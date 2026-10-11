@@ -5,7 +5,7 @@
 | Local repository foundation | macOS ARM64, 14 regressions, lint/content/secret checks | Host checks passed; native unqualified |
 | Native installer boot/runtime | None | Unqualified |
 | First proposed guest profile | [7.9 amd64 BIOS design](../design/native-profile/PRD.md); no runs | Proposed; unqualified |
-| Project configuration/extension contract | Requirements only | Undesigned |
+| Project configuration/extension contract | [Trust design](../design/project-trust/PRD.md); no runtime tests | Proposed boundaries; syntax undecided |
 | ANSI/serial/plain-text renderer | [Research plan](../research/text-ui-runtime-plan.md); no native runs | Proposed; unqualified |
 | Stock installer integration | [Bounded research plan](../research/installer-integration-plan.md); manuals only | Proposed; native tests not run |
 | Disk operations, service bootstrap, recovery | Requirements only | Unimplemented |

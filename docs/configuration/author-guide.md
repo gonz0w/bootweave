@@ -38,3 +38,6 @@ known limits, supported profiles, recovery procedure and how to request help.
 The intended future quick start must include a fully working generic profile,
 reference documentation, migration rules and troubleshooting after its design is
 accepted. Do not copy speculative configuration snippets into production tooling.
+
+See the proposed [project trust design](../design/project-trust/PRD.md) for
+requirements, privilege boundaries and Test Design. No profile syntax is adopted.
