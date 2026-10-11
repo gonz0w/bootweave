@@ -144,3 +144,7 @@ Compare usability, safety, ramdisk feasibility, maintenance and removal costs.
 Recommend a candidate only after evidence; adoption needs scoped PRD/EDD/Test Design
 and ADR for durable runtime/dependency choices. Rendering cannot approve privileged
 operations or turn stock-installer defaults into a safe engine contract.
+
+[Authenticated ramdisk UI source findings](ramdisk-ui-source-findings.md) now
+record selected build-list, reduced utility and library/data boundaries. No
+prototype or language/library adoption is implied; all UI tests remain unrun.
