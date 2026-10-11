@@ -28,6 +28,7 @@ product. The configuration format and extension interface are not designed yet.
 - [Installer author guide](docs/configuration/author-guide.md)
 - [Security boundaries](docs/security/threat-model.md) and [debugging](docs/debugging.md)
 - [Research and decisions](docs/research/openbsd-installers.md)
+- [First native profile design](docs/design/native-profile/PRD.md) (proposed)
 - [Native acceptance gate](docs/testing/native-gate.md)
 - [Contribution and local review](CONTRIBUTING.md)
 
