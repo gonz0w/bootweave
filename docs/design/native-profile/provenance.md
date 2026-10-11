@@ -78,3 +78,6 @@ acceptance. Remaining fields cannot be filled with inferred successes.
 
 No guest, fixture disk, service or network change occurred. No native teardown was
 needed. Local documentation verification does not satisfy native test cases.
+
+Subsequent [firmware source evidence](firmware-evidence.md) establishes upstream
+byte correspondence and source pointers; full build/license closure remains pending.
