@@ -19,3 +19,6 @@ conventional installed layout initially, generic bounded project configuration,
 original ANSI/BBS appearance with serial/plain fallback. Parser, runtime language,
 privilege boundary and release-specific integration remain unresolved. Product
 bootstrap owns optional DNS peer pairing and firewall role/configuration semantics.
+
+Issue #3 now has a [bounded integration research plan](installer-integration-plan.md).
+Its phases and native tests remain proposed and unexecuted.
