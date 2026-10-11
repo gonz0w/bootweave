@@ -87,3 +87,6 @@ Approval should name: host-only pinned build/regression scope, allowed tool stor
 license/provenance review, key-bootstrap route and the EDD exception. Guest boot and
 installation remain separately gated. Until that record exists, the OpenBSD-base
 verifier requirement remains in force.
+
+A subsequent authorized bounded experiment has [host build/test evidence](host-verifier-evidence.md).
+The proposal itself remains unadopted; release trust and guest execution are pending.
