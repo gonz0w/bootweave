@@ -64,3 +64,8 @@ review excerpts for secrets, private host/network information and escape sequenc
 Confirm teardown before declaring a run complete. Cam reviews actual evidence and
 any compatibility change. Passing local make verify validates these documents and
 foundation tooling only. Native outcome as of 2026-10-11: all tests not run.
+
+Current bounded execution evidence: [diskless VGA](diskless-evidence.md) and
+[corrected serial](serial-evidence.md). Earlier no-run/acceptance-pending statements
+describe the original full disk-bearing proposal; execution authority was limited
+to the accepted non-install diskless research, not the complete profile.

@@ -31,5 +31,7 @@ native-run acceptance. Those issues remain open for scope review.
 Issue #10 tracks [native preflight](design/native-profile/preflight.md). The accepted
 [verifier/key route](adr/0002-host-artifact-verifier.md) verified release inputs.
 The accepted bounded diskless run reached the stock VGA menu; serial selection
-failed through input sequencing. See [actual results and remaining gates](design/native-profile/diskless-evidence.md).
+initially failed, then [corrected serial research](design/native-profile/serial-evidence.md)
+observed com0 menu and read-only shell interaction. Disk-bearing tests and framework
+qualification remain pending.
 Runtime/parser/renderer and privileged contracts remain undecided.
