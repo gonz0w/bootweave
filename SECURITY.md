@@ -4,8 +4,8 @@ There are no supported releases or deployable installer images yet.
 
 Report vulnerabilities confidentially to **admin@fungalo.co**, the existing
 maintainer security contact, with project name, affected revision, impact and a
-minimal synthetic reproducer. GitHub private vulnerability reporting may be used
-when its remote enablement has been observed; no enablement is claimed yet.
+minimal synthetic reproducer. [GitHub private vulnerability reporting](https://github.com/gonz0w/bootweave/security/advisories/new)
+is enabled and was read back on 2026-10-11.
 Do not put exploitable details, credentials or private inventories in public issues.
 
 The maintainer coordinates remediation and disclosure. No response SLA is claimed.
