@@ -68,3 +68,6 @@ license findings and the two media-trust routes requiring review.
 
 [Host-verifier experiment evidence](host-verifier-evidence.md) now records a local
 build and adapted synthetic regression pass; release-key/signature trust remains pending.
+
+The proposed [non-install run plan](run-plan.md) freezes backend arguments and
+read-only attachment/console/cleanup scope. Native execution acceptance remains pending.
