@@ -8,8 +8,9 @@ See [observed GitHub settings](engineering/github.md).
 The foundation includes generic scope and boundaries, author/security/debugging
 requirements, pinned local tools/hooks, contribution/review policy, provenance,
 PR/issue templates and versioned protections. It contains no installer,
-configuration grammar or runtime. No native test, service installation, disk
-modification, boot image or release has occurred.
+configuration grammar or runtime. Stock-media [diskless native observations](design/native-profile/diskless-evidence.md)
+have occurred; no service installation, target-disk modification, Bootweave boot
+image or release has occurred.
 
 Clean seed verification passed on macOS ARM64: signature and author DCO, pinned
 development-tool bootstrap, repository/configuration/link checks, ShellCheck,
@@ -27,9 +28,8 @@ and [project trust design](design/project-trust/PRD.md) (issue #5).
 They remain proposed; merging documentation has not recorded implementation or
 native-run acceptance. Those issues remain open for scope review.
 
-Issue #10 tracks [native preflight](design/native-profile/preflight.md), including
-partial tooling/firmware evidence and pending trusted media verification. Installer
-[source findings](research/installer-source-findings.md) are provisional until
-signature verification; no native test has run. Next execution needs an accepted
-verifier/key route, frozen guest configuration and explicit bounded non-install
-run authority. Runtime/parser/renderer and privileged contracts remain undecided.
+Issue #10 tracks [native preflight](design/native-profile/preflight.md). The accepted
+[verifier/key route](adr/0002-host-artifact-verifier.md) verified release inputs.
+The accepted bounded diskless run reached the stock VGA menu; serial selection
+failed through input sequencing. See [actual results and remaining gates](design/native-profile/diskless-evidence.md).
+Runtime/parser/renderer and privileged contracts remain undecided.
