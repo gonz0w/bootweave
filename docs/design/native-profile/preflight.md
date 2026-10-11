@@ -1,16 +1,27 @@
 # Native baseline execution preflight
 
-Status: Incomplete preparation, 2026-10-11. Owner: Cam.
+Status: Bounded diskless observations completed; full profile incomplete,
+2026-10-11. Owner: Cam.
 [Issue #10](https://github.com/gonz0w/bootweave/issues/10).
 Related [PRD](PRD.md), [EDD](EDD.md) and [Test Design](TDD.md).
-No execution acceptance or native result is recorded here.
 
-## Read-only observations
+## Current authority and evidence
 
-Host tooling inspection only; no guest was launched and no fixture was created.
-QEMU reports version 11.1.1. Installed package inventory agrees. Its machine help
-lists pc-i440fx-11.1 and CPU help lists qemu64-v1. These are proposed explicit
-candidates for the amd64 software-emulated profile, not observed boot compatibility.
+Cam accepted the bounded [non-install run plan](run-plan.md), then the
+[diskless exception](startup-failure.md) after read-only IDE startup failed.
+The [VGA observation](diskless-evidence.md) reached the stock menu; the
+[corrected serial observation](serial-evidence.md) reached the menu and read-only
+shell over com0 after VGA bootstrap. These records contain exact source/base/tree,
+input identities, effective attachments, submitted input, resources and cleanup.
+They supersede the original preflight's no-run and verifier-pending statements.
+
+This acceptance covers the recorded diskless stock-media research only. The full
+disk-bearing profile remains proposed. No writable target, installer implementation,
+UI native build, modified media, service or network change is authorized here.
+The original readonly IDE configuration failed before guest CPU execution and must
+not be retried by silently changing the disk to writable.
+
+## Frozen tooling and inputs
 
 | Installed artifact | SHA-256 observed |
 |---|---|
@@ -18,56 +29,55 @@ candidates for the amd64 software-emulated profile, not observed boot compatibil
 | bios-256k.bin | ae6f6aa973aaccc143f57aa960fb035fd9de4daee4ad0cd713322f8c259e7650 |
 | vgabios-stdvga.bin | e8fc9e55790dbe3cb31f019a3deb57206ba6c54f5e581adb2ab2677a9d391472 |
 
-Commands: qemu-system-x86_64 --version; -machine help; -cpu help;
-package version inventory; SHA-256 over the listed installed files. Local package
-license/COPYING/COPYING.LIB and installation receipt files exist. Existence is not
-file-level license/provenance review or proof these firmware files are selected.
-Digests identify local bytes; they do not authenticate package origin. Recompute
-before execution; any changed identity requires updated review.
+Recorded runs used QEMU 11.1.1, pc-i440fx-11.1, qemu64-v1, TCG, one CPU and
+1024 MiB guest RAM with reviewed firmware/data paths. Rehash before any newly
+approved launch; changed identities require review. Installed digests identify
+bytes rather than authenticate package origin. [Provenance](provenance.md) and
+[firmware evidence](firmware-evidence.md) document upstream correspondence and
+remaining build/license limitations; local research use does not authorize redistribution.
 
-No signify executable was found on the ordinary host PATH. This does not prove no
-trusted verifier exists elsewhere. No existing trusted OpenBSD verifier, media digest
-or release-key trust bootstrap has been established in this session. Do not boot
-unverified media to create the environment used to verify that same media.
+The accepted [host-verifier policy](../../adr/0002-host-artifact-verifier.md)
+and [release-input evidence](release-input-evidence.md) establish the recorded
+source/media signature and checksum checks. Verification was repeated before each
+native attempt. Input verification does not qualify native framework behavior.
 
-## Remaining preflight gates
+## Gate reconciliation
 
-| Gate | Required evidence | Current state |
+| Gate | Current evidence | Remaining boundary |
 |---|---|---|
-| Scope acceptance | Maintainer record naming accepted design and permitted non-install run | Pending; merged documents still say proposed. |
-| Package provenance/license | Installed package receipt, source origin, executable and bundled firmware license review | [Partial review](provenance.md); [firmware bytes match upstream](firmware-evidence.md), build/license closure pending. |
-| Input trust | Accepted verifier/key policy and verified source/media identities | [Host artifact checks passed](release-input-evidence.md); no native claim. |
-| Release review | Exact release instructions/source needed for console setup and applicable errata | Not frozen for execution. |
-| Backend | Explicit versioned machine/CPU, TCG, firmware/data paths and all enabled devices | Candidates listed; full configuration not reviewed. |
-| Attachments | New owned raw disk, read-only optical media, no backing chain/passthrough/sharing/network | No fixture created. |
-| Consoles | Reviewed local VGA and private serial endpoints, boot-loader settings and input procedure | Pending. |
-| Limits and stop | Approved profile budgets, capacity checks, owned-process termination and bounded capture | Design exists; execution mechanism pending. |
-| Observation/cleanup | Effective configuration/open-file review, before/after disk digest, guest inventory and teardown checks | Not run. |
+| Scope acceptance | Accepted bounded non-install diskless research; performed inputs recorded | Full disk-bearing profile and any new writable/build scope need separate review |
+| Package provenance/license | Executable/firmware identities and upstream byte correspondence reviewed | Full reproducibility/license closure and redistribution review incomplete |
+| Input trust | Accepted verifier/key policy; verified release source/media; offline corruption rejection | Repeat checks for new approved runs; derived media needs its own trusted identity |
+| Release review | Release-specific boot-console instructions and authenticated selected source reviewed | Installer selected-path prompt/default ledger incomplete |
+| Backend | Explicit versioned configuration observed in diskless guests | No disk-bearing backend qualification or hardware timing claim |
+| Attachments | Sole read-only optical image; no target/network/sharing/passthrough; process open-file checks | Original readonly IDE target failed startup; no target-byte postcondition |
+| Consoles | VGA 80x25 menu/invalid input; com0 menu/shell after VGA bootstrap | Serial-only firmware, measured baud and 80x24 case unqualified |
+| Limits and stop | Runs under five minutes; bounded private captures; observed timing/error stops | Peak RSS and synthetic capture-cap failure case not measured/tested |
+| Observation/cleanup | Owned guests/clients stopped; fixture sockets/files removed; media digest unchanged | Full profile acceptance review and unrun cases remain open |
 
-Do not publish a runnable launch command until trust, device selection and authority
-are concrete. Disabling defaults alone is not evidence of complete isolation;
-review explicit device/controller dependencies and effective attachments. No generic
-run command or new evidence wire format is adopted in this record.
+The first VGA run's complete device-tree review occurred after continuation; its
+block/PCI/open-file checks preceded continuation. Corrected serial attempts reviewed
+the full tree before continuation. Do not generalize the stronger sequencing claim
+to every earlier run. Detailed failures remain in their original evidence records.
 
-## Next bounded work
+## Test status and next gates
 
-Review installed package and firmware provenance locally. Arrange the trusted verifier
-and key bootstrap without claiming digest-only verification authenticates a publisher.
-Then freeze exact media/configuration and prepare two separate console run records
-for NPT-01 through NPT-11. Initial permitted goal remains stock boot/menu inspection,
-with no install/upgrade/autoinstall submission. Any future OS installation requires
-its own inventoried disposable target confirmation and explicit authority.
+NPT-01 has repeated artifact verification evidence; NPT-02 has separate offline host
+corruption evidence. NPT-03 has diskless isolation observations only. NPT-04 has VGA
+menu/input evidence, and NPT-05 has serial menu/input evidence after VGA bootstrap.
+NPT-06 has plain serial text with zero ESC bytes but no measured 80x24 or independent
+baud result. NPT-07 was skipped because no target disk was present. NPT-08's complete
+unsafe-configuration review remains outstanding. NPT-09 has actual error/timeout stops
+but no synthetic capture-cap test. NPT-10 has observed teardown. NPT-11 has sanitized
+evidence for review; these partial outcomes do not satisfy the full proposed profile.
 
-The read-only inventory does not select QEMU as an installer dependency or qualify
-native support. No native process/endpoints/files were created, so native teardown
-was unnecessary. Unresolved gates remain explicit rather than reported as skipped
-passes. Private package receipts and host paths are omitted from shared evidence.
+Next issue work can complete source inspection and unlaunched configuration review
+within existing documentation authority. A native UI build additionally needs the
+[Phase B gate](../../research/plain-ui-spike-plan.md): an approved build environment,
+exact source/build/run/transport, attachments, limits and cleanup. The stock ramdisk
+observations do not supply a compiler environment. Any proposed OS installation must
+identify a fresh disposable target and obtain explicit confirmation of that exact
+inventory and allowed writes before the first destructive choice.
 
-The [provenance and verification-route review](provenance.md) records installed
-license findings and the two media-trust routes requiring review.
-
-[Host-verifier experiment evidence](host-verifier-evidence.md) now records a local
-build and adapted synthetic regression pass; release-key/signature trust remains pending.
-
-The proposed [non-install run plan](run-plan.md) freezes backend arguments and
-read-only attachment/console/cleanup scope. Native execution acceptance remains pending.
+Issue #10 remains open. No Bootweave runtime, renderer, parser, installed system,
+boot image or supported hardware profile is qualified by these observations.
