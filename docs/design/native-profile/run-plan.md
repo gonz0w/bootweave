@@ -1,10 +1,12 @@
 # First non-install native observation: run plan
 
-Status: Proposed, 2026-10-11. Owner/acceptance authority: Cam.
+Status: Accepted for bounded attempt, 2026-10-11. Owner/acceptance authority: Cam.
 [Issue #10](https://github.com/gonz0w/bootweave/issues/10); related
 [PRD](PRD.md), [EDD](EDD.md), [Test Design](TDD.md) and
 [verified release inputs](release-input-evidence.md).
-No guest launch or fixture provisioning has occurred. Acceptance source/date pending.
+Acceptance source: maintainer continued after the explicit bounded run approval
+question for PR #20. The [attempt failed at paused startup](startup-failure.md)
+before guest CPU execution; no native boot evidence exists.
 
 ## Exact intended boundary
 
@@ -122,3 +124,7 @@ listed read-only guest commands and the stop/cleanup policy. It may accept the l
 firmware-use provenance limitations; it grants no redistribution or writable install.
 Release-specific boot-console instructions are reviewed above. No guest has run;
 this plan is the concrete review target for native execution authorization.
+
+The original configuration is now known to fail with readonly IDE disk. Do not
+retry it or broaden disk authority; review the proposed diskless variant in the
+[startup failure record](startup-failure.md).

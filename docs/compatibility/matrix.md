@@ -15,3 +15,7 @@ qualification or an OpenBSD cross-build into framework support claims.
 
 OpenBSD 7.9 release [source/media signature and checksum evidence](../design/native-profile/release-input-evidence.md)
 is host artifact verification under accepted ADR 0002; boot/runtime remains unqualified.
+
+The [first guest attempt](../design/native-profile/startup-failure.md) failed during
+QEMU read-only IDE device initialization, before guest CPU execution. OpenBSD boot
+remains unqualified; the owned fixture was checked unchanged and removed.
