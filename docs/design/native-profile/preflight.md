@@ -35,7 +35,7 @@ unverified media to create the environment used to verify that same media.
 | Gate | Required evidence | Current state |
 |---|---|---|
 | Scope acceptance | Maintainer record naming accepted design and permitted non-install run | Pending; merged documents still say proposed. |
-| Package provenance/license | Installed package receipt, source origin, executable and bundled firmware license review | Artifact inventory only. |
+| Package provenance/license | Installed package receipt, source origin, executable and bundled firmware license review | [Partial review](provenance.md); firmware correspondence unresolved. |
 | Input trust | Independently trusted OpenBSD base signify, release key provenance, verified install79.iso and signed checksum identities | Not established. |
 | Release review | Exact release instructions/source needed for console setup and applicable errata | Not frozen for execution. |
 | Backend | Explicit versioned machine/CPU, TCG, firmware/data paths and all enabled devices | Candidates listed; full configuration not reviewed. |
@@ -62,3 +62,6 @@ The read-only inventory does not select QEMU as an installer dependency or quali
 native support. No native process/endpoints/files were created, so native teardown
 was unnecessary. Unresolved gates remain explicit rather than reported as skipped
 passes. Private package receipts and host paths are omitted from shared evidence.
+
+The [provenance and verification-route review](provenance.md) records installed
+license findings and the two media-trust routes requiring review.
