@@ -1,11 +1,13 @@
 # ADR 0002: host-only OpenBSD artifact verification
 
-Status: Proposed, 2026-10-11. Decision owner: Cam.
+Status: Accepted for host artifact verification, 2026-10-11. Decision owner: Cam.
 Related [issue #10](https://github.com/gonz0w/bootweave/issues/10),
 [host-verifier review](../design/native-profile/host-verifier-review.md) and
 [build/test evidence](../design/native-profile/host-verifier-evidence.md).
-Acceptance date/source: pending explicit adoption; this document does not approve
-an EDD exception, trust root or guest execution.
+Acceptance date/source: 2026-10-11, maintainer replied “continue with issues”
+immediately after the explicit ADR host-verifier/official-HTTPS key-bootstrap
+approval request. This accepts the host artifact-verification EDD exception and
+the stated HTTPS trust assumptions; it does not authorize guest execution.
 
 ## Problem and proposed decision
 
@@ -90,3 +92,7 @@ Host artifact checks remain separate from native compatibility. Guest launches r
 frozen configuration, isolation and bounded-run authorization; disk installation
 requires reviewed disposable-target confirmation. Adoption of this ADR grants none
 of those effects. Until acceptance, the existing EDD remains in force.
+
+Acceptance supersedes the proposal-time pending language above. Earlier consistency
+observations remain historical; accepted-policy checks are recorded in the
+[release-input evidence](../design/native-profile/release-input-evidence.md).

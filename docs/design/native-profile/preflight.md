@@ -36,7 +36,7 @@ unverified media to create the environment used to verify that same media.
 |---|---|---|
 | Scope acceptance | Maintainer record naming accepted design and permitted non-install run | Pending; merged documents still say proposed. |
 | Package provenance/license | Installed package receipt, source origin, executable and bundled firmware license review | [Partial review](provenance.md); [firmware bytes match upstream](firmware-evidence.md), build/license closure pending. |
-| Input trust | Independently trusted OpenBSD base signify, release key provenance, verified install79.iso and signed checksum identities | Not established. |
+| Input trust | Accepted verifier/key policy and verified source/media identities | [Host artifact checks passed](release-input-evidence.md); no native claim. |
 | Release review | Exact release instructions/source needed for console setup and applicable errata | Not frozen for execution. |
 | Backend | Explicit versioned machine/CPU, TCG, firmware/data paths and all enabled devices | Candidates listed; full configuration not reviewed. |
 | Attachments | New owned raw disk, read-only optical media, no backing chain/passthrough/sharing/network | No fixture created. |

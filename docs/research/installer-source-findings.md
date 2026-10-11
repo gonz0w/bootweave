@@ -1,4 +1,4 @@
-# OpenBSD 7.9 installer: provisional source findings
+# OpenBSD 7.9 installer: source findings
 
 Inspected 2026-10-11 for [issue #3](https://github.com/gonz0w/bootweave/issues/3).
 Related [bounded research plan](installer-integration-plan.md).
@@ -97,3 +97,8 @@ checks qualify documentation/foundation tooling only.
 A subsequent [candidate-key consistency check](../adr/0002-host-artifact-verifier.md)
 accepted the downloaded source signature/checksum. The key is not yet adopted, so
 these findings remain provisional rather than authenticated native evidence.
+
+Verification update, 2026-10-11: [accepted-policy checks](../design/native-profile/release-input-evidence.md)
+now verify the source signature/archive and reconfirm the inspected member bytes.
+This supersedes the earlier input-authentication limitation above; native behaviors
+remain untested and no integration is adopted.
