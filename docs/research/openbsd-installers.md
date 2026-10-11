@@ -22,3 +22,6 @@ bootstrap owns optional DNS peer pairing and firewall role/configuration semanti
 
 Issue #3 now has a [bounded integration research plan](installer-integration-plan.md).
 Its phases and native tests remain proposed and unexecuted.
+
+Issue #4 has a [text UI/runtime research plan](text-ui-runtime-plan.md), including
+console equivalence, terminal trust and native footprint tests; none have run.
