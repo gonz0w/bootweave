@@ -81,3 +81,6 @@ needed. Local documentation verification does not satisfy native test cases.
 
 Subsequent [firmware source evidence](firmware-evidence.md) establishes upstream
 byte correspondence and source pointers; full build/license closure remains pending.
+
+A [concrete macOS host-verifier proposal](host-verifier-review.md) now supplies
+a candidate pin, review limits and Test Design. It is not adopted or executed.
