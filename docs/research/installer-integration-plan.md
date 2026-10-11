@@ -146,5 +146,7 @@ research plan alone supplies no future public API or implementation permission.
 
 [Verified-input source findings](installer-source-findings.md) record selected
 7.9 source bytes and prompt/default paths. The [disk-question ledger](installer-disk-question-ledger.md)
-adds root/encryption/partition/layout defaults and write order. The complete
+adds root/encryption/partition/layout defaults and write order. The
+[set and completion ledger](installer-set-completion-ledger.md) covers optical source
+selection, verification continuations, extraction and completion authority. The complete
 selected-path ledger remains outstanding; no installer native test is marked passed.

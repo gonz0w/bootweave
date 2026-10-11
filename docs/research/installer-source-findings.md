@@ -106,3 +106,7 @@ remain untested and no integration is adopted.
 The [disk-question ledger](installer-disk-question-ledger.md) extends the verified
 source review with conditional defaults, matching rules and encryption/partition/label
 write order. It remains a partial ledger and grants no execution authority.
+
+The [set and completion ledger](installer-set-completion-ledger.md) extends source
+review through optical selection, verification/extraction failures and completion
+authority. Setup/secret questions and native command semantics remain outstanding.
