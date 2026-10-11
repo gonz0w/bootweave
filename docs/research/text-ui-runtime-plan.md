@@ -152,3 +152,7 @@ prototype or language/library adoption is implied; all UI tests remain unrun.
 [Release lookup and dimension findings](terminal-lookup-findings.md) now bind
 ordinary-root environment lookup, sizing fallbacks and selected pager-helper
 license notices to authenticated source. Prototype authorization remains pending.
+
+The [minimal plain-text implementation review target](plain-ui-spike-plan.md)
+proposes a bounded C simulation and host-only checks. Implementation needs explicit
+spike acceptance; native provisioning/build/media/run remain separate gates.
