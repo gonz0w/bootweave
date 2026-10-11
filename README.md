@@ -4,7 +4,7 @@ A configurable, text-based OpenBSD installer framework for independent projects.
 BSD-3-Clause licensed; community contributions welcome. This project is independent
 of the OpenBSD project and does not imply upstream endorsement.
 
-**Status: repository foundation only.** No installer, configuration parser, bootable
+**Status: repository foundation and bounded UI research.** No installer, configuration parser, bootable
 image, runtime service, supported hardware profile or release exists yet.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
 The maintainer approved the name and public repository on 2026-10-11.
@@ -45,3 +45,6 @@ make verify
 Checks run locally in the foreground. GitHub Actions and hosted/self-hosted runners
 are not used. Signed Conventional Commits, DCO sign-offs and reviewed PRs are required.
 See [development](docs/engineering/development.md) for tool pins and limitations.
+
+The [plain-text research simulation](research/ui/README.md) has host-only tests;
+it does not qualify an OpenBSD runtime or implement an installer.

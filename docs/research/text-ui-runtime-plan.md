@@ -156,3 +156,7 @@ license notices to authenticated source. Prototype authorization remains pending
 The [minimal plain-text implementation review target](plain-ui-spike-plan.md)
 proposes a bounded C simulation and host-only checks. Implementation needs explicit
 spike acceptance; native provisioning/build/media/run remain separate gates.
+
+Phase A of the [minimal plain-text spike](plain-ui-spike-plan.md) was explicitly
+accepted after PR #26. [Host implementation results](plain-ui-host-evidence.md)
+remain separate from the unrun native UI-01 through UI-10 cases.

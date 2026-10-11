@@ -1,11 +1,12 @@
 # Bounded plain-text UI prototype: implementation review target
 
-Status: Proposed, 2026-10-11. Owner/acceptance authority: Cam.
+Status: Phase A accepted, 2026-10-11. Owner/acceptance authority: Cam.
 [Issue #4](https://github.com/gonz0w/bootweave/issues/4), parent
 [UI research scope](text-ui-runtime-plan.md), [ramdisk inventory](ramdisk-ui-source-findings.md)
 and [terminal lookup review](terminal-lookup-findings.md).
-Documentation preparation only is authorized. This concrete scope requests explicit
-bounded-spike implementation authority under AGENTS.md rule 3; no prototype exists.
+Acceptance: maintainer replied “continue with issues” after the explicit Phase A
+implementation approval question on PR #26. This authorizes the bounded original
+simulation and host tests below under AGENTS.md rule 3. Phase B remains deferred.
 It does not adopt a runtime language or approve installer implementation.
 
 ## Selected experiment and source constraint
@@ -138,3 +139,7 @@ open PR, retaining all Phase B gates above. Maintainer acceptance must be record
 before code is written; merging this plan alone is not implementation authority.
 The prototype is removed by deleting research/ui files and its local check entry;
 there is no runtime/configuration/privilege interface to preserve.
+
+Phase A [implementation and host evidence](plain-ui-host-evidence.md) now exist.
+The exact original source is [research/ui/plain-ui.c](../../research/ui/plain-ui.c);
+Phase B and durable language/runtime selection remain deferred.
