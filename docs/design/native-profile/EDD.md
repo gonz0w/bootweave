@@ -26,10 +26,12 @@ Use the release-specific [7.9 amd64 installation instructions](https://cdn.openb
 and [release record](https://www.openbsd.org/79.html), inspected 2026-10-11.
 Freeze install79.iso, SHA256.sig and applicable source archives by verified digest.
 Before boot, verify signed release checksums using OpenBSD base signify in a trusted
-OpenBSD environment; do not execute an unverified guest to establish its own trust.
-Arrange an independently trusted verifier or stop if none exists. Obtain the release
-key through an already trusted OpenBSD installation or a separately reviewed trust
-bootstrap; fetching key and image from the same mirror is insufficient by itself.
+OpenBSD environment, or the exact host-verifier/key-bootstrap route accepted in
+[ADR 0002](../../adr/0002-host-artifact-verifier.md). This host-only exception was
+accepted 2026-10-11 and grants no native execution authority. Do not execute an
+unverified guest to establish its own trust. Other verifier/key routes require
+separate review; fetching a key and image from the same mirror is insufficient
+by itself.
 Record verifier/key provenance and verification outcomes without publishing private
 keys or host identities. Review release errata before execution. If source inspection
 is needed, pin release archives and exact inspected file digests; do not substitute

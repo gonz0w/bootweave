@@ -12,3 +12,6 @@
 
 Update this record with actual source-bound results; do not turn inherited project
 qualification or an OpenBSD cross-build into framework support claims.
+
+OpenBSD 7.9 release [source/media signature and checksum evidence](../design/native-profile/release-input-evidence.md)
+is host artifact verification under accepted ADR 0002; boot/runtime remains unqualified.
