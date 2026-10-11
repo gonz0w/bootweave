@@ -143,3 +143,7 @@ whether stock behavior can meet proposed requirements, which controls require an
 adapter, and what remains unsupported. Adoption requires reviewed scoped
 PRD/EDD/Test Design and an ADR for durable architecture/dependency choices. This
 research plan alone supplies no future public API or implementation permission.
+
+[Provisional source findings](installer-source-findings.md) now record selected
+7.9 source bytes and prompt/default paths. Signature verification and the complete
+ledger remain outstanding; no native test is marked passed.
