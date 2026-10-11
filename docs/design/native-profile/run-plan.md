@@ -128,3 +128,7 @@ this plan is the concrete review target for native execution authorization.
 The original configuration is now known to fail with readonly IDE disk. Do not
 retry it or broaden disk authority; review the proposed diskless variant in the
 [startup failure record](startup-failure.md).
+
+The diskless variant was subsequently accepted and attempted; see
+[actual VGA success, serial failure and teardown](diskless-evidence.md). Historical
+no-run statements above describe the original review state.
