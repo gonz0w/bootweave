@@ -4,7 +4,7 @@
 |---|---|---|
 | Local repository foundation | macOS ARM64, 14 regressions, lint/content/secret checks | Host checks passed; native unqualified |
 | Native installer boot/runtime | None | Unqualified |
-| OpenBSD release/architecture/media profiles | None selected | Unqualified |
+| First proposed guest profile | [7.9 amd64 BIOS design](../design/native-profile/PRD.md); no runs | Proposed; unqualified |
 | Project configuration/extension contract | Requirements only | Undesigned |
 | ANSI/serial/plain-text renderer | Research only | Unqualified |
 | Disk operations, service bootstrap, recovery | Requirements only | Unimplemented |
