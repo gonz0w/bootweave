@@ -89,3 +89,6 @@ runs was unchanged: 7a4a92e953618035097c796a90b54424a0f3ae775552e1e7d102cf8a5130
 No Bootweave runtime, renderer, parser, writable disk profile or installation is
 qualified by these observations. Issue #10 remains open for serial correction and
 review of the remaining evidence gates.
+
+A subsequent [corrected serial observation](serial-evidence.md) succeeded after
+continued maintainer direction; earlier failures above remain historical evidence.

@@ -3,7 +3,7 @@
 | Capability | Evidence | Status |
 |---|---|---|
 | Local repository foundation | macOS ARM64, 14 regressions, lint/content/secret checks | Host checks passed; native unqualified |
-| Stock OpenBSD 7.9 optical boot/menu | [Diskless VGA observation](../design/native-profile/diskless-evidence.md) | VGA observed; serial attempt failed; framework unqualified |
+| Stock OpenBSD 7.9 optical boot/menu | [Diskless VGA observation](../design/native-profile/diskless-evidence.md) | VGA and [serial](../design/native-profile/serial-evidence.md) observed; framework unqualified |
 | First proposed guest profile | [7.9 amd64 BIOS design](../design/native-profile/PRD.md); diskless VGA observation only | Disk-bearing profile unqualified |
 | Project configuration/extension contract | [Trust design](../design/project-trust/PRD.md); no runtime tests | Proposed boundaries; syntax undecided |
 | ANSI/serial/plain-text renderer | [Research plan](../research/text-ui-runtime-plan.md); no native runs | Proposed; unqualified |
@@ -21,5 +21,7 @@ QEMU read-only IDE device initialization, before guest CPU execution. OpenBSD bo
 remains unqualified; the owned fixture was checked unchanged and removed.
 
 The [diskless follow-up](../design/native-profile/diskless-evidence.md) reached the stock
-VGA menu. Serial console selection missed the boot prompt and remains unqualified.
+VGA menu. The first serial selection missed the boot prompt; the
+[corrected observation](../design/native-profile/serial-evidence.md) reached its menu
+and read-only shell through com0 after VGA bootstrap.
 No writable target or Bootweave runtime was tested.

@@ -60,3 +60,8 @@ claimed. Issues #3–#5 require their own scoped acceptance after this baseline.
 
 The [execution preflight](preflight.md) records host tooling observations and
 remaining trust/configuration/authorization gates; no guest has launched.
+
+Current bounded execution evidence: [diskless VGA](diskless-evidence.md) and
+[corrected serial](serial-evidence.md). Earlier no-run/acceptance-pending statements
+describe the original full disk-bearing proposal; execution authority was limited
+to the accepted non-install diskless research, not the complete profile.

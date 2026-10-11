@@ -89,3 +89,8 @@ Primary option references, inspected 2026-10-11:
 [QEMU x86 system emulation](https://www.qemu.org/docs/master/system/target-i386.html)
 and [UTM system settings](https://docs.getutm.app/settings-qemu/system/).
 These describe available options; neither establishes OpenBSD qualification.
+
+Current bounded execution evidence: [diskless VGA](diskless-evidence.md) and
+[corrected serial](serial-evidence.md). Earlier no-run/acceptance-pending statements
+describe the original full disk-bearing proposal; execution authority was limited
+to the accepted non-install diskless research, not the complete profile.

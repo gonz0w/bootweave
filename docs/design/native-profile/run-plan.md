@@ -132,3 +132,8 @@ retry it or broaden disk authority; review the proposed diskless variant in the
 The diskless variant was subsequently accepted and attempted; see
 [actual VGA success, serial failure and teardown](diskless-evidence.md). Historical
 no-run statements above describe the original review state.
+
+Current bounded execution evidence: [diskless VGA](diskless-evidence.md) and
+[corrected serial](serial-evidence.md). Earlier no-run/acceptance-pending statements
+describe the original full disk-bearing proposal; execution authority was limited
+to the accepted non-install diskless research, not the complete profile.
