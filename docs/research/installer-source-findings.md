@@ -50,6 +50,29 @@ values. No native expected outcome has been confirmed.
 | install.sub 3054–3063 | Executable target-root site hook runs under chroot; nonzero return triggers failure. | Review executable authority separately; test independent marker/failure state; IR-06. |
 | install.sub 3086–3102 | Autoinstall collects a log, checks a completion marker and reboots after completion. | Terminal/process exit is not independent installed readiness; capture/log and reboot authority need design; IR-07/08. |
 
+## Answer logging, extraction and termination paths
+
+Additional inspection uses the same member digests above. Source authentication
+still remains pending. These observations do not assert a vulnerability in the
+stock installer or compliance with Bootweave's stronger boundaries.
+
+| Location in install.sub | Observed source behavior | Follow-up acceptance implication |
+|---|---|---|
+| 621–625, 796–801 | Ordinary ask responses are appended to a response record. | Classify every call before permitting capture; do not export raw answer records. |
+| 888–917 | Password helper disables interactive echo and uses a separate input path; automated password output is a placeholder. | Do not claim ordinary response logging captures all passwords; audit callers/consumers and interruption paths independently. |
+| 921–938 | Interactive passphrase prompt explicitly echoes; automated path prints a placeholder. | Offline/no-network baseline avoids network secrets; future secret UX requires a separately reviewed channel. |
+| 224–237, 3055, 3097 | Response/autoinstall records are copied into target var/log with mode 600 and scheduled for root mail on first boot; removal follows successful mail. | Restricted logs remain persistent data. No transcript is safe by default, and failed delivery can retain the copy. |
+| 1821–1848 | Set contents stream through tar into /mnt; extraction failure offers a continuation choice. | Signature authentication does not establish arbitrary project-archive containment. Review native tar semantics and independent target postconditions before adopting payload extraction. |
+| 64–67, 564–575 | Error helper requests exit 1; installed traps kill the dmesg listener, restore echo and request exit 0. | Trace which trap is active at each failure; an outer process status alone is an unreliable success oracle. |
+| 3086–3102 | Automated completion uses an explicit marker before reboot. | Observe marker, actual filesystem state and readiness separately; no automatic retry/resume from process status. |
+
+The trap interaction is a source-derived hypothesis requiring native confirmation;
+no shell was run to simulate OpenBSD ksh semantics. This is not a claim that every
+failure returns zero. Similarly, the tar invocation is not proof of either safe
+or unsafe archive handling; determine exact native tool behavior and destination
+policy using approved synthetic fixtures. No malicious archive or secret input
+was executed for this review.
+
 ## Conclusions and remaining research
 
 The inspected stock code intentionally supports interactive administration and
@@ -61,7 +84,7 @@ not a selected wrapper design or reason to replace upstream machinery prematurel
 
 IR-01 has partial provisional source observations only; no test is marked passed.
 Complete the selected-path ledger, platform layout defaults, response ambiguity,
-secret-bearing log filtering, set extraction and interruption behavior after trusted
+complete secret-consumer/log filtering, native tar semantics and active-trap failure behavior after trusted
 source verification. Inspect all dependent source revisions; do not infer safe
 behavior from a single helper. IR-02 through IR-09 remain not run. Native experiments
 still need accepted scope, verified media, disposable targets and explicit authority.
