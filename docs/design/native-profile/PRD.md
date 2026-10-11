@@ -57,3 +57,6 @@ errata review, trustworthy release key acquisition, exact console settings and h
 capacity remain preflight decisions. If serial or isolation cannot be established,
 stop rather than silently change backend or profile. No general disk rollback is
 claimed. Issues #3–#5 require their own scoped acceptance after this baseline.
+
+The [execution preflight](preflight.md) records host tooling observations and
+remaining trust/configuration/authorization gates; no guest has launched.
