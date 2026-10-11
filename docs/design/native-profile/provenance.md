@@ -84,3 +84,7 @@ byte correspondence and source pointers; full build/license closure remains pend
 
 A [concrete macOS host-verifier proposal](host-verifier-review.md) now supplies
 a candidate pin, review limits and Test Design. It is not adopted or executed.
+
+[Proposed ADR 0002](../../adr/0002-host-artifact-verifier.md) records a concrete
+host-tool/key-bootstrap decision and candidate-key source consistency observations.
+Trust adoption remains pending; this does not qualify media or runtime.
