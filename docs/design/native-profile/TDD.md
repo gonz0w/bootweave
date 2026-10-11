@@ -1,6 +1,8 @@
 # First native qualification profile: Test Design
 
-Status: Proposed, 2026-10-11. Owner: Cam. Acceptance pending; no native runs.
+Status: Full profile proposed, 2026-10-11. Owner: Cam.
+Bounded diskless research has separate acceptance and observations; see
+[current preflight gates](preflight.md).
 Related [PRD](PRD.md) and [EDD](EDD.md).
 
 ## Acceptance mapping
@@ -63,7 +65,8 @@ firmware, console, commands and tool versions. Retain private receipts outside G
 review excerpts for secrets, private host/network information and escape sequences.
 Confirm teardown before declaring a run complete. Cam reviews actual evidence and
 any compatibility change. Passing local make verify validates these documents and
-foundation tooling only. Native outcome as of 2026-10-11: all tests not run.
+foundation tooling only. Full profile acceptance remains pending; partial diskless outcomes are reconciled
+in [current preflight gates](preflight.md).
 
 Current bounded execution evidence: [diskless VGA](diskless-evidence.md) and
 [corrected serial](serial-evidence.md). Earlier no-run/acceptance-pending statements
