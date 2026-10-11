@@ -121,3 +121,7 @@ No guests, sockets, disks or processes were created by this review. Selected sou
 copies remain private temporary evidence; downloaded source/tool storage is separate
 from disposable guest fixtures. Local make verify checks documentation/foundation
 only and supplies no new native qualification.
+
+[Follow-up terminal lookup review](terminal-lookup-findings.md) resolves selected
+compile-time lookup controls, dimension handling and direct pager-helper notices.
+Full candidate/transitive license and native qualification remain outstanding.

@@ -148,3 +148,7 @@ operations or turn stock-installer defaults into a safe engine contract.
 [Authenticated ramdisk UI source findings](ramdisk-ui-source-findings.md) now
 record selected build-list, reduced utility and library/data boundaries. No
 prototype or language/library adoption is implied; all UI tests remain unrun.
+
+[Release lookup and dimension findings](terminal-lookup-findings.md) now bind
+ordinary-root environment lookup, sizing fallbacks and selected pager-helper
+license notices to authenticated source. Prototype authorization remains pending.
