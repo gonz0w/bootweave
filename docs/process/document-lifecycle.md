@@ -8,5 +8,6 @@ Research documents provide dated sources and limitations.
 Repository setup was authorized on 2026-10-11. Runtime requirements here are proposed,
 not approved engineering contracts. Each scoped implementation needs accepted
 PRD/EDD/TDD or an explicitly authorized research spike. Record acceptance date and
-source; do not infer it from a bootstrap request. No implementation stories have
-been created as part of foundation setup.
+source; do not infer it from a bootstrap request. The initial design issues now have merged proposed documents, but no implementation
+stories or native execution acceptance have been recorded. See the
+[development readiness record](../foundation-status.md).

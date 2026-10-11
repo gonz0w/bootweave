@@ -17,3 +17,19 @@ all 14 foundation regressions and Gitleaks with no findings. Head and tree ident
 and actual outputs are retained in ignored .tools/foundation-verification.json.
 The bootstrap-record PR has its own clean candidate verification evidence.
 These are host foundation results; native runtime remains unqualified.
+
+## Development readiness, 2026-10-11
+
+Initial design deliverables have merged: [native profile](design/native-profile/PRD.md)
+(issue #2), [installer research scope](research/installer-integration-plan.md)
+(issue #3), [text UI/runtime scope](research/text-ui-runtime-plan.md) (issue #4),
+and [project trust design](design/project-trust/PRD.md) (issue #5).
+They remain proposed; merging documentation has not recorded implementation or
+native-run acceptance. Those issues remain open for scope review.
+
+Issue #10 tracks [native preflight](design/native-profile/preflight.md), including
+partial tooling/firmware evidence and pending trusted media verification. Installer
+[source findings](research/installer-source-findings.md) are provisional until
+signature verification; no native test has run. Next execution needs an accepted
+verifier/key route, frozen guest configuration and explicit bounded non-install
+run authority. Runtime/parser/renderer and privileged contracts remain undecided.
