@@ -93,3 +93,7 @@ Research receipts remain outside Git. Public evidence includes only source ident
 and paraphrased observations, no raw answer files, private hosts or control sequences.
 No native fixture or process was created; native teardown was unnecessary. Local
 checks qualify documentation/foundation tooling only.
+
+A subsequent [candidate-key consistency check](../adr/0002-host-artifact-verifier.md)
+accepted the downloaded source signature/checksum. The key is not yet adopted, so
+these findings remain provisional rather than authenticated native evidence.
