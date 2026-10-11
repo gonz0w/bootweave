@@ -8,7 +8,7 @@ See [observed GitHub settings](engineering/github.md).
 The foundation includes generic scope and boundaries, author/security/debugging
 requirements, pinned local tools/hooks, contribution/review policy, provenance,
 PR/issue templates and versioned protections. It contains no installer,
-configuration grammar or runtime. Stock-media [diskless native observations](design/native-profile/diskless-evidence.md)
+configuration grammar or installer runtime. Stock-media [diskless native observations](design/native-profile/diskless-evidence.md)
 have occurred; no service installation, target-disk modification, Bootweave boot
 image or release has occurred.
 
@@ -35,3 +35,8 @@ initially failed, then [corrected serial research](design/native-profile/serial-
 observed com0 menu and read-only shell interaction. Disk-bearing tests and framework
 qualification remain pending.
 Runtime/parser/renderer and privileged contracts remain undecided.
+
+[Accepted Phase A UI research](research/plain-ui-spike-plan.md) now has an original
+[plain-text simulation](../research/ui/README.md) and local host/PTY checks.
+[Actual host results](research/plain-ui-host-evidence.md) do not qualify native UI
+or adopt a language; Phase B remains deferred.

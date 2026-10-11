@@ -1,4 +1,4 @@
-.PHONY: tools hooks check lint test secrets verify
+.PHONY: tools hooks check lint test test-ui secrets verify
 
 tools:
 	python3 tools/bootstrap-tools.py
@@ -15,7 +15,10 @@ lint:
 test:
 	.tools/venv/bin/python3 -m unittest discover -s tools/tests -v
 
+test-ui:
+	.tools/venv/bin/python3 -m unittest discover -s research/ui -v
+
 secrets:
 	.tools/bin/gitleaks dir --redact --no-banner --config .gitleaks.toml .
 
-verify: check lint test secrets
+verify: check lint test test-ui secrets
