@@ -102,3 +102,7 @@ Verification update, 2026-10-11: [accepted-policy checks](../design/native-profi
 now verify the source signature/archive and reconfirm the inspected member bytes.
 This supersedes the earlier input-authentication limitation above; native behaviors
 remain untested and no integration is adopted.
+
+The [disk-question ledger](installer-disk-question-ledger.md) extends the verified
+source review with conditional defaults, matching rules and encryption/partition/label
+write order. It remains a partial ledger and grants no execution authority.

@@ -32,8 +32,8 @@ Primary documentation inspected 2026-10-11:
 | [7.9 INSTALL.amd64](https://cdn.openbsd.org/pub/OpenBSD/7.9/amd64/INSTALL.amd64) | bsd.rd embeds installer tools; install79.iso includes offline OS sets. | Begin with offline stock media; record verified inputs and exact release source. |
 
 These are manual findings, not native observations or proof of safe integration.
-No source revision/file digest has yet been inspected for this issue. Do not use
-mutable FAQ/current-tree behavior as a release contract.
+Authenticated selected source findings and the disk-stage ledger are linked below.
+Do not use mutable FAQ/current-tree behavior as a release contract.
 
 ## Research phases and authority
 
@@ -144,6 +144,7 @@ adapter, and what remains unsupported. Adoption requires reviewed scoped
 PRD/EDD/Test Design and an ADR for durable architecture/dependency choices. This
 research plan alone supplies no future public API or implementation permission.
 
-[Provisional source findings](installer-source-findings.md) now record selected
-7.9 source bytes and prompt/default paths. Signature verification and the complete
-ledger remain outstanding; no native test is marked passed.
+[Verified-input source findings](installer-source-findings.md) record selected
+7.9 source bytes and prompt/default paths. The [disk-question ledger](installer-disk-question-ledger.md)
+adds root/encryption/partition/layout defaults and write order. The complete
+selected-path ledger remains outstanding; no installer native test is marked passed.
