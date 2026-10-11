@@ -65,3 +65,6 @@ passes. Private package receipts and host paths are omitted from shared evidence
 
 The [provenance and verification-route review](provenance.md) records installed
 license findings and the two media-trust routes requiring review.
+
+[Host-verifier experiment evidence](host-verifier-evidence.md) now records a local
+build and adapted synthetic regression pass; release-key/signature trust remains pending.
