@@ -8,6 +8,8 @@ Its twelve host groups and [bounded native results](../../research/payload-nativ
 neither accept this parent design nor qualify trust/extraction. Distinct on-wire
 directory-alias native coverage remains incomplete; PAY-12 supplies host evidence
 using distinct raw name/prefix fields without changing the frozen native stimuli.
+The [proposed authentication experiment](../../research/payload-authentication-spike.md)
+maps a next host-only slice of PTT-04; acceptance and execution remain pending.
 
 ## Requirement mapping
 

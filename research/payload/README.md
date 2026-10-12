@@ -60,3 +60,9 @@ PAY-12 constructs exact raw directory headers independently of tarfile, verifies
 their name/prefix fields and checks six individual admissions and twenty ordered
 duplicate/alias rejections on the host. These include combined names and split
 ustar prefix/name fields. The original 35 native fixtures stay frozen.
+
+The next [proposed authentication experiment](../../docs/research/payload-authentication-spike.md)
+would verify an independently expected synthetic artifact and detached signature
+before inspecting the same retained bytes. It requests host-only code/test work
+and disposable test signing with the existing reviewed verifier. Acceptance is
+pending; no authentication controller or signing fixture has been implemented.
