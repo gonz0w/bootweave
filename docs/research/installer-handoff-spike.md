@@ -204,5 +204,7 @@ backend/reserve changes, automated stock answers or production adoption do.
 
 The [first build preparation stopped](installer-handoff-stopped-evidence.md)
 before set extraction, and all six original fixture files were disposed. This
-exact-target authority has ended. Further native work awaits acceptance of the
-[new-target/media amendment](installer-handoff-retry.md).
+exact-target authority has ended. The
+[new-target/media amendment](installer-handoff-retry.md) was accepted 2026-10-12;
+the [corrected native run](installer-handoff-native-evidence.md) completed the
+bounded supervised experiment with its recorded shutdown limitation and disposal.

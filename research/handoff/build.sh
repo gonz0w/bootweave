@@ -86,7 +86,7 @@ cmp profile "$work/root/.profile"
 [ -L "$work/root/install" ] && [ "$(readlink "$work/root/install")" = install.sub ] || exit 1
 [ -f "$work/root/install.sub" ] && [ -f "$work/root/install.md" ] || exit 1
 [ ! -e "$work/root/auto_install.conf" ] && [ ! -e "$work/root/auto_upgrade.conf" ] || exit 1
-sha256 -C "$work/stock-entry.sha256"
+sha256 -C "$work/stock-entry.sha256" "$work/root/install.sub" "$work/root/install.md"
 ls -ln "$work/root/install"
 df -k "$work/root"
 sync

@@ -1,10 +1,12 @@
 # Corrected confirmed-handoff run amendment
 
-**Proposed; not accepted.** Owner/acceptance authority: Cam. This is the next
+**Accepted, 2026-10-12 local.** Owner/acceptance authority: Cam.
+Acceptance: Cam replied "yes,continue" to the four fresh writable targets,
+two-read-only-optical bootstrap and 1 GiB artifact-export question after PR #35. This is the next
 major decision following the [stopped build preparation](installer-handoff-stopped-evidence.md).
 The [accepted original scope](installer-handoff-spike.md) governs everything
-except the concrete changes below. No new guest has launched or received write
-authorization. The previous six fixture files and their approval lifetime ended
+except the concrete changes below. Before acceptance no new guest had launched or received write
+authorization. Exact receipt binding was reverified before recording acceptance. The previous six fixture files and their approval lifetime ended
 with disposal; their names/digests cannot authorize replacement inodes.
 
 ## Correct the source before any destructive step
@@ -65,7 +67,8 @@ file below was exclusively created 0600, has zero allocated bytes, and is bound
 in a frozen private receipt to its host device/inode, size and whole-file digest.
 The receipt SHA-256 is
 7c5b8e6f584f29dca334e2980df7344144a2ae2c5350f77b441fa113763c06aa.
-All guest-write authorization flags remain false.
+Preparation flags remained false; the subsequent explicit acceptance is recorded
+in a separate binding before launch, leaving the preparation receipt unchanged.
 
 | File | Bytes | Requested guest effects |
 |---|---:|---|
@@ -96,7 +99,10 @@ research/build sources and authenticated bootloaders are included separately.
 Strict host ISO readback matched every frozen source/set payload, including
 both set directories and their signature manifests. The nonbootable transport
 was assembled with existing host hdiutil; it does not qualify native media.
-Native mount/path/manifest verification remains pending before target writes.
+Native mount/path/manifest verification passed before target writes; the
+[current native evidence](installer-handoff-native-evidence.md) records build
+provisioning, compilation, corrections, completed supervised handoffs/OS boots,
+shutdown limitation and full disposal.
 
 The original native Test Design remains required: warning-clean static build,
 pure cases, linker/footprint/reserve and stock-entry checks; native serial/VGA

@@ -23,6 +23,7 @@ class HandoffTests(unittest.TestCase):
         cls.driver = Path(cls.temp.name) / 'driver'
         cls.production = Path(cls.temp.name) / 'production'
         cls.model = Path(cls.temp.name) / 'model'
+        cls.native_pty = Path(cls.temp.name) / 'native-pty'
         common = ['cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-pedantic',
                   '-I' + str(ROOT / 'research/storage')]
         shared = [str(ROOT / p) for p in ('research/handoff/snapshot.c', 'research/storage/validate.c')]
@@ -33,6 +34,9 @@ class HandoffTests(unittest.TestCase):
             if console:
                 sources.append(str(ROOT / 'research/handoff/console.c'))
             subprocess.run([*common, *sources, '-o', str(binary)], check=True)
+        if platform.system() != 'OpenBSD':
+            subprocess.run([*common, str(ROOT / 'research/handoff/native-pty.c'),
+                            '-o', str(cls.native_pty)], check=True)
 
     @classmethod
     def tearDownClass(cls):
@@ -51,6 +55,8 @@ class HandoffTests(unittest.TestCase):
                      'Native observation needs a separately approved target')
     def test_host_production_stub(self):
         p = subprocess.run([str(self.production)], capture_output=True, timeout=3)
+        self.assertEqual(p.returncode, 77)
+        p = subprocess.run([str(self.native_pty)], capture_output=True, timeout=3)
         self.assertEqual(p.returncode, 77)
 
     def run_tty(self, action, size=(24, 80), mode=None):
