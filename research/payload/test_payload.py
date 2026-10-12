@@ -307,6 +307,39 @@ class PayloadTests(unittest.TestCase):
                 os.close(write_end)
                 if read_end is not None: os.close(read_end)
 
+    @unittest.skipIf(sys.platform.startswith('openbsd'), 'host-refusal check')
+    def test_PAY10_native_tools_refuse_host_effects(self):
+        binary = self.directory / 'native-check-host'
+        before = sorted(path.name for path in self.directory.iterdir())
+        try:
+            subprocess.run(['cc', '-std=c99', '-Os', '-Wall', '-Wextra', '-Werror', '-pedantic',
+                            str(ROOT / 'research/payload/native_check.c'), '-o', str(binary)],
+                           check=True, capture_output=True)
+            result = subprocess.run([str(binary)], capture_output=True, timeout=3)
+            self.assertEqual(result.returncode, 77)
+            self.assertEqual(result.stdout, b'')
+            self.assertEqual(result.stderr, b'Native payload checks require OpenBSD.\n')
+            for name in ('native_build.sh', 'native_run.sh'):
+                result = subprocess.run(['sh', str(ROOT / 'research/payload' / name)],
+                                        capture_output=True, timeout=3)
+                self.assertEqual(result.returncode, 77)
+                self.assertEqual(result.stdout, b'')
+            self.assertLess((ROOT / 'research/payload/native_check.c').stat().st_size, 32768)
+        finally:
+            binary.unlink(missing_ok=True)
+        self.assertEqual(sorted(path.name for path in self.directory.iterdir()), before)
+
+    def test_PAY11_native_fixture_recipe_matches_observed_bytes(self):
+        import hashlib
+        import native_fixtures
+        cases = native_fixtures.make_cases()
+        self.assertEqual(len(cases), 35)
+        self.assertEqual(sum(map(len, cases)), 2806787)
+        self.assertEqual(tuple(hashlib.sha256(data).hexdigest() for data in cases),
+                         native_fixtures.DIGESTS)
+        self.assertEqual(hashlib.sha256(native_fixtures.case_manifest(cases)).hexdigest(),
+                         '052f68eeb8c267e6efe4c44ba6c233efc94b9574fed97a6dcaf1b5985b7f2b23')
+
     def test_PAY09_independent_header_no_effects_and_argument_boundary(self):
         # Independent fixed header, not tarfile or the mutation helper.
         raw = bytearray(512)

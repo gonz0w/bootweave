@@ -7,6 +7,11 @@ disposable targets. Payload extraction, generic project readiness and broader
 profile/hardware acceptance remain unqualified; the evidence records its shutdown
 and terminal limitations.
 
+The [bounded payload component](../research/payload-native-evidence.md) has native
+dynamic/static builds and 90 checks each on serial and keyboard/VGA; distinct
+on-wire directory-alias coverage, payload trust/extraction and runtime adoption
+remain unqualified. Its disposable target was removed.
+
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native
 OpenBSD evidence using exact source, release, architecture, firmware and boot mode.

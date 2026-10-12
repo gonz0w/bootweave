@@ -1,10 +1,12 @@
 # Generic project trust and privilege: Test Design
 
-Status: Proposed, 2026-10-11. Owner: Cam; acceptance pending. No tests have run.
+Status: Proposed, 2026-10-11. Owner: Cam; acceptance pending. No complete parent test case has run.
 Related [PRD](PRD.md) and [EDD](EDD.md).
 The narrower accepted Phase A is the
 [read-only payload inspection spike](../../research/payload-inspection-spike.md).
-Its nine host groups neither accept this parent design nor qualify extraction.
+Its eleven host groups and [bounded native results](../../research/payload-native-evidence.md)
+neither accept this parent design nor qualify trust/extraction. Distinct on-wire
+directory-alias native coverage remains incomplete.
 
 ## Requirement mapping
 
@@ -79,5 +81,6 @@ Incomplete cleanup or unobservable postconditions cannot be reported as a pass.
 Report each PTT case as passed, failed, skipped or not run with source identities,
 versions, commands, actual observations, limits and teardown. Publish only reviewed
 escaped evidence, no raw secrets/private inventories. Current PTT-01 through PTT-11
-status: not run; local make verify validates foundation/docs only. Accepted designs,
+status: not run; local make verify checks foundation and bounded host research.
+The narrower accepted spikes have separate native evidence. Accepted designs,
 actual native results and maintainer review precede any compatibility/support claim.
