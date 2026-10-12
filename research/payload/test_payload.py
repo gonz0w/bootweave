@@ -45,6 +45,22 @@ def archive(*members):
     return b''.join(members) + ZERO * 2
 
 
+def wire_directory(name, prefix=b''):
+    """Construct exact directory fields without tarfile's slash normalization."""
+    if not 0 < len(name) <= 100 or len(prefix) > 155:
+        raise ValueError('Fixture name/prefix exceeds its header field')
+    raw = bytearray(512)
+    raw[:len(name)] = name
+    raw[100:124] = b'0000755\0' + b'0000000\0' * 2
+    raw[124:148] = b'00000000000\0' * 2
+    raw[148:156] = b' ' * 8
+    raw[156] = ord('5')
+    raw[257:265] = b'ustar\x0000'
+    raw[345:345 + len(prefix)] = prefix
+    raw[148:156] = f'{sum(raw):06o}'.encode() + b'\0 '
+    return bytes(raw)
+
+
 class PayloadTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -171,7 +187,7 @@ class PayloadTests(unittest.TestCase):
         self.run_inspector(archive(change(header(), 0, b'a\0hidden')), expected=False)
 
     def test_PAY04_duplicates_aliases_and_ancestor_conflicts(self):
-        pairs = ((member('a'), member('a')), (member('a', directory=True), member('a/', directory=True)),
+        pairs = ((member('a'), member('a')), (wire_directory(b'a'), wire_directory(b'a/')),
                  (member('a'), member('a', directory=True)), (member('a'), member('a/b')),
                  (member('a'), member('a/b/', directory=True)))
         for first, second in pairs:
@@ -339,6 +355,37 @@ class PayloadTests(unittest.TestCase):
                          native_fixtures.DIGESTS)
         self.assertEqual(hashlib.sha256(native_fixtures.case_manifest(cases)).hexdigest(),
                          '052f68eeb8c267e6efe4c44ba6c233efc94b9574fed97a6dcaf1b5985b7f2b23')
+
+    def test_PAY12_distinct_wire_directory_aliases(self):
+        # The historical native fixture stays frozen. Confirm why its two
+        # nominal spellings cannot establish distinct on-wire coverage.
+        self.assertEqual(header('a', directory=True), header('a/', directory=True))
+        groups = (((b'a', b''), (b'a/', b'')),
+                  ((b'viewer/docs', b''), (b'viewer/docs/', b''),
+                   (b'docs', b'viewer'), (b'docs/', b'viewer')))
+        content = member('readme.txt', b'hello')
+        for fields in groups:
+            headers = [wire_directory(name, prefix) for name, prefix in fields]
+            self.assertEqual(len(set(headers)), len(fields))
+            for raw, (name, prefix) in zip(headers, fields):
+                with self.subTest(name=name, prefix=prefix):
+                    self.assertEqual(len(raw), 512)
+                    self.assertEqual(raw[:100], name + bytes(100 - len(name)))
+                    self.assertEqual(raw[345:500], prefix + bytes(155 - len(prefix)))
+                    self.assertEqual(int(raw[148:156].strip(b'\0 '), 8),
+                                     sum(raw[:148]) + 8 * 32 + sum(raw[156:]))
+                    result = self.run_inspector(archive(content, raw))
+                    self.assertEqual(result.stdout,
+                                     b'Inspection passed: 2 members, 1 files, 5 content bytes.\n')
+            for first in range(len(headers)):
+                for second in range(len(headers)):
+                    with self.subTest(first=fields[first], second=fields[second]):
+                        # Each header admits on its own, and an unrelated file
+                        # prevents directory-only rejection from masking a bug.
+                        result = self.run_inspector(archive(content, headers[first], headers[second]),
+                                                    expected=False)
+                        self.assertEqual(result.returncode, 2)
+                        self.assertEqual(result.stderr, b'Inspection rejected: tree conflict.\n')
 
     def test_PAY09_independent_header_no_effects_and_argument_boundary(self):
         # Independent fixed header, not tarfile or the mutation helper.

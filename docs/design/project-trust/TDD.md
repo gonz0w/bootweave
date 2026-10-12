@@ -4,9 +4,10 @@ Status: Proposed, 2026-10-11. Owner: Cam; acceptance pending. No complete parent
 Related [PRD](PRD.md) and [EDD](EDD.md).
 The narrower accepted Phase A is the
 [read-only payload inspection spike](../../research/payload-inspection-spike.md).
-Its eleven host groups and [bounded native results](../../research/payload-native-evidence.md)
+Its twelve host groups and [bounded native results](../../research/payload-native-evidence.md)
 neither accept this parent design nor qualify trust/extraction. Distinct on-wire
-directory-alias native coverage remains incomplete.
+directory-alias native coverage remains incomplete; PAY-12 supplies host evidence
+using distinct raw name/prefix fields without changing the frozen native stimuli.
 
 ## Requirement mapping
 
