@@ -1,6 +1,9 @@
 # Bounded payload authentication experiment
 
-Proposed, 2026-10-12. Owner/acceptance authority: Cam; acceptance pending.
+Accepted, 2026-10-12. Owner/acceptance authority: Cam.
+Acceptance: Cam replied "yes,continue" after PR #43 and the explicit host-only
+implementation/test-signing question. Implementation base:
+d58418b832c21bba61fec84020e7f793b599898e, merged PR #43.
 Base: 5b2526eacbed11976bfa292eac5dbbc737fbf096, merged PR #42.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [trust requirements](../design/project-trust/PRD.md),
@@ -40,7 +43,9 @@ Local src/usr.bin/signify/signify.c SHA-256:
 Read-only inspection of xopen/readmsg/verifysimple found this port duplicates stdin
 for message `-`, reads to EOF and uses separate key/signature files. Its own message
 ceiling exceeds this scope; the controller must enforce its cap first. No signing
-or key generation ran. These source observations do not establish native behavior.
+or key generation ran during proposal preparation. The accepted experiment's
+[host outcomes](payload-authentication-host-evidence.md) are separate from these
+source observations and do not establish native behavior.
 
 Before implementation execution, recheck identities/provenance, review generation/
 signing paths and retained file notices, and test detached stdin transport with
@@ -120,6 +125,6 @@ verified cleanup; publish sanitized evidence only. Host success neither complete
 PTT-04/05 nor qualifies native aliases, signer rotation/revocation, freshness policy,
 privileged input lifetime, extraction/races, readiness or production use.
 
-Record Cam's explicit acceptance here before execution. Merging this proposal alone
-is not acceptance. Routine fixes within accepted scope need no repeated approval;
+The acceptance above authorizes this bounded experiment, without adopting its
+mechanisms for production. Routine fixes within accepted scope need no repeated approval;
 changes to effects, trust or bounds return to review.

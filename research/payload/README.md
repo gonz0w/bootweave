@@ -7,7 +7,10 @@ extraction, filesystem path-opening, shell, subprocess, network or privilege bac
 No argument is accepted. Archive names and content never appear in diagnostics.
 
 `make test-payload` compiles the source with the installed host cc and runs twelve
-synthetic test groups. `make verify` includes them. Python is test tooling only;
+structural groups plus eight authentication groups when the exact reviewed local
+verifier is available on macOS. `make verify` includes them. Missing verifier or
+another host platform explicitly skips authentication; a mismatching verifier fails.
+Python is host research tooling only;
 the inspector uses base libc. Temporary fixtures/binaries are owned and removed.
 [Host outcomes and limits](../../docs/research/payload-host-evidence.md) are recorded
 separately from native qualification.
@@ -61,8 +64,17 @@ their name/prefix fields and checks six individual admissions and twenty ordered
 duplicate/alias rejections on the host. These include combined names and split
 ustar prefix/name fields. The original 35 native fixtures stay frozen.
 
-The next [proposed authentication experiment](../../docs/research/payload-authentication-spike.md)
-would verify an independently expected synthetic artifact and detached signature
-before inspecting the same retained bytes. It requests host-only code/test work
-and disposable test signing with the existing reviewed verifier. Acceptance is
-pending; no authentication controller or signing fixture has been implemented.
+The [accepted authentication experiment](../../docs/research/payload-authentication-spike.md)
+now has an original Python host controller and
+[eight test groups](../../docs/research/payload-authentication-host-evidence.md).
+It checks independently expected length/digest and an explicit pinned test key,
+then feeds the retained immutable payload bytes to the unchanged C inspector.
+The trusted host test harness supplies context and tool identities; there is no
+operator-selected key/path/command interface. Direct execution refuses without
+trusted context and rejects arguments. Run `make test-payload`; no new tool is
+downloaded or installed. Disposable signing keys exist only during owned tests
+and are removed afterward. Python is not an OpenBSD installer/runtime choice.
+Darwin DATA/RSS resource-limit calls are unavailable; child RSS is observed through
+wait4 and controller/test-process RSS through getrusage. Neither establishes kernel
+memory containment. Native auth, signer rotation/revocation, freshness/compatibility,
+privileged file-race resistance and extraction require further scoped evidence.

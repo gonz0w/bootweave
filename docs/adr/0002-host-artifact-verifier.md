@@ -96,3 +96,16 @@ of those effects. Until acceptance, the existing EDD remains in force.
 Acceptance supersedes the proposal-time pending language above. Earlier consistency
 observations remain historical; accepted-policy checks are recorded in the
 [release-input evidence](../design/native-profile/release-input-evidence.md).
+
+## Bounded synthetic signing extension, 2026-10-12
+
+Cam accepted the [host authentication experiment](../research/payload-authentication-spike.md)
+by replying "yes,continue" after PR #43 and its explicit implementation/test-signing
+question. That scope additionally permits this exact unchanged local tool to
+generate disposable synthetic keys and sign owned test fixtures. Keys/fixtures
+are privately held and disposed; no release signing, production signer policy,
+dependency update, redistribution or native use is adopted. Existing license,
+provenance and confinement limitations continue to apply. Its
+[host evidence](../research/payload-authentication-host-evidence.md) records actual
+positive/negative checks and cleanup; broader artifact verification remains under
+the original accepted policy.

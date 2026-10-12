@@ -68,3 +68,7 @@ synthetic ustar subset with twelve host regression groups and
 builds and 90 checks each on serial and keyboard/VGA. Distinct on-wire directory
 alias coverage, authentication, extraction and broader qualification remain separate
 gates.
+The [host-only authentication controller](docs/research/payload-authentication-host-evidence.md)
+adds eight synthetic signature/identity/failure groups and inspects the same retained
+bytes after verification. It uses the existing reviewed local verifier; native
+authentication, production trust policy and extraction remain unqualified.
