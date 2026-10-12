@@ -154,16 +154,24 @@ static void sign_bytes(const unsigned char *b, size_t n, const char *signature, 
  tool(args, b, n, 1);
 }
 static void setup(void) {
- int i; struct stat st;
+ int i, fresh; struct stat st; unsigned char lifetime[128], previous[128];
  static const char *const paths[] = {ROOT "cases/case-00.tar", ROOT "cases/case-06.tar", ROOT "cases/case-08.tar"};
  char *const first[] = {"/usr/bin/signify", "-G", "-n", "-p", ROOT "keys/selected.pub", "-s", ROOT "keys/selected.sec", NULL};
  char *const second[] = {"/usr/bin/signify", "-G", "-n", "-p", ROOT "keys/other.pub", "-s", ROOT "keys/other.sec", NULL};
- require(!mkdir(ROOT "keys", 0700), "owned key directory"); tool(first, NULL, 0, 1); tool(second, NULL, 0, 1);
+ fresh = mkdir(ROOT "keys", 0700) == 0;
+ require(fresh || errno == EEXIST, "owned key directory");
+ if (fresh) { tool(first, NULL, 0, 1); tool(second, NULL, 0, 1); }
  key_lengths[0] = read_file(ROOT "keys/selected.pub", keys[0], AUTH_RECORD);
  key_lengths[1] = read_file(ROOT "keys/other.pub", keys[1], AUTH_RECORD);
  require(!lstat(ROOT "keys", &st) && (st.st_mode & 07777) == 0700 && st.st_uid == getuid(), "key directory mode");
  { const char *const files[] = {"selected.pub", "selected.sec", "other.pub", "other.sec"}; char path[80];
-  for (i = 0; i < 4; i++) { snprintf(path, sizeof(path), ROOT "keys/%s", files[i]); require(!lstat(path, &st) && S_ISREG(st.st_mode) && st.st_uid == getuid() && (st.st_mode & 07777) == 0600 && st.st_size > 0 && st.st_size <= AUTH_RECORD, "private key record mode"); }
+  require(fixed_inventory(ROOT "keys", files, 4), "exact two-pair inventory");
+  for (i = 0; i < 4; i++) { snprintf(path, sizeof(path), ROOT "keys/%s", files[i]); require(!lstat(path, &st) && S_ISREG(st.st_mode) && st.st_uid == getuid() && (st.st_mode & 07777) == 0600 && st.st_size > 0 && st.st_size <= AUTH_RECORD, "private key record mode"); require(!auth_hash_file(path, lifetime + i * 32), "private key lifetime identity"); }
+ }
+ if (fresh) owned_write(ROOT "key-lifetime.private", lifetime, sizeof(lifetime));
+ else {
+  require(!lstat(ROOT "key-lifetime.private", &st) && S_ISREG(st.st_mode) && st.st_uid == getuid() && (st.st_mode & 07777) == 0600, "private lifetime receipt mode");
+  require(read_file(ROOT "key-lifetime.private", previous, sizeof(previous)) == sizeof(previous) && !memcmp(previous, lifetime, sizeof(previous)), "same approved two pairs across builds/consoles");
  }
  for (i = 0; i < 3; i++) {
   char path[80]; payloads[i] = malloc(AUTH_INPUT + 1); require(payloads[i] != NULL, "fixture memory");
@@ -319,12 +327,11 @@ static void aliases(void) {
  }
  free(b);
 }
-static void dispose_keys(void) {
+static void dispose_signatures(void) {
  char path[80]; int i; static const char *const names[] = {"selected.pub", "selected.sec", "other.pub", "other.sec"};
- for (i = 0; i < 4; i++) { snprintf(path, sizeof(path), ROOT "keys/%s", names[i]); require(!unlink(path), "key disposal"); }
  for (i = 0; i < 3; i++) { snprintf(path, sizeof(path), ROOT "keys/sig-%d", i); require(!unlink(path), "signature disposal"); }
  for (i = 0; i < 26; i++) { snprintf(path, sizeof(path), ROOT "keys/alias-%02d.sig", i); require(!unlink(path), "alias signature disposal"); }
- require(!rmdir(ROOT "keys"), "key inventory disposed");
+ require(fixed_inventory(ROOT "keys", names, 4), "only approved two pairs retained privately");
  for (i = 0; i < 3; i++) free(payloads[i]);
 }
 int main(int argc, char **argv) {
@@ -333,9 +340,9 @@ int main(int argc, char **argv) {
  umask(077); memset(&sa, 0, sizeof(sa)); sa.sa_handler = SIG_IGN; sigemptyset(&sa.sa_mask);
  require(!sigaction(SIGPIPE, &sa, NULL) && !setrlimit(RLIMIT_CORE, &core), "supervisor signal/core setup");
  tty = isatty(0); if (tty) require(!tcgetattr(0, &before), "saved TTY");
- canary(); setup(); checks(); aliases(); dispose_keys(); canary();
+ canary(); setup(); checks(); aliases(); dispose_signatures(); canary();
  if (tty) { require(!tcgetattr(0, &after) && before.c_iflag == after.c_iflag && before.c_oflag == after.c_oflag && before.c_cflag == after.c_cflag && before.c_lflag == after.c_lflag && !memcmp(before.c_cc, after.c_cc, sizeof(before.c_cc)) && cfgetispeed(&before) == cfgetispeed(&after) && cfgetospeed(&before) == cfgetospeed(&after), "TTY unchanged"); }
- printf("Native authentication checks passed: %d cases; controller peak %ld KiB; child peak %ld KiB; retained pipe bytes observed; keys disposed; canary unchanged; TTY %s.\n", tests, peak_controller, peak_child, tty ? "unchanged" : "unavailable");
+ printf("Native authentication checks passed: %d cases; controller peak %ld KiB; child peak %ld KiB; retained pipe bytes observed; same two pairs retained privately; canary unchanged; TTY %s.\n", tests, peak_controller, peak_child, tty ? "unchanged" : "unavailable");
  return 0;
 }
 #endif

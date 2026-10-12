@@ -335,7 +335,8 @@ class PayloadTests(unittest.TestCase):
             self.assertEqual(result.returncode, 77)
             self.assertEqual(result.stdout, b'')
             self.assertEqual(result.stderr, b'Native payload checks require OpenBSD.\n')
-            for name in ('native_build.sh', 'native_run.sh', 'auth_native_build.sh', 'auth_native_run.sh'):
+            for name in ('native_build.sh', 'native_run.sh', 'auth_native_build.sh',
+                         'auth_native_run.sh', 'auth_native_cleanup.sh'):
                 result = subprocess.run(['sh', str(ROOT / 'research/payload' / name)],
                                         capture_output=True, timeout=3)
                 self.assertEqual(result.returncode, 77)
