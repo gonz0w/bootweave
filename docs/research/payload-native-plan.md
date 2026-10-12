@@ -8,6 +8,9 @@ Related [accepted host phase](payload-inspection-spike.md),
 [host evidence](payload-host-evidence.md), [source binding](payload-source-findings.md)
 and [issue #5](https://github.com/gonz0w/bootweave/issues/5).
 Acceptance covers only the exact prepared target and effects below.
+The [completed run evidence](payload-native-evidence.md) records actual failures,
+final serial/VGA outcomes, the distinct on-wire alias gap and complete disposal.
+Target authority ended with disposal.
 
 ## Outcome and exact requested effects
 
