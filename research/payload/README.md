@@ -13,6 +13,8 @@ the inspector uses base libc. Temporary fixtures/binaries are owned and removed.
 separately from native qualification.
 No native build or run is authorized by Phase A, and host checks cannot qualify
 OpenBSD execution, payload trust or extraction containment.
+The [native experiment proposal](../../docs/research/payload-native-plan.md) prepares
+one new empty build disk and a reviewed execution scope, pending confirmation.
 
 After host compilation, supply an owned synthetic archive through stdin. The
 executable emits only a fixed summary with member/file/content-byte counts after
