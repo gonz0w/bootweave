@@ -47,14 +47,16 @@ a terminal restoration fix. The separately authorized ramdisk experiment now
 provides native media and console evidence; broader qualification and runtime
 adoption remain deferred.
 
-## Next build decision, 2026-10-12
+## Payload Phase A build, 2026-10-12
 
 The [bounded handoff](research/installer-handoff-native-evidence.md) completed its
 approved supervised stock installs and offline boot checks; its targets are
 disposed and exact-target authority has ended. The
 [saved block-observation checker](engineering/development.md) is now local tooling.
-The next proposed component is a
+The next component is the
 [read-only payload archive inspector](research/payload-inspection-spike.md) under
-issue #5. Its bounded host implementation scope awaits acceptance. Payload trust,
+issue #5. Cam accepted Phase A after PR #38; the original C reader now has nine
+host regression groups and an
+[authenticated format review](research/payload-source-findings.md). Payload trust,
 extraction, public project syntax and production installer adoption remain separate
-decisions; no new native run or writable target is prepared by this proposal.
+decisions; no new native run or writable target was prepared by this work.

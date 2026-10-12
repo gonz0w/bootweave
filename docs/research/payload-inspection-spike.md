@@ -1,11 +1,16 @@
 # Bounded payload inspection: next implementation scope
 
-Proposed, 2026-10-12. Owner and acceptance authority: Cam. Acceptance pending.
+Phase A accepted, 2026-10-12. Owner and acceptance authority: Cam.
+Acceptance: Cam replied "yes,continue" to the explicit Phase A implementation
+question after PR #38. Implementation base:
+028a2e951cb1e42c6a0e44f51a674f46bea10b96 (merged PR #38).
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [trust requirements](../design/project-trust/PRD.md),
 [engineering boundaries](../design/project-trust/EDD.md) and
 [parent Test Design](../design/project-trust/TDD.md).
 Base: ec43b2268b293659a9ca12d1f235f2e54a459e54, merged PR #37.
+The implementation's [source binding](payload-source-findings.md) and
+[host outcomes](payload-host-evidence.md) are recorded separately.
 
 ## Outcome and decision requested
 
