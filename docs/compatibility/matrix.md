@@ -6,7 +6,7 @@
 | Stock OpenBSD 7.9 optical boot/menu | [Diskless VGA observation](../design/native-profile/diskless-evidence.md) | VGA and [serial](../design/native-profile/serial-evidence.md) observed; framework unqualified |
 | First proposed guest profile | [7.9 amd64 BIOS design](../design/native-profile/PRD.md); diskless VGA observation only | Disk-bearing profile unqualified |
 | Project configuration/extension contract | [Trust design](../design/project-trust/PRD.md); no runtime tests | Proposed boundaries; syntax undecided |
-| Plain-text synthetic UI research | [Host/PTY evidence](../research/plain-ui-host-evidence.md) | Host-only; OpenBSD unqualified |
+| Plain-text synthetic UI research | [Host/PTY evidence](../research/plain-ui-host-evidence.md) and [native results](../research/plain-ui-native-evidence.md) | 7.9 amd64 installed guest: 7 pipe/12 PTY cases, serial/VGA completion; runtime adoption and ramdisk unqualified |
 | ANSI/serial/plain-text renderer | [Research plan](../research/text-ui-runtime-plan.md) and [ramdisk source findings](../research/ramdisk-ui-source-findings.md); no custom renderer runs | Proposed; unqualified |
 | Stock installer integration | [Bounded research plan](../research/installer-integration-plan.md); manuals only | Proposed; native tests not run |
 | Disk operations, service bootstrap, recovery | Requirements only | Unimplemented |
@@ -25,4 +25,6 @@ The [diskless follow-up](../design/native-profile/diskless-evidence.md) reached 
 VGA menu. The first serial selection missed the boot prompt; the
 [corrected observation](../design/native-profile/serial-evidence.md) reached its menu
 and read-only shell through com0 after VGA bootstrap.
-No writable target or Bootweave runtime was tested.
+Those diskless observations tested no writable target or Bootweave runtime.
+The later [native UI experiment](../research/plain-ui-native-evidence.md) manually
+provisioned one separately confirmed disposable target; no installer engine was tested.

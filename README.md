@@ -46,5 +46,6 @@ Checks run locally in the foreground. GitHub Actions and hosted/self-hosted runn
 are not used. Signed Conventional Commits, DCO sign-offs and reviewed PRs are required.
 See [development](docs/engineering/development.md) for tool pins and limitations.
 
-The [plain-text research simulation](research/ui/README.md) has host-only tests;
-it does not qualify an OpenBSD runtime or implement an installer.
+The [plain-text research simulation](research/ui/README.md) has host and
+[OpenBSD 7.9 native evidence](docs/research/plain-ui-native-evidence.md). It remains
+a research simulation; no runtime adoption or installer implementation follows.

@@ -6,7 +6,9 @@ Status: Phase A accepted, 2026-10-11. Owner/acceptance authority: Cam.
 and [terminal lookup review](terminal-lookup-findings.md).
 Acceptance: maintainer replied “continue with issues” after the explicit Phase A
 implementation approval question on PR #26. This authorizes the bounded original
-simulation and host tests below under AGENTS.md rule 3. Phase B remains deferred.
+simulation and host tests below under AGENTS.md rule 3. Native build and exact-target execution
+were subsequently authorized; see the [build experiment](native-ui-build.md).
+The maintainer confirmed the inventoried empty 8 GiB target before guest writes.
 It does not adopt a runtime language or approve installer implementation.
 
 ## Selected experiment and source constraint
@@ -115,7 +117,7 @@ or real secrets. Local make verify must run and all existing foundation checks p
 Publish clean base/head/tree, exact code hash, build arguments, actual outcomes,
 compiler/host identity and native-unqualified limits. A host pass is Phase A only.
 
-## Phase B: native evidence explicitly deferred
+## Phase B: separately authorized native experiment
 
 No native launch, guest command expansion, script upload, compilation, writable disk,
 installed guest, customized ramdisk or media build is authorized by Phase A approval.
@@ -142,4 +144,7 @@ there is no runtime/configuration/privilege interface to preserve.
 
 Phase A [implementation and host evidence](plain-ui-host-evidence.md) now exist.
 The exact original source is [research/ui/plain-ui.c](../../research/ui/plain-ui.c);
-Phase B and durable language/runtime selection remain deferred.
+Native Phase B ran under the separately authorized [build experiment](native-ui-build.md).
+[Actual native results](plain-ui-native-evidence.md) bind the final sources and
+record the terminal bug, fixes, console checks and fixture disposal.
+Durable language/runtime selection remains deferred.

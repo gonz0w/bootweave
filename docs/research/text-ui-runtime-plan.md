@@ -126,7 +126,9 @@ exceeded. Distinguish serial transmission/operator delay from renderer latency.
 | UI-09 | Native builds and representative screens at limits | Measure resources and dependencies against ceilings; host checks insufficient. |
 | UI-10 | Separately authorized ramdisk build/boot | Dependencies present and UI cases repeated; installed-guest results alone insufficient. |
 
-UI-01 through UI-10 are not run. Manual/source review establishes hypotheses only.
+The parent candidate comparison remains incomplete. The narrower accepted
+[plain-text experiment](plain-ui-native-evidence.md) now supplies partial native
+evidence for UI-01/02/04/05/07/09; it does not satisfy the full parent test scope.
 Host unit tests can check bounded data handling after code exists but cannot replace
 native console behavior. Reviewers compare semantic outcomes separately from screen
 appearance. Capture test control bytes privately and publish escaped excerpts only.
@@ -147,11 +149,13 @@ operations or turn stock-installer defaults into a safe engine contract.
 
 [Authenticated ramdisk UI source findings](ramdisk-ui-source-findings.md) now
 record selected build-list, reduced utility and library/data boundaries. No
-prototype or language/library adoption is implied; all UI tests remain unrun.
+language/library adoption is implied. The later plain-text experiment supplies
+only the explicitly recorded native subset.
 
 [Release lookup and dimension findings](terminal-lookup-findings.md) now bind
 ordinary-root environment lookup, sizing fallbacks and selected pager-helper
-license notices to authenticated source. Prototype authorization remains pending.
+license notices to authenticated source. The later minimal spike received
+separate authorization.
 
 The [minimal plain-text implementation review target](plain-ui-spike-plan.md)
 proposes a bounded C simulation and host-only checks. Implementation needs explicit
@@ -159,4 +163,5 @@ spike acceptance; native provisioning/build/media/run remain separate gates.
 
 Phase A of the [minimal plain-text spike](plain-ui-spike-plan.md) was explicitly
 accepted after PR #26. [Host implementation results](plain-ui-host-evidence.md)
-remain separate from the unrun native UI-01 through UI-10 cases.
+remain separate from the [native plain-text results](plain-ui-native-evidence.md)
+and the still incomplete parent UI-01 through UI-10 comparison.
