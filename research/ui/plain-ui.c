@@ -207,7 +207,7 @@ main(void)
 {
     char input[LINE_CAP + 1], label[65] = "", choice[6] = "";
     struct termios restored;
-    int state = 0, result = 2, read_result;
+    int state = 0, result = 2, read_result, pending;
     long long start = now_ms();
     if (start < 0)
         return 3;
@@ -281,10 +281,13 @@ main(void)
     }
 cleanup:
     if (terminal_saved) {
-        /* Discard this simulation's queued input on exit. On this host this
-         * also clears PENDIN after restoring canonical mode. */
+        /* Discard owned queued input. FIONREAD processes OpenBSD PENDIN
+         * on the emptied queue without blocking. Reapply the original
+         * flags afterwards, including any initially saved PENDIN state. */
         if (tcsetattr(STDIN_FILENO, TCSANOW, &saved) ||
             tcflush(STDIN_FILENO, TCIFLUSH) ||
+            ioctl(STDIN_FILENO, FIONREAD, &pending) ||
+            tcsetattr(STDIN_FILENO, TCSANOW, &saved) ||
             tcgetattr(STDIN_FILENO, &restored)) {
             result = 3;
         } else if (restored.c_iflag != saved.c_iflag ||

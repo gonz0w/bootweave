@@ -2,8 +2,9 @@
 
 Original BSD-3-Clause research code for the accepted Phase A of
 [the bounded spike](../../docs/research/plain-ui-spike-plan.md).
-No installer, disk, payload, configuration or privilege backend. Host-only evidence;
-C is not adopted as the Bootweave runtime and OpenBSD behavior remains unqualified.
+No installer, disk, payload, configuration or privilege backend. [Host](../../docs/research/plain-ui-host-evidence.md) and
+[OpenBSD native evidence](../../docs/research/plain-ui-native-evidence.md) exist.
+C is not adopted as the Bootweave runtime; ramdisk inclusion remains unqualified.
 
 Run the owned host checks with `make test-ui` or `make verify`. The Python suite
 compiles a fresh temporary binary using the installed cc, creates owned PTYs,
@@ -24,3 +25,20 @@ restore attributes; lost-console restoration may be unavailable and returns fail
 The code reports unknown/unusable dimensions rather than treating 80x24 as measured.
 Exit 0 means simulation completed, 2 means incomplete/cancelled, and 3 means setup
 or restoration failure. There is no installation success or readiness result.
+
+Native development uses the [disposable build experiment](../../docs/research/native-ui-build.md)
+with original native-smoke.sh and native-pty.c checks. Both refuse non-OpenBSD
+qualification. Inside the reviewed disposable guest, build and run:
+
+```sh
+cc -std=c99 -Wall -Wextra -Werror -pedantic plain-ui.c -o plain-ui
+cc -std=c99 -Wall -Wextra -Werror -pedantic native-pty.c -lutil -o native-pty
+sh native-smoke.sh /root/ui/plain-ui
+./native-pty /root/ui/plain-ui
+```
+
+Seven pipe and twelve owned-PTY cases passed on 7.9 amd64, plus direct serial and
+VGA keyboard completion. The PTY checks cover exact saved attributes, including
+OpenBSD PENDIN initially set, cancellation, timeout, signals, resize and supervisor
+restoration after forced kill. libutil is a base-system test dependency; the UI
+links only base libc/ld.so. These results do not qualify bsd.rd inclusion.
