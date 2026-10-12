@@ -6,7 +6,7 @@ experiment reads stdin and checks a narrow uncompressed ustar subset. It has no
 extraction, filesystem path-opening, shell, subprocess, network or privilege backend.
 No argument is accepted. Archive names and content never appear in diagnostics.
 
-`make test-payload` compiles the source with the installed host cc and runs eleven
+`make test-payload` compiles the source with the installed host cc and runs twelve
 synthetic test groups. `make verify` includes them. Python is test tooling only;
 the inspector uses base libc. Temporary fixtures/binaries are owned and removed.
 [Host outcomes and limits](../../docs/research/payload-host-evidence.md) are recorded
@@ -56,3 +56,7 @@ private directory under .tools with the exact 35 synthetic archives and test
 checklists; it neither launches a guest nor supplies target authorization. Remove
 the generated directory after review/use. The `alias-dir` recipe produces identical
 directory headers; distinct slash/no-slash wire encodings were not tested natively.
+PAY-12 constructs exact raw directory headers independently of tarfile, verifies
+their name/prefix fields and checks six individual admissions and twenty ordered
+duplicate/alias rejections on the host. These include combined names and split
+ustar prefix/name fields. The original 35 native fixtures stay frozen.

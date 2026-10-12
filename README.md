@@ -63,7 +63,7 @@ boots, a separate partial-install case and full disposal. Stock background kerne
 relinking was interrupted during VGA shutdown; a subsequent kernel boot remains
 unqualified. This is bounded research, with no production installer adoption.
 The [read-only payload inspector](research/payload/README.md) checks a bounded
-synthetic ustar subset with eleven host regression groups and
+synthetic ustar subset with twelve host regression groups and
 [bounded native evidence](docs/research/payload-native-evidence.md): dynamic/static
 builds and 90 checks each on serial and keyboard/VGA. Distinct on-wire directory
 alias coverage, authentication, extraction and broader qualification remain separate

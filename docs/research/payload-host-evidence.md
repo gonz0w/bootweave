@@ -59,6 +59,47 @@ directory inventories, closed owned files/pipes, waited or terminated children,
 and removed temporary binaries/fixtures. Only original source, tests and sanitized
 evidence are versioned; private source-review files remain ignored.
 
+## Directory wire-alias correction
+
+2026-10-12 follow-up, base 7aa91a190dc0fa724e420c0f1d3fde36eed52731,
+merged PR #41, within the accepted Phase A routine-correction scope. Earlier host
+and native fixtures used tarfile's directory encoder for both `a` and `a/`. It
+encoded identical headers, so those passes establish duplicate rejection rather
+than distinct wire-alias rejection. The native gap recorded in
+[the completed experiment](payload-native-evidence.md) remains open.
+
+PAY-04 now uses hand-built directory headers for its slash/no-slash pair. PAY-12
+constructs raw 512-byte headers from the already reviewed field offsets, without
+tarfile or the existing checksum-mutation helper. It independently checks exact
+zero-padded name/prefix fields, header length, pairwise distinct bytes and checksum.
+The fixture groups are:
+
+| Canonical directory | Exact name/prefix combinations | Individual admissions | Ordered pair rejections |
+|---|---|---:|---:|
+| a | name `a` or `a/`, empty prefix | 2 | 4 |
+| viewer/docs | name `viewer/docs` or `viewer/docs/`, empty prefix; name `docs` or `docs/`, prefix `viewer` | 4 | 16 |
+
+All six headers individually admitted with an unrelated five-byte regular file,
+producing exactly two members, one file and five content bytes. All twenty ordered
+pairs, including identical duplicates and both orders of distinct aliases, returned
+exit 2, empty success output and the exact fixed tree-conflict diagnostic. The
+unrelated regular file prevents directory-only rejection from masking a missing
+collision check; individual admissions prevent malformed headers from supplying
+false rejection evidence.
+
+Focused command: `PYTHONPATH=research/payload .tools/venv/bin/python3 -m unittest
+test_payload.PayloadTests.test_PAY04_duplicates_aliases_and_ancestor_conflicts
+test_payload.PayloadTests.test_PAY11_native_fixture_recipe_matches_observed_bytes
+test_payload.PayloadTests.test_PAY12_distinct_wire_directory_aliases -v`.
+All three groups passed on Darwin arm64. Supplied-buffer peak RSS was 1916928
+bytes and sampled owned allocation 61440 bytes; unchanged input/inventory and
+capture limits were checked by the existing supervisor, and temporary files were
+removed. The inspector and all native C/shell tooling are unchanged. PAY-11 still
+matches all 35 historical fixture digests and their exact case-manifest digest.
+Full twelve-group payload and local `make verify` outcomes, clean candidate/tree,
+trusted signatures and DCO accompany the follow-up PR. No new native run,
+target, extraction or runtime adoption follows from this correction.
+
 No native guest, media build, disk target, signature-trust integration, extractor,
 hook, application or service ran. The host cases do not complete parent PTT-04/05
 or qualify native parsing, immutable verified-input lifetime, containment during
