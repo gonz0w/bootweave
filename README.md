@@ -55,3 +55,5 @@ diskless BIOS media and records [build/console evidence](docs/research/ramdisk-u
 The [read-only storage probe](research/storage/README.md) has a native static build
 and fresh native diskless, 8 GiB and undersized-disk evidence under the accepted
 read-only virtio research amendment.
+The next [confirmed stock-installer handoff](docs/research/installer-handoff-spike.md)
+is prepared for scope and exact-target review before write-capable execution.
