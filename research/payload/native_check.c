@@ -148,7 +148,16 @@ static void check(int binary, int index, enum mode mode, int signal_number) {
   result = wait4(child, &status, WNOHANG, &usage);
   if (result < 0) fail("wait4");
   if (result == child) { active_child = 0; done = 1; break; }
-  (void)poll(NULL, 0, mode == PARTIAL ? 1 : 2);
+  {
+   struct pollfd watches[3];
+   watches[0].fd = !input_closed && mode != STALL && mode != INTERRUPT &&
+       (mode != EXCESS || supplied < 512) ? in[1] : -1;
+   watches[0].events = POLLOUT; watches[0].revents = 0;
+   watches[1].fd = mode != FULL && mode != BROKEN ? out[0] : -1;
+   watches[1].events = POLLIN; watches[1].revents = 0;
+   watches[2].fd = err[0]; watches[2].events = POLLIN; watches[2].revents = 0;
+   if (poll(watches, 3, 10) < 0 && errno != EINTR) fail("supervisor poll");
+  }
  }
  elapsed = now() - start;
  current_status = status;
