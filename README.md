@@ -4,7 +4,7 @@ A configurable, text-based OpenBSD installer framework for independent projects.
 BSD-3-Clause licensed; community contributions welcome. This project is independent
 of the OpenBSD project and does not imply upstream endorsement.
 
-**Status: repository foundation and bounded UI/media/storage research.** A disposable
+**Status: repository foundation and bounded UI/media/storage/handoff research.** A disposable
 research image boots the synthetic UI. No installer, configuration parser, runtime
 service, supported hardware profile or release exists yet.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
@@ -55,5 +55,6 @@ diskless BIOS media and records [build/console evidence](docs/research/ramdisk-u
 The [read-only storage probe](research/storage/README.md) has a native static build
 and fresh native diskless, 8 GiB and undersized-disk evidence under the accepted
 read-only virtio research amendment.
-The next [confirmed stock-installer handoff](docs/research/installer-handoff-spike.md)
-is prepared for scope and exact-target review before write-capable execution.
+The [confirmed-handoff prototype](research/handoff/README.md) now has host PTY checks.
+Its native build preparation [stopped before set extraction](docs/research/installer-handoff-stopped-evidence.md);
+no native handoff or installer qualification follows.
