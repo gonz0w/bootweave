@@ -12,9 +12,9 @@ The [accepted authentication experiment](../../research/payload-authentication-s
 has [eight host groups](../../research/payload-authentication-host-evidence.md) for
 a narrow synthetic slice of PTT-04. Privileged input lifetime, compatibility and
 freshness policy, native authentication and extraction remain unqualified.
-The [proposed native authentication experiment](../../research/payload-authentication-native-plan.md)
+The [accepted native authentication experiment](../../research/payload-authentication-native-plan.md)
 maps eight bounded native groups and the distinct directory-alias gap to a fresh
-prepared target. No native authentication case has run; acceptance is pending.
+prepared target. No native authentication case has run yet.
 
 ## Requirement mapping
 

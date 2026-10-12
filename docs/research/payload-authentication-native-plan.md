@@ -1,6 +1,10 @@
 # Native payload authentication experiment
 
-Proposed, 2026-10-12. Owner/acceptance authority: Cam; acceptance pending.
+Accepted, 2026-10-12. Owner/acceptance authority: Cam.
+Acceptance: Cam replied "yes,continue" after PR #45 and the explicit native
+implementation/data-ISO/exact-8-GiB-target question, including disposable keys,
+credentials and the stock password-argv limitation. Implementation base:
+d72eaec20f799cd6a974749ccc024d0e041ed994, merged PR #45.
 Base: 89f21b0a6225b329f6a1605ad536d159b28c8c3a, merged PR #44.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [accepted host experiment](payload-authentication-spike.md),
@@ -18,7 +22,7 @@ is adopted for the installer. No extraction, application, hook or product servic
 execution is included. This is the next native component experiment, not acceptance
 of the proposed parent trust design.
 
-Acceptance would authorize original controller/test implementation, a nonbootable
+Acceptance authorizes original controller/test implementation, a nonbootable
 read-only data CD, two disposable guest-generated test key pairs and synthetic
 signing, and writes on the **one exact target below** for stock provisioning, offline
 compilation and test fixtures. No other disk, live network, dependency installation,
@@ -64,9 +68,9 @@ Six distinct raw headers each admitted alone with an unrelated regular file; all
 20 ordered alias pairs rejected with the expected tree-conflict result in host
 checks. This preparation does not close their native gap.
 
-No data ISO exists. Automatic approval review rejected its creation because this
+At preparation, no data ISO existed. Automatic approval review rejected its creation because this
 new native preparation scope and exact target lacked explicit reviewed confirmation.
-No workaround was attempted. The proposed acceptance explicitly includes assembling
+No workaround was attempted. The subsequent acceptance explicitly includes assembling
 that ISO after approval, adding only reviewed original controller/test sources,
 scripts and further bounded synthetic authentication cases. Preserve the existing
 stock inputs, inspector and 35 historical archives byte-for-byte. Seal a complete

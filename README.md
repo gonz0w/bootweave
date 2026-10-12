@@ -74,5 +74,5 @@ bytes after verification. It uses the existing reviewed local verifier; native
 authentication, production trust policy and extraction remain unqualified.
 The [next native authentication plan](docs/research/payload-authentication-native-plan.md)
 binds a fresh disposable build target and proposes base-signify/C testing, including
-the directory-alias gap. Its implementation, media assembly and guest writes await
-explicit scope/target acceptance.
+the directory-alias gap. Cam accepted its exact disposable target and bounded
+implementation/media/test effects; native results remain pending.
