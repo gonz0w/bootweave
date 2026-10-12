@@ -23,6 +23,8 @@ int main(void) { fputs("Native payload checks require OpenBSD.\n", stderr); retu
 static long peak_kib;
 static int tests;
 static pid_t active_child;
+static int current_binary, current_case, current_mode, current_status = -1;
+static size_t current_output, current_errors;
 static const char *binaries[] = { ROOT "inspect", ROOT "inspect-static" };
 static const char *summaries[] = {
  "Inspection passed: 2 members, 1 files, 5 content bytes.\n",
@@ -40,7 +42,7 @@ static void fail(const char *message) {
   int status; (void)kill(active_child, SIGKILL);
   while (waitpid(active_child, &status, 0) < 0 && errno == EINTR) {}
  }
- fprintf(stderr, "Native check failed: %s.\n", message); exit(1);
+ fprintf(stderr, "Native check failed: %s; binary %d case %d mode %d status %d output %lu errors %lu.\n", message, current_binary, current_case, current_mode, current_status, (unsigned long)current_output, (unsigned long)current_errors); exit(1);
 }
 static long long now(void) {
  struct timespec t;
@@ -89,6 +91,8 @@ static void check(int binary, int index, enum mode mode, int signal_number) {
  size_t used = 0, error_used = 0, pending = 0, at = 0, supplied = 0, filled = 0;
  ssize_t n;
  long long start, elapsed; struct rusage usage;
+ current_binary = binary; current_case = index; current_mode = mode;
+ current_status = -1; current_output = current_errors = 0;
  if (snprintf(path, sizeof(path), ROOT "cases/case-%02d.tar", index) >= (int)sizeof(path)) fail("fixed path");
  source = open(path, O_RDONLY | O_NOFOLLOW); if (source < 0) fail("fixture open");
  if (pipe(in) || pipe(out) || pipe(err)) fail("pipe creation");
@@ -147,9 +151,11 @@ static void check(int binary, int index, enum mode mode, int signal_number) {
   (void)poll(NULL, 0, mode == PARTIAL ? 1 : 2);
  }
  elapsed = now() - start;
+ current_status = status;
  if (!done || !WIFEXITED(status)) fail("child completion");
  if (mode != FULL && mode != BROKEN) collect(out[0], output, &used);
  collect(err[0], errors, &error_used);
+ current_output = used; current_errors = error_used;
  if (fcntl(in[0], F_GETFL) != saved[0] || fcntl(out[1], F_GETFL) != saved[1] || fcntl(err[1], F_GETFL) != saved[2]) fail("exact descriptor flags");
  if (usage.ru_maxrss < 0 || usage.ru_maxrss > 32768) fail("RSS budget");
  if (usage.ru_maxrss > peak_kib) peak_kib = usage.ru_maxrss;
