@@ -1,4 +1,4 @@
-.PHONY: tools hooks check lint test test-ui test-storage test-handoff secrets verify
+.PHONY: tools hooks check lint test test-ui test-storage test-handoff test-payload secrets verify
 
 tools:
 	python3 tools/bootstrap-tools.py
@@ -24,7 +24,10 @@ test-storage:
 test-handoff:
 	.tools/venv/bin/python3 -m unittest discover -s research/handoff -v
 
+test-payload:
+	.tools/venv/bin/python3 -m unittest discover -s research/payload -v
+
 secrets:
 	.tools/bin/gitleaks dir --redact --no-banner --config .gitleaks.toml .
 
-verify: check lint test test-ui test-storage test-handoff secrets
+verify: check lint test test-ui test-storage test-handoff test-payload secrets

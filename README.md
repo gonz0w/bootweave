@@ -62,3 +62,6 @@ The accepted corrected run has [native evidence](docs/research/installer-handoff
 boots, a separate partial-install case and full disposal. Stock background kernel
 relinking was interrupted during VGA shutdown; a subsequent kernel boot remains
 unqualified. This is bounded research, with no production installer adoption.
+The [read-only payload inspector](research/payload/README.md) checks a bounded
+synthetic ustar subset with nine host regression groups; authentication, extraction
+and native qualification remain separate gates.
