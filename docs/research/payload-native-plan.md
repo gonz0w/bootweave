@@ -1,11 +1,13 @@
 # Native payload inspection experiment
 
-Proposed, 2026-10-12. Owner/acceptance authority: Cam; acceptance pending.
+Accepted, 2026-10-12. Owner/acceptance authority: Cam.
+Acceptance: Cam replied "yes,continue" after PR #40 and the explicit 8 GiB
+prepared-target/native scope question, including the disposable-credential limitation.
 Base: 5255bee7ccaca8cdca462bb27565868d41a1e6d1, merged PR #39.
 Related [accepted host phase](payload-inspection-spike.md),
 [host evidence](payload-host-evidence.md), [source binding](payload-source-findings.md)
 and [issue #5](https://github.com/gonz0w/bootweave/issues/5).
-This proposal does not authorize guest launch or disk writes until explicitly accepted.
+Acceptance covers only the exact prepared target and effects below.
 
 ## Outcome and exact requested effects
 
@@ -22,7 +24,9 @@ ebfb4ef19ae410f190327b5ebd312711263bc7579970e87d9c1e2d84e06b3c25.
 The frozen private receipt binds host device/inode, size, digest and preparation
 flags; its SHA-256 is
 4726d734b110230dcffdf8efaaa79973a4d401376053c4763bfd5d116e56c274.
-No guest has started, credential been created or guest-write authority recorded.
+At proposal preparation, no guest had started, credential been created or
+guest-write authority recorded. The immutable preparation receipt is retained;
+acceptance and performed effects are recorded separately.
 Previous experiment targets were disposed; their authority cannot cover this file.
 
 Acceptance requests writes on **this one exact target only**: manual verified stock
@@ -150,5 +154,5 @@ commands, artifacts, limits, failures and complete disposal. Full payload trust,
 extraction containment/races, installed application readiness, runtime adoption and
 broader native-profile support remain outside this experiment. Routine bounded
 test corrections need no further permission after acceptance; fresh targets or
-wider effects do. Until acceptance, preparation receipts remain unchanged with
-guest-start and guest-write flags false.
+wider effects do. Preparation receipts remain immutable; acceptance and performed state are
+recorded separately rather than rewriting initial guest/write flags.
