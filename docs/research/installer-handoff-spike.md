@@ -1,11 +1,12 @@
 # First confirmed stock-installer handoff
 
-Proposed bounded research, 2026-10-11 local. Owner/acceptance authority: Cam.
+Accepted bounded research, 2026-10-11 local. Owner/acceptance authority: Cam.
 Base: 7c0a24ce7e3281d6ef06b0e43dd8f35f0a6fe30e, merged PR #33.
-Preparation is complete; implementation and native execution await explicit
-acceptance of this scope and the exact new writable targets below. Previous
+Acceptance: Cam replied "yes,continue" to the explicit scope/target question after
+PR #34. This authorizes implementation and the exact four new writable targets
+below, including the documented synthetic-password research limitation. Previous
 storage-spike target approval ended with disposal and does not cover these files.
-This is the next larger decision under AGENTS.md rules 3 and 7.
+Implementation base: e3045329f87551e4d9c3464295729082cbd95ee2 (merged PR #34).
 
 ## Outcome and selected experiment
 
@@ -86,11 +87,12 @@ or stable disk handle passed to stock is claimed.
 
 ## Exact prepared targets and allowed effects requested
 
-Files are exclusively owned 0600 sparse raw files under .tools/installer-handoff,
-inside an owned 0700 directory. Each has zero allocated bytes. A private receipt
-binds its filename, host inode/device, size and whole-file SHA-256; substitution
-invalidates acceptance even when zero-filled files share a digest. No guest has
-started and every private guest-write authorization flag is false.
+At preparation, these were exclusively owned 0600 sparse raw files under
+.tools/installer-handoff, inside an owned 0700 directory. Each had zero allocated
+bytes. A private receipt bound its filename, host inode/device, size and whole-file
+SHA-256; substitution invalidates acceptance even when zero-filled files share a
+digest. No guest had started, and all preparation write flags were false. The
+subsequent explicit acceptance was recorded separately before the build launch.
 
 | File | Bytes | Guest authority requested |
 |---|---:|---|
@@ -194,8 +196,13 @@ The [disk](installer-disk-question-ledger.md) and
 and write ordering. Complete automation and broader secret-consumer research remain
 outside this manual experiment; no future answer schema or stock safety contract follows.
 
-Acceptance requested: implement/test this bounded original front end, build it
+Accepted work: implement/test this bounded original front end, build it
 natively, run the specified supervised cases with only the four exact writable
 targets above, and publish sanitized signed-DCO evidence in an open PR. Routine
 corrections within these limits need no new approval. New targets, dependencies,
 backend/reserve changes, automated stock answers or production adoption do.
+
+The [first build preparation stopped](installer-handoff-stopped-evidence.md)
+before set extraction, and all six original fixture files were disposed. This
+exact-target authority has ended. Further native work awaits acceptance of the
+[new-target/media amendment](installer-handoff-retry.md).

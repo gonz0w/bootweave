@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# shellcheck shell=sh
+PATH=/sbin:/bin:/usr/bin:/usr/sbin:/
+VNAME=7.9
+VERSION=79
+ARCH=amd64
+TERM=vt220
+LANG=C
+export PATH VNAME VERSION ARCH TERM LANG
+umask 022
+if ! mount -u /dev/rd0a /; then
+    echo 'Research ramdisk setup failed.' >&2
+    exec /bin/sh
+fi
+if [ -e /auto_install.conf ] || [ -e /auto_upgrade.conf ]; then
+    echo 'Unexpected automatic installation input.' >&2
+    exec /bin/sh
+fi
+mkdir -p /tmp/ai /tmp/i || exec /bin/sh
+if [ -e /tmp/bootweave-handoff-ran ]; then
+    echo 'Research handoff already attempted.'
+else
+    : >/tmp/bootweave-handoff-ran
+    /bin/handoff
+    result=$?
+    echo "Research handoff exit: $result"
+fi
+exec /bin/sh

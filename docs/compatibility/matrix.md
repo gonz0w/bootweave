@@ -10,7 +10,8 @@
 | Disposable synthetic UI ramdisk | [Native build/console evidence](../research/ramdisk-ui-native-evidence.md) | Native static build, ramdisk pipes, serial/VGA startup/completion observed; broader qualification pending |
 | Read-only storage probe research | [Native evidence](../research/storage-probe-native-evidence.md) and [scoped amendment](../research/storage-probe-spike.md) | Native static build/44 validator cases; serial diskless rejection; serial/VGA read-only 8 GiB acceptance and 2 GiB rejection under accepted virtio scope; no installer qualification |
 | ANSI/serial/plain-text renderer | [Research plan](../research/text-ui-runtime-plan.md) and [ramdisk source findings](../research/ramdisk-ui-source-findings.md); no custom renderer runs | Proposed; unqualified |
-| Stock installer integration | [Bounded research plan](../research/installer-integration-plan.md); manuals only | Proposed; native tests not run |
+| Confirmed stock handoff research | [Accepted scope](../research/installer-handoff-spike.md), [implementation/stop evidence](../research/installer-handoff-stopped-evidence.md) | Host PTY/model checks; native build preparation stopped after formatting, before extraction; native prototype/installs/boots untested |
+| Stock installer integration | [Bounded research plan](../research/installer-integration-plan.md) | Production integration proposed; unqualified |
 | Disk operations, service bootstrap, recovery | Requirements only | Unimplemented |
 
 Update this record with actual source-bound results; do not turn inherited project
