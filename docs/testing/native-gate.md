@@ -1,6 +1,11 @@
 # Native installer acceptance
 
-Status: No native installer tests have run. No boot/media/hardware support is claimed.
+Status: Full native installer acceptance remains incomplete. The bounded
+[confirmed-handoff experiment](../research/installer-handoff-native-evidence.md)
+observed verified stock installations and offline OS boots on two approved
+disposable targets. Payload extraction, generic project readiness and broader
+profile/hardware acceptance remain unqualified; the evidence records its shutdown
+and terminal limitations.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

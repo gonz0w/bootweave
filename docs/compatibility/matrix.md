@@ -3,6 +3,7 @@
 | Capability | Evidence | Status |
 |---|---|---|
 | Local repository foundation | macOS ARM64, 14 regressions, lint/content/secret checks | Host checks passed; native unqualified |
+| Saved QMP block observations | [Development checker](../engineering/development.md), eight host regression groups | Supplied snapshot path/access/raw/backing comparisons passed; no guest/file access, live inspection or native qualification |
 | Stock OpenBSD 7.9 optical boot/menu | [Diskless VGA observation](../design/native-profile/diskless-evidence.md) | VGA and [serial](../design/native-profile/serial-evidence.md) observed; framework unqualified |
 | First proposed guest profile | [7.9 amd64 BIOS design](../design/native-profile/PRD.md); diskless VGA observation only | Disk-bearing profile unqualified |
 | Project configuration/extension contract | [Trust design](../design/project-trust/PRD.md); no runtime tests | Proposed boundaries; syntax undecided |
