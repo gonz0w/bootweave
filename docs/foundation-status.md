@@ -10,8 +10,9 @@ requirements, pinned local tools/hooks, contribution/review policy, provenance,
 PR/issue templates and versioned protections. It contains no installer,
 configuration grammar or installer runtime. Stock-media [diskless native observations](design/native-profile/diskless-evidence.md)
 have occurred. The separately confirmed [UI build guest](research/plain-ui-native-evidence.md)
-received a manual stock installation on an owned disposable disk. No Bootweave boot
-image, installer integration or release exists.
+received a manual stock installation on an owned disposable disk. A
+[private research ramdisk](research/ramdisk-ui-native-evidence.md) now packages the
+synthetic UI; no installer integration or release exists.
 
 Clean seed verification passed on macOS ARM64: signature and author DCO, pinned
 development-tool bootstrap, repository/configuration/link checks, ShellCheck,
@@ -42,4 +43,6 @@ Runtime/parser/renderer and privileged contracts remain undecided.
 [plain-text simulation](../research/ui/README.md) and local host/PTY checks.
 [Host results](research/plain-ui-host-evidence.md) and separately authorized
 [native results](research/plain-ui-native-evidence.md) now exist. Native tests drove
-a terminal restoration fix; runtime adoption and ramdisk qualification remain deferred.
+a terminal restoration fix. The separately authorized ramdisk experiment now
+provides native media and console evidence; broader qualification and runtime
+adoption remain deferred.

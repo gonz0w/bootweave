@@ -4,7 +4,8 @@ Original BSD-3-Clause research code for the accepted Phase A of
 [the bounded spike](../../docs/research/plain-ui-spike-plan.md).
 No installer, disk, payload, configuration or privilege backend. [Host](../../docs/research/plain-ui-host-evidence.md) and
 [OpenBSD native evidence](../../docs/research/plain-ui-native-evidence.md) exist.
-C is not adopted as the Bootweave runtime; ramdisk inclusion remains unqualified.
+C is not adopted as the Bootweave runtime. A separately authorized
+[ramdisk experiment](../ramdisk/README.md) now records bounded media/console evidence.
 
 Run the owned host checks with `make test-ui` or `make verify`. The Python suite
 compiles a fresh temporary binary using the installed cc, creates owned PTYs,
@@ -41,4 +42,6 @@ Seven pipe and twelve owned-PTY cases passed on 7.9 amd64, plus direct serial an
 VGA keyboard completion. The PTY checks cover exact saved attributes, including
 OpenBSD PENDIN initially set, cancellation, timeout, signals, resize and supervisor
 restoration after forced kill. libutil is a base-system test dependency; the UI
-links only base libc/ld.so. These results do not qualify bsd.rd inclusion.
+dynamic build links only base libc/ld.so. These installed-guest results do not
+qualify bsd.rd inclusion; [ramdisk results](../../docs/research/ramdisk-ui-native-evidence.md)
+record the later static build and actual diskless boots separately.

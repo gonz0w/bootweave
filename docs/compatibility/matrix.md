@@ -6,7 +6,8 @@
 | Stock OpenBSD 7.9 optical boot/menu | [Diskless VGA observation](../design/native-profile/diskless-evidence.md) | VGA and [serial](../design/native-profile/serial-evidence.md) observed; framework unqualified |
 | First proposed guest profile | [7.9 amd64 BIOS design](../design/native-profile/PRD.md); diskless VGA observation only | Disk-bearing profile unqualified |
 | Project configuration/extension contract | [Trust design](../design/project-trust/PRD.md); no runtime tests | Proposed boundaries; syntax undecided |
-| Plain-text synthetic UI research | [Host/PTY evidence](../research/plain-ui-host-evidence.md) and [native results](../research/plain-ui-native-evidence.md) | 7.9 amd64 installed guest: 7 pipe/12 PTY cases, serial/VGA completion; runtime adoption and ramdisk unqualified |
+| Plain-text synthetic UI research | [Host/PTY evidence](../research/plain-ui-host-evidence.md) and [native results](../research/plain-ui-native-evidence.md) | 7.9 amd64 installed guest: 7 pipe/12 PTY cases, serial/VGA completion; runtime adoption unqualified; [ramdisk results](../research/ramdisk-ui-native-evidence.md) recorded separately |
+| Disposable synthetic UI ramdisk | [Native build/console evidence](../research/ramdisk-ui-native-evidence.md) | Native static build, ramdisk pipes, serial/VGA startup/completion observed; broader qualification pending |
 | ANSI/serial/plain-text renderer | [Research plan](../research/text-ui-runtime-plan.md) and [ramdisk source findings](../research/ramdisk-ui-source-findings.md); no custom renderer runs | Proposed; unqualified |
 | Stock installer integration | [Bounded research plan](../research/installer-integration-plan.md); manuals only | Proposed; native tests not run |
 | Disk operations, service bootstrap, recovery | Requirements only | Unimplemented |
