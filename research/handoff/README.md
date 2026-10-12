@@ -34,5 +34,30 @@ install remains partial or uncertain. Synthetic stock password handling retains
 the accepted upstream plaintext-argv research limitation.
 
 The [native preparation stop](../../docs/research/installer-handoff-stopped-evidence.md)
-is recorded separately. No native prototype build, handoff or boot was reached.
-The [corrected-run amendment](../../docs/research/installer-handoff-retry.md) remains proposed.
+is recorded separately. Under the accepted
+[corrected-run amendment](../../docs/research/installer-handoff-retry.md), the
+[native evidence](../../docs/research/installer-handoff-native-evidence.md)
+records 19 native PTY cases, 19 serial/VGA rejection cases, two verified stock
+installations and offline OS boots, partial-state observation and full disposal.
+VGA shutdown interrupted stock background kernel relinking; a subsequent kernel
+boot is unqualified. These results remain bounded research.
+`native-pty.c` is an owned research supervisor with a fixed synthetic driver,
+base libutil and no installer backend; it is not packaged in the runtime image.
+
+Within a separately approved disposable OpenBSD guest, from this repository, the
+fixture-only terminal checks use:
+
+```sh
+mkdir -p /root/handoff-check
+cc -std=c99 -Os -Wall -Wextra -Werror -pedantic -Iresearch/storage \
+    research/handoff/host-driver.c research/handoff/console.c \
+    research/handoff/snapshot.c research/storage/validate.c \
+    -o /root/handoff-check/driver
+cc -std=c99 -Os -Wall -Wextra -Werror -pedantic \
+    research/handoff/native-pty.c -lutil -o /root/handoff-check/native-pty
+/root/handoff-check/native-pty
+```
+
+The supervisor checks exact native terminal flags, deadlines, signals, forced
+death, terminal loss and fresh/contaminated confirmation using owned PTYs.
+It never runs the stock installer or accepts a caller-selected executable.

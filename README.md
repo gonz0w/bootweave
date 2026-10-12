@@ -5,7 +5,7 @@ BSD-3-Clause licensed; community contributions welcome. This project is independ
 of the OpenBSD project and does not imply upstream endorsement.
 
 **Status: repository foundation and bounded UI/media/storage/handoff research.** A disposable
-research image boots the synthetic UI. No installer, configuration parser, runtime
+research image boots the synthetic UI. No production installer, configuration parser, runtime
 service, supported hardware profile or release exists yet.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
 The maintainer approved the name and public repository on 2026-10-11.
@@ -56,5 +56,9 @@ The [read-only storage probe](research/storage/README.md) has a native static bu
 and fresh native diskless, 8 GiB and undersized-disk evidence under the accepted
 read-only virtio research amendment.
 The [confirmed-handoff prototype](research/handoff/README.md) now has host PTY checks.
-Its native build preparation [stopped before set extraction](docs/research/installer-handoff-stopped-evidence.md);
-no native handoff or installer qualification follows.
+Its first native build preparation [stopped before set extraction](docs/research/installer-handoff-stopped-evidence.md).
+The accepted corrected run has [native evidence](docs/research/installer-handoff-native-evidence.md):
+19 PTY checks, 19 serial/VGA rejections, two verified stock installs and offline OS
+boots, a separate partial-install case and full disposal. Stock background kernel
+relinking was interrupted during VGA shutdown; a subsequent kernel boot remains
+unqualified. This is bounded research, with no production installer adoption.
