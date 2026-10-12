@@ -46,3 +46,15 @@ Runtime/parser/renderer and privileged contracts remain undecided.
 a terminal restoration fix. The separately authorized ramdisk experiment now
 provides native media and console evidence; broader qualification and runtime
 adoption remain deferred.
+
+## Next build decision, 2026-10-12
+
+The [bounded handoff](research/installer-handoff-native-evidence.md) completed its
+approved supervised stock installs and offline boot checks; its targets are
+disposed and exact-target authority has ended. The
+[saved block-observation checker](engineering/development.md) is now local tooling.
+The next proposed component is a
+[read-only payload archive inspector](research/payload-inspection-spike.md) under
+issue #5. Its bounded host implementation scope awaits acceptance. Payload trust,
+extraction, public project syntax and production installer adoption remain separate
+decisions; no new native run or writable target is prepared by this proposal.

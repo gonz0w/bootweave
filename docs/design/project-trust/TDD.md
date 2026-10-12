@@ -2,6 +2,9 @@
 
 Status: Proposed, 2026-10-11. Owner: Cam; acceptance pending. No tests have run.
 Related [PRD](PRD.md) and [EDD](EDD.md).
+The next implementation decision is the narrower
+[read-only payload inspection spike](../../research/payload-inspection-spike.md).
+Its proposed host phase neither accepts this parent design nor qualifies extraction.
 
 ## Requirement mapping
 
