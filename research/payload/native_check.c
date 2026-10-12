@@ -22,6 +22,7 @@ int main(void) { fputs("Native payload checks require OpenBSD.\n", stderr); retu
 #define CAP 4096
 static long peak_kib;
 static int tests;
+static pid_t active_child;
 static const char *binaries[] = { ROOT "inspect", ROOT "inspect-static" };
 static const char *summaries[] = {
  "Inspection passed: 2 members, 1 files, 5 content bytes.\n",
@@ -34,7 +35,13 @@ static const char *summaries[] = {
  "Inspection passed: 1 members, 1 files, 0 content bytes.\n"
 };
 enum mode { NORMAL, PARTIAL, TRUNCATED, EXCESS, STALL, INTERRUPT, BROKEN, FULL, ARGUMENT };
-static void fail(const char *message) { fprintf(stderr, "Native check failed: %s.\n", message); exit(1); }
+static void fail(const char *message) {
+ if (active_child > 0) {
+  int status; (void)kill(active_child, SIGKILL);
+  while (waitpid(active_child, &status, 0) < 0 && errno == EINTR) {}
+ }
+ fprintf(stderr, "Native check failed: %s.\n", message); exit(1);
+}
 static long long now(void) {
  struct timespec t;
  if (clock_gettime(CLOCK_MONOTONIC, &t)) fail("clock");
@@ -109,10 +116,11 @@ static void check(int binary, int index, enum mode mode, int signal_number) {
   limit(RLIMIT_CPU, 15); limit(RLIMIT_FSIZE, 1048576); limit(RLIMIT_CORE, 0);
   execve(binaries[binary], mode == ARGUMENT ? badargv : argv, env); _exit(125);
  }
+ active_child = child;
  nonblock(in[1]); if (mode != BROKEN) nonblock(out[0]); nonblock(err[0]);
  for (;;) {
   elapsed = now() - start;
-  if (elapsed >= 15000) { kill(child, SIGKILL); waitpid(child, &status, 0); fail("supervisor deadline"); }
+  if (elapsed >= 15000) { fail("supervisor deadline"); }
   if (!input_closed && mode != STALL && mode != INTERRUPT) {
    size_t ceiling = mode == TRUNCATED ? 511 : mode == EXCESS ? 512 : 1048577;
    if (at == pending && supplied < ceiling) {
@@ -135,7 +143,7 @@ static void check(int binary, int index, enum mode mode, int signal_number) {
   collect(err[0], errors, &error_used);
   result = wait4(child, &status, WNOHANG, &usage);
   if (result < 0) fail("wait4");
-  if (result == child) { done = 1; break; }
+  if (result == child) { active_child = 0; done = 1; break; }
   (void)poll(NULL, 0, mode == PARTIAL ? 1 : 2);
  }
  elapsed = now() - start;

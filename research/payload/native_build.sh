@@ -17,5 +17,7 @@ cc -std=c99 -Os -Wall -Wextra -Werror -pedantic -static -Wl,-Map=inspect-static.
 cc -std=c99 -Os -Wall -Wextra -Werror -pedantic native_check.c -o native-check
 sha256 inspect inspect-static native-check
 size inspect inspect-static native-check
-ldd inspect inspect-static native-check
+ldd inspect native-check
+readelf -l inspect-static
+readelf -d inspect-static
 printf '%s\n' 'Native payload build finished.'
