@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# shellcheck shell=sh
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+umask 077
+if ! mount -u /dev/rd0a /; then
+    echo 'Research ramdisk setup failed.' >&2
+    exec /bin/sh
+fi
+if [ -f /tmp/bootweave-storage-ran ]; then
+    echo 'Research probe already attempted.'
+else
+    : >/tmp/bootweave-storage-ran
+    /bin/storage-probe
+    result=$?
+    echo "Research probe exit: $result"
+fi
+exec /bin/sh
