@@ -108,6 +108,8 @@ containment during effects, races and readiness have not been tested by Phase A.
 Phase B needs a separately reviewed native build/read-only execution plan with
 fresh exact fixture authority; previous targets were disposed. No guest launch,
 media change, guest disk write or native qualification follows from Phase A.
+The [prepared Phase B proposal](payload-native-plan.md) now identifies its one new
+empty build target, frozen data and requested effects; acceptance remains pending.
 Authentication/trust policy and immutable verified input lifetime precede any
 future privileged parsing/use. Extraction additionally needs an accepted scoped
 mechanism, target-root identity/authority, containment throughout effects, observed
