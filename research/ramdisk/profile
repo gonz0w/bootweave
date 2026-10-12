@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# shellcheck shell=sh
+# Original research-only login profile, replacing stock installer startup.
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+umask 077
+if ! mount -u /dev/rd0a /; then
+    echo 'Research ramdisk setup failed.' >&2
+    exec /bin/sh
+fi
+# Once per boot: a failed/cancelled UI never triggers an automatic retry.
+if [ -f /tmp/bootweave-ui-ran ]; then
+    echo 'Research UI already attempted during this boot.'
+else
+    : >/tmp/bootweave-ui-ran
+    /bin/plain-ui
+    result=$?
+    echo "Research UI exit: $result"
+fi
+exec /bin/sh
