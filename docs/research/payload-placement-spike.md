@@ -13,8 +13,10 @@ the parent design or introduce a production installer interface.
 
 This target's run ended after [410 serial checks](payload-placement-native-evidence.md)
 and a 60-minute watchdog stop before clean halt. Its private fixture was disposed
-and authority ended; keyboard/VGA and native key cleanup remain incomplete. The
-[fresh rerun](payload-placement-rerun-plan.md) has separate proposed authority.
+and authority ended; keyboard/VGA and native key cleanup were incomplete. The
+separately accepted [fresh rerun](payload-placement-rerun-plan.md) has
+[completed evidence](payload-placement-rerun-evidence.md) for both consoles,
+native key cleanup, clean halts and full disposal. Its target authority also ended.
 Preparation statements below describe the immutable pre-acceptance history.
 
 ## Outcome and bounded authority

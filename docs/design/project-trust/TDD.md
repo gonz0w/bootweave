@@ -22,9 +22,14 @@ authenticated file effects, unprivileged writer restrictions and independent
 containment/partial-state observations to PTT-04/05. Its fresh exact target and
 bounded effects were explicitly accepted. [Partial native evidence](../../research/payload-placement-native-evidence.md)
 records 410 serial checks; a hard watchdog stopped before clean halt. The fixture
-was disposed. Keyboard/VGA and native key cleanup remain unqualified, and a
-[fresh rerun](../../research/payload-placement-rerun-plan.md) awaits acceptance.
+was disposed. The separately accepted
+[fresh rerun](../../research/payload-placement-rerun-plan.md) completed
+[820 serial/VGA checks](../../research/payload-placement-rerun-evidence.md), native
+key cleanup, clean halts and full fixture disposal. Exact-target authority ended.
 Neither complete parent PTT-04 nor PTT-05 is qualified.
+The next proposed [review/authorization composition](../../research/payload-authorization-flow.md)
+targets narrow parts of PTT-02/03/07/08 with the evidenced writer. Scope acceptance
+and its exact fresh target remain pending; no composition test or parent pass exists.
 
 ## Requirement mapping
 
