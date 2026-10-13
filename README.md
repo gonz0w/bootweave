@@ -84,5 +84,5 @@ a restricted unprivileged writer and independent postcondition/failure checks ha
 [410 serial checks](docs/research/payload-placement-native-evidence.md). The run
 reached its hard watchdog before clean halt; keyboard/VGA qualification and native
 key cleanup remain incomplete. The private fixture was disposed. A
-[fresh rerun scope](docs/research/payload-placement-rerun-plan.md) awaits approval;
+[fresh rerun scope](docs/research/payload-placement-rerun-plan.md) is accepted;
 no production installer/runtime interface is adopted.

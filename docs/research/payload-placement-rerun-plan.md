@@ -1,10 +1,14 @@
 # Authenticated payload placement: fresh qualification rerun
 
-Proposed, 2026-10-12 local time. Owner/acceptance authority: Cam. Acceptance pending.
+Accepted, 2026-10-12 local time. Owner/acceptance authority: Cam. Cam replied
+"approved" to the exact prepared target, stock installation/boots, two disposable
+signing pairs and documented synthetic credential limitation. A separate private
+acceptance binds the immutable target receipt; preparation history remains unchanged.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [original accepted mechanisms/Test Design](payload-placement-spike.md) and
 [serial evidence and stopped qualification](payload-placement-native-evidence.md).
-No guest or disk-write authority is supplied by this preparation or PR merge.
+Preparation and PR merge supply no authority; this explicit acceptance authorizes
+only the bounded target, effects and tests below.
 
 ## Concrete remaining work
 
@@ -104,7 +108,7 @@ owned target/media/staging/credential/input/captures/helpers with absence checks
 Missing native cleanup is an incomplete case even if host fixture disposal succeeds.
 Preserve sanitized facts only; no rollback or physical erasure claim.
 
-Acceptance must explicitly approve this new target's stock disk writes/boots,
+Acceptance explicitly approves this new target's stock disk writes/boots,
 synthetic credential limitation, two new pairs and bounded placement/testing.
 The prior acceptance and partial serial evidence do not authorize this target.
 Any budget/confinement/postcondition/secret failure stops dependent work without
