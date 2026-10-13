@@ -35,13 +35,15 @@ static int event_fd = -1, tests;
 static struct observations observed;
 static long peak_controller, peak_child;
 static pid_t active_worker;
+static struct auth_result last_result;
 static const char good_summary[] = "Inspection passed: 2 members, 1 files, 5 content bytes.\n";
 static unsigned char *payloads[3], keys[2][AUTH_RECORD], signatures[3][AUTH_RECORD];
 static size_t lengths[3], key_lengths[2], sig_lengths[3];
 static struct auth_context contexts[3];
 static void fail(const char *message) {
  if (active_worker > 0) { int status; (void)kill(-active_worker, SIGKILL); (void)kill(active_worker, SIGKILL); while (waitpid(active_worker, &status, 0) < 0 && errno == EINTR) {} }
- fprintf(stderr, "Native authentication check failed: %s; check %d mode %d.\n", message, tests, (int)mode); exit(1);
+ fprintf(stderr, "Native authentication check failed: %s; check %d mode %d; failure %d, reaped %d, child peak %ld KiB.\n",
+     message, tests, (int)mode, (int)last_result.failure, last_result.reaped, last_result.child_peak_kib); exit(1);
 }
 static void require(int condition, const char *message) { if (!condition) fail(message); }
 static void nonblock(int fd) { int f = fcntl(fd, F_GETFL); require(f >= 0 && !fcntl(fd, F_SETFL, f | O_NONBLOCK), "pipe flags"); }
@@ -267,7 +269,7 @@ static struct auth_result run(const struct auth_context *context, const unsigned
   require(read_file(ROOT "work/source", changed, sizeof(changed)) == expected && !memcmp(changed, mode == MUTATE ? "changed" : "replaced", expected), "original actually changed");
   require(!unlink(ROOT "work/received.sha") && !unlink(ROOT "work/source"), "mutation fixture disposal");
  }
- private_cleanup(); canary(); tests++; return packet.result;
+ private_cleanup(); canary(); tests++; last_result = packet.result; return packet.result;
 }
 static void accept(struct auth_result r, const char *expected) { require(r.completed && r.verified && !r.failure && r.verifier_launches == 1 && r.inspector_launches == 1 && !strcmp(r.summary, expected), "authenticated acceptance"); }
 static void reject(struct auth_result r, int verified, int inspected) { require(!r.completed && r.failure && !r.summary[0] && r.verified == verified && r.inspector_launches == inspected, "bounded rejection/no completion"); }
