@@ -77,3 +77,8 @@ has [native evidence](docs/research/payload-authentication-native-evidence.md):
 original C/base-signify dynamic/static builds, 128 authentication/alias checks and
 90 historical checks on each console, key cleanup and complete fixture disposal.
 Production trust policy, extraction and runtime adoption remain unqualified.
+
+The [next placement scope](docs/research/payload-placement-spike.md) proposes
+authenticated file creation inside fresh owned guest roots with an unprivileged,
+restricted writer and independent containment/postcondition tests. Its new exact
+disposable target and file effects await acceptance.
