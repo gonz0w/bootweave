@@ -229,6 +229,8 @@ int main(int argc,char **argv) {
   require(!p.auth.completed && !p.placement.complete && p.placement.launched && p.placement.reaped && p.placement.peak_kib>0,"failure never completes; killed usage and reap");
   if(i==PL_SHORT) { struct stat s; unsigned char b[8]; require(!fstatat(c.rootfd,"readme.txt",&s,AT_SYMLINK_NOFOLLOW) && s.st_size==1,"exact partial file size");
    require(read_file(WORK "case/readme.txt",b,sizeof(b))==1 && b[0]=='h',"independent partial byte"); }
+  if(i==PL_CLOSE || i==PL_SYNC) { unsigned char b[8]; require(p.placement.observed==1 &&
+      read_file(WORK "case/readme.txt",b,sizeof(b))==5 && !memcmp(b,"hello",5),"independent exact file retained after close/fsync failure"); }
   if(i==PL_SETUP||i==PL_SIGNAL||i==PL_LOSS||i==PL_STALL||i==PL_OUTPUT||i==PL_DIAGNOSTIC)
    require(p.placement.observed==0,"failure before effects observed empty");
   cleanup(&c);
@@ -263,6 +265,9 @@ int main(int argc,char **argv) {
  load(ROOT "cases/case-00.tar",0); signature_length--; c=root(count,PL_REAL); p=run(&c);
  require(p.auth.failure==AUTH_CONTEXT && !p.placement.launched,"incomplete signature no writer"); cleanup(&c);
  keys(); canary(); require(access(WORK "core",F_OK)==-1 && errno==ENOENT,"no core file");
+ { struct rusage self; require(!getrusage(RUSAGE_SELF,&self) && self.ru_maxrss>0 && self.ru_maxrss<=65536,"test supervisor measured RSS");
+  if(self.ru_maxrss>peak_controller) peak_controller=self.ru_maxrss; }
+ require(tests==96,"complete fixed case count; no skipped case");
  printf("Native placement checks passed: %d; peak controller %ld KiB; peak child %ld KiB.\n",tests,peak_controller,peak_child);
  return 0;
 }

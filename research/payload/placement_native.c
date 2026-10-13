@@ -143,7 +143,7 @@ static int barrier(int stage) {
 static void writer(const struct pl_context *c, const struct pl_plan *p, const unsigned char *b, long long end) {
  int fds[PL_NODES], failure=0; struct stat ids[PL_NODES]; struct report r={0}; size_t i;
  for(i=0;i<PL_NODES;i++) fds[i]=-1;
- if (c->test==PL_SETUP || setup(3,&c->identity) || barrier(0)) _exit(125);
+ if (setup(3,&c->identity) || c->test==PL_SETUP || barrier(0)) _exit(125);
  if(c->test==PL_STALL) for(;;) pause();
  if(c->test==PL_LOSS) _exit(126);
  if(c->test==PL_SIGNAL) { raise(SIGTERM); _exit(126); }
@@ -154,17 +154,17 @@ static void writer(const struct pl_context *c, const struct pl_plan *p, const un
   struct stat st; size_t at=0;
   if(!auth_live(end) || held(3,&c->identity,p,fds,ids,i)) { failure=1; break; }
   if(n->directory) {
-   if(mkdirat(parent,leaf(n->path),0700)) { failure=1; break; }
    r.submitted++;
+   if(mkdirat(parent,leaf(n->path),0700)) { failure=1; break; }
    fd=openat(parent,leaf(n->path),O_RDONLY|O_DIRECTORY|O_NOFOLLOW);
    if(fd<0 || fstat(fd,&ids[i]) || !identity(&ids[i],&ids[i],1) || ids[i].st_dev!=c->identity.st_dev) failure=1;
    fds[i]=fd;
    if(!failure && i==0 && barrier(1)) failure=1;
    if(!failure && (c->test==PL_SYNC || fsync(fd))) failure=1;
   } else {
+   r.submitted++;
    fd=openat(parent,leaf(n->path),O_RDWR|O_CREAT|O_EXCL|O_NOFOLLOW,0600);
    if(fd<0) { failure=1; break; }
-   r.submitted++;
    if(fstat(fd,&ids[i]) || !identity(&ids[i],&ids[i],0) || ids[i].st_dev!=c->identity.st_dev) failure=1;
    if(!failure && c->test==PL_FILE_SWAP && (barrier(2) || held(3,&c->identity,p,fds,ids,i+1))) failure=1;
    while(!failure && at<n->size) {
