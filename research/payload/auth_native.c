@@ -143,6 +143,10 @@ int auth_run(char *const argv[], const unsigned char *input, size_t length,
   char *const env[] = {"LC_ALL=C", "LANG=C", "PATH=", "TZ=UTC", NULL};
   struct sigaction sa;
   if (setsid() < 0 || dup2(in[0], 0) < 0 || dup2(out[1], 1) < 0 || dup2(err[1], 2) < 0) _exit(125);
+#ifdef AUTH_TEST
+  /* A fork notification alone does not prove the child has been scheduled. */
+  { pid_t self = getpid(); HOOK(30 + stage, NULL, (const unsigned char *)&self, sizeof(self)); }
+#endif
   closefrom(3); child_limits();
   memset(&sa, 0, sizeof(sa)); sa.sa_handler = SIG_DFL; sigemptyset(&sa.sa_mask);
   if (sigaction(SIGINT, &sa, NULL) || sigaction(SIGTERM, &sa, NULL) ||

@@ -82,10 +82,22 @@ void auth_test_hook(int phase, const char *directory, const unsigned char *b, si
  (void)b; (void)n;
  if (phase < 16) observed.phases |= 1U << phase;
  if (phase == 11 && !(observed.phases & (1U << 2))) observed.bad = 1;
- if (phase == 20 || phase == 21) {
-  struct event event; event.stage = phase - 20;
+ if (phase == 20 || phase == 21 || phase == 30 || phase == 31) {
+  struct event event; event.stage = phase < 30 ? phase - 20 : phase - 28;
   if (n != sizeof(pid_t)) { observed.bad = 1; return; }
-  memcpy(&event.pid, b, sizeof(event.pid)); observed.children[event.stage] = event.pid;
+  memcpy(&event.pid, b, sizeof(event.pid));
+  if (phase < 30) observed.children[event.stage] = event.pid;
+  else if (event_fd >= 0) {
+   struct rusage usage; long long now, until = auth_now();
+   require(until >= 0, "scheduled child clock"); until += 1000;
+   do {
+    require(!getrusage(RUSAGE_SELF, &usage), "scheduled child usage");
+    if (usage.ru_maxrss > 0) break;
+    now = auth_now();
+    require(now >= 0 && now < until && (poll(NULL, 0, 10) >= 0 || errno == EINTR), "bounded scheduled child usage");
+   } while (1);
+   require(usage.ru_maxrss <= 32768, "scheduled child RSS bound");
+  }
   if (event_fd >= 0) write_all(event_fd, &event, sizeof(event));
  }
  if (phase == 1) {
@@ -207,9 +219,10 @@ static struct auth_result run(const struct auth_context *context, const unsigned
  const unsigned char *sig, size_t sn, enum test_mode selected, int signal_number, int unfinished) {
  int input[2], result[2], events[2], input_closed = 0, done = 0, status = 0, flags_before;
  size_t sent = 0, used = 0; struct packet packet; struct event event; struct rusage usage;
- pid_t worker, w; long long started = auth_now(); unsigned int launches = 0; int signalled = 0;
+ pid_t worker, w; long long started = auth_now(); unsigned int launches = 0, scheduled = 0; int signalled = 0;
+ pid_t launch_pids[2] = {0, 0}, scheduled_pids[2] = {0, 0};
  unsigned char returned[sizeof(packet)], event_bytes[sizeof(event)]; size_t event_used = 0;
- mode = selected; memset(&packet, 0, sizeof(packet));
+ mode = selected; memset(&packet, 0, sizeof(packet)); memset(&last_result, 0, sizeof(last_result));
  if (mode == MUTATE || mode == REPLACE) owned_write(ROOT "work/source", data, n);
  require(!pipe(input) && !pipe(result) && !pipe(events), "worker pipes");
  flags_before = fcntl(input[0], F_GETFL); require(flags_before >= 0, "worker saved flags");
@@ -242,8 +255,17 @@ static struct auth_result run(const struct auth_context *context, const unsigned
    else { require(count == 0 || errno == EINTR || errno == EAGAIN, "worker event read"); break; }
    if (event_used == sizeof(event)) {
     memcpy(&event, event_bytes, sizeof(event)); event_used = 0;
-    require(event.stage == 0 || event.stage == 1, "fixed child stage"); launches |= 1U << event.stage;
-    if (signal_number && !signalled) { require(event.stage == 0 && event.pid > 0 && !kill(worker, signal_number), "signal after actual child launch"); signalled = 1; }
+    require(event.stage >= 0 && event.stage <= 3 && event.pid > 0, "fixed child stage");
+    if (event.stage < 2) {
+     require(!launch_pids[event.stage], "unique child launch"); launch_pids[event.stage] = event.pid;
+     launches |= 1U << event.stage;
+    } else {
+     require(!scheduled_pids[event.stage - 2], "unique scheduled child"); scheduled_pids[event.stage - 2] = event.pid;
+     scheduled |= 1U << (event.stage - 2);
+    }
+    if (signal_number && !signalled && event.stage == 2) {
+     require(!kill(worker, signal_number), "signal after scheduled child with observed RSS"); signalled = 1;
+    }
    }
   }
   if (!done) { w = wait4(worker, &status, WNOHANG, &usage); require(w >= 0 || errno == EINTR, "worker wait4"); if (w == worker) { done = 1; active_worker = 0; } }
@@ -254,12 +276,16 @@ static struct auth_result run(const struct auth_context *context, const unsigned
   f[2].fd = events[0]; f[2].events = POLLIN; f[2].revents = 0;
   require(poll(f, 3, 10) >= 0 || errno == EINTR, "worker supervision");
  }
- memcpy(&packet, returned, sizeof(packet));
+ memcpy(&packet, returned, sizeof(packet)); last_result = packet.result;
  require(WIFEXITED(status) && !WEXITSTATUS(status) && usage.ru_maxrss >= 0 && usage.ru_maxrss <= 65536, "controller exit/RSS");
  require(fcntl(input[0], F_GETFL) == flags_before, "exact input flags restored");
  require(!packet.observations.bad && packet.result.reaped == packet.result.verifier_launches + packet.result.inspector_launches, "ordering and every child reaped");
  require((!!(launches & 1)) == !!packet.result.verifier_launches && (!!(launches & 2)) == !!packet.result.inspector_launches, "independent launch observations");
- { int i; for (i = 0; i < 2; i++) if (packet.observations.children[i] > 0) { errno = 0; require(kill(packet.observations.children[i], 0) == -1 && errno == ESRCH, "child absent after reap"); } }
+ require(scheduled == launches && (!signal_number || signalled), "every launched child scheduled; requested signal delivered");
+ { int i; for (i = 0; i < 2; i++) {
+   require(launch_pids[i] == scheduled_pids[i] && launch_pids[i] == packet.observations.children[i], "scheduled child identity bound to launch");
+   if (packet.observations.children[i] > 0) { errno = 0; require(kill(packet.observations.children[i], 0) == -1 && errno == ESRCH, "child absent after reap"); }
+ } }
  if (usage.ru_maxrss > peak_controller) peak_controller = usage.ru_maxrss;
  if (packet.result.child_peak_kib > peak_child) peak_child = packet.result.child_peak_kib;
  close(input[0]); if (!input_closed) close(input[1]); close(result[0]); close(events[0]);
