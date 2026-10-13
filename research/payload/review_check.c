@@ -1,5 +1,4 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Fixed composition supervisor. Reuse original placement fixture/oracle helpers. */
 #define main placement_component_main
 #include "placement_check.c"
 #undef main
@@ -57,6 +56,7 @@ static struct packet reviewed_run(struct pl_context *pl,enum action action,int m
  require(!pipe(in)&&!pipe(out),"review controller pipes");
  if(manual) {slave=fcntl(0,F_DUPFD,3);require(slave>=0,"held actual console");}
  else require(!openpty(&master,&slave,NULL,NULL,&size),"owned native review PTY");
+ if(manual) {int n;require(!tcgetattr(slave,&initial)&&!ioctl(slave,FIONREAD,&n)&&!n,"active console");printf("Native prequeue lflag=%x\n",initial.c_lflag);}
  require(!tcgetattr(slave,&initial),"saved native review TTY");
  if(action==PREQUEUE) {initial.c_lflag&=~ECHO;require(!tcsetattr(slave,TCSANOW,&initial),"quiet fixture echo");write_all(master,(const unsigned char *)"review\nplace viewer-case 1\n",27);}
  saved=fcntl(in[0],F_GETFL);require(saved>=0,"review archive flags");source(input,input_length);hook_error=0;
