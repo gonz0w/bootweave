@@ -27,9 +27,9 @@ was disposed. The separately accepted
 [820 serial/VGA checks](../../research/payload-placement-rerun-evidence.md), native
 key cleanup, clean halts and full fixture disposal. Exact-target authority ended.
 Neither complete parent PTT-04 nor PTT-05 is qualified.
-The next proposed [review/authorization composition](../../research/payload-authorization-flow.md)
+The accepted [review/authorization composition](../../research/payload-authorization-flow.md)
 targets narrow parts of PTT-02/03/07/08 with the evidenced writer. Scope acceptance
-and its exact fresh target remain pending; no composition test or parent pass exists.
+and its exact fresh target were approved after PR #50; no native composition test or parent pass exists.
 
 ## Requirement mapping
 

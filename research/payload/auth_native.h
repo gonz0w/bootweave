@@ -11,12 +11,18 @@ enum auth_failure { AUTH_OK, AUTH_CONTEXT, AUTH_TOOLS, AUTH_INPUT_BAD,
 #ifdef AUTH_PLACEMENT
 struct pl_context;
 #endif
+#ifdef AUTH_REVIEW
+struct rv_console;
+#endif
 struct auth_context {
  size_t length, key_length;
  unsigned char digest[32], verifier_digest[32], inspector_digest[32];
  unsigned char key[AUTH_RECORD];
 #ifdef AUTH_PLACEMENT
  struct pl_context *placement;
+#endif
+#ifdef AUTH_REVIEW
+ struct rv_console *review;
 #endif
 };
 struct auth_result {

@@ -1,13 +1,17 @@
 # Authenticated payload review and placement flow
 
-Status: Proposed, 2026-10-13. Owner and acceptance authority: Cam.
+Status: Accepted, 2026-10-13. Owner and acceptance authority: Cam.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [parent PRD](../design/project-trust/PRD.md), [EDD](../design/project-trust/EDD.md)
 and [Test Design](../design/project-trust/TDD.md).
 Preparation base: 30e4161fa20ed42519e8a1af0fe537e151e5ce61, merged PR #49.
-Acceptance date/source: pending explicit scoped review. The latest approval follows
-the completed placement qualification; it is not recorded as acceptance of this
-new composition or another writable target.
+Acceptance source: Cam replied "approved" after the explicit PR #50 bounded-scope,
+exact fresh target and synthetic credential exception question. This includes the
+new interactive deadline and the implementation/native effects below. The reviewed
+head was bab77601ae95a6a6c17a5a7626a8b973ebed6e2a. PR #50 was merged by Cam before
+implementation; all subsequent implementation, fixes and qualification stay in one
+follow-up draft. The immutable preparation receipt remains historical; a separate
+private acceptance receipt binds approval to its digest and unchanged exact target.
 
 ## Complete slice and proposed outcome
 
