@@ -7,11 +7,17 @@
 #define AUTH_RECORD 2048U
 enum auth_failure { AUTH_OK, AUTH_CONTEXT, AUTH_TOOLS, AUTH_INPUT_BAD,
  AUTH_IDENTITY, AUTH_SIGNATURE, AUTH_INSPECTION, AUTH_IO, AUTH_DEADLINE,
- AUTH_OUTPUT, AUTH_RESOURCE, AUTH_INTERRUPTED, AUTH_CLEANUP };
+ AUTH_OUTPUT, AUTH_RESOURCE, AUTH_INTERRUPTED, AUTH_CLEANUP, AUTH_PLACEMENT_BAD };
+#ifdef AUTH_PLACEMENT
+struct pl_context;
+#endif
 struct auth_context {
  size_t length, key_length;
  unsigned char digest[32], verifier_digest[32], inspector_digest[32];
  unsigned char key[AUTH_RECORD];
+#ifdef AUTH_PLACEMENT
+ struct pl_context *placement;
+#endif
 };
 struct auth_result {
  enum auth_failure failure;

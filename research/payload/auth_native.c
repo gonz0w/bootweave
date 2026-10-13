@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Original bounded native research. No payload file, extraction or shell. */
+/* Original bounded native research. Optional fixed compiled placement phase. */
 #include "auth_native.h"
+#ifdef AUTH_PLACEMENT
+#include "placement.h"
+#endif
 #include <stdio.h>
 #ifndef __OpenBSD__
 struct auth_result auth_native(const struct auth_context *ctx,
@@ -193,8 +196,14 @@ cleanup:
   (void)kill(-pid, SIGKILL); (void)kill(pid, SIGKILL);
   if (!done) {
    do { w = wait4(pid, &status, 0, &usage); } while (w < 0 && errno == EINTR);
-   if (w == pid) metrics->reaped++; else failure = AUTH_CLEANUP;
+   if (w == pid) { done = 1; metrics->reaped++; } else failure = AUTH_CLEANUP;
   }
+ }
+ /* All successfully reaped children, including killed/failed cleanup paths. */
+ if (pid > 0 && done) {
+  r->status = status; r->peak_kib = usage.ru_maxrss;
+  if (r->peak_kib <= 0 || r->peak_kib > 32768) failure = AUTH_RESOURCE;
+  if (r->peak_kib > metrics->child_peak_kib) metrics->child_peak_kib = r->peak_kib;
  }
  if (read_out >= 0) close(read_out);
  if (read_err >= 0) close(read_err);
@@ -242,7 +251,8 @@ static int post(const char *path, const struct stat *identity, const char *key,
  if (lstat(path, &st) || !S_ISDIR(st.st_mode) || !same(identity, &st, 0700)) return -1;
  if (checkfile(key, ki, kb, kl) || checkfile(sig, si, sb, sl)) return -1;
  dir = opendir(path); if (!dir) return -1;
- while ((e = readdir(dir))) {
+ for (;;) {
+  errno = 0; e = readdir(dir); if (!e) { if (errno) failed = 1; break; }
   if (!strcmp(e->d_name, ".") || !strcmp(e->d_name, "..")) continue;
   if (strcmp(e->d_name, "selected.pub") && strcmp(e->d_name, "supplied.sig")) failed = 1;
   count++;
@@ -331,14 +341,17 @@ struct auth_result auth_native(const struct auth_context *ctx,
  if (!WIFEXITED(child.status) || WEXITSTATUS(child.status) || child.err_length ||
      summary(child.out, child.out_length, r.summary)) { r.failure = AUTH_INSPECTION; goto cleanup; }
  if (post(dir, &di, key, &ki, ctx->key, ctx->key_length, signature, &si, sig, sig_length)) r.failure = AUTH_CLEANUP;
+#ifdef AUTH_PLACEMENT
+ if (!r.failure && pl_phase(ctx->placement, snapshot, length, r.summary, deadline, &r)) r.failure = AUTH_PLACEMENT_BAD;
+#endif
 cleanup:
  if (have_sig && unlink(signature) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_key && unlink(key) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_dir && rmdir(dir)) r.failure = AUTH_CLEANUP;
  free(snapshot);
  if (!r.failure && (!alive(deadline))) r.failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
- if (!r.failure) {
-  if (getrusage(RUSAGE_SELF, &usage) || usage.ru_maxrss < 0 || usage.ru_maxrss > 65536) r.failure = AUTH_RESOURCE;
+ {
+  if (getrusage(RUSAGE_SELF, &usage) || usage.ru_maxrss <= 0 || usage.ru_maxrss > 65536) r.failure = AUTH_RESOURCE;
   else r.controller_peak_kib = usage.ru_maxrss;
  }
  for (i = handlers - 1; i >= 0; i--) if (sigaction(signals[i], &old[i], NULL)) r.failure = AUTH_CLEANUP;

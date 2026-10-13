@@ -1,12 +1,15 @@
 # Authenticated payload placement experiment
 
-Proposed, 2026-10-12. Owner/acceptance authority: Cam; acceptance pending.
+Accepted, 2026-10-12. Owner/acceptance authority: Cam. The user's “yes,continue”
+accepted implementation/native testing on the exact target, stock provisioning,
+data ISO, disposable keys and documented synthetic credential limitation after PR #47.
+Implementation base: 9ff2ad75d88a6bbbaf2162c941c517471f7a98d6, merged PR #47.
 Preparation base: b7c97ea320fe40cb876ee0db49cb6ef4b4a67af2, merged PR #46.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [parent PRD/EDD/Test Design](../design/project-trust/PRD.md) and
 [completed native authentication](payload-authentication-native-evidence.md).
-This is a concrete next build scope for review. No placement code, data ISO,
-credential or native execution is authorized by this proposed document.
+This acceptance authorizes only the bounded effects below; it does not accept
+the parent design or introduce a production installer interface.
 
 ## Outcome and bounded authority
 
@@ -248,5 +251,6 @@ Acceptance must explicitly name this new implementation/placement authority,
 stock credential limitation and exact fresh target. Ordinary fixes inside accepted
 bounds need no repeated permission; other targets/effects, changed trust/dependency,
 privileged mutation outside owned fixtures or increased budgets return to review.
-Until acceptance, only repository documentation and local non-executing preparation
-are permitted. The prior authentication acceptance cannot supply these new effects.
+The original preparation receipt remains unchanged. A separate private acceptance
+receipt binds this approval to its digest and exact target; prior authentication
+acceptance supplies no authority for another target or wider effects.

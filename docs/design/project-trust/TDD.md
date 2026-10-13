@@ -17,10 +17,10 @@ has [component evidence](../../research/payload-authentication-native-evidence.m
 Its exact target and private keys were disposed. This completes no parent case
 and adopts no runtime/trust/extraction interface.
 
-The [proposed placement slice](../../research/payload-placement-spike.md) maps
+The [accepted placement slice](../../research/payload-placement-spike.md) maps
 authenticated file effects, unprivileged writer restrictions and independent
 containment/partial-state observations to PTT-04/05. Its fresh exact target and
-new authority await acceptance; no placement case has run.
+bounded effects were explicitly accepted; native placement qualification is pending.
 
 ## Requirement mapping
 

@@ -10,7 +10,7 @@ check:
 	sh tools/check-repo.sh
 
 lint:
-	.tools/bin/shellcheck tools/check-repo.sh .githooks/pre-commit .githooks/commit-msg research/ui/native-smoke.sh research/ramdisk/build.sh research/ramdisk/profile research/ramdisk/smoke.sh research/storage/build.sh research/storage/profile research/handoff/build.sh research/handoff/profile research/payload/native_build.sh research/payload/native_run.sh research/payload/auth_native_build.sh research/payload/auth_native_run.sh research/payload/auth_native_cleanup.sh
+	.tools/bin/shellcheck tools/check-repo.sh .githooks/pre-commit .githooks/commit-msg research/ui/native-smoke.sh research/ramdisk/build.sh research/ramdisk/profile research/ramdisk/smoke.sh research/storage/build.sh research/storage/profile research/handoff/build.sh research/handoff/profile research/payload/native_build.sh research/payload/native_run.sh research/payload/auth_native_build.sh research/payload/auth_native_run.sh research/payload/auth_native_cleanup.sh research/payload/placement_build.sh research/payload/placement_run.sh
 
 test:
 	.tools/venv/bin/python3 -m unittest discover -s tools/tests -v
