@@ -4,6 +4,12 @@
 #ifdef AUTH_PLACEMENT
 #include "placement.h"
 #endif
+#ifdef AUTH_REVIEW
+#ifndef AUTH_PLACEMENT
+#error AUTH_REVIEW requires the fixed compiled placement phase
+#endif
+#include "review.h"
+#endif
 #include <stdio.h>
 #ifndef __OpenBSD__
 struct auth_result auth_native(const struct auth_context *ctx,
@@ -300,6 +306,9 @@ struct auth_result auth_native(const struct auth_context *ctx,
  const int signals[] = {SIGINT, SIGTERM, SIGHUP, SIGPIPE};
  int i, handlers = 0, have_dir = 0, have_key = 0, have_sig = 0;
  long long start = auth_now(), deadline = start + 45000;
+#ifdef AUTH_REVIEW
+ deadline = start + 90000;
+#endif
  mode_t oldmask = umask(077);
  r.failure = AUTH_CONTEXT;
  if (start < 0 || !ctx || !ctx->length || ctx->length > AUTH_INPUT ||
@@ -346,6 +355,9 @@ struct auth_result auth_native(const struct auth_context *ctx,
      summary(child.out, child.out_length, r.summary)) { r.failure = AUTH_INSPECTION; goto cleanup; }
  if (post(dir, &di, key, &ki, ctx->key, ctx->key_length, signature, &si, sig, sig_length)) r.failure = AUTH_CLEANUP;
 #ifdef AUTH_PLACEMENT
+#ifdef AUTH_REVIEW
+ if (!r.failure && (!ctx->review || rv_phase(ctx->review, ctx, snapshot, length, deadline))) r.failure = AUTH_CONTEXT;
+#endif
  if (!r.failure && pl_phase(ctx->placement, snapshot, length, r.summary, deadline, &r)) r.failure = AUTH_PLACEMENT_BAD;
 #endif
 cleanup:
@@ -361,6 +373,12 @@ cleanup:
  for (i = handlers - 1; i >= 0; i--) if (sigaction(signals[i], &old[i], NULL)) r.failure = AUTH_CLEANUP;
  umask(oldmask);
  if (!r.failure) r.completed = 1; else memset(r.summary, 0, sizeof(r.summary));
+#ifdef AUTH_REVIEW
+ if (ctx && ctx->placement && !ctx->placement->result.launched) pl_observe(ctx->placement);
+ if (ctx && ctx->review && ctx->placement && rv_report(ctx->review, &ctx->placement->result, &r)) {
+  r.failure = AUTH_OUTPUT; r.completed = 0; memset(r.summary, 0, sizeof(r.summary));
+ }
+#endif
  return r;
 }
 #endif

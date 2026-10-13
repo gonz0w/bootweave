@@ -127,3 +127,23 @@ inside the original deadlines/ceilings and preserves the positive wait4 metric
 requirement; the readiness hook is compiled only under AUTH_TEST. Stopped
 diagnostic attempts are recorded separately from the final results. No production
 trust, installer API, application readiness or runtime adoption follows this work.
+
+The [accepted authorization composition](../../docs/research/payload-authorization-flow.md)
+adds review.c's bounded plain console and explicit in-memory bindings, a fixed
+review_native.c phase and review_check.c's compiled native supervisor. Only an
+AUTH_REVIEW build inserts fresh confirmation before the existing writer and uses
+the accepted 90-second interactive deadline. Other component builds retain their
+45-second deadline and behavior. Archive stdin and the held TTY are separate;
+changed context or failed terminal restoration blocks dispatch. Sixteen objects
+bound complete review output. Host tests use owned PTYs and a synthetic recorder,
+with no native writer. Run make test-payload or make verify. The
+[native evidence](../../docs/research/payload-authorization-native-evidence.md) records
+976 required checks across serial and keyboard/VGA, exact terminal gates, earlier
+unqualified attempts, native key cleanup, clean halts and full fixture disposal.
+
+Inside that separately accepted guest, review_build.sh makes dynamic/static
+automatic and actual-console supervisors using base libutil only for test PTYs.
+review_run.sh drives 35 automated cases per build; each manual build separately
+requires confirm/cancel/changed-context/partial-writer interaction on the real TTY.
+These scripts refuse host execution and arguments. The original 410 checks per
+console, native key cleanup and full fixture disposal remain completion gates.

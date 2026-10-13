@@ -22,5 +22,8 @@ struct pl_context {
 };
 int pl_prerequisites(int, const struct stat *, long *);
 int pl_phase(struct pl_context *, const unsigned char *, size_t, const char *, long long, struct auth_result *);
+#ifdef AUTH_REVIEW
+void pl_observe(struct pl_context *);
+#endif
 #endif
 #endif

@@ -19,6 +19,13 @@ observed clean halts and full disposal. The signal test observer requires measur
 child execution; resource/confinement guards remain intact. This does not complete
 generic installer extraction/integration, application readiness or parent PTT-04/05.
 
+The [authenticated review/placement composition](../research/payload-authorization-native-evidence.md)
+completed 976 required checks across serial and keyboard/VGA: full effect review,
+fresh one-use confirmation, context substitution refusals and independently observed
+partial state. Exact terminal gates, native key cleanup, clean halts and full disposal
+passed. Earlier compile/console failures remain recorded. This completes only its
+accepted research slice, with no full parent PTT or production integration claim.
+
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native
 OpenBSD evidence using exact source, release, architecture, firmware and boot mode.
