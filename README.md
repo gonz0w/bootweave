@@ -94,3 +94,8 @@ now connects full file-effect review and fresh confirmation to that confined wri
 976 required serial and keyboard/VGA checks, honest partial-state reporting, native
 key cleanup, clean halts and full disposal. Earlier unqualified attempts are recorded;
 production installer integration and runtime adoption remain separate decisions.
+
+The next [complete installed-target payload slice](docs/research/installed-payload-flow.md)
+proposes connecting confirmed stock installation, offline installed-root authorization
+and later inert-data readback. Its exact fresh fixture is prepared but unstarted;
+implementation and native effects await scoped approval in the same feature draft.
