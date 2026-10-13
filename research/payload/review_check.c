@@ -55,7 +55,7 @@ static struct packet reviewed_run(struct pl_context *pl,enum action action,int m
  if(action==UNKNOWN) {size.ws_col=0;size.ws_row=0;}
  if(action==SMALL) {size.ws_col=39;size.ws_row=11;}
  require(!pipe(in)&&!pipe(out),"review controller pipes");
- if(manual) {slave=open("/dev/tty",O_RDWR|O_NOFOLLOW);require(slave>=0,"held actual console");}
+ if(manual) {slave=fcntl(0,F_DUPFD,3);require(slave>=0,"held actual console");}
  else require(!openpty(&master,&slave,NULL,NULL,&size),"owned native review PTY");
  require(!tcgetattr(slave,&initial),"saved native review TTY");
  if(action==PREQUEUE) {initial.c_lflag&=~ECHO;require(!tcsetattr(slave,TCSANOW,&initial),"quiet fixture echo");write_all(master,(const unsigned char *)"review\nplace viewer-case 1\n",27);}
