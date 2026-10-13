@@ -4,9 +4,16 @@ Checks run locally in the foreground. GitHub Actions, hosted/self-hosted runners
 remote success publishers and mandatory remote status checks are not used. GitHub
 branch protection cannot prove local tests ran; the maintainer inspects evidence.
 
-For a topic PR, fetch origin, start from current origin/main, inspect the complete
-diff and verify a clean candidate. Record base/head/tree, actual Conventional
-Commit PR title, command/tool versions and results. Verify every contributor commit
+For a new feature or closely related issue slice, fetch origin and start from current
+origin/main. Keep related scope/design, implementation, fixes, tests, native
+qualification, cleanup and evidence on that branch in one draft PR. When continuing,
+reuse the branch and update the existing PR; phase transitions do not require new
+PRs. Review larger decisions within the draft while preserving scoped implementation
+and exact disk target authorization. Mark it ready only when the agreed deliverable
+and required verification, native qualification and fixture teardown are complete.
+
+Inspect the complete diff and verify a clean candidate. Record base/head/tree, actual
+Conventional Commit PR title, command/tool versions and results. Verify every contributor commit
 against deliberately trusted signing keys and run tools/check-dco.py BASE_SHA
 HEAD_SHA. DCO checks are not signature verification. Run make verify on the clean
 identified candidate and confirm neither HEAD nor tracked content changed.

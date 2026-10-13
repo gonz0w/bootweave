@@ -91,3 +91,34 @@ records dynamic/static builds, 128 authentication/alias checks and 90 historical
 checks on each of serial and keyboard/VGA, followed by key/fixture disposal.
 The 26 distinct raw alias cases close that narrow native gap. No installer API,
 production trust policy, extraction or privileged race/confinement guarantee is adopted.
+
+The [accepted placement slice](../../docs/research/payload-placement-spike.md) adds
+an original complete-buffer planner and fixed compiled native placement phase. The
+default authentication build still stops after inspection; placement builds pass
+the same retained snapshot directly to the planner and child writer. No archive
+pathname is reopened, no general extractor runs and no callback is configurable.
+The trusted harness supplies an empty held root and separate synthetic expected
+inventory. New implicit directories count toward 128 objects and depth is limited
+to 16. Archive owners/modes/timestamps never become write policy.
+
+placement_native.c targets OpenBSD only: fixed nobody IDs/groups, locked unveil,
+pledge, component-relative no-follow traversal, exclusive creation and fixed
+0700/0600 directories/files. Native prerequisite probes precede all member effects;
+failed or unobservable confinement stops the experiment. A read-only independent
+oracle checks expected paths/hashes, owners/modes, root binding and outside canary
+identity/content. Failure observations preserve partial/uncertain state until fixed
+fixture disposal; cleanup is not rollback. placement_check.c has only compiled
+synthetic probes/barriers, never payload/argument/environment selected operations.
+
+Three host groups check original/frozen rejection policy, additional planner
+bounds/contents and native entry refusals/source ceilings. They perform no native
+file effects or confinement qualification. placement_fixtures.py prepares trusted
+synthetic bytes and private expected test records without extracting files. Native
+build/run scripts use the fixed approved guest roots, verify source manifests and
+reuse the authentication suite's exact two native signing pairs across builds and
+consoles. [Native serial evidence](../../docs/research/payload-placement-native-evidence.md)
+records 192 placement, 128 authentication and 90 historical checks, then a hard
+watchdog stop before clean halt. The fixture was disposed; keyboard/VGA and
+native key cleanup remain unqualified. A [fresh rerun](../../docs/research/payload-placement-rerun-plan.md)
+awaits acceptance. No production trust, installer API, application readiness or
+runtime adoption follows this work.

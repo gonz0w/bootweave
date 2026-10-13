@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Original bounded native research. No payload file, extraction or shell. */
+/* Original bounded native research. Optional fixed compiled placement phase. */
 #include "auth_native.h"
+#ifdef AUTH_PLACEMENT
+#include "placement.h"
+#endif
 #include <stdio.h>
 #ifndef __OpenBSD__
 struct auth_result auth_native(const struct auth_context *ctx,
@@ -42,7 +45,7 @@ long long auth_now(void) {
  if (clock_gettime(CLOCK_MONOTONIC, &t)) return -1;
  return (long long)t.tv_sec * 1000 + t.tv_nsec / 1000000;
 }
-static int alive(long long deadline) {
+int auth_live(long long deadline) {
  long long t = auth_now();
  return !stopped && t >= 0 && t < deadline;
 }
@@ -131,7 +134,7 @@ int auth_run(char *const argv[], const unsigned char *input, size_t length,
  size_t sent = 0, total = 0; pid_t pid = -1, w; struct rusage usage;
  long long start = auth_now(), child_deadline;
  memset(r, 0, sizeof(*r));
- if (start < 0 || !alive(deadline)) return stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
+ if (start < 0 || !auth_live(deadline)) return stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
  child_deadline = start + 15000; if (child_deadline > deadline) child_deadline = deadline;
  if (pipe(in) || pipe(out) || pipe(err)) goto cleanup;
  HOOK(10 + stage, NULL, input, length);
@@ -159,7 +162,7 @@ int auth_run(char *const argv[], const unsigned char *input, size_t length,
  if (flags(in[1]) < 0 || flags(read_out) < 0 || flags(read_err) < 0) goto cleanup;
  for (;;) {
   int d; struct pollfd f[3]; ssize_t n;
-  if (!alive(child_deadline)) { failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE; goto cleanup; }
+  if (!auth_live(child_deadline)) { failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE; goto cleanup; }
   if (in[1] >= 0) {
    if (sent == length) { close(in[1]); in[1] = -1; }
    else {
@@ -193,8 +196,14 @@ cleanup:
   (void)kill(-pid, SIGKILL); (void)kill(pid, SIGKILL);
   if (!done) {
    do { w = wait4(pid, &status, 0, &usage); } while (w < 0 && errno == EINTR);
-   if (w == pid) metrics->reaped++; else failure = AUTH_CLEANUP;
+   if (w == pid) { done = 1; metrics->reaped++; } else failure = AUTH_CLEANUP;
   }
+ }
+ /* All successfully reaped children, including killed/failed cleanup paths. */
+ if (pid > 0 && done) {
+  r->status = status; r->peak_kib = usage.ru_maxrss;
+  if (r->peak_kib <= 0 || r->peak_kib > 32768) failure = AUTH_RESOURCE;
+  if (r->peak_kib > metrics->child_peak_kib) metrics->child_peak_kib = r->peak_kib;
  }
  if (read_out >= 0) close(read_out);
  if (read_err >= 0) close(read_err);
@@ -242,7 +251,8 @@ static int post(const char *path, const struct stat *identity, const char *key,
  if (lstat(path, &st) || !S_ISDIR(st.st_mode) || !same(identity, &st, 0700)) return -1;
  if (checkfile(key, ki, kb, kl) || checkfile(sig, si, sb, sl)) return -1;
  dir = opendir(path); if (!dir) return -1;
- while ((e = readdir(dir))) {
+ for (;;) {
+  errno = 0; e = readdir(dir); if (!e) { if (errno) failed = 1; break; }
   if (!strcmp(e->d_name, ".") || !strcmp(e->d_name, "..")) continue;
   if (strcmp(e->d_name, "selected.pub") && strcmp(e->d_name, "supplied.sig")) failed = 1;
   count++;
@@ -253,7 +263,7 @@ static int post(const char *path, const struct stat *identity, const char *key,
 static int capture(unsigned char *b, size_t *length, long long deadline) {
  int saved = flags(0), failure = AUTH_INPUT_BAD; size_t at = 0; ssize_t n;
  if (saved < 0) return AUTH_IO;
- while (alive(deadline)) {
+ while (auth_live(deadline)) {
   struct pollfd f = {0, POLLIN, 0};
   n = read(0, b + at, AUTH_INPUT + 1 - at);
   if (n > 0) { at += (size_t)n; if (at > AUTH_INPUT) break; }
@@ -261,7 +271,7 @@ static int capture(unsigned char *b, size_t *length, long long deadline) {
   else if (errno != EINTR && errno != EAGAIN) { failure = AUTH_IO; break; }
   if (poll(&f, 1, 10) < 0 && errno != EINTR) { failure = AUTH_IO; break; }
  }
- if (!alive(deadline)) failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
+ if (!auth_live(deadline)) failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
  if (fcntl(0, F_SETFL, saved)) failure = AUTH_CLEANUP;
  return failure;
 }
@@ -331,14 +341,17 @@ struct auth_result auth_native(const struct auth_context *ctx,
  if (!WIFEXITED(child.status) || WEXITSTATUS(child.status) || child.err_length ||
      summary(child.out, child.out_length, r.summary)) { r.failure = AUTH_INSPECTION; goto cleanup; }
  if (post(dir, &di, key, &ki, ctx->key, ctx->key_length, signature, &si, sig, sig_length)) r.failure = AUTH_CLEANUP;
+#ifdef AUTH_PLACEMENT
+ if (!r.failure && pl_phase(ctx->placement, snapshot, length, r.summary, deadline, &r)) r.failure = AUTH_PLACEMENT_BAD;
+#endif
 cleanup:
  if (have_sig && unlink(signature) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_key && unlink(key) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_dir && rmdir(dir)) r.failure = AUTH_CLEANUP;
  free(snapshot);
- if (!r.failure && (!alive(deadline))) r.failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
- if (!r.failure) {
-  if (getrusage(RUSAGE_SELF, &usage) || usage.ru_maxrss < 0 || usage.ru_maxrss > 65536) r.failure = AUTH_RESOURCE;
+ if (!r.failure && (!auth_live(deadline))) r.failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
+ {
+  if (getrusage(RUSAGE_SELF, &usage) || usage.ru_maxrss <= 0 || usage.ru_maxrss > 65536) r.failure = AUTH_RESOURCE;
   else r.controller_peak_kib = usage.ru_maxrss;
  }
  for (i = handlers - 1; i >= 0; i--) if (sigaction(signals[i], &old[i], NULL)) r.failure = AUTH_CLEANUP;

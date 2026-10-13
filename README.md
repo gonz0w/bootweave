@@ -78,7 +78,11 @@ original C/base-signify dynamic/static builds, 128 authentication/alias checks a
 90 historical checks on each console, key cleanup and complete fixture disposal.
 Production trust policy, extraction and runtime adoption remain unqualified.
 
-The [next placement scope](docs/research/payload-placement-spike.md) proposes
-authenticated file creation inside fresh owned guest roots with an unprivileged,
-restricted writer and independent containment/postcondition tests. Its new exact
-disposable target and file effects await acceptance.
+The [accepted placement scope](docs/research/payload-placement-spike.md) authorizes
+bounded authenticated file creation in fresh owned guest roots. Original C planning,
+a restricted unprivileged writer and independent postcondition/failure checks have
+[410 serial checks](docs/research/payload-placement-native-evidence.md). The run
+reached its hard watchdog before clean halt; keyboard/VGA qualification and native
+key cleanup remain incomplete. The private fixture was disposed. A
+[fresh rerun scope](docs/research/payload-placement-rerun-plan.md) awaits approval;
+no production installer/runtime interface is adopted.
