@@ -60,6 +60,8 @@ static int setup(int fd, const struct stat *id) {
  /* Observe irreversible identity drop separately from pledge's syscall denial. */
  errno = 0; if (setresuid(0,0,0) != -1 || errno != EPERM) return -1;
  errno = 0; if (setresgid(0,0,0) != -1 || errno != EPERM) return -1;
+ /* Check the unveil lock before pledge makes the syscall itself forbidden. */
+ errno = 0; if (unveil("/", "rwc") != -1 || errno != EPERM) return -1;
  return pledge("stdio rpath wpath cpath fattr", NULL);
 }
 static int reap(pid_t pid, int *status, long long deadline, long *peak, int *killed) {
@@ -111,7 +113,7 @@ int pl_prerequisites(int fd, const struct stat *id, long *peak) {
   { unsigned char b[4097]; ssize_t n = read(p[0],b,sizeof(b)); if (n != 0) ok = 0; }
   if (close(p[0])) ok = 0;
   if (!(WIFEXITED(status) && WEXITSTATUS(status) == 73) &&
-      !(probe >= 4 && WIFSIGNALED(status) && WTERMSIG(status) == SIGABRT)) ok = 0;
+      !(probe >= 3 && WIFSIGNALED(status) && WTERMSIG(status) == SIGABRT)) ok = 0;
   if (!ok || !empty(fd)) return -1;
  }
  if (auth_hash_file("/usr/bin/true",actual) || memcmp(expected,actual,32)) return -1;
