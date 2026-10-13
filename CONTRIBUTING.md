@@ -4,9 +4,18 @@ Read [agent instructions](AGENTS.md), [scope](docs/product/PRD.md) and the desig
 our active work. The framework is open to any OpenBSD project; use a generic
 synthetic fixture when a change does not depend on a real product.
 
-Start a focused `codex/` topic branch from current `origin/main`. Use Conventional
-Commit subjects and PR titles. Sign canonical commits and annotated release tags;
-include the author's Developer Certificate of Origin sign-off:
+Start a `codex/` topic branch from current `origin/main` for a complete feature or
+closely related issue slice. Keep related scope/design, implementation, fixes,
+tests, native qualification, cleanup and evidence in one draft PR, using incremental
+commits. Continue on that branch and update the existing PR as the work develops;
+a phase transition or request to continue does not require another PR. Build
+accepted work and document as needed or at a major decision point. Review larger
+decisions in the same draft; scoped implementation and exact disk target approvals
+still apply. Mark the PR ready when its agreed deliverable and required verification,
+native qualification and fixture teardown are complete.
+
+Use Conventional Commit subjects and PR titles. Sign canonical commits and annotated
+release tags; include the author's Developer Certificate of Origin sign-off:
 
 ```sh
 git commit -S -s

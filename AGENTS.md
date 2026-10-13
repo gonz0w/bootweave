@@ -28,3 +28,8 @@
 12. Research is evidence until adopted. Do not invent future wire schemas,
     configuration syntax or service names before their scoped design.
 13. Do not spawn agents unless the user explicitly requests parallel agent work.
+14. Use one PR per complete feature or closely related issue slice. Keep its scope,
+    implementation, fixes, tests, native qualification and evidence on the same
+    branch and draft PR. Continue requests and phase transitions are not new PR
+    boundaries. Build accepted work and document as needed; bring larger decisions
+    to review within the existing PR. Keep exact target authorization requirements.
