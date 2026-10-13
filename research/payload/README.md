@@ -86,5 +86,8 @@ verifies with explicit-key base signify, and then inspects retained bytes. Only
 the trusted compiled test harness supplies context. The standalone entry refuses
 without context; neither it nor the native scripts run on the host. Test hooks
 exist only in AUTH_TEST builds and cannot be selected by payload/CLI/environment.
-No native authentication pass is claimed yet. No installer API, extraction or
-privileged race/confinement guarantee is adopted.
+The [native evidence](../../docs/research/payload-authentication-native-evidence.md)
+records dynamic/static builds, 128 authentication/alias checks and 90 historical
+checks on each of serial and keyboard/VGA, followed by key/fixture disposal.
+The 26 distinct raw alias cases close that narrow native gap. No installer API,
+production trust policy, extraction or privileged race/confinement guarantee is adopted.

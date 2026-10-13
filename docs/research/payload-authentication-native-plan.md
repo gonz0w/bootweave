@@ -1,6 +1,8 @@
 # Native payload authentication experiment
 
 Accepted, 2026-10-12. Owner/acceptance authority: Cam.
+The [completed native experiment](payload-authentication-native-evidence.md)
+records actual results and full disposal; authority for this exact target has ended.
 Acceptance: Cam replied "yes,continue" after PR #45 and the explicit native
 implementation/data-ISO/exact-8-GiB-target question, including disposable keys,
 credentials and the stock password-argv limitation. Implementation base:
