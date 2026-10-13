@@ -12,6 +12,13 @@ dynamic/static builds and 90 checks each on serial and keyboard/VGA; distinct
 on-wire directory-alias coverage, payload trust/extraction and runtime adoption
 remain unqualified. Its disposable target was removed.
 
+The [authenticated placement rerun](../research/payload-placement-rerun-evidence.md)
+completed the accepted component slice: 192 placement, 128 authentication and 90
+historical checks per actual serial/keyboard-VGA console, native key cleanup,
+observed clean halts and full disposal. The signal test observer requires measured
+child execution; resource/confinement guards remain intact. This does not complete
+generic installer extraction/integration, application readiness or parent PTT-04/05.
+
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native
 OpenBSD evidence using exact source, release, architecture, firmware and boot mode.

@@ -4,6 +4,8 @@ Accepted, 2026-10-12 local time. Owner/acceptance authority: Cam. Cam replied
 "approved" to the exact prepared target, stock installation/boots, two disposable
 signing pairs and documented synthetic credential limitation. A separate private
 acceptance binds the immutable target receipt; preparation history remains unchanged.
+Completed with [820 console checks and full cleanup](payload-placement-rerun-evidence.md).
+The exact target and private fixture were disposed; this accepted scope is ended.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [original accepted mechanisms/Test Design](payload-placement-spike.md) and
 [serial evidence and stopped qualification](payload-placement-native-evidence.md).
