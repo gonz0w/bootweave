@@ -45,7 +45,7 @@ long long auth_now(void) {
  if (clock_gettime(CLOCK_MONOTONIC, &t)) return -1;
  return (long long)t.tv_sec * 1000 + t.tv_nsec / 1000000;
 }
-static int alive(long long deadline) {
+int auth_live(long long deadline) {
  long long t = auth_now();
  return !stopped && t >= 0 && t < deadline;
 }
@@ -134,7 +134,7 @@ int auth_run(char *const argv[], const unsigned char *input, size_t length,
  size_t sent = 0, total = 0; pid_t pid = -1, w; struct rusage usage;
  long long start = auth_now(), child_deadline;
  memset(r, 0, sizeof(*r));
- if (start < 0 || !alive(deadline)) return stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
+ if (start < 0 || !auth_live(deadline)) return stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
  child_deadline = start + 15000; if (child_deadline > deadline) child_deadline = deadline;
  if (pipe(in) || pipe(out) || pipe(err)) goto cleanup;
  HOOK(10 + stage, NULL, input, length);
@@ -162,7 +162,7 @@ int auth_run(char *const argv[], const unsigned char *input, size_t length,
  if (flags(in[1]) < 0 || flags(read_out) < 0 || flags(read_err) < 0) goto cleanup;
  for (;;) {
   int d; struct pollfd f[3]; ssize_t n;
-  if (!alive(child_deadline)) { failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE; goto cleanup; }
+  if (!auth_live(child_deadline)) { failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE; goto cleanup; }
   if (in[1] >= 0) {
    if (sent == length) { close(in[1]); in[1] = -1; }
    else {
@@ -263,7 +263,7 @@ static int post(const char *path, const struct stat *identity, const char *key,
 static int capture(unsigned char *b, size_t *length, long long deadline) {
  int saved = flags(0), failure = AUTH_INPUT_BAD; size_t at = 0; ssize_t n;
  if (saved < 0) return AUTH_IO;
- while (alive(deadline)) {
+ while (auth_live(deadline)) {
   struct pollfd f = {0, POLLIN, 0};
   n = read(0, b + at, AUTH_INPUT + 1 - at);
   if (n > 0) { at += (size_t)n; if (at > AUTH_INPUT) break; }
@@ -271,7 +271,7 @@ static int capture(unsigned char *b, size_t *length, long long deadline) {
   else if (errno != EINTR && errno != EAGAIN) { failure = AUTH_IO; break; }
   if (poll(&f, 1, 10) < 0 && errno != EINTR) { failure = AUTH_IO; break; }
  }
- if (!alive(deadline)) failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
+ if (!auth_live(deadline)) failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
  if (fcntl(0, F_SETFL, saved)) failure = AUTH_CLEANUP;
  return failure;
 }
@@ -349,7 +349,7 @@ cleanup:
  if (have_key && unlink(key) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_dir && rmdir(dir)) r.failure = AUTH_CLEANUP;
  free(snapshot);
- if (!r.failure && (!alive(deadline))) r.failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
+ if (!r.failure && (!auth_live(deadline))) r.failure = stopped ? AUTH_INTERRUPTED : AUTH_DEADLINE;
  {
   if (getrusage(RUSAGE_SELF, &usage) || usage.ru_maxrss <= 0 || usage.ru_maxrss > 65536) r.failure = AUTH_RESOURCE;
   else r.controller_peak_kib = usage.ru_maxrss;

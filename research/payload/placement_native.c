@@ -140,7 +140,7 @@ static int barrier(int stage) {
  unsigned char b=(unsigned char)stage, ack=0;
  return write(5,&b,1)!=1 || read(6,&ack,1)!=1 || ack!='A' ? -1 : 0;
 }
-static void writer(const struct pl_context *c, const struct pl_plan *p, const unsigned char *b) {
+static void writer(const struct pl_context *c, const struct pl_plan *p, const unsigned char *b, long long end) {
  int fds[PL_NODES], failure=0; struct stat ids[PL_NODES]; struct report r={0}; size_t i;
  for(i=0;i<PL_NODES;i++) fds[i]=-1;
  if (c->test==PL_SETUP || setup(3,&c->identity) || barrier(0)) _exit(125);
@@ -152,7 +152,7 @@ static void writer(const struct pl_context *c, const struct pl_plan *p, const un
  for(i=0;i<p->count;i++) {
   const struct pl_node *n=&p->nodes[i]; int parent=n->parent<0?3:fds[n->parent], fd=-1;
   struct stat st; size_t at=0;
-  if(auth_now()<0 || held(3,&c->identity,p,fds,ids,i)) { failure=1; break; }
+  if(!auth_live(end) || held(3,&c->identity,p,fds,ids,i)) { failure=1; break; }
   if(n->directory) {
    if(mkdirat(parent,leaf(n->path),0700)) { failure=1; break; }
    r.submitted++;
@@ -169,6 +169,7 @@ static void writer(const struct pl_context *c, const struct pl_plan *p, const un
    if(!failure && c->test==PL_FILE_SWAP && (barrier(2) || held(3,&c->identity,p,fds,ids,i+1))) failure=1;
    while(!failure && at<n->size) {
     size_t amount=n->size-at; ssize_t w;
+    if(!auth_live(end)) { failure=1; break; }
     if(amount>4096) amount=4096;
     if(c->test==PL_SHORT && at>=1) { failure=1; break; }
     if(c->test==PL_SHORT) amount=1;
@@ -287,7 +288,7 @@ int pl_phase(struct pl_context *c, const unsigned char *b, size_t length,
   for(i=0;i<5;i++) { saved[i]=fcntl(originals[i],F_DUPFD,16); if(saved[i]<0) _exit(125); }
   if(dup2(saved[0],3)<0 || dup2(saved[1],4)<0 || dup2(saved[2],5)<0 || dup2(saved[3],6)<0 ||
       dup2(saved[4],1)<0 || dup2(saved[4],2)<0) _exit(125);
-  close(0); closefrom(7); writer(c,&plan,b); _exit(125);
+  close(0); closefrom(7); writer(c,&plan,b,end); _exit(125);
  }
  r->launched=1;
  close(report[1]); report[1]=-1; close(logs[1]); logs[1]=-1;
@@ -297,15 +298,17 @@ int pl_phase(struct pl_context *c, const unsigned char *b, size_t length,
  }
  while(!done) {
   unsigned char log[512],stage; ssize_t n; struct pollfd f[3];
-  if(auth_now()<0 || auth_now()>=end) goto cleanup;
+  if(!auth_live(end)) goto cleanup;
   n=read(request[0],&stage,1);
   if(n==1) {
    if(stage>2 || mutation(c,stage) || bound_root(c)) goto cleanup;
+   if(stage==0 && c->test==PL_CONTROLLER_SIGNAL) (void)raise(SIGINT);
+   if(!auth_live(end)) goto cleanup;
    if(c->test>=PL_EXIST) mutated=1;
    if(write(ack[1],"A",1)!=1) goto cleanup;
   } else if(n<0 && errno!=EAGAIN && errno!=EINTR) goto cleanup;
   n=read(logs[0],log,sizeof(log));
-  if(n>0) { total+=(size_t)n; if(total>4096) goto cleanup; }
+  if(n>0) { total+=(size_t)n; if(total>4096-sizeof(packet)) goto cleanup; }
   else if(n<0 && errno!=EAGAIN && errno!=EINTR) goto cleanup;
   if(got<sizeof(packet)) {
    n=read(report[0],(unsigned char *)&packet+got,sizeof(packet)-got);
@@ -323,7 +326,7 @@ int pl_phase(struct pl_context *c, const unsigned char *b, size_t length,
   if(n>0) got+=(size_t)n;
  }
  { unsigned char extra[4097]; ssize_t n;
-  while((n=read(logs[0],extra,sizeof(extra)))>0) { total+=(size_t)n; if(total>4096) break; }
+  while((n=read(logs[0],extra,sizeof(extra)))>0) { total+=(size_t)n; if(total>4096-sizeof(packet)) break; }
   n=read(report[0],extra,sizeof(extra)); if(n!=0) goto cleanup;
  }
  if(got==sizeof(packet) && packet.submitted<=plan.count) r->submitted=packet.submitted;

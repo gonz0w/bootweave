@@ -242,6 +242,9 @@ int main(int argc,char **argv) {
  /* Root validation, expected inventory mismatch and authentic trust rejection. */
  load(ROOT "cases/case-00.tar",0); count=expected_file(ROOT "cases/case-00.expected");
  c=root(count,PL_FILE_SWAP); p=run(&c); require(!p.auth.completed && !p.placement.complete,"held file substitution rejects before content write"); cleanup(&c);
+ c=root(count,PL_CONTROLLER_SIGNAL); p=run(&c); require(!p.auth.completed && !p.placement.complete &&
+     p.placement.launched && p.placement.reaped && p.placement.observed==0 && p.placement.peak_kib>0,
+     "caught controller interruption stops dependent effects and records killed usage"); cleanup(&c);
  for(i=0;i<7;i++) {
   c=root(count,PL_REAL);
   if(i==0) { require(!renameat(c.parentfd,"case",c.parentfd,"moved"),"root missing fixture"); }

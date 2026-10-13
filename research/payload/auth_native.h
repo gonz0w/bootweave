@@ -37,5 +37,6 @@ int auth_run(char *const [], const unsigned char *, size_t, struct auth_child *,
  long long, int, struct auth_result *);
 int auth_hash_file(const char *, unsigned char [32]);
 long long auth_now(void);
+int auth_live(long long);
 #endif
 #endif

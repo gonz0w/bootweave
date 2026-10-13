@@ -14,7 +14,7 @@ struct auth_result;
 struct pl_expected { const char *path; int directory; size_t size; unsigned char digest[32]; };
 enum pl_test { PL_REAL, PL_SETUP, PL_SHORT, PL_CLOSE, PL_SYNC, PL_SIGNAL,
  PL_LOSS, PL_STALL, PL_OUTPUT, PL_DIAGNOSTIC, PL_EXIST, PL_LINK,
- PL_REPLACE_DIR, PL_RENAME_ROOT, PL_AFTER_HOLD, PL_FILE_SWAP };
+ PL_REPLACE_DIR, PL_RENAME_ROOT, PL_AFTER_HOLD, PL_FILE_SWAP, PL_CONTROLLER_SIGNAL };
 struct pl_result { size_t planned, submitted, observed; int launched, reaped, complete, uncertain; long peak_kib; };
 struct pl_context {
  int rootfd, parentfd; struct stat identity; const struct pl_expected *expected;
