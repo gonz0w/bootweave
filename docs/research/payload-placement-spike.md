@@ -11,6 +11,12 @@ Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 This acceptance authorizes only the bounded effects below; it does not accept
 the parent design or introduce a production installer interface.
 
+This target's run ended after [410 serial checks](payload-placement-native-evidence.md)
+and a 60-minute watchdog stop before clean halt. Its private fixture was disposed
+and authority ended; keyboard/VGA and native key cleanup remain incomplete. The
+[fresh rerun](payload-placement-rerun-plan.md) has separate proposed authority.
+Preparation statements below describe the immutable pre-acceptance history.
+
 ## Outcome and bounded authority
 
 Build original C research that places authenticated synthetic regular files and

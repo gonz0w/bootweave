@@ -80,5 +80,9 @@ Production trust policy, extraction and runtime adoption remain unqualified.
 
 The [accepted placement scope](docs/research/payload-placement-spike.md) authorizes
 bounded authenticated file creation in fresh owned guest roots. Original C planning,
-a restricted unprivileged writer and independent postcondition/failure checks are
-under development. Host checks cannot qualify native containment or file effects.
+a restricted unprivileged writer and independent postcondition/failure checks have
+[410 serial checks](docs/research/payload-placement-native-evidence.md). The run
+reached its hard watchdog before clean halt; keyboard/VGA qualification and native
+key cleanup remain incomplete. The private fixture was disposed. A
+[fresh rerun scope](docs/research/payload-placement-rerun-plan.md) awaits approval;
+no production installer/runtime interface is adopted.

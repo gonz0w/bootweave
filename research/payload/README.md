@@ -116,5 +116,9 @@ file effects or confinement qualification. placement_fixtures.py prepares truste
 synthetic bytes and private expected test records without extracting files. Native
 build/run scripts use the fixed approved guest roots, verify source manifests and
 reuse the authentication suite's exact two native signing pairs across builds and
-consoles. Native execution/evidence is pending; no production trust, installer
-API, application readiness or runtime adoption follows this work.
+consoles. [Native serial evidence](../../docs/research/payload-placement-native-evidence.md)
+records 192 placement, 128 authentication and 90 historical checks, then a hard
+watchdog stop before clean halt. The fixture was disposed; keyboard/VGA and
+native key cleanup remain unqualified. A [fresh rerun](../../docs/research/payload-placement-rerun-plan.md)
+awaits acceptance. No production trust, installer API, application readiness or
+runtime adoption follows this work.
