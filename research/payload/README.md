@@ -116,9 +116,14 @@ file effects or confinement qualification. placement_fixtures.py prepares truste
 synthetic bytes and private expected test records without extracting files. Native
 build/run scripts use the fixed approved guest roots, verify source manifests and
 reuse the authentication suite's exact two native signing pairs across builds and
-consoles. [Native serial evidence](../../docs/research/payload-placement-native-evidence.md)
-records 192 placement, 128 authentication and 90 historical checks, then a hard
-watchdog stop before clean halt. The fixture was disposed; keyboard/VGA and
-native key cleanup remain unqualified. A [fresh rerun](../../docs/research/payload-placement-rerun-plan.md)
-awaits acceptance. No production trust, installer API, application readiness or
-runtime adoption follows this work.
+consoles. [Earlier serial evidence](../../docs/research/payload-placement-native-evidence.md)
+records 410 checks and a watchdog stop before clean halt. The
+[accepted fresh rerun](../../docs/research/payload-placement-rerun-plan.md) completed
+[820 checks on both consoles](../../docs/research/payload-placement-rerun-evidence.md),
+native key cleanup, clean halts and full disposal. The fixed authentication test
+observer binds parent launch and scheduled-child PIDs, waits at most one second
+for positive observed child RSS, then signals the controller after its verifier runs. This stays
+inside the original deadlines/ceilings and preserves the positive wait4 metric
+requirement; the readiness hook is compiled only under AUTH_TEST. Stopped
+diagnostic attempts are recorded separately from the final results. No production
+trust, installer API, application readiness or runtime adoption follows this work.

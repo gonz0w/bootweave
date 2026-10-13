@@ -81,8 +81,9 @@ Production trust policy, extraction and runtime adoption remain unqualified.
 The [accepted placement scope](docs/research/payload-placement-spike.md) authorizes
 bounded authenticated file creation in fresh owned guest roots. Original C planning,
 a restricted unprivileged writer and independent postcondition/failure checks have
-[410 serial checks](docs/research/payload-placement-native-evidence.md). The run
-reached its hard watchdog before clean halt; keyboard/VGA qualification and native
-key cleanup remain incomplete. The private fixture was disposed. A
-[fresh rerun scope](docs/research/payload-placement-rerun-plan.md) awaits approval;
-no production installer/runtime interface is adopted.
+[410 serial checks in an earlier stopped run](docs/research/payload-placement-native-evidence.md).
+The [accepted fresh rerun](docs/research/payload-placement-rerun-plan.md) now has
+[820 serial and keyboard/VGA checks](docs/research/payload-placement-rerun-evidence.md),
+observed native key cleanup, clean halts and full fixture disposal. A test observer
+correction waits for measured child execution before signaling; resource and
+confinement checks remain enforced. No production installer/runtime interface is adopted.
