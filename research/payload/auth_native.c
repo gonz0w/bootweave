@@ -374,6 +374,7 @@ cleanup:
  umask(oldmask);
  if (!r.failure) r.completed = 1; else memset(r.summary, 0, sizeof(r.summary));
 #ifdef AUTH_REVIEW
+ if (ctx && ctx->placement && !ctx->placement->result.launched) pl_observe(ctx->placement);
  if (ctx && ctx->review && ctx->placement && rv_report(ctx->review, &ctx->placement->result, &r)) {
   r.failure = AUTH_OUTPUT; r.completed = 0; memset(r.summary, 0, sizeof(r.summary));
  }

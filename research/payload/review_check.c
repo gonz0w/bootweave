@@ -155,7 +155,8 @@ int main(int argc,char **argv) {
  }
  for(i=1;i<=11;i++) {
   load(ROOT "cases/case-00.tar",0);count=expected_file(ROOT "cases/case-00.expected");change_mode=i;c=root(count,PL_REAL);p=reviewed_run(&c,CONFIRM,0);
-  require(!p.auth.completed&&!p.placement.launched,"changed complete context cannot dispatch");cleanup(&c);
+  require(!p.auth.completed&&!p.placement.launched,"changed complete context cannot dispatch");
+  if(i==9) require(p.placement.observed==1&&p.placement.uncertain,"changed inventory observed honestly");cleanup(&c);
  }
  change_mode=0;
  for(i=PL_SHORT;i<=PL_SYNC;i++) {

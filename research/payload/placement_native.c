@@ -356,4 +356,13 @@ cleanup:
  if(r->observed!=plan.count || !exact || mutated) failure=1;
  r->complete=!failure; return failure?-1:0;
 }
+#ifdef AUTH_REVIEW
+/* A refused review may still observe supervisor-induced root changes. */
+void pl_observe(struct pl_context *c) {
+ int exact=1;
+ c->result.observed=0;
+ if(c->count>128 || !c->expected || bound_root(c) ||
+    oracle(c->rootfd,"",c,&c->result.observed,&exact)) c->result.uncertain=1;
+}
+#endif
 #endif
