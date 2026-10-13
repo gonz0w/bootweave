@@ -335,12 +335,31 @@ class PayloadTests(unittest.TestCase):
             self.assertEqual(result.returncode, 77)
             self.assertEqual(result.stdout, b'')
             self.assertEqual(result.stderr, b'Native payload checks require OpenBSD.\n')
-            for name in ('native_build.sh', 'native_run.sh'):
+            for name in ('native_build.sh', 'native_run.sh', 'auth_native_build.sh',
+                         'auth_native_run.sh', 'auth_native_cleanup.sh'):
                 result = subprocess.run(['sh', str(ROOT / 'research/payload' / name)],
                                         capture_output=True, timeout=3)
                 self.assertEqual(result.returncode, 77)
                 self.assertEqual(result.stdout, b'')
             self.assertLess((ROOT / 'research/payload/native_check.c').stat().st_size, 32768)
+            subprocess.run(['cc', '-std=c99', '-Os', '-Wall', '-Wextra', '-Werror', '-pedantic',
+                            '-DAUTH_STANDALONE', str(ROOT / 'research/payload/auth_native.c'),
+                            '-o', str(binary)], check=True, capture_output=True)
+            for arguments, status in (([], 77), (['$(touch forbidden)'], 2)):
+                result = subprocess.run([str(binary), *arguments], capture_output=True, timeout=3)
+                self.assertEqual(result.returncode, status)
+                self.assertEqual(result.stdout, b'')
+                self.assertEqual(result.stderr, b'Native authentication requires trusted research context.\n')
+            subprocess.run(['cc', '-std=c99', '-Os', '-Wall', '-Wextra', '-Werror', '-pedantic',
+                            '-DAUTH_TEST', str(ROOT / 'research/payload/auth_native.c'),
+                            str(ROOT / 'research/payload/auth_native_check.c'), '-o', str(binary)],
+                           check=True, capture_output=True)
+            result = subprocess.run([str(binary)], capture_output=True, timeout=3)
+            self.assertEqual(result.returncode, 77)
+            self.assertEqual(result.stdout, b'')
+            self.assertEqual(result.stderr, b'Native authentication checks require OpenBSD.\n')
+            self.assertLess(sum((ROOT / 'research/payload' / name).stat().st_size for name in
+                                ('auth_native.c', 'auth_native_check.c', 'auth_native.h')), 65536)
         finally:
             binary.unlink(missing_ok=True)
         self.assertEqual(sorted(path.name for path in self.directory.iterdir()), before)

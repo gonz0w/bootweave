@@ -5,16 +5,17 @@ Related [PRD](PRD.md) and [EDD](EDD.md).
 The narrower accepted Phase A is the
 [read-only payload inspection spike](../../research/payload-inspection-spike.md).
 Its twelve host groups and [bounded native results](../../research/payload-native-evidence.md)
-neither accept this parent design nor qualify trust/extraction. Distinct on-wire
-directory-alias native coverage remains incomplete; PAY-12 supplies host evidence
-using distinct raw name/prefix fields without changing the frozen native stimuli.
+neither accept this parent design nor qualify trust/extraction. The later native
+authentication experiment covers the distinct on-wire directory alias gap without changing the frozen historical native stimuli.
 The [accepted authentication experiment](../../research/payload-authentication-spike.md)
 has [eight host groups](../../research/payload-authentication-host-evidence.md) for
-a narrow synthetic slice of PTT-04. Privileged input lifetime, compatibility and
-freshness policy, native authentication and extraction remain unqualified.
-The [proposed native authentication experiment](../../research/payload-authentication-native-plan.md)
-maps eight bounded native groups and the distinct directory-alias gap to a fresh
-prepared target. No native authentication case has run; acceptance is pending.
+a narrow synthetic slice of PTT-04. Privileged race resistance, compatibility/
+freshness policy and extraction remain unqualified.
+The [accepted native authentication experiment](../../research/payload-authentication-native-plan.md)
+has [component evidence](../../research/payload-authentication-native-evidence.md):
+128 authentication/alias checks plus 90 historical checks on each console.
+Its exact target and private keys were disposed. This completes no parent case
+and adopts no runtime/trust/extraction interface.
 
 ## Requirement mapping
 
