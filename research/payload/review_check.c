@@ -31,7 +31,7 @@ void rv_test_hook(int phase,struct auth_context *c,unsigned char *b,size_t n) {
 enum action { CONFIRM,CANCEL,HELP,BACK,STALE,PREQUEUE,CONTROL,OVERFLOW,BLANK,RESIZE,INTERRUPT,IDLE,LOST,DOUBLE,REVISION,NARROW,UNKNOWN,SMALL };
 #ifndef REVIEW_MANUAL
 static void killed_console(void) {
- struct rv_binding b;struct rv_console c;struct termios t,a;struct rusage u;int m,s,status,f;char text[2048];size_t n=0;pid_t pid;long long end=auth_now()+20000;
+ struct rv_binding b;struct rv_console c;struct termios t,a;struct rusage u;int m=-1,s=-1,status,f;char text[2048];size_t n=0;pid_t pid;long long end=auth_now()+20000;
  memset(&b,0,sizeof(b));memset(&c,0,sizeof(c));b.length=input_length;b.inode=1;b.owner=b.group=32767;b.mode=0700;
  require(!pl_plan(input,input_length,&b.plan)&&!openpty(&m,&s,NULL,NULL,NULL)&&!tcgetattr(s,&t),"death console setup");
  f=fcntl(s,F_GETFL);c.in=c.out=s;strcpy(c.case_id,"death-case");pid=fork();require(pid>=0,"death console fork");
