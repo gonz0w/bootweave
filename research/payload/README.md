@@ -136,8 +136,10 @@ the accepted 90-second interactive deadline. Other component builds retain their
 45-second deadline and behavior. Archive stdin and the held TTY are separate;
 changed context or failed terminal restoration blocks dispatch. Sixteen objects
 bound complete review output. Host tests use owned PTYs and a synthetic recorder,
-with no native writer. Run make test-payload or make verify; native qualification
-is pending on the accepted exact fresh fixture, in the same implementation draft.
+with no native writer. Run make test-payload or make verify. The
+[native evidence](../../docs/research/payload-authorization-native-evidence.md) records
+976 required checks across serial and keyboard/VGA, exact terminal gates, earlier
+unqualified attempts, native key cleanup, clean halts and full fixture disposal.
 
 Inside that separately accepted guest, review_build.sh makes dynamic/static
 automatic and actual-console supervisors using base libutil only for test PTYs.

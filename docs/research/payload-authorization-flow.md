@@ -258,4 +258,6 @@ and bounded file effects above. Ordinary implementation choices and corrections
 within those bounds need no repeated approval. Another target, broader privileges,
 new dependency/trust policy, production architecture adoption or higher budget
 requires review within the same draft PR. Do not mark parent PTT cases or application
-readiness qualified from this synthetic composition. No native case has run yet.
+readiness qualified from this synthetic composition. The complete bounded slice
+now has [976 required native checks and disposal evidence](payload-authorization-native-evidence.md),
+including earlier unqualified attempts. Exact-target authority ended at disposal.

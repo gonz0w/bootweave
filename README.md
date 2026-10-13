@@ -87,3 +87,10 @@ The [accepted fresh rerun](docs/research/payload-placement-rerun-plan.md) now ha
 observed native key cleanup, clean halts and full fixture disposal. A test observer
 correction waits for measured child execution before signaling; resource and
 confinement checks remain enforced. No production installer/runtime interface is adopted.
+
+The [authenticated review and placement composition](docs/research/payload-authorization-flow.md)
+now connects full file-effect review and fresh confirmation to that confined writer.
+[Native evidence](docs/research/payload-authorization-native-evidence.md) records
+976 required serial and keyboard/VGA checks, honest partial-state reporting, native
+key cleanup, clean halts and full disposal. Earlier unqualified attempts are recorded;
+production installer integration and runtime adoption remain separate decisions.

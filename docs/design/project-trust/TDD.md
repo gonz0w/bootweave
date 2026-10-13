@@ -29,7 +29,10 @@ key cleanup, clean halts and full fixture disposal. Exact-target authority ended
 Neither complete parent PTT-04 nor PTT-05 is qualified.
 The accepted [review/authorization composition](../../research/payload-authorization-flow.md)
 targets narrow parts of PTT-02/03/07/08 with the evidenced writer. Scope acceptance
-and its exact fresh target were approved after PR #50; no native composition test or parent pass exists.
+and its exact fresh target were approved after PR #50.
+[Native evidence](../../research/payload-authorization-native-evidence.md) records
+976 required serial/VGA checks, earlier unqualified attempts and full disposal.
+This narrow composition qualifies no complete parent case; target authority ended.
 
 ## Requirement mapping
 
