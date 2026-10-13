@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include <poll.h>
 #include <errno.h>
 #include <sha2.h>
 #include <stdio.h>
