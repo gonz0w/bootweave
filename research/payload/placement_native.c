@@ -162,7 +162,8 @@ static void writer(const struct pl_context *c, const struct pl_plan *p, const un
    if(fd<0 || fstat(fd,&ids[i]) || !identity(&ids[i],&ids[i],1) || ids[i].st_dev!=c->identity.st_dev) failure=1;
    fds[i]=fd;
    if(!failure && i==0 && barrier(1)) failure=1;
-   if(!failure && (c->test==PL_SYNC || fsync(fd))) failure=1;
+   /* The PL_SYNC injection targets the data file, after its bytes exist. */
+   if(!failure && fsync(fd)) failure=1;
   } else {
    r.submitted++;
    fd=openat(parent,leaf(n->path),O_RDWR|O_CREAT|O_EXCL|O_NOFOLLOW,0600);
@@ -237,13 +238,14 @@ static int oracle(int fd, const char *prefix, const struct pl_context *c, size_t
 static int mutation(struct pl_context *c, int stage) {
  int fd;
  if(stage==0) {
-  if(c->test==PL_EXIST) {
-   fd=openat(c->rootfd,"readme.txt",O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW,0600);
-   if(fd<0 || fchown(fd,32767,32767)) return -1;
-   if(close(fd)) return -1;
-  }
   if(c->test==PL_LINK && symlinkat(WORK "canary",c->rootfd,"viewer")) return -1;
   if(c->test==PL_RENAME_ROOT && renameat(c->parentfd,"case",c->parentfd,"moved")) return -1;
+ } else if(stage==1 && c->test==PL_EXIST) {
+  int dir=openat(c->rootfd,"viewer",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);
+  if(dir<0) return -1;
+  fd=openat(dir,"readme.txt",O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW,0600);
+  if(fd<0 || fchown(fd,32767,32767)) { if(fd>=0) close(fd); close(dir); return -1; }
+  { int failed=close(fd); if(close(dir)) failed=1; if(failed) return -1; }
  } else if(stage==1 && (c->test==PL_REPLACE_DIR || c->test==PL_AFTER_HOLD)) {
   if(renameat(c->rootfd,"viewer",c->rootfd,"moved")) return -1;
   if(c->test==PL_REPLACE_DIR) {
@@ -252,8 +254,11 @@ static int mutation(struct pl_context *c, int stage) {
    if(close(fd)) return -1;
   } else if(symlinkat(WORK,c->rootfd,"viewer")) return -1;
  } else if(stage==2 && c->test==PL_FILE_SWAP) {
-  if(renameat(c->rootfd,"readme.txt",c->rootfd,"moved") ||
-      symlinkat(WORK "canary",c->rootfd,"readme.txt")) return -1;
+  int dir=openat(c->rootfd,"viewer",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);
+  if(dir<0) return -1;
+  if(renameat(dir,"readme.txt",dir,"moved") ||
+      symlinkat(WORK "canary",dir,"readme.txt")) { close(dir); return -1; }
+  if(close(dir)) return -1;
  }
  return 0;
 }

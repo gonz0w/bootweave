@@ -227,16 +227,18 @@ int main(int argc,char **argv) {
  for(i=PL_SETUP;i<=PL_DIAGNOSTIC;i++) {
   c=root(count,(enum pl_test)i); p=run(&c);
   require(!p.auth.completed && !p.placement.complete && p.placement.launched && p.placement.reaped && p.placement.peak_kib>0,"failure never completes; killed usage and reap");
-  if(i==PL_SHORT) { struct stat s; unsigned char b[8]; require(!fstatat(c.rootfd,"readme.txt",&s,AT_SYMLINK_NOFOLLOW) && s.st_size==1,"exact partial file size");
-   require(read_file(WORK "case/readme.txt",b,sizeof(b))==1 && b[0]=='h',"independent partial byte"); }
-  if(i==PL_CLOSE || i==PL_SYNC) { unsigned char b[8]; require(p.placement.observed==1 &&
-      read_file(WORK "case/readme.txt",b,sizeof(b))==5 && !memcmp(b,"hello",5),"independent exact file retained after close/fsync failure"); }
+  if(i==PL_SHORT) { struct stat s; unsigned char b[8]; int dir=openat(c.rootfd,"viewer",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);
+   require(dir>=0 && !fstatat(dir,"readme.txt",&s,AT_SYMLINK_NOFOLLOW) && s.st_size==1 && !close(dir),"exact partial file size");
+   require(p.placement.observed==2 && read_file(WORK "case/viewer/readme.txt",b,sizeof(b))==1 && b[0]=='h',"independent partial byte and inventory"); }
+  if(i==PL_CLOSE || i==PL_SYNC) { unsigned char b[8]; require(p.placement.observed==2 &&
+      read_file(WORK "case/viewer/readme.txt",b,sizeof(b))==5 && !memcmp(b,"hello",5),"independent exact file retained after close/fsync failure"); }
   if(i==PL_SETUP||i==PL_SIGNAL||i==PL_LOSS||i==PL_STALL||i==PL_OUTPUT||i==PL_DIAGNOSTIC)
    require(p.placement.observed==0,"failure before effects observed empty");
   cleanup(&c);
  }
- c=root(count,PL_EXIST); p=run(&c); require(!p.auth.completed && p.placement.observed==1,"existing final never overwritten");
- { struct stat s; require(!fstatat(c.rootfd,"readme.txt",&s,AT_SYMLINK_NOFOLLOW) && s.st_size==0,"preexisting final unchanged"); } cleanup(&c);
+ c=root(count,PL_EXIST); p=run(&c); require(!p.auth.completed && p.placement.observed==2,"existing final never overwritten");
+ { struct stat s; int dir=openat(c.rootfd,"viewer",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);
+  require(dir>=0 && !fstatat(dir,"readme.txt",&s,AT_SYMLINK_NOFOLLOW) && s.st_size==0 && !close(dir),"preexisting final unchanged"); } cleanup(&c);
  load(ROOT "placement/new-00.tar",0); count=expected_file(ROOT "placement/new-00.expected");
  for(i=PL_LINK;i<=PL_AFTER_HOLD;i++) {
   c=root(count,(enum pl_test)i); p=run(&c); require(!p.auth.completed && !p.placement.complete,"held/missing/substituted binding rejects"); cleanup(&c);
