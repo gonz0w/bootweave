@@ -32,7 +32,7 @@ The private empty-fd0 adjustment is accepted. Media export remained incomplete a
 the earlier build hard stop was followed by approved recovery/export, persisted key
 absence, native clean halt and full original ISO readback; serial stock installation
 and cold OS boot passed; installed initial preflight refused before dispatch. A
-diagnostic build/replacement boot amendment is proposed; installed-root qualification
+fourteen-launch diagnostic/replacement amendment is accepted; installed-root qualification
 remains pending.
 All 92 installed-root cases and disposal remain pending; no installed-root or parent
 installer acceptance follows.

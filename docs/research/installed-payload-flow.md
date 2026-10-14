@@ -485,20 +485,28 @@ under the plan's rule: "retries/changed budgets need review." Acceptance covers 
 requires complete media and recovery postconditions.
 
 
-## Diagnostic build and replacement serial payload amendment — proposed
+## Diagnostic build and replacement serial payload amendment — accepted
 
-2026-10-14. The first installed dynamic entry refused its combined initial
+2026-10-14. Cam replied "continue" to the concrete two-boot/fourteen-launch
+question, accepting this amendment. A separate private acceptance receipt binds
+reviewed head b45127866cc2dbca1e4826a321208b18ec78030b, the immutable original
+target receipt and fresh full target rechecks. PR #56 was maintainer-merged at
+1720584704b511e95cb76cfff357458d2c0f6657; all remaining diagnostics, qualification
+and disposal stay together on codex/installed-payload-diagnostics in one follow-up
+draft. Historical proposal/source/artifact/target receipts remain unchanged.
+
+The first installed dynamic entry refused its combined initial
 preflight before review or writer dispatch, with zero installed passes. Native
 OS/runtime/namespace/fixture/relink observations and clean halt are recorded in
-[native progress](installed-payload-native-progress.md#installed-preflight-refusal-and-proposed-diagnostic-continuation).
+[native progress](installed-payload-native-progress.md#installed-preflight-refusal-and-accepted-diagnostic-continuation).
 The source now separates the same five initial requirements to identify the failing
 call, without weakening any binding or confinement check. It passes host verification
 and source caps; native compilation and qualification remain pending.
 
-Concrete review request in draft PR #56: one additional build-diagnostic-refresh
+Accepted continuation: one additional build-diagnostic-refresh
 cold boot of the same exact build.raw, then one replacement serial-payload cold
 boot on the same exact serial-target.raw, preserving the four remaining original
-serial-readback/VGA install/payload/readback phases. Increase the aggregate ceiling
+serial-readback/VGA install/payload/readback phases. The aggregate ceiling increases
 from twelve to **fourteen**; eight launches are already consumed. All other
 launch clocks, operation, capture, source, storage, export, CPU/memory, target,
 privilege and confirmation rules remain unchanged. No new target, credential,
@@ -533,5 +541,17 @@ member dispatch. A diagnostic label is not proof and debug cannot bypass safety.
 
 Clean native halts, complete post-halt hashes, reaping/handle closure and final exact
 fixture disposal remain required. These are retries and an increased frozen launch
-budget under the existing rule: "retries/changed budgets need review." Do not start
-the additional compiler or replacement target guest before acceptance.
+budget under the existing rule: "retries/changed budgets need review." Acceptance
+covers these two fixed additional guests; dependent cases remain gated by complete
+native preflight/postcondition proof.
+
+
+Routine capture diagnostics further label the existing ordered requirement groups:
+device/label, release/namespace, directory identity, filesystem binding, canonical
+comparison/namespace stability and final label recheck. The same conditions and
+call order still fail closed. Only fixed stage numbers and numeric errno/flags/
+fsid are emitted on refusal; zero initialization prevents undefined diagnostic
+fields. Errno may be retained after a failed comparison and is advisory. No path,
+operation selector or untrusted string is introduced. Compact indentation in only
+the new installed sources funds these diagnostics; original C/header is 16340
+bytes, below 16 KiB. Native diagnostic compilation/execution remains pending.

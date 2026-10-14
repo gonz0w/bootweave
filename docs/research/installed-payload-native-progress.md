@@ -9,7 +9,7 @@ Eight launches completed, including clean stock installation and offline serial 
 boot. The first dynamic installed entry refused its combined initial preflight,
 before member review or writer dispatch; its empty case was removed and the guest
 cleanly halted. All 92 installed payload cases and final disposal remain pending. Remaining qualification
-stays in draft [PR #56](https://github.com/gonz0w/bootweave/pull/56).
+stays together after the maintainer merge of [PR #56](https://github.com/gonz0w/bootweave/pull/56).
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -295,7 +295,7 @@ post-halt disk identity/mode/links/full digest recorded. No installed-root entry
 run; cold OS boot, all 92 installed payload cases and final disposal remain required.
 
 
-## Installed preflight refusal and proposed diagnostic continuation
+## Installed preflight refusal and accepted diagnostic continuation
 
 The eighth launch cold-booted the same exact serial target from its recorded clean
 post-installation digest. All three FFS filesystems reported clean. Offline first-
@@ -339,8 +339,17 @@ bytes, within 16 KiB. Host make verify passed all 81 groups, no failures/skips;
 content/links/ShellCheck/Gitleaks passed. The changed diagnostic source has not
 built or run natively; previously compiled artifacts are retained as historical.
 
-The [concrete proposed amendment](installed-payload-flow.md#diagnostic-build-and-replacement-serial-payload-amendment--proposed)
-requests one build/artifact-refresh boot and one replacement serial payload boot,
-raising the aggregate ceiling from twelve to fourteen. Neither is accepted or
-started. The failed preflight stops dependent cases; all scope, diagnostic changes,
-remaining qualification and disposal stay in draft PR #56.
+The [accepted amendment](installed-payload-flow.md#diagnostic-build-and-replacement-serial-payload-amendment--accepted)
+permits one build/artifact-refresh boot and one replacement serial payload boot,
+raising the aggregate ceiling from twelve to fourteen. Cam accepted both by replying "continue" to the concrete review question. Neither
+additional guest has started. The failed preflight stops dependent cases; all scope, diagnostic changes,
+remaining qualification and disposal stay in one follow-up draft after the maintainer
+merge of PR #56.
+
+
+The accepted continuation adds ordered capture-group diagnostics while preserving
+all checks and call order. Only fixed stage/numeric fields are printed on refusal;
+errno is advisory. Additional source is now 16340 bytes after compacting new-source
+indentation. Freeze the clean signed diagnostic sources, media and helpers before
+either approved added launch. Prior six compiled variants remain historical until
+the new native compilation and full artifact identity/readback observations pass.
