@@ -1,7 +1,11 @@
 # Confirmed installation to installed payload: complete research slice
 
-Status: Proposed, 2026-10-13. Owner and acceptance authority: Cam.
-Implementation and native effects await explicit acceptance below.
+Status: Accepted, 2026-10-13. Owner and acceptance authority: Cam.
+Acceptance: Cam replied "approved" after draft PR #52 and its explicit complete-slice,
+three exact targets, two signing pairs and synthetic credential exception question.
+Reviewed scope head: e999eec0e453f1e3823fb3b16534bb6382b497ce. The immutable
+preparation receipt remains historical; a separate private acceptance record binds
+that approval to its digest and rechecked unchanged full target identities/bytes.
 Base: bc989d022f97d25fda9702c97b531aa51da12cf2, maintainer-merged PR #51.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [handoff evidence](installer-handoff-native-evidence.md) and
@@ -76,6 +80,47 @@ reboot supplies no persisted authorization. Changing root filesystem/device/moun
 label binding, held case, snapshot, key/tool identity or plan invalidates the attempt.
 Unchanged member counts with wrong content must remain incomplete. Failed postconditions
 stop dependent work; no automatic retry, resume, repair or general rollback.
+
+## Frozen installed-root mechanism, 2026-10-13
+
+Accepted-policy explicit-key signify verified sys.tar.gz against the previously
+verified release manifest. Full archive SHA-256:
+c9ef294021ef7aafd5f18ffe8ebfed63394e5a86d65d7436d6db78551f9d57f1.
+Only the selected bounded regular members below were read; no upstream code ran.
+
+| Release source | SHA-256 |
+|---|---|
+| sys/sys/mount.h | 1b7b54af74f683ebde14ae63db88dfd2718c81b853baab76bd0f0aa484a63714 |
+| sys/kern/vfs_syscalls.c | 26e1b069c1e790f516279c59f523405f53a3c357946546f9fe44b126a28f9b62 |
+| sys/kern/vfs_subr.c | 5dc75eebf7484897cd0577d1b9eb80247af677714e766acb92322c89cb0cbfa9 |
+| sys/ufs/ffs/ffs_vfsops.c | 100fee4f552dbc21428a1da211ad2e237bc27b6d4dacfab7032c1b90ed2d52eb |
+| sys/sys/disklabel.h | 29212a079676a6e34fc8e2a79e4eb8f9a2bc4ae264b04ef3e06fba11fe787ecb |
+| sys/arch/amd64/amd64/conf.c | cf0ca3b13b8dc36f8c183b5a9e75b278c460d175877f60b6deab9d3722c8dc68 |
+| sys/kern/subr_disk.c | 3696f57abafb8b7138893f91926d9babb205e6b5293ce16a35788e9baa3f767e |
+| sys/sys/types.h | 4c8207f20baf3e965be7dde3ba7e4334fb649667617790fb45181c7de6d901c7 |
+| sys/sys/param.h | 80017c9395be25d7dcf8a3103ddb8c032c47cde46ea5575971297cb3452812f4 |
+
+fstatfs returns the filesystem attached to the held vnode, with full visible mount
+flags, owner, last mount-update time and fsid. FFS fsid[0] is the actual block-device
+number; amd64 maps raw sd major 13 to block major 4. The fixed sd0 root partition
+is block minor zero, raw whole-disk minor two. Root st_dev, held directory st_dev,
+block-device st_rdev and FFS fsid[0] must agree, with local/rootfs flags, FFS type,
+mount point / and mounted-from /dev/sd0a. Mounted-from-spec must be that same fixed
+name or the independently observed DUID followed by .a. Native ioctl on the held
+raw and block references must agree on the complete validated label geometry,
+partition types and DUID; root partition a must be nonempty BSD FFS.
+
+Compare fields explicitly, excluding changing free-space/I/O counters and structure
+padding. Keep all visible flags and mount-update time in the binding; readonly,
+async, permission-bypass or exported roots refuse. Reobserve device references,
+label/discovery, filesystem and held/named parent/case identity before dispatch
+and after writer observation. No mount operation is added. These source facts
+are not native qualification; native measurement must establish every claimed gate.
+
+Reuse authentication's transient public-key/signature verification records and a
+fixed synthetic source file only inside the owned research parent; remove/observe
+them after each attempt. They are fixture bookkeeping, separately identified from
+archive members, contain no private key, and cannot select paths or executables.
 
 ## Exact unstarted fixture and requested authority
 
@@ -153,8 +198,15 @@ execution. Base tools only; new dependencies or production adoption need review.
 | IPF-T07 later readback | Preserve a final positive inventory, clean halt, bind full target digest, boot the same exact disk offline again and independently check bytes/modes/owners/root association without running payload code or rewriting members. |
 | IPF-T08 teardown | All owned processes/relinkers reaped, key lifetime ended, clean halts/full digests, no handles/mounts/listeners/attachments; dispose only the exact new fixture/helpers after sanitized evidence. |
 
-Freeze the complete new per-build case list/counts with implementation before native
-execution; no missing or stopped case is silently counted as passing. Dynamic and
+Frozen implementation case list: seventeen automatic cases per dynamic/static
+build (positive, cancel, nine changed-observation bindings, postconfirmation snapshot
+change, short/close/fsync failure, wrong signer and truncated signature); five actual
+console cases per build (positive, cancel, snapshot change, changed observed flags,
+short writer); one static retained-positive case and one static later-readback case
+per installed console. This requires 92 installed checks plus 976 build-guest
+regressions, 1068 total, with no substituted or silently omitted case. Pure field
+comparisons/public packing and host refusal remain three host groups, not native
+filesystem qualification. Dynamic and
 static installed-root supervisors both need native cases and link-map/ldd/readelf
 identities. Positive RSS/CPU/time/allocation measurements remain required.
 
