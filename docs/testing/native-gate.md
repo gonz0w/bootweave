@@ -33,7 +33,7 @@ the earlier build hard stop was followed by approved recovery/export, persisted 
 absence, native clean halt and full original ISO readback; serial stock installation
 and cold OS boot passed. Both approved diagnostic boots cleanly halted; the serial
 entry identified mounted block-device open refusal before dispatch. The raw
-root-partition replacement and sixteen-launch amendment are proposed for review;
+root-partition replacement and sixteen-launch amendment are accepted;
 installed-root qualification remains pending.
 All 92 installed-root cases and disposal remain pending; no installed-root or parent
 installer acceptance follows.

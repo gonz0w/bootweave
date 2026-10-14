@@ -15,11 +15,11 @@ struct pl_context;
 struct rv_console;
 #endif
 #ifdef AUTH_INSTALLED
-struct ip_context;
+struct ip_ctx;
 #endif
 struct auth_context {
 #ifdef AUTH_INSTALLED
- struct ip_context *installed;
+ struct ip_ctx *installed;
 #endif
  size_t length,key_length;
  unsigned char digest[32],verifier_digest[32],inspector_digest[32];

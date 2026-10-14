@@ -9,7 +9,7 @@ Ten launches completed, including clean stock installation and offline serial OS
 boot. The diagnostic serial entry identifies a mounted block-device open refusal;
 its empty case was removed and the guest cleanly halted. All 92 installed payload
 cases and final disposal remain pending. A raw root-partition replacement is
-proposed for review in [draft PR #57](https://github.com/gonz0w/bootweave/pull/57),
+accepted after review in [PR #57](https://github.com/gonz0w/bootweave/pull/57),
 after the maintainer merge of [PR #56](https://github.com/gonz0w/bootweave/pull/56).
 
 The following serial checkpoint is historical, before VGA continuation.
@@ -394,7 +394,7 @@ member review and writer dispatch were never reached; **zero installed cases pas
 After the refusal, read-only count-zero dd on /dev/rsd0a returned zero, with zero
 bytes read/written; base disklabel there agreed with the selected whole-disk label.
 The authenticated release-source spec_open distinction is recorded in the
-[proposed replacement](installed-payload-flow.md#raw-root-partition-binding-amendment--proposed-2026-10-14).
+[accepted replacement](installed-payload-flow.md#raw-root-partition-binding-amendment--accepted-2026-10-14).
 Those observations explain the failure; they do not qualify that replacement.
 
 The exact empty nobody-owned case was independently checked and removed by rmdir;
@@ -411,6 +411,16 @@ all 92 installed cases, later readbacks and exact fixture disposal remain requir
 
 Local make verify after this diagnostic completion passed all 81 groups
 (22/13/3/10/33), no failures/skips; repository content/links, ShellCheck and Gitleaks
-passed. The replacement remains a reviewed proposal awaiting acceptance, with no
+passed. At that checkpoint the replacement awaited acceptance, with no
 implementation/native execution claimed. No Actions, runners or hosted status
 publisher was used.
+
+Cam subsequently replied "continue" to the concrete binding replacement and two
+additional boots, accepting the sixteen-launch ceiling on the same three exact
+targets. PR #57 was maintainer-merged before implementation/native qualification;
+its merged tree equals the reviewed candidate. Remaining work continues together
+on codex/installed-root-binding. The implemented raw-partition/named-node gate and
+extended pure mutation tests pass host checks, with 16369 additional C/header bytes
+and all installed-mode syntax checks against authenticated OpenBSD headers passing.
+These checks do not replace native qualification. No new signing pair, credential,
+network, service, target or production interface is authorized.

@@ -557,10 +557,13 @@ the new installed sources funds these diagnostics; original C/header is 16340
 bytes, below 16 KiB. These diagnostic builds and the stopped serial execution are
 now observed in the [native progress](installed-payload-native-progress.md#diagnostic-refresh-and-mounted-block-refusal-2026-10-14).
 
-## Raw root-partition binding amendment — proposed, 2026-10-14
+## Raw root-partition binding amendment — accepted, 2026-10-14
 
-Status: **Proposed; no replacement implementation or guest launch authorized by
-this amendment yet.** The two accepted diagnostic boots completed. Ten launches
+Status: **Accepted.** Cam replied "continue" to the concrete raw-partition binding
+and two-added-boot/fourteen-to-sixteen question after reviewed head
+c02a56073146e5fb9d9c6e8e500b3aa873bb8dd4. Separate private acceptance preserves
+the immutable proposal receipt and rechecks all three complete targets/identities.
+The two accepted diagnostic boots completed. Ten launches
 are consumed, including previous stops. Signed native source was
 ab71ee966019d4af6f8e09be7f2352b75d5457b4. The serial entry refused `open`, before
 capture, member review or writer dispatch; zero installed cases passed.
@@ -576,7 +579,7 @@ branch checks vfs_mountedon unconditionally, before device open; the correspondi
 VCHR mounted-device restriction applies to writing. No upstream code executed.
 Opening the mounted block root read-only cannot satisfy the frozen mechanism.
 
-Proposed replacement is restricted to the same OpenBSD 7.9 amd64, sole-sd0,
+Accepted replacement is restricted to the same OpenBSD 7.9 amd64, sole-sd0,
 8 GiB, no-hotplug virtual research profile:
 
 1. Hold /, /dev/rsd0c and /dev/rsd0a with the existing read-only/no-follow flags;
@@ -626,7 +629,7 @@ identities, compile all six revised variants and verify full native artifact/map
 ABI readback before installed execution. The 16 KiB original C/header and existing
 component/generated-header ceilings still apply; inability to fit requires review.
 
-Requested execution amendment: one **build-raw-root-refresh** cold boot of the same
+Accepted execution amendment: one **build-raw-root-refresh** cold boot of the same
 build.raw and one **serial-raw-root-retry** cold boot of the same serial target;
 increase the aggregate launch ceiling **fourteen to sixteen**. Ten consumed plus
 these two added boots plus the four original remaining serial-readback/VGA-install/
@@ -655,5 +658,16 @@ Owned allocation was 11902095360 bytes below 20 GiB, observation capture 510335
 bytes below 10 MiB; export totals above were independently recounted.
 Clean native halt/reaping/full hash/handle closure and eventual exact fixture
 disposal remain required. All fixes, qualification and disposal stay in
-[draft PR #57](https://github.com/gonz0w/bootweave/pull/57). This returns to the
-existing explicit replacement-mechanism and changed-budget review boundaries.
+[PR #57](https://github.com/gonz0w/bootweave/pull/57) was maintainer-merged before
+implementation/qualification. Its merged main tree matches the reviewed tree;
+remaining implementation, qualification and disposal stay in one follow-up draft
+on codex/installed-root-binding. Acceptance covers this concrete replacement and
+two added guests; every other original review/stop boundary remains.
+
+Implementation holds the raw root partition read-only, captures/rechecks all five
+named-block metadata fields and compares them explicitly at existing boundaries.
+Host pure tests mutate each new field and reject zero inode/link count, wrong node
+type and group/other writable mode. Shorter private C identifiers fund these fields
+without removing a guard: additional original C/header is 16369 bytes, within 16 KiB.
+All installed modes pass host syntax checks against authenticated native headers;
+native build, positive binding and all 92 installed cases remain required.

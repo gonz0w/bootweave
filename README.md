@@ -109,5 +109,6 @@ The accepted recovery/export boot completed with native clean halt and full orig
 ISO readback. The serial target passed stock installation and cold OS boot; the
 diagnostic entry identified a mounted block-device open refusal before dispatch.
 All 92 installed payload cases and disposal remain together after the maintainer
-merge of PR #56. Both approved diagnostic boots completed cleanly. A raw root-partition binding and
-sixteen-launch amendment are proposed for review in the same draft PR #57.
+merge of PR #56. Both approved diagnostic boots completed cleanly. The raw
+root-partition binding and sixteen-launch amendment are accepted; implementation,
+native qualification and disposal continue together after the maintainer merge of PR #57.
