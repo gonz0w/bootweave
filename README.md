@@ -96,6 +96,6 @@ key cleanup, clean halts and full disposal. Earlier unqualified attempts are rec
 production installer integration and runtime adoption remain separate decisions.
 
 The next [complete installed-target payload slice](docs/research/installed-payload-flow.md)
-proposes connecting confirmed stock installation, offline installed-root authorization
-and later inert-data readback. Its exact fresh fixture is prepared but unstarted;
-implementation and native effects await scoped approval in the same feature draft.
+authorizes connecting confirmed stock installation, offline installed-root authorization
+and later inert-data readback on three exact fresh targets. Implementation, native
+qualification and cleanup continue in the same accepted feature draft.

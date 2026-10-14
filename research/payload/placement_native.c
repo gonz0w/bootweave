@@ -19,7 +19,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#define WORK "/root/payload-placement/work/"
+#ifndef PL_WORK
+#define PL_WORK "/root/payload-placement/work/"
+#endif
+#define WORK PL_WORK
 static int identity(const struct stat *a, const struct stat *b, int dir) {
  return a->st_dev == b->st_dev && a->st_ino == b->st_ino &&
      (dir ? S_ISDIR(b->st_mode) : S_ISREG(b->st_mode)) &&
@@ -37,19 +40,23 @@ static int empty(int fd) {
  }
  if (closedir(d)) ok = 0; return ok;
 }
-static int limits(int controller) {
+int pl_limits(int controller) {
  const int resources[] = {RLIMIT_CORE, RLIMIT_CPU, RLIMIT_FSIZE, RLIMIT_DATA, RLIMIT_RSS, RLIMIT_NOFILE};
  rlim_t values[] = {0, 15, 1048576, (controller ? 64U : 32U) * 1048576, (controller ? 64U : 32U) * 1048576, 160};
  size_t i; for (i = 0; i < sizeof(values)/sizeof(values[0]); i++) {
   struct rlimit r = {values[i], values[i]}; if (setrlimit(resources[i], &r)) return -1;
  }
+#ifdef AUTH_INSTALLED
+ if(controller) {struct rusage u;if(getrusage(RUSAGE_SELF,&u)||u.ru_maxrss<=0||u.ru_maxrss>65536) return -1;
+  printf("Installed supervisor RSS=%ld KiB.\n",u.ru_maxrss);}
+#endif
  return 0;
 }
 static int setup(int fd, const struct stat *id) {
  struct stat st; uid_t u[3]; gid_t g[3]; struct sigaction sa;
  memset(&sa, 0, sizeof(sa)); sa.sa_handler = SIG_DFL; sigemptyset(&sa.sa_mask);
  if (sigaction(SIGINT, &sa, NULL) || sigaction(SIGTERM, &sa, NULL) ||
-     sigaction(SIGHUP, &sa, NULL) || sigaction(SIGPIPE, &sa, NULL) || limits(0)) return -1;
+     sigaction(SIGHUP, &sa, NULL) || sigaction(SIGPIPE, &sa, NULL) || pl_limits(0)) return -1;
  umask(077);
  if (fstat(fd, &st) || !identity(id, &st, 1) || fchdir(fd) ||
      unveil(".", "rwc") || unveil(NULL, NULL) || setgroups(0, NULL) ||

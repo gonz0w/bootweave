@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Original fixed composition phase. No selectable operation or executable. */
+/* Fixed phase; no selectable operation. */
 #include "auth_native.h"
 #include "review.h"
 #ifdef __OpenBSD__
