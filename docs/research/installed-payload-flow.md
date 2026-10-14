@@ -7,6 +7,11 @@ Reviewed scope head: e999eec0e453f1e3823fb3b16534bb6382b497ce. The immutable
 preparation receipt remains historical; a separate private acceptance record binds
 that approval to its digest and rechecked unchanged full target identities/bytes.
 Base: bc989d022f97d25fda9702c97b531aa51da12cf2, maintainer-merged PR #51.
+PR #52 was maintainer-merged at the scope-only head before its implementation
+commits were included. The implementation and stopped evidence now remain together
+in [follow-up draft PR #53](https://github.com/gonz0w/bootweave/pull/53), based on
+676814196afa8bdd7d61d7f42faad8d246cec199. Preserve historical source/media receipts;
+its cherry-picked source tree was independently equal to the already verified tree.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [handoff evidence](installer-handoff-native-evidence.md) and
 [payload authorization evidence](payload-authorization-native-evidence.md).
@@ -21,7 +26,7 @@ another clean boot. This connects the two evidenced boundaries without selecting
 production runtime, profile grammar, adapter API or persistent receipt format.
 
 Keep scope, implementation, routine corrections, host tests, native qualification,
-cleanup and evidence on codex/installed-payload-flow in one draft PR. Acceptance
+cleanup and evidence on codex/installed-payload-qualification in one follow-up draft PR. Acceptance
 covers that complete bounded feature, rather than requiring a planning merge or
 another PR for each phase. Mark it ready only after both console flows and disposal.
 Larger scope changes return to review in that draft.
@@ -332,4 +337,4 @@ with the existing draft before that attempt; do not repeat known failing prepara
 or renew clocks within a running launch. This is a concrete retry/launch-count
 review under this plan's existing stop rule, not permission to retry a partial
 installation. No destructive installation has occurred. All implementation, fixes,
-qualification, stopped evidence and eventual disposal continue in PR #52.
+qualification, stopped evidence and eventual disposal continue in PR #53.

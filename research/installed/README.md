@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in PR #52.
+kept with scope, fixes, tests, native qualification and teardown in follow-up draft PR #53 after the scope-only merge of PR #52.
 Native qualification remains pending; no production runtime or interface is adopted.
 
 root.c compares private canonical observations. root_native.c uses fixed read-only
