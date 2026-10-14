@@ -99,5 +99,12 @@ The next [complete installed-target payload slice](docs/research/installed-paylo
 authorizes connecting confirmed stock installation, offline installed-root authorization
 and later inert-data readback on three exact fresh targets. Implementation, native
 qualification and cleanup continue in the same accepted feature draft. A read-only
-bootstrap stopped before installation; its evidence and proposed launch-count
-amendment remain in that draft, with all three targets unchanged.
+bootstrap stopped before installation; its stopped evidence is recorded, with all three targets unchanged. The maintainer
+accepted one replacement provisioning attempt and eleven total launches; remaining
+native qualification and cleanup stay together after the implementation merge.
+
+[Installed-target native progress](docs/research/installed-payload-native-progress.md)
+records completed compiler provisioning, six native entry builds and 488 serial
+regressions. The unexpected empty fd0 namespace requires a scoped discovery
+decision before target installation; remaining qualification and disposal stay
+in the same draft PR #54.

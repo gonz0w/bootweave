@@ -9,7 +9,7 @@ that approval to its digest and rechecked unchanged full target identities/bytes
 Base: bc989d022f97d25fda9702c97b531aa51da12cf2, maintainer-merged PR #51.
 PR #52 was maintainer-merged at the scope-only head before its implementation
 commits were included. The implementation and stopped evidence now remain together
-in [follow-up draft PR #53](https://github.com/gonz0w/bootweave/pull/53), based on
+in [PR #53](https://github.com/gonz0w/bootweave/pull/53), based on
 676814196afa8bdd7d61d7f42faad8d246cec199. Preserve historical source/media receipts;
 its cherry-picked source tree was independently equal to the already verified tree.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
@@ -25,8 +25,9 @@ placement on that same installed filesystem, and independently checks it after
 another clean boot. This connects the two evidenced boundaries without selecting a
 production runtime, profile grammar, adapter API or persistent receipt format.
 
-Keep scope, implementation, routine corrections, host tests, native qualification,
-cleanup and evidence on codex/installed-payload-qualification in one follow-up draft PR. Acceptance
+PR #53 was also maintainer-merged before native qualification. Keep all remaining
+fixes, tests, native qualification, cleanup and evidence on
+codex/installed-payload-native in one follow-up draft PR. Acceptance
 covers that complete bounded feature, rather than requiring a planning merge or
 another PR for each phase. Mark it ready only after both console flows and disposal.
 Larger scope changes return to review in that draft.
@@ -267,8 +268,9 @@ production adoption, new dependency or increased budget require review there.
 
 ## Stopped pre-install execution and proposed launch-count amendment
 
-2026-10-13. **This amendment is proposed, not accepted.** The original nine-launch
-ceiling and all other accepted limits remain in force. Implementation source
+Historical stopped report, 2026-10-13, before amendment acceptance below.
+At this point the amendment was proposed and the original nine-launch ceiling
+remained in force. Implementation source
 1f256a815107cde4fa66ecebf5eee40b3acd2727 passed clean local make verify: 81 groups
 (22/13/3/10/33), no failures/skips; two trusted signatures and author DCO passed.
 All four installed entry variants passed host syntax checks with authenticated
@@ -338,3 +340,57 @@ or renew clocks within a running launch. This is a concrete retry/launch-count
 review under this plan's existing stop rule, not permission to retry a partial
 installation. No destructive installation has occurred. All implementation, fixes,
 qualification, stopped evidence and eventual disposal continue in PR #53.
+
+## Accepted replacement provisioning amendment, 2026-10-13
+
+Cam replied "approved" to the request for one replacement provisioning attempt and
+eleven total launches. Review head: 7acc72385f7e445f477088263353f6e4e941327d.
+A separate private amendment receipt preserves original acceptance history and binds
+the unchanged immutable target receipt. All three full target digests, exact identities,
+0600 modes, single links and zero allocations were rechecked before recording acceptance.
+The replacement is build-install-retry; both prior stops count toward eleven. Every
+original per-launch and other bound remains unchanged. PR #53 includes implementation
+and stopped evidence; it does not contain native qualification. All remaining work
+continues together in one draft after that maintainer merge.
+
+## Installed disk namespace decision — proposed, not accepted
+
+Native compiler-guest provisioning completed on the same confirmed build.raw,
+followed by an offline serial boot and all 488 required serial regression/composition
+cases. Native hw.disknames also reports fd0 with an empty DUID after the wd0 and
+cd0 entries. Paused effective blocks contain only the exact target and read-only
+source optical; the legacy floppy controller has no backing image. Native fd0 raw
+and block nodes are major/minor 9/2 and 2/2; disklabel refused with Device not
+configured. That refusal alone is not evidence that arbitrary floppy media is empty.
+Authenticated OpenBSD 7.9 fd.c shows probe-based attachment and disk_attach even
+when density is unknown. The RAMdisk discovery list did not expose this full-kernel
+entry. The current strict storage_discovery refuses it; no installed-root case ran,
+and the two payload targets remain untouched.
+
+Proposed bounded replacement: keep the existing generic storage validator unchanged.
+Add only a private installed-research discovery adapter that permits at most one
+exact fd0: record with no DUID, removes that record for the existing validator and
+retains the complete original kernel namespace in before/after equality checks.
+The remaining records must still prove exactly the fixed sd0/DUID with only the
+already permitted empty cd0/rd0 entries. Duplicate, malformed, nonempty-DUID fd0,
+fd1 or any other disk entry refuses. Root/block/raw label agreement, root FFS fsid,
+device/inode/mount/held-context checks and fresh confirmation remain required.
+Neither fd0 device is opened or written by the payload gate or writer.
+
+This exception requires the already mandatory exact no-hotplug virtual fixture
+preflight, including a complete paused block/device inventory proving no floppy
+backing media. It is not a production physical-media classification rule. The stock
+installer and emulator/firmware profile remain unchanged. No new target, launch,
+credential, signing pair, dependency or budget is requested. Retain both original
+source ceilings; update only frozen installed source/manifests and sealed inputs
+as necessary, with native source/artifact identities recorded separately.
+
+Add pure-host acceptance/refusal cases for every namespace boundary above and native
+read-only namespace/empty-backend observations on both build consoles. Existing 976
+regressions remain required. The later installed target must demonstrate positive
+root binding in every existing installed case; a refusal cannot count as placement.
+Do not begin serial/VGA target installation until this replacement is accepted.
+Keep all decision, fixes, qualification and disposal in
+[PR #54](https://github.com/gonz0w/bootweave/pull/54). This is the frozen mechanism's
+existing stop rule: "if those observations cannot prove the binding, stop dependent
+work and review a replacement mechanism."
