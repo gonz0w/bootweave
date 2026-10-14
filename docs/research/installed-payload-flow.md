@@ -9,7 +9,7 @@ that approval to its digest and rechecked unchanged full target identities/bytes
 Base: bc989d022f97d25fda9702c97b531aa51da12cf2, maintainer-merged PR #51.
 PR #52 was maintainer-merged at the scope-only head before its implementation
 commits were included. The implementation and stopped evidence now remain together
-in [follow-up draft PR #53](https://github.com/gonz0w/bootweave/pull/53), based on
+in [PR #53](https://github.com/gonz0w/bootweave/pull/53), based on
 676814196afa8bdd7d61d7f42faad8d246cec199. Preserve historical source/media receipts;
 its cherry-picked source tree was independently equal to the already verified tree.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
@@ -25,8 +25,9 @@ placement on that same installed filesystem, and independently checks it after
 another clean boot. This connects the two evidenced boundaries without selecting a
 production runtime, profile grammar, adapter API or persistent receipt format.
 
-Keep scope, implementation, routine corrections, host tests, native qualification,
-cleanup and evidence on codex/installed-payload-qualification in one follow-up draft PR. Acceptance
+PR #53 was also maintainer-merged before native qualification. Keep all remaining
+fixes, tests, native qualification, cleanup and evidence on
+codex/installed-payload-native in one follow-up draft PR. Acceptance
 covers that complete bounded feature, rather than requiring a planning merge or
 another PR for each phase. Mark it ready only after both console flows and disposal.
 Larger scope changes return to review in that draft.
@@ -267,8 +268,9 @@ production adoption, new dependency or increased budget require review there.
 
 ## Stopped pre-install execution and proposed launch-count amendment
 
-2026-10-13. **This amendment is proposed, not accepted.** The original nine-launch
-ceiling and all other accepted limits remain in force. Implementation source
+Historical stopped report, 2026-10-13, before amendment acceptance below.
+At this point the amendment was proposed and the original nine-launch ceiling
+remained in force. Implementation source
 1f256a815107cde4fa66ecebf5eee40b3acd2727 passed clean local make verify: 81 groups
 (22/13/3/10/33), no failures/skips; two trusted signatures and author DCO passed.
 All four installed entry variants passed host syntax checks with authenticated
@@ -338,3 +340,15 @@ or renew clocks within a running launch. This is a concrete retry/launch-count
 review under this plan's existing stop rule, not permission to retry a partial
 installation. No destructive installation has occurred. All implementation, fixes,
 qualification, stopped evidence and eventual disposal continue in PR #53.
+
+## Accepted replacement provisioning amendment, 2026-10-13
+
+Cam replied "approved" to the request for one replacement provisioning attempt and
+eleven total launches. Review head: 7acc72385f7e445f477088263353f6e4e941327d.
+A separate private amendment receipt preserves original acceptance history and binds
+the unchanged immutable target receipt. All three full target digests, exact identities,
+0600 modes, single links and zero allocations were rechecked before recording acceptance.
+The replacement is build-install-retry; both prior stops count toward eleven. Every
+original per-launch and other bound remains unchanged. PR #53 includes implementation
+and stopped evidence; it does not contain native qualification. All remaining work
+continues together in one draft after that maintainer merge.
