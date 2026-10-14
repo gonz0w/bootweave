@@ -50,6 +50,7 @@ class InstalledTooling(unittest.TestCase):
         subprocess.run(flags + ['-shared', '-fPIC', str(SOURCES / 'root.c'),
                        str(ROOT / 'research/storage/validate.c'), '-o', str(path / 'model.so')], check=True)
         cls.lib = c.CDLL(str(path / 'model.so'))
+        cls.lib.ip_names.argtypes = [c.c_char_p, c.c_size_t, c.POINTER(c.c_ubyte)]
         cls.lib.ip_valid.argtypes = [c.POINTER(Binding)]
         cls.lib.ip_same.argtypes = [c.POINTER(Binding), c.POINTER(Binding)]
         cls.stub = path / 'native-stub'
@@ -74,6 +75,24 @@ class InstalledTooling(unittest.TestCase):
         return a
 
     def test_IPFH01_each_authority_field_and_unsafe_root(self):
+        uid = c.c_ubyte * 8
+        disk = b'sd0:0123456789abcdef'
+        for raw in (disk, b'fd0:' + b',' + disk, disk + b',fd0:',
+                    b'cd0:,fd0:,' + disk + b',rd0:', disk + b',rd0:,cd0:,fd0:'):
+            observed = uid()
+            self.assertEqual(self.lib.ip_names(raw + b'\0', len(raw) + 1, observed), 0)
+            self.assertEqual(bytes(observed), bytes.fromhex('0123456789abcdef'))
+        for raw in (b'', disk, disk + b'\0junk\0', disk + b',fd0:,fd0:\0',
+                    disk + b',fd0:0123456789abcdef\0', disk + b',fd1:\0',
+                    disk + b',cd0:0123456789abcdef\0', disk + b',rd0:0123456789abcdef\0',
+                    disk + b',wd0:\0', disk + b',sd0:0123456789abcdef\0',
+                    b',' + disk + b'\0', disk + b',\0', disk + b',,fd0:\0',
+                    disk + b',fd0\0', disk + b',fd0::\0', disk + b', fd0:\0',
+                    b'sd0:0123456789abcdeg,fd0:\0', b'X' * 4096 + b'\0'):
+            with self.subTest(namespace=raw):
+                self.assertNotEqual(self.lib.ip_names(raw, len(raw), uid()), 0)
+        self.assertNotEqual(self.lib.ip_names(b'fd0:\0', 5, uid()), 0)
+        self.assertNotEqual(self.lib.ip_names(None, 5, uid()), 0)
         a = self.binding()
         self.assertEqual(self.lib.ip_valid(a), 1)
         self.assertEqual(self.lib.ip_same(a, a), 1)

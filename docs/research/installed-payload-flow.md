@@ -353,7 +353,7 @@ original per-launch and other bound remains unchanged. PR #53 includes implement
 and stopped evidence; it does not contain native qualification. All remaining work
 continues together in one draft after that maintainer merge.
 
-## Installed disk namespace decision — proposed, not accepted
+## Installed disk namespace adjustment — accepted, 2026-10-14
 
 Native compiler-guest provisioning completed on the same confirmed build.raw,
 followed by an offline serial boot and all 488 required serial regression/composition
@@ -367,7 +367,7 @@ when density is unknown. The RAMdisk discovery list did not expose this full-ker
 entry. The current strict storage_discovery refuses it; no installed-root case ran,
 and the two payload targets remain untouched.
 
-Proposed bounded replacement: keep the existing generic storage validator unchanged.
+Accepted bounded replacement: keep the existing generic storage validator unchanged.
 Add only a private installed-research discovery adapter that permits at most one
 exact fd0: record with no DUID, removes that record for the existing validator and
 retains the complete original kernel namespace in before/after equality checks.
@@ -389,8 +389,11 @@ Add pure-host acceptance/refusal cases for every namespace boundary above and na
 read-only namespace/empty-backend observations on both build consoles. Existing 976
 regressions remain required. The later installed target must demonstrate positive
 root binding in every existing installed case; a refusal cannot count as placement.
-Do not begin serial/VGA target installation until this replacement is accepted.
-Keep all decision, fixes, qualification and disposal in
-[PR #54](https://github.com/gonz0w/bootweave/pull/54). This is the frozen mechanism's
+Cam approved the concrete replacement after reviewing head
+2ea6560fcf823d33cf447576e031384b019e015b; a separate private acceptance receipt
+binds the preserved target receipt and rechecked full current target digests.
+PR #54 was maintainer-merged before the correction/native completion. Keep all
+remaining fixes, qualification and disposal on codex/installed-payload-completion
+in one follow-up draft. This is the frozen mechanism's
 existing stop rule: "if those observations cannot prove the binding, stop dependent
 work and review a replacement mechanism."

@@ -1,8 +1,8 @@
 # Installed payload native progress and discovery decision
 
-2026-10-13. **Partial qualification; installed-root placement remains unqualified.**
+2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
 This continues the [accepted complete slice](installed-payload-flow.md) in
-[one draft PR #54](https://github.com/gonz0w/bootweave/pull/54), after maintainer
+PR #54 (now maintainer-merged before completion), after maintainer
 merges of scope PR #52 and implementation/stopped-evidence PR #53. The accepted
 replacement provisioning amendment permits eleven total launches on the unchanged
 three exact targets. Four have been consumed, including both earlier stops.
@@ -101,13 +101,15 @@ emulator/profile change or discovery exception was adopted. The current strict
 validator rejects that unexpected namespace by its source contract. No installed
 root case was run or counted as a refusal/placement pass.
 
-The [concrete proposed research discovery adjustment](installed-payload-flow.md#installed-disk-namespace-decision--proposed-not-accepted)
-remains **unaccepted**. It preserves the generic validator and full raw namespace
+The [research discovery adjustment](installed-payload-flow.md#installed-disk-namespace-adjustment--accepted-2026-10-14)
+was **accepted on 2026-10-14**, reviewed at 2ea6560. It preserves the generic validator and full raw namespace
 comparison, permits only one exact empty-DUID fd0 entry under mandatory no-hotplug
 virtual backing-media proof, and retains all sole-sd0/label/root/mount/held-context
 checks. Both fd0 devices remain outside the payload gate/writer's operations.
 The accepted plan requires review of a replacement when observations cannot prove
-its frozen binding. Dependent target installation is stopped at that decision.
+its frozen binding. The correction preserves generic storage_discovery and full raw before/after
+comparison. Pure host boundary cases pass; corrected native source/media and
+installed positive binding remain unqualified.
 
 Both payload targets were fully rehashed after serial halt: original full zero-image
 digests, exact identities, 0600/single links and zero allocation remain unchanged.
@@ -119,7 +121,7 @@ fixture disposal and exact-target authority have **not** ended.
 Remaining required cases: 488 build keyboard/VGA regressions plus all 92 installed
 serial/VGA placement/refusal/retained-positive/later-readback cases, 580 in total.
 All remaining qualification, source fixes, sealed artifacts, native key cleanup,
-clean halts, full digests and fixture disposal stay in PR #54. No general rollback,
+clean halts, full digests and fixture disposal stay together in the follow-up feature draft after the maintainer merge. No general rollback,
 physical erasure, production integration or project readiness is claimed.
 
 ## Observer limits and local verification
@@ -135,7 +137,8 @@ public encoded artifact frames remain separately counted under 1 GiB. No clock o
 operation deadline was renewed.
 
 Local make verify passed 81 groups (22/13/3/10/33), no failures/skips, plus content,
-links, ShellCheck and Gitleaks. Additional original C remains 16376 bytes within
-16 KiB. Signed source/decision history and author DCO remain required; no Actions,
+links, ShellCheck and Gitleaks. Additional original C remains within 16 KiB. Compact formatting, shorter
+test diagnostics and concise component comments fund the adapter; component
+behavior outside the installed build is unchanged. Signed source/decision history and author DCO remain required; no Actions,
 runners or hosted status publisher is used. Host evidence cannot replace the
 remaining native cases.

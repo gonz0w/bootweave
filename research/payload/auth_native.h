@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Private research call, not an installer API or serialized contract. */
+/* Private research; no installer/wire API. */
 #ifndef AUTH_NATIVE_H
 #define AUTH_NATIVE_H
 #include <stddef.h>

@@ -28,8 +28,8 @@ accepted research slice, with no full parent PTT or production integration claim
 
 The [installed-root slice progress](../research/installed-payload-native-progress.md)
 records native compiler provisioning, six entry builds and 488 serial regressions.
-An unexpected empty fd0 kernel namespace entry triggers the accepted mechanism
-review boundary. Target installation, VGA/installed cases and disposal remain
+A private empty-fd0 adjustment was accepted after the native namespace observation;
+host boundary checks cannot qualify its corrected native gate. Target installation, VGA/installed cases and disposal remain
 pending; no installed-root or parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and

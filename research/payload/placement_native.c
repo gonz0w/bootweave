@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Original fixed OpenBSD writer/supervisor; no archive-selected command. */
+/* Fixed OpenBSD writer; no archive-selected command. */
 #include "placement.h"
 #include "auth_native.h"
 #ifndef __OpenBSD__
@@ -64,10 +64,10 @@ static int setup(int fd, const struct stat *id) {
      getresuid(&u[0],&u[1],&u[2]) || getresgid(&g[0],&g[1],&g[2]) ||
      u[0] != 32767 || u[1] != 32767 || u[2] != 32767 ||
      g[0] != 32767 || g[1] != 32767 || g[2] != 32767 || getgroups(0,NULL) != 0) return -1;
- /* Observe irreversible identity drop separately from pledge's syscall denial. */
+ /* Observe identity drop separately from pledge denial. */
  errno = 0; if (setresuid(0,0,0) != -1 || errno != EPERM) return -1;
  errno = 0; if (setresgid(0,0,0) != -1 || errno != EPERM) return -1;
- /* Check the unveil lock before pledge makes the syscall itself forbidden. */
+ /* Check unveil lock before pledge forbids the syscall. */
  errno = 0; if (unveil("/", "rwc") != -1 || errno != EPERM) return -1;
  return pledge("stdio rpath wpath cpath fattr", NULL);
 }
@@ -89,7 +89,7 @@ static int reap(pid_t pid, int *status, long long deadline, long *peak, int *kil
 }
 int pl_prerequisites(int fd, const struct stat *id, long *peak) {
  int probe; unsigned char expected[32], actual[32];
- /* Only the pinned stock benign true binary may be named by the exec denial probe. */
+ /* Exec denial names only pinned stock true. */
  if (auth_hash_file("/usr/bin/true", expected)) return -1;
  for (probe = 0; probe < 8; probe++) {
   int p[2], status=0, killed, ok; pid_t pid; long rss=0; unsigned char marker = 0;
@@ -110,7 +110,7 @@ int pl_prerequisites(int fd, const struct stat *id, long *peak) {
    if (probe == 5) rc = socket(AF_INET,SOCK_STREAM,0);
    if (probe == 6) rc = mknodat(3,"forbidden-device",S_IFCHR|0600,0);
    if (probe == 7) rc = setresuid(0,0,0);
-   /* Stock true exits zero if unexpectedly executed; a denial has a distinct code. */
+   /* Stock true exits zero; denial has a distinct code. */
    _exit(rc == -1 && errno != 0 ? 73 : 1);
   }
   close(p[1]);
@@ -169,7 +169,7 @@ static void writer(const struct pl_context *c, const struct pl_plan *p, const un
    if(fd<0 || fstat(fd,&ids[i]) || !identity(&ids[i],&ids[i],1) || ids[i].st_dev!=c->identity.st_dev) failure=1;
    fds[i]=fd;
    if(!failure && i==0 && barrier(1)) failure=1;
-   /* The PL_SYNC injection targets the data file, after its bytes exist. */
+   /* PL_SYNC targets the written data file. */
    if(!failure && fsync(fd)) failure=1;
   } else {
    r.submitted++;
@@ -209,7 +209,7 @@ static void writer(const struct pl_context *c, const struct pl_plan *p, const un
  if(write(4,&r,sizeof(r))!=(ssize_t)sizeof(r)) _exit(125);
  _exit(failure?1:0);
 }
-/* Read-only oracle uses independent expected paths/hashes; no planner offsets. */
+/* Read-only oracle: independent paths/hashes, no planner offsets. */
 static int oracle(int fd, const char *prefix, const struct pl_context *c, size_t *count, int *exact) {
  int copy=openat(fd,".",O_RDONLY|O_DIRECTORY|O_NOFOLLOW), ok=1;
  DIR *d; struct dirent *e;
@@ -297,7 +297,7 @@ int pl_phase(struct pl_context *c, const unsigned char *b, size_t length,
  if(pipe(report)||pipe(logs)||pipe(request)||pipe(ack)) goto cleanup;
  pid=fork(); if(pid<0) goto cleanup;
  if(!pid) {
-  /* Preserve capabilities at fixed descriptors, then close all unrelated FDs. */
+  /* Keep fixed capabilities; close unrelated FDs. */
   int saved[5], originals[]={c->rootfd,report[1],request[1],ack[0],logs[1]};
   for(i=0;i<5;i++) { saved[i]=fcntl(originals[i],F_DUPFD,16); if(saved[i]<0) _exit(125); }
   if(dup2(saved[0],3)<0 || dup2(saved[1],4)<0 || dup2(saved[2],5)<0 || dup2(saved[3],6)<0 ||
@@ -334,7 +334,7 @@ int pl_phase(struct pl_context *c, const unsigned char *b, size_t length,
   for(i=0;i<3;i++) { f[i].fd=i==0?report[0]:i==1?logs[0]:request[0]; f[i].events=POLLIN; f[i].revents=0; }
   if(!done && poll(f,3,10)<0 && errno!=EINTR) goto cleanup;
  }
- /* Drain all fixed result/diagnostics after reap; reject extra/partial output. */
+ /* After reap, drain results; reject extra/partial output. */
  if(got<sizeof(packet)) {
   ssize_t n=read(report[0],(unsigned char *)&packet+got,sizeof(packet)-got);
   if(n>0) got+=(size_t)n;

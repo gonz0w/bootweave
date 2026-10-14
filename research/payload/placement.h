@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Private compiled research context; never a public/wire contract. */
+/* Private research; no public/wire API. */
 #ifndef PLACEMENT_H
 #define PLACEMENT_H
 #include <stddef.h>
@@ -10,7 +10,7 @@ int pl_plan(const unsigned char *, size_t, struct pl_plan *);
 #ifdef __OpenBSD__
 #include <sys/stat.h>
 struct auth_result;
-/* Expectations are separate trusted fixture observations, never archive claims. */
+/* Trusted fixture expectations, never archive claims. */
 struct pl_expected { const char *path; int directory; size_t size; unsigned char digest[32]; };
 enum pl_test { PL_REAL, PL_SETUP, PL_SHORT, PL_CLOSE, PL_SYNC, PL_SIGNAL,
  PL_LOSS, PL_STALL, PL_OUTPUT, PL_DIAGNOSTIC, PL_EXIST, PL_LINK,
