@@ -352,3 +352,45 @@ The replacement is build-install-retry; both prior stops count toward eleven. Ev
 original per-launch and other bound remains unchanged. PR #53 includes implementation
 and stopped evidence; it does not contain native qualification. All remaining work
 continues together in one draft after that maintainer merge.
+
+## Installed disk namespace decision — proposed, not accepted
+
+Native compiler-guest provisioning completed on the same confirmed build.raw,
+followed by an offline serial boot and all 488 required serial regression/composition
+cases. Native hw.disknames also reports fd0 with an empty DUID after the wd0 and
+cd0 entries. Paused effective blocks contain only the exact target and read-only
+source optical; the legacy floppy controller has no backing image. Native fd0 raw
+and block nodes are major/minor 9/2 and 2/2; disklabel refused with Device not
+configured. That refusal alone is not evidence that arbitrary floppy media is empty.
+Authenticated OpenBSD 7.9 fd.c shows probe-based attachment and disk_attach even
+when density is unknown. The RAMdisk discovery list did not expose this full-kernel
+entry. The current strict storage_discovery refuses it; no installed-root case ran,
+and the two payload targets remain untouched.
+
+Proposed bounded replacement: keep the existing generic storage validator unchanged.
+Add only a private installed-research discovery adapter that permits at most one
+exact fd0: record with no DUID, removes that record for the existing validator and
+retains the complete original kernel namespace in before/after equality checks.
+The remaining records must still prove exactly the fixed sd0/DUID with only the
+already permitted empty cd0/rd0 entries. Duplicate, malformed, nonempty-DUID fd0,
+fd1 or any other disk entry refuses. Root/block/raw label agreement, root FFS fsid,
+device/inode/mount/held-context checks and fresh confirmation remain required.
+Neither fd0 device is opened or written by the payload gate or writer.
+
+This exception requires the already mandatory exact no-hotplug virtual fixture
+preflight, including a complete paused block/device inventory proving no floppy
+backing media. It is not a production physical-media classification rule. The stock
+installer and emulator/firmware profile remain unchanged. No new target, launch,
+credential, signing pair, dependency or budget is requested. Retain both original
+source ceilings; update only frozen installed source/manifests and sealed inputs
+as necessary, with native source/artifact identities recorded separately.
+
+Add pure-host acceptance/refusal cases for every namespace boundary above and native
+read-only namespace/empty-backend observations on both build consoles. Existing 976
+regressions remain required. The later installed target must demonstrate positive
+root binding in every existing installed case; a refusal cannot count as placement.
+Do not begin serial/VGA target installation until this replacement is accepted.
+Keep all decision, fixes, qualification and disposal in
+[PR #54](https://github.com/gonz0w/bootweave/pull/54). This is the frozen mechanism's
+existing stop rule: "if those observations cannot prove the binding, stop dependent
+work and review a replacement mechanism."
