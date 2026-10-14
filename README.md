@@ -107,5 +107,5 @@ native qualification and cleanup stay together after the implementation merge.
 records compiler provisioning, six corrected native entry builds and all 976
 serial/VGA build regressions. The private empty-fd0 adjustment is accepted. A large
 artifact export remained incomplete and the build guest reached its hard stop before
-clean halt; a bounded recovery/export amendment is proposed. All 92 installed cases
-and disposal remain together in draft PR #55.
+clean halt; a bounded twelfth recovery/export launch is accepted. All 92 installed cases
+and disposal remain together in one follow-up draft after the maintainer merge of PR #55.

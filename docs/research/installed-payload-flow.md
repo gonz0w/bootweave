@@ -398,9 +398,17 @@ in one follow-up draft. This is the frozen mechanism's
 existing stop rule: "if those observations cannot prove the binding, stop dependent
 work and review a replacement mechanism."
 
-## Recovery and range-export amendment — proposed, not accepted
+## Recovery and range-export amendment — accepted
 
-2026-10-14. In [draft PR #55](https://github.com/gonz0w/bootweave/pull/55),
+2026-10-14. Cam replied "continue" to the concrete twelfth-boot review question,
+accepting the fixed recovery/range export and twelve-launch ceiling. The separate
+private acceptance receipt binds reviewed head 2f2aeb3e844edc195bb1c1962e307b7c11698831,
+the original target receipt and freshly rehashed stopped/untouched target bytes.
+PR #55 was maintainer-merged at a8c217874a915476709bd39816534c37e103640f;
+remaining recovery, target qualification and disposal stay in one follow-up draft
+on codex/installed-payload-recovery. Historical receipts remain unchanged.
+
+In [PR #55](https://github.com/gonz0w/bootweave/pull/55),
 the accepted private discovery adapter and its routine inherited-declaration fix
 are implemented. All 976 build regressions passed across serial and actual VGA;
 all six corrected installed entry variants compiled. The planned VGA launch then
@@ -418,13 +426,14 @@ The two payload targets retain their original full zero-image digest and zero
 allocation. Historical clean-halt/acceptance receipts are preserved; this stopped
 image's digest is recorded separately, without upgrading it to a clean state.
 
-Concrete requested amendment: one additional build-export-recovery cold boot on
+Accepted amendment: one additional build-export-recovery cold boot on
 that same exact build.raw, before the six unchanged target phases, increasing
 the aggregate launch ceiling from eleven to **twelve**. Preserve every other
 launch, source, capture, storage, memory, operation, privilege and export bound.
-Use the unchanged pinned offline IDE build profile and corrected read-only source
-optical; reuse the existing build credential. No additional target, credential,
-signing pair, service, network, dependency or runtime adoption is requested.
+Use the unchanged pinned offline IDE build profile and a sealed read-only source
+optical carrying only the fixed reviewed reader and its SHA256 manifest; reuse the
+existing build credential. Complete ISO9660/Joliet inventory readback is required. No additional target, credential,
+signing pair, service, network, dependency or runtime adoption is authorized.
 
 Observe stock automatic filesystem recovery (failed preen or an unexpected
 interactive repair stops, with no blind fsck -y), independently recheck the frozen native source
@@ -452,7 +461,7 @@ regular nonsymlink source and exact root ownership/mode/size/full hash. Require
 root-owned 0600 suffix size 169625600; publish its native sha256 before the complete
 uuencode -m handoff-tail frame. Rehash the original ISO afterward, remove the fixed
 scratch suffix and observe absence. Retain dd diagnostics. Scratch stays within
-the original 3 GiB media bound. ShellCheck passed for the private proposed reader;
+the original 3 GiB media bound. ShellCheck passed for the accepted fixed reader;
 it has not executed. Freeze exact source/helper identities before the launch.
 Assemble only in the
 owned host fixture, require the original complete native ISO hash and complete
@@ -472,5 +481,5 @@ All 92 installed cases, final artifact sealing and fixture disposal remain requi
 in the same feature draft. Native test success before the stop does not qualify
 the failed shutdown. Exact-target authority has not ended; no general rollback
 or physical erasure is claimed. This changes a frozen launch/export mechanism
-under the plan's rule: "retries/changed budgets need review." Do not start the
-additional guest or dependent target installation without acceptance.
+under the plan's rule: "retries/changed budgets need review." Acceptance covers this fixed additional guest; dependent target installation still
+requires complete media and recovery postconditions.

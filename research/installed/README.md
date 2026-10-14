@@ -1,11 +1,11 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six corrected entry builds and 976 serial/VGA regressions.
 The installed disk namespace adjustment is accepted. A recovery/range-export
-amendment is proposed after incomplete media export and an unclean hard stop; all
+amendment is accepted after incomplete media export and an unclean hard stop; all
 92 installed cases and disposal remain pending; no production runtime or interface is adopted.
 
 root.c compares private canonical observations and normalizes only one exact

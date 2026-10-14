@@ -4,8 +4,8 @@
 Current: 976 build checks passed, six corrected entry variants built, eighteen
 fresh public artifact frames complete. Five launches consumed; the latest build
 guest hit its hard stop before clean halt with an incomplete ISO export. All 92
-installed cases remain pending. A twelfth recovery/range-export launch is proposed,
-not accepted; see the final sections for the current observed state.
+installed cases remain pending. A twelfth recovery/range-export launch is accepted,
+with execution pending; see the final sections for the current observed state.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -166,7 +166,8 @@ frames to fixed owned build-source paths, with complete native SHA256 checks bef
 recompilation, as with the existing generated public header. No media swap, clock
 reset, extra launch or target change is allowed. The corrected entry rebuild and
 remaining native outcomes still need observation; no host check supplies native
-qualification. All remaining work stays in draft [PR #55](https://github.com/gonz0w/bootweave/pull/55).
+qualification. This checkpoint was recorded in [PR #55](https://github.com/gonz0w/bootweave/pull/55),
+subsequently maintainer-merged before completion.
 
 ## VGA results and incomplete export stop, 2026-10-14
 
@@ -209,7 +210,7 @@ The incomplete ISO and failed host reconstruction candidates were never attached
 or used. All encoded exports, including unread trailing bytes, remain counted.
 
 The full prefix is privately retained for the concrete
-[proposed recovery/range-export amendment](installed-payload-flow.md#recovery-and-range-export-amendment--proposed-not-accepted).
+[accepted recovery/range-export amendment](installed-payload-flow.md#recovery-and-range-export-amendment--accepted).
 Stopping the completed VGA observer and temporarily disabling accessory serial
 output processing did not finish the transfer in time. Foreground export cancellation,
 exact serial state restoration/receipt removal, absent workers/relinkers/key paths
@@ -228,5 +229,7 @@ Allocated owned storage: 8581140480 bytes; observation capture: 473800; encoded 
 export: 728731015, all within unchanged bounds. Fixtures, credentials and exact-target
 authority remain held; disposal is incomplete. All **92 installed cases remain**.
 
-The proposed twelfth launch is not accepted. Remaining work stays in draft PR #55;
+Cam accepted the fixed twelfth recovery/export launch by replying "continue" to
+its concrete review question. PR #55 was maintainer-merged before completion; all
+remaining work stays together on codex/installed-payload-recovery in one follow-up draft;
 no production/installer acceptance, general rollback or physical erasure follows.
