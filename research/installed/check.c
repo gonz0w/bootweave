@@ -41,7 +41,7 @@ c.rootfd=openat(c.parentfd,"case",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);require(c.roo
 pl_observe(&c);{unsigned char b[8];require(!c.result.uncertain&&c.result.observed==2&&read_file(WORK "case/viewer/readme.txt",b,sizeof(b))==5&&!memcmp(b,"hello",5),"content");}
  canary();require(!ip_close(&gate)&&!close(c.rootfd)&&!close(c.parentfd),"readback FDs");puts("Installed later readback passed.");return pl_limits(1)!=0;
 #else
-c=root(2,PL_REAL);require(!ip_open(&gate)&&!ip_capture(&gate,&c,&observed)&&!ip_check(&gate,&c,&observed)&&!ip_close(&gate)&&!pl_prerequisites(c.rootfd,&c.identity,&peak),"initial gate");cleanup(&c);
+c=root(2,PL_REAL);require(!ip_open(&gate),"open");require(!ip_capture(&gate,&c,&observed),"capture");require(!ip_check(&gate,&c,&observed),"recheck");require(!ip_close(&gate),"close");require(!pl_prerequisites(c.rootfd,&c.identity,&peak),"prereq");cleanup(&c);
 #ifdef IPF_KEEP
 c=root(2,PL_REAL);p=reviewed_run(&c,CONFIRM,1);require(p.auth.completed&&p.placement.complete,"keep outcome");require(!close(c.rootfd)&&!close(c.parentfd),"keep FDs");canary();puts("Installed final positive retained.");return pl_limits(1)!=0;
 #else

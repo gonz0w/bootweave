@@ -1,11 +1,15 @@
 # Installed payload native progress and discovery decision
 
 2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
-Current: 976 build checks passed, six corrected entry variants built, eighteen
-fresh public artifact frames complete. Five launches consumed; the latest build
-guest hit its hard stop before clean halt with an incomplete ISO export. All 92
-installed cases remain pending. A twelfth recovery/range-export launch is proposed,
-not accepted; see the final sections for the current observed state.
+Current: 976 build checks passed and six corrected installed variants built. The
+accepted recovery boot completed stock automatic preening, verified persisted key
+absence and source/artifact hashes, finished the fixed suffix export, and cleanly
+halted. The original native ISO and its full boot/member inventory passed readback.
+Eight launches completed, including clean stock installation and offline serial OS
+boot. The first dynamic installed entry refused its combined initial preflight,
+before member review or writer dispatch; its empty case was removed and the guest
+cleanly halted. All 92 installed payload cases and final disposal remain pending. Remaining qualification
+stays in draft [PR #56](https://github.com/gonz0w/bootweave/pull/56).
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -166,7 +170,8 @@ frames to fixed owned build-source paths, with complete native SHA256 checks bef
 recompilation, as with the existing generated public header. No media swap, clock
 reset, extra launch or target change is allowed. The corrected entry rebuild and
 remaining native outcomes still need observation; no host check supplies native
-qualification. All remaining work stays in draft [PR #55](https://github.com/gonz0w/bootweave/pull/55).
+qualification. This checkpoint was recorded in [PR #55](https://github.com/gonz0w/bootweave/pull/55),
+subsequently maintainer-merged before completion.
 
 ## VGA results and incomplete export stop, 2026-10-14
 
@@ -209,7 +214,7 @@ The incomplete ISO and failed host reconstruction candidates were never attached
 or used. All encoded exports, including unread trailing bytes, remain counted.
 
 The full prefix is privately retained for the concrete
-[proposed recovery/range-export amendment](installed-payload-flow.md#recovery-and-range-export-amendment--proposed-not-accepted).
+[accepted recovery/range-export amendment](installed-payload-flow.md#recovery-and-range-export-amendment--accepted).
 Stopping the completed VGA observer and temporarily disabling accessory serial
 output processing did not finish the transfer in time. Foreground export cancellation,
 exact serial state restoration/receipt removal, absent workers/relinkers/key paths
@@ -228,5 +233,114 @@ Allocated owned storage: 8581140480 bytes; observation capture: 473800; encoded 
 export: 728731015, all within unchanged bounds. Fixtures, credentials and exact-target
 authority remain held; disposal is incomplete. All **92 installed cases remain**.
 
-The proposed twelfth launch is not accepted. Remaining work stays in draft PR #55;
+Cam accepted the fixed twelfth recovery/export launch by replying "continue" to
+its concrete review question. PR #55 was maintainer-merged before completion; all
+remaining work stays together on codex/installed-payload-recovery in one follow-up draft;
 no production/installer acceptance, general rollback or physical erasure follows.
+
+
+## Approved recovery completed and serial installation started, 2026-10-14
+
+The sixth launch used the same stopped build image, frozen offline IDE profile and
+sealed 921600-byte read-only reader disc. Stock automatic preening repaired
+unreferenced files and allocation metadata, marked the filesystems clean and
+reached serial login. No interactive repair was requested or performed. All frozen
+native source/public-fixture checks, the full original ISO hash and eighteen
+previously exported artifact hashes passed. The key directory and lifetime receipt
+were independently absent after recovery; no pair or credential was regenerated.
+
+The fixed native suffix was 169625600 bytes, SHA-256
+c606ac82f3dbdf50a7378ffefff184e3fd0e193308235ffd8d0e5792b5a0c831.
+Canonical framing, native full-source rehash, suffix removal and actual shell return
+passed in 753.150 seconds. Aggregate encoded export was 957874717 bytes, below
+1 GiB. Host assembly from the retained aligned prefix and this suffix reproduced
+the original 677939200-byte native ISO SHA-256
+607f1cc73a90402e5a02889b1bdc79c29dc8f67176086be38beffe218422f624.
+Complete readback checked all seventeen members, signed stock set identities,
+boot configuration, El Torito catalog checksum and fixed BIOS boot extent. Failed
+reconstruction candidates remain unusable. A separate nonbootable runtime disc
+passed full ISO9660/Joliet inventory/hash readback for sixteen public files.
+
+Exact serial restoration and receipt removal, key/scratch absence, no test/relink
+workers, unused vnds and matching installed/relinked kernel copies were observed.
+Native unmount/sync/halt produced a guest shutdown event before emulator exit at
+1019.665 seconds. Guest/client reaping, no fixture handles/mounts, credential
+exclusion, full image digest and original target identity/mode/links passed. This
+qualifies the recovery halt; the earlier forced stop remains unclean historical
+evidence. The build image is retained for final fixture disposal.
+
+The seventh launch began the original serial install on its unchanged exact fresh
+target. Paused effective attachments and full target hashes/zero allocation matched.
+Actual serial review and fresh disk confirmation observed zero writes; host identity,
+full zero-image digest and effective attachments were rechecked immediately before
+stock whole-disk MBR input. The reduced stock ramdisk tools rejected the compiler
+guest's checklist CLI forms; these refusals are not passes. Native explicit-key
+embedded-signature verification then passed, its extracted full manifest hash
+matched the authenticated frozen manifest, and all six native input hashes plus
+unmodified stock entry hashes matched independently. Scratch was removed and
+optical unmounted before returning to manually supervised stock prompts.
+
+Only bsd/bsd.rd/base/man were selected, with comp explicitly deselected; stock
+signature verification and all four set verification/extraction observations passed.
+The approved offline/no-DNS/no-SSH/no-X/no-extra-user/serial/UTC profile remains.
+Stock kernel relinking completed; independent disklabel/partition/mount/configuration,
+base-verifier and installed/relinked kernel hash agreement passed. Reduced RAMDISK_CD
+process observation was unavailable: neither missing ps nor the installed ps kernel-
+interface refusal is counted as a pass. Independent native process/relink checks
+remain required in the installed OS before any payload entry. Exact target filesystem
+unmounts, sync and native OS-halted/reboot-prompt observations preceded emulator quit
+without a reboot key. The phase ended at 1125.376 seconds; all guest/client processes
+were reaped, fixture handles/mounts absent, capture credentials excluded, and exact
+post-halt disk identity/mode/links/full digest recorded. No installed-root entry has
+run; cold OS boot, all 92 installed payload cases and final disposal remain required.
+
+
+## Installed preflight refusal and proposed diagnostic continuation
+
+The eighth launch cold-booted the same exact serial target from its recorded clean
+post-installation digest. All three FFS filesystems reported clean. Offline first-
+boot firmware/syspatch fetch failures are stock observations, not native test
+results. Native process observation was available in GENERIC; its initial make/ld
+relink workers later disappeared and both kernel copies matched. Native runtime
+manifest checks passed for all fifteen artifacts, with executable 0555 optical
+permissions. Complete effective attachment observation again excluded floppy
+backing media, networking and additional writable targets. Actual namespace order
+was cd0, sd0, fd0; the host proof was corrected to validate exact names/identities
+without imposing order. The generic discovery validator remains unchanged.
+
+Trusted preparation created only the separately authorized root-owned 0700
+/bootweave-research parent and root-owned 0600 fourteen-byte canary on device 1024.
+The actual serial dynamic entry reported supervisor RSS 848 KiB, then refused
+initial gate at check zero/case zero, exit one. No installed case passed; all 92
+remain required. This combined preflight includes opening/capturing/rechecking/
+closing the root context and the existing confinement prerequisites, so its text
+cannot identify which call failed. Independent observations show the expected
+root/parent/empty nobody case ownership/modes, fixed device numbers, installed
+DUID, FFS root mount, empty fd0 and frozen verifier/runtime hashes; these cannot
+replace a passing native preflight. No binding check is waived or relaxed.
+
+The retained empty case was independently observed, checked by exact device/inode/
+ownership/mode/size, and removed with rmdir. Canary bytes/hash remained unchanged.
+Exact serial settings were restored and its temporary receipt absent; native
+process observation showed no owned test or relink workers and kernel copies
+matched. Fixed runtime unmount/sync/halt produced native guest shutdown, followed
+by normal emulator exit at 857.581 seconds. Emulator/client reaping, no fixture
+handles/mounts, credential exclusion and full original target identity/mode/links
+passed. Serial target full post-halt SHA-256:
+5d86c4bfc030aae075cdd11df5ba6df24fd33cc43f7a95267e9a9c3ab73f0c5c.
+The four-KiB parent/canary remain held for the remaining approved feature. The VGA
+target remains the original untouched zero image. Final disposal is incomplete.
+
+A routine diagnostic change splits the existing combined initial require into
+five fail-closed requires in the same call order: open, capture, recheck, close,
+prereq. No operation, binding condition, privilege or case changes. Removing one
+redundant new-source comment funds its size; additional original C/header is 16378
+bytes, within 16 KiB. Host make verify passed all 81 groups, no failures/skips;
+content/links/ShellCheck/Gitleaks passed. The changed diagnostic source has not
+built or run natively; previously compiled artifacts are retained as historical.
+
+The [concrete proposed amendment](installed-payload-flow.md#diagnostic-build-and-replacement-serial-payload-amendment--proposed)
+requests one build/artifact-refresh boot and one replacement serial payload boot,
+raising the aggregate ceiling from twelve to fourteen. Neither is accepted or
+started. The failed preflight stops dependent cases; all scope, diagnostic changes,
+remaining qualification and disposal stay in draft PR #56.

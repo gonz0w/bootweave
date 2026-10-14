@@ -12,7 +12,6 @@ enum storage_result ip_names(const char *s,size_t n,unsigned char uid[8]){
   if(end==at||(end<n-1&&end==n-2))return STORAGE_INVALID;
   if(end-at==4&&!memcmp(s+at,"fd0:",4)){if(fd++)return STORAGE_INVALID;}
   else{
-  /* Only sd0 has a DUID. */
   if(end-at>4&&s[at]!='s')return STORAGE_INVALID;
   if(k) out[k++]=',';memcpy(out+k,s+at,end-at);k+=end-at;
   }
