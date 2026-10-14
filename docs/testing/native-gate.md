@@ -27,13 +27,14 @@ passed. Earlier compile/console failures remain recorded. This completes only it
 accepted research slice, with no full parent PTT or production integration claim.
 
 The [installed-root slice progress](../research/installed-payload-native-progress.md)
-records six corrected native entry builds and 976 serial/VGA build regressions.
+records six diagnostic native entry builds and 976 serial/VGA build regressions.
 The private empty-fd0 adjustment is accepted. Media export remained incomplete and
 the earlier build hard stop was followed by approved recovery/export, persisted key
 absence, native clean halt and full original ISO readback; serial stock installation
-and cold OS boot passed; installed initial preflight refused before dispatch. A
-fourteen-launch diagnostic/replacement amendment is accepted; installed-root qualification
-remains pending.
+and cold OS boot passed. Both approved diagnostic boots cleanly halted; the serial
+entry identified mounted block-device open refusal before dispatch. The raw
+root-partition replacement and sixteen-launch amendment are proposed for review;
+installed-root qualification remains pending.
 All 92 installed-root cases and disposal remain pending; no installed-root or parent
 installer acceptance follows.
 

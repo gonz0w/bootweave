@@ -1,15 +1,16 @@
 # Installed payload native progress and discovery decision
 
 2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
-Current: 976 build checks passed and six corrected installed variants built. The
+Current: 976 build checks passed and six diagnostic installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Eight launches completed, including clean stock installation and offline serial OS
-boot. The first dynamic installed entry refused its combined initial preflight,
-before member review or writer dispatch; its empty case was removed and the guest
-cleanly halted. All 92 installed payload cases and final disposal remain pending. Remaining qualification
-stays together after the maintainer merge of [PR #56](https://github.com/gonz0w/bootweave/pull/56).
+Ten launches completed, including clean stock installation and offline serial OS
+boot. The diagnostic serial entry identifies a mounted block-device open refusal;
+its empty case was removed and the guest cleanly halted. All 92 installed payload
+cases and final disposal remain pending. A raw root-partition replacement is
+proposed for review in [draft PR #57](https://github.com/gonz0w/bootweave/pull/57),
+after the maintainer merge of [PR #56](https://github.com/gonz0w/bootweave/pull/56).
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -336,13 +337,13 @@ five fail-closed requires in the same call order: open, capture, recheck, close,
 prereq. No operation, binding condition, privilege or case changes. Removing one
 redundant new-source comment funds its size; additional original C/header is 16378
 bytes, within 16 KiB. Host make verify passed all 81 groups, no failures/skips;
-content/links/ShellCheck/Gitleaks passed. The changed diagnostic source has not
-built or run natively; previously compiled artifacts are retained as historical.
+content/links/ShellCheck/Gitleaks passed. At that checkpoint the changed diagnostic
+source had not built or run natively; prior compiled artifacts remain historical.
 
 The [accepted amendment](installed-payload-flow.md#diagnostic-build-and-replacement-serial-payload-amendment--accepted)
 permits one build/artifact-refresh boot and one replacement serial payload boot,
 raising the aggregate ceiling from twelve to fourteen. Cam accepted both by replying "continue" to the concrete review question. Neither
-additional guest has started. The failed preflight stops dependent cases; all scope, diagnostic changes,
+additional guest had started at that checkpoint. The failed preflight stopped dependent cases; all scope, diagnostic changes,
 remaining qualification and disposal stay in one follow-up draft after the maintainer
 merge of PR #56.
 
@@ -353,3 +354,63 @@ errno is advisory. Additional source is now 16340 bytes after compacting new-sou
 indentation. Freeze the clean signed diagnostic sources, media and helpers before
 either approved added launch. Prior six compiled variants remain historical until
 the new native compilation and full artifact identity/readback observations pass.
+
+## Diagnostic refresh and mounted-block refusal, 2026-10-14
+
+Both boots in the accepted fourteen-launch amendment completed; ten total launches
+are consumed. Native source head ab71ee966019d4af6f8e09be7f2352b75d5457b4 was
+sealed in a 921600-byte diagnostic source disc, SHA-256
+837b41dc917210a2882e32bfbee2dd0df6f257d1a49d736571f69884ff9a211c.
+All 24 files passed full ISO9660/Joliet inventory/hash readback. The compiler guest
+cold-booted the same exact clean build image, all FFS checks were clean, and native
+source/public-fixture/prior-artifact hashes and persisted signing-key absence passed.
+Prior output was preserved separately. All six fixed dynamic/static automatic,
+manual, KEEP and READBACK variants compiled with base clang 19.1.7; native maps,
+sizes, ldd/readelf and twelve canonical artifact-frame hashes/modes passed. A legacy
+fixed-literal strcpy linker advisory remains recorded. No entry ran on the IDE guest.
+
+Combined native fixture allocation was 17016 KiB below 20 MiB; native media scratch
+672892 KiB below 3 GiB. Fresh encoded frames added 7115405 bytes, bringing the
+aggregate to 964990122 below 1 GiB. Exact serial restoration/receipt removal, key
+absence, no test/relink workers, unused vnds and matching kernel copies passed.
+Native unmount/sync/halt produced guest shutdown; emulator/client were reaped at
+566.961 seconds. No fixture handles/mounts remained, credential capture exclusion
+passed and full original target identity/mode/links matched. Clean build digest:
+ea2eb3b28d6967d42855747901fc9a84b6781dcdfebefe64ac5dcb77d18123ec.
+
+A new 5939200-byte runtime disc, SHA-256
+c9e92717e0bd52c20c4bc11f444789d6a22a9d0a76543bcd6f6dba313ac3c302,
+passed full sixteen-file readback in both namespaces. The tenth launch cold-booted
+the same serial target from its prior clean digest. Paused complete effective
+device/block/argv/file/listener observations proved only that target and read-only
+CD, no NIC/sharing/hotplug/floppy backing. All FFS checks were clean; native OS,
+base verifier, fifteen runtime hashes/0555 executable modes, namespace, full label,
+root/parent/canary identity and eventual relink-worker absence/kernel agreement passed.
+
+Independent read-only base dd with count zero on /dev/sd0a returned Device busy,
+exit one. The fresh dynamic automatic entry then reported supervisor RSS 872 KiB
+and `Native placement check failed: open; check 0 case 0.`, exit one. Capture,
+member review and writer dispatch were never reached; **zero installed cases passed**.
+After the refusal, read-only count-zero dd on /dev/rsd0a returned zero, with zero
+bytes read/written; base disklabel there agreed with the selected whole-disk label.
+The authenticated release-source spec_open distinction is recorded in the
+[proposed replacement](installed-payload-flow.md#raw-root-partition-binding-amendment--proposed-2026-10-14).
+Those observations explain the failure; they do not qualify that replacement.
+
+The exact empty nobody-owned case was independently checked and removed by rmdir;
+absence was observed. Parent/canary remain four KiB, and canary bytes/hash were
+unchanged. Exact serial settings were restored and the temporary receipt absent;
+no test/relink workers remained and both kernel copies matched. Fixed unmount/
+sync/halt produced guest shutdown; emulator/client were reaped at 743.826 seconds.
+Full original target identity/mode/links, no fixture handles/mounts and credential
+capture exclusion passed. Clean serial digest:
+b283bd4c9960e250f6c6c51cad53af46f6da5c2056531b07b138c17e6dd7a408.
+The VGA target remains untouched and unallocated. Captures were retained losslessly
+with digest/size receipts. No further guest starts before replacement review;
+all 92 installed cases, later readbacks and exact fixture disposal remain required.
+
+Local make verify after this diagnostic completion passed all 81 groups
+(22/13/3/10/33), no failures/skips; repository content/links, ShellCheck and Gitleaks
+passed. The replacement remains a reviewed proposal awaiting acceptance, with no
+implementation/native execution claimed. No Actions, runners or hosted status
+publisher was used.
