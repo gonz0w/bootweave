@@ -102,3 +102,9 @@ qualification and cleanup continue in the same accepted feature draft. A read-on
 bootstrap stopped before installation; its stopped evidence is recorded, with all three targets unchanged. The maintainer
 accepted one replacement provisioning attempt and eleven total launches; remaining
 native qualification and cleanup stay together after the implementation merge.
+
+[Installed-target native progress](docs/research/installed-payload-native-progress.md)
+records completed compiler provisioning, six native entry builds and 488 serial
+regressions. The unexpected empty fd0 namespace requires a scoped discovery
+decision before target installation; remaining qualification and disposal stay
+in the same draft PR #54.

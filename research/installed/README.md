@@ -1,8 +1,10 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in follow-up draft PR #53 after the scope-only merge of PR #52.
-Native qualification remains pending; no production runtime or interface is adopted.
+kept with scope, fixes, tests, native qualification and teardown in draft PR #54 after maintainer merges of PR #52/#53.
+[Native progress](../../docs/research/installed-payload-native-progress.md) records
+compiler provisioning, six entry builds and 488 serial regressions. The installed
+disk namespace decision, VGA/installed qualification and disposal remain pending; no production runtime or interface is adopted.
 
 root.c compares private canonical observations. root_native.c uses fixed read-only
 raw/block/root references and held filesystem/directory observations to bind an
