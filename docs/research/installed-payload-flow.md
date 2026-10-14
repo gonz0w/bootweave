@@ -485,20 +485,28 @@ under the plan's rule: "retries/changed budgets need review." Acceptance covers 
 requires complete media and recovery postconditions.
 
 
-## Diagnostic build and replacement serial payload amendment — proposed
+## Diagnostic build and replacement serial payload amendment — accepted
 
-2026-10-14. The first installed dynamic entry refused its combined initial
+2026-10-14. Cam replied "continue" to the concrete two-boot/fourteen-launch
+question, accepting this amendment. A separate private acceptance receipt binds
+reviewed head b45127866cc2dbca1e4826a321208b18ec78030b, the immutable original
+target receipt and fresh full target rechecks. PR #56 was maintainer-merged at
+1720584704b511e95cb76cfff357458d2c0f6657; all remaining diagnostics, qualification
+and disposal stay together on codex/installed-payload-diagnostics in one follow-up
+draft. Historical proposal/source/artifact/target receipts remain unchanged.
+
+The first installed dynamic entry refused its combined initial
 preflight before review or writer dispatch, with zero installed passes. Native
 OS/runtime/namespace/fixture/relink observations and clean halt are recorded in
-[native progress](installed-payload-native-progress.md#installed-preflight-refusal-and-proposed-diagnostic-continuation).
+[native progress](installed-payload-native-progress.md#installed-preflight-refusal-and-accepted-diagnostic-continuation).
 The source now separates the same five initial requirements to identify the failing
 call, without weakening any binding or confinement check. It passes host verification
 and source caps; native compilation and qualification remain pending.
 
-Concrete review request in draft PR #56: one additional build-diagnostic-refresh
+Accepted continuation: one additional build-diagnostic-refresh
 cold boot of the same exact build.raw, then one replacement serial-payload cold
 boot on the same exact serial-target.raw, preserving the four remaining original
-serial-readback/VGA install/payload/readback phases. Increase the aggregate ceiling
+serial-readback/VGA install/payload/readback phases. The aggregate ceiling increases
 from twelve to **fourteen**; eight launches are already consumed. All other
 launch clocks, operation, capture, source, storage, export, CPU/memory, target,
 privilege and confirmation rules remain unchanged. No new target, credential,
@@ -533,5 +541,119 @@ member dispatch. A diagnostic label is not proof and debug cannot bypass safety.
 
 Clean native halts, complete post-halt hashes, reaping/handle closure and final exact
 fixture disposal remain required. These are retries and an increased frozen launch
-budget under the existing rule: "retries/changed budgets need review." Do not start
-the additional compiler or replacement target guest before acceptance.
+budget under the existing rule: "retries/changed budgets need review." Acceptance
+covers these two fixed additional guests; dependent cases remain gated by complete
+native preflight/postcondition proof.
+
+
+Routine capture diagnostics further label the existing ordered requirement groups:
+device/label, release/namespace, directory identity, filesystem binding, canonical
+comparison/namespace stability and final label recheck. The same conditions and
+call order still fail closed. Only fixed stage numbers and numeric errno/flags/
+fsid are emitted on refusal; zero initialization prevents undefined diagnostic
+fields. Errno may be retained after a failed comparison and is advisory. No path,
+operation selector or untrusted string is introduced. Compact indentation in only
+the new installed sources funds these diagnostics; original C/header is 16340
+bytes, below 16 KiB. These diagnostic builds and the stopped serial execution are
+now observed in the [native progress](installed-payload-native-progress.md#diagnostic-refresh-and-mounted-block-refusal-2026-10-14).
+
+## Raw root-partition binding amendment — proposed, 2026-10-14
+
+Status: **Proposed; no replacement implementation or guest launch authorized by
+this amendment yet.** The two accepted diagnostic boots completed. Ten launches
+are consumed, including previous stops. Signed native source was
+ab71ee966019d4af6f8e09be7f2352b75d5457b4. The serial entry refused `open`, before
+capture, member review or writer dispatch; zero installed cases passed.
+
+Independent base `dd` with read-only input and count zero returned Device busy for
+fixed /dev/sd0a, but succeeded for /dev/rsd0a without reading any bytes. Base
+disklabel on that raw partition returned the same selected whole-disk identity,
+geometry and partition types. This is diagnostic evidence, not a replacement gate
+pass. Authenticated release member sys/kern/spec_vnops.c, 18202 bytes, SHA-256
+6368d8c80e8643ee356568b2e152e268207df4a63cfc6187d8024b55f0d315d0,
+was read from the already verified sys.tar.gz recorded above. Its spec_open VBLK
+branch checks vfs_mountedon unconditionally, before device open; the corresponding
+VCHR mounted-device restriction applies to writing. No upstream code executed.
+Opening the mounted block root read-only cannot satisfy the frozen mechanism.
+
+Proposed replacement is restricted to the same OpenBSD 7.9 amd64, sole-sd0,
+8 GiB, no-hotplug virtual research profile:
+
+1. Hold /, /dev/rsd0c and /dev/rsd0a with the existing read-only/no-follow flags;
+   both device opens retain nonblocking mode. Require character major 13, minors
+   two and zero respectively, root ownership and no group/other write permission.
+   The authenticated amd64 character-to-block mapping makes the root raw partition
+   correspond to block major 4/minor zero. Rename the private block descriptor
+   field to root-partition descriptor; close all three held references on refusal.
+2. Independently lstat fixed /dev/sd0a with no symlink traversal, before and after
+   every capture. Require a block node, major 4/minor zero, root ownership, no
+   group/other write permission, root-filesystem st_dev and a nonzero inode.
+   Capture and explicitly compare its inode, complete mode, group, link count and
+   flags across those observations and each authorization boundary. These are
+   named-node metadata observations; no held block descriptor is claimed.
+3. Keep held root/parent/case ownership, modes, identities and named/held matching.
+   Root st_dev and FFS fsid[0] must equal block device 1024. Preserve every mount
+   owner/flag/time/fsid/type/name/spec comparison, including root mount / and
+   /dev/sd0a, and the independently observed DUID.a alternative for mount spec.
+   Both held raw descriptors must independently return the same complete validated
+   disklabel geometry, partition types, flags/checksum and DUID; partition a remains
+   nonempty BSD FFS. Repeat both labels and the entire raw namespace at capture end.
+4. Bind the added named-node fields and root-partition descriptor in explicit
+   canonical equality and the fixed numeric installed-root prelude. Preserve the
+   1024-byte prelude and 16 KiB total review output. Reobserve the complete binding
+   at all existing review/dispatch/post-observation boundaries. Missing, changed or
+   unsupported observations refuse before writer dispatch; diagnostics waive none.
+
+The held root filesystem and raw partition provide the continuing references;
+named block metadata is an additional correlation check. This does not establish
+an atomically held block vnode, arbitrary physical-media stability or support for
+hotplug/concurrent privileged device replacement. Host attachment/no-hotplug proof
+remains mandatory. No unmount/remount, privilege increase, device write, bootstrap,
+new dependency, production interface or arbitrary path selection is proposed.
+
+Test Design retains **17 automatic and five actual console cases per dynamic/static
+variant, plus static KEEP and later READBACK per console: all 92 installed cases**.
+The nine native binding substitutions retain their meaning; the former block-FD
+substitution now changes the held raw root-partition descriptor. Extend pure
+IPF-T01 field mutations to every added named-node field, including zero inode and
+unsafe node attributes. IPF-T03 independently observes both raw node types/numbers,
+named block metadata, full matching labels, mount/held filesystem association and
+the before/after canonical binding on each console. Neither the zero-count probe
+nor synthetic host substitutions qualify native positive binding. Initial capture
+must pass before any automatic case; subsequent failures stop dependent work.
+The 976 historical build regressions remain recorded. Freeze source/media/helper
+identities, compile all six revised variants and verify full native artifact/maps/
+ABI readback before installed execution. The 16 KiB original C/header and existing
+component/generated-header ceilings still apply; inability to fit requires review.
+
+Requested execution amendment: one **build-raw-root-refresh** cold boot of the same
+build.raw and one **serial-raw-root-retry** cold boot of the same serial target;
+increase the aggregate launch ceiling **fourteen to sixteen**. Ten consumed plus
+these two added boots plus the four original remaining serial-readback/VGA-install/
+VGA-payload/VGA-readback phases fit sixteen. Reuse existing credentials, inert
+payload/public signatures and fully verified native handoff ISO; no stock bootstrap
+reinstallation, full-ISO replay, signing pair or credential regeneration. Use new
+sealed read-only source/runtime discs with full inventory/hash readback before
+cold attachment. Every other original clock, operation, source, capture, storage,
+export, CPU/memory, confinement and exact disk/member confirmation limit remains.
+Current encoded export is 964990122 bytes; 108751702 remain within 1 GiB.
+
+The same three regular 8 GiB, 0600/single-link targets retain original exact host
+identities bound by immutable receipt SHA-256
+56f416bbdf7f25ac96bb610d1c2b81f1f7a4db4aee9abdb68bdcacf90e2dac5f.
+Latest complete clean post-halt build.raw SHA-256:
+ea2eb3b28d6967d42855747901fc9a84b6781dcdfebefe64ac5dcb77d18123ec.
+Latest complete clean post-halt serial-target.raw SHA-256:
+b283bd4c9960e250f6c6c51cad53af46f6da5c2056531b07b138c17e6dd7a408.
+VGA remains the original untouched full-zero digest and zero allocation. Before
+acceptance/execution, independently rehash all three and compare original identity,
+mode/links; preserve prior receipts and bind acceptance separately to this proposal.
+That full three-target recheck passed, with no fixture handles or mounts. Immutable
+private proposal receipt SHA-256:
+2b337ea148062e1e0da34d423fc48f385bae9ff23bd98265e262d81b9db3d2c6.
+Owned allocation was 11902095360 bytes below 20 GiB, observation capture 510335
+bytes below 10 MiB; export totals above were independently recounted.
+Clean native halt/reaping/full hash/handle closure and eventual exact fixture
+disposal remain required. All fixes, qualification and disposal stay in
+[draft PR #57](https://github.com/gonz0w/bootweave/pull/57). This returns to the
+existing explicit replacement-mechanism and changed-budget review boundaries.

@@ -1,14 +1,17 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six corrected entry builds and 976 serial/VGA regressions.
 The installed disk namespace adjustment is accepted. Recovery and bounded range
 export completed with native clean halt and full ISO readback. Stock installation
 and cold OS boot on the serial target passed; initial installed preflight refused
 before dispatch. All 92 installed payload cases and disposal remain
-pending in draft PR #56; no production runtime or interface is adopted.
+pending together after the PR #56 merge; no production runtime or interface is adopted.
+
+Ordered fixed diagnostic labels identify capture/preflight refusals without
+weakening the checks or selecting operations; numeric errno is advisory.
 
 root.c compares private canonical observations and normalizes only one exact
 empty fd0: record under mandatory host proof of no floppy backing media in the
