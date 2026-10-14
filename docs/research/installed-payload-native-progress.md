@@ -5,9 +5,10 @@ Current: 976 build checks passed and six corrected installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Seven launches completed, including the original serial-target installation;
-stock extraction, kernel relinking, independent OS checks and native halt passed. All 92
-installed payload cases and final disposal remain pending. Remaining qualification
+Eight launches completed, including clean stock installation and offline serial OS
+boot. The first dynamic installed entry refused its combined initial preflight,
+before member review or writer dispatch; its empty case was removed and the guest
+cleanly halted. All 92 installed payload cases and final disposal remain pending. Remaining qualification
 stays in draft [PR #56](https://github.com/gonz0w/bootweave/pull/56).
 
 The following serial checkpoint is historical, before VGA continuation.
@@ -292,3 +293,54 @@ without a reboot key. The phase ended at 1125.376 seconds; all guest/client proc
 were reaped, fixture handles/mounts absent, capture credentials excluded, and exact
 post-halt disk identity/mode/links/full digest recorded. No installed-root entry has
 run; cold OS boot, all 92 installed payload cases and final disposal remain required.
+
+
+## Installed preflight refusal and proposed diagnostic continuation
+
+The eighth launch cold-booted the same exact serial target from its recorded clean
+post-installation digest. All three FFS filesystems reported clean. Offline first-
+boot firmware/syspatch fetch failures are stock observations, not native test
+results. Native process observation was available in GENERIC; its initial make/ld
+relink workers later disappeared and both kernel copies matched. Native runtime
+manifest checks passed for all fifteen artifacts, with executable 0555 optical
+permissions. Complete effective attachment observation again excluded floppy
+backing media, networking and additional writable targets. Actual namespace order
+was cd0, sd0, fd0; the host proof was corrected to validate exact names/identities
+without imposing order. The generic discovery validator remains unchanged.
+
+Trusted preparation created only the separately authorized root-owned 0700
+/bootweave-research parent and root-owned 0600 fourteen-byte canary on device 1024.
+The actual serial dynamic entry reported supervisor RSS 848 KiB, then refused
+initial gate at check zero/case zero, exit one. No installed case passed; all 92
+remain required. This combined preflight includes opening/capturing/rechecking/
+closing the root context and the existing confinement prerequisites, so its text
+cannot identify which call failed. Independent observations show the expected
+root/parent/empty nobody case ownership/modes, fixed device numbers, installed
+DUID, FFS root mount, empty fd0 and frozen verifier/runtime hashes; these cannot
+replace a passing native preflight. No binding check is waived or relaxed.
+
+The retained empty case was independently observed, checked by exact device/inode/
+ownership/mode/size, and removed with rmdir. Canary bytes/hash remained unchanged.
+Exact serial settings were restored and its temporary receipt absent; native
+process observation showed no owned test or relink workers and kernel copies
+matched. Fixed runtime unmount/sync/halt produced native guest shutdown, followed
+by normal emulator exit at 857.581 seconds. Emulator/client reaping, no fixture
+handles/mounts, credential exclusion and full original target identity/mode/links
+passed. Serial target full post-halt SHA-256:
+5d86c4bfc030aae075cdd11df5ba6df24fd33cc43f7a95267e9a9c3ab73f0c5c.
+The four-KiB parent/canary remain held for the remaining approved feature. The VGA
+target remains the original untouched zero image. Final disposal is incomplete.
+
+A routine diagnostic change splits the existing combined initial require into
+five fail-closed requires in the same call order: open, capture, recheck, close,
+prereq. No operation, binding condition, privilege or case changes. Removing one
+redundant new-source comment funds its size; additional original C/header is 16378
+bytes, within 16 KiB. Host make verify passed all 81 groups, no failures/skips;
+content/links/ShellCheck/Gitleaks passed. The changed diagnostic source has not
+built or run natively; previously compiled artifacts are retained as historical.
+
+The [concrete proposed amendment](installed-payload-flow.md#diagnostic-build-and-replacement-serial-payload-amendment--proposed)
+requests one build/artifact-refresh boot and one replacement serial payload boot,
+raising the aggregate ceiling from twelve to fourteen. Neither is accepted or
+started. The failed preflight stops dependent cases; all scope, diagnostic changes,
+remaining qualification and disposal stay in draft PR #56.

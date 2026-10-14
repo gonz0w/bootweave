@@ -106,6 +106,7 @@ native qualification and cleanup stay together after the implementation merge.
 [Installed-target native progress](docs/research/installed-payload-native-progress.md)
 records six corrected native entry builds and all 976 serial/VGA build regressions.
 The accepted recovery/export boot completed with native clean halt and full original
-ISO readback. The first serial target passed stock installation and native halt; all 92 installed
-payload cases and disposal remain together in draft PR #56 after the maintainer
+ISO readback. The serial target passed stock installation and cold OS boot, but its first installed
+entry refused initial preflight before member dispatch. All 92 installed payload
+cases and disposal remain together in draft PR #56 after the maintainer
 merge of PR #55.

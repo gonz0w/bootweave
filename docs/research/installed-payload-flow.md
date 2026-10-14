@@ -483,3 +483,55 @@ the failed shutdown. Exact-target authority has not ended; no general rollback
 or physical erasure is claimed. This changes a frozen launch/export mechanism
 under the plan's rule: "retries/changed budgets need review." Acceptance covers this fixed additional guest; dependent target installation still
 requires complete media and recovery postconditions.
+
+
+## Diagnostic build and replacement serial payload amendment — proposed
+
+2026-10-14. The first installed dynamic entry refused its combined initial
+preflight before review or writer dispatch, with zero installed passes. Native
+OS/runtime/namespace/fixture/relink observations and clean halt are recorded in
+[native progress](installed-payload-native-progress.md#installed-preflight-refusal-and-proposed-diagnostic-continuation).
+The source now separates the same five initial requirements to identify the failing
+call, without weakening any binding or confinement check. It passes host verification
+and source caps; native compilation and qualification remain pending.
+
+Concrete review request in draft PR #56: one additional build-diagnostic-refresh
+cold boot of the same exact build.raw, then one replacement serial-payload cold
+boot on the same exact serial-target.raw, preserving the four remaining original
+serial-readback/VGA install/payload/readback phases. Increase the aggregate ceiling
+from twelve to **fourteen**; eight launches are already consumed. All other
+launch clocks, operation, capture, source, storage, export, CPU/memory, target,
+privilege and confirmation rules remain unchanged. No new target, credential,
+signing pair, dependency, network, service or production adoption is authorized.
+
+Use the same pinned offline IDE compiler profile, existing build credential and
+sealed read-only corrected source disc. Reobserve native key absence, exact source
+and public fixture closure, compile only the six fixed installed variants, and
+freeze full native binary/map/ABI identities before bounded public export. Preserve
+the prior failed source/artifact records. The verified native handoff ISO is reused;
+no full-ISO replay or rebuild. Current encoded export is 957874717 bytes; all new
+frames still count within the original 1 GiB, with 115867107 bytes remaining. Every
+new sealed source/runtime image requires full inventory/hash readback before its
+cold attachment. No running media swap or deadline reset.
+
+At review, unchanged exact file identities/modes/single links are held. Complete
+latest clean build.raw SHA-256:
+409f405f8458211d6d3fb2d85dee70fcda117fca828d3cdb2553e7c74634bdf7.
+Complete latest clean serial-target.raw SHA-256:
+5d86c4bfc030aae075cdd11df5ba6df24fd33cc43f7a95267e9a9c3ab73f0c5c.
+VGA target retains the original full zero-image digest/zero allocation. Bind any
+acceptance separately to the unchanged original target-receipt digest and fresh
+complete target rechecks; preserve historical receipts.
+
+The replacement serial boot must repeat independent OS/runtime/root/namespace and
+completed-relink proofs before its fresh preflight. Its existing fixed owned parent/
+canary are separately rechecked; each case is fresh and empty. Seventeen automatic and five manual cases per variant, plus one retained positive
+and one later readback per console, remain required, without substituting
+the failed attempt for a pass. If diagnostics show the frozen observation mechanism
+cannot establish its binding, stop and review a concrete replacement before any
+member dispatch. A diagnostic label is not proof and debug cannot bypass safety.
+
+Clean native halts, complete post-halt hashes, reaping/handle closure and final exact
+fixture disposal remain required. These are retries and an increased frozen launch
+budget under the existing rule: "retries/changed budgets need review." Do not start
+the additional compiler or replacement target guest before acceptance.

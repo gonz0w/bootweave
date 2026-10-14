@@ -6,7 +6,8 @@ kept with scope, fixes, tests, native qualification and teardown in one follow-u
 compiler provisioning, six corrected entry builds and 976 serial/VGA regressions.
 The installed disk namespace adjustment is accepted. Recovery and bounded range
 export completed with native clean halt and full ISO readback. Stock installation
-and native halt on the serial target passed; all 92 installed payload cases and disposal remain
+and cold OS boot on the serial target passed; initial installed preflight refused
+before dispatch. All 92 installed payload cases and disposal remain
 pending in draft PR #56; no production runtime or interface is adopted.
 
 root.c compares private canonical observations and normalizes only one exact
