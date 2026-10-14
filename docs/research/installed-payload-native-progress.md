@@ -142,3 +142,21 @@ test diagnostics and concise component comments fund the adapter; component
 behavior outside the installed build is unchanged. Signed source/decision history and author DCO remain required; no Actions,
 runners or hosted status publisher is used. Host evidence cannot replace the
 remaining native cases.
+
+## Corrected-build continuation, 2026-10-14
+
+The accepted fd0 adapter passed all 81 local groups and complete corrected source
+ISO readback (279 files in both ISO9660/Joliet namespaces). In the planned VGA
+launch, native compilation then refused a test-harness signature mismatch: the
+compact load definition had one argument while its inherited private declaration
+still required two. No installed-root entry ran. The original two-argument
+signature and bounded keys definition were restored; every installed mode passed
+host syntax checks against authenticated native headers. A clean local make verify
+again passed all 81 groups. The refusal remains a failed build observation.
+
+Corrected signed sources are frozen and transferred as bounded public base64 data
+frames to fixed owned build-source paths, with complete native SHA256 checks before
+recompilation, as with the existing generated public header. No media swap, clock
+reset, extra launch or target change is allowed. The corrected entry rebuild and
+remaining native outcomes still need observation; no host check supplies native
+qualification. All remaining work stays in draft [PR #55](https://github.com/gonz0w/bootweave/pull/55).
