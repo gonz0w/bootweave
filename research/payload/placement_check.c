@@ -21,8 +21,12 @@ int main(int argc, char **argv) {
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#ifndef ROOT
 #define ROOT "/root/payload-placement/"
+#endif
+#ifndef WORK
 #define WORK ROOT "work/"
+#endif
 #define AUTH "/root/payload-auth/"
 #ifndef AUTH_INSPECTOR
 #define AUTH_INSPECTOR AUTH "inspect"
@@ -88,6 +92,10 @@ static size_t expected_file(const char *path) {
  }
  return count;
 }
+#ifdef AUTH_INSTALLED
+static void keys(void);
+static void load(const char *,int);
+#else
 static void keys(void) {
  static const char *const names4[]={AUTH "keys/selected.pub",AUTH "keys/selected.sec",AUTH "keys/other.pub",AUTH "keys/other.sec"};
  unsigned char actual[128],previous[128]; size_t i; struct stat st;
@@ -111,6 +119,7 @@ static void load(const char *path,int other) {
  signature_length=read_file(WORK "supplied.sig",signature,AUTH_RECORD);
  require(!unlink(WORK "supplied.sig"),"signature disposed");
 }
+#endif
 static void remove_tree(int fd,int depth) {
  int copy=openat(fd,".",O_RDONLY|O_DIRECTORY|O_NOFOLLOW); DIR *d; struct dirent *e; size_t count=0;
  require(copy>=0 && depth<=17,"owned cleanup bound"); d=fdopendir(copy); require(d!=NULL,"cleanup inventory");

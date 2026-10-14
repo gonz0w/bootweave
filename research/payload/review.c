@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Original bounded console and pure binding checks; no dispatch capability. */
+/* Bounded console; no dispatch. */
 #include "review.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -14,6 +14,9 @@
 #include <termios.h>
 #include <time.h>
 #include <unistd.h>
+#ifndef RV_OUTPUT
+#define RV_OUTPUT 16384
+#endif
 static volatile sig_atomic_t stopped;
 static void stop_handler(int n) { stopped=n; }
 long long rv_now(void) {
@@ -78,7 +81,7 @@ static int wait_fd(struct io *s,int fd,short events,long long deadline) {
 }
 static int emit(struct io *s,const char *b,size_t n) {
  long long end=rv_now();
- if(end<0||n>16384-s->output) return -1;
+ if(end<0||n>RV_OUTPUT-s->output) return -1;
  end+=5000; if(end>s->response) end=s->response;
  while(n) {
   ssize_t w;

@@ -20,6 +20,7 @@ struct pl_context {
  int rootfd, parentfd; struct stat identity; const struct pl_expected *expected;
  size_t count; enum pl_test test; struct pl_result result;
 };
+int pl_limits(int);
 int pl_prerequisites(int, const struct stat *, long *);
 int pl_phase(struct pl_context *, const unsigned char *, size_t, const char *, long long, struct auth_result *);
 #ifdef AUTH_REVIEW

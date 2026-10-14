@@ -14,7 +14,13 @@ struct pl_context;
 #ifdef AUTH_REVIEW
 struct rv_console;
 #endif
+#ifdef AUTH_INSTALLED
+struct ip_context;
+#endif
 struct auth_context {
+#ifdef AUTH_INSTALLED
+ struct ip_context *installed;
+#endif
  size_t length, key_length;
  unsigned char digest[32], verifier_digest[32], inspector_digest[32];
  unsigned char key[AUTH_RECORD];

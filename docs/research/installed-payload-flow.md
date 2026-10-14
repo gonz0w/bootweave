@@ -1,8 +1,17 @@
 # Confirmed installation to installed payload: complete research slice
 
-Status: Proposed, 2026-10-13. Owner and acceptance authority: Cam.
-Implementation and native effects await explicit acceptance below.
+Status: Accepted, 2026-10-13. Owner and acceptance authority: Cam.
+Acceptance: Cam replied "approved" after draft PR #52 and its explicit complete-slice,
+three exact targets, two signing pairs and synthetic credential exception question.
+Reviewed scope head: e999eec0e453f1e3823fb3b16534bb6382b497ce. The immutable
+preparation receipt remains historical; a separate private acceptance record binds
+that approval to its digest and rechecked unchanged full target identities/bytes.
 Base: bc989d022f97d25fda9702c97b531aa51da12cf2, maintainer-merged PR #51.
+PR #52 was maintainer-merged at the scope-only head before its implementation
+commits were included. The implementation and stopped evidence now remain together
+in [follow-up draft PR #53](https://github.com/gonz0w/bootweave/pull/53), based on
+676814196afa8bdd7d61d7f42faad8d246cec199. Preserve historical source/media receipts;
+its cherry-picked source tree was independently equal to the already verified tree.
 Related [issue #5](https://github.com/gonz0w/bootweave/issues/5),
 [handoff evidence](installer-handoff-native-evidence.md) and
 [payload authorization evidence](payload-authorization-native-evidence.md).
@@ -17,7 +26,7 @@ another clean boot. This connects the two evidenced boundaries without selecting
 production runtime, profile grammar, adapter API or persistent receipt format.
 
 Keep scope, implementation, routine corrections, host tests, native qualification,
-cleanup and evidence on codex/installed-payload-flow in one draft PR. Acceptance
+cleanup and evidence on codex/installed-payload-qualification in one follow-up draft PR. Acceptance
 covers that complete bounded feature, rather than requiring a planning merge or
 another PR for each phase. Mark it ready only after both console flows and disposal.
 Larger scope changes return to review in that draft.
@@ -76,6 +85,47 @@ reboot supplies no persisted authorization. Changing root filesystem/device/moun
 label binding, held case, snapshot, key/tool identity or plan invalidates the attempt.
 Unchanged member counts with wrong content must remain incomplete. Failed postconditions
 stop dependent work; no automatic retry, resume, repair or general rollback.
+
+## Frozen installed-root mechanism, 2026-10-13
+
+Accepted-policy explicit-key signify verified sys.tar.gz against the previously
+verified release manifest. Full archive SHA-256:
+c9ef294021ef7aafd5f18ffe8ebfed63394e5a86d65d7436d6db78551f9d57f1.
+Only the selected bounded regular members below were read; no upstream code ran.
+
+| Release source | SHA-256 |
+|---|---|
+| sys/sys/mount.h | 1b7b54af74f683ebde14ae63db88dfd2718c81b853baab76bd0f0aa484a63714 |
+| sys/kern/vfs_syscalls.c | 26e1b069c1e790f516279c59f523405f53a3c357946546f9fe44b126a28f9b62 |
+| sys/kern/vfs_subr.c | 5dc75eebf7484897cd0577d1b9eb80247af677714e766acb92322c89cb0cbfa9 |
+| sys/ufs/ffs/ffs_vfsops.c | 100fee4f552dbc21428a1da211ad2e237bc27b6d4dacfab7032c1b90ed2d52eb |
+| sys/sys/disklabel.h | 29212a079676a6e34fc8e2a79e4eb8f9a2bc4ae264b04ef3e06fba11fe787ecb |
+| sys/arch/amd64/amd64/conf.c | cf0ca3b13b8dc36f8c183b5a9e75b278c460d175877f60b6deab9d3722c8dc68 |
+| sys/kern/subr_disk.c | 3696f57abafb8b7138893f91926d9babb205e6b5293ce16a35788e9baa3f767e |
+| sys/sys/types.h | 4c8207f20baf3e965be7dde3ba7e4334fb649667617790fb45181c7de6d901c7 |
+| sys/sys/param.h | 80017c9395be25d7dcf8a3103ddb8c032c47cde46ea5575971297cb3452812f4 |
+
+fstatfs returns the filesystem attached to the held vnode, with full visible mount
+flags, owner, last mount-update time and fsid. FFS fsid[0] is the actual block-device
+number; amd64 maps raw sd major 13 to block major 4. The fixed sd0 root partition
+is block minor zero, raw whole-disk minor two. Root st_dev, held directory st_dev,
+block-device st_rdev and FFS fsid[0] must agree, with local/rootfs flags, FFS type,
+mount point / and mounted-from /dev/sd0a. Mounted-from-spec must be that same fixed
+name or the independently observed DUID followed by .a. Native ioctl on the held
+raw and block references must agree on the complete validated label geometry,
+partition types and DUID; root partition a must be nonempty BSD FFS.
+
+Compare fields explicitly, excluding changing free-space/I/O counters and structure
+padding. Keep all visible flags and mount-update time in the binding; readonly,
+async, permission-bypass or exported roots refuse. Reobserve device references,
+label/discovery, filesystem and held/named parent/case identity before dispatch
+and after writer observation. No mount operation is added. These source facts
+are not native qualification; native measurement must establish every claimed gate.
+
+Reuse authentication's transient public-key/signature verification records and a
+fixed synthetic source file only inside the owned research parent; remove/observe
+them after each attempt. They are fixture bookkeeping, separately identified from
+archive members, contain no private key, and cannot select paths or executables.
 
 ## Exact unstarted fixture and requested authority
 
@@ -153,8 +203,15 @@ execution. Base tools only; new dependencies or production adoption need review.
 | IPF-T07 later readback | Preserve a final positive inventory, clean halt, bind full target digest, boot the same exact disk offline again and independently check bytes/modes/owners/root association without running payload code or rewriting members. |
 | IPF-T08 teardown | All owned processes/relinkers reaped, key lifetime ended, clean halts/full digests, no handles/mounts/listeners/attachments; dispose only the exact new fixture/helpers after sanitized evidence. |
 
-Freeze the complete new per-build case list/counts with implementation before native
-execution; no missing or stopped case is silently counted as passing. Dynamic and
+Frozen implementation case list: seventeen automatic cases per dynamic/static
+build (positive, cancel, nine changed-observation bindings, postconfirmation snapshot
+change, short/close/fsync failure, wrong signer and truncated signature); five actual
+console cases per build (positive, cancel, snapshot change, changed observed flags,
+short writer); one static retained-positive case and one static later-readback case
+per installed console. This requires 92 installed checks plus 976 build-guest
+regressions, 1068 total, with no substituted or silently omitted case. Pure field
+comparisons/public packing and host refusal remain three host groups, not native
+filesystem qualification. Dynamic and
 static installed-root supervisors both need native cases and link-map/ldd/readelf
 identities. Positive RSS/CPU/time/allocation measurements remain required.
 
@@ -207,3 +264,77 @@ fixture effects and limits. This is a larger target/authority boundary under
 [AGENTS.md rules 3 and 7](../../AGENTS.md). Ordinary bounded fixes then proceed within
 the same draft without repeated approval. Broader privileges, another target,
 production adoption, new dependency or increased budget require review there.
+
+## Stopped pre-install execution and proposed launch-count amendment
+
+2026-10-13. **This amendment is proposed, not accepted.** The original nine-launch
+ceiling and all other accepted limits remain in force. Implementation source
+1f256a815107cde4fa66ecebf5eee40b3acd2727 passed clean local make verify: 81 groups
+(22/13/3/10/33), no failures/skips; two trusted signatures and author DCO passed.
+All four installed entry variants passed host syntax checks with authenticated
+native headers; no native implementation build or installed-root case has run.
+Additional original C including reused-source changes: 16,376 bytes within 16 KiB.
+
+The sealed nonbootable source ISO is 687,392,768 bytes, SHA-256
+89227f5240375a4dcb665d6bb1f659076657d715e84f19b26a6621a9e6f3fcf3.
+Complete ISO9660 and Joliet readback independently matched all 276 source, fixture
+and stock-input files. Duplicate staging set paths were removed before sealing;
+input filenames/bytes and native build source manifests were frozen.
+
+Two launches have been consumed and count against the nine-launch ceiling:
+
+- The first stopped while paused, before any guest CPU continuation. A host capture
+  classifier counted the public sys.tar.gz source archive as observation capture.
+  The target retained its full initial digest and zero allocation. The emulator was
+  reaped; only documented observations now count as capture, while source archives
+  still count toward allocated storage. No limit was increased.
+- The next reached the stock RAMdisk and verified release inputs, but host input and
+  observation setup consumed the provisioning window. Legacy timed key events did
+  not deliver the observation training reliably; explicit down/up events independently
+  produced the expected harmless shell output before any credential or write answer.
+  Stock SMALL ksh had no printf; authenticated print -r produced/read back all 95
+  printable glyphs. The missing cd1 node was first given the wrong character type,
+  then the wrong unit stride. Both mounts refused. Authenticated 7.9 disklabel.h
+  defines MAXPARTITIONSUNIT=64: the reviewed cd1 block partition c is major 6/minor
+  66, not 18. Only that newly owned RAMdisk node was corrected; attachments stayed
+  unchanged. This does not affect the installed gate's fixed unit-zero sd0 nodes.
+
+A conservative private observer text guard also stopped at its 1 MiB bound.
+The history was retained losslessly in a compressed checkpoint; cursor deduplication
+was corrected, and actual screen readback independently established verification.
+The approved aggregate capture bound was not exceeded. Submitted input was never
+counted as an observed outcome. These are host supervision/preparation failures,
+not passing native implementation tests.
+
+Native explicit-key base signify observed Signature Verified for the release
+manifest, and native SHA-256 for all six stock inputs independently matched it.
+No installer was invoked, password submitted, native signing pair generated or
+payload member created. Remaining time was insufficient for a complete installation
+and cleanup using the previously measured installation durations, so dependent
+writes were not started. The RAMdisk visibly completed sync and halted; its requested
+poweroff event was unavailable at the press-any-key reboot prompt. QMP exit followed
+that independently observed native halt, with no reboot or forced running-OS stop.
+Normal emulator exit occurred after 2220.832 seconds, within the scheduling/hard bounds.
+
+All three exact targets retained their full initial zero-image digest, identity,
+0600 mode, single link and zero allocation. Guests, clients and observers were
+reaped; fixture handle, mount and Unix-listener observations were empty. Capture
+credential exclusion passed. The same three unused synthetic credentials and exact
+unwritten targets remain privately held for review; no fixture/authority disposal
+or native completion is claimed. All 1068 required implementation cases remain not run.
+
+Requested amendment: allow **one replacement stock provisioning attempt** on the
+same exact untouched build.raw and increase the aggregate maximum from nine to
+**eleven launches**, accounting for both stopped attempts and preserving the
+original nine-phase sequence, including separate serial/VGA build qualification.
+Retain every original per-launch, operation, capture, storage, source, memory,
+privilege and artifact bound. No new target, credential, signing pair, dependency,
+network, service or production adoption is requested. Recheck the immutable receipt
+and all full target digests before recording any acceptance or continuing.
+
+The fixed observer, keyboard and read-only source-node corrections will be reviewed
+with the existing draft before that attempt; do not repeat known failing preparation
+or renew clocks within a running launch. This is a concrete retry/launch-count
+review under this plan's existing stop rule, not permission to retry a partial
+installation. No destructive installation has occurred. All implementation, fixes,
+qualification, stopped evidence and eventual disposal continue in PR #53.

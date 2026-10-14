@@ -2,6 +2,9 @@
 #define main placement_component_main
 #include "placement_check.c"
 #undef main
+#ifdef AUTH_INSTALLED
+#define main ipf_component_main
+#endif
 #include "review.h"
 #ifndef __OpenBSD__
 int main(int argc,char **argv) {(void)argv;fputs("Native review checks require OpenBSD.\n",stderr);return argc==1?77:2;}

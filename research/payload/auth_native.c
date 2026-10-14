@@ -10,6 +10,12 @@
 #endif
 #include "review.h"
 #endif
+#ifdef AUTH_INSTALLED
+#include "root.h"
+#ifndef AUTH_REVIEW
+#error AUTH_INSTALLED requires AUTH_REVIEW
+#endif
+#endif
 #include <stdio.h>
 #ifndef __OpenBSD__
 struct auth_result auth_native(const struct auth_context *ctx,
@@ -32,7 +38,10 @@ struct auth_result auth_native(const struct auth_context *ctx,
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#define HOME "/root/payload-auth/"
+#ifndef AUTH_HOME
+#define AUTH_HOME "/root/payload-auth/"
+#endif
+#define HOME AUTH_HOME
 #ifndef AUTH_INSPECTOR
 #define AUTH_INSPECTOR HOME "inspect"
 #endif
@@ -303,6 +312,9 @@ struct auth_result auth_native(const struct auth_context *ctx,
  unsigned char *snapshot = NULL, digest[32]; size_t length = 0;
  char dir[] = HOME "private-XXXXXXXX", key[128] = "", signature[128] = "";
  struct stat di, ki, si; struct sigaction sa, old[4]; struct rusage usage;
+#ifdef AUTH_INSTALLED
+ struct ip_binding installed;struct ip_context *gate=ctx?ctx->installed:NULL;int bound_installed=0;
+#endif
  const int signals[] = {SIGINT, SIGTERM, SIGHUP, SIGPIPE};
  int i, handlers = 0, have_dir = 0, have_key = 0, have_sig = 0;
  long long start = auth_now(), deadline = start + 45000;
@@ -356,11 +368,22 @@ struct auth_result auth_native(const struct auth_context *ctx,
  if (post(dir, &di, key, &ki, ctx->key, ctx->key_length, signature, &si, sig, sig_length)) r.failure = AUTH_CLEANUP;
 #ifdef AUTH_PLACEMENT
 #ifdef AUTH_REVIEW
+#ifdef AUTH_INSTALLED
+ if(!r.failure) {if(ip_begin(gate,ctx->placement,ctx->review,&installed)) r.failure=AUTH_CONTEXT;else bound_installed=1;}
+#endif
  if (!r.failure && (!ctx->review || rv_phase(ctx->review, ctx, snapshot, length, deadline))) r.failure = AUTH_CONTEXT;
+#ifdef AUTH_INSTALLED
+ if(!r.failure&&(ctx->installed!=gate||ip_check(gate,ctx->placement,&installed))) r.failure=AUTH_CONTEXT;
+#endif
 #endif
  if (!r.failure && pl_phase(ctx->placement, snapshot, length, r.summary, deadline, &r)) r.failure = AUTH_PLACEMENT_BAD;
 #endif
 cleanup:
+#ifdef AUTH_INSTALLED
+ if(bound_installed&&(ctx->installed!=gate||ip_check(gate,ctx->placement,&installed))) {
+  r.failure=AUTH_CONTEXT;ctx->placement->result.complete=0;ctx->placement->result.uncertain=1;
+ }
+#endif
  if (have_sig && unlink(signature) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_key && unlink(key) && errno != ENOENT) r.failure = AUTH_CLEANUP;
  if (have_dir && rmdir(dir)) r.failure = AUTH_CLEANUP;
