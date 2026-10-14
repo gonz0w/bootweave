@@ -259,3 +259,77 @@ fixture effects and limits. This is a larger target/authority boundary under
 [AGENTS.md rules 3 and 7](../../AGENTS.md). Ordinary bounded fixes then proceed within
 the same draft without repeated approval. Broader privileges, another target,
 production adoption, new dependency or increased budget require review there.
+
+## Stopped pre-install execution and proposed launch-count amendment
+
+2026-10-13. **This amendment is proposed, not accepted.** The original nine-launch
+ceiling and all other accepted limits remain in force. Implementation source
+1f256a815107cde4fa66ecebf5eee40b3acd2727 passed clean local make verify: 81 groups
+(22/13/3/10/33), no failures/skips; two trusted signatures and author DCO passed.
+All four installed entry variants passed host syntax checks with authenticated
+native headers; no native implementation build or installed-root case has run.
+Additional original C including reused-source changes: 16,376 bytes within 16 KiB.
+
+The sealed nonbootable source ISO is 687,392,768 bytes, SHA-256
+89227f5240375a4dcb665d6bb1f659076657d715e84f19b26a6621a9e6f3fcf3.
+Complete ISO9660 and Joliet readback independently matched all 276 source, fixture
+and stock-input files. Duplicate staging set paths were removed before sealing;
+input filenames/bytes and native build source manifests were frozen.
+
+Two launches have been consumed and count against the nine-launch ceiling:
+
+- The first stopped while paused, before any guest CPU continuation. A host capture
+  classifier counted the public sys.tar.gz source archive as observation capture.
+  The target retained its full initial digest and zero allocation. The emulator was
+  reaped; only documented observations now count as capture, while source archives
+  still count toward allocated storage. No limit was increased.
+- The next reached the stock RAMdisk and verified release inputs, but host input and
+  observation setup consumed the provisioning window. Legacy timed key events did
+  not deliver the observation training reliably; explicit down/up events independently
+  produced the expected harmless shell output before any credential or write answer.
+  Stock SMALL ksh had no printf; authenticated print -r produced/read back all 95
+  printable glyphs. The missing cd1 node was first given the wrong character type,
+  then the wrong unit stride. Both mounts refused. Authenticated 7.9 disklabel.h
+  defines MAXPARTITIONSUNIT=64: the reviewed cd1 block partition c is major 6/minor
+  66, not 18. Only that newly owned RAMdisk node was corrected; attachments stayed
+  unchanged. This does not affect the installed gate's fixed unit-zero sd0 nodes.
+
+A conservative private observer text guard also stopped at its 1 MiB bound.
+The history was retained losslessly in a compressed checkpoint; cursor deduplication
+was corrected, and actual screen readback independently established verification.
+The approved aggregate capture bound was not exceeded. Submitted input was never
+counted as an observed outcome. These are host supervision/preparation failures,
+not passing native implementation tests.
+
+Native explicit-key base signify observed Signature Verified for the release
+manifest, and native SHA-256 for all six stock inputs independently matched it.
+No installer was invoked, password submitted, native signing pair generated or
+payload member created. Remaining time was insufficient for a complete installation
+and cleanup using the previously measured installation durations, so dependent
+writes were not started. The RAMdisk visibly completed sync and halted; its requested
+poweroff event was unavailable at the press-any-key reboot prompt. QMP exit followed
+that independently observed native halt, with no reboot or forced running-OS stop.
+Normal emulator exit occurred after 2220.832 seconds, within the scheduling/hard bounds.
+
+All three exact targets retained their full initial zero-image digest, identity,
+0600 mode, single link and zero allocation. Guests, clients and observers were
+reaped; fixture handle, mount and Unix-listener observations were empty. Capture
+credential exclusion passed. The same three unused synthetic credentials and exact
+unwritten targets remain privately held for review; no fixture/authority disposal
+or native completion is claimed. All 1068 required implementation cases remain not run.
+
+Requested amendment: allow **one replacement stock provisioning attempt** on the
+same exact untouched build.raw and increase the aggregate maximum from nine to
+**eleven launches**, accounting for both stopped attempts and preserving the
+original nine-phase sequence, including separate serial/VGA build qualification.
+Retain every original per-launch, operation, capture, storage, source, memory,
+privilege and artifact bound. No new target, credential, signing pair, dependency,
+network, service or production adoption is requested. Recheck the immutable receipt
+and all full target digests before recording any acceptance or continuing.
+
+The fixed observer, keyboard and read-only source-node corrections will be reviewed
+with the existing draft before that attempt; do not repeat known failing preparation
+or renew clocks within a running launch. This is a concrete retry/launch-count
+review under this plan's existing stop rule, not permission to retry a partial
+installation. No destructive installation has occurred. All implementation, fixes,
+qualification, stopped evidence and eventual disposal continue in PR #52.

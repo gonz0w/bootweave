@@ -98,4 +98,6 @@ production installer integration and runtime adoption remain separate decisions.
 The next [complete installed-target payload slice](docs/research/installed-payload-flow.md)
 authorizes connecting confirmed stock installation, offline installed-root authorization
 and later inert-data readback on three exact fresh targets. Implementation, native
-qualification and cleanup continue in the same accepted feature draft.
+qualification and cleanup continue in the same accepted feature draft. A read-only
+bootstrap stopped before installation; its evidence and proposed launch-count
+amendment remain in that draft, with all three targets unchanged.
