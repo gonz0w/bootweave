@@ -4,9 +4,10 @@ Original removable C under the [accepted complete slice](../../docs/research/ins
 kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six corrected entry builds and 976 serial/VGA regressions.
-The installed disk namespace adjustment is accepted. A recovery/range-export
-amendment is accepted after incomplete media export and an unclean hard stop; all
-92 installed cases and disposal remain pending; no production runtime or interface is adopted.
+The installed disk namespace adjustment is accepted. Recovery and bounded range
+export completed with native clean halt and full ISO readback. Stock installation
+and native halt on the serial target passed; all 92 installed payload cases and disposal remain
+pending in draft PR #56; no production runtime or interface is adopted.
 
 root.c compares private canonical observations and normalizes only one exact
 empty fd0: record under mandatory host proof of no floppy backing media in the

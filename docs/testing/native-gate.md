@@ -29,7 +29,9 @@ accepted research slice, with no full parent PTT or production integration claim
 The [installed-root slice progress](../research/installed-payload-native-progress.md)
 records six corrected native entry builds and 976 serial/VGA build regressions.
 The private empty-fd0 adjustment is accepted. Media export remained incomplete and
-the build guest hit its hard stop before clean halt; a twelfth recovery/export launch is accepted and pending execution.
+the earlier build hard stop was followed by approved recovery/export, persisted key
+absence, native clean halt and full original ISO readback; serial stock installation
+and native halt passed, with installed-root qualification still pending.
 All 92 installed-root cases and disposal remain pending; no installed-root or parent
 installer acceptance follows.
 

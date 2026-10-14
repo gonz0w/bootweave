@@ -1,11 +1,14 @@
 # Installed payload native progress and discovery decision
 
 2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
-Current: 976 build checks passed, six corrected entry variants built, eighteen
-fresh public artifact frames complete. Five launches consumed; the latest build
-guest hit its hard stop before clean halt with an incomplete ISO export. All 92
-installed cases remain pending. A twelfth recovery/range-export launch is accepted,
-with execution pending; see the final sections for the current observed state.
+Current: 976 build checks passed and six corrected installed variants built. The
+accepted recovery boot completed stock automatic preening, verified persisted key
+absence and source/artifact hashes, finished the fixed suffix export, and cleanly
+halted. The original native ISO and its full boot/member inventory passed readback.
+Seven launches completed, including the original serial-target installation;
+stock extraction, kernel relinking, independent OS checks and native halt passed. All 92
+installed payload cases and final disposal remain pending. Remaining qualification
+stays in draft [PR #56](https://github.com/gonz0w/bootweave/pull/56).
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -233,3 +236,59 @@ Cam accepted the fixed twelfth recovery/export launch by replying "continue" to
 its concrete review question. PR #55 was maintainer-merged before completion; all
 remaining work stays together on codex/installed-payload-recovery in one follow-up draft;
 no production/installer acceptance, general rollback or physical erasure follows.
+
+
+## Approved recovery completed and serial installation started, 2026-10-14
+
+The sixth launch used the same stopped build image, frozen offline IDE profile and
+sealed 921600-byte read-only reader disc. Stock automatic preening repaired
+unreferenced files and allocation metadata, marked the filesystems clean and
+reached serial login. No interactive repair was requested or performed. All frozen
+native source/public-fixture checks, the full original ISO hash and eighteen
+previously exported artifact hashes passed. The key directory and lifetime receipt
+were independently absent after recovery; no pair or credential was regenerated.
+
+The fixed native suffix was 169625600 bytes, SHA-256
+c606ac82f3dbdf50a7378ffefff184e3fd0e193308235ffd8d0e5792b5a0c831.
+Canonical framing, native full-source rehash, suffix removal and actual shell return
+passed in 753.150 seconds. Aggregate encoded export was 957874717 bytes, below
+1 GiB. Host assembly from the retained aligned prefix and this suffix reproduced
+the original 677939200-byte native ISO SHA-256
+607f1cc73a90402e5a02889b1bdc79c29dc8f67176086be38beffe218422f624.
+Complete readback checked all seventeen members, signed stock set identities,
+boot configuration, El Torito catalog checksum and fixed BIOS boot extent. Failed
+reconstruction candidates remain unusable. A separate nonbootable runtime disc
+passed full ISO9660/Joliet inventory/hash readback for sixteen public files.
+
+Exact serial restoration and receipt removal, key/scratch absence, no test/relink
+workers, unused vnds and matching installed/relinked kernel copies were observed.
+Native unmount/sync/halt produced a guest shutdown event before emulator exit at
+1019.665 seconds. Guest/client reaping, no fixture handles/mounts, credential
+exclusion, full image digest and original target identity/mode/links passed. This
+qualifies the recovery halt; the earlier forced stop remains unclean historical
+evidence. The build image is retained for final fixture disposal.
+
+The seventh launch began the original serial install on its unchanged exact fresh
+target. Paused effective attachments and full target hashes/zero allocation matched.
+Actual serial review and fresh disk confirmation observed zero writes; host identity,
+full zero-image digest and effective attachments were rechecked immediately before
+stock whole-disk MBR input. The reduced stock ramdisk tools rejected the compiler
+guest's checklist CLI forms; these refusals are not passes. Native explicit-key
+embedded-signature verification then passed, its extracted full manifest hash
+matched the authenticated frozen manifest, and all six native input hashes plus
+unmodified stock entry hashes matched independently. Scratch was removed and
+optical unmounted before returning to manually supervised stock prompts.
+
+Only bsd/bsd.rd/base/man were selected, with comp explicitly deselected; stock
+signature verification and all four set verification/extraction observations passed.
+The approved offline/no-DNS/no-SSH/no-X/no-extra-user/serial/UTC profile remains.
+Stock kernel relinking completed; independent disklabel/partition/mount/configuration,
+base-verifier and installed/relinked kernel hash agreement passed. Reduced RAMDISK_CD
+process observation was unavailable: neither missing ps nor the installed ps kernel-
+interface refusal is counted as a pass. Independent native process/relink checks
+remain required in the installed OS before any payload entry. Exact target filesystem
+unmounts, sync and native OS-halted/reboot-prompt observations preceded emulator quit
+without a reboot key. The phase ended at 1125.376 seconds; all guest/client processes
+were reaped, fixture handles/mounts absent, capture credentials excluded, and exact
+post-halt disk identity/mode/links/full digest recorded. No installed-root entry has
+run; cold OS boot, all 92 installed payload cases and final disposal remain required.

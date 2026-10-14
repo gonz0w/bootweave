@@ -104,8 +104,8 @@ accepted one replacement provisioning attempt and eleven total launches; remaini
 native qualification and cleanup stay together after the implementation merge.
 
 [Installed-target native progress](docs/research/installed-payload-native-progress.md)
-records compiler provisioning, six corrected native entry builds and all 976
-serial/VGA build regressions. The private empty-fd0 adjustment is accepted. A large
-artifact export remained incomplete and the build guest reached its hard stop before
-clean halt; a bounded twelfth recovery/export launch is accepted. All 92 installed cases
-and disposal remain together in one follow-up draft after the maintainer merge of PR #55.
+records six corrected native entry builds and all 976 serial/VGA build regressions.
+The accepted recovery/export boot completed with native clean halt and full original
+ISO readback. The first serial target passed stock installation and native halt; all 92 installed
+payload cases and disposal remain together in draft PR #56 after the maintainer
+merge of PR #55.
