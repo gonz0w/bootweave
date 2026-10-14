@@ -27,10 +27,11 @@ passed. Earlier compile/console failures remain recorded. This completes only it
 accepted research slice, with no full parent PTT or production integration claim.
 
 The [installed-root slice progress](../research/installed-payload-native-progress.md)
-records native compiler provisioning, six entry builds and 488 serial regressions.
-An unexpected empty fd0 kernel namespace entry triggers the accepted mechanism
-review boundary. Target installation, VGA/installed cases and disposal remain
-pending; no installed-root or parent installer acceptance follows.
+records six corrected native entry builds and 976 serial/VGA build regressions.
+The private empty-fd0 adjustment is accepted. Media export remained incomplete and
+the build guest hit its hard stop before clean halt; recovery/export review is pending.
+All 92 installed-root cases and disposal remain pending; no installed-root or parent
+installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

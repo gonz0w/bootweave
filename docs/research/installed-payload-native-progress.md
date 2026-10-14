@@ -1,8 +1,15 @@
 # Installed payload native progress and discovery decision
 
-2026-10-13. **Partial qualification; installed-root placement remains unqualified.**
+2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
+Current: 976 build checks passed, six corrected entry variants built, eighteen
+fresh public artifact frames complete. Five launches consumed; the latest build
+guest hit its hard stop before clean halt with an incomplete ISO export. All 92
+installed cases remain pending. A twelfth recovery/range-export launch is proposed,
+not accepted; see the final sections for the current observed state.
+
+The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
-[one draft PR #54](https://github.com/gonz0w/bootweave/pull/54), after maintainer
+PR #54 (now maintainer-merged before completion), after maintainer
 merges of scope PR #52 and implementation/stopped-evidence PR #53. The accepted
 replacement provisioning amendment permits eleven total launches on the unchanged
 three exact targets. Four have been consumed, including both earlier stops.
@@ -101,13 +108,15 @@ emulator/profile change or discovery exception was adopted. The current strict
 validator rejects that unexpected namespace by its source contract. No installed
 root case was run or counted as a refusal/placement pass.
 
-The [concrete proposed research discovery adjustment](installed-payload-flow.md#installed-disk-namespace-decision--proposed-not-accepted)
-remains **unaccepted**. It preserves the generic validator and full raw namespace
+The [research discovery adjustment](installed-payload-flow.md#installed-disk-namespace-adjustment--accepted-2026-10-14)
+was **accepted on 2026-10-14**, reviewed at 2ea6560. It preserves the generic validator and full raw namespace
 comparison, permits only one exact empty-DUID fd0 entry under mandatory no-hotplug
 virtual backing-media proof, and retains all sole-sd0/label/root/mount/held-context
 checks. Both fd0 devices remain outside the payload gate/writer's operations.
 The accepted plan requires review of a replacement when observations cannot prove
-its frozen binding. Dependent target installation is stopped at that decision.
+its frozen binding. The correction preserves generic storage_discovery and full raw before/after
+comparison. Pure host boundary cases pass; corrected native source/media and
+installed positive binding remain unqualified.
 
 Both payload targets were fully rehashed after serial halt: original full zero-image
 digests, exact identities, 0600/single links and zero allocation remain unchanged.
@@ -119,7 +128,7 @@ fixture disposal and exact-target authority have **not** ended.
 Remaining required cases: 488 build keyboard/VGA regressions plus all 92 installed
 serial/VGA placement/refusal/retained-positive/later-readback cases, 580 in total.
 All remaining qualification, source fixes, sealed artifacts, native key cleanup,
-clean halts, full digests and fixture disposal stay in PR #54. No general rollback,
+clean halts, full digests and fixture disposal stay together in the follow-up feature draft after the maintainer merge. No general rollback,
 physical erasure, production integration or project readiness is claimed.
 
 ## Observer limits and local verification
@@ -135,7 +144,89 @@ public encoded artifact frames remain separately counted under 1 GiB. No clock o
 operation deadline was renewed.
 
 Local make verify passed 81 groups (22/13/3/10/33), no failures/skips, plus content,
-links, ShellCheck and Gitleaks. Additional original C remains 16376 bytes within
-16 KiB. Signed source/decision history and author DCO remain required; no Actions,
+links, ShellCheck and Gitleaks. Additional original C remains within 16 KiB. Compact formatting, shorter
+test diagnostics and concise component comments fund the adapter; component
+behavior outside the installed build is unchanged. Signed source/decision history and author DCO remain required; no Actions,
 runners or hosted status publisher is used. Host evidence cannot replace the
 remaining native cases.
+
+## Corrected-build continuation, 2026-10-14
+
+The accepted fd0 adapter passed all 81 local groups and complete corrected source
+ISO readback (279 files in both ISO9660/Joliet namespaces). In the planned VGA
+launch, native compilation then refused a test-harness signature mismatch: the
+compact load definition had one argument while its inherited private declaration
+still required two. No installed-root entry ran. The original two-argument
+signature and bounded keys definition were restored; every installed mode passed
+host syntax checks against authenticated native headers. A clean local make verify
+again passed all 81 groups. The refusal remains a failed build observation.
+
+Corrected signed sources are frozen and transferred as bounded public base64 data
+frames to fixed owned build-source paths, with complete native SHA256 checks before
+recompilation, as with the existing generated public header. No media swap, clock
+reset, extra launch or target change is allowed. The corrected entry rebuild and
+remaining native outcomes still need observation; no host check supplies native
+qualification. All remaining work stays in draft [PR #55](https://github.com/gonz0w/bootweave/pull/55).
+
+## VGA results and incomplete export stop, 2026-10-14
+
+The fifth consumed launch reached native ttyC0 after observed boot-console selection.
+Stock filesystem checks were clean. Paused and later complete effective block/device
+inventories again showed only the unchanged target/read-only optical, no NIC or
+floppy backing media. Actual VGA repeated empty fd0 namespace/node observations;
+disklabel refused with Device not configured. A supervision echo marker acquired a
+repeated character, without changing the observed query paths/results. Atomic
+press/release batching later produced an independently observed exact harmless
+marker. No fd0 device enters the installed gate or writer.
+
+Native base clang rebuilt the components. Frozen automatic suites ran with actual
+ttyC0 input and separate owned output logs: 90 inspector, 128 authentication, 192
+placement and 70 review cases. Complete native log readback verified counts, positive
+resource metrics, confinement, canaries, source/fixture hashes and exact TTY restoration.
+Both manual variants supplied actual full-review/fresh confirmation, cancellation,
+changed-context refusal and partial-writer inputs: four each. All 488 VGA cases passed,
+bringing the required build total to **976/976**. Maximum reported RSS was 4464 KiB;
+measured combined research fixture allocation 17028 KiB was below 20 MiB, and native
+media allocation 667550 KiB below 3 GiB.
+
+The inherited load/keys declarations were restored at signed source
+5071f776faaf775278befa065d056d0fc9d11eca. An unpaced source heredoc stopped partially;
+its thirty-second host observer expired, no compilation was dispatched, and the
+observed partial heredoc was cancelled back to the actual serial shell. Paced sealed
+frames then passed all six fixed file/manifest hashes and complete native source/
+public-header closure in 15.450 seconds. Exact serial settings were restored and
+its temporary receipt removed. All six corrected installed entries then compiled
+natively, with static/dynamic/map/size/ldd/readelf identities. None ran on the IDE
+build guest; all installed-root cases remain unqualified. Additional source: 16344
+bytes within 16 KiB; combined/components and generated-header limits passed.
+
+Two native signing pairs were reused throughout. The fixed cleanup removed all four
+key files and lifetime receipt; independent absence was observed before the stop.
+Eighteen fresh public binary/map/kernel/entry artifacts exported in canonical frames
+with exact native sizes/modes/hashes. The complete handoff ISO frame did not finish
+within a batch allowance bounded by remaining launch time and a cleanup reserve.
+The incomplete ISO and failed host reconstruction candidates were never attached
+or used. All encoded exports, including unread trailing bytes, remain counted.
+
+The full prefix is privately retained for the concrete
+[proposed recovery/range-export amendment](installed-payload-flow.md#recovery-and-range-export-amendment--proposed-not-accepted).
+Stopping the completed VGA observer and temporarily disabling accessory serial
+output processing did not finish the transfer in time. Foreground export cancellation,
+exact serial state restoration/receipt removal, absent workers/relinkers/key paths
+and kernel-copy agreement were observed. The cleanup dispatch was too late: the
+launcher stopped QEMU at 3600.198 seconds before native unmount/sync/halt. Its exit
+zero cannot qualify an OS shutdown; build filesystem cleanliness and persisted key
+absence require a recovery boot. No native shutdown event or clean-halt receipt exists.
+
+All owned emulator/client/observer processes were reaped; fixture handles/mounts were
+absent. Full exact target identity/mode/links/hash checks and credential exclusion
+passed. Stopped build image SHA-256:
+8f63565048599f8c212d8deb7b1dde8ea2be23e121685be4b1ca242e925374c7.
+Both payload targets retain original full zero-image digests and zero allocation.
+Private observations were losslessly compressed with checked digest/size receipts.
+Allocated owned storage: 8581140480 bytes; observation capture: 473800; encoded public
+export: 728731015, all within unchanged bounds. Fixtures, credentials and exact-target
+authority remain held; disposal is incomplete. All **92 installed cases remain**.
+
+The proposed twelfth launch is not accepted. Remaining work stays in draft PR #55;
+no production/installer acceptance, general rollback or physical erasure follows.

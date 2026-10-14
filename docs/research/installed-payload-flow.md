@@ -353,7 +353,7 @@ original per-launch and other bound remains unchanged. PR #53 includes implement
 and stopped evidence; it does not contain native qualification. All remaining work
 continues together in one draft after that maintainer merge.
 
-## Installed disk namespace decision — proposed, not accepted
+## Installed disk namespace adjustment — accepted, 2026-10-14
 
 Native compiler-guest provisioning completed on the same confirmed build.raw,
 followed by an offline serial boot and all 488 required serial regression/composition
@@ -367,7 +367,7 @@ when density is unknown. The RAMdisk discovery list did not expose this full-ker
 entry. The current strict storage_discovery refuses it; no installed-root case ran,
 and the two payload targets remain untouched.
 
-Proposed bounded replacement: keep the existing generic storage validator unchanged.
+Accepted bounded replacement: keep the existing generic storage validator unchanged.
 Add only a private installed-research discovery adapter that permits at most one
 exact fd0: record with no DUID, removes that record for the existing validator and
 retains the complete original kernel namespace in before/after equality checks.
@@ -389,8 +389,88 @@ Add pure-host acceptance/refusal cases for every namespace boundary above and na
 read-only namespace/empty-backend observations on both build consoles. Existing 976
 regressions remain required. The later installed target must demonstrate positive
 root binding in every existing installed case; a refusal cannot count as placement.
-Do not begin serial/VGA target installation until this replacement is accepted.
-Keep all decision, fixes, qualification and disposal in
-[PR #54](https://github.com/gonz0w/bootweave/pull/54). This is the frozen mechanism's
+Cam approved the concrete replacement after reviewing head
+2ea6560fcf823d33cf447576e031384b019e015b; a separate private acceptance receipt
+binds the preserved target receipt and rechecked full current target digests.
+PR #54 was maintainer-merged before the correction/native completion. Keep all
+remaining fixes, qualification and disposal on codex/installed-payload-completion
+in one follow-up draft. This is the frozen mechanism's
 existing stop rule: "if those observations cannot prove the binding, stop dependent
 work and review a replacement mechanism."
+
+## Recovery and range-export amendment — proposed, not accepted
+
+2026-10-14. In [draft PR #55](https://github.com/gonz0w/bootweave/pull/55),
+the accepted private discovery adapter and its routine inherited-declaration fix
+are implemented. All 976 build regressions passed across serial and actual VGA;
+all six corrected installed entry variants compiled. The planned VGA launch then
+exported eighteen complete public artifacts but not the large native handoff ISO.
+Its bounded export ended incomplete. Foreground cancellation, exact accessory TTY
+restoration, matching kernel copies, absent test/relink workers and key absence
+were observed. The clean-halt dispatch was too late: the launcher enforced its
+sixty-minute hard limit at 3600.198 seconds. QEMU exit zero is not a native halt.
+The build filesystem and persisted key absence require recovery observation.
+
+The emulator/client/observer were reaped; exact target identities, 0600 modes and
+single links matched, with no fixture handles/mounts. Current complete build.raw
+SHA-256: 8f63565048599f8c212d8deb7b1dde8ea2be23e121685be4b1ca242e925374c7.
+The two payload targets retain their original full zero-image digest and zero
+allocation. Historical clean-halt/acceptance receipts are preserved; this stopped
+image's digest is recorded separately, without upgrading it to a clean state.
+
+Concrete requested amendment: one additional build-export-recovery cold boot on
+that same exact build.raw, before the six unchanged target phases, increasing
+the aggregate launch ceiling from eleven to **twelve**. Preserve every other
+launch, source, capture, storage, memory, operation, privilege and export bound.
+Use the unchanged pinned offline IDE build profile and corrected read-only source
+optical; reuse the existing build credential. No additional target, credential,
+signing pair, service, network, dependency or runtime adoption is requested.
+
+Observe stock automatic filesystem recovery (failed preen or an unexpected
+interactive repair stops, with no blind fsck -y), independently recheck the frozen native source
+ISO's file size/mode/full SHA-256 and already exported artifact identities, and
+reobserve both key pairs/lifetime receipt absent. If old owned key files reappear
+after recovery, remove only their previously authorized fixed paths and independently
+observe absence; never generate or reuse another pair. Missing source/artifact or
+filesystem proof stops dependent work; this is not recovery of a payload install.
+
+Replace the full-ISO replay with one fixed read-only range export of the same
+natively built handoff.iso. Retained decoded prefix: 508315170 bytes, SHA-256
+3783a0f7c9277c39f33801cbf79b1ef1e6d0f068470700b645bae68095ecd4bf.
+Freeze a validated 2048-byte-aligned resume offset of **508313600**; discard only
+the final 1570 prefix bytes for assembly. Remaining native suffix: **169625600**
+bytes. Before reading it, the complete native ISO must still be 677939200 bytes
+and match 607f1cc73a90402e5a02889b1bdc79c29dc8f67176086be38beffe218422f624.
+
+Use base dd with the fixed public ISO path and typed bounded block offset/count,
+base sha256 and one canonical base64 frame with exact native suffix size/hash.
+No path or shell operation comes from native output or payload input. The concrete native reader is frozen for review: base dd reads the fixed
+/root/handoff-probe/handoff.iso with bs=2048, skip=248200 and count=82825 into
+one absent fixed owned /root/handoff-probe/handoff-tail. After sufficient free
+space and media-budget observations, set -eu and umask 077 require successful dd,
+regular nonsymlink source and exact root ownership/mode/size/full hash. Require
+root-owned 0600 suffix size 169625600; publish its native sha256 before the complete
+uuencode -m handoff-tail frame. Rehash the original ISO afterward, remove the fixed
+scratch suffix and observe absence. Retain dd diagnostics. Scratch stays within
+the original 3 GiB media bound. ShellCheck passed for the private proposed reader;
+it has not executed. Freeze exact source/helper identities before the launch.
+Assemble only in the
+owned host fixture, require the original complete native ISO hash and complete
+boot/catalog/member inventory readback before attachment. The current partial
+frame and unsuccessful host reconstruction candidates are unusable. No host
+rebuild may substitute for the independently identified native image.
+
+Current aggregate encoded export is 728731015 bytes. Conservative current-plus-
+suffix estimate, including overlap/framing reserve: 961749041, below the unchanged
+1 GiB ceiling. Current owned allocation is 8581140480 bytes below 20 GiB; private
+observation capture is 473800 below 10 MiB. Source remains 16344 additional original
+C/header bytes; all component/combined caps remain enforced. Do not replay the
+whole ISO or renew clocks. Freeze enough measured time for transfer, independent
+postconditions, exact terminal restoration, unmount/sync and **native clean halt**.
+
+All 92 installed cases, final artifact sealing and fixture disposal remain required
+in the same feature draft. Native test success before the stop does not qualify
+the failed shutdown. Exact-target authority has not ended; no general rollback
+or physical erasure is claimed. This changes a frozen launch/export mechanism
+under the plan's rule: "retries/changed budgets need review." Do not start the
+additional guest or dependent target installation without acceptance.

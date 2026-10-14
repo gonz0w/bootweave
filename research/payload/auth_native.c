@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* Original bounded native research. Optional fixed compiled placement phase. */
+/* Bounded native research; optional fixed placement. */
 #include "auth_native.h"
 #ifdef AUTH_PLACEMENT
 #include "placement.h"
@@ -48,7 +48,7 @@ struct auth_result auth_native(const struct auth_context *ctx,
 static volatile sig_atomic_t stopped;
 static void stop_signal(int s) { (void)s; stopped = 1; }
 #ifdef AUTH_TEST
-/* These fixed test hooks exist only in the explicitly compiled test build. */
+/* Fixed hooks in test builds only. */
 extern void auth_test_hook(int, const char *, const unsigned char *, size_t);
 extern int auth_test_child(int);
 #define HOOK(n,p,b,l) auth_test_hook(n,p,b,l)
@@ -115,7 +115,7 @@ static int record(const unsigned char *b, size_t n, size_t decoded) {
  for (i = 0; i < encoded - pad; i++) if (value(b[i]) < 0) return -1;
  for (; i < encoded; i++) if (b[i] != '=') return -1;
  if (pad && (value(b[encoded - pad - 1]) & (pad == 1 ? 3 : 15))) return -1;
- /* Only the algorithm marker is decoded here; signify owns cryptography. */
+ /* Decode the marker only; signify verifies. */
  if (((value(b[0]) << 2) | (value(b[1]) >> 4)) != 'E' ||
      (((value(b[1]) & 15) << 4) | (value(b[2]) >> 2)) != 'd') return -1;
  return 0;
@@ -159,7 +159,7 @@ int auth_run(char *const argv[], const unsigned char *input, size_t length,
   struct sigaction sa;
   if (setsid() < 0 || dup2(in[0], 0) < 0 || dup2(out[1], 1) < 0 || dup2(err[1], 2) < 0) _exit(125);
 #ifdef AUTH_TEST
-  /* A fork notification alone does not prove the child has been scheduled. */
+  /* Fork notification cannot prove child scheduling. */
   { pid_t self = getpid(); HOOK(30 + stage, NULL, (const unsigned char *)&self, sizeof(self)); }
 #endif
   closefrom(3); child_limits();
@@ -218,7 +218,7 @@ cleanup:
    if (w == pid) { done = 1; metrics->reaped++; } else failure = AUTH_CLEANUP;
   }
  }
- /* All successfully reaped children, including killed/failed cleanup paths. */
+ /* Count every reaped child, including cleanup failures. */
  if (pid > 0 && done) {
   r->status = status; r->peak_kib = usage.ru_maxrss;
   if (r->peak_kib <= 0 || r->peak_kib > 32768) failure = AUTH_RESOURCE;
