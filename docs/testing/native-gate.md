@@ -45,11 +45,18 @@ stock verification/install, foreground relink/configuration, native halt and com
 integrity/closure. Cold boot 25 reached the actual ttyC0 login page but stopped on a
 host prompt-matching error before runtime/payload input. Cleanup-only root login/
 sync/halt and full hash/identity/closure passed; first-boot changes remain, with no
-claim of worker absence/kernel-copy agreement. The host guard is corrected/tested;
-all 46 VGA cases and exact disposal remain pending. Twenty-five of twenty-six
-launches are consumed; a two-boot continuation at 26/27, no reinstall/reset, is
-proposed and not accepted. No complete installed-root, Cocoa-window,
-physical-hardware or parent installer acceptance follows.
+claim of worker absence/kernel-copy agreement from launch 25. Corrected launch 26
+independently established runtime/root binding, worker absence and matching kernel
+copies, then passed 34 automatic VGA cases. The first 28-line keyboard review
+exceeded the 25-row display; the host stopped before any review answer/confirmation.
+Cleanup forced termination. All original target/media hashes, identities and owned
+closure passed, but native clean halt and full qualification remain false.
+Nine host prompt groups cover complete overlapping views, full variant hashes and
+exact return to the current page; native scrollback remains unproven. Twenty-six of
+twenty-seven launches are consumed. Probe/exact stopped-fixture cleanup/full payload
+rerun and later readback at 27/28, ceiling 28, are proposed and not accepted. No reset
+or reinstall is proposed. Complete installed-root, Cocoa-window, physical-hardware
+and parent installer acceptance and original exact disposal remain pending.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

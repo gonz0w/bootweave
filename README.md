@@ -118,8 +118,13 @@ installation, foreground relink/configuration, clean halt and full integrity/clo
 Its cold OS boot then reached the normal ttyC0 login: page; a host observer expected
 the wrong prompt. Qualification stopped before payload input, followed by cleanup-only
 native login/sync/halt and verified closure. First-boot changes are preserved.
-The login guard is corrected/tested; all 46 VGA cases and disposal remain pending
-on one feature branch after maintainer merge of PR #65. Twenty-five of twenty-six
-launches are consumed. Payload/readback at 26/27 with no reinstall or reset is
-proposed and not authorized. No production runtime/profile or general hardware
-qualification follows.
+The corrected launch 26 passed native login, root-binding/kernel closure and all
+34 automatic VGA cases. Its first keyboard review exceeded the 25-row screen;
+the observer refused before any answer or confirmation. Bounded cleanup forced
+termination; full hashes/identities and owned closure passed, without native clean
+halt or complete qualification. Host overlap/restoration guards and nine prompt
+regression groups are ready. A proposed inert scrollback probe, exact stopped-fixture
+cleanup, full payload rerun and later readback at 27/28 would raise the ceiling from
+27 to 28, without reinstall or reset. It is not authorized. Qualification and disposal
+remain together on one feature branch after maintainer merge of PR #66. No production
+runtime/profile or general hardware qualification follows.

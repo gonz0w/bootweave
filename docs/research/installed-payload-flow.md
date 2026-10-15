@@ -1294,7 +1294,7 @@ Keep this work in the existing complete-feature draft; no phase PR boundary.
 
 ## VGA getty observer correction and two-stage completion — proposed, 2026-10-15
 
-Status: **Proposed; no further boot or ceiling increase authorized.** The successful
+Status: **Accepted by Cam on 2026-10-15; launch 26 stopped, dependent readback unexecuted.** The successful
 headless preflight and completed stock VGA installation remain qualified for their
 bounded scope. Cold boot 25 reached the normal synthetic ttyC0 login: page, while
 its frozen controller incorrectly expected a hostname-prefixed prompt. Qualification
@@ -1312,7 +1312,7 @@ The failed controller remains frozen; a separate corrected controller and exact
 arguments are prepared and unexecuted. No native C/binary/media/compiler, payload
 signing pair, credential, dependency, export, transport or guest hardware changes.
 
-Propose ceiling **twenty-six to twenty-seven** for exactly two remaining launches:
+Approved ceiling **twenty-six to twenty-seven** for exactly two remaining launches:
 
 | Launch | Stage | Required result |
 |---|---|---|
@@ -1342,12 +1342,82 @@ no automatic retry/fallback/reset or job/answer/confirmation resubmission. Keep 
 same maximum three read-only recovery observations and one one-second/1 MiB owned-PID
 sample at first QMP timeout; no generic Ctrl-C of writing work.
 
-The extra launch and retry require review under the accepted stop/budget boundary.
-Private unexecuted two-stage proposal SHA-256:
+Cam approved the two-stage continuation under the accepted stop/budget boundary.
+Private reviewed two-stage proposal SHA-256:
 dce6e37595735cd48dd3ba084982ec51ad66a787deb1c813352235c9e8fb2a1b.
 It binds accepted preflight/install, stopped cold boot/host correction, the original
 receipt/completed single reset, current target hashes, freshly rehashed 0400 media,
-exact arguments and corrected guard/controller sources. New acceptance must bind
-fresh complete integrity/closure and phase freezes. Keep fixes, qualification and
-original disposal in the same feature draft on codex/vga-qualification-finish after
-maintainer merge of PR #65; no phase PR boundary.
+exact arguments and corrected guard/controller sources. Fresh acceptance binds complete target/media integrity, original identities and
+closed handles/mounts, with phase-specific helper/argument/host-pin freezes. Its
+SHA-256 is ad964408bcbbc027dc7b8bfe37183cb125a753bd1e59e7227f7d4cc88e6573b7.
+Keep fixes, qualification and original disposal on codex/vga-payload-readback after
+maintainer merge of PR #66 from the identical reviewed tree; no phase PR boundary.
+
+## VGA review scrollback and completion — proposed, 2026-10-15
+
+Status: **Proposed; the first-failure stop remains in effect.** Launch 26 passed
+both automatic suites (34 cases) before its first manual review. The frozen host
+observer required the whole review in one 25-row page, but the native fixed fixture
+emits 28 nonempty lines. No review answer or placement confirmation was sent.
+Twenty-six launches are consumed under twenty-seven. Forced cleanup supplies no
+native halt or complete qualification; the current original VGA image is retained
+with full digest b71a214006d313d5d6914d7880c4829055933d4e4e8449402af35799b3eea9d0.
+Its closed failed audit is
+af236ee9384af9613811eb0ea86a7ecca9171ca267272de9cbf312356b027465.
+
+Propose ceiling **twenty-seven to twenty-eight**, with exactly two remaining boots:
+
+| Launch | Stage | Required result |
+|---|---|---|
+| 27 | vga-scrollback-payload | Fresh full hashes, original identities, closure and exact helper/argument/host-pin freeze. Boot the same original image with the same runtime CD; stock automatic filesystem checks only, no manual repair. Repeat actual login/runtime/device/raw-label/root/worker/kernel-copy gates. Prove an inert numbered-text scrollback cycle and exact TTY restoration before fixture cleanup or payload execution. Independently validate the stopped original fixture; remove only its checked empty case and exact TTY receipt, then prove the original root/parent/canary baseline unchanged. Rerun all 34 automatic cases, ten keyboard cases and KEEP, with complete actual review capture and fresh confirmation. Require all 45, independent retained postconditions, native halt and full postflight. |
+| 28 | vga-scrollback-readback | Cold boot the full-hash-bound result on the same profile/media. Repeat prerequisites, independently compare retained content/metadata/canary before and after READBACK case 46 without writer dispatch. Require positive native resources, exact TTY, native halt, complete hashes and closure, then original exact all-three-fixture/helper logical disposal and authority closure. |
+
+OpenBSD documents keyboard scrollback on supported display drivers; this is
+[documentation, not native evidence](https://man.openbsd.org/OpenBSD-7.9/wskbd.4).
+The [VGA FAQ](https://www.openbsd.org/faq/faq7.html#Scrollback) also limits support
+to certain hardware and excludes install kernels. This proposal uses the installed
+GENERIC kernel and existing headless VGA/keyboard/QMP framebuffer only. No new
+transport, UART redirection, console, font, resolution, kernel, C/binary, media,
+compiler, signing pair, credential, dependency or artifact export is proposed.
+
+The inert probe prints 29 fixed numbered lines and returns to the actual shell.
+One Shift+Page Up and one Shift+Page Down must yield two overlapping captured pages
+and exact current-page restoration, followed by native exact TTY agreement. Missing
+support, gaps or uncertain navigation stop before fixture cleanup or payload cases.
+The same single owned reader records at most twelve navigation cycles: probe plus
+eleven reviews, one up/down each, with at most two seconds per view observation.
+Keep existing ten-second line, review/whole/output and original launch clocks.
+
+Every review must contain the actual contiguous header, case/root identity,
+owners/modes, four complete expected hashes, limits and both effects across captured
+pages with at least one observed overlapping row. Source text never fills a missing
+row. Match the frozen dynamic/static inspector separately. Require exact return to
+the current review prompt and the actual numbered case announcement before sending
+one review/cancel answer, then a fresh one-use phrase where applicable. No h/back,
+revision reset, repeated answer/confirmation or job resubmission. Nine host prompt
+groups and simulated navigation failure paths cover these controls; they do not
+qualify native scrollback or placement.
+
+Stopped-fixture cleanup is limited to independently observed original root, parent
+and canary identities/metadata and matching full canary bytes; the exact four-path
+inventory must contain only parent, canary, empty nobody-owned 0700 case and regular
+single-link root-owned 0600 TTY receipt of at most 512 bytes. Require the saved TTY
+to equal the fresh native TTY, use rmdir on that empty case and remove only that
+receipt. Never recursively remove, replace or recreate the original parent/canary.
+Independently recheck the complete original baseline before rerunning all cases.
+Any missing, changed, nonempty or unexpected object stops without fallback.
+
+After a failure, dependent work stays stopped. Cleanup may wait read-only for at
+most 100 seconds for a fresh shell, only while the bottom/current view is proven,
+within the original cleanup deadline (2670 seconds). Observe the fixed cd/sync/halt
+command before one Return and require guest-origin shutdown for a clean-halt claim.
+Never interrupt a writer, resend uncertain navigation/halt input or use generic
+Ctrl-C. Existing bounded read-only QMP recovery, owned sample, watchdog and reaping
+remain. An unproven view or halt remains unqualified and may require forced cleanup.
+
+All other accepted bounds, exact original targets/media and original disposal stay
+in force. Keep false historical gates false. Fresh acceptance must bind complete
+integrity/closure and phase freezes. Private unaccepted proposal SHA-256:
+22ad44910b95aa138bb7571f534c961f4393ec0424379cddb2b7262929402bab.
+Preparation authorizes no boot, reset, reinstall, fixture cleanup or disposal.
+Keep implementation, fixes, qualification and evidence in the same feature draft.
