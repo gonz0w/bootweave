@@ -37,11 +37,12 @@ serial qualification with clean halts/full target hashes. The accepted VGA obser
 retry passed fresh confirmation and native input checks, then stock extraction
 panicked. Its partially written target is quarantined; no native clean halt or
 installed VGA case is claimed. All 46 installed VGA cases and exact fixture disposal
-remain pending. Both accepted diskless diagnostics are closed: stock verification
-lacked an input; verified handoff listing emitted ATAPI not-ready and exited without
-completion/clean halt. All target hashes/identities remain unchanged. Seventeen
-launches are consumed. Four-boot AHCI qualification and exact VGA reset are proposed.
-No complete installed-root or parent installer acceptance follows.
+remain pending. After the two initial diskless diagnoses, the accepted AHCI preflight
+passed auth/input checks and one listing. Its second pass remained incomplete and
+was aborted for cleanup; native clean halt followed within the scheduling limit.
+No reset occurred; all three target hashes/identities remain unchanged. Eighteen of
+twenty-one launches are consumed. A corrected stock-only read-only control is
+proposed. No complete installed-root or parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

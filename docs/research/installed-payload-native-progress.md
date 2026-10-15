@@ -1,23 +1,22 @@
 # Installed payload native progress and discovery decision
 
-2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
+2026-10-15. **Partial qualification; installed-root placement remains unqualified.**
 Current: 976 build checks and all 46 installed serial cases passed; six revised
 installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Seventeen launches completed, exhausting the accepted ceiling. The two accepted
-diskless diagnostics are closed. Stock media lacked the required embedded signature
-file at the fixed sets path, so its native verification stopped and no tar pass ran.
-Handoff media passed native signature/manifest/six-input verification, then the first
-listing-only tar pass emitted the same ATAPI not-ready diagnostic and the guest
-exited without completion or observed clean halt. No target disk was attached.
-All three retained image hashes/original identities remain unchanged; owned processes
-are reaped and fixture handles/mounts absent. All 46 installed VGA cases and final
-disposal remain pending. A four-boot AHCI optical qualification amendment, including
-explicit reset of the same quarantined VGA file, is proposed, not accepted. Remaining
-work stays together on codex/installed-optical-diagnosis after maintainer merge of
-PR #59 from the identical reviewed tree.
+Eighteen launches completed under the accepted twenty-one ceiling. Cam accepted the
+four-stage AHCI attempt and conditional same-image reset on 2026-10-15. Its diskless
+preflight passed native AHCI attachment, authentication/input hashes and the first
+listing pass. The second pass did not establish completion; observation timeouts and
+slow progress preceded operator abort and native clean halt at 2671.618 seconds.
+No VGA reset or dependent installation/payload/readback boot occurred. All three
+retained images remain unchanged, owned processes reaped and handles/mounts absent.
+All 46 VGA cases and final disposal remain pending. A corrected stock-only read-only
+control is proposed within the same ceiling; no control or reset is authorized by
+that proposal. Remaining work stays together on codex/installed-ahci-qualification
+after maintainer merge of PR #60 from the identical reviewed tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -668,7 +667,7 @@ an emulator, kernel or media defect. The incomplete stock control cannot isolate
 upstream stock behavior from modified-media behavior. No stable hardware profile,
 production adoption or installed VGA case follows. Seventeen launches are consumed;
 no additional guest or reset is authorized. The
-[AHCI qualification proposal](installed-payload-flow.md#ahci-optical-complete-vga-qualification--proposed-2026-10-14)
+[AHCI qualification proposal](installed-payload-flow.md#ahci-optical-complete-vga-qualification--accepted-2026-10-15)
 keeps any further decision and the complete remaining feature together.
 
 The AHCI preparation rechecked complete hashes of all three retained targets and both
@@ -685,3 +684,96 @@ Local make verify after these diagnostic/scope updates passed all 82 groups
 final prose also passed content/link and diff-whitespace checks. Both native diagnostic
 outcomes remain partial/failed as described; host checks do not qualify installation.
 No Actions, runners or hosted status publisher was used.
+
+## AHCI preflight incomplete; targets unchanged, 2026-10-15
+
+Cam accepted the concrete four AHCI boots, twenty-one-launch ceiling and conditional
+reset at reviewed head 2fadb6320bab81a278997c4394805e8595bf46d5. Separate acceptance
+receipt SHA-256 b4dbfd47df866412e577b6d2c342513968724ee58af4acb3c0b37e0e38cd85d3
+binds fresh complete target/media hashes, original target identities/modes/links,
+closure and the unchanged proposal. Initial exact helper/argument/host-pin freeze:
+0f80bfeab360ebb3f0059cdeee8b1cd0e0150ad6dee912e8f0c7dbd019eb0bb0.
+
+Only the first, diskless stage ran. Complete paused inventory proved the sole
+read-only handoff CD on ich9-ahci/optical.0, no target images, no network endpoints,
+sharing, hotplug or floppy backing. Actual native boot rows correlated ahci0,
+scsibus0 and cd0, with no IDE CD attachment. The frontend refused the absent disk
+and returned to shell; no install confirmation or /install invocation followed.
+Native explicit-key signature, authenticated full manifest and all six frozen input
+hashes passed. The exact ephemeral manifest was removed before the input-completion
+marker. No native source, media, compiler, signing pair or credential changed.
+
+The first tar -tzf base79.tgz listing to /dev/null completed with actual native
+return zero and shell; host wall observation was 197.685 seconds including submission.
+No extraction occurred, and observed CD write counters were zero. The second fixed
+listing was submitted once. Its I/O counter eventually advanced by 535343104 bytes,
+but no native zero-return/shell completion was established. That count alone is not
+proof of successful archive consumption. No second pass or installed VGA case is
+counted. No ATAPI not-ready diagnostic or panic was observed in this AHCI attempt;
+that is not a claim that the unobserved intervals were error-free.
+
+The general VGA observer and a waiting helper timed out on QMP screen observation.
+The observer exited one and was reaped; it was not restarted. Independent read-only
+status/screens recovered, with the observation gap retained honestly. A shared PPM
+peek during an in-progress dump rejected incomplete framing; it supplied no native
+outcome. A separate recovered snapshot was bounded and retained. Captures were
+losslessly preserved, without claiming a continuous terminal history after timeout.
+
+Temporary macOS host-base requests prevented idle system sleep for the owned PID
+lifetime and requested normal background/default throughput/latency scheduling for
+that PID only. Prior scheduling state was not established; these requests neither
+identify a cause nor make timing comparisons controlled. No persistent host setting,
+guest CPU/RAM/argument, launch clock, workload submission or disk authority changed.
+The host-awake lease ended and was reaped with the emulator. One native Ctrl-T
+status request produced no status line in the sampled screen; no conclusion follows.
+
+A bounded read-only host thread sample and virtual CPU/stack observations were saved
+privately. The host CPU 0/TCG sample was in mttcg_cpu_thread_fn,
+qemu_process_cpu_events and qemu_cond_wait_impl. One sampled guest PC mapped within
+x86_bus_space_mem_read_4 in the frozen kernel; stack-word function-range candidates
+included sched_idle and proc_trampoline. Those are snapshots, not a verified guest
+backtrace, deadlock diagnosis or proof of an emulator/kernel defect. No debugger memory
+write, guest pause/reboot, NMI injection or controller fallback was used.
+
+The original forty-five-minute scheduling guard remained active. With completion
+unestablished and time reserved for closure, operator Ctrl-C was submitted once at
+2656.056 seconds. A fresh shell was actually observed, followed by fixed read-only
+CD unmount/sync/halt. Native halted/reboot text and zero CD write counters were
+observed before QMP quit, without a reboot key. Emulator exit zero at 2671.618
+seconds followed actual native halt; the scheduling guard did not need to force a
+stop. The second pass has no established natural return status. All owned emulator,
+serial, failed observer and host-awake processes were reaped. No reset attempt
+receipt exists; the three conditional VGA boots were not launched.
+
+Post-closure complete hashes and original identities/modes/single links match all
+three retained targets and the full handoff CD. Build SHA-256 remains
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592;
+serial remains
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021;
+quarantined VGA remains
+fd79de7a50ad70adfcc7f6fd5eeaa694fc9c5dc961396535085e54090d85a438.
+No fixture handles/mounts remain. Standard capture metric is 724424 bytes; an
+additional 136524 bytes conservatively counts current-stage metadata and host
+capture records. A 3670164-byte conservative uncompressed capture/metadata upper
+bound also fits 10 MiB. Owned allocation was 12213407744 bytes below 20 GiB and
+encoded exports 972121651 below 1 GiB. Capture credential exclusion passed.
+Incomplete-preflight audit SHA-256:
+32d402abef49ce13930967232ad766f38724b1c846c2b4bf85acb93089fd0816.
+
+The AHCI preflight gate remains false. The accepted VGA reset, installation, 46
+cases and disposal cannot proceed through that gate. Eighteen of twenty-one launches
+are consumed; remaining count grants no alternate experiment. Root cause remains
+unproven. The [corrected stock-control proposal](installed-payload-flow.md#corrected-stock-ahci-read-only-control--proposed-2026-10-15)
+repurposes one remaining slot only after review, with no target attachment or reset.
+Offline host explicit-key verification of original install79.iso and member inventory
+confirmed all six inputs present and SHA256.sig absent at the fixed sets path.
+That preparation receipt SHA-256 is
+ee5beee37f22fb90eb8de98158cf0b1b1a284a8a8d38f8e81838628ddac2935f.
+No further guest has started. Original native C remains frozen at 35238a1 and its
+16369-byte additional-source ceiling remains satisfied; no runtime adoption follows.
+
+Final local make verify passed all 82 groups (23/13/3/10/33), no failures/skips,
+after these evidence/scope updates. Content/links, ShellCheck and Gitleaks passed;
+final prose passed content/link and diff-whitespace checks. This is host validation,
+not completion of the native preflight or installed VGA cases. No Actions, runners
+or hosted status publisher was used.
