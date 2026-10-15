@@ -733,8 +733,70 @@ Owned allocation is 11928199168 bytes below 20 GiB; captures 548805 below 10 MiB
 encoded exports 972121651 below 1 GiB, with 101620173 bytes remaining. A separate
 acceptance receipt SHA-256
 d3260c65f2f855c65a8381ae55b9292081611af843e6d4b7f856ebe39ac16042
-binds the reviewed candidate, original receipt and fresh complete target rechecks; all prior evidence is preserved. PR #58 was maintainer-merged
+binds the reviewed candidate, original receipt and fresh complete target rechecks;
+all prior evidence is preserved. PR #58 was maintainer-merged
 before this continuation; its main tree equals the reviewed tree. Keep remaining
 implementation/fixes/qualification/disposal together on codex/installed-vga-qualification
-in one follow-up draft. This accepts only the concrete retry and changed launch
-budget under the existing explicit review rule.
+in [draft PR #59](https://github.com/gonz0w/bootweave/pull/59). This accepts only the
+concrete retry and changed launch budget under the existing explicit review rule.
+
+## Diskless diagnosis after VGA stock panic — proposed, 2026-10-14
+
+Status: **Proposed; no diagnostic guest, repair or reinstall authorized.** The accepted
+retry passed VGA confirmation and independent native signature/input verification.
+Stock extraction subsequently panicked in the IDE path; full stopped evidence is in
+[native progress](installed-payload-native-progress.md#vga-confirmation-passed-stock-extraction-panic-2026-10-14).
+The original stop rule applies: "Failed postconditions stop dependent work; no
+automatic retry, resume, repair or general rollback." The incomplete VGA target is
+quarantined, with no later OS/payload boot. Fifteen launches are consumed; all 46
+VGA cases remain pending. Root cause is unproven.
+
+Propose repurposing the **two remaining launches within seventeen** for a bounded
+read-only comparison: one diskless boot from the original authenticated stock
+install79.iso, and one from the unchanged fully verified handoff.iso. Both use the
+same pinned QEMU/firmware, pc-i440fx-11.1/TCG/qemu64-v1, one CPU, 1 GiB RAM,
+keyboard/VGA and private serial observation. Each attaches only its single read-only
+CD: none of the three target images, no other block backing, network, sharing,
+hotplug or floppy backing. Complete paused effective inventory must prove that
+absence before execution. This changes purpose and attachments and needs review;
+remaining launch count is not permission to perform a different experiment.
+
+Observe the stock shell through its actual prompt; on handoff media, absence of an
+eligible disk must cause the unchanged frontend to refuse before returning to its
+shell. Do not bypass a refused confirmation or run /install. Mount only fixed cd0c
+read-only. Independently verify the explicit native release key, embedded signature,
+manifest and six frozen full input hashes. List the same authenticated base79.tgz
+through native tar to /dev/null, without extraction, at most twice per boot. Only
+bounded verification scratch in ephemeral RAMdisk /tmp is allowed; remove it before
+unmount/sync/halt. No target filesystem, destination directory or payload operation
+exists in this experiment. Record actual output/exit and resource outcomes. A panic,
+unsupported prompt, hash mismatch or other unexpected observation stops dependent
+work; no repetition beyond the two listed passes or automatic replacement boot.
+
+Keep the original fifteen-minute prompt, forty-five-minute scheduling and sixty-minute
+hard clocks from launch, all existing capture/storage/export and CPU/memory/input
+bounds, credential exclusion and no hosted checks. No compilation, new dependency,
+ISO rebuild/export, signing pair or credential is authorized. Reuse existing media:
+stock SHA-256 7a4a92e953618035097c796a90b54424a0f3ae775552e1e7d102cf8a5130449f;
+handoff SHA-256 607f1cc73a90402e5a02889b1bdc79c29dc8f67176086be38beffe218422f624.
+Their complete fresh hashes match. Freeze exact helpers/arguments before any accepted
+execution. Observe native halt when possible, honestly record any panic/unclean exit,
+reap all owned processes and prove closure. Preserve all three original target
+identities and stopped hashes; no guest target attachment/write/reset/disposal in
+this diagnosis. Host integrity hashing remains read-only.
+
+The comparison can show whether a read-only optical workload reproduces this failure.
+Media boot/RAMdisk/layout differences and lack of concurrent FFS writes limit what a
+non-reproduction proves. Do not claim isolation, general stability or qualification
+from two successful reads. Report evidence before proposing any installation retry,
+profile replacement or fix. This proposal authorizes none of those later actions and
+does not complete the 92-case deliverable or end exact-target/disposal authority.
+Keep diagnosis, subsequent decisions and eventual qualification/cleanup together in
+[draft PR #59](https://github.com/gonz0w/bootweave/pull/59).
+
+Immutable private proposal receipt SHA-256:
+a2d8dbfde9aeb7dc3684778be7983e29aff0db38609e1a740a81a8932805457f.
+It binds the completed stop audit and original target receipt, quarantined VGA hash,
+exact existing media, bounded operations, unchanged launch ceiling and no-target rule.
+Any acceptance must be recorded separately against the reviewed candidate and fresh
+closure/media/target-integrity observations; retain the proposal unchanged.

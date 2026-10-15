@@ -8,9 +8,10 @@ compiler provisioning, six revised entry builds, 976 serial/VGA regressions and 
 The installed disk namespace adjustment is accepted. Recovery and bounded range
 export completed with native clean halt and full ISO readback. Stock installation
 and cold OS boot on the serial target passed. The accepted raw-partition replacement
-passed serial qualification. VGA handoff stopped before confirmation/writes on an
-observer decoding failure; that target remains untouched. All 46 VGA cases and
-disposal remain together in one follow-up draft after PR #58 was maintainer-merged; no production runtime/interface is adopted.
+passed serial qualification. The accepted VGA observer retry passed confirmation and
+native input checks, then stock extraction panicked. Its incomplete target is
+quarantined, all 46 VGA cases and disposal pending in draft PR #59. A bounded
+read-only diskless diagnosis is proposed; no production runtime/interface is adopted.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.

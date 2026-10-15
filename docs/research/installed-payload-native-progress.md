@@ -6,13 +6,16 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Fourteen launches completed. The accepted raw-partition replacement passed native
-serial qualification and later readback, with clean halts/full target hashes.
-The VGA handoff observer failed before any confirmation or write; its target is
-still the original zero image. All 46 VGA cases and final disposal remain pending.
-The narrow observer fix/one-boot retry and seventeen-launch ceiling are accepted.
-PR #58 was maintainer-merged; remaining qualification and disposal continue together
-on codex/installed-vga-qualification from its identical merged tree.
+Fifteen launches completed. All 46 serial cases remain passed. The accepted VGA
+observer retry passed fresh disk confirmation and independent native input checks,
+then stock extraction panicked before OS completion. The partially written VGA
+image is quarantined; no clean native halt or installed VGA case is claimed.
+All owned processes are reaped, handles/mounts absent, all three full hashes and
+original identities checked. All 46 VGA cases and final disposal remain pending.
+Two diskless read-only diagnostic boots are proposed within the seventeen-launch
+ceiling; neither is accepted or started. Remaining work stays together in
+[draft PR #59](https://github.com/gonz0w/bootweave/pull/59), after maintainer merge of
+PR #58 from an identical tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -517,3 +520,81 @@ Local make verify after the prompt guard passed 82 groups (23/13/3/10/33), no
 failures/skips; content/links, ShellCheck and Gitleaks passed. No original C changed
 after native source 35238a1; its 16369-byte addition remains within 16 KiB. No
 Actions, runners or hosted status publisher was used.
+
+## VGA confirmation passed; stock extraction panic, 2026-10-14
+
+Cam accepted the one-replacement-install/seventeen-launch proposal at reviewed head
+78c58f826455d94025f258d1b4a7dc4f0548f11a. The separate acceptance receipt SHA-256 is
+d3260c65f2f855c65a8381ae55b9292081611af843e6d4b7f856ebe39ac16042.
+Fresh full hashes/original identities/modes/links matched all three targets; the VGA
+target was still completely zero. Corrected helpers and unchanged handoff/runtime
+media were frozen. Complete paused block/node/PCI/argv/open-file inventory passed:
+sole target, read-only CD, no network, sharing, hotplug or floppy backing.
+
+The actual VGA frontend passed both effect pages and fresh exact disk confirmation,
+with zero write counters before every input. The corrected observer retained unknown
+boot glyphs without treating them as prompt text. Unmodified stock /install began.
+Native explicit-key embedded-signature verification passed; the extracted complete
+manifest digest and all six input hashes matched authenticated frozen media. Stock
+entry files/symlink matched. Verification scratch was removed and optical media
+unmounted before returning to the installer. No unsupported checklist CLI was used.
+
+At the actual whole-disk prompt, another complete zero-image hash, original target
+identity/mode/single-link/zero-allocation observation, unchanged effective attachments
+and zero write counters passed. The approved whole-disk MBR and automatic FFS/swap
+layout were selected. The invalid-domain hostname, no DNS/SSH/X/extra account and
+actual VGA console remained the fixed profile; the existing synthetic credential
+was supplied only at observed echo-off prompts. Only bsd, bsd.rd, base79.tgz and
+man79.tgz were selected; comp79.tgz was explicitly deselected. Stock independently
+verified its signature and all four selected input hashes before extraction.
+
+During base extraction at the observed 14% progress, an ATAPI not-ready diagnostic
+was followed by a fatal supervisor protection fault: trap type 4, code zero,
+PC ffffffff810071a1. Panic disk-sync text was observed, without a completed sync or
+native clean halt. The emulator exited zero at 527.798 seconds; that exit is not OS
+completion, a qualified shutdown or payload readiness. No dependent input, retry,
+OS boot or payload case followed. The general observer subsequently exited one on
+the closed QMP socket; its last actual panic screen and lossless row capture remain
+private. A later QMP inspection was unavailable after guest exit, not a passing
+observation. Emulator, serial client and observer were reaped.
+
+Offline symbol inspection of the frozen native handoff kernel maps the PC within
+wdcstart, offset 0x17. Authenticated sys.tar.gz source correlation used these bounded
+regular members, with no execution:
+
+| Source | Bytes | SHA-256 |
+|---|---:|---|
+| sys/dev/ic/wdc.c | 55731 | eabac91bfc03889ee8d63f062c491d7ad2da3fb263464fb2dc3f003de0bf725c |
+| sys/dev/atapiscsi/atapiscsi.c | 38274 | 1d27bb46fa565df1f9a35f8f1a240e87c5c9d9265f867a3048bd807326b08d74 |
+
+This locates the observed failure; it does not establish an emulator, driver, media,
+prototype or hardware root cause. No kernel patch or profile change is adopted.
+
+The stopped VGA image's complete SHA-256 is
+fd79de7a50ad70adfcc7f6fd5eeaa694fc9c5dc961396535085e54090d85a438.
+Its original 8 GiB file identity, 0600 mode and single link still match; it is partially
+written and quarantined from dependent boots. Historical clean receipts were not
+overwritten. Build image SHA-256 remains
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592;
+serial image remains
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+All three full hashes and original identities were independently rechecked, with no
+fixture handles or mounts. Credentials were excluded from observation captures,
+which were losslessly compressed after closure. Owned allocation is 12212760576
+bytes below 20 GiB, capture 597384 below 10 MiB, encoded exports 972121651 below
+1 GiB. Post-stop audit receipt SHA-256:
+2341f684f45f2b12619b2ca75a07b6acea99d5cabe0f28703780811be65f74ad.
+Authority and final fixture disposal remain open. The remaining originally planned
+VGA payload/readback boots cannot run against an incomplete OS. The
+[read-only diagnosis proposal](installed-payload-flow.md#diskless-diagnosis-after-vga-stock-panic--proposed-2026-10-14)
+is a larger scope decision in this same draft; no diagnostic guest has started.
+
+Local make verify before this attempt passed all 82 groups (23/13/3/10/33), with
+content/link, ShellCheck and Gitleaks checks passing. Original C remains unchanged
+from native source 35238a1 and within its 16369-byte additional-source ceiling.
+
+Final local make verify after the stop-evidence/proposal update also passed all 82
+groups, no failures or skips; content/links, ShellCheck and Gitleaks passed. The
+subsequent final prose clarification passed the same content/link check. No Actions,
+runners or hosted status publisher was used. These host results do not qualify the
+panic-stopped VGA installation.

@@ -110,7 +110,8 @@ The accepted recovery/export boot completed with native clean halt and full orig
 ISO readback. The serial target passed stock installation and cold OS boot; the
 diagnostic entry identified a mounted block-device open refusal before dispatch.
 The accepted raw-partition replacement now passed serial qualification. The VGA
-handoff stopped before disk confirmation because its observer rejected an unknown
-boot glyph; that target remains untouched. A one-boot retry/seventeen-launch
-amendment is accepted. All 46 VGA cases and disposal stay together in one follow-up
-draft after maintainer merge of PR #58.
+handoff initially stopped before disk confirmation on an observer glyph error. Its
+accepted retry passed confirmation and native input checks, then stock extraction
+panicked. That partially written target is quarantined; no VGA installed case passed.
+All 46 VGA cases and disposal remain pending in draft PR #59. A bounded diskless
+read-only diagnosis is proposed within the existing seventeen-launch ceiling.
