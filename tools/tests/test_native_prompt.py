@@ -7,9 +7,23 @@ import unittest
 MODEL = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'check-native-prompt.py'))
 PAGE, REJECTED = MODEL['handoff_page'], MODEL['Rejected']
 OBSERVATION = MODEL['handoff_observation']
+LOGIN = MODEL['installed_login_page']
 
 
 class NativePromptTests(unittest.TestCase):
+    def test_installed_VGA_login_requires_banner_and_fresh_prompt(self):
+        banner = 'OpenBSD/amd64 (bootweave.example.invalid) (ttyC0)'
+        self.assertTrue(LOGIN([banner, '', 'login: \uFFFD']))
+        for rows in ([], ['login:'], [banner, 'bootweave login:'],
+                     [banner, 'Password:'], [banner, 'login:', '#'],
+                     [banner.replace('ttyC0', 'tty00'), 'login:'],
+                     [banner.replace('bootweave', 'other'), 'login:']):
+            with self.subTest(rows=rows):
+                self.assertFalse(LOGIN(rows))
+        for rows in (None, [banner] * 26, [banner, '\x1b[2Jlogin:']):
+            with self.subTest(rows=rows), self.assertRaises(REJECTED):
+                LOGIN(rows)
+
     def test_preboot_observation_never_authorizes_input(self):
         marker = 'Type next to review effects.'
         self.assertFalse(OBSERVATION([], marker))

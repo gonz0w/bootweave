@@ -6,23 +6,22 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Twenty-three launches are consumed under the accepted twenty-five ceiling. The
-headless AHCI handoff preflight passed native authentication/full input hashes,
-both listing-only tar passes and native clean halt. Full original-target/media
-integrity and closure passed. The approved one-time reset preserved the original
-VGA file identity and established the complete zero hash/zero allocation.
-The next install boot stopped in the host observer at 0.352 seconds: its known
-preboot BIOS frame decoded as no native text page, then the controller incorrectly
-called the strict page guard with an empty list. No frontend, stock, native-command
-or credential input was submitted. Host termination ended at 20.375 seconds without
-native halt. The original VGA target still has its full zero hash/zero allocation;
-other targets and both sealed media are unchanged, with no handles/mounts.
-All 46 VGA cases and disposal remain pending. A tested host observation adapter
-now waits on an empty preboot observation without weakening strict native-page
-checks. A concrete three-stage continuation proposes launches 24–26, no further
-reset, and ceiling twenty-six. It is not accepted or executed. This feature remains
-on codex/headless-vga-qualification after maintainer merge of PR #64 from the
-identical reviewed tree; no phase PR boundary or production qualification follows.
+Twenty-five launches are consumed under the accepted twenty-six ceiling. The
+headless preflight and one-time original VGA reset remain verified. Launch 24
+completed native confirmation/input verification, offline stock installation,
+foreground relink/configuration and clean halt; full target/media hashes and closure
+passed. Its cold installed-OS boot at 25 reached the actual ttyC0 getty banner and
+normal login: prompt. The frozen host observer incorrectly awaited a hostname-
+prefixed prompt. Qualification was stopped before any runtime/payload command;
+cleanup-only login/sync/halt produced native guest shutdown within the original
+cleanup window. All owned processes are reaped, with full hashes/identities and
+closure verified. First-boot changes are retained; kernel-copy/process agreement
+was not established and remains a fresh native gate before payload work.
+The host login guard is corrected and tested against the retained actual frame.
+All 46 installed VGA cases and exact disposal remain pending. A two-stage proposal
+requests launches 26/27 and ceiling twenty-seven, with no reinstall or reset; it is
+not accepted or executed. This feature continues on codex/vga-qualification-finish
+after maintainer merge of PR #65 from the identical reviewed tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -1088,9 +1087,107 @@ Host tests do not qualify a corrected native boot.
 
 Twenty-three of twenty-five launches are consumed. No payload/readback boot ran,
 and all 46 installed VGA cases plus exact disposal remain pending. The
-[three-stage continuation proposal](installed-payload-flow.md#vga-preboot-observer-correction-and-three-stage-continuation--proposed-2026-10-15)
+[three-stage continuation proposal](installed-payload-flow.md#vga-preboot-observer-correction-and-three-stage-continuation--accepted-2026-10-15)
 keeps the successful headless preflight and verified same-original zero target,
 proposes no further reset and requests ceiling twenty-six for install/payload/
 readback at 24/25/26. No further launch or budget increase is accepted by preparing
 that proposal. Keep its implementation, native qualification and disposal together
 on this feature branch/draft.
+
+
+## Completed VGA stock installation; cold-boot login observer stopped, 2026-10-15
+
+Cam accepted the concrete three-stage continuation, launches 24–26, ceiling twenty-six
+and no second reset, at reviewed head a44130431ce9f9e031ba55a5baf8bf888c272dd3.
+Maintainer merge 624fb232c6fec9ac06dc6cb5e2b0ec4ddd598dad has the identical tree
+18b6c8d85544731f73f7c9d6802aea2f13df208d. Fresh acceptance receipt
+bdc31959f237fa645cad48d8b0cd37d986a93796f6a9db3ae8e03fda3c5c77b6
+binds all original target identities/full hashes, 0400 media and closure to the
+successful launch-22 preflight and already completed single reset. The reset-attempt
+receipt remains unchanged. No reset, new target, media/kernel/source build, credential,
+payload signing pair, dependency, transport or export was added.
+
+Install helper/argument/host-pin freeze:
+f4b3ab71376529971703e3dc5a0225673705e62575e38a05c6d8146f2ee56cec.
+The reviewed corrected controller is preserved; its execution copy differs only in
+the sampler helper path, whose exact stage allowlist retains the same owned-PID,
+one-second/1 MiB limits. Launch 24 passed complete paused sole-original-target/
+read-only AHCI CD isolation with zero writes. The corrected preboot observer reached
+actual effect review and fresh exact disk confirmation at 45.694 seconds, still
+with zero writes. Native explicit-key signature, authenticated manifest, six full
+release-input hashes and unmodified stock entry hashes passed. Scratch/CD cleanup
+preceded returning to stock prompts. Another full zero-image/original-identity/
+effective-attachment check passed before the whole-disk MBR answer at 297.073 seconds.
+
+Stock separately verified its signature and all four selected sets, then installed
+bsd/bsd.rd/base79.tgz/man79.tgz; comp was deselected. Offline/no-DNS/no-SSH/no-X/
+no-extra-user/VGA/UTC choices remained. Foreground kernel relink and stock completion
+were observed. Independent disklabel, three FFS mounts, hostname/SSH/DNS/default-VGA/
+UTC observations and the base verifier digest passed. Optional boot.conf was absent
+for the stock default VGA console; its missing-file diagnostic is not a successful
+file read. Installed /bsd and the relink output agreed on full digest
+dbf7db2caa7d882e2c9ad789ab0dc188152defb3778e832730526337781466e2.
+Native unmount/sync/halted-reboot state preceded QMP quit. Normal exit and all owned
+reaping completed at 1173.183 seconds, with no timeout, recovery, sample or forced stop.
+Full original VGA image SHA-256:
+f1a3e1ba8d5a0fd6be4fcd164e32d32e1e4ef064890f63a054a5dfb2d5d953f0.
+Allocated bytes were 1998749696. Full build/serial/media hashes, original identities,
+credential exclusion and no-handle/mount closure passed. Positive installation audit:
+1ba391b701b7128556fbdcd380af5becdc13b27e37d227287d41f14623f0402d.
+This establishes the bounded stock installation, not installed payload qualification.
+
+Launch-25 installed-OS helper/argument/host-pin freeze:
+45694e4915897941f4d350c0c110cea34320ab8c564d471dbe6bf9533984ae18.
+A fresh full-hash/identity/media/closure check bound the cold boot to that installed
+image. Complete paused target/runtime-CD isolation passed. Actual native boot frames
+established AHCI/cd0, stock first-boot activity and the ttyC0 getty banner with the
+normal login: prompt. The frozen host controller instead awaited bootweave login:;
+this was a host matching error, not a native refusal, QMP timeout or failed login.
+No qualification-driver input or runtime/payload command was submitted.
+
+Qualification was deliberately stopped at 352.633 seconds. After validating the
+owned controller's exact command/cwd and guest argv, SIGINT stopped that host
+observer; its exception-safe QMP scope released the reader. Only then did a bounded
+cleanup helper become the sole reader. Fresh exact getty banner/login and actual
+echo-off Password prompts preceded one cleanup-only root login. A fresh shell and
+the fixed sync/halt command were observed before Return. The guest-origin shutdown
+event was observed at 367.836 seconds; normal guest/client/awake reaping finished at
+367.946, within the original controller's twenty-second cleanup wait. No guest
+restart, clock reset, payload entry, answer/confirmation resubmission, QMP recovery,
+sample or qualification continuation occurred.
+
+No runtime hashes, raw-label/root context, worker/relink/kernel-copy agreement,
+trusted fixture preparation or installed case passed in this stopped phase. Clean
+shutdown does not establish that first-boot relink workers had finished. Their
+absence and matching kernel copies remain mandatory before a later payload entry.
+First-boot changes are retained on the same original file, without reinstall,
+reset, overlay or rollback. Complete post-halt VGA SHA-256:
+ad9c4443de60c003e3b5358a53deb175b7a942686e282c09fd9a13de834e0a90;
+allocated bytes 2019049472. Build/serial digests remain respectively
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592 and
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+All original identities, both complete media hashes, credential exclusion and owned
+closure passed. Captures, including cleanup frames, are retained losslessly.
+Closed-audit allocation 13949915136 bytes, capture 2105840 and exports 972121651
+were within all bounds; additional lossless cleanup-frame compression reduced capture.
+Stopped phase audit SHA-256:
+c6f14f9e3308d07fb40cfa3bfd3a7caef088b5e2f1eeef39684e952997665b44.
+Its qualification stays false. Its generic quarantine flag records an unqualified
+phase, not an observed failed stock install or payload write.
+
+The new host-only installed_login_page guard requires the actual synthetic ttyC0
+banner and fresh login: row, retaining strict shape/glyph/control checks. It rejects
+missing/wrong-host/wrong-console banners, stale pages, Password prompts and the old
+incorrect hostname-prefixed expectation. Three host prompt regression groups passed,
+including the earlier strict preboot/refusal guards. The actual retained login frame
+matches; a separate corrected controller and two exact stage arguments are prepared
+and syntax checked, with no native retry result. Host correction proof SHA-256:
+51b29f7ef6d91560ab9f592ef740cbb43b3284d5a671ad71758a3d1038662d67.
+The failed frozen controller remains unchanged. No production login API is adopted.
+
+Twenty-five of twenty-six launches are consumed; launch 26 did not run. The
+[remaining two-stage proposal](installed-payload-flow.md#vga-getty-observer-correction-and-two-stage-completion--proposed-2026-10-15)
+requests payload/readback at 26/27 and ceiling twenty-seven on the same cleanly
+halted first-boot image, with no reinstall/reset. All 46 VGA cases and original exact
+disposal remain pending; preparing the proposal or disposal helper grants no further
+native execution or deletion. Complete qualification/disposal remains one feature.

@@ -113,10 +113,13 @@ The corrected stock-only AHCI control passed both listing-only passes and native
 clean halt. After an earlier Cocoa observation failure, the accepted headless handoff
 preflight passed native verification, both tar listings and clean halt. The approved
 one-time reset preserved the original VGA identity and verified a full zero image.
-The next install boot stopped in a host preboot observer before frontend input;
-the target is still zero, with other targets/media unchanged and closure verified.
-The host guard is corrected and tested, but all 46 VGA cases and disposal remain
-pending on one feature branch after maintainer merge of PR #64. Twenty-three of
-twenty-five launches are consumed. A three-stage continuation at 24–26, with no
-further reset, is proposed and not authorized. No production runtime/profile or
-general hardware qualification follows.
+The corrected install run completed native input verification, offline stock
+installation, foreground relink/configuration, clean halt and full integrity/closure.
+Its cold OS boot then reached the normal ttyC0 login: page; a host observer expected
+the wrong prompt. Qualification stopped before payload input, followed by cleanup-only
+native login/sync/halt and verified closure. First-boot changes are preserved.
+The login guard is corrected/tested; all 46 VGA cases and disposal remain pending
+on one feature branch after maintainer merge of PR #65. Twenty-five of twenty-six
+launches are consumed. Payload/readback at 26/27 with no reinstall or reset is
+proposed and not authorized. No production runtime/profile or general hardware
+qualification follows.

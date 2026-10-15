@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -14,13 +14,16 @@ for the reviewed recovery sequence. The corrected stock-only AHCI control
 passed both listings/native halt. After an earlier failed Cocoa observation attempt,
 the accepted headless handoff preflight passed native verification, two listing-only
 passes and native clean halt. The approved original-file reset completed with the
-full zero hash/zero allocation. Install launch 23 then stopped in a host preboot
-observer before any frontend/stock input. All original identities, other targets,
-both media and the zero VGA image passed closure/hash checks. The host observation
-adapter is corrected/tested; the strict native-page guard is unchanged. Twenty-three
-of twenty-five launches are consumed, all 46 VGA cases/disposal pending. A three-stage
-continuation proposes ceiling twenty-six with no further reset; it is not accepted
-or executed. No production interface/profile or general hardware qualification follows.
+full zero hash/zero allocation. After the earlier preboot observer stop, launch 24
+completed native confirmation/input verification, offline stock installation,
+foreground relink/configuration and native halt/full integrity/closure. Cold boot 25
+reached the actual ttyC0 getty page; its host observer expected the wrong login text.
+Qualification stopped before any runtime/payload input. Cleanup-only root login/
+sync/halt and owned closure passed, without a worker/kernel-copy agreement claim.
+First-boot changes remain on the same original target; no reinstall or reset occurred.
+The host login guard is corrected/tested; all 46 VGA cases/disposal remain pending.
+Twenty-five of twenty-six launches are consumed. Two remaining boots at 26/27 are
+proposed, not accepted. No production interface/profile or general qualification.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
