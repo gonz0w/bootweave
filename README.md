@@ -104,21 +104,17 @@ accepted one replacement provisioning attempt and eleven total launches; remaini
 native qualification and cleanup stay together after the implementation merge.
 
 [Installed-target native progress](docs/research/installed-payload-native-progress.md)
-records six revised native entry builds, 976 serial/VGA build regressions and all
-46 installed serial cases, including retained-payload readback after another boot.
-The accepted recovery/export boot completed with native clean halt and full original
-ISO readback. The serial target passed stock installation and cold OS boot; the
-diagnostic entry identified a mounted block-device open refusal before dispatch.
-The accepted raw-partition replacement now passed serial qualification. The VGA
-handoff initially stopped before disk confirmation on an observer glyph error. Its
-accepted retry passed confirmation and native input checks, then stock extraction
-panicked. That partially written target is quarantined; no VGA installed case passed.
-All 46 VGA cases and disposal remain pending in one feature follow-up after PR #61
-was maintainer-merged. The accepted AHCI diskless preflight passed authentication,
-full input hashes and one listing, but its second pass remained incomplete. It was
-aborted and cleanly halted within the scheduling limit. No VGA reset occurred; all
-three retained images remain unchanged. The separately accepted stock-only control
-matched native hashes and passed one listing, then lost QMP observation in its second
-pass and required forced host closure; no native halt is claimed. Nineteen of
-twenty-one launches are consumed. A host socket cleanup fix passed two synthetic
-cases; one corrected-cleanup diskless control is proposed, without target/reset authority.
+records six revised native entry builds, 976 build regressions and all 46 installed
+serial cases, including later retained-payload readback. Recovery/export, persisted
+key absence and full original ISO readback passed. The raw-partition replacement
+passed serial qualification. The VGA retry passed confirmation/native input checks,
+then stock extraction panicked; its partial target remains quarantined.
+The handoff AHCI preflight passed one listing, but its second remained incomplete
+before abort and native clean halt. A separate corrected stock-only AHCI control now
+passed native hashes, both listing-only passes and actual native clean halt, without
+QMP recovery. No target was attached/reset; all three full hashes/identities remain
+unchanged. Twenty of twenty-one launches are consumed. All 46 VGA cases and exact
+disposal remain pending in one feature follow-up after maintainer merge of PR #62.
+A complete four-stage proposal requests ceiling twenty-four: fresh handoff preflight,
+then only after its success the same original VGA reset, installation, payload and
+readback. It is not authorized; stock control success does not unlock that gate.
