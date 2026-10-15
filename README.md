@@ -109,12 +109,13 @@ serial cases, including later retained-payload readback. Recovery/export, persis
 key absence and full original ISO readback passed. The raw-partition replacement
 passed serial qualification. The VGA retry passed confirmation/native input checks,
 then stock extraction panicked; its partial target remains quarantined.
-The handoff AHCI preflight passed one listing, but its second remained incomplete
-before abort and native clean halt. A separate corrected stock-only AHCI control now
-passed native hashes, both listing-only passes and actual native clean halt, without
-QMP recovery. No target was attached/reset; all three full hashes/identities remain
-unchanged. Twenty of twenty-one launches are consumed. All 46 VGA cases and exact
-disposal remain pending in one feature follow-up after maintainer merge of PR #62.
-A complete four-stage proposal requests ceiling twenty-four: fresh handoff preflight,
-then only after its success the same original VGA reset, installation, payload and
-readback. It is not authorized; stock control success does not unlock that gate.
+The corrected stock-only AHCI control passed both listing-only passes and native
+clean halt. The accepted four-stage handoff/VGA attempt then stopped during its
+first diskless boot on QMP observation failure, before native verification or any
+target reset. Bounded recovery failed; a retained host sample does not establish a
+cause. All three full target hashes/identities remain unchanged. Twenty-one of
+twenty-four launches are consumed. All 46 VGA cases and disposal remain pending in
+one feature follow-up after maintainer merge of PR #63. A host-display isolation
+proposal keeps virtual VGA/keyboard, requests ceiling twenty-five and preserves a
+fresh successful handoff preflight before any same-original-VGA reset. It is not
+authorized; no production runtime/profile or general hardware qualification follows.
