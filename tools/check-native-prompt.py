@@ -21,3 +21,13 @@ def handoff_page(lines, marker, interactive=True):
     rows = [row.rstrip('_\uFFFD ') for row in lines]
     active = next((row for row in reversed(rows) if row), '')
     return marker in rows and (not interactive or active == marker)
+
+
+def handoff_observation(lines, marker, interactive=True):
+    """An empty preboot observation cannot authorize input; pages stay strict."""
+    if isinstance(lines, list) and not lines:
+        # The framebuffer decoder can report no text page during BIOS startup.
+        # Still validate the expected marker, without manufacturing a prompt.
+        handoff_page([''], marker, interactive)
+        return False
+    return handoff_page(lines, marker, interactive)
