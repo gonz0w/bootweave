@@ -1,16 +1,17 @@
 # Installed payload native progress and discovery decision
 
 2026-10-14. **Partial qualification; installed-root placement remains unqualified.**
-Current: 976 build checks passed and six diagnostic installed variants built. The
+Current: 976 build checks and all 46 installed serial cases passed; six revised
+installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Ten launches completed, including clean stock installation and offline serial OS
-boot. The diagnostic serial entry identifies a mounted block-device open refusal;
-its empty case was removed and the guest cleanly halted. All 92 installed payload
-cases and final disposal remain pending. A raw root-partition replacement is
-accepted after review in [PR #57](https://github.com/gonz0w/bootweave/pull/57),
-after the maintainer merge of [PR #56](https://github.com/gonz0w/bootweave/pull/56).
+Fourteen launches completed. The accepted raw-partition replacement passed native
+serial qualification and later readback, with clean halts/full target hashes.
+The VGA handoff observer failed before any confirmation or write; its target is
+still the original zero image. All 46 VGA cases and final disposal remain pending.
+A narrow observer fix/one-boot retry is proposed in
+[draft PR #58](https://github.com/gonz0w/bootweave/pull/58).
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -424,3 +425,94 @@ extended pure mutation tests pass host checks, with 16369 additional C/header by
 and all installed-mode syntax checks against authenticated OpenBSD headers passing.
 These checks do not replace native qualification. No new signing pair, credential,
 network, service, target or production interface is authorized.
+
+## Raw-partition build and complete serial qualification, 2026-10-14
+
+The eleventh boot compiled signed source
+35238a1a7afd9d53518671b66baca0fc6ccd010f under base clang 19.1.7. All six revised
+variants and twelve native binary/map frames passed exact size/mode/hash readback;
+dynamic linkage and static program-header/dynamic-section observations passed.
+The IDE compiler guest ran no installed entry. Persisted signing-key absence,
+frozen source/public-fixture/prior-output hashes, exact TTY restoration/receipt
+removal, absent test/relink workers, unused vnds and matching kernel copies passed.
+Combined fixture allocation was 17016 KiB below 20 MiB; media scratch 678234 KiB
+below 3 GiB. Native clean halt/reaping/no handles/mounts/full original identity
+checks passed at 595.568 seconds. Build image SHA-256:
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592.
+
+Source disc: 921600 bytes, SHA-256
+c1d9dc97d4c00473419d9829e4c129b0ed1f19bac3cf06cf66930e93e68bc917,
+24 files. Runtime disc: 5947392 bytes, SHA-256
+a0eedff80d5d23b24bc596e55cc3c42f9b96427fa98a55443f6055dd529fc7e5,
+16 files. Both complete ISO9660/Joliet inventories/hashes passed. Fresh encoded
+frames added 7131529 bytes, aggregate 972121651 within 1 GiB. No handoff-ISO replay
+or rebuild, signing pair, credential or dependency was added.
+
+The twelfth boot used the same exact serial target. All three FFS checks were
+clean. Independent runtime/verifier hashes, device/namespace/full matching raw
+labels, root/parent/canary metadata, optical executable modes and completed
+relink/kernel-copy proofs passed. Complete paused/postprobe attachments excluded
+additional disks, floppy backing media, IP endpoints and sharing. The revised
+native preflight passed without waiving a binding condition.
+
+| Required installed serial group | Passed |
+|---|---:|
+| Dynamic automatic | 17 |
+| Static automatic | 17 |
+| Actual serial dynamic | 5 |
+| Actual serial static | 5 |
+| Static retained positive | 1 |
+| Static later readback | 1 |
+| Total | 46 |
+
+Actual cases independently observed full target/member review, fresh confirmation,
+cancel, changed snapshot/binding refusal and partial writer reporting. All ten
+manual target preludes included the new named-block metadata. Exact TTY and native
+exit-zero checks passed. Maximum controller/child RSS across the four suites was
+1272/1172 KiB, below 64/32 MiB. Retained inventory was exactly the case, viewer directory
+and five-byte readme, with nobody ownership, 0700/0600 modes and expected content
+hash; parent/canary metadata and canary bytes/hash were unchanged. KEEP measured
+2.06 seconds real, 0.02 user/0.28 system and 1140 KiB maximum RSS. Native halt,
+reaping/handle closure, credential exclusion and full original identity passed at
+837.208 seconds. Retained serial image SHA-256:
+3f11d7ec75ccbd2f5b167fb936c171ec264aa7140d636f7b7418cea7004b02de.
+
+The thirteenth boot independently repeated clean FFS/runtime/namespace/root label
+and retained inventory/content/owner/mode/canary checks. Stock relinking was still
+active initially; dependent execution waited until workers disappeared and kernel
+copies matched. One fixed static READBACK entry passed, without writer dispatch or
+member rewriting. Native exit zero, exact TTY/receipt cleanup, positive time/CPU/RSS
+and identical final inventory/content/canary passed. Native halt/reaping/full
+identity/hash/handle closure passed at 980.476 seconds. Final serial image SHA-256:
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+
+## VGA observer stop before disk confirmation, 2026-10-14
+
+The fourteenth launch used the original untouched VGA target and fully verified
+native handoff ISO. Complete paused attachments passed. The actual VGA text
+observer retained its display, but the confirmation driver attempted ASCII encoding
+of a decoder unknown-glyph marker from boot text. UnicodeEncodeError occurred
+before any frontend input. Native initial review then timed out, reporting handoff
+exit two and returning to the RAMDISK shell. No disk confirmation or stock install
+started; no installed VGA case passed.
+
+All block write-byte and write-operation counters were zero before cleanup and
+after native sync/halt. No target filesystem had been mounted. Native halted/reboot
+text was observed before QMP quit; no reboot input was sent. The general observer
+exited on the now-absent QMP socket during closure; that host observer race is
+recorded, not a native success. Future closure stops/reaps it before the dedicated
+halt observation. Emulator/client/observer were reaped; no handles/mounts remained.
+Full original target identity/mode/links, zero allocation and original complete
+zero-image hash passed at 306.446 seconds. Credentials remained excluded from captures.
+
+The [proposed observer/retry amendment](installed-payload-flow.md#vga-confirmation-observer-retry--proposed-2026-10-14)
+preserves unknown glyphs and requires the current exact input prompt, rejecting
+native refusal before any stale match. A new pure host boundary test also rejects
+garbled prompts, control text, oversized observations and wrong active prompts.
+This host fix is not native qualification. No further guest starts before retry
+review. All 46 VGA cases, clean later readback and exact fixture disposal remain.
+
+Local make verify after the prompt guard passed 82 groups (23/13/3/10/33), no
+failures/skips; content/links, ShellCheck and Gitleaks passed. No original C changed
+after native source 35238a1; its 16369-byte addition remains within 16 KiB. No
+Actions, runners or hosted status publisher was used.

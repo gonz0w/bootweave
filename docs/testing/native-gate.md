@@ -27,16 +27,17 @@ passed. Earlier compile/console failures remain recorded. This completes only it
 accepted research slice, with no full parent PTT or production integration claim.
 
 The [installed-root slice progress](../research/installed-payload-native-progress.md)
-records six diagnostic native entry builds and 976 serial/VGA build regressions.
+records six revised native entry builds, 976 serial/VGA build regressions and all
+46 installed serial cases, including retained positive and later readback.
 The private empty-fd0 adjustment is accepted. Media export remained incomplete and
 the earlier build hard stop was followed by approved recovery/export, persisted key
 absence, native clean halt and full original ISO readback; serial stock installation
-and cold OS boot passed. Both approved diagnostic boots cleanly halted; the serial
-entry identified mounted block-device open refusal before dispatch. The raw
-root-partition replacement and sixteen-launch amendment are accepted;
-installed-root qualification remains pending.
-All 92 installed-root cases and disposal remain pending; no installed-root or parent
-installer acceptance follows.
+and cold OS boot passed. The accepted raw-partition replacement passed complete
+serial qualification with clean halts/full target hashes. VGA handoff stopped on a
+host observer failure before disk confirmation/writes; the target remains untouched.
+A one-boot/seventeen-launch retry amendment is proposed. All 46 installed VGA
+cases and exact fixture disposal remain pending; no complete installed-root or
+parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

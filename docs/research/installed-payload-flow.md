@@ -669,5 +669,68 @@ named-block metadata fields and compares them explicitly at existing boundaries.
 Host pure tests mutate each new field and reject zero inode/link count, wrong node
 type and group/other writable mode. Shorter private C identifiers fund these fields
 without removing a guard: additional original C/header is 16369 bytes, within 16 KiB.
-All installed modes pass host syntax checks against authenticated native headers;
-native build, positive binding and all 92 installed cases remain required.
+All installed modes pass host syntax checks against authenticated native headers.
+Native compilation and all 46 serial cases, including positive binding and later
+readback, now passed; all 46 VGA cases and final disposal remain required.
+
+## VGA confirmation observer retry — proposed, 2026-10-14
+
+Status: **Proposed; no additional guest or repeated confirmation authorized by this
+amendment yet.** Fourteen launches are consumed under the accepted sixteen ceiling.
+The accepted raw-partition implementation built natively and all 46 installed
+serial cases passed. The original VGA install launch stopped before any frontend
+input, disk confirmation or stock install: its observer attempted ASCII encoding
+of an undecoded boot glyph. Native handoff subsequently timed out at initial review.
+Complete zero write counters, native RAMDISK sync/halt, reaping/handle closure,
+original full zero hash and zero allocation independently prove that target unwritten.
+
+The concrete host observer fix preserves decoder unknown glyphs as UTF-8 text;
+it does not guess their meaning or repair a garbled safety field. The public
+tools/check-native-prompt.py guard bounds a screen to 25 rows/80 cells, permits
+only printable ASCII/decoder unknown markers and rejects native handoff refusal
+before matching any prompt. Each input page requires its complete literal marker
+to be the current active line, after only trailing cursor/space normalization;
+stale review text above a shell prompt cannot authorize input. Confirmation-result
+observation may follow the transition to a stock question, with native refusal
+still rejected. Capacity remains exactly 8 GiB/512-byte sectors, and the displayed
+DUID must still match sixteen lowercase hexadecimal characters. It is validated
+typed confirmation data, never shell text. Host tests cover unknown boot text,
+expired/stale and wrong prompts, garbled prompt/control text, bounds and result
+transition. Native positive confirmation remains unqualified on VGA.
+
+Requested retry: one **vga-install-retry** cold boot on the same untouched exact
+VGA target; increase aggregate launch ceiling **sixteen to seventeen**. Fourteen
+consumed plus this replacement install and the two original VGA payload/readback
+boots fit seventeen. Do not repeat within the stopped guest or renew any clock.
+Reuse the original fully verified handoff ISO, revised verified runtime disc,
+existing target credentials and inert signed fixture. No compiler boot, rebuild,
+full-ISO replay, key pair, credential, dependency, network or service is added.
+Every original per-launch, input/operation/confirmation, source, capture, storage,
+export, CPU/memory and privilege bound remains. Stop/reap the general observer
+before dedicated halt observation, avoiding the recorded closed-socket race.
+
+Repeat full original target identity/mode/single-link/zero-allocation/hash checks,
+paused complete attachments and zero write counters. Wait for supported actual
+text geometry, freeze corrected observer/helper identities, and supply both effect
+review pages and fresh exact disk confirmation from the observed current prompts.
+Host identity/full zero hash/attachments must again match immediately before stock
+whole-disk input. Preserve independent native release/set verification, stock
+completion, clean halt/cold OS boot, all 46 VGA payload/refusal/readback cases and
+final exact fixture disposal. Any unexpected observation stops dependent work.
+
+Immutable original target receipt SHA-256 remains
+56f416bbdf7f25ac96bb610d1c2b81f1f7a4db4aee9abdb68bdcacf90e2dac5f.
+Fresh complete build image SHA-256:
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592.
+Fresh complete final serial image SHA-256:
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+VGA remains the original full-zero digest, exact identity and zero allocation.
+All three full rechecks and no fixture handles/mounts passed. Separate immutable
+private retry proposal receipt SHA-256:
+345aa6e51c4c617e655b44a6cebc4a00ed1cba18f0eb54e6bfcc1811ca7db8ff.
+Owned allocation is 11928199168 bytes below 20 GiB; captures 548805 below 10 MiB;
+encoded exports 972121651 below 1 GiB, with 101620173 bytes remaining. Bind any
+acceptance separately to the reviewed candidate, original receipt and fresh target
+rechecks; preserve all prior evidence. Keep implementation/fixes/qualification/
+disposal in [draft PR #58](https://github.com/gonz0w/bootweave/pull/58). This is a
+retry and changed launch budget under the existing explicit review rule.
