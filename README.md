@@ -124,6 +124,13 @@ incomplete-review observer stop. Launch 27 proved native scrollback; approved la
 checks. Its cleanup completion marker was absent, so removal remains unestablished;
 native cleanup halt and full integrity/closure passed. No new payload case ran.
 The corrected host flow preserves current-boot TTY state and treats the stale receipt
-as an inert artifact. Seventeen prompt groups pass. Full payload rerun/readback at
-29/30, ceiling 30, require review; no reinstall/reset is proposed. Keep qualification
-and disposal in draft PR #67. No production runtime/profile or hardware qualification.
+as an inert artifact. Approved launch 29 passed the full 45-case VGA payload stage,
+including ten actual keyboard cases, retained inventory and native clean halt.
+Independent launch 30 matched that inventory, then a host frame/inventory variable
+collision stopped observation before READBACK input and blocked native halt cleanup;
+termination was forced. Full hashes/identities and closure passed, but READBACK and
+complete installed qualification remain false. Thirty of thirty launches consumed.
+A readback-only closure-state correction passed six host checks; launch 31, ceiling
+31, is proposed and unaccepted. No reinstall/reset or payload rerun. Keep completion
+and original exact disposal together after PR #67's maintainer merge. Production
+runtime/profile and hardware qualification remain pending.

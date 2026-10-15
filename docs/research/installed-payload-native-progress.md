@@ -1,23 +1,25 @@
 # Installed payload native progress and discovery decision
 
 2026-10-15. **Partial qualification; installed-root placement remains unqualified.**
-Current: 976 build checks and all 46 installed serial cases passed; six revised
-installed variants built. The
-accepted recovery boot completed stock automatic preening, verified persisted key
-absence and source/artifact hashes, finished the fixed suffix export, and cleanly
-halted. The original native ISO and its full boot/member inventory passed readback.
-Twenty-eight launches are consumed under twenty-nine. Launch 26 passed 34 automatic
-VGA cases before its incomplete-review observer stop/forced cleanup. Launch 27 proved
-native scrollback/current return/TTY agreement, then stopped on the prepared fixture
-owner expectation. Approved launch 28 passed repeated prerequisites/probe, exact
-metadata, native type/content/canary/four-path checks. Its cleanup chain returned to
-the shell without the completion marker; the exact failing predicate and removal
-state remain unestablished. Native cleanup halt and full postflight passed. No new
-payload case ran. The corrected host flow uses current-boot TTY preservation and
-treats the stale receipt as an inert owned artifact; it re-observes known optional
-artifacts and rejects unknown paths or changed identities. Seventeen prompt groups
-pass. Full-45 rerun/readback at 29/30, ceiling 30, are proposed and unaccepted, with
-no reinstall/reset. Keep qualification, fixes and exact disposal in draft PR #67.
+All 976 required build regressions, 46 installed serial cases and the complete
+45-case VGA payload stage passed. Launch 29 completed actual keyboard reviews,
+fresh confirmations, exact TTY restoration, independent retained inventory/content,
+native clean halt and full integrity/closure. The independent launch 30 repeated
+native prerequisites/kernel closure and observed the same retained inventory as 29.
+Before READBACK submission, its host controller overwrote previous-frame state with
+the retained-inventory dictionary. The next screen observation raised KeyError; the
+same collision blocked cleanup observation, requiring bounded forced termination.
+READBACK, native clean halt and complete VGA qualification remain false. All original
+identities, full hashes/media, credential exclusion and process/handle closure passed;
+the unclean original image remains quarantined. Thirty of thirty launches consumed.
+
+The corrected readback-only controller owns frame state in a private closure. Six
+host checks reproduce the old failure and exercise corrected observation/submission,
+cleanup availability, global-name collision isolation and inventory/prompt refusal.
+These are host checks, not native qualification. A single cold-boot readback at 31,
+ceiling 31, is proposed and unaccepted; no payload rerun, reinstall/reset or new media.
+Keep qualification, fixes and original exact disposal in this continuation after the
+maintainer merge of PR #67. Earlier stopped attempts remain separate and unqualified.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -1372,3 +1374,104 @@ proposes full-45 rerun at 29 and independent READBACK/disposal at 30, ceiling 30
 from this cleanly halted original image, without reset/reinstall. Twenty-eight
 launches are consumed. No new acceptance, phase freeze, guest or deletion has run;
 complete installed VGA qualification and original disposal remain pending in PR #67.
+
+
+## Accepted current-boot TTY continuation, 2026-10-15
+
+Cam's continuation accepts launches 29 and 30, ceiling thirty, against the unchanged
+original targets and sealed media. PR #67 was maintainer-merged before this work;
+its merged tree equals the reviewed candidate. Qualification and conditional exact
+disposal continue together on codex/vga-tty-completion.
+
+Fresh full target/media integrity, original identities and closure passed. Acceptance
+SHA-256 f73dd8dda7d9166cd2f88be1e573ef00f7d378600167b0c77c78e7b8e8ba65bc;
+launch-29 helper/argument/host-pin freeze
+a8f26c3bc9e3404cb72fbc46cdb51f2b48567ad35e1673dfb5dbf687d2572270.
+Acceptance does not qualify execution or change any earlier false gate.
+
+## Full VGA payload stage passed, 2026-10-15
+
+Approved launch 29 repeated native boot/login, optical runtime hashes and modes,
+sole-disk/raw-label/root binding, worker absence and matching kernel copies. The
+inert scrollback probe, exact current-page return and current-boot TTY check passed.
+Both known stopped artifacts were present with the pinned metadata; native types,
+full canary/receipt hashes and exact inventory passed. Conditional rmdir/rm completed
+with the fresh TTY preserved, followed by an independent complete original baseline
+check. No stale receipt content supplied current TTY authority.
+
+All 45 required payload-stage cases passed: seventeen automatic and five actual
+keyboard cases per dynamic/static build, then the static retained-positive case.
+Every manual review used the actual overlapping pages, observed case announcement
+and exact return before one review/cancel answer and, where applicable, one fresh
+confirmation. No answer, job or confirmation was resubmitted. Native counts, exit
+zero and exact TTY restoration passed.
+
+| Native stage | Cases | Controller / child RSS, KiB |
+|---|---:|---:|
+| Dynamic automatic | 17 | 1324 / 1232 |
+| Static automatic | 17 | 1324 / 1232 |
+| Dynamic keyboard | 5 | 1304 / 1220 |
+| Static keyboard | 5 | 1232 / 1232 |
+
+KEEP used 3.76 real / 0.18 user / 0.18 system seconds and 1216 KiB maximum RSS.
+Independent retained inventory, full canary/hello hashes, owners/modes and original
+root/parent/canary identities passed. Prehalt worker/kernel-copy closure, absent TTY
+receipts and native unmount/sync/halt passed. The guest/client/awake lease were reaped
+at 866.966 seconds, with no failure, forced stop, QMP timeout, recovery or sample.
+
+Closed audit ed831b4b7e9229ec0afa1fc9b14ae661593e6257cc14f984fd07245ca8437dd8
+qualified the phase and independently checked all original identities, full target and
+media hashes, credential exclusion and absence of handles/mounts. Original VGA image
+SHA-256 0d0195e7594c12b76257eb85c003b767135dec484c23fc64d815128a64ef662f;
+allocated bytes 2019229696. Allocation/capture/export were
+13951016960/1985536/972121651 bytes. Earlier stopped attempts remain unqualified.
+
+The accepted independent cold-boot READBACK at launch 30 is separately frozen by
+bcfd627a7c7d476d23ed8e1306b370dd3eff5f8f9bba6dcb22ea627ba4719d05.
+Launch-29 success alone does not establish later readback or original disposal.
+
+## Independent readback observer stopped before submission, 2026-10-15
+
+Approved launch 30 used the independently sealed post-29 disk and repeated native
+boot/login/runtime, executable modes, sole disk/raw labels/root binding, worker
+absence and matching kernel copies. Its independent before inventory, full content
+and canary matched the retained post-29 observation. No payload rewrite occurred.
+
+At 630.235 seconds, a host KeyError stopped work before the READBACK submission
+receipt or any READBACK input. The controller's top-level retained-inventory variable
+reused the screen observer's previous-frame variable; indexing that dictionary as
+rows failed. Cleanup observation hit the same collision before observing/submitting
+a native halt. Bounded termination/reaping completed at 655.364 seconds. Emulator
+exit zero alone does not prove native shutdown: clean halt and phase qualification
+remain false. No READBACK count, resource result or after-inventory pass is claimed.
+
+All exact original identities/modes/links, full target/media hashes, credential
+exclusion, reaping and absence of handles/mounts passed. The original VGA image is
+unclean and quarantined, SHA-256
+8ef44ecf2fe100d7e8ec5ce5afa8ff0e0f51a9efa9521f3b449817eaee7dafd5;
+allocated bytes 2019246080. Closed audit
+58c00aeaa05ffb355a1cd401b081ff813b239b0383fb8228f2ea38e5e0656dac.
+Allocation/capture/export: 13951385600/2140773/972121651 bytes. No QMP timeout,
+recovery/sample, extra launch, reinstall/reset or disposal ran.
+
+The separate prepared readback-only controller keeps previous-frame/time state in
+a private closure and retained inventory in a distinct variable. Six host checks
+execute the actual controller functions and retained-comparison statements: the old
+frozen code reproduces readback and cleanup KeyError before input; corrected
+observation/submission and cleanup remain available; global-name substitutions do
+not alter frame state; changed inventory refuses READBACK while preserving cleanup;
+a changed actual prompt refuses input; closure cells have no external assignments
+and the controller has no payload-suite entry. Commands remain ASCII, at most 374
+bytes. This does not claim a native cleanup or READBACK pass. Host proof
+a1a353b9054e95fabd68c3ae5acc1f5281b08a6759a8ecbbc97a618df3be9cbc;
+corrected private controller
+30daed467f78981f32c38f9275f93e7516b66799d86d3548b14f9834bf826585.
+
+The [one-boot continuation](installed-payload-flow.md#observer-state-and-independent-readback--proposed-2026-10-15)
+proposes launch 31, ceiling 31, preserving qualified launch 29 and requiring native
+automatic boot checks, all prerequisites and exact before/after retained equality.
+Only after READBACK/resources/TTY, native clean halt, full integrity and closure may
+the original exact fixture and helpers be logically disposed. Thirty launches are
+consumed. Proposal SHA-256
+d4961d421e63725a63748c2f663d9b1ff448da8606376a748596a09cb5d093e5;
+no acceptance, new phase freeze, guest or deletion has run.

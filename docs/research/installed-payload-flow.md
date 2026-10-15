@@ -1471,7 +1471,7 @@ Preparation alone granted no authority. Keep all work in draft PR #67.
 
 ## Current-boot TTY and inert stale receipt — proposed, 2026-10-15
 
-Status: **Proposed; first-failure stop remains in effect.** Approved launch 28
+Status: **Accepted by Cam on 2026-10-15; first-failure stop remains in effect.** Approved launch 28
 passed exact metadata and native types/content/canary/four-path inventory. Its fixed
 cleanup chain returned to the shell without its completion marker. The exact failing
 predicate and which removals, if any, occurred were not observed. Cleanup-only native
@@ -1480,7 +1480,7 @@ consumed under twenty-nine. Original cleanly halted VGA full SHA-256:
 24b209c82b821bb931940eb7aa34d77b29c6391fbba1db01a2c5c09598bfe204;
 stopped audit 67cae6daf262a4d05531fb664384d4a8dcc3fc4a77928a55a583bd6e1cbf970e.
 
-Propose ceiling **twenty-nine to thirty**: vga-tty-payload at 29, followed only after
+Accepted ceiling **twenty-nine to thirty**: vga-tty-payload at 29, followed only after
 complete qualification by vga-tty-readback at 30. Retain all native prerequisites,
 repeat probe/full-45 suite, full actual reviews/fresh confirmations, independent
 retained checks, later READBACK, native halts/full hashes/closure and original exact
@@ -1513,6 +1513,63 @@ counters and malformed pages refuse before an answer; navigation cycles and nati
 deadlines remain unchanged. New fixed native commands remain ASCII and at most
 489 bytes under the 512-byte host command bound. Fresh acceptance must bind complete original target/media
 integrity, closure, previous stop, pinned metadata and exact new phase freezes.
-Private unaccepted proposal SHA-256:
+Accepted proposal SHA-256:
 637248680cf3189888113d9e41d5e9224878ae6855fa7d6939937ef8539fda55.
-Preparation grants no new boot or deletion. Keep the same draft PR #67 open.
+Fresh acceptance SHA-256:
+f73dd8dda7d9166cd2f88be1e573ef00f7d378600167b0c77c78e7b8e8ba65bc.
+The launch-29 helper/argument/host-pin freeze is
+a8f26c3bc9e3404cb72fbc46cdb51f2b48567ad35e1673dfb5dbf687d2572270.
+PR #67 was maintainer-merged before this continuation; its merged tree equals the
+reviewed candidate. Continue qualification and exact disposal together on
+codex/vga-tty-completion. No failed gate is promoted by acceptance.
+
+
+## Observer state and independent readback — proposed, 2026-10-15
+
+Status: **Proposed; first-failure stop remains in effect.** Accepted launch 29
+qualified all 45 VGA payload-stage cases, actual full reviews/fresh confirmations,
+exact TTY, retained metadata/content/canary, native halt and full integrity/closure.
+Its closed audit is ed831b4b7e9229ec0afa1fc9b14ae661593e6257cc14f984fd07245ca8437dd8.
+Launch 30 repeated native prerequisites/kernel closure and its before inventory
+matched 29. A host frame/inventory variable collision then stopped observation before
+READBACK submission. Cleanup observation failed on the same collision and termination
+was forced; clean halt and phase qualification remain false. Closed stopped audit
+58c00aeaa05ffb355a1cd401b081ff813b239b0383fb8228f2ea38e5e0656dac.
+Thirty launches are consumed under thirty. The unchanged original VGA identity now
+binds full unclean-image SHA-256
+8ef44ecf2fe100d7e8ec5ce5afa8ff0e0f51a9efa9521f3b449817eaee7dafd5.
+
+Propose ceiling **thirty to thirty-one**, one vga-frame-readback cold boot. Preserve
+29's qualified payload result; repeat native automatic boot checks, fresh actual
+login/TTY, runtime hashes/modes, AHCI/sole-disk/raw-label/root binding and independent
+worker/kernel-copy closure. Before inventory must equal 29's retained metadata,
+full content and canary; run only READBACK, with no payload writer or reused
+confirmation. Require native exit zero, positive CPU/time/RSS, exact TTY and an
+after inventory equal to both before and 29. Any mismatch or unexpected state stops
+without manual filesystem repair, fallback or payload rerun.
+
+The corrected controller owns previous-frame/time state in a private closure,
+separate from retained inventory. Six host-only checks reproduce the old failure and
+exercise actual corrected functions, collision isolation, cleanup availability and
+changed-inventory/prompt refusal. Frozen failed controls and false gates remain
+unchanged. Proof a1a353b9054e95fabd68c3ae5acc1f5281b08a6759a8ecbbc97a618df3be9cbc.
+Fixed native commands remain ASCII, at most 374 bytes under the 512-byte bound.
+
+Require observed native unmount/sync/halt, reaped owned processes, all three original
+full hashes/identities, both media hashes, credential exclusion and no handles/mounts.
+Then perform the original exact logical disposal and end target authority. The
+conditional disposal allowlist contains 168 exact source helpers (136 original plus
+32 enumerated additions) and 26 proven compiled copies; retain reused global tools.
+No recursive guest cleanup, reinstall/reset, new target/overlay, source/binary/media/
+kernel/key/dependency/transport/hardware change, export or diagnostic boot is added.
+Retain the same original clocks, resource/capture/export limits, sole reader and
+first-failure/recovery rules. No failed gate becomes positive by preparation.
+
+Fresh acceptance must bind complete target/media integrity and closure, qualified
+payload/stopped-readback audits, host proof, inherited common-helper hashes, exact
+conditional disposer and the new phase helper/argument/host-pin freeze. Private
+unaccepted proposal SHA-256:
+d4961d421e63725a63748c2f663d9b1ff448da8606376a748596a09cb5d093e5.
+Preparation grants no new boot or deletion. Continue this feature in one draft after
+PR #67's maintainer merge. Complete VGA qualification and original disposal remain
+pending; no Cocoa/physical hardware, parent installer or production runtime acceptance.
