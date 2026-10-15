@@ -1514,5 +1514,5 @@ deadlines remain unchanged. New fixed native commands remain ASCII and at most
 489 bytes under the 512-byte host command bound. Fresh acceptance must bind complete original target/media
 integrity, closure, previous stop, pinned metadata and exact new phase freezes.
 Private unaccepted proposal SHA-256:
-3438ee4b2d37c77ae762c0ad017788594ab522f0efed1255446e2f7b5b4463f0.
+637248680cf3189888113d9e41d5e9224878ae6855fa7d6939937ef8539fda55.
 Preparation grants no new boot or deletion. Keep the same draft PR #67 open.

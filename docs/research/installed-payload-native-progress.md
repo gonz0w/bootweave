@@ -1365,7 +1365,7 @@ original baseline and native type/content/absence checks required. No extra path
 or changed identity is accepted. Seventeen prompt groups pass; fixed native commands
 are ASCII and at most 489 bytes. This is host verification, not native cleanup
 completion. Failed frozen controls and false gates remain unchanged. Host proof:
-e73ffb8d60ba4e0091a18279408ab7a7c8037ece526ccea250f25192b8e60262.
+0a57b94afddb239cc0406f96e815baaf1ea48f3d643de8788b6a367a102df8b9.
 
 The [current-TTY continuation](installed-payload-flow.md#current-boot-tty-and-inert-stale-receipt--proposed-2026-10-15)
 proposes full-45 rerun at 29 and independent READBACK/disposal at 30, ceiling 30,
