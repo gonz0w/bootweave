@@ -104,10 +104,12 @@ accepted one replacement provisioning attempt and eleven total launches; remaini
 native qualification and cleanup stay together after the implementation merge.
 
 [Installed-target native progress](docs/research/installed-payload-native-progress.md)
-records six diagnostic native entry builds and all 976 serial/VGA build regressions.
+records six revised native entry builds, 976 serial/VGA build regressions and all
+46 installed serial cases, including retained-payload readback after another boot.
 The accepted recovery/export boot completed with native clean halt and full original
 ISO readback. The serial target passed stock installation and cold OS boot; the
 diagnostic entry identified a mounted block-device open refusal before dispatch.
-All 92 installed payload cases and disposal remain together after the maintainer
-merge of PR #56. Both approved diagnostic boots completed cleanly. A raw root-partition binding and
-sixteen-launch amendment are proposed for review in the same draft PR #57.
+The accepted raw-partition replacement now passed serial qualification. The VGA
+handoff stopped before disk confirmation because its observer rejected an unknown
+boot glyph; that target remains untouched. A one-boot retry/seventeen-launch
+amendment is proposed. All 46 VGA cases and disposal stay together in draft PR #58.

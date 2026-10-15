@@ -13,7 +13,7 @@
 static unsigned probe;
 struct auth_result auth_native(const struct auth_context *,const unsigned char *,size_t);
 struct auth_result ipf_auth(const struct auth_context *c,const unsigned char *sig,size_t n){
-struct auth_result r={0};struct auth_context local=*c;struct ip_context gate;
+struct auth_result r={0};struct auth_context local=*c;struct ip_ctx gate;
 if(ip_open(&gate)){r.failure=AUTH_CONTEXT;return r;}
 local.installed=&gate;r=auth_native(&local,sig,n);
 if(ip_close(&gate)){r.failure=AUTH_CLEANUP;r.completed=0;}return r;
@@ -32,16 +32,16 @@ memset(expected,0,sizeof(expected));expected[0].path="viewer";expected[0].direct
 hash((const unsigned char *)"hello",5,expected[1].digest);
 }
 int main(int argc,char **argv){
-struct pl_context c;struct packet p;struct ip_context gate;struct ip_binding observed;long peak=0;int i;
+struct pl_context c;struct packet p;struct ip_ctx gate;struct ip_bind seen;long peak=0;int i;
 (void)argv;(void)&p;(void)&i;(void)&peak;require(argc==1&&getuid()==0&&isatty(0),"fixed root/TTY");
 require(!pl_limits(1),"limits");require(!lstat(WORK "canary",&sentinel),"canary stat");load(NULL,0);
 #ifdef IPF_READBACK
 memset(&c,0,sizeof(c));c.expected=expected;c.count=2;c.parentfd=open(WORK,O_RDONLY|O_DIRECTORY|O_NOFOLLOW);
-c.rootfd=openat(c.parentfd,"case",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);require(c.rootfd>=3&&!fstat(c.rootfd,&c.identity)&&!ip_open(&gate)&&!ip_capture(&gate,&c,&observed),"readback binding");
+c.rootfd=openat(c.parentfd,"case",O_RDONLY|O_DIRECTORY|O_NOFOLLOW);require(c.rootfd>=3&&!fstat(c.rootfd,&c.identity)&&!ip_open(&gate)&&!ip_cap(&gate,&c,&seen),"readback binding");
 pl_observe(&c);{unsigned char b[8];require(!c.result.uncertain&&c.result.observed==2&&read_file(WORK "case/viewer/readme.txt",b,sizeof(b))==5&&!memcmp(b,"hello",5),"content");}
 canary();require(!ip_close(&gate)&&!close(c.rootfd)&&!close(c.parentfd),"readback FDs");puts("Installed later readback passed.");return pl_limits(1)!=0;
 #else
-c=root(2,PL_REAL);require(!ip_open(&gate),"open");require(!ip_capture(&gate,&c,&observed),"capture");require(!ip_check(&gate,&c,&observed),"recheck");require(!ip_close(&gate),"close");require(!pl_prerequisites(c.rootfd,&c.identity,&peak),"prereq");cleanup(&c);
+c=root(2,PL_REAL);require(!ip_open(&gate),"open");require(!ip_cap(&gate,&c,&seen),"capture");require(!ip_check(&gate,&c,&seen),"recheck");require(!ip_close(&gate),"close");require(!pl_prerequisites(c.rootfd,&c.identity,&peak),"prereq");cleanup(&c);
 #ifdef IPF_KEEP
 c=root(2,PL_REAL);p=reviewed_run(&c,CONFIRM,1);require(p.auth.completed&&p.placement.complete,"keep outcome");require(!close(c.rootfd)&&!close(c.parentfd),"keep FDs");canary();puts("Installed final positive retained.");return pl_limits(1)!=0;
 #else

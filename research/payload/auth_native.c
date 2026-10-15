@@ -313,7 +313,7 @@ struct auth_result auth_native(const struct auth_context *ctx,
  char dir[] = HOME "private-XXXXXXXX", key[128] = "", signature[128] = "";
  struct stat di, ki, si; struct sigaction sa, old[4]; struct rusage usage;
 #ifdef AUTH_INSTALLED
- struct ip_binding installed;struct ip_context *gate=ctx?ctx->installed:NULL;int bound_installed=0;
+ struct ip_bind installed;struct ip_ctx *gate=ctx?ctx->installed:NULL;int bound_installed=0;
 #endif
  const int signals[] = {SIGINT, SIGTERM, SIGHUP, SIGPIPE};
  int i, handlers = 0, have_dir = 0, have_key = 0, have_sig = 0;

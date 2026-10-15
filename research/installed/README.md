@@ -1,14 +1,16 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
-compiler provisioning, six corrected entry builds and 976 serial/VGA regressions.
+compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
+46 installed serial cases, including later readback.
 The installed disk namespace adjustment is accepted. Recovery and bounded range
 export completed with native clean halt and full ISO readback. Stock installation
-and cold OS boot on the serial target passed; initial installed preflight refused
-before dispatch. All 92 installed payload cases and disposal remain
-pending together after the PR #56 merge; no production runtime or interface is adopted.
+and cold OS boot on the serial target passed. The accepted raw-partition replacement
+passed serial qualification. VGA handoff stopped before confirmation/writes on an
+observer decoding failure; that target remains untouched. All 46 VGA cases and
+disposal remain together in draft PR #58; no production runtime/interface is adopted.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
@@ -17,10 +19,16 @@ root.c compares private canonical observations and normalizes only one exact
 empty fd0: record under mandatory host proof of no floppy backing media in the
 fixed no-hotplug virtual fixture. Empty cd0/rd0 and sole sd0/DUID rules remain;
 the generic storage validator is unchanged. root_native.c uses fixed read-only
-raw/block/root references and held filesystem/directory observations to bind an
+raw whole-disk/root-partition and root references, rechecked named block-node
+metadata and held filesystem/directory observations to bind an
 installed sd0a FFS root to its authorized case. It refuses missing or changed
 bindings before member dispatch and observes the binding after placement. The
 original confined nobody writer and independent inventory oracle remain in use.
+
+The raw-partition binding replacement and sixteen-launch ceiling are accepted.
+Named block metadata binds inode, complete mode, group, link count and flags;
+it does not claim a held mounted-block descriptor or physical/hotplug qualification.
+All original mount, label, namespace, destination and confirmation gates remain.
 
 The new AUTH_INSTALLED build alone wraps authentication/review/placement with that
 gate and uses fixed owned public verification files. Separate archive and console

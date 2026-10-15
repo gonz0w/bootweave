@@ -24,19 +24,20 @@ class Label(c.Structure):
 
 
 class Files(c.Structure):
-    _fields_ = [(v, c.c_uint64) for v in ('root_device', 'root_inode', 'parent_inode', 'case_inode', 'mount_time')] + [
+    _fields_ = [(v, c.c_uint64) for v in ('rootdev', 'rootino', 'parentino', 'caseino', 'mounttime', 'nodeino')] + [
+        (v, c.c_uint32) for v in ('nodemode', 'nodegid', 'nodelinks', 'nodeflags')] + [
         ('flags', c.c_uint32), ('fsid', c.c_uint32 * 2), ('spec', c.c_char * 90)] + [
-        (v, c.c_int) for v in ('rootfd', 'rawfd', 'blockfd', 'parentfd', 'casefd')]
+        (v, c.c_int) for v in ('rootfd', 'rawfd', 'partfd', 'parentfd', 'casefd')]
 
 
 class Binding(c.Structure):
     _fields_ = [('label', Label), ('uid', c.c_ubyte * 8), ('types', c.c_ubyte * 16),
-               ('label_flags', c.c_uint32), ('checksum', c.c_uint32), ('held', Files)]
+               ('labelflags', c.c_uint32), ('checksum', c.c_uint32), ('h', Files)]
 
 
 for _name, _type in Files._fields_:
-    setattr(Binding, _name, property(lambda s, n=_name: getattr(s.held, n),
-                                    lambda s, v, n=_name: setattr(s.held, n, v)))
+    setattr(Binding, _name, property(lambda s, n=_name: getattr(s.h, n),
+                                    lambda s, v, n=_name: setattr(s.h, n, v)))
 
 
 class InstalledTooling(unittest.TestCase):
@@ -68,9 +69,10 @@ class InstalledTooling(unittest.TestCase):
         a.label.partition[0].offset, a.label.partition[0].size = 64, 2097152
         a.label.partition[2].size = 16777216
         a.uid[0], a.types[0] = 1, 7
-        a.root_device = a.fsid[0] = 1024
-        a.fsid[1], a.root_inode, a.parent_inode, a.case_inode, a.flags = 77, 2, 100, 101, 0x5000
-        a.rootfd, a.rawfd, a.blockfd, a.parentfd, a.casefd = 9, 10, 11, 4, 3
+        a.rootdev = a.fsid[0] = 1024
+        a.fsid[1], a.rootino, a.parentino, a.caseino, a.flags = 77, 2, 100, 101, 0x5000
+        a.rootfd, a.rawfd, a.partfd, a.parentfd, a.casefd = 9, 10, 11, 4, 3
+        a.nodeino, a.nodemode, a.nodegid, a.nodelinks = 102, 0o60640, 5, 1
         a.spec = b'/dev/sd0a'
         return a
 
@@ -96,8 +98,9 @@ class InstalledTooling(unittest.TestCase):
         a = self.binding()
         self.assertEqual(self.lib.ip_valid(a), 1)
         self.assertEqual(self.lib.ip_same(a, a), 1)
-        for name in ('root_device', 'root_inode', 'parent_inode', 'case_inode', 'mount_time',
-                     'flags', 'label_flags', 'checksum', 'rootfd', 'rawfd', 'blockfd', 'parentfd', 'casefd'):
+        for name in ('rootdev', 'rootino', 'parentino', 'caseino', 'mounttime',
+                     'nodeino', 'nodemode', 'nodegid', 'nodelinks', 'nodeflags',
+                     'flags', 'labelflags', 'checksum', 'rootfd', 'rawfd', 'partfd', 'parentfd', 'casefd'):
             with self.subTest(field=name):
                 b = Binding.from_buffer_copy(a)
                 setattr(b, name, getattr(b, name) + 1)
@@ -126,9 +129,14 @@ class InstalledTooling(unittest.TestCase):
             b = Binding.from_buffer_copy(a)
             b.flags |= flag
             self.assertEqual(self.lib.ip_valid(b), 0)
-        for field in ('root_inode', 'parent_inode', 'case_inode'):
+        for field in ('rootino', 'parentino', 'caseino', 'nodeino', 'nodelinks'):
             b = Binding.from_buffer_copy(a)
             setattr(b, field, 0)
+            self.assertEqual(self.lib.ip_valid(b), 0)
+
+        for mode in (0o20640, 0o100640, 0o60660, 0o60642, 0):
+            b = Binding.from_buffer_copy(a)
+            b.nodemode = mode
             self.assertEqual(self.lib.ip_valid(b), 0)
 
     def test_IPFH02_host_refuses_and_original_source_budgets(self):
