@@ -40,14 +40,16 @@ The corrected stock-only AHCI control passed both listings/native halt. The late
 accepted headless handoff preflight independently passed authentication/full hashes,
 both listing-only tar passes and clean native halt, followed by all-target/media
 integrity and closure. The approved one-time original VGA reset passed full zero
-hash/zero allocation with identity preserved. Install launch 23 stopped in its host
-preboot observer before frontend or stock input; no native install/halt is claimed.
-The target remains the verified zero file, with other targets/media unchanged and
-all owned processes/handles closed. The host guard is corrected/tested, but its
-native retry is unqualified. Twenty-three of twenty-five launches are consumed;
-all 46 VGA cases and exact disposal remain pending. A three-stage continuation at
-24–26 with no new reset is proposed, not accepted. No complete installed-root,
-Cocoa-window, physical-hardware or parent installer acceptance follows.
+hash/zero allocation with identity preserved. The corrected launch 24 completed
+stock verification/install, foreground relink/configuration, native halt and complete
+integrity/closure. Cold boot 25 reached the actual ttyC0 login page but stopped on a
+host prompt-matching error before runtime/payload input. Cleanup-only root login/
+sync/halt and full hash/identity/closure passed; first-boot changes remain, with no
+claim of worker absence/kernel-copy agreement. The host guard is corrected/tested;
+all 46 VGA cases and exact disposal remain pending. Twenty-five of twenty-six
+launches are consumed; a two-boot continuation at 26/27, no reinstall/reset, is
+proposed and not accepted. No complete installed-root, Cocoa-window,
+physical-hardware or parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

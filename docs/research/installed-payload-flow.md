@@ -1225,9 +1225,16 @@ exact disposal in the same complete-feature draft on codex/headless-vga-qualific
 after maintainer merge of PR #64; no phase PR boundary or production profile adoption.
 
 
-## VGA preboot observer correction and three-stage continuation — proposed, 2026-10-15
+## VGA preboot observer correction and three-stage continuation — accepted, 2026-10-15
 
-Status: **Proposed; no new launch or ceiling increase authorized.** The accepted
+Status: **Accepted by Cam's continue on 2026-10-15.** Separate fresh acceptance and
+actual results are recorded in the [native progress](installed-payload-native-progress.md#completed-vga-stock-installation-cold-boot-login-observer-stopped-2026-10-15).
+Launch 24 completed stock installation/native halt. Launch 25 reached the normal
+getty prompt but stopped on a host login-matching error, before qualification input.
+Cleanup-only login/sync/halt and full integrity/closure passed; no payload case ran.
+Current count is twenty-five of twenty-six. No automatic retry follows.
+
+The following is the accepted proposal before execution. The accepted
 headless preflight at 22 passed both listing-only workloads/native halt, complete
 integrity and closure. The single approved reset completed with the same original
 VGA identity, full zero hash and zero allocation. Install launch 23 then stopped
@@ -1276,10 +1283,71 @@ including 120 cleanup, 3600 hard from before initial Popen. The additional launc
 retry need review under AGENTS.md rules 3/7 and the accepted stop/retry boundary;
 the routine host correction itself does not grant another native attempt.
 
-Private unexecuted three-stage proposal SHA-256:
+Private three-stage proposal SHA-256, unexecuted when prepared and later accepted:
 03525d3ac4f9d7120d46dc14e391b9fed0c284ec9b0af0795f409426599b3729.
 It binds the successful preflight, failed install/host correction, original target
 receipt, completed one-time reset, latest full hashes, freshly rehashed 0400 media,
 exact arguments and corrected host/controller sources. Acceptance must separately
 bind fresh full integrity/closure and exact per-phase helpers before execution.
 Keep this work in the existing complete-feature draft; no phase PR boundary.
+
+
+## VGA getty observer correction and two-stage completion — proposed, 2026-10-15
+
+Status: **Proposed; no further boot or ceiling increase authorized.** The successful
+headless preflight and completed stock VGA installation remain qualified for their
+bounded scope. Cold boot 25 reached the normal synthetic ttyC0 login: page, while
+its frozen controller incorrectly expected a hostname-prefixed prompt. Qualification
+stopped before any runtime/payload input. Cleanup-only root login and fixed sync/halt
+produced native guest shutdown and owned closure within the original cleanup window.
+All original identities/full target hashes and both sealed media passed postflight.
+First-boot changes are retained; no worker/kernel-copy agreement or payload gate is
+claimed. Twenty-five launches are consumed under twenty-six.
+
+The routine host correction is implemented and tested. installed_login_page
+requires the observed synthetic ttyC0 banner plus a fresh login: row and preserves
+strict shape/glyph/control boundaries. The three prompt regression groups include
+wrong-host/console, missing/stale/malformed pages and the previous incorrect prompt.
+The failed controller remains frozen; a separate corrected controller and exact
+arguments are prepared and unexecuted. No native C/binary/media/compiler, payload
+signing pair, credential, dependency, export, transport or guest hardware changes.
+
+Propose ceiling **twenty-six to twenty-seven** for exactly two remaining launches:
+
+| Launch | Stage | Required result |
+|---|---|---|
+| 26 | vga-login-payload | Fresh original-target/media full hashes, closure and exact helper/argument/host-pin freeze. Cold boot the same cleanly halted image from 25; require actual ttyC0 banner/fresh login and echo-off Password before root input. Native boot, runtime hashes/permissions, AHCI, complete backing inventory, namespace/raw labels/root/held binding, worker absence and matching kernel copies before payload entry. All 17 automatic and five actual manual cases per dynamic/static variant plus KEEP: 45. Exact TTY restoration and independent original root/parent/canary/retained-content metadata. Native clean halt, full image/all-other-target/media hashes and closure. |
+| 27 | vga-login-readback | Cold boot the same newly full-hash-bound image and frozen runtime CD. Repeat native prerequisites, independently verify retained bytes/metadata/root binding, READBACK case 46 without writer dispatch/reused confirmation, positive native time/CPU/RSS, exact TTY and identical retained postconditions. Native clean halt, complete hashes/closure, then original exact all-three-fixture/helper disposal and authority closure. |
+
+Reuse only the successful closed preflight and installation, never a failed payload
+gate. Bind original target receipt
+56f416bbdf7f25ac96bb610d1c2b81f1f7a4db4aee9abdb68bdcacf90e2dac5f
+and the current original VGA full post-halt digest
+ad9c4443de60c003e3b5358a53deb175b7a942686e282c09fd9a13de834e0a90.
+**No reinstall, second reset, replacement, overlay or new target is proposed.**
+Preserve first-boot changes and independently establish relink/process/kernel-copy
+agreement before cases; the cleanup halt supplies no shortcut. Build/serial remain
+unchanged until original exact disposal. Fresh payload review/one-use confirmation
+remains separate from earlier disk confirmation and cleanup login.
+
+Retain headless VGA/keyboard/AHCI/virtio/firmware/CPU/RAM, frozen runtime/source/media,
+the same credential only at actual echo-off prompts, all 46 case/resource/source/
+privilege/input/output/allocation/export bounds and original exact disposal. No
+Cocoa-window, physical-hardware or production runtime/profile qualification follows.
+Keep one reader, fresh actual prompt before input, five-second unattended/rapid
+bounded interactive capture, owned-lifetime pre-CPU scheduling requests and per-phase
+exact freezes. Original clocks: prompt 900 seconds, scheduling 2700 including 120
+cleanup, hard 3600 from before Popen. First unexpected failure stops dependent work;
+no automatic retry/fallback/reset or job/answer/confirmation resubmission. Keep the
+same maximum three read-only recovery observations and one one-second/1 MiB owned-PID
+sample at first QMP timeout; no generic Ctrl-C of writing work.
+
+The extra launch and retry require review under the accepted stop/budget boundary.
+Private unexecuted two-stage proposal SHA-256:
+dce6e37595735cd48dd3ba084982ec51ad66a787deb1c813352235c9e8fb2a1b.
+It binds accepted preflight/install, stopped cold boot/host correction, the original
+receipt/completed single reset, current target hashes, freshly rehashed 0400 media,
+exact arguments and corrected guard/controller sources. New acceptance must bind
+fresh complete integrity/closure and phase freezes. Keep fixes, qualification and
+original disposal in the same feature draft on codex/vga-qualification-finish after
+maintainer merge of PR #65; no phase PR boundary.

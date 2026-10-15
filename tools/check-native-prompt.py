@@ -31,3 +31,9 @@ def handoff_observation(lines, marker, interactive=True):
         handoff_page([''], marker, interactive)
         return False
     return handoff_page(lines, marker, interactive)
+
+
+def installed_login_page(lines):
+    """Recognize the observed synthetic guest's VGA getty page; no input."""
+    ready = handoff_observation(lines, 'login:')
+    return ready and 'OpenBSD/amd64 (bootweave.example.invalid) (ttyC0)' in lines
