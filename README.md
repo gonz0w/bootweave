@@ -113,5 +113,9 @@ The accepted raw-partition replacement now passed serial qualification. The VGA
 handoff initially stopped before disk confirmation on an observer glyph error. Its
 accepted retry passed confirmation and native input checks, then stock extraction
 panicked. That partially written target is quarantined; no VGA installed case passed.
-All 46 VGA cases and disposal remain pending in draft PR #59. A bounded diskless
-read-only diagnosis is proposed within the existing seventeen-launch ceiling.
+All 46 VGA cases and disposal remain pending in one feature follow-up after PR #59
+was maintainer-merged. Diskless diagnosis reproduced an ATAPI not-ready/guest-exit
+failure during a verified read-only listing with no target attached; the stock
+control stopped on a missing verification input. Root cause remains unproven.
+The seventeen-launch ceiling is exhausted. A complete four-boot AHCI optical
+qualification and explicit reset of the same quarantined VGA image are proposed.

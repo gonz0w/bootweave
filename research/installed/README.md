@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -10,8 +10,11 @@ export completed with native clean halt and full ISO readback. Stock installatio
 and cold OS boot on the serial target passed. The accepted raw-partition replacement
 passed serial qualification. The accepted VGA observer retry passed confirmation and
 native input checks, then stock extraction panicked. Its incomplete target is
-quarantined, all 46 VGA cases and disposal pending in draft PR #59. A bounded
-read-only diskless diagnosis is proposed; no production runtime/interface is adopted.
+quarantined, all 46 VGA cases and disposal pending in one feature follow-up after
+maintainer merge of PR #59. Diskless read-only handoff listing reproduced an ATAPI
+not-ready/guest-exit failure; stock control lacked a required verification input.
+All seventeen launches are consumed. Complete four-boot AHCI qualification and exact
+VGA image reset are proposed; no production runtime/interface is adopted.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
