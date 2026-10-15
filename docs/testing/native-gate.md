@@ -40,9 +40,12 @@ installed VGA case is claimed. All 46 installed VGA cases and exact fixture disp
 remain pending. After the two initial diskless diagnoses, the accepted AHCI preflight
 passed auth/input checks and one listing. Its second pass remained incomplete and
 was aborted for cleanup; native clean halt followed within the scheduling limit.
-No reset occurred; all three target hashes/identities remain unchanged. Eighteen of
-twenty-one launches are consumed. A corrected stock-only read-only control is
-proposed. No complete installed-root or parent installer acceptance follows.
+No reset occurred; all three target hashes/identities remain unchanged. The accepted
+stock-only control matched native hashes and passed one listing, then lost QMP
+observation during its second and required forced host closure, without native halt.
+Nineteen of twenty-one launches are consumed. A host socket cleanup fix passed two
+synthetic cases; one corrected-cleanup diskless control is proposed. No complete
+installed-root or parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

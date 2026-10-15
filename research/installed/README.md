@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -10,11 +10,14 @@ export completed with native clean halt and full ISO readback. Stock installatio
 and cold OS boot on the serial target passed. The accepted raw-partition replacement
 passed serial qualification. The accepted VGA observer retry passed confirmation and
 native input checks, then stock extraction panicked. Its incomplete target is
-quarantined, all 46 VGA cases and disposal pending in one follow-up after PR #60.
+quarantined, all 46 VGA cases and disposal pending in one follow-up after PR #61.
 The accepted AHCI preflight passed auth/input checks and one listing; its second
 pass remained incomplete and was aborted before native clean halt. No target reset
-occurred; all three retained images remain unchanged. Eighteen of twenty-one boots
-are consumed. A corrected stock-only read-only control is proposed; no production
+occurred; all three retained images remain unchanged. The accepted stock-only control
+matched native hashes and passed one listing, then lost QMP observation during the
+second and required forced host closure, without an observed native halt. Nineteen
+of twenty-one boots are consumed. A host socket cleanup fix passed two synthetic
+cases; one corrected-cleanup diskless control is proposed. No production
 runtime/interface or general hardware qualification is adopted.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
