@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -9,16 +9,18 @@ The installed disk namespace adjustment is accepted. Recovery and bounded range
 export completed with native clean halt and full ISO readback. Stock installation
 and cold OS boot on the serial target passed. The accepted raw-partition replacement
 passed serial qualification. The accepted VGA observer retry passed confirmation and
-native input checks, then stock extraction panicked. Its incomplete target is
-quarantined, all 46 VGA cases and disposal pending in one follow-up after PR #63.
-The corrected stock-only AHCI control passed both listings and native halt. The
-accepted four-stage handoff/VGA attempt then lost QMP boot observation before native
-verification, with no reset or conditional VGA stage run. Bounded recovery failed;
-a retained host sample establishes no cause. All three full target hashes/identities
-remain unchanged. Twenty-one of twenty-four launches are consumed. A proposed host
-display isolation keeps virtual VGA/keyboard and requests ceiling twenty-five for a
-fresh gated complete attempt. It is not authorized; no production interface/profile
-or general hardware qualification is adopted.
+native input checks, then stock extraction panicked. Its partial state was held
+for the reviewed recovery sequence. The corrected stock-only AHCI control
+passed both listings/native halt. After an earlier failed Cocoa observation attempt,
+the accepted headless handoff preflight passed native verification, two listing-only
+passes and native clean halt. The approved original-file reset completed with the
+full zero hash/zero allocation. Install launch 23 then stopped in a host preboot
+observer before any frontend/stock input. All original identities, other targets,
+both media and the zero VGA image passed closure/hash checks. The host observation
+adapter is corrected/tested; the strict native-page guard is unchanged. Twenty-three
+of twenty-five launches are consumed, all 46 VGA cases/disposal pending. A three-stage
+continuation proposes ceiling twenty-six with no further reset; it is not accepted
+or executed. No production interface/profile or general hardware qualification follows.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.

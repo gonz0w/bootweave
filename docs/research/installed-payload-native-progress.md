@@ -6,21 +6,23 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Twenty-one launches are consumed under the accepted twenty-four ceiling. The
-corrected stock-only AHCI control passed both listings and native halt. Cam then
-accepted a complete four-stage handoff/VGA attempt. Its first diskless boot lost QMP
-observation during native boot, before driver-submitted native commands or actual
-AHCI/diskless-refusal proof. Three bounded read-only recovery attempts failed; one
-approved host sample was retained. No native verification, tar pass or halt is
-claimed. Forced host closure ended at 108.445 seconds. No VGA reset or conditional
-VGA stage ran. Both earlier failed gates remain false; all 46 VGA cases and disposal
-remain pending. All three full target hashes/original identities and handoff media
-remain unchanged; owned processes are reaped and handles/mounts absent.
-A concrete host-display isolation proposal would use the existing none backend,
-retain virtual VGA/keyboard and raise ceiling twenty-four to twenty-five for four
-new gated stages. It is not accepted or executed and identifies no proven cause/fix.
-The same feature continues on codex/installed-vga-completion after maintainer merge
-of PR #63 from the identical reviewed tree.
+Twenty-three launches are consumed under the accepted twenty-five ceiling. The
+headless AHCI handoff preflight passed native authentication/full input hashes,
+both listing-only tar passes and native clean halt. Full original-target/media
+integrity and closure passed. The approved one-time reset preserved the original
+VGA file identity and established the complete zero hash/zero allocation.
+The next install boot stopped in the host observer at 0.352 seconds: its known
+preboot BIOS frame decoded as no native text page, then the controller incorrectly
+called the strict page guard with an empty list. No frontend, stock, native-command
+or credential input was submitted. Host termination ended at 20.375 seconds without
+native halt. The original VGA target still has its full zero hash/zero allocation;
+other targets and both sealed media are unchanged, with no handles/mounts.
+All 46 VGA cases and disposal remain pending. A tested host observation adapter
+now waits on an empty preboot observation without weakening strict native-page
+checks. A concrete three-stage continuation proposes launches 24–26, no further
+reset, and ceiling twenty-six. It is not accepted or executed. This feature remains
+on codex/headless-vga-qualification after maintainer merge of PR #64 from the
+identical reviewed tree; no phase PR boundary or production qualification follows.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -991,8 +993,104 @@ bd1d5f1a3a931efe8fcf6b1694f5a59935bce4c5ccf00c57eef8b691a8625c3e.
 The new and earlier failed handoff gates stay false. Twenty-one of twenty-four
 launches are consumed; the remaining count grants no display fallback or alternate
 experiment. All 46 serial cases remain passed, all 46 VGA cases/disposal pending.
-The [host display isolation proposal](installed-payload-flow.md#host-display-isolation-and-complete-vga-qualification--proposed-2026-10-15)
+The [host display isolation proposal](installed-payload-flow.md#host-display-isolation-and-complete-vga-qualification--accepted-2026-10-15)
 changes only the host window backend and private stage paths, requires fresh native
 VGA/keyboard and all original gates, and proposes ceiling twenty-five for a complete
 four-stage attempt. No headless boot, target reset, native C change or profile
 adoption occurred.
+
+
+## Headless handoff preflight passed; install observer stopped, 2026-10-15
+
+Cam accepted the four-stage headless attempt and ceiling twenty-five at reviewed
+head 098ece9d77f836627f02c2f58892266ea07a46c9. Maintainer merge
+c1b0629cb6f63a10bfcd4065f0f068bf9d2772bd has the identical tree
+a49138c9d6b256cfb954ed049e910f30c32743c4. Separate acceptance receipt
+f386b7b8f78fbf2cdbc84d08328bf8cebec15c062455251b4e3a92a713aa89ec
+binds fresh complete target/media hashes, exact original identities and closure.
+Initial preflight/reset helper, argument and host-pin freeze:
+e2dfa741e3f88497b218dde7a6124436f1b3337b75075e70c32048fc69ff0c93.
+Only host display cocoa to none and private stage paths changed. Native C/binaries,
+kernel, compiler, keys/credentials, media, dependencies and exports stayed frozen.
+
+Launch 22 attached only the read-only handoff CD on AHCI, with no target. Complete
+paused hardware, backing-file, argument and network inventory passed. One owned
+framebuffer reader used the exception-safe QMP helper; temporary owned host-awake/
+default scheduling requests preceded CPU execution. Actual native VGA frames
+established AHCI/cd0 and the diskless frontend refusal before a fresh shell at
+37.152 seconds. Native explicit-key signature verification passed at 69.425;
+full public-key, authenticated manifest and six frozen input hashes agreed at
+177.822, after scratch removal. No compiler, extraction or disk write was requested.
+
+| Native listing-only pass | Zero return and fresh shell | Host elapsed for listing |
+|---|---:|---:|
+| First | 374.796 seconds | 190.481 seconds |
+| Second | 591.645 seconds | 210.500 seconds |
+
+Scratch absence, CD unmount, sync and actual native halted/reboot state were observed
+before QMP quit. Normal emulator exit and owned-client/awake reaping completed at
+610.851 seconds. No QMP timeout, recovery, sample or abort occurred. The subsequent
+full hashes/original identities of all three targets, complete handoff media,
+credential exclusion and no-handle/mount closure passed. This qualifies this bounded
+diskless headless preflight; it neither proves the previous Cocoa failure's cause
+nor qualifies an installed VGA payload, visible window or physical hardware.
+Positive new preflight audit SHA-256:
+ca0f2a07cee8b0064cf235ed2aaf90abcf2e12bf9a72092ddcf4f1b9b44d737d.
+Every earlier failed preflight receipt remains false.
+
+After that positive gate and closure, the approved single reset used the held,
+no-follow original VGA file with full prior-hash/identity/size/0600/single-link checks.
+Its attempt receipt preceded truncation; truncate-zero/8 GiB, fsync, named/held
+identity agreement, full zero digest and zero allocation passed. No unlink,
+replacement, other target write or reset retry occurred. Reset receipt SHA-256:
+edc5c2150ca8e78b0b07a20091e5af27c2b8f94628202573997cf909a5ee9009.
+Discarding the earlier partial contents is not rollback. Fresh native disk/effect
+confirmation remained mandatory before stock installation.
+
+Install helper/argument/host-pin freeze
+3a280d66481ca185a5904e92974aade9c0ebed1f908591312bd2934b24fa1d66
+followed another complete original-target/media/closure check. Launch 23 passed
+paused proof of the sole original writable VGA target and read-only AHCI handoff CD,
+with zero initial writes and no network/sharing/extra target. Immediately after CPU
+continuation, its first dump was a valid 640×480 BIOS framebuffer. The decoder's
+existing bounded preboot path returned an empty list instead of a 720×400 native
+text page. The new controller mistakenly passed that list to handoff_page, whose
+strict shape refusal correctly raised Rejected at 0.352 seconds. This was a host
+controller error, without a QMP timeout, native panic or frontend outcome.
+
+Dependent work stopped. No frontend review/confirmation, stock answer, native command,
+credential, recovery observation or sample was submitted. Bounded host termination
+ended at 20.375 seconds; process exit zero does not establish native clean halt.
+No native halt or installation is claimed. Owned guest/client/awake processes are
+reaped. The full original VGA file remains zero, single-link 0600 and unallocated:
+ebfb4ef19ae410f190327b5ebd312711263bc7579970e87d9c1e2d84e06b3c25.
+Build/serial full digests remain respectively
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592 and
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+Both complete sealed media hashes, original fixture identities, closure and credential
+capture exclusion passed. Retained captures were losslessly compressed. Closed audit
+allocation was 11929399296 bytes, conservative capture 1036586 and exports 972121651,
+below 20 GiB/10 MiB/1 GiB. Failed install audit SHA-256:
+361f073b36bf25870e1c25b1e45a32dc88d3831ea33a3af29ed990c301866196.
+Its qualification remains false; the earlier zero-image clean receipt is not replaced
+with a claimed clean result for this stopped boot.
+
+The host-only handoff_observation adapter now returns false for an empty preboot
+observation, still validates the expected marker, and delegates every nonempty page
+to the unchanged strict guard. It never submits input or manufactures a prompt.
+The empty-frame refusal was reproduced from the retained BIOS-frame/header path;
+two host regression groups cover waiting, fresh/stale prompts, native refusal,
+malformed shapes/markers and terminal controls. The frozen failed controller remains
+unchanged; a separate corrected controller is prepared and syntax checked, not run.
+Host correction proof SHA-256:
+900587b6c39abc42e2d6bd6e85b4e4806368338d42b260d530fa632f92d46538.
+Host tests do not qualify a corrected native boot.
+
+Twenty-three of twenty-five launches are consumed. No payload/readback boot ran,
+and all 46 installed VGA cases plus exact disposal remain pending. The
+[three-stage continuation proposal](installed-payload-flow.md#vga-preboot-observer-correction-and-three-stage-continuation--proposed-2026-10-15)
+keeps the successful headless preflight and verified same-original zero target,
+proposes no further reset and requests ceiling twenty-six for install/payload/
+readback at 24/25/26. No further launch or budget increase is accepted by preparing
+that proposal. Keep its implementation, native qualification and disposal together
+on this feature branch/draft.

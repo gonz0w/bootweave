@@ -108,14 +108,15 @@ records six revised native entry builds, 976 build regressions and all 46 instal
 serial cases, including later retained-payload readback. Recovery/export, persisted
 key absence and full original ISO readback passed. The raw-partition replacement
 passed serial qualification. The VGA retry passed confirmation/native input checks,
-then stock extraction panicked; its partial target remains quarantined.
+then stock extraction panicked; its partial state was held for reviewed recovery.
 The corrected stock-only AHCI control passed both listing-only passes and native
-clean halt. The accepted four-stage handoff/VGA attempt then stopped during its
-first diskless boot on QMP observation failure, before native verification or any
-target reset. Bounded recovery failed; a retained host sample does not establish a
-cause. All three full target hashes/identities remain unchanged. Twenty-one of
-twenty-four launches are consumed. All 46 VGA cases and disposal remain pending in
-one feature follow-up after maintainer merge of PR #63. A host-display isolation
-proposal keeps virtual VGA/keyboard, requests ceiling twenty-five and preserves a
-fresh successful handoff preflight before any same-original-VGA reset. It is not
-authorized; no production runtime/profile or general hardware qualification follows.
+clean halt. After an earlier Cocoa observation failure, the accepted headless handoff
+preflight passed native verification, both tar listings and clean halt. The approved
+one-time reset preserved the original VGA identity and verified a full zero image.
+The next install boot stopped in a host preboot observer before frontend input;
+the target is still zero, with other targets/media unchanged and closure verified.
+The host guard is corrected and tested, but all 46 VGA cases and disposal remain
+pending on one feature branch after maintainer merge of PR #64. Twenty-three of
+twenty-five launches are consumed. A three-stage continuation at 24–26, with no
+further reset, is proposed and not authorized. No production runtime/profile or
+general hardware qualification follows.

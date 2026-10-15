@@ -35,19 +35,19 @@ absence, native clean halt and full original ISO readback; serial stock installa
 and cold OS boot passed. The accepted raw-partition replacement passed complete
 serial qualification with clean halts/full target hashes. The accepted VGA observer
 retry passed fresh confirmation and native input checks, then stock extraction
-panicked. Its partially written target is quarantined; no native clean halt or
-installed VGA case is claimed. All 46 installed VGA cases and exact fixture disposal
-remain pending. After the two initial diskless diagnoses, the accepted AHCI preflight
-passed auth/input checks and one listing. Its second pass remained incomplete and
-was aborted for cleanup; native clean halt followed within the scheduling limit.
-No reset occurred; all three target hashes/identities remain unchanged. The corrected
-stock-only AHCI control passed both listings/native halt. The accepted complete
-handoff/VGA attempt then lost boot observation before native verification; bounded
-recovery failed and host closure was forced. A retained host sample identifies no
-proven cause. Twenty-one of twenty-four launches are consumed. Both failed handoff
-gates remain false, all three VGA stages unrun and all 46 VGA cases/disposal pending.
-A host-display isolation/ceiling twenty-five proposal is not accepted. No complete
-installed-root or parent installer acceptance follows.
+panicked. Earlier failed optical/Cocoa preflights remain recorded without qualification.
+The corrected stock-only AHCI control passed both listings/native halt. The later
+accepted headless handoff preflight independently passed authentication/full hashes,
+both listing-only tar passes and clean native halt, followed by all-target/media
+integrity and closure. The approved one-time original VGA reset passed full zero
+hash/zero allocation with identity preserved. Install launch 23 stopped in its host
+preboot observer before frontend or stock input; no native install/halt is claimed.
+The target remains the verified zero file, with other targets/media unchanged and
+all owned processes/handles closed. The host guard is corrected/tested, but its
+native retry is unqualified. Twenty-three of twenty-five launches are consumed;
+all 46 VGA cases and exact disposal remain pending. A three-stage continuation at
+24–26 with no new reset is proposed, not accepted. No complete installed-root,
+Cocoa-window, physical-hardware or parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native
