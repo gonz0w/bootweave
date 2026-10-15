@@ -113,9 +113,9 @@ The accepted raw-partition replacement now passed serial qualification. The VGA
 handoff initially stopped before disk confirmation on an observer glyph error. Its
 accepted retry passed confirmation and native input checks, then stock extraction
 panicked. That partially written target is quarantined; no VGA installed case passed.
-All 46 VGA cases and disposal remain pending in one feature follow-up after PR #59
-was maintainer-merged. Diskless diagnosis reproduced an ATAPI not-ready/guest-exit
-failure during a verified read-only listing with no target attached; the stock
-control stopped on a missing verification input. Root cause remains unproven.
-The seventeen-launch ceiling is exhausted. A complete four-boot AHCI optical
-qualification and explicit reset of the same quarantined VGA image are proposed.
+All 46 VGA cases and disposal remain pending in one feature follow-up after PR #60
+was maintainer-merged. The accepted AHCI diskless preflight passed authentication,
+full input hashes and one listing, but its second pass remained incomplete. It was
+aborted and cleanly halted within the scheduling limit. No VGA reset occurred; all
+three retained images remain unchanged. Eighteen of twenty-one launches are consumed.
+A corrected stock-only read-only control is proposed, without target/reset authority.

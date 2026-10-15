@@ -811,16 +811,19 @@ diagnosis, decisions, qualification and disposal together in one follow-up draft
 codex/installed-optical-diagnosis.
 
 
-## AHCI optical complete VGA qualification — proposed, 2026-10-14
+## AHCI optical complete VGA qualification — accepted, 2026-10-15
 
-Status: **Proposed; no new guest, target reset or controller replacement authorized.**
+Status: **Accepted, 2026-10-15.** Cam replied "continue" to the concrete four-boot
+AHCI qualification, ceiling twenty-one and same-original-VGA reset proposal at
+reviewed head 2fadb6320bab81a278997c4394805e8595bf46d5. Reset authority remains
+conditional on the positive diskless preflight, clean halt and closure below.
 The accepted two-boot diagnosis is complete as an attempted comparison: stock input
 verification stopped on a missing CD signature file, while fully verified handoff
 media reproduced an ATAPI not-ready/guest-exit failure during read-only listing, with
 no target attached. See [diagnostic evidence](installed-payload-native-progress.md#diskless-optical-diagnosis-2026-10-14).
 Root cause remains unproven, and the accepted seventeen launches are exhausted.
 
-Propose four fixed boots, increasing the ceiling **seventeen to twenty-one**, as a
+Acceptance covers four fixed boots, increasing the ceiling **seventeen to twenty-one**, as a
 complete remaining VGA qualification attempt. Change only the optical controller
 path to the pinned emulator's existing ich9-ahci device, id optical, with the same
 ide-cd backend attached to optical.0. Do not attach CD media to chipset IDE. Preserve
@@ -844,7 +847,7 @@ unqualified until observed. No silent controller fallback is allowed.
 | 3 | vga-ahci-payload | Cold boot that fully hashed installed image with the same read-only revised runtime CD on AHCI. Prove stock boot/relink, actual optical/root/label/namespace/held context and complete media hashes. Pass 17 automatic and five actual manual cases per dynamic/static variant, plus KEEP: 45 VGA cases, exact TTY and independent retained-content/canary checks. Clean halt/closure/full image hash. |
 | 4 | vga-ahci-readback | Another cold boot of that same hashed image/runtime CD/profile. Independently prove unchanged retained inventory/content/metadata/root association; READBACK adds case 46 without a writer or replacement authorization. Clean halt/closure/full hashes, then original exact fixture disposal and authority closure. |
 
-Reset authority requested is only for the **same original vga-target.raw identity**
+Accepted reset authority is only for the **same original vga-target.raw identity**
 bound by immutable original target receipt SHA-256
 56f416bbdf7f25ac96bb610d1c2b81f1f7a4db4aee9abdb68bdcacf90e2dac5f,
 currently complete SHA-256
@@ -875,11 +878,101 @@ Freeze exact helpers/arguments before acceptance/execution. Unsupported boot/dri
 input mismatch, native failure, incomplete postcondition or deadline stops dependent
 work; no retry, BIOS/controller fallback, boot substitution or ceiling extension.
 Keep all implementation, tests, fixes, native qualification and all-three-fixture
-disposal on codex/installed-optical-diagnosis in one continuation draft after
-maintainer merge of PR #59; no phase PRs. This proposal does not itself authorize
-any of these four guests or the reset. Separate acceptance must bind the reviewed
-candidate and private proposal to fresh original target/media integrity and closure.
+disposal on codex/installed-ahci-qualification in one continuation draft after
+maintainer merges of PR #59/#60; no phase PRs. PR #60 was merged before this
+continuation; its tree matches the reviewed candidate. Remaining qualification and
+disposal continue together on codex/installed-ahci-qualification. Separate immutable
+acceptance binds the reviewed candidate/proposal to fresh full target/media hashes,
+original identities, closure and frozen helpers. No other guest or reset is granted.
 
 Immutable private proposal receipt SHA-256: f5b0c4d85d24e6bde4e1c91cb35f3b1a4e00a57a9d8d74bfecb0d914bfb2bd47.
 It includes the four exact argument arrays and both completed diagnostic receipt
 hashes, unchanged full target/media hashes, the exact single-file reset and all gates.
+
+Initial exact helper/argument/host-pin freeze SHA-256:
+0f80bfeab360ebb3f0059cdeee8b1cd0e0150ad6dee912e8f0c7dbd019eb0bb0.
+
+Acceptance receipt SHA-256:
+b4dbfd47df866412e577b6d2c342513968724ee58af4acb3c0b37e0e38cd85d3.
+All three complete stopped hashes/original identities, both media and closure passed
+again before this receipt; no image reset preceded the preflight.
+
+
+## Corrected stock AHCI read-only control — proposed, 2026-10-15
+
+Status: **Proposed; no new control boot or target reset authorized.** The accepted
+AHCI preflight established one successful listing, then its second pass remained
+incomplete and was aborted for scheduling cleanup. It cleanly halted before forty-five
+minutes. All three target hashes/identities remain unchanged. The reset gate is
+false and the three conditional VGA stages were not started. Eighteen launches are
+consumed under twenty-one. See [actual evidence](installed-payload-native-progress.md#ahci-preflight-incomplete-targets-unchanged-2026-10-15).
+Do not guess another controller fix or treat an archive-sized read count as completion.
+
+Propose **one diag-stock-ahci-control** diskless boot, repurposing one remaining
+conditional VGA slot within the **unchanged twenty-one ceiling**. Use the original
+unmodified authenticated install79.iso, same pinned QEMU/firmware/machine, TCG CPU,
+one CPU/1 GiB RAM, AHCI optical.0, VGA/keyboard/private serial observation and no
+target, network, sharing, hotplug, overlay or floppy backing. It does not install,
+reset, run payloads, add media/input transport, compile, regenerate keys/credentials
+or authorize any further boot. Freeze exact helpers and the prepared argument array
+before accepted execution. Complete paused effective inventory and native AHCI/cd0
+association are required, then choose only the actual stock shell prompt.
+
+Correct the unavailable-input assumption explicitly for this read-only control:
+
+1. Before launch, the existing reviewed host signify and fixed explicit release key
+   must authenticate the complete unchanged stock ISO and release manifest. Full ISO
+   SHA-256 remains 7a4a92e953618035097c796a90b54424a0f3ae775552e1e7d102cf8a5130449f;
+   public-key SHA-256 is b7ee8e7981549a1f707a4ed05115a99959a5f9e34b9bed9f9a098be17dd7e4b1.
+   Offline authenticated inventory confirms bsd, bsd.rd, base79.tgz, comp79.tgz,
+   man79.tgz and INSTALL.amd64 present at the fixed sets path, with SHA256.sig absent.
+   Authenticated manifest body SHA-256 remains
+   50bec66f28426a22b9c9436f6a87cf3e7029e636bb915ba1d0db80d638881b87.
+2. In the guest, mount only cd0c read-only. Hash the existing native public key and
+   all six fixed input files; compare every full digest independently to the frozen
+   authenticated host expectations before either tar pass. Mismatch stops the test.
+3. Do not invoke or claim native embedded-signature verification when its input is
+   absent. Do not ignore a signature warning, replace a key, inject a manifest or
+   create verification scratch. Record host ISO/release authentication separately
+   from native key/input hash agreement. This location change is proposed explicitly
+   for this non-writing control, not a fallback or production trust-policy adoption.
+
+Then run at most two fixed listing-only tar passes to /dev/null, without extraction.
+Each requires its actual native zero return and fresh shell before the next step.
+Stop dependent work on unexpected output or incomplete observations; no retry or
+substituted input. An independent hash gate and one submission per pass remain.
+The result can compare stock behavior with the handoff attempt, but media layout,
+RAMdisk contents and host observation conditions limit isolation. Do not infer a
+root cause, stable profile or installer qualification from a successful control.
+
+Use one owned screen reader, with rapid bounded boot capture for native attachment
+and at most one screen read per five seconds during unattended work; take a fresh
+actual prompt observation before input. Avoid overlapping dumps/readers. Preserve
+observation gaps honestly; a recoverable read-only host reobservation sends no
+additional workload or confirmation. Put the already documented temporary host-awake
+and default scheduling requests in place before CPU execution, scoped only to the
+owned PID/lifetime, with no persistent setting or virtual resource increase. Their
+prior state/cause remains unproven and changed observation conditions are reported.
+
+Keep original launch-clock prompt fifteen minutes, scheduling forty-five minutes
+including two-minute cleanup reserve, hard sixty minutes and every original source,
+input/output/capture/storage/export, CPU/memory and privilege bound. No clock renewal.
+If a pass remains incomplete, abort only that read-only process for cleanup; count
+no pass from the abort. Observe CD unmount/sync/native halt when possible before
+emulator exit; otherwise record the unclean stop. Reap all owned processes, prove
+closure, exclude credentials from captures and recheck full media/all-three-target
+hashes and original target identities/modes/links. No target is opened by the guest.
+
+A successful stock control **does not unlock the failed handoff preflight**, approve
+VGA reset, replace its required two passes or complete the 92-case feature. Two
+remaining slots would still not authorize the blocked three-stage VGA path or a
+ceiling extension. Return evidence to review before a specific further test/fix;
+keep this control, diagnosis, qualification and eventual original exact disposal in
+one continuing draft on codex/installed-ahci-qualification. No phase PRs.
+
+Fresh all-three-target hashes/original identities, absent handles/mounts, authenticated
+actual ISO inventory, native expected digests and one exact proposed no-target
+argument array are bound by private proposal SHA-256:
+d6b7078e8bb4609268b63d3d2d0e1a74c7b80686240d5c0b46e729c905110787.
+Acceptance must separately bind the reviewed candidate/proposal and fresh integrity/
+closure checks. The earlier immutable receipts and failed/incomplete results remain.
