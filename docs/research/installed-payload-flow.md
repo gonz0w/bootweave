@@ -673,10 +673,11 @@ All installed modes pass host syntax checks against authenticated native headers
 Native compilation and all 46 serial cases, including positive binding and later
 readback, now passed; all 46 VGA cases and final disposal remain required.
 
-## VGA confirmation observer retry — proposed, 2026-10-14
+## VGA confirmation observer retry — accepted, 2026-10-14
 
-Status: **Proposed; no additional guest or repeated confirmation authorized by this
-amendment yet.** Fourteen launches are consumed under the accepted sixteen ceiling.
+Status: **Accepted.** Cam replied "continue" to the concrete replacement-boot and
+seventeen-launch proposal, reviewed at 78c58f826455d94025f258d1b4a7dc4f0548f11a.
+Fourteen launches are consumed; the accepted aggregate ceiling is seventeen.
 The accepted raw-partition implementation built natively and all 46 installed
 serial cases passed. The original VGA install launch stopped before any frontend
 input, disk confirmation or stock install: its observer attempted ASCII encoding
@@ -698,7 +699,7 @@ typed confirmation data, never shell text. Host tests cover unknown boot text,
 expired/stale and wrong prompts, garbled prompt/control text, bounds and result
 transition. Native positive confirmation remains unqualified on VGA.
 
-Requested retry: one **vga-install-retry** cold boot on the same untouched exact
+Accepted retry: one **vga-install-retry** cold boot on the same untouched exact
 VGA target; increase aggregate launch ceiling **sixteen to seventeen**. Fourteen
 consumed plus this replacement install and the two original VGA payload/readback
 boots fit seventeen. Do not repeat within the stopped guest or renew any clock.
@@ -729,8 +730,11 @@ All three full rechecks and no fixture handles/mounts passed. Separate immutable
 private retry proposal receipt SHA-256:
 345aa6e51c4c617e655b44a6cebc4a00ed1cba18f0eb54e6bfcc1811ca7db8ff.
 Owned allocation is 11928199168 bytes below 20 GiB; captures 548805 below 10 MiB;
-encoded exports 972121651 below 1 GiB, with 101620173 bytes remaining. Bind any
-acceptance separately to the reviewed candidate, original receipt and fresh target
-rechecks; preserve all prior evidence. Keep implementation/fixes/qualification/
-disposal in [draft PR #58](https://github.com/gonz0w/bootweave/pull/58). This is a
-retry and changed launch budget under the existing explicit review rule.
+encoded exports 972121651 below 1 GiB, with 101620173 bytes remaining. A separate
+acceptance receipt SHA-256
+d3260c65f2f855c65a8381ae55b9292081611af843e6d4b7f856ebe39ac16042
+binds the reviewed candidate, original receipt and fresh complete target rechecks; all prior evidence is preserved. PR #58 was maintainer-merged
+before this continuation; its main tree equals the reviewed tree. Keep remaining
+implementation/fixes/qualification/disposal together on codex/installed-vga-qualification
+in one follow-up draft. This accepts only the concrete retry and changed launch
+budget under the existing explicit review rule.

@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -10,7 +10,7 @@ export completed with native clean halt and full ISO readback. Stock installatio
 and cold OS boot on the serial target passed. The accepted raw-partition replacement
 passed serial qualification. VGA handoff stopped before confirmation/writes on an
 observer decoding failure; that target remains untouched. All 46 VGA cases and
-disposal remain together in draft PR #58; no production runtime/interface is adopted.
+disposal remain together in one follow-up draft after PR #58 was maintainer-merged; no production runtime/interface is adopted.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.

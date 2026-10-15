@@ -112,4 +112,5 @@ diagnostic entry identified a mounted block-device open refusal before dispatch.
 The accepted raw-partition replacement now passed serial qualification. The VGA
 handoff stopped before disk confirmation because its observer rejected an unknown
 boot glyph; that target remains untouched. A one-boot retry/seventeen-launch
-amendment is proposed. All 46 VGA cases and disposal stay together in draft PR #58.
+amendment is accepted. All 46 VGA cases and disposal stay together in one follow-up
+draft after maintainer merge of PR #58.

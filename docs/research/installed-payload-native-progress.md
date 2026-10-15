@@ -10,8 +10,9 @@ Fourteen launches completed. The accepted raw-partition replacement passed nativ
 serial qualification and later readback, with clean halts/full target hashes.
 The VGA handoff observer failed before any confirmation or write; its target is
 still the original zero image. All 46 VGA cases and final disposal remain pending.
-A narrow observer fix/one-boot retry is proposed in
-[draft PR #58](https://github.com/gonz0w/bootweave/pull/58).
+The narrow observer fix/one-boot retry and seventeen-launch ceiling are accepted.
+PR #58 was maintainer-merged; remaining qualification and disposal continue together
+on codex/installed-vga-qualification from its identical merged tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -505,12 +506,12 @@ halt observation. Emulator/client/observer were reaped; no handles/mounts remain
 Full original target identity/mode/links, zero allocation and original complete
 zero-image hash passed at 306.446 seconds. Credentials remained excluded from captures.
 
-The [proposed observer/retry amendment](installed-payload-flow.md#vga-confirmation-observer-retry--proposed-2026-10-14)
+The [accepted observer/retry amendment](installed-payload-flow.md#vga-confirmation-observer-retry--accepted-2026-10-14)
 preserves unknown glyphs and requires the current exact input prompt, rejecting
 native refusal before any stale match. A new pure host boundary test also rejects
 garbled prompts, control text, oversized observations and wrong active prompts.
-This host fix is not native qualification. No further guest starts before retry
-review. All 46 VGA cases, clean later readback and exact fixture disposal remain.
+This host fix is not native qualification. Cam accepted the concrete retry at
+reviewed head 78c58f8; separate acceptance preserves the original proposal receipt. All 46 VGA cases, clean later readback and exact fixture disposal remain.
 
 Local make verify after the prompt guard passed 82 groups (23/13/3/10/33), no
 failures/skips; content/links, ShellCheck and Gitleaks passed. No original C changed

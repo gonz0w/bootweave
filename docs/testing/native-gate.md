@@ -35,7 +35,7 @@ absence, native clean halt and full original ISO readback; serial stock installa
 and cold OS boot passed. The accepted raw-partition replacement passed complete
 serial qualification with clean halts/full target hashes. VGA handoff stopped on a
 host observer failure before disk confirmation/writes; the target remains untouched.
-A one-boot/seventeen-launch retry amendment is proposed. All 46 installed VGA
+A one-boot/seventeen-launch retry amendment is accepted. All 46 installed VGA
 cases and exact fixture disposal remain pending; no complete installed-root or
 parent installer acceptance follows.
 
