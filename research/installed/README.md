@@ -26,12 +26,15 @@ matching kernel copies and 34 automatic VGA cases. The 28-line first manual revi
 scrolled beyond the 25-row display; its host guard stopped before any answer or
 confirmation. Forced cleanup, full hashes/identities and owned closure are recorded;
 no native halt, manual case or complete installed qualification is claimed.
-Nine host prompt groups now cover complete overlapping review observations, variant
-hashes and exact current-page restoration. Native scrollback remains unproven.
-Twenty-six of twenty-seven launches are consumed. The proposed probe, exact empty-case/
-TTY-receipt cleanup, full-45 rerun and later readback at 27/28 require a ceiling of 28;
-no acceptance, boot, reset or reinstall follows from preparation. Disposal remains
-pending in the same feature. No production interface/profile or general qualification.
+Approved launch 27 then proved native scrollback, current-page return and exact TTY
+restoration after native prerequisites/kernel closure. Its fixture guard required
+nobody, but the actual stopped case was root-owned; it refused before content checks,
+cleanup or payload entry. Native cleanup halt and full postflight passed. The cause
+of ownership is unestablished. Twelve host prompt groups include exact observed
+five-path metadata and unchanged original root/parent/canary, with no general owner
+range. Twenty-seven of twenty-eight launches are consumed. Full-45 rerun/readback at
+28/29 and ceiling 29 are proposed and unaccepted. No reinstall/reset, production
+interface/profile or general qualification. Keep exact disposal in draft PR #67.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.

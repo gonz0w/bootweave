@@ -96,3 +96,30 @@ def installed_review_pages(current, earlier, restored, expected_hashes):
                      'Directory viewer bytes=0', 'File viewer/readme.txt bytes=5',
                      'h help | b back | q cancel', 'Type review to confirm these effects.'])
     return _scrollback_complete(current, earlier, restored, expected)
+
+
+def installed_stopped_fixture(observed, original, frozen):
+    """Exact stopped research fixture; type/content/empty/TTY checks are separate."""
+    base = {'/', '/bootweave-research', '/bootweave-research/canary'}
+    paths = base | {'/bootweave-research/case', '/bootweave-research/manual-tty.private'}
+    for value, names in ((observed, paths), (original, base), (frozen, paths)):
+        if not isinstance(value, dict):
+            raise Rejected('fixture shape')
+        if set(value) != names:
+            return False
+        for row in value.values():
+            if (not isinstance(row, list) or len(row) != 7 or
+                    any(type(n) is not int or not 0 <= n < 2**64 for n in row)):
+                raise Rejected('fixture fields')
+            if row[0] != 1024 or not row[1] or row[2:4] != [0, 0]:
+                return False
+    if observed != frozen or len({row[1] for row in frozen.values()}) != 5:
+        return False
+    parent, canary = '/bootweave-research', '/bootweave-research/canary'
+    return (frozen['/'] == original['/'] and original['/'][4:6] == [755, 512] and
+            original['/'][6] >= 2 and frozen[canary] == original[canary] and
+            original[canary][4:] == [600, 14, 1] and
+            frozen[parent][:-1] == original[parent][:-1] and
+            original[parent][4:] == [700, 512, 2] and frozen[parent][-1] == 3 and
+            frozen['/bootweave-research/case'][4:] == [700, 512, 2] and
+            frozen['/bootweave-research/manual-tty.private'][4:] == [600, 225, 1])

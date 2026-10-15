@@ -51,12 +51,15 @@ copies, then passed 34 automatic VGA cases. The first 28-line keyboard review
 exceeded the 25-row display; the host stopped before any review answer/confirmation.
 Cleanup forced termination. All original target/media hashes, identities and owned
 closure passed, but native clean halt and full qualification remain false.
-Nine host prompt groups cover complete overlapping views, full variant hashes and
-exact return to the current page; native scrollback remains unproven. Twenty-six of
-twenty-seven launches are consumed. Probe/exact stopped-fixture cleanup/full payload
-rerun and later readback at 27/28, ceiling 28, are proposed and not accepted. No reset
-or reinstall is proposed. Complete installed-root, Cocoa-window, physical-hardware
-and parent installer acceptance and original exact disposal remain pending.
+Approved launch 27 proved native scrollback/current return/TTY agreement, then stopped
+before fixture cleanup or payload entry: observed root ownership differed from the
+prepared nobody expectation. Cleanup-only native halt and complete integrity/closure
+passed; original root/parent/canary identities match. Ownership cause unestablished.
+Twelve host prompt groups include exact observed five-path metadata; native type,
+content, emptiness and TTY checks still precede cleanup. Twenty-seven of twenty-eight
+launches consumed. Full-45 rerun/readback at 28/29, ceiling 29, proposed and unaccepted,
+without reinstall/reset. Complete installed-root, Cocoa-window, physical-hardware,
+parent installer acceptance and original exact disposal remain pending in PR #67.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

@@ -1355,7 +1355,7 @@ maintainer merge of PR #66 from the identical reviewed tree; no phase PR boundar
 
 ## VGA review scrollback and completion — proposed, 2026-10-15
 
-Status: **Proposed; the first-failure stop remains in effect.** Launch 26 passed
+Status: **Accepted by Cam on 2026-10-15; launch 27 stopped at fixture metadata, dependent readback unexecuted.** Launch 26 passed
 both automatic suites (34 cases) before its first manual review. The frozen host
 observer required the whole review in one 25-row page, but the native fixed fixture
 emits 28 nonempty lines. No review answer or placement confirmation was sent.
@@ -1365,7 +1365,7 @@ with full digest b71a214006d313d5d6914d7880c4829055933d4e4e8449402af35799b3eea9d
 Its closed failed audit is
 af236ee9384af9613811eb0ea86a7ecca9171ca267272de9cbf312356b027465.
 
-Propose ceiling **twenty-seven to twenty-eight**, with exactly two remaining boots:
+Approved ceiling **twenty-seven to twenty-eight**, with exactly two remaining boots:
 
 | Launch | Stage | Required result |
 |---|---|---|
@@ -1417,7 +1417,51 @@ remain. An unproven view or halt remains unqualified and may require forced clea
 
 All other accepted bounds, exact original targets/media and original disposal stay
 in force. Keep false historical gates false. Fresh acceptance must bind complete
-integrity/closure and phase freezes. Private unaccepted proposal SHA-256:
+integrity/closure and phase freezes. Private reviewed proposal SHA-256:
 22ad44910b95aa138bb7571f534c961f4393ec0424379cddb2b7262929402bab.
-Preparation authorizes no boot, reset, reinstall, fixture cleanup or disposal.
+Cam approved this concrete sequence in PR #67. Fresh complete integrity/closure
+and code/host-pin checks passed; acceptance SHA-256:
+b14658c0a661ed1c50f7143083963d0359c7136029ca3eb9213ec7db0776c1d2.
+Preparation alone granted no authority. No reset or reinstall is authorized.
 Keep implementation, fixes, qualification and evidence in the same feature draft.
+
+## Exact observed stopped-fixture continuation — proposed, 2026-10-15
+
+Status: **Proposed; first-failure stop remains in effect.** Approved launch 27
+proved the inert native scrollback/TTY gates, then stopped before content inspection,
+fixture cleanup or payload entry. The original root/parent/canary identities and
+metadata matched. Case metadata was root-owned, not the nobody ownership assumed by
+the prepared guard. Its cause is unestablished; no general ownership exception or
+rollback is inferred. Cleanup-only native sync/halt and complete postflight passed.
+Twenty-seven launches are consumed under twenty-eight. The same original image is
+now cleanly halted with full digest
+6bd8a16e0b832984b7bc81dac7fd241579dd787bbd47f36e24605d8fdc0edf44;
+closed stopped audit
+7fbf07d906f3d4208d2a873dfee305bc50b2599dd74fa40ed044b2437f9ecb93.
+
+Propose ceiling **twenty-eight to twenty-nine**, with vga-fixture-payload at 28 and
+vga-fixture-readback at 29. Retain the preceding accepted two-stage sequence and all
+its native prerequisites, repeated inert scrollback probe, full-45 suite, review/
+confirmation controls, independent retained checks, later READBACK, clean halts,
+complete integrity/closure, exact disposal and first-failure stop. No reinstall,
+reset, replacement, overlay, source/binary/media/kernel/key/dependency/export/hardware
+change or additional diagnostic boot is proposed.
+
+Narrow the stopped-fixture metadata guard to all seven fields of all five native
+rows captured at 27, with exact original root/parent/canary comparisons. The case
+must match that exact root-owned 0700/512-byte/two-link observation; the root-owned
+0600 single-link TTY receipt must match its exact 225-byte observation. Pin the
+private observation digest before comparing; no general owner range. Independently
+require native directory/regular-file types, no symlinks, exact four-path inventory,
+full canary hash and saved/fresh TTY agreement before rmdir of the empty case and
+removal of only the receipt. Recheck the complete original baseline afterward.
+Missing/changed/nonempty/unexpected state stops without cleanup or fallback.
+
+Twelve host prompt groups cover the exact retained observation, all 35 field
+substitutions, wrong owner/baseline, missing/extra paths and malformed/unbounded
+fields. Native type/content/emptiness/TTY checks and actual cleanup remain unexecuted.
+Fresh acceptance must bind the clean image, original identities, complete media
+hashes, positive probe/TTY evidence, stopped native observation and exact new
+helper/argument/host-pin freezes. Private unaccepted proposal SHA-256:
+d47151b38ec129f6246e34835d8aa4c4821ece675a52aa09b92f36eb4fafaedb.
+Preparation grants no new boot or deletion. Keep all work in draft PR #67.

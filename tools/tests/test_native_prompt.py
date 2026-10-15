@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 """Confirmation observer boundaries; no guest or input backend."""
 from pathlib import Path
+import copy
 import runpy
 import unittest
 
@@ -10,6 +11,7 @@ OBSERVATION = MODEL['handoff_observation']
 LOGIN = MODEL['installed_login_page']
 REVIEW = MODEL['installed_review_pages']
 SCROLLBACK = MODEL['installed_scrollback_probe']
+STOPPED = MODEL['installed_stopped_fixture']
 
 HASHES = ('38e5e458bc7cb0d72bc8d2b6fd90f5363eaad309680d3aef18fbe43343c7398a',
           '73eac4a9de4571f73d185e2dc07f8afc82ef236965e9daaa2876eb0b6c21c45d',
@@ -37,6 +39,62 @@ def views(rows, offset=12):
 
 
 class NativePromptTests(unittest.TestCase):
+    def test_stopped_fixture_matches_exact_observed_metadata(self):
+        frozen = {'/': [1024, 1, 0, 0, 755, 512, 14],
+                  '/bootweave-research': [1024, 2, 0, 0, 700, 512, 3],
+                  '/bootweave-research/canary': [1024, 3, 0, 0, 600, 14, 1],
+                  '/bootweave-research/case': [1024, 4, 0, 0, 700, 512, 2],
+                  '/bootweave-research/manual-tty.private': [1024, 5, 0, 0, 600, 225, 1]}
+        original = {p: row.copy() for p, row in frozen.items() if p in
+                    ('/', '/bootweave-research', '/bootweave-research/canary')}
+        original['/bootweave-research'][-1] = 2
+        self.assertTrue(STOPPED(frozen, original, frozen))
+        for path in frozen:
+            for index in range(7):
+                changed = copy.deepcopy(frozen)
+                changed[path][index] += 1
+                with self.subTest(path=path, field=index):
+                    self.assertFalse(STOPPED(changed, original, frozen))
+        changed = copy.deepcopy(frozen)
+        changed['/bootweave-research/case'][2:4] = [32767, 32767]
+        self.assertFalse(STOPPED(changed, original, changed))
+
+    def test_stopped_fixture_rejects_wrong_baseline_and_extra_paths(self):
+        frozen = {'/': [1024, 1, 0, 0, 755, 512, 14],
+                  '/bootweave-research': [1024, 2, 0, 0, 700, 512, 3],
+                  '/bootweave-research/canary': [1024, 3, 0, 0, 600, 14, 1],
+                  '/bootweave-research/case': [1024, 4, 0, 0, 700, 512, 2],
+                  '/bootweave-research/manual-tty.private': [1024, 5, 0, 0, 600, 225, 1]}
+        original = {p: row.copy() for p, row in frozen.items() if p in
+                    ('/', '/bootweave-research', '/bootweave-research/canary')}
+        original['/bootweave-research'][-1] = 2
+        for path in original:
+            changed = copy.deepcopy(original)
+            changed[path][1] += 1
+            self.assertFalse(STOPPED(frozen, changed, frozen))
+        for path in frozen:
+            changed = copy.deepcopy(frozen)
+            del changed[path]
+            self.assertFalse(STOPPED(changed, original, frozen))
+        changed = copy.deepcopy(frozen)
+        changed['/unexpected'] = [1024, 6, 0, 0, 600, 1, 1]
+        self.assertFalse(STOPPED(changed, original, frozen))
+
+    def test_stopped_fixture_rejects_untyped_or_unbounded_fields(self):
+        for value in (None, [], 'fixture'):
+            with self.assertRaises(REJECTED):
+                STOPPED(value, {}, {})
+        frozen = {'/': [1024, 1, 0, 0, 755, 512, 14],
+                  '/bootweave-research': [1024, 2, 0, 0, 700, 512, 3],
+                  '/bootweave-research/canary': [1024, 3, 0, 0, 600, 14, 1],
+                  '/bootweave-research/case': [1024, 4, 0, 0, 700, 512, 2],
+                  '/bootweave-research/manual-tty.private': [1024, 5, 0, 0, 600, 225, 1]}
+        for value in (None, [], [0] * 8, [True] * 7, [-1] * 7, [2**64] * 7):
+            changed = copy.deepcopy(frozen)
+            changed['/'] = value
+            with self.subTest(value=value), self.assertRaises(REJECTED):
+                STOPPED(changed, {}, frozen)
+
     def test_full_native_review_exceeds_current_VGA_page(self):
         self.assertEqual(len(REVIEW_ROWS), 28)
         current, earlier, restored = views(REVIEW_ROWS)

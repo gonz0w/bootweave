@@ -6,18 +6,18 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Twenty-six launches are consumed under the accepted twenty-seven ceiling. The
-headless preflight and stock VGA installation passed. Corrected cold boot 26 passed
-native login/runtime/root binding, kernel/process closure and all 34 automatic VGA
-cases. Its first 28-line keyboard review exceeded the 25-row display, so the host
-refused before any answer or confirmation. Bounded cleanup forced termination;
-complete original hashes/identities, sealed media and owned closure passed, with
-no native clean halt or full qualification. Twelve VGA cases and exact disposal
-remain pending. New host overlap/restoration guards pass nine prompt groups; native
-scrollback remains unproven. A probe/exact stopped-fixture cleanup/full-45 rerun and
-later readback at 27/28, ceiling 28, are proposed and not accepted, without reinstall
-or reset. Keep qualification/fixes/disposal on codex/vga-payload-readback after
-maintainer merge of PR #66 from the identical reviewed tree.
+Twenty-seven launches are consumed under twenty-eight. Launch 26 passed 34
+automatic VGA cases before the incomplete-review host stop and forced cleanup.
+Approved launch 27 passed native prerequisites, kernel/process closure and an inert
+scrollback probe with overlapping captured pages, exact current return and native
+TTY agreement. Stopped-fixture metadata showed a root-owned case where its prepared
+guard required nobody, so it stopped before content inspection, fixture cleanup or
+payload entry. Cleanup-only native sync/halt and full postflight passed. The original
+root/parent/canary identities remain unchanged. The cause of case ownership is not
+established. Twelve VGA cases and exact disposal remain pending; full-45 rerun plus
+later readback at 28/29, ceiling 29, are proposed and unaccepted. Twelve host prompt
+groups now include exact observed stopped-fixture metadata, without a general owner
+range. Keep all work in PR #67 on codex/vga-payload-readback.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -1266,3 +1266,64 @@ reinstall/reset. Twenty-six launches are consumed. No new acceptance, phase free
 guest or disposal has executed. Keep all further fixes/qualification/disposal in
 this same feature draft; complete installed-root and production qualification
 remain pending.
+
+## Native scrollback passed; exact fixture metadata stopped, 2026-10-15
+
+Cam explicitly approved launches 27/28 in PR #67, ceiling twenty-eight. Fresh full
+integrity/closure and code/host-pin checks passed; acceptance SHA-256:
+b14658c0a661ed1c50f7143083963d0359c7136029ca3eb9213ec7db0776c1d2.
+Launch-27 exact helper/argument/host-pin freeze:
+ef117eda6c79efc88d788d9610840ac92c52d86bd9affe96f7557884d89d3280.
+The paused sole original writable target/read-only AHCI runtime CD and no network/
+extra backing passed. Actual stock automatic boot checks, synthetic VGA login,
+runtime hashes/permissions, device/namespace/raw-label/root gates passed. At 442.388
+seconds no test/relink workers were visible; installed/relink kernel copies agreed:
+033a60cd2d6b767593140ac6eaefa41e648104239d3065ba1cb3b26c9599f34e.
+
+The fixed 29-line inert probe passed with two actual overlapping framebuffer pages,
+one Shift+Page Up/Down cycle, exact current-page return and native exact TTY match.
+This establishes that bounded installed-kernel display mechanism on the frozen
+headless fixture. It does not qualify a raw manual review, physical hardware,
+Cocoa window, production UI or payload placement.
+
+Five native metadata rows matched the original root/parent/canary identity and
+expected parent link count. The stopped case showed uid/gid 0/0, mode 0700, size 512
+and two links; its prepared guard required 32767/32767. The saved TTY receipt showed
+root ownership, mode 0600, size 225 and one link. The cause of case ownership is
+unestablished. At 481.409 seconds the strict guard stopped before content/type/
+empty-inventory checks, fixture removal or payload execution. No case was added to
+the earlier 34 automatic VGA results; manual/KEEP/READBACK remain pending.
+
+The new failure cleanup waited read-only for the actual fresh current shell,
+observed the fixed cd/sync/halt command before Return, and received guest-origin
+shutdown at 498.267 seconds. Normal exit/guest/client/awake reaping completed at
+498.340; no explicit optical unmount was claimed by this cleanup path. No forced
+stop, generic Ctrl-C, QMP timeout/recovery/sample, job/answer resubmission, restart,
+reset, reinstall or dependent readback occurred. Clean native halt is true; phase
+qualification remains false.
+
+Full original VGA SHA-256:
+6bd8a16e0b832984b7bc81dac7fd241579dd787bbd47f36e24605d8fdc0edf44;
+allocated bytes 2019180544. Build/serial remain respectively
+6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592 and
+2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+Original identities/modes/links, both sealed media complete hashes, credential
+exclusion and absence of owned processes/fixture handles/mounts passed. Closed-audit
+allocation/capture/exports were 13949878272/1552965/972121651 bytes, within bounds.
+Stopped audit SHA-256:
+7fbf07d906f3d4208d2a873dfee305bc50b2599dd74fa40ed044b2437f9ecb93.
+The earlier forced-stop and false gates remain unchanged.
+
+The new host metadata guard matches all seven fields for each of those five paths
+against the pinned actual observation and preserves the original baseline. Twelve
+prompt groups include all 35 field substitutions, wrong baseline/owner, missing/
+extra paths and untyped/out-of-range fields. The retained native metadata passes
+that host guard. Independent native types/content/emptiness/TTY and actual removal
+remain required and unexecuted. Host correction proof SHA-256:
+a6a246576f0069c12553234a08238d62ef528f4fd6141f9ae753d466b3ce85a9.
+
+Twenty-seven of twenty-eight launches are consumed. The
+[exact-fixture continuation](installed-payload-flow.md#exact-observed-stopped-fixture-continuation--proposed-2026-10-15)
+proposes full-45 payload rerun at 28 and later READBACK/disposal at 29, ceiling 29,
+from this cleanly halted original image with no reset/reinstall. No new acceptance,
+phase freeze, guest or disposal has executed. Keep the same draft PR #67 open.
