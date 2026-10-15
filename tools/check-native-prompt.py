@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
 """Host research observer only; no input, guest, socket or disk operations."""
+import re
 
 
 class Rejected(ValueError):
@@ -37,3 +38,121 @@ def installed_login_page(lines):
     """Recognize the observed synthetic guest's VGA getty page; no input."""
     ready = handoff_observation(lines, 'login:')
     return ready and 'OpenBSD/amd64 (bootweave.example.invalid) (ttyC0)' in lines
+
+
+def _scrollback_rows(page):
+    handoff_page(page, 'shape check', interactive=False)
+    if len(page) != 25:
+        raise Rejected('scrollback shape')
+    rows = [row.rstrip('_\uFFFD ') for row in page]
+    while rows and not rows[-1]:
+        rows.pop()
+    return rows
+
+
+def _scrollback_complete(current, earlier, restored, expected):
+    """Check observed overlap; callers must establish one owned navigation cycle."""
+    tail, head, back = map(_scrollback_rows, (current, earlier, restored))
+    if tail != back or not tail or tail[-1] != expected[-1]:
+        return False
+    if head.count(expected[0]) != 1:
+        return False
+    prefix = head[head.index(expected[0]):]
+    start = len(expected) - len(tail)
+    # At least one actual row must overlap. Never fill an unseen gap from source.
+    return (0 < start < len(prefix) < len(expected) and
+            prefix == expected[:len(prefix)] and tail == expected[start:])
+
+
+def installed_scrollback_probe(current, earlier, restored):
+    """Fixed inert native display probe; no console input or support claim."""
+    expected = [f'IPF_SCROLLBACK_{i:02d}' for i in range(1, 30)] + ['bootweave#']
+    return _scrollback_complete(current, earlier, restored, expected)
+
+
+def installed_review_case_page(earlier, case):
+    """Read the actual numbered prelude from history before a review answer."""
+    if type(case) is not int or not 0 <= case < 5:
+        raise Rejected('review case')
+    rows = _scrollback_rows(earlier)
+    expected = f'Installed manual case {case}: ' + (
+        'type q' if case == 1 else 'review, then exact fresh phrase')
+    title = 'Bootweave file placement research'
+    return (rows.count(expected) == rows.count(title) == 1 and
+            rows.index(expected) < rows.index(title))
+
+
+def installed_review_pages(current, earlier, restored, expected_hashes):
+    """Frozen two-member research fixture only; not a generic review protocol."""
+    if (not isinstance(expected_hashes, tuple) or len(expected_hashes) != 4 or
+            any(not isinstance(h, str) or not re.fullmatch('[0-9a-f]{64}', h)
+                for h in expected_hashes)):
+        raise Rejected('review hashes')
+    head = _scrollback_rows(earlier)
+    title = 'Bootweave file placement research'
+    if head.count(title) != 1:
+        return False
+    prefix = head[head.index(title):]
+    if len(prefix) < 5 or not re.fullmatch(r'Root dev=1024 inode=[1-9][0-9]{0,19}', prefix[3]):
+        return False
+    expected = [title, 'Only this fresh case root is writable.', 'viewer-case', prefix[3],
+                'Directories: 32767/32767 mode 0700', 'Files: 32767/32767 mode 0600']
+    for label, value in zip(('Payload', 'Explicit key', 'Verifier', 'Inspector'), expected_hashes):
+        expected.extend([label + ' SHA256:', value[:40], value[40:]])
+    expected.extend(['Planned=2 files=1 bytes=5 input=2560',
+                     'Limits: 16 objects, depth 16, path 255',
+                     'Input 1 MiB; content 512 KiB total',
+                     'Each file 256 KiB; writer 15 seconds',
+                     'Controller 64 MiB; child 32 MiB',
+                     'No overwrite, links or executable data',
+                     'Directory viewer bytes=0', 'File viewer/readme.txt bytes=5',
+                     'h help | b back | q cancel', 'Type review to confirm these effects.'])
+    return _scrollback_complete(current, earlier, restored, expected)
+
+
+def installed_stopped_fixture(observed, original, frozen):
+    """Exact stopped research fixture; type/content/empty/TTY checks are separate."""
+    base = {'/', '/bootweave-research', '/bootweave-research/canary'}
+    paths = base | {'/bootweave-research/case', '/bootweave-research/manual-tty.private'}
+    for value, names in ((observed, paths), (original, base), (frozen, paths)):
+        if not isinstance(value, dict):
+            raise Rejected('fixture shape')
+        if set(value) != names:
+            return False
+        for row in value.values():
+            if (not isinstance(row, list) or len(row) != 7 or
+                    any(type(n) is not int or not 0 <= n < 2**64 for n in row)):
+                raise Rejected('fixture fields')
+            if row[0] != 1024 or not row[1] or row[2:4] != [0, 0]:
+                return False
+    if observed != frozen or len({row[1] for row in frozen.values()}) != 5:
+        return False
+    parent, canary = '/bootweave-research', '/bootweave-research/canary'
+    return (frozen['/'] == original['/'] and original['/'][4:6] == [755, 512] and
+            original['/'][6] >= 2 and frozen[canary] == original[canary] and
+            original[canary][4:] == [600, 14, 1] and
+            frozen[parent][:-1] == original[parent][:-1] and
+            original[parent][4:] == [700, 512, 2] and frozen[parent][-1] == 3 and
+            frozen['/bootweave-research/case'][4:] == [700, 512, 2] and
+            frozen['/bootweave-research/manual-tty.private'][4:] == [600, 225, 1])
+
+
+def installed_fixture_cleanup_state(observed, original, frozen):
+    """Bind present known artifacts; native absence/type/content checks are separate."""
+    if not installed_stopped_fixture(frozen, original, frozen):
+        return False
+    if not isinstance(observed, dict):
+        raise Rejected('cleanup shape')
+    base = {'/', '/bootweave-research', '/bootweave-research/canary'}
+    if not base <= set(observed) <= set(frozen):
+        return False
+    for path, row in observed.items():
+        if (not isinstance(row, list) or len(row) != 7 or
+                any(type(n) is not int or not 0 <= n < 2**64 for n in row)):
+            raise Rejected('cleanup fields')
+        expected = frozen[path].copy()
+        if path == '/bootweave-research':
+            expected[-1] = 2 + int('/bootweave-research/case' in observed)
+        if row != expected:
+            return False
+    return True

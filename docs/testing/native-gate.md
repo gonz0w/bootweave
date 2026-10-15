@@ -45,11 +45,24 @@ stock verification/install, foreground relink/configuration, native halt and com
 integrity/closure. Cold boot 25 reached the actual ttyC0 login page but stopped on a
 host prompt-matching error before runtime/payload input. Cleanup-only root login/
 sync/halt and full hash/identity/closure passed; first-boot changes remain, with no
-claim of worker absence/kernel-copy agreement. The host guard is corrected/tested;
-all 46 VGA cases and exact disposal remain pending. Twenty-five of twenty-six
-launches are consumed; a two-boot continuation at 26/27, no reinstall/reset, is
-proposed and not accepted. No complete installed-root, Cocoa-window,
-physical-hardware or parent installer acceptance follows.
+claim of worker absence/kernel-copy agreement from launch 25. Corrected launch 26
+independently established runtime/root binding, worker absence and matching kernel
+copies, then passed 34 automatic VGA cases. The first 28-line keyboard review
+exceeded the 25-row display; the host stopped before any review answer/confirmation.
+Cleanup forced termination. All original target/media hashes, identities and owned
+closure passed, but native clean halt and full qualification remain false.
+Approved launch 27 proved native scrollback/current return/TTY agreement, then stopped
+before fixture cleanup or payload entry: observed root ownership differed from the
+prepared nobody expectation. Cleanup-only native halt and complete integrity/closure
+passed; original root/parent/canary identities match. Ownership cause unestablished.
+Approved launch 28 passed exact metadata, native types, canary/content and four-path
+inventory. Its cleanup marker was absent; exact failing predicate and removal state
+remain unestablished. Native cleanup halt and full postflight passed, without new
+payload entry. Seventeen prompt groups cover current-boot TTY preservation and only
+known optional artifacts with exact identities; stale receipt never supplies current
+TTY authority. Full-45 rerun/readback at 29/30, ceiling 30, proposed and unaccepted;
+28/29 launches consumed, no reinstall/reset. Complete installed-root, Cocoa-window,
+physical-hardware, parent acceptance and original exact disposal remain pending.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

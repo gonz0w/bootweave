@@ -1294,7 +1294,7 @@ Keep this work in the existing complete-feature draft; no phase PR boundary.
 
 ## VGA getty observer correction and two-stage completion — proposed, 2026-10-15
 
-Status: **Proposed; no further boot or ceiling increase authorized.** The successful
+Status: **Accepted by Cam on 2026-10-15; launch 26 stopped, dependent readback unexecuted.** The successful
 headless preflight and completed stock VGA installation remain qualified for their
 bounded scope. Cold boot 25 reached the normal synthetic ttyC0 login: page, while
 its frozen controller incorrectly expected a hostname-prefixed prompt. Qualification
@@ -1312,7 +1312,7 @@ The failed controller remains frozen; a separate corrected controller and exact
 arguments are prepared and unexecuted. No native C/binary/media/compiler, payload
 signing pair, credential, dependency, export, transport or guest hardware changes.
 
-Propose ceiling **twenty-six to twenty-seven** for exactly two remaining launches:
+Approved ceiling **twenty-six to twenty-seven** for exactly two remaining launches:
 
 | Launch | Stage | Required result |
 |---|---|---|
@@ -1342,12 +1342,177 @@ no automatic retry/fallback/reset or job/answer/confirmation resubmission. Keep 
 same maximum three read-only recovery observations and one one-second/1 MiB owned-PID
 sample at first QMP timeout; no generic Ctrl-C of writing work.
 
-The extra launch and retry require review under the accepted stop/budget boundary.
-Private unexecuted two-stage proposal SHA-256:
+Cam approved the two-stage continuation under the accepted stop/budget boundary.
+Private reviewed two-stage proposal SHA-256:
 dce6e37595735cd48dd3ba084982ec51ad66a787deb1c813352235c9e8fb2a1b.
 It binds accepted preflight/install, stopped cold boot/host correction, the original
 receipt/completed single reset, current target hashes, freshly rehashed 0400 media,
-exact arguments and corrected guard/controller sources. New acceptance must bind
-fresh complete integrity/closure and phase freezes. Keep fixes, qualification and
-original disposal in the same feature draft on codex/vga-qualification-finish after
-maintainer merge of PR #65; no phase PR boundary.
+exact arguments and corrected guard/controller sources. Fresh acceptance binds complete target/media integrity, original identities and
+closed handles/mounts, with phase-specific helper/argument/host-pin freezes. Its
+SHA-256 is ad964408bcbbc027dc7b8bfe37183cb125a753bd1e59e7227f7d4cc88e6573b7.
+Keep fixes, qualification and original disposal on codex/vga-payload-readback after
+maintainer merge of PR #66 from the identical reviewed tree; no phase PR boundary.
+
+## VGA review scrollback and completion — proposed, 2026-10-15
+
+Status: **Accepted by Cam on 2026-10-15; launch 27 stopped at fixture metadata, dependent readback unexecuted.** Launch 26 passed
+both automatic suites (34 cases) before its first manual review. The frozen host
+observer required the whole review in one 25-row page, but the native fixed fixture
+emits 28 nonempty lines. No review answer or placement confirmation was sent.
+Twenty-six launches are consumed under twenty-seven. Forced cleanup supplies no
+native halt or complete qualification; the current original VGA image is retained
+with full digest b71a214006d313d5d6914d7880c4829055933d4e4e8449402af35799b3eea9d0.
+Its closed failed audit is
+af236ee9384af9613811eb0ea86a7ecca9171ca267272de9cbf312356b027465.
+
+Approved ceiling **twenty-seven to twenty-eight**, with exactly two remaining boots:
+
+| Launch | Stage | Required result |
+|---|---|---|
+| 27 | vga-scrollback-payload | Fresh full hashes, original identities, closure and exact helper/argument/host-pin freeze. Boot the same original image with the same runtime CD; stock automatic filesystem checks only, no manual repair. Repeat actual login/runtime/device/raw-label/root/worker/kernel-copy gates. Prove an inert numbered-text scrollback cycle and exact TTY restoration before fixture cleanup or payload execution. Independently validate the stopped original fixture; remove only its checked empty case and exact TTY receipt, then prove the original root/parent/canary baseline unchanged. Rerun all 34 automatic cases, ten keyboard cases and KEEP, with complete actual review capture and fresh confirmation. Require all 45, independent retained postconditions, native halt and full postflight. |
+| 28 | vga-scrollback-readback | Cold boot the full-hash-bound result on the same profile/media. Repeat prerequisites, independently compare retained content/metadata/canary before and after READBACK case 46 without writer dispatch. Require positive native resources, exact TTY, native halt, complete hashes and closure, then original exact all-three-fixture/helper logical disposal and authority closure. |
+
+OpenBSD documents keyboard scrollback on supported display drivers; this is
+[documentation, not native evidence](https://man.openbsd.org/OpenBSD-7.9/wskbd.4).
+The [VGA FAQ](https://www.openbsd.org/faq/faq7.html#Scrollback) also limits support
+to certain hardware and excludes install kernels. This proposal uses the installed
+GENERIC kernel and existing headless VGA/keyboard/QMP framebuffer only. No new
+transport, UART redirection, console, font, resolution, kernel, C/binary, media,
+compiler, signing pair, credential, dependency or artifact export is proposed.
+
+The inert probe prints 29 fixed numbered lines and returns to the actual shell.
+One Shift+Page Up and one Shift+Page Down must yield two overlapping captured pages
+and exact current-page restoration, followed by native exact TTY agreement. Missing
+support, gaps or uncertain navigation stop before fixture cleanup or payload cases.
+The same single owned reader records at most twelve navigation cycles: probe plus
+eleven reviews, one up/down each, with at most two seconds per view observation.
+Keep existing ten-second line, review/whole/output and original launch clocks.
+
+Every review must contain the actual contiguous header, case/root identity,
+owners/modes, four complete expected hashes, limits and both effects across captured
+pages with at least one observed overlapping row. Source text never fills a missing
+row. Match the frozen dynamic/static inspector separately. Require exact return to
+the current review prompt and the actual numbered case announcement before sending
+one review/cancel answer, then a fresh one-use phrase where applicable. No h/back,
+revision reset, repeated answer/confirmation or job resubmission. Nine host prompt
+groups and simulated navigation failure paths cover these controls; they do not
+qualify native scrollback or placement.
+
+Stopped-fixture cleanup is limited to independently observed original root, parent
+and canary identities/metadata and matching full canary bytes; the exact four-path
+inventory must contain only parent, canary, empty nobody-owned 0700 case and regular
+single-link root-owned 0600 TTY receipt of at most 512 bytes. Require the saved TTY
+to equal the fresh native TTY, use rmdir on that empty case and remove only that
+receipt. Never recursively remove, replace or recreate the original parent/canary.
+Independently recheck the complete original baseline before rerunning all cases.
+Any missing, changed, nonempty or unexpected object stops without fallback.
+
+After a failure, dependent work stays stopped. Cleanup may wait read-only for at
+most 100 seconds for a fresh shell, only while the bottom/current view is proven,
+within the original cleanup deadline (2670 seconds). Observe the fixed cd/sync/halt
+command before one Return and require guest-origin shutdown for a clean-halt claim.
+Never interrupt a writer, resend uncertain navigation/halt input or use generic
+Ctrl-C. Existing bounded read-only QMP recovery, owned sample, watchdog and reaping
+remain. An unproven view or halt remains unqualified and may require forced cleanup.
+
+All other accepted bounds, exact original targets/media and original disposal stay
+in force. Keep false historical gates false. Fresh acceptance must bind complete
+integrity/closure and phase freezes. Private reviewed proposal SHA-256:
+22ad44910b95aa138bb7571f534c961f4393ec0424379cddb2b7262929402bab.
+Cam approved this concrete sequence in PR #67. Fresh complete integrity/closure
+and code/host-pin checks passed; acceptance SHA-256:
+b14658c0a661ed1c50f7143083963d0359c7136029ca3eb9213ec7db0776c1d2.
+Preparation alone granted no authority. No reset or reinstall is authorized.
+Keep implementation, fixes, qualification and evidence in the same feature draft.
+
+## Exact observed stopped-fixture continuation — proposed, 2026-10-15
+
+Status: **Accepted by Cam on 2026-10-15; launch 28 stopped at cleanup completion, dependent readback unexecuted.** Approved launch 27
+proved the inert native scrollback/TTY gates, then stopped before content inspection,
+fixture cleanup or payload entry. The original root/parent/canary identities and
+metadata matched. Case metadata was root-owned, not the nobody ownership assumed by
+the prepared guard. Its cause is unestablished; no general ownership exception or
+rollback is inferred. Cleanup-only native sync/halt and complete postflight passed.
+Twenty-seven launches are consumed under twenty-eight. The same original image is
+now cleanly halted with full digest
+6bd8a16e0b832984b7bc81dac7fd241579dd787bbd47f36e24605d8fdc0edf44;
+closed stopped audit
+7fbf07d906f3d4208d2a873dfee305bc50b2599dd74fa40ed044b2437f9ecb93.
+
+Approved ceiling **twenty-eight to twenty-nine**, with vga-fixture-payload at 28 and
+vga-fixture-readback at 29. Retain the preceding accepted two-stage sequence and all
+its native prerequisites, repeated inert scrollback probe, full-45 suite, review/
+confirmation controls, independent retained checks, later READBACK, clean halts,
+complete integrity/closure, exact disposal and first-failure stop. No reinstall,
+reset, replacement, overlay, source/binary/media/kernel/key/dependency/export/hardware
+change or additional diagnostic boot is proposed.
+
+Narrow the stopped-fixture metadata guard to all seven fields of all five native
+rows captured at 27, with exact original root/parent/canary comparisons. The case
+must match that exact root-owned 0700/512-byte/two-link observation; the root-owned
+0600 single-link TTY receipt must match its exact 225-byte observation. Pin the
+private observation digest before comparing; no general owner range. Independently
+require native directory/regular-file types, no symlinks, exact four-path inventory,
+full canary hash and saved/fresh TTY agreement before rmdir of the empty case and
+removal of only the receipt. Recheck the complete original baseline afterward.
+Missing/changed/nonempty/unexpected state stops without cleanup or fallback.
+
+Twelve host prompt groups cover the exact retained observation, all 35 field
+substitutions, wrong owner/baseline, missing/extra paths and malformed/unbounded
+fields. Native type/content/emptiness/TTY checks and actual cleanup remain unexecuted.
+Fresh acceptance must bind the clean image, original identities, complete media
+hashes, positive probe/TTY evidence, stopped native observation and exact new
+helper/argument/host-pin freezes. Private reviewed proposal SHA-256:
+d47151b38ec129f6246e34835d8aa4c4821ece675a52aa09b92f36eb4fafaedb.
+Cam approved this exact continuation in PR #67. Fresh complete integrity/closure
+and code/host-pin checks passed; acceptance SHA-256:
+8c9a18fd9364f304be11d7675ee2aedcf10e1e7746fe150ff26cc27ea4c477b4.
+Preparation alone granted no authority. Keep all work in draft PR #67.
+
+## Current-boot TTY and inert stale receipt — proposed, 2026-10-15
+
+Status: **Proposed; first-failure stop remains in effect.** Approved launch 28
+passed exact metadata and native types/content/canary/four-path inventory. Its fixed
+cleanup chain returned to the shell without its completion marker. The exact failing
+predicate and which removals, if any, occurred were not observed. Cleanup-only native
+shutdown/full postflight passed; no payload suite ran. Twenty-eight launches are
+consumed under twenty-nine. Original cleanly halted VGA full SHA-256:
+24b209c82b821bb931940eb7aa34d77b29c6391fbba1db01a2c5c09598bfe204;
+stopped audit 67cae6daf262a4d05531fb664384d4a8dcc3fc4a77928a55a583bd6e1cbf970e.
+
+Propose ceiling **twenty-nine to thirty**: vga-tty-payload at 29, followed only after
+complete qualification by vga-tty-readback at 30. Retain all native prerequisites,
+repeat probe/full-45 suite, full actual reviews/fresh confirmations, independent
+retained checks, later READBACK, native halts/full hashes/closure and original exact
+disposal. No reinstall/reset, new target, source/binary/media/kernel/key/dependency/
+transport/hardware change, extra diagnostic boot or artifact export.
+
+The stale receipt is an untrusted owned artifact, not authority for another boot's
+TTY. Capture the current native TTY in a shell variable before inspection; compare
+that same current state immediately before and after cleanup, then unset it. Never
+import, restore, execute or compare old receipt contents as current terminal state.
+If present, observe its full SHA-256 privately as inert data. Subsequent payload
+operations still save and compare their own fresh TTY receipts.
+
+Because the previous removal state is unestablished, independently observe the
+original root/parent/canary plus either, both or neither known case/receipt. Every
+present optional object must match all seven fields of its pinned launch-27 record;
+original parent links must be two without the case, three with it. Require native
+absence or correct directory/regular type, no symlinks, exact inventory with no other
+path, full canary hash and the fresh TTY match. Use only rmdir for a present empty
+case and rm for the present exact receipt, never recursive cleanup or parent/canary
+replacement. Independently recheck the complete original baseline afterward.
+Unknown/changed/nonempty state or failed current-TTY preservation stops without
+fallback. Planned/submitted/unobserved removals never become observed disposal.
+
+Seventeen host prompt groups cover these known presence combinations, exact identity/
+field substitutions, missing baseline/extra paths and malformed/unbounded fields.
+The numbered case announcement must be observed in the actual scrolled page before
+the review header, avoiding reliance on capturing a transient preface. Stale/wrong
+counters and malformed pages refuse before an answer; navigation cycles and native
+deadlines remain unchanged. New fixed native commands remain ASCII and at most
+489 bytes under the 512-byte host command bound. Fresh acceptance must bind complete original target/media
+integrity, closure, previous stop, pinned metadata and exact new phase freezes.
+Private unaccepted proposal SHA-256:
+637248680cf3189888113d9e41d5e9224878ae6855fa7d6939937ef8539fda55.
+Preparation grants no new boot or deletion. Keep the same draft PR #67 open.

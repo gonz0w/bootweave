@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65/#66.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -21,9 +21,24 @@ reached the actual ttyC0 getty page; its host observer expected the wrong login 
 Qualification stopped before any runtime/payload input. Cleanup-only root login/
 sync/halt and owned closure passed, without a worker/kernel-copy agreement claim.
 First-boot changes remain on the same original target; no reinstall or reset occurred.
-The host login guard is corrected/tested; all 46 VGA cases/disposal remain pending.
-Twenty-five of twenty-six launches are consumed. Two remaining boots at 26/27 are
-proposed, not accepted. No production interface/profile or general qualification.
+The corrected launch 26 passed native login/runtime/root binding, worker absence,
+matching kernel copies and 34 automatic VGA cases. The 28-line first manual review
+scrolled beyond the 25-row display; its host guard stopped before any answer or
+confirmation. Forced cleanup, full hashes/identities and owned closure are recorded;
+no native halt, manual case or complete installed qualification is claimed.
+Approved launch 27 then proved native scrollback, current-page return and exact TTY
+restoration after native prerequisites/kernel closure. Its fixture guard required
+nobody, but the actual stopped case was root-owned; it refused before content checks,
+cleanup or payload entry. Native cleanup halt and full postflight passed. The cause
+of ownership is unestablished. Approved launch 28 passed exact observed metadata, native types, full canary hash
+and four-path inventory. Its cleanup marker was absent; the failing predicate and
+removal state remain unestablished. Native cleanup halt/full postflight passed;
+no new payload case ran. Seventeen prompt groups now cover current-boot TTY preservation
+and conditional cleanup of only the known exact artifacts, with independent presence/
+type/content/TTY checks. The stale receipt is inert and never imported as current
+terminal state. Twenty-eight of twenty-nine launches consumed. Full-45 rerun/readback
+at 29/30, ceiling 30, proposed and unaccepted. No reinstall/reset, production interface/
+profile or general qualification. Keep qualification/disposal in draft PR #67.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
