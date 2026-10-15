@@ -113,9 +113,12 @@ The accepted raw-partition replacement now passed serial qualification. The VGA
 handoff initially stopped before disk confirmation on an observer glyph error. Its
 accepted retry passed confirmation and native input checks, then stock extraction
 panicked. That partially written target is quarantined; no VGA installed case passed.
-All 46 VGA cases and disposal remain pending in one feature follow-up after PR #60
+All 46 VGA cases and disposal remain pending in one feature follow-up after PR #61
 was maintainer-merged. The accepted AHCI diskless preflight passed authentication,
 full input hashes and one listing, but its second pass remained incomplete. It was
 aborted and cleanly halted within the scheduling limit. No VGA reset occurred; all
-three retained images remain unchanged. Eighteen of twenty-one launches are consumed.
-A corrected stock-only read-only control is proposed, without target/reset authority.
+three retained images remain unchanged. The separately accepted stock-only control
+matched native hashes and passed one listing, then lost QMP observation in its second
+pass and required forced host closure; no native halt is claimed. Nineteen of
+twenty-one launches are consumed. A host socket cleanup fix passed two synthetic
+cases; one corrected-cleanup diskless control is proposed, without target/reset authority.

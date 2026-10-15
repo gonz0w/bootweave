@@ -6,17 +6,20 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Eighteen launches completed under the accepted twenty-one ceiling. Cam accepted the
-four-stage AHCI attempt and conditional same-image reset on 2026-10-15. Its diskless
-preflight passed native AHCI attachment, authentication/input hashes and the first
-listing pass. The second pass did not establish completion; observation timeouts and
-slow progress preceded operator abort and native clean halt at 2671.618 seconds.
-No VGA reset or dependent installation/payload/readback boot occurred. All three
-retained images remain unchanged, owned processes reaped and handles/mounts absent.
-All 46 VGA cases and final disposal remain pending. A corrected stock-only read-only
-control is proposed within the same ceiling; no control or reset is authorized by
-that proposal. Remaining work stays together on codex/installed-ahci-qualification
-after maintainer merge of PR #60 from the identical reviewed tree.
+Nineteen launches are consumed under the accepted twenty-one ceiling. The AHCI
+handoff preflight passed one listing; its second remained incomplete before abort
+and native clean halt. The separately accepted stock-only AHCI control authenticated
+the unchanged whole ISO on the host, matched the native key and all six input
+hashes, and passed one listing. Its second listing lost QMP observation; native
+completion/halt remain unestablished and the owned emulator required a forced stop.
+All three full target hashes/original identities and the stock ISO remain unchanged;
+owned processes are reaped and no handles/mounts remain. No target reset occurred.
+All 46 VGA cases and final disposal remain pending. Two host synthetic tests
+reproduced and verified a QMP timeout socket-lifetime cleanup fix; they do not explain
+the initial timeout or qualify a guest. One further corrected-cleanup diskless control
+is proposed, not authorized. Remaining work stays together on
+codex/installed-stock-ahci-control after maintainer merge of PR #61 from the identical
+reviewed tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -763,17 +766,92 @@ Incomplete-preflight audit SHA-256:
 The AHCI preflight gate remains false. The accepted VGA reset, installation, 46
 cases and disposal cannot proceed through that gate. Eighteen of twenty-one launches
 are consumed; remaining count grants no alternate experiment. Root cause remains
-unproven. The [corrected stock-control proposal](installed-payload-flow.md#corrected-stock-ahci-read-only-control--proposed-2026-10-15)
+unproven. The [corrected stock-control proposal](installed-payload-flow.md#corrected-stock-ahci-read-only-control--accepted-2026-10-15)
 repurposes one remaining slot only after review, with no target attachment or reset.
 Offline host explicit-key verification of original install79.iso and member inventory
 confirmed all six inputs present and SHA256.sig absent at the fixed sets path.
 That preparation receipt SHA-256 is
 ee5beee37f22fb90eb8de98158cf0b1b1a284a8a8d38f8e81838628ddac2935f.
-No further guest has started. Original native C remains frozen at 35238a1 and its
-16369-byte additional-source ceiling remains satisfied; no runtime adoption follows.
+At that checkpoint no further guest had started. Original native C remains frozen
+at 35238a1 and its 16369-byte additional-source ceiling remains satisfied; no runtime
+adoption follows.
 
 Final local make verify passed all 82 groups (23/13/3/10/33), no failures/skips,
 after these evidence/scope updates. Content/links, ShellCheck and Gitleaks passed;
 final prose passed content/link and diff-whitespace checks. This is host validation,
 not completion of the native preflight or installed VGA cases. No Actions, runners
 or hosted status publisher was used.
+
+## Stock AHCI control stopped; host cleanup fix, 2026-10-15
+
+Cam accepted one corrected stock-only diskless control at reviewed head
+30f314ca6b4086e3e261ef7a6909546046b6837c. Maintainer merge
+96eeed0fd7d64878ed964d44f3efc1294dbcfc7c has the identical tree
+d356473682e4f6bdc5a70b5b308f8c6fe2ac789d. Acceptance receipt
+befcf847a405c22abaecbd8fb3784e436fb2e2379a453b8d76f7909853ff73cb
+binds fresh full target/media hashes, original identities and closure. Exact
+helper/argument/host-pin freeze:
+700398a6326e9c1f570e7ed6e2b3938597ed077dff252ea5b23d9d8f2cc232a8.
+
+Launch nineteen attached only the original stock ISO, read-only on AHCI. Complete
+paused block/node/PCI/qtree/argument/open-file inventory proved no target, network,
+sharing, hotplug or floppy backing. Native boot rows correlated ahci0/scsibus0/cd0
+and the actual stock installer question. Only its shell choice was submitted.
+Temporary owned-PID host-awake/default scheduling requests preceded CPU execution;
+no persistent setting, native CPU/RAM, controller, source or media changed.
+
+The fixed explicit host key authenticated the whole unchanged ISO and signed
+release manifest before launch. Native read-only cd0c mount, public-key hash and
+all six full file hashes independently matched those authenticated expectations.
+SHA256.sig is absent at the stock sets path; no native signature operation was
+performed or claimed, no warning ignored and no manifest injected. No verification
+scratch, new keys, credentials, compiler, dependency or media was introduced.
+
+The first listing-only tar pass to /dev/null returned actual zero and a fresh shell
+at 351.023 launch seconds, 200.517 seconds after submission finished. The second
+was submitted exactly once; completion was not established. The last retained
+screen observation was at 420.229 seconds. A subsequent QMP read timed out at
+440.162 seconds, and the cleanup observation received connection refused. No native
+tar error, ATAPI diagnostic or panic was observed in the retained interval; the gap
+cannot establish their absence. No second pass is counted and no extraction occurred. Offline decoding of the final
+complete retained PPM matched the last acknowledged screen; it supplied no later
+completion or halt marker.
+
+Dependent input stopped. Native CD unmount/sync/halt could not be observed. Bounded
+host cleanup terminated, then killed the still-owned emulator; exit was signal nine
+at 465.243 seconds, not a native successful exit or clean halt. The serial client
+and host-awake lease exited zero and were reaped. There was one screen reader and
+at most one unattended screen observation per five seconds, with fresh prompt
+observations before input; no overlapping observer was used. That correction alone
+did not prevent the observed timeout. Its root cause and the second tar state
+remain unknown. No target reset or dependent VGA stage occurred.
+
+Full post-closure target hashes, original identities, 0600 modes and single links
+remain exactly those in the preceding incomplete-AHCI audit. The whole stock ISO
+hash remains 7a4a92e953618035097c796a90b54424a0f3ae775552e1e7d102cf8a5130449f.
+No fixture handles or mounts remain. Credential exclusion passed; 897681 bytes of
+retained screen/row/serial captures were losslessly compressed, preserving the
+observation gap. Owned allocation was 12213559296 bytes, standard capture metric
+742991 bytes and encoded exports 972121651 bytes, below 20 GiB/10 MiB/1 GiB.
+Control audit SHA-256:
+5826c70bc015e0e4a0727f169ef425cce1773d23c89d059971538e0a4123d61e.
+Nineteen of twenty-one launches are consumed; 46 serial cases remain passed,
+all 46 VGA cases/disposal pending and the failed handoff preflight gate still false.
+
+A separate host-only synthetic Unix-socket regression reproduced a cleanup defect
+in the original private QMP helper. Retaining a timeout exception also retained its
+traceback, open stream and socket; the test server received no EOF until that
+exception was released. The replacement uses nested socket/stream context managers.
+Its server received EOF immediately even while the timeout traceback remained held.
+Both cases passed without QEMU, guest input or target access. This demonstrates the
+resource-lifetime defect and its fix, not the cause of the first timeout, a verified
+explanation of this native connection refusal or native recovery success.
+
+The original frozen helper remains unchanged at SHA-256
+561f54f6e2afb58b06e17efc1ffaafbe34afcab5182a23c0b4d1f3e409c5bc79;
+the separate corrected helper is
+c1084649c96b05ff2a33ab3e88ca9a4dbe32376cd6587aff24598629246976d6.
+Host two-case receipt:
+3ccfde3233180aa7b04a16bbb2ec897c1726c317515fac0c57ed0e0290335217.
+The [next concrete proposal](installed-payload-flow.md#stock-control-with-corrected-qmp-cleanup--proposed-2026-10-15)
+permits no execution until accepted. No native C or production policy changed.

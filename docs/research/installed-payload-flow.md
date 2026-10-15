@@ -898,9 +898,10 @@ All three complete stopped hashes/original identities, both media and closure pa
 again before this receipt; no image reset preceded the preflight.
 
 
-## Corrected stock AHCI read-only control — proposed, 2026-10-15
+## Corrected stock AHCI read-only control — accepted, 2026-10-15
 
-Status: **Proposed; no new control boot or target reset authorized.** The accepted
+Status: **Accepted by Cam’s continue on 2026-10-15 for one diskless control only;
+no target reset authorized.** The accepted
 AHCI preflight established one successful listing, then its second pass remained
 incomplete and was aborted for scheduling cleanup. It cleanly halted before forty-five
 minutes. All three target hashes/identities remain unchanged. The reset gate is
@@ -908,7 +909,7 @@ false and the three conditional VGA stages were not started. Eighteen launches a
 consumed under twenty-one. See [actual evidence](installed-payload-native-progress.md#ahci-preflight-incomplete-targets-unchanged-2026-10-15).
 Do not guess another controller fix or treat an archive-sized read count as completion.
 
-Propose **one diag-stock-ahci-control** diskless boot, repurposing one remaining
+Accept **one diag-stock-ahci-control** diskless boot, repurposing one remaining
 conditional VGA slot within the **unchanged twenty-one ceiling**. Use the original
 unmodified authenticated install79.iso, same pinned QEMU/firmware/machine, TCG CPU,
 one CPU/1 GiB RAM, AHCI optical.0, VGA/keyboard/private serial observation and no
@@ -934,7 +935,7 @@ Correct the unavailable-input assumption explicitly for this read-only control:
 3. Do not invoke or claim native embedded-signature verification when its input is
    absent. Do not ignore a signature warning, replace a key, inject a manifest or
    create verification scratch. Record host ISO/release authentication separately
-   from native key/input hash agreement. This location change is proposed explicitly
+   from native key/input hash agreement. This location change is accepted explicitly
    for this non-writing control, not a fallback or production trust-policy adoption.
 
 Then run at most two fixed listing-only tar passes to /dev/null, without extraction.
@@ -968,7 +969,8 @@ VGA reset, replace its required two passes or complete the 92-case feature. Two
 remaining slots would still not authorize the blocked three-stage VGA path or a
 ceiling extension. Return evidence to review before a specific further test/fix;
 keep this control, diagnosis, qualification and eventual original exact disposal in
-one continuing draft on codex/installed-ahci-qualification. No phase PRs.
+one continuing draft on codex/installed-stock-ahci-control after maintainer merge of
+PR #61 from the identical reviewed tree. No phase PRs.
 
 Fresh all-three-target hashes/original identities, absent handles/mounts, authenticated
 actual ISO inventory, native expected digests and one exact proposed no-target
@@ -976,3 +978,60 @@ argument array are bound by private proposal SHA-256:
 d6b7078e8bb4609268b63d3d2d0e1a74c7b80686240d5c0b46e729c905110787.
 Acceptance must separately bind the reviewed candidate/proposal and fresh integrity/
 closure checks. The earlier immutable receipts and failed/incomplete results remain.
+
+Cam accepted the concrete control at reviewed head
+30f314ca6b4086e3e261ef7a6909546046b6837c. Maintainer merge
+96eeed0fd7d64878ed964d44f3efc1294dbcfc7c has the identical tree
+d356473682e4f6bdc5a70b5b308f8c6fe2ac789d. Separate acceptance receipt
+befcf847a405c22abaecbd8fb3784e436fb2e2379a453b8d76f7909853ff73cb
+binds fresh original target identities/full hashes, whole stock ISO/release
+authentication and closure. Exact helper/argument/host-pin freeze:
+700398a6326e9c1f570e7ed6e2b3938597ed077dff252ea5b23d9d8f2cc232a8.
+The failed handoff preflight gate remains false regardless of this control outcome.
+
+## Stock control with corrected QMP cleanup — proposed, 2026-10-15
+
+Status: **Proposed; no further boot or target reset authorized.** The separately
+accepted stock control passed native key/six-input hash agreement and one listing,
+then lost observation during its second listing and required forced host closure.
+Its [actual evidence and host cleanup regression](installed-payload-native-progress.md#stock-ahci-control-stopped-host-cleanup-fix-2026-10-15)
+remain failed/incomplete. Nineteen of twenty-one launches are consumed. The corrected
+host helper has two synthetic lifetime cases, without native recovery evidence.
+
+Propose exactly one diag-stock-ahci-recovery-control diskless boot, consuming launch
+twenty under the unchanged twenty-one ceiling. Keep the original stock ISO, explicit
+host ISO/release authentication, native key/six-input agreement, AHCI/Cocoa/QEMU/
+firmware, CPU/RAM, fixed keyboard/serial observation and all no-target/network/
+sharing/hotplug rules unchanged. No fallback controller/display, native source,
+compiler, dependency, key/credential, media or production policy change. List the
+same base archive at most twice, one submission per pass, no extraction. Require
+actual zero return and fresh shell before a next pass. Native signature remains
+unavailable and is neither invoked nor claimed.
+
+Use the separate exception-safe QMP helper, preserving original frozen helpers and
+receipts. Freeze exact driver/helpers, arguments and pins before accepted execution.
+Retain one screen reader, five-second unattended cadence and fresh prompt guard.
+At the first timeout stop dependent native work. Allow at most three read-only
+recovery observations, separated by at least five seconds, without resubmitting a
+native job, confirmation or renewing clocks. A single bounded one-second owned-PID
+host thread sample, capped at 1 MiB and retained privately, may precede cleanup to
+preserve evidence otherwise lost at process exit. It cannot write guest state or
+establish a root cause by itself. Do not take an unbounded sample or attach a debugger.
+
+If read-only observation recovers, allow only the existing cleanup: one Ctrl-C for
+a submitted read-only process if necessary, then fresh actual shell before fixed CD
+unmount/sync/halt. Observe native halt before QMP quit; otherwise record a bounded
+unclean stop. Keep original prompt 900-second, scheduling 2700-second including
+120-second cleanup reserve and hard 3600-second launch clocks, every other bound
+and pre-CPU owned-lifetime host-awake/default scheduling requests. No retries or
+clock resets. Reap all owned processes and recheck complete stock ISO/all-three-target
+hashes, original identities/modes/links, closure and credential-excluded captures.
+
+Private proposal SHA-256:
+1f057a3d8c4e5509d5c9efd957e7757395d363e51202af58567354aca89ed68d.
+It binds the failed control audit, two-case host regression, corrected helper,
+original target receipt/latest audited hashes and one exact no-target argument array.
+Acceptance must separately bind the reviewed candidate and fresh full integrity/
+closure checks. Even success does not unlock the failed handoff preflight, VGA reset
+or any installed case. One remaining slot cannot authorize the three VGA stages;
+any further qualification/budget decision returns to this same feature draft.
