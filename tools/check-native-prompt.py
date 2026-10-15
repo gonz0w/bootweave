@@ -70,6 +70,18 @@ def installed_scrollback_probe(current, earlier, restored):
     return _scrollback_complete(current, earlier, restored, expected)
 
 
+def installed_review_case_page(earlier, case):
+    """Read the actual numbered prelude from history before a review answer."""
+    if type(case) is not int or not 0 <= case < 5:
+        raise Rejected('review case')
+    rows = _scrollback_rows(earlier)
+    expected = f'Installed manual case {case}: ' + (
+        'type q' if case == 1 else 'review, then exact fresh phrase')
+    title = 'Bootweave file placement research'
+    return (rows.count(expected) == rows.count(title) == 1 and
+            rows.index(expected) < rows.index(title))
+
+
 def installed_review_pages(current, earlier, restored, expected_hashes):
     """Frozen two-member research fixture only; not a generic review protocol."""
     if (not isinstance(expected_hashes, tuple) or len(expected_hashes) != 4 or
@@ -123,3 +135,24 @@ def installed_stopped_fixture(observed, original, frozen):
             original[parent][4:] == [700, 512, 2] and frozen[parent][-1] == 3 and
             frozen['/bootweave-research/case'][4:] == [700, 512, 2] and
             frozen['/bootweave-research/manual-tty.private'][4:] == [600, 225, 1])
+
+
+def installed_fixture_cleanup_state(observed, original, frozen):
+    """Bind present known artifacts; native absence/type/content checks are separate."""
+    if not installed_stopped_fixture(frozen, original, frozen):
+        return False
+    if not isinstance(observed, dict):
+        raise Rejected('cleanup shape')
+    base = {'/', '/bootweave-research', '/bootweave-research/canary'}
+    if not base <= set(observed) <= set(frozen):
+        return False
+    for path, row in observed.items():
+        if (not isinstance(row, list) or len(row) != 7 or
+                any(type(n) is not int or not 0 <= n < 2**64 for n in row)):
+            raise Rejected('cleanup fields')
+        expected = frozen[path].copy()
+        if path == '/bootweave-research':
+            expected[-1] = 2 + int('/bootweave-research/case' in observed)
+        if row != expected:
+            return False
+    return True

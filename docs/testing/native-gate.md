@@ -55,11 +55,14 @@ Approved launch 27 proved native scrollback/current return/TTY agreement, then s
 before fixture cleanup or payload entry: observed root ownership differed from the
 prepared nobody expectation. Cleanup-only native halt and complete integrity/closure
 passed; original root/parent/canary identities match. Ownership cause unestablished.
-Twelve host prompt groups include exact observed five-path metadata; native type,
-content, emptiness and TTY checks still precede cleanup. Twenty-seven of twenty-eight
-launches consumed. Full-45 rerun/readback at 28/29, ceiling 29, proposed and unaccepted,
-without reinstall/reset. Complete installed-root, Cocoa-window, physical-hardware,
-parent installer acceptance and original exact disposal remain pending in PR #67.
+Approved launch 28 passed exact metadata, native types, canary/content and four-path
+inventory. Its cleanup marker was absent; exact failing predicate and removal state
+remain unestablished. Native cleanup halt and full postflight passed, without new
+payload entry. Seventeen prompt groups cover current-boot TTY preservation and only
+known optional artifacts with exact identities; stale receipt never supplies current
+TTY authority. Full-45 rerun/readback at 29/30, ceiling 30, proposed and unaccepted;
+28/29 launches consumed, no reinstall/reset. Complete installed-root, Cocoa-window,
+physical-hardware, parent acceptance and original exact disposal remain pending.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

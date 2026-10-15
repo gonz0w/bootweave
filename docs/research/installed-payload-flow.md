@@ -1427,7 +1427,7 @@ Keep implementation, fixes, qualification and evidence in the same feature draft
 
 ## Exact observed stopped-fixture continuation — proposed, 2026-10-15
 
-Status: **Proposed; first-failure stop remains in effect.** Approved launch 27
+Status: **Accepted by Cam on 2026-10-15; launch 28 stopped at cleanup completion, dependent readback unexecuted.** Approved launch 27
 proved the inert native scrollback/TTY gates, then stopped before content inspection,
 fixture cleanup or payload entry. The original root/parent/canary identities and
 metadata matched. Case metadata was root-owned, not the nobody ownership assumed by
@@ -1439,7 +1439,7 @@ now cleanly halted with full digest
 closed stopped audit
 7fbf07d906f3d4208d2a873dfee305bc50b2599dd74fa40ed044b2437f9ecb93.
 
-Propose ceiling **twenty-eight to twenty-nine**, with vga-fixture-payload at 28 and
+Approved ceiling **twenty-eight to twenty-nine**, with vga-fixture-payload at 28 and
 vga-fixture-readback at 29. Retain the preceding accepted two-stage sequence and all
 its native prerequisites, repeated inert scrollback probe, full-45 suite, review/
 confirmation controls, independent retained checks, later READBACK, clean halts,
@@ -1462,6 +1462,57 @@ substitutions, wrong owner/baseline, missing/extra paths and malformed/unbounded
 fields. Native type/content/emptiness/TTY checks and actual cleanup remain unexecuted.
 Fresh acceptance must bind the clean image, original identities, complete media
 hashes, positive probe/TTY evidence, stopped native observation and exact new
-helper/argument/host-pin freezes. Private unaccepted proposal SHA-256:
+helper/argument/host-pin freezes. Private reviewed proposal SHA-256:
 d47151b38ec129f6246e34835d8aa4c4821ece675a52aa09b92f36eb4fafaedb.
-Preparation grants no new boot or deletion. Keep all work in draft PR #67.
+Cam approved this exact continuation in PR #67. Fresh complete integrity/closure
+and code/host-pin checks passed; acceptance SHA-256:
+8c9a18fd9364f304be11d7675ee2aedcf10e1e7746fe150ff26cc27ea4c477b4.
+Preparation alone granted no authority. Keep all work in draft PR #67.
+
+## Current-boot TTY and inert stale receipt — proposed, 2026-10-15
+
+Status: **Proposed; first-failure stop remains in effect.** Approved launch 28
+passed exact metadata and native types/content/canary/four-path inventory. Its fixed
+cleanup chain returned to the shell without its completion marker. The exact failing
+predicate and which removals, if any, occurred were not observed. Cleanup-only native
+shutdown/full postflight passed; no payload suite ran. Twenty-eight launches are
+consumed under twenty-nine. Original cleanly halted VGA full SHA-256:
+24b209c82b821bb931940eb7aa34d77b29c6391fbba1db01a2c5c09598bfe204;
+stopped audit 67cae6daf262a4d05531fb664384d4a8dcc3fc4a77928a55a583bd6e1cbf970e.
+
+Propose ceiling **twenty-nine to thirty**: vga-tty-payload at 29, followed only after
+complete qualification by vga-tty-readback at 30. Retain all native prerequisites,
+repeat probe/full-45 suite, full actual reviews/fresh confirmations, independent
+retained checks, later READBACK, native halts/full hashes/closure and original exact
+disposal. No reinstall/reset, new target, source/binary/media/kernel/key/dependency/
+transport/hardware change, extra diagnostic boot or artifact export.
+
+The stale receipt is an untrusted owned artifact, not authority for another boot's
+TTY. Capture the current native TTY in a shell variable before inspection; compare
+that same current state immediately before and after cleanup, then unset it. Never
+import, restore, execute or compare old receipt contents as current terminal state.
+If present, observe its full SHA-256 privately as inert data. Subsequent payload
+operations still save and compare their own fresh TTY receipts.
+
+Because the previous removal state is unestablished, independently observe the
+original root/parent/canary plus either, both or neither known case/receipt. Every
+present optional object must match all seven fields of its pinned launch-27 record;
+original parent links must be two without the case, three with it. Require native
+absence or correct directory/regular type, no symlinks, exact inventory with no other
+path, full canary hash and the fresh TTY match. Use only rmdir for a present empty
+case and rm for the present exact receipt, never recursive cleanup or parent/canary
+replacement. Independently recheck the complete original baseline afterward.
+Unknown/changed/nonempty state or failed current-TTY preservation stops without
+fallback. Planned/submitted/unobserved removals never become observed disposal.
+
+Seventeen host prompt groups cover these known presence combinations, exact identity/
+field substitutions, missing baseline/extra paths and malformed/unbounded fields.
+The numbered case announcement must be observed in the actual scrolled page before
+the review header, avoiding reliance on capturing a transient preface. Stale/wrong
+counters and malformed pages refuse before an answer; navigation cycles and native
+deadlines remain unchanged. New fixed native commands remain ASCII and at most
+489 bytes under the 512-byte host command bound. Fresh acceptance must bind complete original target/media
+integrity, closure, previous stop, pinned metadata and exact new phase freezes.
+Private unaccepted proposal SHA-256:
+3438ee4b2d37c77ae762c0ad017788594ab522f0efed1255446e2f7b5b4463f0.
+Preparation grants no new boot or deletion. Keep the same draft PR #67 open.

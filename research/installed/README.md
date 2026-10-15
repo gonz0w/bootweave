@@ -30,11 +30,15 @@ Approved launch 27 then proved native scrollback, current-page return and exact 
 restoration after native prerequisites/kernel closure. Its fixture guard required
 nobody, but the actual stopped case was root-owned; it refused before content checks,
 cleanup or payload entry. Native cleanup halt and full postflight passed. The cause
-of ownership is unestablished. Twelve host prompt groups include exact observed
-five-path metadata and unchanged original root/parent/canary, with no general owner
-range. Twenty-seven of twenty-eight launches are consumed. Full-45 rerun/readback at
-28/29 and ceiling 29 are proposed and unaccepted. No reinstall/reset, production
-interface/profile or general qualification. Keep exact disposal in draft PR #67.
+of ownership is unestablished. Approved launch 28 passed exact observed metadata, native types, full canary hash
+and four-path inventory. Its cleanup marker was absent; the failing predicate and
+removal state remain unestablished. Native cleanup halt/full postflight passed;
+no new payload case ran. Seventeen prompt groups now cover current-boot TTY preservation
+and conditional cleanup of only the known exact artifacts, with independent presence/
+type/content/TTY checks. The stale receipt is inert and never imported as current
+terminal state. Twenty-eight of twenty-nine launches consumed. Full-45 rerun/readback
+at 29/30, ceiling 30, proposed and unaccepted. No reinstall/reset, production interface/
+profile or general qualification. Keep qualification/disposal in draft PR #67.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.

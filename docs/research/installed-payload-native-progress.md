@@ -6,18 +6,18 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Twenty-seven launches are consumed under twenty-eight. Launch 26 passed 34
-automatic VGA cases before the incomplete-review host stop and forced cleanup.
-Approved launch 27 passed native prerequisites, kernel/process closure and an inert
-scrollback probe with overlapping captured pages, exact current return and native
-TTY agreement. Stopped-fixture metadata showed a root-owned case where its prepared
-guard required nobody, so it stopped before content inspection, fixture cleanup or
-payload entry. Cleanup-only native sync/halt and full postflight passed. The original
-root/parent/canary identities remain unchanged. The cause of case ownership is not
-established. Twelve VGA cases and exact disposal remain pending; full-45 rerun plus
-later readback at 28/29, ceiling 29, are proposed and unaccepted. Twelve host prompt
-groups now include exact observed stopped-fixture metadata, without a general owner
-range. Keep all work in PR #67 on codex/vga-payload-readback.
+Twenty-eight launches are consumed under twenty-nine. Launch 26 passed 34 automatic
+VGA cases before its incomplete-review observer stop/forced cleanup. Launch 27 proved
+native scrollback/current return/TTY agreement, then stopped on the prepared fixture
+owner expectation. Approved launch 28 passed repeated prerequisites/probe, exact
+metadata, native type/content/canary/four-path checks. Its cleanup chain returned to
+the shell without the completion marker; the exact failing predicate and removal
+state remain unestablished. Native cleanup halt and full postflight passed. No new
+payload case ran. The corrected host flow uses current-boot TTY preservation and
+treats the stale receipt as an inert owned artifact; it re-observes known optional
+artifacts and rejects unknown paths or changed identities. Seventeen prompt groups
+pass. Full-45 rerun/readback at 29/30, ceiling 30, are proposed and unaccepted, with
+no reinstall/reset. Keep qualification, fixes and exact disposal in draft PR #67.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -1327,3 +1327,48 @@ Twenty-seven of twenty-eight launches are consumed. The
 proposes full-45 payload rerun at 28 and later READBACK/disposal at 29, ceiling 29,
 from this cleanly halted original image with no reset/reinstall. No new acceptance,
 phase freeze, guest or disposal has executed. Keep the same draft PR #67 open.
+
+## Cleanup marker absent; current-boot TTY correction, 2026-10-15
+
+Cam approved launches 28/29, ceiling twenty-nine. Fresh acceptance and launch-28
+exact helper/argument/host-pin freeze were respectively
+8c9a18fd9364f304be11d7675ee2aedcf10e1e7746fe150ff26cc27ea4c477b4 and
+13cb617902a6f849a005d9f7efc7637d48aa2b5819e4cd2638540a8a9c8d063f.
+Fresh complete integrity/closure and paused sole-target/read-only-AHCI/no-network
+inventory passed. Native boot/login/runtime/device/raw-label/root gates, worker
+absence and kernel-copy agreement passed. The repeated inert native scrollback
+cycle/current-page return/exact TTY check passed.
+
+The five metadata rows exactly matched their pinned observation and original
+root/parent/canary baseline. Native no-symlink/directory/regular checks, full canary
+hash and exact four-path inventory passed. The fixed cleanup chain was submitted
+once; it compared the stale prior-boot receipt to the fresh TTY before rmdir/rm.
+Its completion marker was absent while the fresh shell returned. At 556.935 seconds
+the host command observation deadline stopped dependent work. No rmdir/rm/cat/stty
+diagnostic was captured, and the exact failing predicate and performed removal
+state remain unestablished. No fixture baseline recheck or payload suite ran.
+
+Cleanup-only native sync/halt completed; all owned processes reaped at 572.494
+seconds. No forced stop, QMP timeout/recovery/sample, generic Ctrl-C, repeated command,
+reset/reinstall or dependent readback ran. Clean native halt is true and phase
+qualification remains false. Complete original VGA digest:
+24b209c82b821bb931940eb7aa34d77b29c6391fbba1db01a2c5c09598bfe204;
+allocated bytes 2019229696. Full build/serial/media hashes remain unchanged; original
+identities/modes/links, credential exclusion and absence of owned handles/mounts
+passed. Allocation/capture/export at closed audit: 13950308352/1704873/972121651 bytes.
+Stopped audit 67cae6daf262a4d05531fb664384d4a8dcc3fc4a77928a55a583bd6e1cbf970e.
+
+The new host flow treats old receipt contents as inert data and preserves a fresh
+current-boot TTY snapshot around typed cleanup. Presence of each known artifact is
+re-observed because removals were not established, with exact pinned metadata,
+original baseline and native type/content/absence checks required. No extra path
+or changed identity is accepted. Seventeen prompt groups pass; fixed native commands
+are ASCII and at most 489 bytes. This is host verification, not native cleanup
+completion. Failed frozen controls and false gates remain unchanged. Host proof:
+e73ffb8d60ba4e0091a18279408ab7a7c8037ece526ccea250f25192b8e60262.
+
+The [current-TTY continuation](installed-payload-flow.md#current-boot-tty-and-inert-stale-receipt--proposed-2026-10-15)
+proposes full-45 rerun at 29 and independent READBACK/disposal at 30, ceiling 30,
+from this cleanly halted original image, without reset/reinstall. Twenty-eight
+launches are consumed. No new acceptance, phase freeze, guest or deletion has run;
+complete installed VGA qualification and original disposal remain pending in PR #67.

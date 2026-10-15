@@ -12,6 +12,8 @@ LOGIN = MODEL['installed_login_page']
 REVIEW = MODEL['installed_review_pages']
 SCROLLBACK = MODEL['installed_scrollback_probe']
 STOPPED = MODEL['installed_stopped_fixture']
+CLEANUP = MODEL['installed_fixture_cleanup_state']
+CASE_PAGE = MODEL['installed_review_case_page']
 
 HASHES = ('38e5e458bc7cb0d72bc8d2b6fd90f5363eaad309680d3aef18fbe43343c7398a',
           '73eac4a9de4571f73d185e2dc07f8afc82ef236965e9daaa2876eb0b6c21c45d',
@@ -38,7 +40,83 @@ def views(rows, offset=12):
     return full[-25:], full[-25-offset:-offset], full[-25:]
 
 
+def stopped_fixture():
+    frozen = {'/': [1024, 1, 0, 0, 755, 512, 14],
+              '/bootweave-research': [1024, 2, 0, 0, 700, 512, 3],
+              '/bootweave-research/canary': [1024, 3, 0, 0, 600, 14, 1],
+              '/bootweave-research/case': [1024, 4, 0, 0, 700, 512, 2],
+              '/bootweave-research/manual-tty.private': [1024, 5, 0, 0, 600, 225, 1]}
+    original = {p: row.copy() for p, row in frozen.items() if p in
+                ('/', '/bootweave-research', '/bootweave-research/canary')}
+    original['/bootweave-research'][-1] = 2
+    return frozen, original
+
+
 class NativePromptTests(unittest.TestCase):
+    def test_actual_scrolled_case_announcement_precedes_current_review(self):
+        for case in range(5):
+            announcement = f'Installed manual case {case}: ' + (
+                'type q' if case == 1 else 'review, then exact fresh phrase')
+            history = ['preceding output'] * 4 + [announcement] + ['native target prelude'] * 15 + REVIEW_ROWS[:5]
+            self.assertTrue(CASE_PAGE(history, case))
+            self.assertFalse(CASE_PAGE(history, (case + 1) % 5))
+        self.assertFalse(CASE_PAGE(['preceding output'] * 25, 0))
+        reversed_page = REVIEW_ROWS[:5] + ['native target prelude'] * 19 + [
+            'Installed manual case 0: review, then exact fresh phrase']
+        self.assertFalse(CASE_PAGE(reversed_page, 0))
+
+    def test_scrolled_case_rejects_malformed_page_or_counter(self):
+        for bad in (True, -1, 5, '0', None):
+            with self.subTest(case=bad), self.assertRaises(REJECTED):
+                CASE_PAGE(['preceding output'] * 25, bad)
+        for bad in ([], None, ['x'] * 26, ['\x1b[2J'] * 25):
+            with self.subTest(page=bad), self.assertRaises(REJECTED):
+                CASE_PAGE(bad, 0)
+
+    def test_current_cleanup_binds_each_known_artifact_or_observed_absence(self):
+        frozen, original = stopped_fixture()
+        for keep_case in (False, True):
+            for keep_receipt in (False, True):
+                observed = copy.deepcopy(original)
+                if keep_case:
+                    observed['/bootweave-research'][-1] = 3
+                    observed['/bootweave-research/case'] = frozen['/bootweave-research/case'].copy()
+                if keep_receipt:
+                    observed['/bootweave-research/manual-tty.private'] = frozen['/bootweave-research/manual-tty.private'].copy()
+                self.assertTrue(CLEANUP(observed, original, frozen))
+        self.assertEqual(original['/bootweave-research'][-1], 2)
+        self.assertEqual(frozen['/bootweave-research'][-1], 3)
+
+    def test_current_cleanup_refuses_changed_identity_fields_or_unknown_paths(self):
+        frozen, original = stopped_fixture()
+        for path in frozen:
+            for index in range(7):
+                observed = copy.deepcopy(frozen)
+                observed[path][index] += 1
+                with self.subTest(path=path, field=index):
+                    self.assertFalse(CLEANUP(observed, original, frozen))
+        observed = copy.deepcopy(original)
+        observed['/bootweave-research/source'] = [1024, 6, 0, 0, 600, 2560, 1]
+        self.assertFalse(CLEANUP(observed, original, frozen))
+        observed = copy.deepcopy(original)
+        observed['/bootweave-research'][-1] = 3
+        self.assertFalse(CLEANUP(observed, original, frozen))
+
+    def test_current_cleanup_requires_complete_baseline_and_typed_rows(self):
+        frozen, original = stopped_fixture()
+        for path in original:
+            observed = copy.deepcopy(original)
+            del observed[path]
+            self.assertFalse(CLEANUP(observed, original, frozen))
+        for bad in (None, [], 'fixture'):
+            with self.assertRaises(REJECTED):
+                CLEANUP(bad, original, frozen)
+        for bad in ([], [0] * 8, [False] * 7, [-1] * 7, [2**64] * 7):
+            observed = copy.deepcopy(original)
+            observed['/'] = bad
+            with self.subTest(bad=bad), self.assertRaises(REJECTED):
+                CLEANUP(observed, original, frozen)
+
     def test_stopped_fixture_matches_exact_observed_metadata(self):
         frozen = {'/': [1024, 1, 0, 0, 755, 512, 14],
                   '/bootweave-research': [1024, 2, 0, 0, 700, 512, 3],
