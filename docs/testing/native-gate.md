@@ -40,13 +40,14 @@ installed VGA case is claimed. All 46 installed VGA cases and exact fixture disp
 remain pending. After the two initial diskless diagnoses, the accepted AHCI preflight
 passed auth/input checks and one listing. Its second pass remained incomplete and
 was aborted for cleanup; native clean halt followed within the scheduling limit.
-No reset occurred; all three target hashes/identities remain unchanged. The separate
-corrected stock-only AHCI control passed native hashes, both listing-only passes and
-native clean halt without QMP recovery. Twenty of twenty-one launches are consumed.
-A complete four-stage proposal requests ceiling twenty-four and a fresh handoff
-preflight before the same original VGA reset and three VGA stages. It is not accepted;
-stock success does not unlock the failed gate. All 46 VGA cases/disposal remain
-pending; no complete installed-root or parent installer acceptance follows.
+No reset occurred; all three target hashes/identities remain unchanged. The corrected
+stock-only AHCI control passed both listings/native halt. The accepted complete
+handoff/VGA attempt then lost boot observation before native verification; bounded
+recovery failed and host closure was forced. A retained host sample identifies no
+proven cause. Twenty-one of twenty-four launches are consumed. Both failed handoff
+gates remain false, all three VGA stages unrun and all 46 VGA cases/disposal pending.
+A host-display isolation/ceiling twenty-five proposal is not accepted. No complete
+installed-root or parent installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

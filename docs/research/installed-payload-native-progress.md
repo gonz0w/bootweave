@@ -6,21 +6,21 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Twenty launches are consumed under the accepted twenty-one ceiling. The corrected
-stock-only AHCI control passed host explicit-key ISO/release authentication, native
-public-key/six-input hash agreement and both listing-only tar passes, then actual
-native CD unmount/sync/halt. Native halt was observed before emulator exit zero at 512.883
-seconds. No QMP failure, recovery observation or host sample occurred. This verifies
-the control under its recorded conditions, without establishing the cause of prior
-failures or native exception recovery. No target was attached or reset.
-All three full target hashes/original identities and the stock ISO remain unchanged;
-owned processes are reaped and no handles/mounts remain. The failed handoff preflight
-gate remains false. All 46 VGA cases and final disposal remain pending. One proposed
-four-stage completion attempt would raise the ceiling from twenty-one to twenty-four:
-a fresh handoff preflight, then the same exact conditional VGA reset and three VGA
-stages. It is not accepted or executed. Remaining work stays together on
-codex/installed-qmp-recovery after maintainer merge of PR #62 from the identical
-reviewed tree.
+Twenty-one launches are consumed under the accepted twenty-four ceiling. The
+corrected stock-only AHCI control passed both listings and native halt. Cam then
+accepted a complete four-stage handoff/VGA attempt. Its first diskless boot lost QMP
+observation during native boot, before driver-submitted native commands or actual
+AHCI/diskless-refusal proof. Three bounded read-only recovery attempts failed; one
+approved host sample was retained. No native verification, tar pass or halt is
+claimed. Forced host closure ended at 108.445 seconds. No VGA reset or conditional
+VGA stage ran. Both earlier failed gates remain false; all 46 VGA cases and disposal
+remain pending. All three full target hashes/original identities and handoff media
+remain unchanged; owned processes are reaped and handles/mounts absent.
+A concrete host-display isolation proposal would use the existing none backend,
+retain virtual VGA/keyboard and raise ceiling twenty-four to twenty-five for four
+new gated stages. It is not accepted or executed and identifies no proven cause/fix.
+The same feature continues on codex/installed-vga-completion after maintainer merge
+of PR #63 from the identical reviewed tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -920,9 +920,79 @@ b3b514e613bb0fa9e636990d0ee22e324d9ff55b4b040ce5f0ba3a85641e312d.
 Twenty of twenty-one launches are consumed. All 46 installed serial cases remain
 passed; zero installed VGA cases have passed and exact disposal remains pending.
 
-The [remaining complete qualification proposal](installed-payload-flow.md#remaining-ahci-vga-qualification--proposed-2026-10-15)
+The [remaining complete qualification proposal](installed-payload-flow.md#remaining-ahci-vga-qualification--accepted-2026-10-15)
 binds the successful control, original target receipt, unchanged handoff/runtime
 media and four exact argument arrays. It requests ceiling twenty-four and a fresh
 handoff preflight before any same-original-VGA reset, installation, 45 payload cases
-and later readback case. No such boot or reset has run or been authorized. Source C
-remains frozen at 35238a1 with the 16369-byte additional-source ceiling satisfied.
+and later readback case. At that checkpoint no such boot or reset was authorized.
+Source C remains frozen at 35238a1 with the 16369-byte additional-source ceiling
+satisfied.
+
+## Fresh handoff preflight boot observation stopped, 2026-10-15
+
+Cam accepted the concrete four-stage attempt, ceiling twenty-four and exact same-image
+reset only after fresh handoff preflight at reviewed head
+59f89ae8e6c4419f71bd921bd0817e4828527c6a. Maintainer merge
+61f5843555e040e39295451d1136d7d8546a58a5 has the identical tree
+d7c6b3842ce0e0713da5edd47aaecf394c502d9d. Separate acceptance receipt
+a02846ac2e0cef44979576149b62c07e169f4328ae56667b3ec4dc2413d79dd9
+binds fresh full target/media hashes, original identities and closure. Initial exact
+preflight/reset helper/argument/host-pin freeze:
+fb6d3fb8694510b7de3aea9ad20700b5bd7954418ab761c591e0171afcbf1f71.
+Source C, native binaries, media, keys/credentials and dependencies stayed unchanged.
+
+Only launch 21 ran, with the sole handoff CD read-only on AHCI and no target. Complete
+paused block/node/PCI/qtree/argument/open-file inventory passed, with no network,
+sharing, hotplug or floppy backing. The exception-safe QMP helper handled the sole
+screen reader; host-awake/default scheduling requests preceded CPU execution.
+Actual partial native boot rows were retained through 32.045 seconds, before the
+required AHCI/cd0 association and diskless frontend refusal were established.
+No signature/hash/tar/prehalt or other native command was submitted by the driver.
+
+A subsequent screen observation timed out at 47.506 seconds. Dependent work stopped.
+One owned-PID host sample used the fixed one-second argument, returned zero and
+retained 238098 bytes, below 1 MiB, at 53.374 seconds. Its child was reaped. The three
+read-only recovery attempts, separated by at least five seconds, produced timeout
+at 73.386, connection refused at 78.389 and connection refused at 83.390 seconds.
+Distinct recovery dump paths were used; no native input, second sample, clock reset
+or workload retry followed. No native shell/halt could be established. Bounded host
+termination then kill ended the emulator by signal nine at 108.445 seconds. This is
+unclean closure, not an OS completion or successful native halt. Serial client and
+host-awake lease exited zero and were reaped. No VGA reset-attempt receipt exists;
+the three conditional installation/payload/readback boots were not started.
+
+The retained host sample includes QMP monitor/screendump, qemu_open_internal and
+open/__open frames. Its Cocoa main-thread path includes CABackingStoreGetFrontTexture,
+_dispatch_sync_f_slow and __DISPATCH_WAIT_FOR_QUEUE__; the TCG path includes
+MMIO load and mutex-wait frames. These are sampled host paths, not verified lock
+ownership, a wait cycle, deadlock diagnosis, guest backtrace or root cause. They do
+not establish an OpenBSD, archive, storage-controller, filesystem or Cocoa defect.
+The final dump was a regular single-link zero-byte file and supplies no valid frame;
+the last acknowledged row history remains the earlier partial boot. The host helper
+lifetime fix therefore does not establish native recovery under this failure.
+Bounded retained-capture host-path analysis SHA-256:
+f4bdd04b42e0f90c6f882903f9674e0f79f8899c1e44bb9a112a1b6197ea31be.
+
+No native AHCI/refusal proof, signature/input verification, tar pass, extraction or
+installed VGA case is counted. All three full target hashes and original regular-file
+identities, 8 GiB sizes, 0600 modes and single links match the preceding successful
+control audit, including quarantined VGA
+fd79de7a50ad70adfcc7f6fd5eeaa694fc9c5dc961396535085e54090d85a438.
+The whole handoff ISO remains
+607f1cc73a90402e5a02889b1bdc79c29dc8f67176086be38beffe218422f624.
+All owned emulator/client/host-awake/sample processes are reaped, no fixture handles
+or mounts remain, and credential exclusion passed. The 250409 bytes of retained
+row/serial/dump/sample captures were losslessly compressed, without turning an empty
+dump or observation gap into a terminal outcome. Owned allocation was 12213927936
+bytes, expanded capture metric 918459 and exports 972121651, below 20 GiB/10 MiB/1 GiB.
+Fresh failed preflight audit SHA-256:
+bd1d5f1a3a931efe8fcf6b1694f5a59935bce4c5ccf00c57eef8b691a8625c3e.
+
+The new and earlier failed handoff gates stay false. Twenty-one of twenty-four
+launches are consumed; the remaining count grants no display fallback or alternate
+experiment. All 46 serial cases remain passed, all 46 VGA cases/disposal pending.
+The [host display isolation proposal](installed-payload-flow.md#host-display-isolation-and-complete-vga-qualification--proposed-2026-10-15)
+changes only the host window backend and private stage paths, requires fresh native
+VGA/keyboard and all original gates, and proposes ceiling twenty-five for a complete
+four-stage attempt. No headless boot, target reset, native C change or profile
+adoption occurred.

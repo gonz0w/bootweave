@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -10,15 +10,15 @@ export completed with native clean halt and full ISO readback. Stock installatio
 and cold OS boot on the serial target passed. The accepted raw-partition replacement
 passed serial qualification. The accepted VGA observer retry passed confirmation and
 native input checks, then stock extraction panicked. Its incomplete target is
-quarantined, all 46 VGA cases and disposal pending in one follow-up after PR #62.
-The handoff AHCI preflight passed one listing, second incomplete before abort/clean
-halt. A separate corrected stock-only AHCI control now passed native hashes, both
-listing-only passes and native clean halt without QMP recovery. No target attached
-or reset; all three full hashes/identities remain unchanged. Twenty of twenty-one
-launches are consumed. A complete four-stage proposal requests ceiling twenty-four:
-fresh handoff preflight, then only after success the same original VGA reset and
-three VGA stages. It is not authorized; stock success does not unlock reset. No
-production runtime/interface or general hardware qualification is adopted.
+quarantined, all 46 VGA cases and disposal pending in one follow-up after PR #63.
+The corrected stock-only AHCI control passed both listings and native halt. The
+accepted four-stage handoff/VGA attempt then lost QMP boot observation before native
+verification, with no reset or conditional VGA stage run. Bounded recovery failed;
+a retained host sample establishes no cause. All three full target hashes/identities
+remain unchanged. Twenty-one of twenty-four launches are consumed. A proposed host
+display isolation keeps virtual VGA/keyboard and requests ceiling twenty-five for a
+fresh gated complete attempt. It is not authorized; no production interface/profile
+or general hardware qualification is adopted.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
