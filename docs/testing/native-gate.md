@@ -33,11 +33,13 @@ The private empty-fd0 adjustment is accepted. Media export remained incomplete a
 the earlier build hard stop was followed by approved recovery/export, persisted key
 absence, native clean halt and full original ISO readback; serial stock installation
 and cold OS boot passed. The accepted raw-partition replacement passed complete
-serial qualification with clean halts/full target hashes. VGA handoff stopped on a
-host observer failure before disk confirmation/writes; the target remains untouched.
-A one-boot/seventeen-launch retry amendment is proposed. All 46 installed VGA
-cases and exact fixture disposal remain pending; no complete installed-root or
-parent installer acceptance follows.
+serial qualification with clean halts/full target hashes. The accepted VGA observer
+retry passed fresh confirmation and native input checks, then stock extraction
+panicked. Its partially written target is quarantined; no native clean halt or
+installed VGA case is claimed. All 46 installed VGA cases and exact fixture disposal
+remain pending. Two diskless read-only diagnostic boots are proposed within the
+seventeen-launch ceiling, not accepted. No complete installed-root or parent
+installer acceptance follows.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native
