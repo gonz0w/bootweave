@@ -6,19 +6,20 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Nineteen launches are consumed under the accepted twenty-one ceiling. The AHCI
-handoff preflight passed one listing; its second remained incomplete before abort
-and native clean halt. The separately accepted stock-only AHCI control authenticated
-the unchanged whole ISO on the host, matched the native key and all six input
-hashes, and passed one listing. Its second listing lost QMP observation; native
-completion/halt remain unestablished and the owned emulator required a forced stop.
+Twenty launches are consumed under the accepted twenty-one ceiling. The corrected
+stock-only AHCI control passed host explicit-key ISO/release authentication, native
+public-key/six-input hash agreement and both listing-only tar passes, then actual
+native CD unmount/sync/halt. Native halt was observed before emulator exit zero at 512.883
+seconds. No QMP failure, recovery observation or host sample occurred. This verifies
+the control under its recorded conditions, without establishing the cause of prior
+failures or native exception recovery. No target was attached or reset.
 All three full target hashes/original identities and the stock ISO remain unchanged;
-owned processes are reaped and no handles/mounts remain. No target reset occurred.
-All 46 VGA cases and final disposal remain pending. Two host synthetic tests
-reproduced and verified a QMP timeout socket-lifetime cleanup fix; they do not explain
-the initial timeout or qualify a guest. One further corrected-cleanup diskless control
-is proposed, not authorized. Remaining work stays together on
-codex/installed-stock-ahci-control after maintainer merge of PR #61 from the identical
+owned processes are reaped and no handles/mounts remain. The failed handoff preflight
+gate remains false. All 46 VGA cases and final disposal remain pending. One proposed
+four-stage completion attempt would raise the ceiling from twenty-one to twenty-four:
+a fresh handoff preflight, then the same exact conditional VGA reset and three VGA
+stages. It is not accepted or executed. Remaining work stays together on
+codex/installed-qmp-recovery after maintainer merge of PR #62 from the identical
 reviewed tree.
 
 The following serial checkpoint is historical, before VGA continuation.
@@ -853,5 +854,75 @@ the separate corrected helper is
 c1084649c96b05ff2a33ab3e88ca9a4dbe32376cd6587aff24598629246976d6.
 Host two-case receipt:
 3ccfde3233180aa7b04a16bbb2ec897c1726c317515fac0c57ed0e0290335217.
-The [next concrete proposal](installed-payload-flow.md#stock-control-with-corrected-qmp-cleanup--proposed-2026-10-15)
-permits no execution until accepted. No native C or production policy changed.
+The [next concrete proposal](installed-payload-flow.md#stock-control-with-corrected-qmp-cleanup--accepted-2026-10-15)
+required separate acceptance; the accepted control outcome follows. No native C
+or production policy changed.
+
+## Corrected stock AHCI control passed, 2026-10-15
+
+Cam accepted the concrete corrected-cleanup control at reviewed head
+2dc8236f63c1d3dda12f6ea6c32cb72c2da621d9. Maintainer merge
+3f466f973bfc18d7f46a1020ae25285a6261bd3d has the identical tree
+7bda7b8d718097f597c5bf45dc239b2af712489c. Separate acceptance receipt
+03a89b107f104d831e7eeedd997657dfe56a7f7beed8814e035f339500734f85
+binds fresh full target/media integrity and closure. Exact helper/argument/host-pin
+freeze: 63d75b728af9f22ee2c950cbabce06645aea43ebc0580211240f401f56269800.
+Original helpers and earlier failed/incomplete receipts remain unchanged.
+
+Launch twenty attached only the original stock install79.iso read-only on AHCI.
+Complete paused block/node/PCI/qtree/argument/open-file inspection passed: no target,
+network, sharing, hotplug or floppy backing. Actual native boot rows correlated
+ahci0/scsibus0/cd0, followed by the stock installer question and only its shell choice.
+Host-awake/default scheduling requests preceded CPU execution, scoped to the owned
+PID lifetime. Both screen and keyboard operations used the exception-safe QMP helper.
+One owned screen reader used rapid bounded boot capture, five-second unattended
+observations and fresh actual prompts before input. No observer overlapped it.
+
+Before launch, the fixed explicit host key authenticated the unchanged whole ISO and
+signed release manifest. In the guest, read-only cd0c mount and the full native
+public-key/bsd/bsd.rd/base/comp/man/INSTALL.amd64 hashes matched the authenticated
+expectations. Stock SHA256.sig remains absent: no native signature operation was
+performed or counted, no warning ignored and no new manifest injected. Native C,
+kernel and media stayed unchanged; no compiler, signing pair, credential or dependency
+was added.
+
+Both fixed tar -tzf base79.tgz passes listed to /dev/null, one submission each, without
+extraction. Actual native zero returns and fresh shell prompts were observed for
+pass one at 311.132 seconds and pass two at 503.726 seconds. Host wall intervals from
+completed submission were 150.454 and 185.498 seconds respectively. These observations
+are not controlled performance benchmarks. The fixed CD unmount/sync/halt completed;
+actual halted/reboot text and zero CD write counters were observed at 512.765 seconds
+before QMP quit. Emulator exit zero followed at 512.883 seconds, within original
+bounds; the scheduling guard did not force closure and no reboot key was sent.
+
+No QMP timeout, observation recovery, process abort or host sample was needed. The
+corrected helper operated normally here, but its native exception/recovery path was
+not exercised. The host-only socket-lifetime regression remains separate evidence.
+The result does not prove that socket cleanup caused the earlier timeout or second
+listing failure, establish a stable hardware profile, or qualify handoff installation.
+The failed handoff preflight receipt/gate remains false; stock success grants no reset.
+
+All owned emulator, serial client and host-awake processes were reaped. No fixture
+handles/mounts remain. Full target hashes and original regular-file identities,
+8 GiB sizes, 0600 modes and single links are unchanged:
+
+- Build: 6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592.
+- Serial: 2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021.
+- Quarantined VGA: fd79de7a50ad70adfcc7f6fd5eeaa694fc9c5dc961396535085e54090d85a438.
+
+Full stock ISO remains
+7a4a92e953618035097c796a90b54424a0f3ae775552e1e7d102cf8a5130449f.
+Credential capture exclusion passed; 904122 bytes of retained screen/row/serial
+captures were losslessly compressed. Owned allocation was 12213714944 bytes,
+conservatively expanded capture metric 810582 bytes and encoded exports 972121651
+bytes, below 20 GiB/10 MiB/1 GiB. Control audit SHA-256:
+b3b514e613bb0fa9e636990d0ee22e324d9ff55b4b040ce5f0ba3a85641e312d.
+Twenty of twenty-one launches are consumed. All 46 installed serial cases remain
+passed; zero installed VGA cases have passed and exact disposal remains pending.
+
+The [remaining complete qualification proposal](installed-payload-flow.md#remaining-ahci-vga-qualification--proposed-2026-10-15)
+binds the successful control, original target receipt, unchanged handoff/runtime
+media and four exact argument arrays. It requests ceiling twenty-four and a fresh
+handoff preflight before any same-original-VGA reset, installation, 45 payload cases
+and later readback case. No such boot or reset has run or been authorized. Source C
+remains frozen at 35238a1 with the 16369-byte additional-source ceiling satisfied.

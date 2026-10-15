@@ -989,16 +989,17 @@ authentication and closure. Exact helper/argument/host-pin freeze:
 700398a6326e9c1f570e7ed6e2b3938597ed077dff252ea5b23d9d8f2cc232a8.
 The failed handoff preflight gate remains false regardless of this control outcome.
 
-## Stock control with corrected QMP cleanup — proposed, 2026-10-15
+## Stock control with corrected QMP cleanup — accepted, 2026-10-15
 
-Status: **Proposed; no further boot or target reset authorized.** The separately
+Status: **Accepted by Cam’s continue on 2026-10-15 for one corrected-cleanup
+diskless boot only; no target reset or subsequent boot authorized.** The separately
 accepted stock control passed native key/six-input hash agreement and one listing,
 then lost observation during its second listing and required forced host closure.
 Its [actual evidence and host cleanup regression](installed-payload-native-progress.md#stock-ahci-control-stopped-host-cleanup-fix-2026-10-15)
 remain failed/incomplete. Nineteen of twenty-one launches are consumed. The corrected
 host helper has two synthetic lifetime cases, without native recovery evidence.
 
-Propose exactly one diag-stock-ahci-recovery-control diskless boot, consuming launch
+Accept exactly one diag-stock-ahci-recovery-control diskless boot, consuming launch
 twenty under the unchanged twenty-one ceiling. Keep the original stock ISO, explicit
 host ISO/release authentication, native key/six-input agreement, AHCI/Cocoa/QEMU/
 firmware, CPU/RAM, fixed keyboard/serial observation and all no-target/network/
@@ -1035,3 +1036,91 @@ Acceptance must separately bind the reviewed candidate and fresh full integrity/
 closure checks. Even success does not unlock the failed handoff preflight, VGA reset
 or any installed case. One remaining slot cannot authorize the three VGA stages;
 any further qualification/budget decision returns to this same feature draft.
+
+
+Cam accepted this concrete proposal at reviewed head
+2dc8236f63c1d3dda12f6ea6c32cb72c2da621d9. Maintainer merge
+3f466f973bfc18d7f46a1020ae25285a6261bd3d has the identical tree
+7bda7b8d718097f597c5bf45dc239b2af712489c. Separate acceptance receipt
+03a89b107f104d831e7eeedd997657dfe56a7f7beed8814e035f339500734f85
+binds fresh complete hashes/original target identities, authenticated stock ISO and
+closure. Exact helper/argument/host-pin freeze:
+63d75b728af9f22ee2c950cbabce06645aea43ebc0580211240f401f56269800.
+Keyboard events use the same exception-safe QMP replacement. Recovery captures
+have distinct fixed filenames to avoid reusing an unacknowledged dump’s path.
+The scheduling guard reserves forced-closure time before the unchanged 2700-second
+ceiling; prompt/work/cleanup clocks are never renewed. Remaining feature work stays
+on codex/installed-qmp-recovery in one follow-up draft after the maintainer merge of
+PR #62. Earlier immutable proposals/helpers/receipts remain unchanged.
+
+
+## Remaining AHCI VGA qualification — proposed, 2026-10-15
+
+Status: **Proposed; no further guest, ceiling increase or reset authorized.** The
+[corrected stock control](installed-payload-native-progress.md#corrected-stock-ahci-control-passed-2026-10-15)
+passed both listings and native clean halt, with all three targets unchanged. That
+result does not satisfy the failed handoff-media preflight or grant reset authority.
+Twenty launches are consumed under twenty-one. One remaining slot cannot complete
+the required fresh handoff preflight and three VGA stages.
+
+Propose one complete four-stage attempt, raising only the launch ceiling from
+**twenty-one to twenty-four**, with the existing original C/binaries, handoff/runtime
+media, public signatures, inert fixture and synthetic VGA credential. Preserve the
+pinned QEMU/firmware, AHCI optical.0, Cocoa keyboard/VGA, CPU/RAM, no-network/sharing/
+hotplug/overlay profile and sole legacy virtio target when required. Keep native
+source/kernel and media unchanged; add no compiler, dependency, export, signing pair,
+credential or input transport. Use the existing VGA credential only at observed
+echo-off prompts; retain disabled SSH/X and no extra account or networking.
+No production runtime/profile or AHCI serial/general hardware qualification follows.
+
+| Order | Fixed stage | Required gate/result |
+|---|---|---|
+| 21 | diag-ahci-handoff-recovery | Diskless, sole read-only handoff CD. Complete paused inventory and actual native AHCI/cd0 association; diskless frontend refusal; native explicit-key signature, full manifest/six-input hash verification and two listing-only zero-return/fresh-shell passes; clean native halt, owned-process closure and full target/media integrity. Keep the old failed receipt/gate false; this is a separately reviewed fresh attempt. |
+| 22 | vga-ahci-install | Only after the new step 21 passes and closes: one same-original-VGA reset as below, full-zero proof, sole virtio target/read-only AHCI CD inventory, actual effect review and fresh exact native disk confirmation. Supervise unchanged stock /install; independently prove completion, foreground relink and configuration before native clean halt and complete image hash. |
+| 23 | vga-ahci-payload | Cold boot the verified installed image with the unchanged runtime CD. Prove boot/relink, native optical/root/label/namespace/held context and media. Pass 17 automatic plus five actual manual cases per dynamic/static variant, then KEEP: 45 cases with exact TTY and independent retained-content/canary postconditions. Clean halt, closure and full image hash. |
+| 24 | vga-ahci-readback | Another cold boot of the same hashed image/profile. Independently prove retained inventory/content/metadata/root binding without a writer or reused member confirmation; READBACK supplies case 46. Clean halt, closure and full hashes, then original exact all-three-fixture disposal and authority closure. |
+
+Reset is proposed only for the same original vga-target.raw identity, bound by
+immutable original receipt
+56f416bbdf7f25ac96bb610d1c2b81f1f7a4db4aee9abdb68bdcacf90e2dac5f
+and latest unchanged full hash
+fd79de7a50ad70adfcc7f6fd5eeaa694fc9c5dc961396535085e54090d85a438.
+Keep it quarantined until explicit new acceptance, successful new handoff preflight
+and full integrity/closure. Recheck named/held agreement, original device/inode,
+regular type, 8 GiB size, 0600 mode, single link and full stopped hash using a no-follow
+held host descriptor. On that descriptor only, truncate zero then exactly 8 GiB,
+fsync and independently prove unchanged identity/mode/link, zero allocation and full
+zero-image SHA-256
+ebfb4ef19ae410f190327b5ebd312711263bc7579970e87d9c1e2d84e06b3c25.
+No unlink/replacement, other target write or reset retry. Preserve prior evidence;
+reset discards partial bytes and supplies no rollback or native install confirmation.
+Build/serial images stay unchanged until original exact disposal after qualification.
+
+Reuse the exception-safe QMP helper for keyboard and screen operations. One owned
+reader per stage; rapid bounded boot/interactive capture, five-second unattended
+cadence and fresh actual prompts before input. Put owned-lifetime host-awake/default
+scheduling requests in place before CPU execution. On first QMP timeout stop dependent
+work; allow at most three read-only recovery observations separated by at least five
+seconds and one one-second owned-PID host sample capped at 1 MiB. No workload, answer or confirmation resubmission or
+clock reset. The read-only control’s Ctrl-C cleanup does not authorize a generic
+abort of a writing installer/payload. Apply only existing reviewed cleanup semantics;
+uncertain writing state stays partial/quarantined, with no dependent stage or rollback
+claim. Unexpected failure, mismatch, missing postcondition or deadline stops the attempt.
+No retry, controller/display fallback, boot substitution or automatic ceiling extension.
+
+Keep every existing source/input/operation/review/output/CPU/memory/confinement and
+privilege bound. Per-launch clocks remain prompt 900 seconds, scheduling 2700 seconds
+including 120-second cleanup reserve, hard 3600 seconds, from before initial Popen.
+Observe native halt before emulator quit when established; otherwise record unclean
+closure. Reap all owned processes, exclude credentials from captures and recheck full
+media/target hashes, original identities and absent handles/mounts at each gate.
+Freeze exact helpers/arguments/host pins before accepted execution. Separate acceptance
+must bind the reviewed candidate/proposal to fresh full integrity and closure.
+
+Private proposal SHA-256:
+7116e92cf818e98a0acc6171341ba92014813703ec43292d351fcfd957192e6a.
+It binds the successful stock audit, unchanged failed handoff receipt, original target
+receipt/latest full hashes, freshly rehashed 0400 handoff/runtime media and four exact
+prepared argument arrays. It opens no target for writing and grants no execution.
+Keep the complete qualification, fixes, native evidence and exact disposal on
+codex/installed-qmp-recovery in the same feature draft, without phase PR boundaries.
