@@ -6,16 +6,18 @@ installed variants built. The
 accepted recovery boot completed stock automatic preening, verified persisted key
 absence and source/artifact hashes, finished the fixed suffix export, and cleanly
 halted. The original native ISO and its full boot/member inventory passed readback.
-Fifteen launches completed. All 46 serial cases remain passed. The accepted VGA
-observer retry passed fresh disk confirmation and independent native input checks,
-then stock extraction panicked before OS completion. The partially written VGA
-image is quarantined; no clean native halt or installed VGA case is claimed.
-All owned processes are reaped, handles/mounts absent, all three full hashes and
-original identities checked. All 46 VGA cases and final disposal remain pending.
-Two diskless read-only diagnostic boots are proposed within the seventeen-launch
-ceiling; neither is accepted or started. Remaining work stays together in
-[draft PR #59](https://github.com/gonz0w/bootweave/pull/59), after maintainer merge of
-PR #58 from an identical tree.
+Seventeen launches completed, exhausting the accepted ceiling. The two accepted
+diskless diagnostics are closed. Stock media lacked the required embedded signature
+file at the fixed sets path, so its native verification stopped and no tar pass ran.
+Handoff media passed native signature/manifest/six-input verification, then the first
+listing-only tar pass emitted the same ATAPI not-ready diagnostic and the guest
+exited without completion or observed clean halt. No target disk was attached.
+All three retained image hashes/original identities remain unchanged; owned processes
+are reaped and fixture handles/mounts absent. All 46 installed VGA cases and final
+disposal remain pending. A four-boot AHCI optical qualification amendment, including
+explicit reset of the same quarantined VGA file, is proposed, not accepted. Remaining
+work stays together on codex/installed-optical-diagnosis after maintainer merge of
+PR #59 from the identical reviewed tree.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -586,8 +588,8 @@ bytes below 20 GiB, capture 597384 below 10 MiB, encoded exports 972121651 below
 2341f684f45f2b12619b2ca75a07b6acea99d5cabe0f28703780811be65f74ad.
 Authority and final fixture disposal remain open. The remaining originally planned
 VGA payload/readback boots cannot run against an incomplete OS. The
-[read-only diagnosis proposal](installed-payload-flow.md#diskless-diagnosis-after-vga-stock-panic--proposed-2026-10-14)
-is a larger scope decision in this same draft; no diagnostic guest has started.
+[accepted read-only diagnosis](installed-payload-flow.md#diskless-diagnosis-after-vga-stock-panic--accepted-2026-10-14)
+was subsequently accepted at ca282f7; no installation retry follows that acceptance.
 
 Local make verify before this attempt passed all 82 groups (23/13/3/10/33), with
 content/link, ShellCheck and Gitleaks checks passing. Original C remains unchanged
@@ -598,3 +600,88 @@ groups, no failures or skips; content/links, ShellCheck and Gitleaks passed. The
 subsequent final prose clarification passed the same content/link check. No Actions,
 runners or hosted status publisher was used. These host results do not qualify the
 panic-stopped VGA installation.
+
+## Diskless optical diagnosis, 2026-10-14
+
+Cam accepted the two listed diskless comparisons at reviewed head
+ca282f747858b91351ad011bd3dbe70cffd9105e. Acceptance receipt SHA-256:
+7b5cb8328a764df9631b5fc01c1151cdffd606a6917a3163a293d5e324687007.
+Fresh complete hashes and original file identities/modes/single links matched all
+three stopped targets; both existing media hashes and absent handles/mounts passed.
+The initial helper/argument/host-pin freeze SHA-256 is
+0b4572b43ed1a4bed29738eabbcf8b670d44aade8f736396c060019076bcbd17.
+Both paused observations independently proved only one read-only CD, no target
+backing, no network endpoints, sharing, hotplug or floppy backing. Pinned machine,
+CPU, RAM, firmware, clocks and all other bounds remained unchanged.
+
+Launch sixteen booted the authenticated original stock install79.iso. The actual
+stock prompt selected shell, never installation. Native key hashing matched, but
+signify could not open SHA256.sig at the fixed /mnt/7.9/amd64 sets path. Read-only
+native directory inspection confirmed the missing input. Preparing that path without
+checking the stock CD's member inventory was a host preparation error. Verification
+was not bypassed: no substituted input, six-input verification or tar pass was
+claimed, and neither listing pass was submitted. Absence of the exact scratch file
+was independently observed. The observer stopped/reaped before dedicated CD
+unmount/sync/halt observation; QMP quit followed actual native halted/reboot text,
+without another key. Emulator/client/observer exited zero and were reaped at
+286.842 seconds. Full media and all three retained target hashes/identities matched;
+no fixture handles/mounts remained. The stock control workload remains incomplete.
+
+Launch seventeen was the separately accepted handoff-media comparison, not a retry
+of stock verification. The first launcher had unnecessarily required a passing
+stock workload before this independent comparison. After the stock stop was cleanly
+closed and audited, the handoff-only launcher instead required that closed audit,
+unchanged target hashes and the recorded missing-input stop. No native verification
+predicate or attachment was relaxed. Original first-launch source/freeze were
+preserved; handoff-only helper freeze SHA-256:
+096d015d86525977b78aeab8fbae96c0b5e97a6d6852b72ec358e2c0444ebf03.
+
+The actual handoff frontend refused the absent disk with "No qualified research
+target; no handoff." and exit two, then returned to its shell. No confirmation or
+/install invocation followed. Native explicit-key embedded-signature verification,
+complete authenticated manifest digest and all six frozen input hashes passed.
+The exact RAMdisk scratch manifest was removed before the completion marker. The
+first fixed tar -tzf base79.tgz redirected its listing to /dev/null, with no extraction.
+It emitted "wdc_atapi_start: not ready, st = 50"; the guest/emulator exited zero at
+342.632 seconds before the native tar return marker. The second pass was not
+submitted. No new panic PC, shutdown event or clean native halt was observed. An
+empty emulator log and zero emulator exit do not establish the shutdown mechanism.
+Observer and waiting helper exited on absent QMP; this is recorded as failure, not
+native completion. All owned processes were reaped.
+
+The last successfully observed CD write counters were zero before tar. Post-exit
+QMP counters were unavailable. The effective backend was read-only throughout,
+its complete hash remained unchanged, and no target was attached. All three retained
+targets again passed complete hashes/original identity/mode/link checks; no fixture
+handles or mounts remained. Captures excluded credentials and were losslessly
+compressed after closure. Final allocation was 12213063680 bytes below 20 GiB,
+capture 667736 below 10 MiB and encoded exports 972121651 below 1 GiB. No new source,
+compiler, ISO, signing pair or credential was introduced. Stock diagnostic receipt
+SHA-256: 4d78e3751caa223c35779c391ccc38c79ac2f4542a60a3cd42fe6329a876614f.
+Handoff diagnostic receipt SHA-256:
+428cf1c2f0ccd04702d00aced36d4a1023cd7b5c2bbfbae56b5efe94ad381a4e.
+
+The read-only handoff workload reproduced a guest failure with the same ATAPI
+not-ready diagnostic while no installed filesystem, target writes, extraction or
+payload operation existed. It does not prove the same panic mechanism or identify
+an emulator, kernel or media defect. The incomplete stock control cannot isolate
+upstream stock behavior from modified-media behavior. No stable hardware profile,
+production adoption or installed VGA case follows. Seventeen launches are consumed;
+no additional guest or reset is authorized. The
+[AHCI qualification proposal](installed-payload-flow.md#ahci-optical-complete-vga-qualification--proposed-2026-10-14)
+keeps any further decision and the complete remaining feature together.
+
+The AHCI preparation rechecked complete hashes of all three retained targets and both
+unchanged handoff/runtime discs, original target identities/modes/links, and absent
+handles/mounts. Four exact proposed argument arrays are preserved; none executed.
+The same existing native C/binaries, credentials and inert public signatures would
+be reused. Pinned-emulator help and authenticated RAMDISK_CD config/kernel symbols
+show AHCI build availability, with no native AHCI qualification claimed. No target
+reset, controller fallback or additional boot occurred. Private preparation digest:
+f5b0c4d85d24e6bde4e1c91cb35f3b1a4e00a57a9d8d74bfecb0d914bfb2bd47.
+
+Local make verify after these diagnostic/scope updates passed all 82 groups
+(23/13/3/10/33), with no failures/skips. Content/links, ShellCheck and Gitleaks passed;
+final prose also passed content/link and diff-whitespace checks. Both native diagnostic
+outcomes remain partial/failed as described; host checks do not qualify installation.
+No Actions, runners or hosted status publisher was used.

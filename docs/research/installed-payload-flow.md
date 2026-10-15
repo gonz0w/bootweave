@@ -740,9 +740,11 @@ implementation/fixes/qualification/disposal together on codex/installed-vga-qual
 in [draft PR #59](https://github.com/gonz0w/bootweave/pull/59). This accepts only the
 concrete retry and changed launch budget under the existing explicit review rule.
 
-## Diskless diagnosis after VGA stock panic — proposed, 2026-10-14
+## Diskless diagnosis after VGA stock panic — accepted, 2026-10-14
 
-Status: **Proposed; no diagnostic guest, repair or reinstall authorized.** The accepted
+Status: **Accepted for two diskless read-only diagnostic boots only.** Cam replied
+"continue" to the concrete proposal at reviewed head
+ca282f747858b91351ad011bd3dbe70cffd9105e. No repair or reinstall is authorized. The accepted
 retry passed VGA confirmation and independent native signature/input verification.
 Stock extraction subsequently panicked in the IDE path; full stopped evidence is in
 [native progress](installed-payload-native-progress.md#vga-confirmation-passed-stock-extraction-panic-2026-10-14).
@@ -751,15 +753,15 @@ automatic retry, resume, repair or general rollback." The incomplete VGA target 
 quarantined, with no later OS/payload boot. Fifteen launches are consumed; all 46
 VGA cases remain pending. Root cause is unproven.
 
-Propose repurposing the **two remaining launches within seventeen** for a bounded
+Acceptance repurposes the **two remaining launches within seventeen** for a bounded
 read-only comparison: one diskless boot from the original authenticated stock
 install79.iso, and one from the unchanged fully verified handoff.iso. Both use the
 same pinned QEMU/firmware, pc-i440fx-11.1/TCG/qemu64-v1, one CPU, 1 GiB RAM,
 keyboard/VGA and private serial observation. Each attaches only its single read-only
 CD: none of the three target images, no other block backing, network, sharing,
 hotplug or floppy backing. Complete paused effective inventory must prove that
-absence before execution. This changes purpose and attachments and needs review;
-remaining launch count is not permission to perform a different experiment.
+absence before execution. The reviewed purpose and attachment change applies only to these two boots.
+Remaining launch count is not permission to perform another experiment.
 
 Observe the stock shell through its actual prompt; on handoff media, absence of an
 eligible disk must cause the unchanged frontend to refuse before returning to its
@@ -789,7 +791,7 @@ The comparison can show whether a read-only optical workload reproduces this fai
 Media boot/RAMdisk/layout differences and lack of concurrent FFS writes limit what a
 non-reproduction proves. Do not claim isolation, general stability or qualification
 from two successful reads. Report evidence before proposing any installation retry,
-profile replacement or fix. This proposal authorizes none of those later actions and
+profile replacement or fix. This acceptance authorizes none of those later actions and
 does not complete the 92-case deliverable or end exact-target/disposal authority.
 Keep diagnosis, subsequent decisions and eventual qualification/cleanup together in
 [draft PR #59](https://github.com/gonz0w/bootweave/pull/59).
@@ -798,5 +800,86 @@ Immutable private proposal receipt SHA-256:
 a2d8dbfde9aeb7dc3684778be7983e29aff0db38609e1a740a81a8932805457f.
 It binds the completed stop audit and original target receipt, quarantined VGA hash,
 exact existing media, bounded operations, unchanged launch ceiling and no-target rule.
-Any acceptance must be recorded separately against the reviewed candidate and fresh
-closure/media/target-integrity observations; retain the proposal unchanged.
+Separate acceptance receipt SHA-256:
+7b5cb8328a764df9631b5fc01c1151cdffd606a6917a3163a293d5e324687007.
+It binds the reviewed candidate, fresh full hashes and original identities of all
+three stopped targets, both media hashes and absent handles/mounts. The proposal
+remains unchanged. Exact helper/argument/host-pin freeze SHA-256:
+0b4572b43ed1a4bed29738eabbcf8b670d44aade8f736396c060019076bcbd17.
+PR #59 was maintainer-merged; its tree equals the reviewed tree. Keep remaining
+diagnosis, decisions, qualification and disposal together in one follow-up draft on
+codex/installed-optical-diagnosis.
+
+
+## AHCI optical complete VGA qualification — proposed, 2026-10-14
+
+Status: **Proposed; no new guest, target reset or controller replacement authorized.**
+The accepted two-boot diagnosis is complete as an attempted comparison: stock input
+verification stopped on a missing CD signature file, while fully verified handoff
+media reproduced an ATAPI not-ready/guest-exit failure during read-only listing, with
+no target attached. See [diagnostic evidence](installed-payload-native-progress.md#diskless-optical-diagnosis-2026-10-14).
+Root cause remains unproven, and the accepted seventeen launches are exhausted.
+
+Propose four fixed boots, increasing the ceiling **seventeen to twenty-one**, as a
+complete remaining VGA qualification attempt. Change only the optical controller
+path to the pinned emulator's existing ich9-ahci device, id optical, with the same
+ide-cd backend attached to optical.0. Do not attach CD media to chipset IDE. Preserve
+pc-i440fx-11.1/TCG/qemu64-v1, one CPU, 1 GiB RAM, BIOS/VGA firmware, no network,
+sharing, hotplug or overlays. Where a target is present, retain its exact sole
+legacy virtio sd0 path and the same fixed raw-root observer. No C, kernel, runtime
+interface, dependency, compiler, ISO, export, signing pair or credential changes.
+This tests another virtual optical path; it does not fix or identify the old failure.
+
+The pinned emulator's help lists ich9-ahci. The authenticated RAMDISK_CD configuration
+includes ahci at pci; bounded config-member SHA-256 is
+7b9c3b64e95725518a92992b9ecd57f21f8adb710dc0e4e20c768096bde4a1aa.
+Frozen handoff-kernel symbols contain ahci_attach and ahci_pci_attach. These are
+availability evidence only; BIOS boot, native attachment and operation remain
+unqualified until observed. No silent controller fallback is allowed.
+
+| Order | Fixed stage | Required gate/result |
+|---|---|---|
+| 1 | diag-ahci-optical | Diskless, sole read-only handoff CD. Prove paused AHCI attachment/no IDE CD/no target; actual native AHCI/cd0 association and diskless frontend refusal. Native explicit-key signature, manifest/six-input verification and two listing-only tar passes must pass, followed by clean native halt, closure and complete target/media integrity checks. |
+| 2 | vga-ahci-install | Only after step 1 passes, reset the same exact quarantined VGA file as below; fresh full-zero proof and paused sole virtio target/read-only AHCI CD proof. Supply actual effect pages and fresh exact disk confirmation; manually supervise unchanged stock /install and independently prove all stock completion/relink/configuration postconditions before clean halt. |
+| 3 | vga-ahci-payload | Cold boot that fully hashed installed image with the same read-only revised runtime CD on AHCI. Prove stock boot/relink, actual optical/root/label/namespace/held context and complete media hashes. Pass 17 automatic and five actual manual cases per dynamic/static variant, plus KEEP: 45 VGA cases, exact TTY and independent retained-content/canary checks. Clean halt/closure/full image hash. |
+| 4 | vga-ahci-readback | Another cold boot of that same hashed image/runtime CD/profile. Independently prove unchanged retained inventory/content/metadata/root association; READBACK adds case 46 without a writer or replacement authorization. Clean halt/closure/full hashes, then original exact fixture disposal and authority closure. |
+
+Reset authority requested is only for the **same original vga-target.raw identity**
+bound by immutable original target receipt SHA-256
+56f416bbdf7f25ac96bb610d1c2b81f1f7a4db4aee9abdb68bdcacf90e2dac5f,
+currently complete SHA-256
+fd79de7a50ad70adfcc7f6fd5eeaa694fc9c5dc961396535085e54090d85a438.
+Keep it quarantined until step 1 passes and all owned processes/handles/mounts close.
+Recheck full stopped hash, original device/inode, regular type, 8 GiB size, 0600 mode,
+single link and named/held agreement using a no-follow held host descriptor. On
+that descriptor only, truncate to zero then exactly 8 GiB, fsync, and independently
+verify original identity/mode/link, zero allocation and complete zero-image SHA-256
+ebfb4ef19ae410f190327b5ebd312711263bc7579970e87d9c1e2d84e06b3c25.
+No unlink, replacement image, changed path, physical disk or other target write.
+Preserve pre-reset receipts/captures; reset discards partial bytes and is not rollback.
+Host reset does not supply native install confirmation. Any reset failure stops,
+without retry, and OS/payload stages cannot run before their independent gates.
+
+Reuse existing vga credential only at observed echo-off prompts; no extra account,
+SSH, X, DNS or networking. The same verified handoff/runtime discs and inert signed
+fixture are frozen. Both media full hashes, all three stopped target full hashes and
+original identities, and absent handles/mounts are freshly rechecked in preparation.
+Build and serial images remain unchanged until original exact disposal. Existing 46
+serial passes belong to the earlier IDE optical profile; do not claim AHCI serial
+qualification or general hardware equivalence from them. Report VGA AHCI evidence
+separately, with no production profile/runtime adoption.
+
+All existing per-launch clocks, source/input/operation/review/output/resource,
+capture/storage/export, CPU/memory, privilege and exact confirmation limits remain.
+Freeze exact helpers/arguments before acceptance/execution. Unsupported boot/driver,
+input mismatch, native failure, incomplete postcondition or deadline stops dependent
+work; no retry, BIOS/controller fallback, boot substitution or ceiling extension.
+Keep all implementation, tests, fixes, native qualification and all-three-fixture
+disposal on codex/installed-optical-diagnosis in one continuation draft after
+maintainer merge of PR #59; no phase PRs. This proposal does not itself authorize
+any of these four guests or the reset. Separate acceptance must bind the reviewed
+candidate and private proposal to fresh original target/media integrity and closure.
+
+Immutable private proposal receipt SHA-256: f5b0c4d85d24e6bde4e1c91cb35f3b1a4e00a57a9d8d74bfecb0d914bfb2bd47.
+It includes the four exact argument arrays and both completed diagnostic receipt
+hashes, unchanged full target/media hashes, the exact single-file reset and all gates.
