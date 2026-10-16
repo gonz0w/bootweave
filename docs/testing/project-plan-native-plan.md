@@ -1,11 +1,15 @@
 # Read-only planner: exact native qualification plan
 
-Status: **Proposed; native target approval pending, 2026-10-15.** Owner: Cam.
+Status: **Accepted, 2026-10-16.** Owner: Cam.
+Cam replied “continue” after the explicit PR #72 exact-new-8-GiB/four-launch
+approval question, including the documented disposable credential limitation.
+Source/helper bindings remain unchanged. Native results and teardown are pending.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
-continuation, fixes, observations and teardown in one draft. Merge or a general
-continuation does not authorize this target. No target or media has been created
-and no guest has been launched by this preparation.
+continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
+authority remains ended. Source-only preparation preceded approval. Creation,
+performed effects and observations are recorded separately in
+[native progress](project-plan-native-progress.md).
 
 ## Concrete source and independent cases
 
