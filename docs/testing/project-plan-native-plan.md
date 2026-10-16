@@ -8,7 +8,11 @@ the [failure evidence and accepted five-launch continuation](project-plan-native
 record Cam's subsequent explicit recovery approval. Launch 2 then stopped because
 `uname` is unavailable in the stock ramdisk; the earlier keyboard diagnosis was
 incorrect. The original four-launch plan below and five-launch recovery are historical;
-the proposed launches 3–6 in that continuation require review before another launch.
+Cam explicitly approved launches 3–6 after PR #74's recovery question. Launch 3 then
+stopped because the reduced ramdisk verifier rejects checksum mode. The current
+[seven-launch proposal](project-plan-native-progress.md) uses native embedded-signature
+verification followed by selected-file checksums; it requires review, including its
+RAM-only manifest namespace and narrow prerequisite-correction exception.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
@@ -132,7 +136,9 @@ headless VGA with QMP keyboard/screendump. No NIC/IP listener, forwarding, shari
 passthrough, hotplug/reopen or additional disk. Empty machine controllers are not
 backed targets and must be identified as such in the full inventory.
 
-In the stock shell, independently verify the expected OpenBSD release/key and
+The stopped stock-shell `signify -C` method is not executable with the reduced
+ramdisk verifier. The corrected proposal above is unapproved; do not retry it under
+the historical scope below. It must independently verify the expected OpenBSD release/key and
 all six selected files (`bsd`, `bsd.rd`, `base79.tgz`, `comp79.tgz`, `man79.tgz`,
 `INSTALL.amd64`) against the native explicit-key signed manifest on the read-only
 data CD. Unmount before the fixed manual installer. Confirm sole guest `sd0`,

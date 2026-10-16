@@ -1,187 +1,207 @@
 # Read-only planner native progress
 
-Status: **Stopped in launch 2, 2026-10-16.** Native qualification incomplete.
-Neither launch installed the system or ran planner checks. Original scope:
-[accepted run plan](project-plan-native-plan.md); the accepted five-launch recovery
-stopped at its first command failure. The six-launch proposal below is unapproved.
-Approval source: Cam's “continue” after the explicit PR #72 target/run question.
-PR #72 was merged before execution; keep this qualification continuation together.
+Status: **Stopped in launch 3, 2026-10-16.** No installation, credential, compilation
+or planner check has run. All **5,868 required native checks remain unrun**.
+Original scope and unchanged limits: [native run plan](project-plan-native-plan.md).
+The original exact target, media and private failure evidence are preserved.
 
-## Preparation and creation
+## Authority and frozen fixtures
 
-The eight tool/firmware/verifier/key/release pins and frozen source bindings were
-rechecked. Source/helper candidate remains 375f6b65ce7a8841a33c0bb2d0f4aaf94c1e6651,
-tree f10bfa143641f8516afc57f8e2d1f4c08a72cf19. The maintainer merge has the same tree.
-The earlier clean candidate passed 115 local groups, lint/content and secret checks.
+Cam's explicit “continue” replies accepted the concrete target/run questions below.
+Each continuation counted prior attempts; none authorized a reset or replacement.
+The maintainer merged each draft before its execution. Remaining qualification and
+teardown accumulate on one continuation branch; PR #74's review notes link its current
+proposal. A further PR will cover that remaining work together when qualification is ready.
 
-The sole new approved target was exclusively created as an owned 0600 single-link
-8 GiB raw file under its owned 0700 namespace. Independent complete readback
-matched the required zero digest with zero allocation and unchanged identity/times.
-Private immutable creation and separate acceptance/readback receipts retain actual
-host device/inode data; those values are not public evidence.
+| Review | Accepted ceiling | Outcome |
+|---|---:|---|
+| PR #72 | 4 | Launch 1 stopped before installation. |
+| PR #73 | 5 | Launch 2 stopped; the keyboard diagnosis was corrected. |
+| PR #74 | 6 | Launch 3 stopped on reduced-verifier usage. |
+| Current proposal | 7, unapproved | Remaining stages 4–7 below require review. |
 
-Six selected stock files passed explicit-key host signature/checksum verification.
-The nonbootable source/release CD was independently extracted and every source and
-release byte compared with its sealed staging inventory. Its 675287040 bytes have
-SHA-256 b31e06d778c3bb43050dfcdfff66a40537799c0748c623c35de499f73dd5d1cd.
-Transported source SHA256 listing remains
-c58a21ff94aa3ead38d82da1691b5977fb87c23eb608c84209cd536a842e832b.
-At completion of preparation, no native result, clean halt or disposal was claimed.
-Planned, performed and observed records remain separate.
+Separate exclusive private acceptance receipts bind each accepted run to the original
+host identity/digest, previous failure receipt and reviewed controller/input helper.
+Immutable creation receipts were not rewritten as approval or success records.
+Earlier research target authority remains ended.
 
-## Launch 1: stopped before installation
+The sole target remains the exclusively created, owned 0600 single-link
+`.tools/project-planner-native/build.raw`, exactly 8,589,934,592 bytes under its owned
+0700 namespace. Independent complete readbacks before execution and after every
+halt matched its original zero digest:
 
-The complete paused device/block/PCI/ROM/process/handle/listener audit passed before
-CPU continuation. The stock OpenBSD/amd64 7.9 kernel observed the sole writable
-8 GiB `sd0` and both read-only optical drives. Its shell prompt was reached within
-the fifteen-minute limit. No installer disk-selection or destructive answer was sent.
-
-The submitted `uname -srvm` failed because the stock ramdisk does not provide
-`uname`. **Correction to the earlier report:** enlarged inspection of the preserved
-original frame reads `uname`, not `umame`; the claimed keyboard substitution was a
-font-reading error. Launch 2 independently confirmed command unavailability. The
-subsequent CD mount failed with ENOENT, followed by
-failure to enter its release directory. Later verification text had already been
-queued before earlier command results were observed; this was an orchestration
-error. No release verification, installation, compilation or qualification success
-is inferred from queued input. All 5,868 required checks remain unrun.
-
-The private sender used 80 ms QMP key holds and 110 ms spacing; a QMP acknowledgement
-alone does not establish guest delivery, but these frames do not establish transport
-corruption. Separately, read-only inspection of `dev/MAKEDEV` in the already verified
-stock base set shows that its `ramdisk` profile includes `cd0` only and its `cd*`
-branch supports `cd1`. Missing second-drive nodes are a plausible additional cause
-of the mount error; their native absence was not observed before shutdown.
-
-Dependent work stopped. A slowly entered `halt` was observed in full before Return,
-then the native console reported completed sync and “The operating system has halted.”
-Only then was the owned emulator closed and reaped. Total launch time was 504.109
-seconds, measured peak emulator RSS 619,408 KiB, and retained console/log captures
-174,184 bytes. No credential was created or entered. The controller's successful
-exit records supervision/closure, not native qualification success.
-
-Independent complete stopped readback matched the original zero-image SHA-256
 `ebfb4ef19ae410f190327b5ebd312711263bc7579970e87d9c1e2d84e06b3c25`.
-Original target/parent identities, ownership/modes, single link, size, timestamps
-and zero allocation remained unchanged. The sealed data CD digest and all eight
-original tool/firmware/verifier/key/release pins matched. No owned guest/controller,
-open fixture handle, fixture mount or IP listener remained. Only checked stale owned
-Unix endpoints and redundant PPM copies with retained lossless PNGs were removed.
-The original disk, media, sources and private failure evidence remain preserved;
-no target reset, recreation, replacement or final disposal occurred.
 
-## Accepted continuation: launches 2–5 (stopped)
+Original target/parent identities, owner/modes, single link, size, timestamps and zero
+allocation remained unchanged. Private device/inode inventories remain outside Git.
+No target recreation, reset, zeroing, clone or overlay was performed. No installer
+disk answer was sent.
 
-Cam replied “continue” after the explicit PR #73 launches 2–5 recovery question,
-including conditional stock `MAKEDEV cd1` ramdisk nodes. PR #73 was merged before
-execution. A separate exclusive private acceptance receipt binds this approval to
-the original target identity/digest, stopped failure record and corrected host helpers.
-This approval set a total ceiling of **five launches**, counting stopped launch 1. Use the
-same original zero disk identity and full digest above, unchanged sealed data CD,
-frozen sources/cases/helpers and pinned devices/tools. Do not recreate or zero it.
-Repeat all before-launch and paused audits. Accepted remaining stages are:
+Frozen native source/helper candidate is
+`375f6b65ce7a8841a33c0bb2d0f4aaf94c1e6651`, tree
+`f10bfa143641f8516afc57f8e2d1f4c08a72cf19`. All sixteen source-bundle files
+(2,045,033 bytes) retain SHA256-listing digest
+`c58a21ff94aa3ead38d82da1691b5977fb87c23eb608c84209cd536a842e832b`.
+The independently extracted and byte-compared nonbootable source/release CD remains
+675,287,040 bytes, SHA-256
+`b31e06d778c3bb43050dfcdfff66a40537799c0748c623c35de499f73dd5d1cd`.
+Its six selected stock files passed explicit-key host verification. All eight original
+tool/firmware/verifier/key/release pins matched before and after each launch.
+No native source/case/helper or media bytes changed.
 
-| Launch | Stage |
+## Actual native attempts
+
+Every launch passed complete paused block/device/PCI/ROM/process/handle/listener/mount
+audits before CPU continuation. Provisioning used only the original writable raw
+file, both expected read-only optical drives, one CPU, 1 GiB RAM and no NIC/sharing.
+Generated block-node labels and host CPU thread identifiers were accounted for;
+block graph edges and actual attachments were checked independently.
+
+| Launch | Elapsed seconds | Peak emulator RSS, KiB | Captures/logs, bytes | Closure |
+|---|---:|---:|---:|---|
+| 1 | 504.109 | 619408 | 174184 | Observed clean native halt, reaped, full zero readback. |
+| 2 | 634.331 | 659824 | 619312 | Observed clean native halt, reaped, full zero readback. |
+| 3 | 1931.342 | 653376 | 1294473 | Observed CD unmount and clean halt, reaped, full zero readback. |
+
+Counts describe retained launch captures at closure; later diagnostic enlargements
+retain the original frames. These are supervision/prerequisite observations, not
+successful native planner tests. Each closure independently found no owned guest/
+controller, fixture handles, mounts or IP listeners. Only checked stale owned Unix
+endpoints and redundant PPMs with retained lossless PNGs were removed. Failed disks,
+media, source staging, original frames and receipts remain preserved; final fixture
+disposal has not occurred. Logical disposal would not establish physical erasure.
+
+### Launches 1 and 2: unavailable ramdisk command
+
+`uname -srvm` returned `sh: uname: not found`. **Correction:** the earlier report
+misread the VGA font as `umame`; enlarged inspection of the original frame reads
+`uname`. The frames do not establish keyboard corruption. Launch 1 also queued later
+verification text before earlier results were observed; that orchestration error
+produced a failed CD mount and failed directory change, with no verification success.
+Original private failure receipts remain intact; a separate correction records the
+changed interpretation. PR #73's published description was corrected explicitly.
+
+Launch 2 used 800 ms spacing and observed the full pending line before Return, then
+stopped at the same unavailable command. Bounded read-only diagnosis listed the
+ramdisk tool inventory: no `uname`, with `sysctl`, `sha256`, `signify` and stock
+mount tools present. It confirmed absent `/dev/cd1a` and `/mnt/cd`, existing `/mnt`
+and stock `/dev/MAKEDEV`, and the native release-key filename. Inspection of the actual
+ramdisk script showed its cd-unit branch; no node or mount was created in launch 2.
+The previously reviewed base-set MAKEDEV also includes only cd0 in its ramdisk profile.
+
+### Launch 3: reduced verifier lacks checksum mode
+
+The stock prompt was observed at 107.924 seconds. The positive shell probe emitted
+exact `BOOTWEAVE-CONSOLE`. `sysctl` exited 0 and emitted release 7.9 and architecture
+amd64; it omitted `kern.ostype`. OpenBSD family was independently observed in the
+stock boot banner. The [reduced sysctl source](https://github.com/openbsd/src/blob/master/distrib/special/sysctl/sysctl.c)
+lists those two supported keys and silently ignores unknown names; that source
+explains the observation and does not replace native evidence.
+
+Native SHA-256 of `/etc/signify/openbsd-79-base.pub` matched pinned key digest
+`b7ee8e7981549a1f707a4ed05115a99959a5f9e34b9bed9f9a098be17dd7e4b1`.
+After exact expected-absence checks, the approved stock `MAKEDEV cd1` returned 0.
+Independent inspection observed root/operator block node (6,64) and raw node (15,64);
+the actual script's UNITMULT=64 binds those minors to unit 1. Kernel maxpartitions=16
+is a separate property. The owned root/wheel 0700 mountpoint was created and checked.
+The read-only mount returned 0; native mount output showed only the ramdisk root and
+cd1a as cd9660 read-only, with no target-disk mount. The fixed release-directory
+change returned 0. A fresh complete host readback still matched the zero target.
+
+After complete prefix/middle/suffix pending-line inspection, the exact six-file
+`signify -C` invocation returned usage and status 1. Dependent work stopped.
+The ramdisk [verifier build](https://github.com/openbsd/src/blob/master/distrib/special/signify/Makefile)
+uses VERIFYONLY, which excludes checksum mode. This was a planning error: the reduced
+ramdisk and full installed-system tools are different. No signature or selected-set
+checksum success is claimed. No installer answer, credential or planner operation
+followed the failure.
+
+Bounded read-only diagnosis inspected `/install.sub`, which uses `signify -Vep` to
+authenticate/extract the embedded checksum manifest. An expected usage diagnostic
+confirmed that the actual ramdisk `sha256` supports `-C checklist`. Reading `ulimit -f`
+confirmed the shell builtin; no limit was changed. The already verified stock ksh
+manual specifies 512-byte blocks. After leaving the CD directory, unmount returned 0
+and an independent mount listing showed only the ramdisk root. Completed sync/halt
+was observed before emulator closure. The native RAM nodes/mountpoint do not survive
+closure; their observations are preserved. No new manifest output was created.
+
+## Proposed continuation: launches 4–7, approval required
+
+Request a **seven-launch total ceiling**, counting all three stopped attempts, on
+that same original zero target and sealed media. No reinstall, reset, source/media
+replacement or extra authority follows from this proposal. Repeat all original pins,
+source/identity/full-digest/free-space checks and complete paused audits.
+
+| Launch | Allowed stage after approval |
 |---|---|
-| 2 | Corrected observed keyboard transport, stock prerequisite checks and first installation; clean halt and complete stopped readback. |
-| 3 | Original serial build, suites, traces and actual console cases. |
-| 4 | Original keyboard/VGA suites and actual console cases, using the same native binaries. |
-| 5 | Original independent retained-fixture readback, exact native cleanup, clean halt and exact host disposal. |
+| 4 | Observed stock prerequisites, corrected native release verification, first installation, clean halt and complete stopped readback. |
+| 5 | Original serial build, all suites, traces and actual console cases. |
+| 6 | Original keyboard/VGA suites and console cases using the same native binaries. |
+| 7 | Original independent retained-fixture readback, exact native cleanup, clean halt and exact host disposal. |
 
-Use 800 ms spacing with the existing 80 ms holds. Ordinary text delivery excludes
-Return: observe the complete pending command, then submit Return separately. Check
-the resulting output/status before sending the next command. An unsubmitted line
-may be cleared and reentered once if its observed text differs; an executed command
-failure or a second input mismatch stops dependent work. Verify this procedure first
-with the fixed `uname -srvm` command. That positive prerequisite was incorrect and
-caused launch 2 to stop; it is not the proposed next probe. Slow shutdown entry is evidence for four
-characters only, not a completed transport qualification. Password entry remains
-limited to observed echo-off prompts and the previously approved disposable
-credential limitation; no credential may enter host command arguments or public captures.
+Use only observed stock-tool capabilities: positive `echo`, the two supported
+`sysctl` values and OpenBSD boot identity, pinned native key hash, and the same
+conditional cd1-node/mountpoint creation. Do not call ramdisk `uname` or `signify -C`.
 
-Before mounting, independently inspect `/mnt`, the proposed `/mnt/cd` and `/dev/cd1a`.
-Expected absence is a prerequisite discovery outcome, not a failed mount to retry.
-Only if the sole second read-only drive is confirmed and its node is absent, permit
-the stock fixed `cd /dev && sh MAKEDEV cd1` to create that unit's ramdisk device
-nodes. Inspect their types/unit and the mountpoint; create only the absent owned
-`/mnt/cd` directory. No other device-unit creation is permitted. Then perform the
-read-only mount and native signature/checksum verification, observing each result
-before progressing. These prerequisite changes affect the disposable ramdisk;
-the original stock-install disk confirmation gate still precedes target writes.
+### Exact corrected authentication and checksums
 
-Retain the original sixty-minute nonrenewing launch deadline, fifteen-minute prompt
-limit, forty-five-minute scheduling cutoff, resource/capture/allocation limits,
-5,868 required checks and first-failure rule. Authority comes from the explicit
-recovery acceptance above. There is no automatic reinstall, reset, media/source swap
-or extra launch beyond this five-launch ceiling.
+Request one additional **RAM-only** owned namespace, `/tmp/bootweave-release`, which
+must be absent before exclusive 0700 root-owned directory creation. Its sole allowed
+file is `SHA256`, root-owned 0600, one link, at most 4096 bytes. It is not a disk,
+media input, project definition or native executable. With the CD still read-only
+and its fixed release directory selected, use the observed embedded-signature mode:
 
-## Launch 2: missing stock command, diagnosis corrected
+```sh
+(umask 077 && ulimit -f 8 && ulimit -f && signify -Vep /etc/signify/openbsd-79-base.pub -x SHA256.sig -m /tmp/bootweave-release/SHA256)
+```
 
-Complete before-launch checks revalidated the original zero target, source bundle,
-sealed CD and all eight pins. The complete paused inventory matched launch 1 after
-accounting for generated block-node labels and the host CPU thread identifier;
-block graph edges and all device/firmware/process/handle/mount properties were checked
-independently. The native installer prompt was observed at 152.491 elapsed seconds.
+The subshell must report limit 8, a 4096-byte file ceiling; it leaves parent limits
+and umask unchanged. Require signature success and status 0. The
+[verifier implementation](https://github.com/openbsd/src/blob/master/usr.bin/signify/signify.c)
+verifies the embedded message before opening its output with O_NOFOLLOW. Independently
+require the exact output size **1992 bytes**, expected ownership/mode/link/type and
+complete body SHA-256:
 
-With 800 ms spacing, the complete pending `uname -srvm` was observed before Return.
-It returned `sh: uname: not found`; dependent work stopped. Bounded read-only diagnosis
-listed `/bin`, `/sbin`, `/usr/bin` and `/usr/sbin`: no `uname`, with `sysctl` in `/sbin`,
-`sha256` in `/bin`, and `signify` in `/usr/bin`. The stock ramdisk is not the installed
-base-system command inventory. Enlarged inspection of both original attempt frames
-corrects the earlier keyboard diagnosis; no input substitution was observed here.
+`50bec66f28426a22b9c9436f6a87cf3e7029e636bb915ba1d0db80d638881b87`.
 
-Read-only path inspection confirmed `/mnt` exists, `/mnt/cd` and `/dev/cd1a` are
-absent, `/install` is the stock `install.sub` symlink, and `/dev/MAKEDEV` exists.
-Inspection of that actual ramdisk script showed its `cd*` branch calls
-`dodisk2 cd $U 6 15 $U 0`; no node was created. `/etc/signify` contains
-`openbsd-79-base.pub`. These are prerequisite observations, not successful native
-release verification or planner qualification. No mount, installation, credential,
-compilation, test or device-node creation followed the failure.
+Then use the actual checksum tool's supported selected-file mode:
 
-The full pending `halt` was observed before Return, then completed native sync/halt
-was observed. The owned emulator/controller were closed and reaped. Launch time was
-634.331 seconds; measured peak emulator RSS 659,824 KiB; retained captures/logs,
-including the diagnostic enlarged frame, totaled 619,312 bytes. Private original
-captures and original receipts remain intact; the corrected interpretation is
-recorded separately rather than rewriting the original private failure receipt.
+```sh
+sha256 -C /tmp/bootweave-release/SHA256 bsd bsd.rd base79.tgz comp79.tgz man79.tgz INSTALL.amd64
+```
 
-Independent complete stopped readback again matched the original zero-image digest
-above, original target/parent identities, ownership/modes, single link, size,
-timestamps and zero allocation. Sealed media and all eight pins matched. No owned
-guest/controller, fixture handle, mount or IP listener remained; only checked stale
-owned Unix endpoints were removed. All original fixtures and failed evidence remain
-preserved. Both attempts ran **zero of the 5,868 required checks**.
+Require all six explicit names to pass and status 0; authenticate the whole manifest,
+not a filtered/rewritten list. Independently recheck its complete digest, metadata
+and directory inventory afterward. Remove only that checked owned file and empty
+RAM directory, observe absence, leave and unmount the CD, and reconfirm the sole exact
+8 GiB target before original destructive installer answers. No verification bypass
+or change to accepted stock installation/credential choices is permitted.
 
-## Proposed continuation: launches 3–6, approval required
+A bounded host-only rehearsal with the already pinned verifier extracted exactly
+those 1992 bytes under a 4096-byte file limit and 0600 mode. A deliberately tampered
+message rejected without creating output. The owned rehearsal was disposed. This
+checks the proposed procedure; native execution of the corrected method remains
+unrun and requires acceptance.
 
-Request a total ceiling of **six launches**, counting both stopped launches. Keep
-the same original zero target identity and full digest, sealed source/release CD,
-frozen native sources/cases, device profile and all resource/deadline limits. No
-target recreation, zeroing, media/source swap or automatic retry is proposed.
+### Routine prerequisite correction and unchanged hard stops
 
-| Launch | Stage |
-|---|---|
-| 3 | Stock prerequisites using observed available tools, first installation, clean halt and complete stopped readback. |
-| 4 | Original serial build, all suites, traces and actual console cases. |
-| 5 | Original keyboard/VGA suites and actual console cases using the same native binaries. |
-| 6 | Original independent retained-fixture readback, exact native cleanup, clean halt and exact host disposal. |
+Propose 200 ms keyboard spacing with full pending-text observation before Return and
+full result/status observation before dependent work. The earlier 110 ms input was
+correctly delivered; its failure was misdiagnosed. Retain at most one correction of
+an unsubmitted line and preserve full original frames, including horizontal views.
 
-After all original before-launch/paused audits and an observed stock shell prompt,
-use the shell's fixed `echo BOOTWEAVE-CONSOLE` as the positive pending-text/result
-oracle, then `sysctl kern.ostype kern.osrelease hw.machine` to verify the expected
-OpenBSD/7.9/amd64 values. Both commands are supported by the observed toolbox; no
-`uname` call is permitted in the ramdisk. Inspect the complete pending text before
-Return and the full result/status before another command, retaining 800 ms spacing.
-Use enlarged diagnostic inspection when the VGA font is ambiguous; keep original
-frames. The existing one correction of an unsubmitted line is unchanged.
+To avoid approval for routine command-choice errors, request **at most one correction
+per launch** of command-not-found or unsupported-option/usage-only errors during
+read-only prerequisite discovery, before the installer begins and while the original
+target remains independently proven zero. Record the exact error, observed stock
+capability and correction first. This does not permit retrying a failed signature,
+checksum or test, changing inputs/media/devices or resetting any deadline. It is a
+proposed narrow exception; the current accepted first-failure rule remains in force
+until explicitly approved.
 
-Recheck the observed paths/key/tool availability before use. Expected absent mountpoint
-or cd1 nodes are discovery outcomes. Only after confirming the same second read-only
-drive, conditionally execute the already reviewed stock `cd /dev && sh MAKEDEV cd1`
-and create only the absent owned `/mnt/cd`; inspect the node types/unit and directory.
-Then mount read-only, verify the native key against the pinned key and all six stock
-files against the native explicit-key signed manifest, observing each command/result.
-Unmount before the fixed manual installer and reconfirm the sole exact 8 GiB target
-before destructive answers. The original stock choices, disposable credential
-limitation, 5,868 checks, first-failure stop, exact readback and disposal remain required.
-This proposal grants no new execution authority.
+Authentication/checksum/identity/inventory, confinement/oracle/compiler/resource,
+secret/capture failures, unexpected prompts and all errors after provisioning starts
+still stop dependent work for review and bounded shutdown. Preserve the original
+60-minute nonrenewing launch deadline, 15-minute prompt limit, 45-minute scheduling
+cutoff, all guest/host resource and allocation limits, 5,868 native checks and exact
+independent readback/disposal. Native support and feature completion remain unclaimed.
