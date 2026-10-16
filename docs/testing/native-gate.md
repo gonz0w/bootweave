@@ -60,9 +60,15 @@ inventory. Its cleanup marker was absent; exact failing predicate and removal st
 remain unestablished. Native cleanup halt and full postflight passed, without new
 payload entry. Seventeen prompt groups cover current-boot TTY preservation and only
 known optional artifacts with exact identities; stale receipt never supplies current
-TTY authority. Full-45 rerun/readback at 29/30, ceiling 30, proposed and unaccepted;
-28/29 launches consumed, no reinstall/reset. Complete installed-root, Cocoa-window,
-physical-hardware, parent acceptance and original exact disposal remain pending.
+TTY authority. Approved launch 29 passed all 45 VGA payload-stage cases, actual
+keyboard reviews, retained postconditions and native halt/full integrity/closure.
+Independent launch 30 matched the retained inventory, then a host state collision
+stopped before READBACK submission and blocked cleanup observation. Forced termination;
+full identities/hashes and closure passed, but native halt and qualification remain
+false. Thirty of thirty launches consumed. The readback-only closure-state correction
+passed six host checks. Launch 31, ceiling 31, is proposed and unaccepted; no payload
+rerun or reinstall/reset. Complete installed-root, Cocoa-window, physical-hardware,
+parent acceptance and original exact disposal remain pending.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native

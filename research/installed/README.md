@@ -1,7 +1,7 @@
 # Installed-target payload research
 
 Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65/#66.
+kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65/#66/#67.
 [Native progress](../../docs/research/installed-payload-native-progress.md) records
 compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
 46 installed serial cases, including later readback.
@@ -36,9 +36,17 @@ removal state remain unestablished. Native cleanup halt/full postflight passed;
 no new payload case ran. Seventeen prompt groups now cover current-boot TTY preservation
 and conditional cleanup of only the known exact artifacts, with independent presence/
 type/content/TTY checks. The stale receipt is inert and never imported as current
-terminal state. Twenty-eight of twenty-nine launches consumed. Full-45 rerun/readback
-at 29/30, ceiling 30, proposed and unaccepted. No reinstall/reset, production interface/
-profile or general qualification. Keep qualification/disposal in draft PR #67.
+terminal state. Approved launch 29 passed the complete 45-case VGA payload stage,
+ten actual keyboard reviews, retained postconditions and native halt/full audit.
+Independent launch 30 matched the retained inventory, then a host frame/inventory
+state collision stopped observation before READBACK submission and blocked cleanup
+observation; bounded termination was forced. Full identities/hashes/media and closure
+passed, but native halt/READBACK/full qualification remain false. Thirty of thirty
+launches consumed. A separate readback-only closure-state correction passed six host
+checks. Launch 31, ceiling 31, is proposed and unaccepted, without payload rerun or
+reinstall/reset. Keep qualification and original exact disposal together after the
+maintainer merge of PR #67; production interface/profile and general qualification
+remain pending.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
