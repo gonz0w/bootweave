@@ -33,3 +33,8 @@ back generally; recovery documentation must describe the actual remaining state.
 Initial installed systems should follow conventional OpenBSD layouts unless native
 research justifies another design. Read-only/two-image storage and full update
 orchestration are separate decisions, with product persistence implications.
+
+The next [scoped project-planner design](../design/project-plan.md) and
+[ADR 0003](../adr/0003-read-only-project-planner.md) propose the first read-only
+engine entry point. They remain unaccepted and grant no privileged backend,
+native target or general runtime/renderer adoption.

@@ -20,13 +20,14 @@ Project configuration should control branding, bounded flow choices, payloads,
 service selection and product bootstrap without forking the common installer.
 DNS, firewalls and unrelated OpenBSD applications must be expressible through the
 same reviewed extension contract. Product policy and runtime state stay with each
-product. The configuration format and extension interface are not designed yet.
+product. No project definition format or extension interface is adopted yet.
 
 ## Start here
 
 - [Accepted scope](docs/adr/0001-generic-public-foundation.md)
 - [Product requirements](docs/product/PRD.md) and [architecture](docs/architecture/baseline.md)
 - [Installer author guide](docs/configuration/author-guide.md)
+- [Proposed first read-only project planner](docs/design/project-plan.md)
 - [Security boundaries](docs/security/threat-model.md) and [debugging](docs/debugging.md)
 - [Research and decisions](docs/research/openbsd-installers.md)
 - [First native profile design](docs/design/native-profile/PRD.md) (proposed)
@@ -109,3 +110,9 @@ helpers were logically disposed; sanitized evidence and reused global tools rema
 Exact-target authority has ended. Production installer integration, runtime adoption,
 generic project/service readiness and broader hardware/profile acceptance remain
 separate decisions.
+
+The next [complete feature proposal](docs/design/project-plan.md) introduces a
+read-only `bootweave plan` entry point, original base C and a strict versioned JSON
+metadata definition. Its [runtime/contract decision](docs/adr/0003-read-only-project-planner.md)
+needs acceptance before implementation. Keep implementation, host tests, later exact
+native qualification and teardown in that same feature draft.

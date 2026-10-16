@@ -111,3 +111,9 @@ provenance, review and ADR. This PR adopts no dependency or copied upstream code
 Each implementation slice needs accepted scoped PRD/EDD/Test Design or an explicit
 bounded spike, exact allowed effects and a disposable fixture. Public contracts and
 migration rules require separate review before profile syntax is published.
+
+The [first read-only project planner](../project-plan.md) now scopes that initial
+loader/model/output implementation and proposes its exact metadata contract.
+[ADR 0003](../../adr/0003-read-only-project-planner.md) requests the associated
+runtime/format decision. Both remain proposed; the parent trust design and privileged
+interfaces are not adopted by preparing them.
