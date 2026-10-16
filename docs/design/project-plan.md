@@ -199,8 +199,10 @@ independent assertions over rejection/no-effects, with host memory/UB diagnostic
 when available; freeze tool/options and report limitations. No unbounded fuzz job
 or dependency installation. The normal host executable must retain refusal.
 
-After scope acceptance, implement the complete host-tested slice and author guide
-in this same draft. Then prepare a bounded native plan with exact source/artifacts,
+The complete host-tested slice and author guide are implemented. The
+[concrete native continuation](../testing/project-plan-native-plan.md) now binds
+source/cases/helpers and proposes one fresh exact target. Its approval is pending.
+The bounded native plan must retain exact source/artifacts,
 release/backend/firmware, fresh target identity/allowed effects, case manifest,
 commands, resource/capture limits, stop/reap and independent disposal. Obtain exact
 target approval before provisioning/launch/write; no inherited authority from #69.

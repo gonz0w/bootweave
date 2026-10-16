@@ -120,4 +120,5 @@ for this bounded feature. Run `make build test-plan`; normal host builds provide
 help/version and refuse planning outside OpenBSD. See the
 [author guide](docs/configuration/author-guide.md) and
 [host evidence](docs/testing/project-plan-host.md). Native qualification and fresh
-exact fixture approval remain pending in the implementation draft.
+exact fixture approval remain pending. The [frozen native run plan](docs/testing/project-plan-native-plan.md)
+identifies the next complete qualification gate; keep its continuation draft open.

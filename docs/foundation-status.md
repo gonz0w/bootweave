@@ -81,3 +81,8 @@ fixes, tests and later exact native qualification/teardown in one draft. A froze
 native run plan and fresh exact fixture approval are still required. No guest or
 fixture was provisioned or launched, and no disk/backend, service or network
 authority follows from this read-only contract.
+
+The [native continuation](testing/project-plan-native-plan.md) now freezes 1,401
+input/oracle cases, a portable supervisor rehearsal and an exact four-launch plan
+for one new 8 GiB target. Source-only staging is prepared; target creation, derived
+media and native execution still require the separate exact-target approval.
