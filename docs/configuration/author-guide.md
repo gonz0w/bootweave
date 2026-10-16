@@ -3,6 +3,11 @@
 Status: Design preparation. No runnable profile format or example command exists.
 This guide states the information authors will need; it is not a schema.
 
+The [first read-only project planner](../design/project-plan.md) now proposes exact
+metadata fields and a bounded command. Its definition/runtime decision is pending;
+the proposed invocation is not a working quick start. All of its fields would be
+public display metadata, never a place for credentials or private operator data.
+
 ## Prepare a project definition
 
 Describe your application, support owner, license and source provenance. Select

@@ -60,3 +60,18 @@ host regression groups and an
 [authenticated format review](research/payload-source-findings.md). Payload trust,
 extraction, public project syntax and production installer adoption remain separate
 decisions; no new native run or writable target was prepared by this work.
+
+## Installed-payload completion and first engine entry point, 2026-10-15
+
+The [installed-target slice](research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15)
+completed 1068 required native checks and original exact disposal. Its targets and
+helpers are gone, sanitized evidence remains and target authority has ended. This
+completed bounded research does not itself adopt the runtime or project format.
+
+The next [complete feature proposal](design/project-plan.md) scopes a real read-only
+`bootweave plan` loader/model/output entry point under issue #5. It proposes original
+base C and a strict version-1 JSON metadata definition in
+[ADR 0003](adr/0003-read-only-project-planner.md). This first durable contract requires
+acceptance before implementation. Keep its scope, implementation, tests and later
+exact native qualification/teardown in one draft. No new guest/fixture, disk/backend,
+service or network authority is granted by this preparation.
