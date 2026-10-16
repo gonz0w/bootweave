@@ -1,25 +1,27 @@
 # Installed payload native progress and discovery decision
 
-2026-10-15. **Partial qualification; installed-root placement remains unqualified.**
-All 976 required build regressions, 46 installed serial cases and the complete
-45-case VGA payload stage passed. Launch 29 completed actual keyboard reviews,
-fresh confirmations, exact TTY restoration, independent retained inventory/content,
-native clean halt and full integrity/closure. The independent launch 30 repeated
-native prerequisites/kernel closure and observed the same retained inventory as 29.
-Before READBACK submission, its host controller overwrote previous-frame state with
-the retained-inventory dictionary. The next screen observation raised KeyError; the
-same collision blocked cleanup observation, requiring bounded forced termination.
-READBACK, native clean halt and complete VGA qualification remain false. All original
-identities, full hashes/media, credential exclusion and process/handle closure passed;
-the unclean original image remains quarantined. Thirty of thirty launches consumed.
+2026-10-15. **The accepted installed-root research slice is complete.** All 1068
+required native checks passed: 976 build regressions and 46 installed cases on each
+of serial and keyboard/VGA. Both consoles cover dynamic/static automatic and actual
+console review, fresh confirmation, refusal/partial-state cases, retained placement
+and independent later readback. Six revised variants were built from frozen source
+35238a1a7afd9d53518671b66baca0fc6ccd010f under OpenBSD base clang 19.1.7.
 
-The corrected readback-only controller owns frame state in a private closure. Six
-host checks reproduce the old failure and exercise corrected observation/submission,
-cleanup availability, global-name collision isolation and inventory/prompt refusal.
-These are host checks, not native qualification. A single cold-boot readback at 31,
-ceiling 31, is proposed and unaccepted; no payload rerun, reinstall/reset or new media.
-Keep qualification, fixes and original exact disposal in this continuation after the
-maintainer merge of PR #67. Earlier stopped attempts remain separate and unqualified.
+Launch 29 qualified all 45 VGA payload-stage cases. After launch 30's host-state
+failure before READBACK submission, approved readback-only launch 31 repeated native
+prerequisites, matched launch 29's retained inventory, passed READBACK/resources/TTY
+and matched the after inventory. Native unmount/sync/halt, worker/kernel closure,
+full original target/media hashes and absence of handles/mounts passed. Thirty-one
+of thirty-one accepted launches were consumed. No reinstall/reset or payload rerun
+was added by the final continuation; earlier failed/stopped gates remain false.
+
+The original three disks, owned media/staging/credentials/raw captures/receipts,
+194 exact source/compiled helpers and nineteen temporary preparation helpers were
+logically disposed. Independent absence checks passed; reused global tools remain.
+Sanitized evidence survives, and exact-target authority has ended. Logical disposal
+is not physical erasure or rollback. This qualifies only the accepted OpenBSD 7.9
+amd64 BIOS/TCG research fixture on serial/headless keyboard-VGA; Cocoa/physical
+hardware, parent installer acceptance and production runtime adoption remain separate.
 
 The following serial checkpoint is historical, before VGA continuation.
 This continues the [accepted complete slice](installed-payload-flow.md) in
@@ -1475,3 +1477,117 @@ the original exact fixture and helpers be logically disposed. Thirty launches ar
 consumed. Proposal SHA-256
 d4961d421e63725a63748c2f663d9b1ff448da8606376a748596a09cb5d093e5;
 no acceptance, new phase freeze, guest or deletion has run.
+
+
+## Accepted independent-readback continuation, 2026-10-15
+
+Cam accepted the single readback-only launch 31, ceiling thirty-one, followed only
+after complete native qualification by original exact disposal. PR #68 was
+maintainer-merged before this continuation, with its tree equal to the reviewed
+candidate. Keep this continuation together on codex/vga-readback-final.
+
+Fresh full original target/media hashes, identities, host pins, helper hashes and
+closure passed. Acceptance SHA-256:
+73d50e21465c291edce51cc93bbb0c17a9cedfad607235a8ea88ed0ed83f8381;
+launch-31 helper/argument/host-pin freeze:
+8be1050a9a23fa30a32d9195fba992e9189469e251fb5f5b30f4d3a24741a1d4.
+Earlier false gates remain false; acceptance does not establish READBACK or disposal.
+
+## Completed independent readback and exact disposal, 2026-10-15
+
+Approved launch 31 used the same exact original disk after the unclean launch-30
+stop, without reinstall/reset or a payload rerun. Stock automatic boot checks reached
+the fresh native login. Runtime and verifier hashes, all six executable modes, AHCI/
+sole-disk namespace, whole/root raw labels, root binding, worker absence and matching
+kernel copies passed. The independent before inventory, full content and canary
+matched qualified launch 29.
+
+The corrected closure-owned frame observer then submitted READBACK once. Native
+READBACK passed without a payload writer/member rewrite or reused confirmation.
+Exit zero and exact TTY restoration/receipt removal passed. Native time was
+0.17 real / 0.02 user / 0.12 system seconds, with 424 KiB maximum RSS. After inventory
+equalled both before and launch 29, including original root/parent/canary identities,
+retained bytes, owners/modes and exact path set. Prehalt worker/kernel-copy closure,
+absent TTY receipts and native unmount/sync/halt passed. Guest/client/awake lease
+were reaped at 744.108 seconds. No exception, forced stop, QMP timeout/recovery/sample,
+manual repair, extra boot or new artifact export occurred.
+
+Closed qualified audit SHA-256:
+f670e1dd3bce6602824f7be22d4c0258d77b7a9a513175dde8dd48fabe2635ab.
+Final original VGA image SHA-256:
+56ccc593476b5fba819eeba94ab91d2b5c9fb0364ee097dc631d37bc275a9948;
+allocated bytes 2019278848. All original identities/modes/links, both complete media
+hashes, credential exclusion and absence of owned handles/mounts passed. The six
+host correction checks remain host evidence; native success is established by this
+separate launch. Earlier partial/stopped attempts are not counted as additional
+required passes and their false gates remain false.
+
+| Required native qualification | Passed |
+|---|---:|
+| Serial build regressions | 488 |
+| Keyboard/VGA build regressions | 488 |
+| Installed serial, including later readback | 46 |
+| Installed keyboard/VGA, including later readback | 46 |
+| Total required | 1068 |
+
+### Final source and artifact identities
+
+All twelve binary/map artifacts below bind source
+35238a1a7afd9d53518671b66baca0fc6ccd010f. Native compiler/linkage and
+full framed export observations are recorded in the earlier raw-partition build
+section. Original added C/header bytes remain 16369 under 16384. No C/header,
+exported native binary, sealed media, compiler, signing pair or dependency change
+was introduced for this final readback. Stock kernel relinking completed and its
+installed/relink copies matched.
+
+| Native artifact | Bytes | SHA-256 |
+|---|---:|---|
+| auto-dynamic | 93184 | f4b89bf6e4b91458399cd7b9305905e75bc2876f12db191f5a17f98fa4fbcb7a |
+| auto-dynamic.map | 35576 | 4163849dc7a6056fa337d5719acd40f3a9fc1aacc7ee5eb20a98e237cbcc1cfa |
+| auto-static | 958928 | 644755734e9c60bcd149770263331bd7634c37902b2ec01ac2f79655859e177a |
+| auto-static.map | 313104 | 4254dbeff9fb978e1cfce9494aa086b071a20d53ac939bdf72ad800d165f42c9 |
+| manual-dynamic | 89176 | 45504a2cf87d9ab6913be47afe4aca57b1660cfd7667da134d5362efd7806bf5 |
+| manual-dynamic.map | 35307 | d048736ef3566ac0187953aa34e0929bfb89cb2f9987c00f937a93298d5c4323 |
+| manual-static | 943656 | 7ea6707bd150ce0802e4c110cf334c6cdd2399235a7159a8c02eb570901e46ce |
+| manual-static.map | 308900 | 891b11672c90340bd1d7463ffd2d995a035e789d0b78cbbe38ebffdca31ed34a |
+| KEEP | 943624 | 971c7a2e26857c153148e2802bd5708b9ff614172cd735ea760e17561bb79c7d |
+| KEEP.map | 308829 | ac4eb98656e09d0de14a859fece8e490485a6b0923bcca23c1c85bbda7f98a86 |
+| READBACK | 939456 | fcfc272c9414de3b5c39c30f1c7f14378337f8248feecb80507d080ab7819687 |
+| READBACK.map | 308557 | 80747e518e4aac675f165b598753daabcba81a3c4d67851058680b88229cfd6c |
+
+The final complete 8 GiB target hashes were checked before disposal:
+
+| Original target | Final SHA-256 |
+|---|---|
+| build.raw | 6c5fc4f5a2d07d4067c35f1c77de2ef58c44691d33fe9b422e2ec85bc95dc592 |
+| serial-target.raw | 2964e99af1a1eedbd1bda1dca5853a5c6744b427a219d1d10ea3b9de4a7c0021 |
+| vga-target.raw | 56ccc593476b5fba819eeba94ab91d2b5c9fb0364ee097dc631d37bc275a9948 |
+
+Handoff and runtime media hashes remain
+607f1cc73a90402e5a02889b1bdc79c29dc8f67176086be38beffe218422f624 and
+a0eedff80d5d23b24bc596e55cc3c42f9b96427fa98a55443f6055dd529fc7e5,
+respectively. Final measured allocation/capture/export were
+13953040384/2315525/972121651 bytes, below the original 20 GiB/10 MiB/1 GiB bounds.
+Native build fixture/media measurements remain 17016/678234 KiB, below 20 MiB/3 GiB.
+
+### Observed exact teardown and authority end
+
+The frozen conditional disposer rechecked all required serial/build/key-absence,
+VGA payload/readback/inventory, native halt, complete integrity and closure gates.
+It bound the original fixture-root identity and each exact helper identity/hash,
+then removed only the three original disks and their owned media/staging, credential,
+input, raw capture, screen and receipt files. It also removed 168 exact source
+helpers, 26 proven compiled copies and nineteen enumerated temporary preparation
+helpers. Independent absence checks passed for the fixture root and all 194 source/
+compiled helpers. Reused release inputs, verifier/key-review tooling, development
+environment and global native guards remain.
+
+Private exact disposal-manifest SHA-256:
+350cf072380390a83022c13eeffb3ea9f7b9304c0cf4fe66dd6b12e3e608d96c.
+Sanitized final completion/disposal receipt SHA-256:
+cfdce6af879458e221383fe2e06ab1b570281d8436d2e772387ab9879650ccec.
+No credential, PID, private inode inventory or raw transcript is retained in this
+public evidence. Logical disposal is observed, not physical erasure or rollback.
+Exact-target authority has ended. This completes the accepted bounded research
+slice; production interfaces, generic project/service readiness, parent PTT cases
+and Cocoa/physical-hardware qualification remain unqualified.

@@ -1,52 +1,20 @@
 # Installed-target payload research
 
-Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md),
-kept with scope, fixes, tests, native qualification and teardown in one follow-up draft after maintainer merges of PR #52/#53/#54/#55/#56/#57/#58/#59/#60/#61/#62/#63/#64/#65/#66/#67.
-[Native progress](../../docs/research/installed-payload-native-progress.md) records
-compiler provisioning, six revised entry builds, 976 serial/VGA regressions and all
-46 installed serial cases, including later readback.
-The installed disk namespace adjustment is accepted. Recovery and bounded range
-export completed with native clean halt and full ISO readback. Stock installation
-and cold OS boot on the serial target passed. The accepted raw-partition replacement
-passed serial qualification. The accepted VGA observer retry passed confirmation and
-native input checks, then stock extraction panicked. Its partial state was held
-for the reviewed recovery sequence. The corrected stock-only AHCI control
-passed both listings/native halt. After an earlier failed Cocoa observation attempt,
-the accepted headless handoff preflight passed native verification, two listing-only
-passes and native clean halt. The approved original-file reset completed with the
-full zero hash/zero allocation. After the earlier preboot observer stop, launch 24
-completed native confirmation/input verification, offline stock installation,
-foreground relink/configuration and native halt/full integrity/closure. Cold boot 25
-reached the actual ttyC0 getty page; its host observer expected the wrong login text.
-Qualification stopped before any runtime/payload input. Cleanup-only root login/
-sync/halt and owned closure passed, without a worker/kernel-copy agreement claim.
-First-boot changes remain on the same original target; no reinstall or reset occurred.
-The corrected launch 26 passed native login/runtime/root binding, worker absence,
-matching kernel copies and 34 automatic VGA cases. The 28-line first manual review
-scrolled beyond the 25-row display; its host guard stopped before any answer or
-confirmation. Forced cleanup, full hashes/identities and owned closure are recorded;
-no native halt, manual case or complete installed qualification is claimed.
-Approved launch 27 then proved native scrollback, current-page return and exact TTY
-restoration after native prerequisites/kernel closure. Its fixture guard required
-nobody, but the actual stopped case was root-owned; it refused before content checks,
-cleanup or payload entry. Native cleanup halt and full postflight passed. The cause
-of ownership is unestablished. Approved launch 28 passed exact observed metadata, native types, full canary hash
-and four-path inventory. Its cleanup marker was absent; the failing predicate and
-removal state remain unestablished. Native cleanup halt/full postflight passed;
-no new payload case ran. Seventeen prompt groups now cover current-boot TTY preservation
-and conditional cleanup of only the known exact artifacts, with independent presence/
-type/content/TTY checks. The stale receipt is inert and never imported as current
-terminal state. Approved launch 29 passed the complete 45-case VGA payload stage,
-ten actual keyboard reviews, retained postconditions and native halt/full audit.
-Independent launch 30 matched the retained inventory, then a host frame/inventory
-state collision stopped observation before READBACK submission and blocked cleanup
-observation; bounded termination was forced. Full identities/hashes/media and closure
-passed, but native halt/READBACK/full qualification remain false. Thirty of thirty
-launches consumed. A separate readback-only closure-state correction passed six host
-checks. Launch 31, ceiling 31, is proposed and unaccepted, without payload rerun or
-reinstall/reset. Keep qualification and original exact disposal together after the
-maintainer merge of PR #67; production interface/profile and general qualification
-remain pending.
+Original removable C under the [accepted complete slice](../../docs/research/installed-payload-flow.md).
+[Completed native evidence](../../docs/research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15)
+records six revised variants and all 1068 required checks: 976 build regressions plus
+46 installed serial and 46 installed keyboard/VGA cases. Native full review/fresh
+confirmation, root binding, refusal/partial-state cases, retained placement and
+independent later readback passed. Launch 29 qualified the full VGA payload stage;
+readback-only launch 31 completed later observation after the recorded host-state
+failure at 30. Earlier failed/stopped attempts remain separate and unqualified.
+
+The original three targets, owned media/staging/credentials/raw captures/receipts and
+exact helpers were logically disposed after native clean halts, full hashes and
+process/handle closure. Sanitized evidence and reused global tools remain; exact-
+target authority has ended. This is bounded OpenBSD 7.9 amd64 BIOS/TCG research on
+serial/headless keyboard-VGA. Production interfaces/runtime adoption, generic project
+readiness, parent acceptance and Cocoa/physical hardware remain separate decisions.
 
 Ordered fixed diagnostic labels identify capture/preflight refusals without
 weakening the checks or selecting operations; numeric errno is advisory.
@@ -61,7 +29,8 @@ installed sd0a FFS root to its authorized case. It refuses missing or changed
 bindings before member dispatch and observes the binding after placement. The
 original confined nobody writer and independent inventory oracle remain in use.
 
-The raw-partition binding replacement and sixteen-launch ceiling are accepted.
+The raw-partition binding replacement and amended final thirty-one-launch ceiling
+were accepted; qualification and exact teardown are complete.
 Named block metadata binds inode, complete mode, group, link count and flags;
 it does not claim a held mounted-block descriptor or physical/hotplug qualification.
 All original mount, label, namespace, destination and confirmation gates remain.
