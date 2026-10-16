@@ -16,8 +16,9 @@ No parser/library/runtime dependency was added. `make build` uses base `cc` with
 no test bypass. Test-only entry points and IO fault interposition live in `tests/`.
 
 Observed host: macOS ARM64, Apple clang 21.0.0 (clang-2100.3.20.102), Python 3.14.7.
-`make build test-plan` builds the normal executable and portable harness. Fourteen
-unittest groups passed. These groups contain multiple independently asserted cases:
+`make build test-plan` builds the normal executable and portable harness. Seventeen
+unittest groups passed: fourteen planner groups and three native-preparation
+tooling groups. These groups contain multiple independently asserted cases:
 
 - 576 successful combinations: all 24 root orders and eight child-order
   combinations for each of three unrelated viewer/DNS/firewall definitions.
@@ -43,6 +44,24 @@ unittest groups passed. These groups contain multiple independently asserted cas
   `-fsanitize=address,undefined -fno-omit-frame-pointer -g`. Options are
   `ASAN_OPTIONS=detect_leaks=0:halt_on_error=1` and
   `UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=0`. Leak checking is not claimed.
+
+The [native preparation](project-plan-native-plan.md) adds a deterministic 1,401-case
+manifest and a trusted C supervisor. On the host, that supervisor passed 2,802 corpus
+executions against the portable driver under both binary names, 30 descriptor/output
+cases, two trace-case executions and four PTY console commands. Exact terminal
+attributes/geometry were restored. Changed canary and wrong-output controls rejected;
+a stalled child was killed/reaped by the independent seven-second guard. The host
+copies do not qualify native dynamic/static linkage. Native build/run/compiler/probe
+tools retain host refusal. Fixed argument previews and sealed source closure also
+passed; no target, derived media or guest was created. The production confinement
+function was moved unchanged to `src/native.c` for shared native probes; it has no
+test selectors or bypass. Runtime C/headers now total 14,070 bytes.
+
+The first rehearsal found Darwin's kernel-owned first-write flag changing a pipe's
+F_GETFL result. The supervisor now writes/drains one owned staging byte before
+recording the exact flag baseline; it masks no flags. A negative-control assertion
+was corrected to expect the actual content/identity diagnostic. These were host
+harness corrections before any native authority, not native successes or failures.
 
 The resource timer restores its required signal dispositions and unblocks those
 signals before arming a single nonrenewing timer. It does not change terminal

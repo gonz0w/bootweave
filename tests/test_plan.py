@@ -17,34 +17,7 @@ import time
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = {
-    "schema_version": 1,
-    "project": {"id": "offline-viewer", "name": "Offline Viewer"},
-    "system": {"release": "7.9", "architecture": "amd64"},
-    "payload": {"file": "absent.tar", "sha256": "a" * 64},
-}
-
-
-def encode(model):
-    return json.dumps(model, separators=(",", ":")).encode("ascii")
-
-
-def expected(model):
-    return (
-        "UNVERIFIED PROJECT PLAN - NO OPERATIONS AUTHORIZED\n"
-        "Definition syntax: validated\n"
-        f"Project ID (supplied): {model['project']['id']}\n"
-        f"Project name (supplied): {model['project']['name']}\n"
-        f"Requested release (supplied): {model['system']['release']}\n"
-        f"Requested architecture (supplied): {model['system']['architecture']}\n"
-        f"Payload file (unverified): {model['payload']['file']}\n"
-        f"Claimed SHA-256 (unverified): {model['payload']['sha256']}\n"
-        "Payload access: not opened\n"
-        "Target: unselected; no device identity collected\n"
-        "Operations authorized: none\n"
-        "Operations performed: none\n"
-        "Operations independently observed: none\n"
-    ).encode("ascii")
+from plan_cases import BASE, encode, expected
 
 
 class PlannerTests(unittest.TestCase):
@@ -58,7 +31,8 @@ class PlannerTests(unittest.TestCase):
         cls.unit = cls.directory / "unit"
         cls.flags = ["cc", "-std=c99", "-Wall", "-Wextra", "-Werror", "-pedantic",
                      "-O2", "-I", str(ROOT / "src")]
-        cls.core = [str(ROOT / "src/plan.c"), str(ROOT / "src/plan_io.c")]
+        cls.core = [str(ROOT / "src/plan.c"), str(ROOT / "src/plan_io.c"),
+                    str(ROOT / "src/native.c")]
         for entry, output in [("tests/plan_driver.c", cls.driver),
                               ("src/main.c", cls.production),
                               ("tests/plan_unit.c", cls.unit)]:

@@ -19,6 +19,7 @@ struct bw_plan {
 int bw_parse(const unsigned char *, size_t, struct bw_plan *, size_t *);
 int bw_validate(const struct bw_plan *);
 int bw_render(const struct bw_plan *, char *, size_t, size_t *);
+int bw_confine(void);
 int bw_start(void);
 int bw_write(int, const char *, size_t);
 int bw_run(void);
