@@ -1,6 +1,7 @@
 # Architecture direction
 
-Status: Proposed. No runtime interfaces or configuration grammar are adopted.
+Status: Broader installer architecture proposed. The read-only metadata planner
+is the first narrowly adopted runtime/definition contract.
 
 Separate media construction, configuration/flow presentation, privileged install
 operations and product bootstrap. A project author supplies reviewed configuration
@@ -34,7 +35,8 @@ Initial installed systems should follow conventional OpenBSD layouts unless nati
 research justifies another design. Read-only/two-image storage and full update
 orchestration are separate decisions, with product persistence implications.
 
-The next [scoped project-planner design](../design/project-plan.md) and
-[ADR 0003](../adr/0003-read-only-project-planner.md) propose the first read-only
-engine entry point. They remain unaccepted and grant no privileged backend,
-native target or general runtime/renderer adoption.
+The accepted [scoped project-planner design](../design/project-plan.md) and
+[ADR 0003](../adr/0003-read-only-project-planner.md) adopt the first read-only
+engine entry point and metadata grammar. Host implementation does not qualify its
+native confinement or grant a privileged backend, native target or general
+runtime/renderer adoption.
