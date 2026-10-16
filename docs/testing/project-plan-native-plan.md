@@ -3,7 +3,9 @@
 Status: **Accepted, 2026-10-16.** Owner: Cam.
 Cam replied “continue” after the explicit PR #72 exact-new-8-GiB/four-launch
 approval question, including the documented disposable credential limitation.
-Source/helper bindings remain unchanged. Native results and teardown are pending.
+Source/helper bindings remain unchanged. Launch 1 stopped before installation;
+the [failure evidence and proposed five-launch continuation](project-plan-native-progress.md)
+require review. The accepted four-launch ceiling is not silently increased.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research

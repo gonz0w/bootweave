@@ -201,7 +201,9 @@ or dependency installation. The normal host executable must retain refusal.
 
 The complete host-tested slice and author guide are implemented. The
 [concrete native continuation](../testing/project-plan-native-plan.md) now binds
-source/cases/helpers and proposes one fresh exact target. Its approval is pending.
+source/cases/helpers and identifies the approved fresh exact target. Its first launch
+[stopped before installation](../testing/project-plan-native-progress.md); the
+proposed recovery requires review under the accepted first-failure rule.
 The bounded native plan must retain exact source/artifacts,
 release/backend/firmware, fresh target identity/allowed effects, case manifest,
 commands, resource/capture limits, stop/reap and independent disposal. Obtain exact

@@ -119,6 +119,7 @@ Its [runtime/contract decision](docs/adr/0003-read-only-project-planner.md) is a
 for this bounded feature. Run `make build test-plan`; normal host builds provide
 help/version and refuse planning outside OpenBSD. See the
 [author guide](docs/configuration/author-guide.md) and
-[host evidence](docs/testing/project-plan-host.md). Native qualification and fresh
-exact fixture approval remain pending. The [frozen native run plan](docs/testing/project-plan-native-plan.md)
-identifies the next complete qualification gate; keep its continuation draft open.
+[host evidence](docs/testing/project-plan-host.md). Exact native fixture approval was
+received; the [first launch stopped before installation](docs/testing/project-plan-native-progress.md).
+Native qualification remains pending. The [frozen native run plan](docs/testing/project-plan-native-plan.md)
+and concrete recovery proposal belong in the same open continuation draft.
