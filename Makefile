@@ -1,4 +1,17 @@
-.PHONY: tools hooks check lint test test-ui test-storage test-handoff test-payload secrets verify
+.PHONY: tools hooks check lint test test-ui test-storage test-handoff test-payload test-plan build secrets verify
+
+CC = cc
+CFLAGS = -O2 -std=c99 -Wall -Wextra -Werror -pedantic
+PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c
+
+build: bin/bootweave
+
+bin/bootweave: $(PLAN_SOURCES) src/plan.h
+	mkdir -p bin
+	$(CC) $(CFLAGS) -Isrc $(PLAN_SOURCES) -o $@
+
+test-plan:
+	.tools/venv/bin/python3 -m unittest discover -s tests -v
 
 tools:
 	python3 tools/bootstrap-tools.py
@@ -30,4 +43,4 @@ test-payload:
 secrets:
 	.tools/bin/gitleaks dir --redact --no-banner --config .gitleaks.toml .
 
-verify: check lint test test-ui test-storage test-handoff test-payload secrets
+verify: check lint test test-ui test-storage test-handoff test-payload test-plan secrets

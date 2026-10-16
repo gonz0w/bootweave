@@ -1,10 +1,12 @@
 # ADR 0003: base-C read-only project planner
 
-Status: **Proposed, 2026-10-15.** Decision owner: Cam.
-Acceptance date/source: pending. Related [scoped PRD/EDD/Test Design](../design/project-plan.md)
+Status: **Accepted for this planner, 2026-10-15.** Decision owner: Cam.
+Acceptance source: Cam's continuation after the explicit PR #70 scope/ADR approval
+request. Native qualification and exact fixture approval remain pending.
+Related [scoped PRD/EDD/Test Design](../design/project-plan.md)
 and [issue #5](https://github.com/gonz0w/bootweave/issues/5).
 
-## Problem and proposed decision
+## Problem and decision
 
 The installed-root research completed 1068 native checks and exact disposal, but
 project authors still have no engine entry point. The research uses compiled
@@ -12,7 +14,7 @@ synthetic fixtures; it does not adopt a runtime, project definition or public AP
 The next useful step is a real read-only loader/planner with a deliberately small
 input contract, before attaching any write backend.
 
-Propose original base C99 and OpenBSD base libc for `bootweave plan`, with the
+Adopt original base C99 and OpenBSD base libc for `bootweave plan`, with the
 version-1 restricted JSON definition in the scoped design. The planner reads a
 bounded regular read-only standard-input file, validates metadata and emits a
 plain-text unverified plan. It opens no payload/device path and grants no authority.
@@ -37,8 +39,9 @@ policy. The schema is intentionally smaller than the JSON value space. Implement
 the reader originally under BSD-3-Clause; copy no external parser/code or RFC code
 components. The native libc/API use adds no bundled library or capability database.
 
-Native confinement is a proposed checked combination of base pledge/unveil, limits
-and descriptor discipline, not a host stub or a claim of whole-session confinement.
+Native confinement is an accepted design requiring separate native evidence: a
+checked combination of base pledge/unveil, limits and descriptor discipline, not a
+host stub or a claim of whole-session confinement.
 No target provisioning or native execution follows from accepting this ADR; the
 same feature draft must present its concrete implementation and exact native plan.
 
@@ -57,8 +60,9 @@ native support. The ASCII and regular-file input limits are visible compatibilit
 limits, not silent fallback behavior. The planner cannot install or validate an
 artifact merely because its project definition parsed.
 
-Approval accepts this runtime/definition choice and implementation/host-test scope.
-After approval, build in the same draft; review a larger contract change or the
+Acceptance covers this runtime/definition choice and implementation/host-test scope.
+Build in the same draft; review a larger contract change or the
 fresh exact native target separately. Removing this planner requires no service,
-network or product-state migration; no persistent state is introduced. Until
-acceptance, existing proposed architecture and no-public-grammar status remain.
+network or product-state migration; no persistent state is introduced. Adoption is
+limited to this read-only metadata planner; the broader installer architecture
+remains proposed.

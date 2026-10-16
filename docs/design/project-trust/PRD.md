@@ -6,6 +6,10 @@ Status: Proposed, 2026-10-11. Owner and acceptance authority: Cam.
 This scope defines proposed boundaries, not configuration syntax or permission to
 implement or execute privileged operations.
 
+The narrower [read-only metadata planner](../project-plan.md) is now accepted and
+implemented with portable host evidence. Its limited version-1 definition does not
+adopt the broader profile, extension or privileged-operation contracts below.
+
 ## Author and operator outcomes
 
 Independent OpenBSD projects can supply branding, bounded questions, verified

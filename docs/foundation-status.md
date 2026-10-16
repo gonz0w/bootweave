@@ -68,10 +68,16 @@ completed 1068 required native checks and original exact disposal. Its targets a
 helpers are gone, sanitized evidence remains and target authority has ended. This
 completed bounded research does not itself adopt the runtime or project format.
 
-The next [complete feature proposal](design/project-plan.md) scopes a real read-only
-`bootweave plan` loader/model/output entry point under issue #5. It proposes original
-base C and a strict version-1 JSON metadata definition in
-[ADR 0003](adr/0003-read-only-project-planner.md). This first durable contract requires
-acceptance before implementation. Keep its scope, implementation, tests and later
-exact native qualification/teardown in one draft. No new guest/fixture, disk/backend,
-service or network authority is granted by this preparation.
+Cam accepted the [read-only planner scope](design/project-plan.md) and
+[ADR 0003](adr/0003-read-only-project-planner.md) after PR #70's explicit review
+request. Original base C now implements `bootweave plan`, a strict version-1 JSON
+metadata reader, typed model and complete unverified plaintext output. The
+[host evidence](testing/project-plan-host.md) records fourteen portable groups,
+including sanitizers and descriptor/output failure cases. Production host planning
+refuses; native privilege/confinement, console and resource qualification is pending.
+
+PR #70 was merged before implementation. Keep the implementation continuation,
+fixes, tests and later exact native qualification/teardown in one draft. A frozen
+native run plan and fresh exact fixture approval are still required. No guest or
+fixture was provisioned or launched, and no disk/backend, service or network
+authority follows from this read-only contract.

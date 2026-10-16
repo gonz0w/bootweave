@@ -1,13 +1,16 @@
 # First project definition and read-only planner
 
-Status: **Proposed, 2026-10-15.** Owner and acceptance authority: Cam.
+Status: **Accepted for implementation and host tests, 2026-10-15.** Owner and acceptance authority: Cam.
 Scoped PRD, EDD and Test Design for issue [#5](https://github.com/gonz0w/bootweave/issues/5).
-Acceptance date/source: pending. Related runtime decision: [ADR 0003](../adr/0003-read-only-project-planner.md).
+Acceptance source: Cam's “continue” after the explicit scope/ADR approval request
+in PR #70; confirmed by the following continuation. Native target authority remains
+separate. Related runtime decision: [ADR 0003](../adr/0003-read-only-project-planner.md).
 This is the next complete feature after the
 [installed-payload qualification](../research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15).
-It introduces proposed interfaces for review; they are not implemented or adopted.
+It adopts the bounded metadata/runtime contract below for this planner only.
+Implementation and portable host checks are complete; native qualification is pending.
 
-## PRD: outcome and accepted-work request
+## PRD: outcome and accepted work
 
 An independent author can supply a small project definition and obtain a complete,
 plain-text candidate plan from `bootweave plan`. The result clearly distinguishes
@@ -15,7 +18,7 @@ validated definition syntax from unverified claims, unselected targets and absen
 effects. This establishes an engine entry point usable by unrelated projects before
 connecting the existing installer/payload mechanisms.
 
-Approval requested: original base-C implementation, the exact version-1 definition
+Accepted scope: original base-C implementation, the exact version-1 definition
 below, portable parser/model/output tests, a production CLI that refuses unsupported
 hosts/elevated execution, build integration and author documentation. Keep design,
 implementation, fixes, native qualification and evidence in this one feature draft.
@@ -44,11 +47,11 @@ bootstrap, persistent receipts, resume or a public privilege protocol. Its plan 
 not an executable request and cannot be submitted to a write backend. Existing
 research code is evidence and remains separate; no bulk promotion into the engine.
 
-## EDD: proposed public contract
+## EDD: accepted public contract
 
 ### Command and input
 
-The proposed invocation is `bootweave plan < project.json`. The caller opens the
+The invocation is `bootweave plan < project.json`. The caller opens the
 input; the planner accepts standard input only when fstat identifies a regular file
 and F_GETFL identifies a read-only descriptor at initial offset zero. Reject
 terminal, pipe, FIFO, socket,
@@ -66,8 +69,10 @@ additional overflow/EOF probe byte. Any extra byte rejects before parsing. Valid
 the entire copied definition, including trailing bytes, before rendering.
 Compare held-input size/mtime/ctime before/after reading and refuse observed changes.
 This is a validated byte snapshot, not a claim of atomic file publication or future
-freshness. Close the input descriptor before parsing. No file is reopened, and no
-authorization can depend on the input path or inode.
+freshness. Close the input descriptor before parsing. Regular-file output aliases
+of the input inode are refused silently before reading or diagnostics, so an error
+cannot append to the held definition. No file is reopened, and no authorization
+can depend on the input path or inode.
 
 ### Version-1 definition
 
@@ -155,7 +160,7 @@ native tests must establish the selected combination. Pledge's libc-internal
 exceptions and caller-owned output descriptors prevent a claim that the whole user
 session or every possible descriptor operation is sandboxed.
 
-Proposed per-invocation ceilings: 16 KiB input, 2 KiB typed model, 4 KiB plan output,
+Accepted per-invocation ceilings: 16 KiB input, 2 KiB typed model, 4 KiB plan output,
 256-byte diagnostics, depth two/ten members; 16 MiB DATA and measured RSS, 2 MiB
 STACK, eight-descriptor limit, CORE=0 and FSIZE=8 KiB. CPU limit two seconds and
 whole wall-clock deadline five seconds from CLI work entry, including read/output;
@@ -172,8 +177,9 @@ device, configuration, log or other path and creates no child process or socket.
 ## Test Design and delivery gates
 
 Each row below is a required group, with enumerated fixtures/cases frozen before
-qualification. These are proposed tests, not results. Use an independent expected
-model/text oracle; do not derive expected validity/output from the C implementation.
+qualification. These are required tests; the
+[host evidence](../testing/project-plan-host.md) records the implemented subset
+separately from pending native cases. Use an independent expected model/text oracle; do not derive expected validity/output from the C implementation.
 
 | ID | Required stimuli and independent evidence |
 |---|---|
@@ -202,7 +208,6 @@ Freeze cases, oracles and helper hashes before native execution. Unexpected fail
 stop dependent work; no automatic retry, scope expansion or deadline reset.
 
 Only mark ready after all required native groups and local verification pass and
-owned native fixtures are disposed. Record accepted contracts as accepted, with
-actual date/source; until then the grammar/runtime remain proposed. This slice
-advances PT-01/02/06/07/09/10 and INST-02/03/07/09/10 but does not close the broader
+owned native fixtures are disposed. Contract acceptance does not establish native
+qualification. This slice advances PT-01/02/06/07/09/10 and INST-02/03/07/09/10 but does not close the broader
 project-trust, UI, native-profile or full installer acceptance issues.

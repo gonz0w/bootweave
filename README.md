@@ -4,9 +4,10 @@ A configurable, text-based OpenBSD installer framework for independent projects.
 BSD-3-Clause licensed; community contributions welcome. This project is independent
 of the OpenBSD project and does not imply upstream endorsement.
 
-**Status: repository foundation and bounded UI/media/storage/handoff research.** A disposable
-research image boots the synthetic UI. No production installer, configuration parser, runtime
-service, supported hardware profile or release exists yet.
+**Status: first read-only planner implementation and bounded installer research.**
+The planner has an accepted metadata contract and portable tests; OpenBSD planner
+qualification is pending. A disposable research image boots the synthetic UI. No
+production installer, runtime service, supported hardware profile or release exists yet.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
 The maintainer approved the name and public repository on 2026-10-11.
 
@@ -20,14 +21,15 @@ Project configuration should control branding, bounded flow choices, payloads,
 service selection and product bootstrap without forking the common installer.
 DNS, firewalls and unrelated OpenBSD applications must be expressible through the
 same reviewed extension contract. Product policy and runtime state stay with each
-product. No project definition format or extension interface is adopted yet.
+product. A small metadata definition is adopted for the read-only planner. Installer flow
+and extension interfaces remain separate designs.
 
 ## Start here
 
 - [Accepted scope](docs/adr/0001-generic-public-foundation.md)
 - [Product requirements](docs/product/PRD.md) and [architecture](docs/architecture/baseline.md)
 - [Installer author guide](docs/configuration/author-guide.md)
-- [Proposed first read-only project planner](docs/design/project-plan.md)
+- [First read-only project planner](docs/design/project-plan.md)
 - [Security boundaries](docs/security/threat-model.md) and [debugging](docs/debugging.md)
 - [Research and decisions](docs/research/openbsd-installers.md)
 - [First native profile design](docs/design/native-profile/PRD.md) (proposed)
@@ -111,8 +113,11 @@ Exact-target authority has ended. Production installer integration, runtime adop
 generic project/service readiness and broader hardware/profile acceptance remain
 separate decisions.
 
-The next [complete feature proposal](docs/design/project-plan.md) introduces a
-read-only `bootweave plan` entry point, original base C and a strict versioned JSON
-metadata definition. Its [runtime/contract decision](docs/adr/0003-read-only-project-planner.md)
-needs acceptance before implementation. Keep implementation, host tests, later exact
-native qualification and teardown in that same feature draft.
+The [first project planner](docs/design/project-plan.md) implements a read-only
+`bootweave plan` entry point in original base C with strict version-1 JSON metadata.
+Its [runtime/contract decision](docs/adr/0003-read-only-project-planner.md) is accepted
+for this bounded feature. Run `make build test-plan`; normal host builds provide
+help/version and refuse planning outside OpenBSD. See the
+[author guide](docs/configuration/author-guide.md) and
+[host evidence](docs/testing/project-plan-host.md). Native qualification and fresh
+exact fixture approval remain pending in the implementation draft.
