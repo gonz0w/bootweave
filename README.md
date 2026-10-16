@@ -95,42 +95,17 @@ now connects full file-effect review and fresh confirmation to that confined wri
 key cleanup, clean halts and full disposal. Earlier unqualified attempts are recorded;
 production installer integration and runtime adoption remain separate decisions.
 
-The next [complete installed-target payload slice](docs/research/installed-payload-flow.md)
-authorizes connecting confirmed stock installation, offline installed-root authorization
-and later inert-data readback on three exact fresh targets. Implementation, native
-qualification and cleanup continue in the same accepted feature draft. A read-only
-bootstrap stopped before installation; its stopped evidence is recorded, with all three targets unchanged. The maintainer
-accepted one replacement provisioning attempt and eleven total launches; remaining
-native qualification and cleanup stay together after the implementation merge.
+The [complete installed-target payload slice](docs/research/installed-payload-flow.md)
+now has [1068 required native checks and observed exact teardown](docs/research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15):
+976 build regressions and 46 installed cases each on serial and keyboard/VGA.
+Confirmed offline stock installation, installed-root authorization, full actual
+review/fresh confirmation, refusal/partial-state cases, retained placement and
+independent later readback passed under the accepted OpenBSD 7.9 amd64 BIOS/TCG
+research fixture. Native terminal/resource checks, clean halts, complete target/media
+hashes and absence of handles/mounts passed. Earlier stopped attempts remain recorded.
 
-[Installed-target native progress](docs/research/installed-payload-native-progress.md)
-records six revised native entry builds, 976 build regressions and all 46 installed
-serial cases, including later retained-payload readback. Recovery/export, persisted
-key absence and full original ISO readback passed. The raw-partition replacement
-passed serial qualification. The VGA retry passed confirmation/native input checks,
-then stock extraction panicked; its partial state was held for reviewed recovery.
-The corrected stock-only AHCI control passed both listing-only passes and native
-clean halt. After an earlier Cocoa observation failure, the accepted headless handoff
-preflight passed native verification, both tar listings and clean halt. The approved
-one-time reset preserved the original VGA identity and verified a full zero image.
-The corrected install run completed native input verification, offline stock
-installation, foreground relink/configuration, clean halt and full integrity/closure.
-Its cold OS boot then reached the normal ttyC0 login: page; a host observer expected
-the wrong prompt. Qualification stopped before payload input, followed by cleanup-only
-native login/sync/halt and verified closure. First-boot changes are preserved.
-Launch 26 passed native root/kernel closure and 34 automatic VGA cases before its
-incomplete-review observer stop. Launch 27 proved native scrollback; approved launch
-28 then passed exact stopped-fixture metadata and native type/content/canary/inventory
-checks. Its cleanup completion marker was absent, so removal remains unestablished;
-native cleanup halt and full integrity/closure passed. No new payload case ran.
-The corrected host flow preserves current-boot TTY state and treats the stale receipt
-as an inert artifact. Approved launch 29 passed the full 45-case VGA payload stage,
-including ten actual keyboard cases, retained inventory and native clean halt.
-Independent launch 30 matched that inventory, then a host frame/inventory variable
-collision stopped observation before READBACK input and blocked native halt cleanup;
-termination was forced. Full hashes/identities and closure passed, but READBACK and
-complete installed qualification remain false. Thirty of thirty launches consumed.
-A readback-only closure-state correction passed six host checks; launch 31, ceiling
-31, is proposed and unaccepted. No reinstall/reset or payload rerun. Keep completion
-and original exact disposal together after PR #67's maintainer merge. Production
-runtime/profile and hardware qualification remain pending.
+The three exact disposable disks, owned media/staging/credentials/raw captures and
+helpers were logically disposed; sanitized evidence and reused global tools remain.
+Exact-target authority has ended. Production installer integration, runtime adoption,
+generic project/service readiness and broader hardware/profile acceptance remain
+separate decisions.

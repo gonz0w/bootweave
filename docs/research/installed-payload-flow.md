@@ -1526,7 +1526,7 @@ codex/vga-tty-completion. No failed gate is promoted by acceptance.
 
 ## Observer state and independent readback — proposed, 2026-10-15
 
-Status: **Proposed; first-failure stop remains in effect.** Accepted launch 29
+Status: **Accepted by Cam on 2026-10-15; completed with observed exact disposal.** Accepted launch 29
 qualified all 45 VGA payload-stage cases, actual full reviews/fresh confirmations,
 exact TTY, retained metadata/content/canary, native halt and full integrity/closure.
 Its closed audit is ed831b4b7e9229ec0afa1fc9b14ae661593e6257cc14f984fd07245ca8437dd8.
@@ -1535,11 +1535,11 @@ matched 29. A host frame/inventory variable collision then stopped observation b
 READBACK submission. Cleanup observation failed on the same collision and termination
 was forced; clean halt and phase qualification remain false. Closed stopped audit
 58c00aeaa05ffb355a1cd401b081ff813b239b0383fb8228f2ea38e5e0656dac.
-Thirty launches are consumed under thirty. The unchanged original VGA identity now
-binds full unclean-image SHA-256
+At this amendment's starting checkpoint, thirty launches were consumed under thirty.
+The original VGA identity bound full unclean-image SHA-256
 8ef44ecf2fe100d7e8ec5ce5afa8ff0e0f51a9efa9521f3b449817eaee7dafd5.
 
-Propose ceiling **thirty to thirty-one**, one vga-frame-readback cold boot. Preserve
+Accepted ceiling **thirty to thirty-one**, one vga-frame-readback cold boot. Preserve
 29's qualified payload result; repeat native automatic boot checks, fresh actual
 login/TTY, runtime hashes/modes, AHCI/sole-disk/raw-label/root binding and independent
 worker/kernel-copy closure. Before inventory must equal 29's retained metadata,
@@ -1565,11 +1565,27 @@ kernel/key/dependency/transport/hardware change, export or diagnostic boot is ad
 Retain the same original clocks, resource/capture/export limits, sole reader and
 first-failure/recovery rules. No failed gate becomes positive by preparation.
 
-Fresh acceptance must bind complete target/media integrity and closure, qualified
+Fresh acceptance bound complete target/media integrity and closure, qualified
 payload/stopped-readback audits, host proof, inherited common-helper hashes, exact
 conditional disposer and the new phase helper/argument/host-pin freeze. Private
-unaccepted proposal SHA-256:
+accepted proposal SHA-256:
 d4961d421e63725a63748c2f663d9b1ff448da8606376a748596a09cb5d093e5.
-Preparation grants no new boot or deletion. Continue this feature in one draft after
-PR #67's maintainer merge. Complete VGA qualification and original disposal remain
-pending; no Cocoa/physical hardware, parent installer or production runtime acceptance.
+The final readback passed all required observations, native halt, full integrity and
+closure. Original exact disposal was observed and target authority has ended. Earlier
+failed gates remain false. See the completed native evidence below; Cocoa/physical
+hardware, parent installer and production runtime acceptance remain separate.
+
+Fresh acceptance SHA-256:
+73d50e21465c291edce51cc93bbb0c17a9cedfad607235a8ea88ed0ed83f8381;
+launch-31 helper/argument/host-pin freeze:
+8be1050a9a23fa30a32d9195fba992e9189469e251fb5f5b30f4d3a24741a1d4.
+PR #68 was maintainer-merged; its merged tree equals the reviewed candidate.
+Qualification and conditional exact disposal completed together on
+codex/vga-readback-final. Acceptance alone did not qualify native execution.
+
+Completed result: 1068 required native checks (976 build + 46 serial + 46 VGA),
+observed native clean halts and original exact logical disposal.
+[Final observations and artifact identities](installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15).
+Sanitized completion/disposal receipt SHA-256:
+cfdce6af879458e221383fe2e06ab1b570281d8436d2e772387ab9879650ccec.
+The accepted exact-target authority has ended.

@@ -26,49 +26,21 @@ partial state. Exact terminal gates, native key cleanup, clean halts and full di
 passed. Earlier compile/console failures remain recorded. This completes only its
 accepted research slice, with no full parent PTT or production integration claim.
 
-The [installed-root slice progress](../research/installed-payload-native-progress.md)
-records six revised native entry builds, 976 serial/VGA build regressions and all
-46 installed serial cases, including retained positive and later readback.
-The private empty-fd0 adjustment is accepted. Media export remained incomplete and
-the earlier build hard stop was followed by approved recovery/export, persisted key
-absence, native clean halt and full original ISO readback; serial stock installation
-and cold OS boot passed. The accepted raw-partition replacement passed complete
-serial qualification with clean halts/full target hashes. The accepted VGA observer
-retry passed fresh confirmation and native input checks, then stock extraction
-panicked. Earlier failed optical/Cocoa preflights remain recorded without qualification.
-The corrected stock-only AHCI control passed both listings/native halt. The later
-accepted headless handoff preflight independently passed authentication/full hashes,
-both listing-only tar passes and clean native halt, followed by all-target/media
-integrity and closure. The approved one-time original VGA reset passed full zero
-hash/zero allocation with identity preserved. The corrected launch 24 completed
-stock verification/install, foreground relink/configuration, native halt and complete
-integrity/closure. Cold boot 25 reached the actual ttyC0 login page but stopped on a
-host prompt-matching error before runtime/payload input. Cleanup-only root login/
-sync/halt and full hash/identity/closure passed; first-boot changes remain, with no
-claim of worker absence/kernel-copy agreement from launch 25. Corrected launch 26
-independently established runtime/root binding, worker absence and matching kernel
-copies, then passed 34 automatic VGA cases. The first 28-line keyboard review
-exceeded the 25-row display; the host stopped before any review answer/confirmation.
-Cleanup forced termination. All original target/media hashes, identities and owned
-closure passed, but native clean halt and full qualification remain false.
-Approved launch 27 proved native scrollback/current return/TTY agreement, then stopped
-before fixture cleanup or payload entry: observed root ownership differed from the
-prepared nobody expectation. Cleanup-only native halt and complete integrity/closure
-passed; original root/parent/canary identities match. Ownership cause unestablished.
-Approved launch 28 passed exact metadata, native types, canary/content and four-path
-inventory. Its cleanup marker was absent; exact failing predicate and removal state
-remain unestablished. Native cleanup halt and full postflight passed, without new
-payload entry. Seventeen prompt groups cover current-boot TTY preservation and only
-known optional artifacts with exact identities; stale receipt never supplies current
-TTY authority. Approved launch 29 passed all 45 VGA payload-stage cases, actual
-keyboard reviews, retained postconditions and native halt/full integrity/closure.
-Independent launch 30 matched the retained inventory, then a host state collision
-stopped before READBACK submission and blocked cleanup observation. Forced termination;
-full identities/hashes and closure passed, but native halt and qualification remain
-false. Thirty of thirty launches consumed. The readback-only closure-state correction
-passed six host checks. Launch 31, ceiling 31, is proposed and unaccepted; no payload
-rerun or reinstall/reset. Complete installed-root, Cocoa-window, physical-hardware,
-parent acceptance and original exact disposal remain pending.
+The [completed installed-root slice](../research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15)
+passed all 1068 required native checks: 976 build regressions and 46 installed cases
+each on serial and keyboard/VGA. Both consoles cover confirmed stock installation,
+installed-root review/fresh confirmation, refusal/partial-state cases, retained
+placement and independent later readback. Six revised variants, exact TTY and native
+resource checks, key absence, native clean halts, complete target/media integrity and
+process/handle closure passed. Launch 31 completed independent readback after the
+recorded launch-30 host-state failure; earlier false gates remain false.
+
+The exact original disks, owned media/staging/credentials/raw captures/receipts and
+helpers were logically disposed; sanitized evidence and reused global tools remain.
+Exact-target authority has ended. This completes the accepted OpenBSD 7.9 amd64
+BIOS/TCG research fixture on serial/headless keyboard-VGA, with thirty-one accepted
+launches consumed. Cocoa-window, physical-hardware, production integration/runtime,
+generic project/service readiness and parent acceptance remain unqualified.
 
 Local make verify checks foundation text/configuration, ShellCheck, safeguards and
 secret scanning. Every runtime/media profile additionally needs disposable native
