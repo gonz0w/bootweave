@@ -1,8 +1,9 @@
 # Read-only planner native progress
 
-Status: **Stopped at the first unexpected failure, 2026-10-16.**
-Native qualification incomplete; no installation or planner checks ran.
-Scope and exact four-launch ceiling: [accepted run plan](project-plan-native-plan.md).
+Status: **Stopped in launch 2, 2026-10-16.** Native qualification incomplete.
+Neither launch installed the system or ran planner checks. Original scope:
+[accepted run plan](project-plan-native-plan.md); the accepted five-launch recovery
+stopped at its first command failure. The six-launch proposal below is unapproved.
 Approval source: Cam's “continue” after the explicit PR #72 target/run question.
 PR #72 was merged before execution; keep this qualification continuation together.
 
@@ -35,16 +36,19 @@ CPU continuation. The stock OpenBSD/amd64 7.9 kernel observed the sole writable
 8 GiB `sd0` and both read-only optical drives. Its shell prompt was reached within
 the fifteen-minute limit. No installer disk-selection or destructive answer was sent.
 
-Keyboard transport did not preserve the submitted text: `uname -srvm` arrived as
-`umame -srvm` and failed. The subsequent CD mount failed with ENOENT, followed by
+The submitted `uname -srvm` failed because the stock ramdisk does not provide
+`uname`. **Correction to the earlier report:** enlarged inspection of the preserved
+original frame reads `uname`, not `umame`; the claimed keyboard substitution was a
+font-reading error. Launch 2 independently confirmed command unavailability. The
+subsequent CD mount failed with ENOENT, followed by
 failure to enter its release directory. Later verification text had already been
 queued before earlier command results were observed; this was an orchestration
 error. No release verification, installation, compilation or qualification success
 is inferred from queued input. All 5,868 required checks remain unrun.
 
 The private sender used 80 ms QMP key holds and 110 ms spacing; a QMP acknowledgement
-did not establish guest delivery. The transport fault's precise timing cause remains
-unproven. Separately, read-only inspection of `dev/MAKEDEV` in the already verified
+alone does not establish guest delivery, but these frames do not establish transport
+corruption. Separately, read-only inspection of `dev/MAKEDEV` in the already verified
 stock base set shows that its `ramdisk` profile includes `cd0` only and its `cd*`
 branch supports `cd1`. Missing second-drive nodes are a plausible additional cause
 of the mount error; their native absence was not observed before shutdown.
@@ -66,13 +70,16 @@ Unix endpoints and redundant PPM copies with retained lossless PNGs were removed
 The original disk, media, sources and private failure evidence remain preserved;
 no target reset, recreation, replacement or final disposal occurred.
 
-## Proposed continuation: approval required
+## Accepted continuation: launches 2–5 (stopped)
 
-The accepted first-failure rule prohibits another launch or retry without review.
-Request a total ceiling of **five launches**, counting stopped launch 1. Use the
+Cam replied “continue” after the explicit PR #73 launches 2–5 recovery question,
+including conditional stock `MAKEDEV cd1` ramdisk nodes. PR #73 was merged before
+execution. A separate exclusive private acceptance receipt binds this approval to
+the original target identity/digest, stopped failure record and corrected host helpers.
+This approval set a total ceiling of **five launches**, counting stopped launch 1. Use the
 same original zero disk identity and full digest above, unchanged sealed data CD,
 frozen sources/cases/helpers and pinned devices/tools. Do not recreate or zero it.
-Repeat all before-launch and paused audits. Proposed remaining stages are:
+Repeat all before-launch and paused audits. Accepted remaining stages are:
 
 | Launch | Stage |
 |---|---|
@@ -86,7 +93,8 @@ Return: observe the complete pending command, then submit Return separately. Che
 the resulting output/status before sending the next command. An unsubmitted line
 may be cleared and reentered once if its observed text differs; an executed command
 failure or a second input mismatch stops dependent work. Verify this procedure first
-with the fixed `uname -srvm` command. Slow shutdown entry is evidence for four
+with the fixed `uname -srvm` command. That positive prerequisite was incorrect and
+caused launch 2 to stop; it is not the proposed next probe. Slow shutdown entry is evidence for four
 characters only, not a completed transport qualification. Password entry remains
 limited to observed echo-off prompts and the previously approved disposable
 credential limitation; no credential may enter host command arguments or public captures.
@@ -103,5 +111,77 @@ the original stock-install disk confirmation gate still precedes target writes.
 
 Retain the original sixty-minute nonrenewing launch deadline, fifteen-minute prompt
 limit, forty-five-minute scheduling cutoff, resource/capture/allocation limits,
-5,868 required checks and first-failure rule. No new authority is inferred from this
-proposal. There is no automatic reinstall, reset, media/source swap or extra launch.
+5,868 required checks and first-failure rule. Authority comes from the explicit
+recovery acceptance above. There is no automatic reinstall, reset, media/source swap
+or extra launch beyond this five-launch ceiling.
+
+## Launch 2: missing stock command, diagnosis corrected
+
+Complete before-launch checks revalidated the original zero target, source bundle,
+sealed CD and all eight pins. The complete paused inventory matched launch 1 after
+accounting for generated block-node labels and the host CPU thread identifier;
+block graph edges and all device/firmware/process/handle/mount properties were checked
+independently. The native installer prompt was observed at 152.491 elapsed seconds.
+
+With 800 ms spacing, the complete pending `uname -srvm` was observed before Return.
+It returned `sh: uname: not found`; dependent work stopped. Bounded read-only diagnosis
+listed `/bin`, `/sbin`, `/usr/bin` and `/usr/sbin`: no `uname`, with `sysctl` in `/sbin`,
+`sha256` in `/bin`, and `signify` in `/usr/bin`. The stock ramdisk is not the installed
+base-system command inventory. Enlarged inspection of both original attempt frames
+corrects the earlier keyboard diagnosis; no input substitution was observed here.
+
+Read-only path inspection confirmed `/mnt` exists, `/mnt/cd` and `/dev/cd1a` are
+absent, `/install` is the stock `install.sub` symlink, and `/dev/MAKEDEV` exists.
+Inspection of that actual ramdisk script showed its `cd*` branch calls
+`dodisk2 cd $U 6 15 $U 0`; no node was created. `/etc/signify` contains
+`openbsd-79-base.pub`. These are prerequisite observations, not successful native
+release verification or planner qualification. No mount, installation, credential,
+compilation, test or device-node creation followed the failure.
+
+The full pending `halt` was observed before Return, then completed native sync/halt
+was observed. The owned emulator/controller were closed and reaped. Launch time was
+634.331 seconds; measured peak emulator RSS 659,824 KiB; retained captures/logs,
+including the diagnostic enlarged frame, totaled 619,312 bytes. Private original
+captures and original receipts remain intact; the corrected interpretation is
+recorded separately rather than rewriting the original private failure receipt.
+
+Independent complete stopped readback again matched the original zero-image digest
+above, original target/parent identities, ownership/modes, single link, size,
+timestamps and zero allocation. Sealed media and all eight pins matched. No owned
+guest/controller, fixture handle, mount or IP listener remained; only checked stale
+owned Unix endpoints were removed. All original fixtures and failed evidence remain
+preserved. Both attempts ran **zero of the 5,868 required checks**.
+
+## Proposed continuation: launches 3–6, approval required
+
+Request a total ceiling of **six launches**, counting both stopped launches. Keep
+the same original zero target identity and full digest, sealed source/release CD,
+frozen native sources/cases, device profile and all resource/deadline limits. No
+target recreation, zeroing, media/source swap or automatic retry is proposed.
+
+| Launch | Stage |
+|---|---|
+| 3 | Stock prerequisites using observed available tools, first installation, clean halt and complete stopped readback. |
+| 4 | Original serial build, all suites, traces and actual console cases. |
+| 5 | Original keyboard/VGA suites and actual console cases using the same native binaries. |
+| 6 | Original independent retained-fixture readback, exact native cleanup, clean halt and exact host disposal. |
+
+After all original before-launch/paused audits and an observed stock shell prompt,
+use the shell's fixed `echo BOOTWEAVE-CONSOLE` as the positive pending-text/result
+oracle, then `sysctl kern.ostype kern.osrelease hw.machine` to verify the expected
+OpenBSD/7.9/amd64 values. Both commands are supported by the observed toolbox; no
+`uname` call is permitted in the ramdisk. Inspect the complete pending text before
+Return and the full result/status before another command, retaining 800 ms spacing.
+Use enlarged diagnostic inspection when the VGA font is ambiguous; keep original
+frames. The existing one correction of an unsubmitted line is unchanged.
+
+Recheck the observed paths/key/tool availability before use. Expected absent mountpoint
+or cd1 nodes are discovery outcomes. Only after confirming the same second read-only
+drive, conditionally execute the already reviewed stock `cd /dev && sh MAKEDEV cd1`
+and create only the absent owned `/mnt/cd`; inspect the node types/unit and directory.
+Then mount read-only, verify the native key against the pinned key and all six stock
+files against the native explicit-key signed manifest, observing each command/result.
+Unmount before the fixed manual installer and reconfirm the sole exact 8 GiB target
+before destructive answers. The original stock choices, disposable credential
+limitation, 5,868 checks, first-failure stop, exact readback and disposal remain required.
+This proposal grants no new execution authority.

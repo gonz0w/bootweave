@@ -4,8 +4,11 @@ Status: **Accepted, 2026-10-16.** Owner: Cam.
 Cam replied “continue” after the explicit PR #72 exact-new-8-GiB/four-launch
 approval question, including the documented disposable credential limitation.
 Source/helper bindings remain unchanged. Launch 1 stopped before installation;
-the [failure evidence and proposed five-launch continuation](project-plan-native-progress.md)
-require review. The accepted four-launch ceiling is not silently increased.
+the [failure evidence and accepted five-launch continuation](project-plan-native-progress.md)
+record Cam's subsequent explicit recovery approval. Launch 2 then stopped because
+`uname` is unavailable in the stock ramdisk; the earlier keyboard diagnosis was
+incorrect. The original four-launch plan below and five-launch recovery are historical;
+the proposed launches 3–6 in that continuation require review before another launch.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
