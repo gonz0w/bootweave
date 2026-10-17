@@ -10,9 +10,13 @@ record Cam's subsequent explicit recovery approval. Launch 2 then stopped becaus
 incorrect. The original four-launch plan below and five-launch recovery are historical;
 Cam explicitly approved launches 3–6 after PR #74's recovery question. Launch 3 then
 stopped because the reduced ramdisk verifier rejects checksum mode. The current
-[seven-launch proposal](project-plan-native-progress.md) uses native embedded-signature
-verification followed by selected-file checksums; it requires review, including its
-RAM-only manifest namespace and narrow prerequisite-correction exception.
+[accepted seven-launch continuation](project-plan-native-progress.md) uses native embedded-signature
+verification followed by selected-file checksums; Cam explicitly approved its
+RAM-only manifest namespace and narrow prerequisite-correction exception. Launch 4
+completed first stock installation/relink, then stopped when full installed ps could
+not obtain process information under the installer kernel. The current proposal
+uses the existing remaining launches 5–7 and full installed-kernel process readback;
+it requires review of that failure without a reinstall or extra launch.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
@@ -137,8 +141,8 @@ passthrough, hotplug/reopen or additional disk. Empty machine controllers are no
 backed targets and must be identified as such in the full inventory.
 
 The stopped stock-shell `signify -C` method is not executable with the reduced
-ramdisk verifier. The corrected proposal above is unapproved; do not retry it under
-the historical scope below. It must independently verify the expected OpenBSD release/key and
+ramdisk verifier. The corrected method above was explicitly accepted; the original
+method below is historical. Independently verify the expected OpenBSD release/key and
 all six selected files (`bsd`, `bsd.rd`, `base79.tgz`, `comp79.tgz`, `man79.tgz`,
 `INSTALL.amd64`) against the native explicit-key signed manifest on the read-only
 data CD. Unmount before the fixed manual installer. Confirm sole guest `sd0`,
