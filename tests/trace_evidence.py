@@ -57,7 +57,38 @@ def check_trace(decoded, receipts, supervisor, positive=False):
         edge = index % 23
         confined = positive or edge < 15
         no_input = not positive and (edge < 10 or edge >= 15)
-        if no_input and any(name == "read" and re.match(r"0,", args) for _, name, args in calls):
+        markers = [offset for offset, name, args in calls
+                   if name == "sigaction" and args.startswith("SIGALRM,")]
+        plan_entered = confined or (not positive and edge >= 20)
+        if plan_entered and len(markers) != 1:
+            raise ValueError("missing unique planner work-entry marker")
+        entry = markers[0] if plan_entered else 0
+        loader_reads = [offset for offset, name, args in calls
+                        if offset < entry and name == "read" and re.match(r"0,", args)]
+        if loader_reads:
+            if positive or edge != 7:
+                raise ValueError("unexpected pre-entry descriptor-zero read")
+            opened = False
+            for offset, (kind, body) in enumerate(runtime[:entry]):
+                if kind == "RET" and body in ("open 0", "openat 0"):
+                    opened = True
+                if offset in loader_reads and not opened:
+                    raise ValueError("loader read without observed descriptor reuse")
+                if kind == "CALL" and body == "close(0)":
+                    if offset + 1 >= entry or runtime[offset + 1] != ("RET", "close 0"):
+                        raise ValueError("incomplete loader close")
+                    opened = False
+            if opened:
+                raise ValueError("loader descriptor remains open at planner entry")
+            missing = any(offset >= entry and name == "fstat" and args.startswith("0,") and
+                          offset + 1 < len(runtime) and
+                          runtime[offset + 1][0] == "RET" and
+                          runtime[offset + 1][1].startswith("fstat -1 errno 9 ")
+                          for offset, name, args in calls)
+            if not missing:
+                raise ValueError("missing closed-input EBADF observation")
+        if no_input and any(offset >= entry and name == "read" and re.match(r"0,", args)
+                            for offset, name, args in calls):
             raise ValueError("read from disallowed input")
         if confined:
             def checked(name, argument=None):
@@ -82,7 +113,7 @@ def check_trace(decoded, receipts, supervisor, positive=False):
                     [x[0] for x in limits] == sorted(x[0] for x in limits) and
                     limits[-1][0] < unveil[0] < unveil[1] < boundary):
                 raise ValueError("confinement order")
-            if any(offset <= boundary and name == "read" and re.match(r"0,", args)
+            if any(entry <= offset <= boundary and name == "read" and re.match(r"0,", args)
                    for offset, name, args in calls):
                 raise ValueError("input before confinement")
             if any(offset > boundary and name in FORBIDDEN for offset, name, _ in calls):
@@ -97,5 +128,6 @@ def check_trace(decoded, receipts, supervisor, positive=False):
                 raise ValueError("missing complete terminal exit evidence")
         results.append({"case": index, "pid": pid, "confinement_checked": confined,
                         "disallowed_input_read_absent": no_input,
-                        "complete_terminal_evidence": True})
+                        "complete_terminal_evidence": True,
+                        "loader_descriptor_zero_reads_before_entry": len(loader_reads)})
     return results

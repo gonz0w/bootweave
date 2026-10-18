@@ -170,8 +170,10 @@ timers for those same budgets, restores/unblocks SIGPROF as well as the existing
 deadline signals, and retains RLIMIT_CPU=2. Timer/handler setup failures refuse.
 This fix passed host tests and all revised serial/VGA runtime checks after
 [launch 6's CPU gate failure](../testing/project-plan-native-progress.md).
-The separate tracing gate remains incomplete; its proposed evidence amendment
-requires a major Test Design decision, without changing production limits.
+The accepted separate trace-evidence method passed with source-correlated test
+companions, without changing production limits. Independent readback and exact
+guest cleanup passed; automatic approval review requires explicit approval for
+remaining host fixture disposal.
 Measure actual native CPU/time/RSS/output. Limits changing or evidence unavailable
 stops qualification and needs review.
 
@@ -206,11 +208,13 @@ independent assertions over rejection/no-effects, with host memory/UB diagnostic
 when available; freeze tool/options and report limitations. No unbounded fuzz job
 or dependency installation. The normal host executable must retain refusal.
 
-The complete host-tested slice and author guide are implemented. The
-[concrete native continuation](../testing/project-plan-native-plan.md) now binds
-source/cases/helpers and identifies the approved fresh exact target. Its first launch
-[stopped before installation](../testing/project-plan-native-progress.md); the
-proposed recovery requires review under the accepted first-failure rule.
+The host-tested slice and author guide are implemented. The
+[accepted native continuation](../testing/project-plan-native-plan.md) completed all
+5,882 required native checks, independent retained readback and exact guest cleanup.
+[Actual evidence](../testing/project-plan-native-progress.md) preserves earlier
+failures and the accepted source-correlated trace method. Automatic approval review
+blocks exact host fixture disposal pending explicit user approval; the draft stays
+unready and retained host bytes are not claimed disposed.
 The bounded native plan must retain exact source/artifacts,
 release/backend/firmware, fresh target identity/allowed effects, case manifest,
 commands, resource/capture limits, stop/reap and independent disposal. Obtain exact

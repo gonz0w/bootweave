@@ -34,6 +34,10 @@ The original plan below is
 historical for source candidate 375f6b6 and launches 1–6; its frozen argument preview
 is overridden only by the explicit accepted cache/profile amendments and any later
 accepted source-CD replacement, never by recreating its target.
+Current result: [all 5,882 required native checks, independent readback and exact
+guest cleanup passed](project-plan-native-progress.md#launch-11-independent-readback-and-exact-guest-cleanup).
+Automatic approval review requires explicit user approval for exact host disposal;
+the original host fixture/source/media/helpers remain intact and delivery is draft.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research

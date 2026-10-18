@@ -1,6 +1,8 @@
 # Proposed planner trace evidence amendment
 
-Status: **Accepted continuation, 2026-10-18; native execution pending.**
+Status: **Accepted continuation, 2026-10-18; all 50 additional native checks and
+independent guest readback/cleanup passed. Host disposal awaits explicit approval
+required by automatic approval review.**
 After the concrete proposal and explicit design question, Cam directed: “keep
 batching work and knocking out the backlog until we have a PR ready”. This is
 recorded as direction to proceed with this test-only method, not as a selected
@@ -171,3 +173,22 @@ Corrected nonbootable CD: 675,276,800 bytes, SHA-256
 `4987679ca56d91ee45bce3f559ad4b9194835e95db05bcb1f9b4a95dd8be809a`.
 Selected stock files/signatures and independent extraction/byte inventory passed;
 the stopped original disk and all older candidates were unchanged.
+
+
+## Completed native evidence
+
+[Launch 10](project-plan-native-progress.md#launch-10-complete-trace-qualification-and-retained-state)
+passed all seven guarded compiler calls, two native real-limit helpers, two positive
+traces and 46 edge traces. All child PIDs, checked confinement/input ordering,
+forbidden-call absence and expected terminal records were independently validated;
+no new kernel trace-write error occurred. The host observer was corrected to account
+for a proven loader descriptor-zero lifetime before planner entry, retaining the
+required later EBADF and absence of engine reads. Regressions reject missing
+open/close/EBADF evidence. Native source/artifacts/oracles/traces were unchanged;
+no native retry supplied this observer correction.
+
+[Launch 11](project-plan-native-progress.md#launch-11-independent-readback-and-exact-guest-cleanup)
+matched all 85 entries/81 hashes independently, removed only checked guest fixtures
+and observed disk sync/normal poweroff. All original host fixtures/source/media and
+private helpers remain because automatic approval review requires explicit host
+cleanup approval. Native test results do not make that unperformed disposal a pass.

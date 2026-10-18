@@ -89,8 +89,11 @@ All existing cases remain. Runtime C/headers are now 14,337 bytes. Current seale
 bindings reproduce the revised sixteen-file bundle; the original native bundle and
 media are preserved. Later native continuation completed a revised build and all
 5,832 serial/VGA runtime checks; see [actual native results](project-plan-native-progress.md).
-The syscall-tracing gate and final disposal remain incomplete; no general support
-claim follows from these host checks or the bounded native runtime results.
+The accepted source-correlated tracing method subsequently passed all 48 cases
+and two added native limit helpers, for 5,882 required native checks. Independent
+readback and exact guest cleanup passed. Automatic approval review blocks host
+disposal pending explicit approval; no general support claim follows from host
+checks or the bounded native results.
 
 ## Limits and delivery gate
 

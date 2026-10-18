@@ -86,3 +86,16 @@ The [native continuation](testing/project-plan-native-plan.md) now freezes 1,401
 input/oracle cases, a portable supervisor rehearsal and an exact four-launch plan
 for one new 8 GiB target. Source-only staging is prepared; target creation, derived
 media and native execution still require the separate exact-target approval.
+
+
+## Planner qualification batch, 2026-10-18
+
+The accepted read-only planner now has 5,882 required native checks across serial,
+actual keyboard/VGA and source-correlated trace companions, with unchanged
+production resource limits. Independent 85-entry/81-file readback and exact guest
+cleanup passed. [Actual evidence](testing/project-plan-native-progress.md) preserves
+all earlier stopped attempts and source/resource/console limits. Automatic approval
+review requires explicit approval for exact host fixture disposal; all retained
+host bytes remain and the consolidated delivery is draft. This bounded feature
+advances the existing trust/native backlog; it does not close broader profile,
+renderer, privileged extension or full installer acceptance issues.

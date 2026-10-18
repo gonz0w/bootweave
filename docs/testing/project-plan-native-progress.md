@@ -1,13 +1,15 @@
 # Read-only planner native progress
 
-Status: **5,832 revised serial/VGA runtime checks passed; trace gate incomplete,
-2026-10-18.** The checked CPU-timer correction passed with unchanged budgets.
-Launch 7's first traced invocation failed when kernel trace writes exceeded the
-production 8 KiB file limit; its partial trace is not accepted. Launch 8 completed
-all independent VGA runtime checks on the same binaries and powered off normally.
-Full stopped host closure passed; exact original fixtures remain preserved.
-The [trace evidence amendment](project-plan-trace-amendment.md) is a proposed major
-design decision. Routine bounded continuation follows Cam's standing instruction.
+Status: **5,882 required native checks, independent readback and exact guest
+cleanup passed, 2026-10-18. Host disposal is blocked pending explicit approval.**
+The checked CPU-timer correction passed with unchanged production budgets. The
+accepted trace method uses separately labelled source-correlated test companions;
+all 48 complete traces passed, including explicit loader accounting. Launch 11
+independently matched all 85 retained entries/81 file hashes, removed only the
+checked guest fixtures and powered off normally. Full stopped host closure passed.
+Automatic approval review requires explicit user approval before deleting the exact
+host fixture/source copies and private helpers. Those bytes remain preserved and
+the consolidated PR remains draft until disposal is complete.
 Original scope and unchanged limits: [native run plan](project-plan-native-plan.md).
 The original exact target, media and private failure evidence are preserved.
 
@@ -767,3 +769,119 @@ partial state. Rebind the changed script/source/media and helpers, then continue
 in bounded launches 10 (build/traces) and 11 (independent readback/teardown), counting
 all nine consumed. No production limit, target, guest resource or deadline changes;
 no reinstall/reset or new approval question for this routine correction.
+
+
+## Launch 10: complete trace qualification and retained state
+
+The corrected source/media and helpers were rebound to the same stopped original
+target under standing routine authority. Complete paused target/device/process/
+handle/firmware/media checks passed; all three installed filesystems booted clean.
+Native platform, root/nobody accounts, base compiler, mounts and no-NIC observations
+passed. Stock relinking finished before compilation. Independent readback matched
+all original 52 metadata entries and 50 file hashes before new-tree creation.
+The exact twelve-file source copy was root-owned 0600, single-link, under an
+exclusive 0700 root; its sealed manifest and all source bytes matched.
+
+All seven guarded compiler calls passed. Peak compiler RSS **67,232 KiB**, maximum
+CPU **18.430 seconds**, wall **18.871 seconds**, within the original limits. Nine
+executables, two objects and two maps were bound. Dynamic dependencies were only
+base `libc.so.103.0` and the loader; all three static artifacts were PIE with no
+INTERP or NEEDED entry. The compiler temporary directory was observed absent after
+the successful build. Original production source and artifacts matched before and
+after compilation. This build changes no production artifact.
+
+| Trace qualification | Passed | Native observations |
+|---|---:|---|
+| Real-limit helper, dynamic/static | 2 | Exact fixed FSIZE substitution, unrelated limit forwarding and rejected requests; maximum RSS 1,048/468 KiB. Base time reported real/user/system 0.00 seconds at its displayed precision; these are not exact zero measurements. |
+| Positive companion cases | 2 | Complete independent output/status oracles; 49/22 ms wall, 30,000/10,000 microseconds CPU, 940/208 KiB RSS. |
+| Edge companion cases | 46 | All descriptor/alias/output/timer/CLI/root/set-ID oracles; maximum wall 5,017 ms and RSS 932 KiB; suite wall 21,117 ms. |
+
+All **50 additional checks passed**. Together with the unchanged 2,916 serial and
+2,916 keyboard/VGA runtime cases, **5,882 required native checks passed** under the
+accepted trace amendment. Companion traces establish source-correlated syscall
+observations; production remains at FSIZE=8 KiB, independently exercised by the
+normal resource probes. No exact-production-binary tracing claim follows.
+
+| Retained trace | Raw bytes | Decoded bytes | Raw SHA-256 |
+|---|---:|---:|---|
+| Positive | 39368 | 25568 | a446b39ea9f5dfe456ad86fe934bb27c192a42491d90c9c3cc4d5b2d5a3e206e |
+| Edges | 767920 | 499711 | 42a94fbe97969325ac231fec7a5dffe86e361eaeb0460ef4b7adb9eb2afe9f32 |
+
+Every child PID correlated to its supervisor fork and successful exec. Checked
+limits, timers, unveil and pledge preceded engine input; no later path open,
+exec/fork or socket attempt appeared. Disallowed inputs/privilege/CLI cases had no
+engine read(0), and every case had complete expected terminal exit/signal evidence.
+Raw traces stayed below 4 MiB, decoded traces below 1 MiB; no partial trace was
+accepted. Kernel trace-write error count remained **one before and after**, the
+preserved launch-7 failure; no new error occurred.
+
+The first host observer rejected one loader read in dynamic closed-input case 7.
+The actual trace shows the loader opening descriptor 0, reading its newly opened
+file and successfully closing it before the planner's unique first SIGALRM setup.
+The planner subsequently observed fstat(0) EBADF and exited 3 without read(0).
+The accepted plan explicitly accounts for loader and supervisor activity separately.
+The corrected host observer allows only that proven pre-entry closed-input lifetime,
+requires the later EBADF and retains every post-entry input/confinement restriction.
+Regressions reject missing open/close/EBADF evidence and any engine read. The
+observer's old/new hashes and initial rejection were preserved privately; the same
+native bytes were revalidated, with **no native rerun or source/binary/oracle change**.
+
+Final source/artifact/map/canary/raw-trace hashes and strict inventory passed:
+**85 entries, 81 regular files**, both roots together **16,180 KiB**, below 32 MiB.
+All original regular-file metadata/bytes stayed unchanged. Only the original root
+folder's expected bookkeeping/timestamps reflected the transient compiler directory.
+Both trees and all input/canary/failure/trace evidence were retained. No test,
+compiler or relink worker remained. Source CD unmount and native serial disk-sync
+completion were observed; normal poweroff exit 0, without host termination/QMP quit.
+
+Complete stopped original identity/digest, all four media/source candidates and tool
+pins, no-process/handles/mounts/listeners and secret/resource guards passed. Elapsed
+**1,186.849 seconds**, peak host RSS **1,247,168 KiB**, capture **687,313 bytes**,
+owned allocation **10,537,959,424 bytes**. Stopped target SHA-256:
+
+`090b7f5a7ae56508cb5d4b0561c4037f91cff9bf71f5c81f3d36823d4e97a235`.
+
+Final independent native readback and exact disposal remain outstanding. Launch 11
+uses only base observations and checked cleanup; it does not rerun a planner/writer.
+
+## Launch 11: independent readback and exact guest cleanup
+
+Complete paused device/block/process/handle/firmware/media and original stopped
+8 GiB target digest checks passed. The full installed kernel reported all three
+filesystems clean. Serial login, native platform/accounts and exact three mounted
+filesystems were observed. No planner, writer, probe or compiler was rerun.
+
+Independent base-tool readback matched **all 85 metadata entries and all 81 file
+hashes exactly** against launch 10, including both roots' source/artifacts/maps,
+retained inputs/canaries, the historical failed trace and both completed traces.
+Previously held native-case and observer receipts also matched independently on
+the host. Aggregate guest allocation remained 16,180 KiB. The original created
+mountpoint was an empty root-owned 0700 directory; no nested mount, extra file,
+compiler/test/relink worker or unknown inventory appeared.
+
+Only that checked empty mountpoint and the two checked guest test trees were
+removed. Native guards and a separate post-removal query proved all three paths
+absent, no workers, and only the three installed filesystems mounted. Serial
+`sync && halt -p` printed disk-sync completion, followed by normal owned emulator
+poweroff exit 0. Elapsed **451.981 seconds**, peak host RSS **1,231,552 KiB** and
+capture **91,889 bytes**. Full original-target/parent identity, complete stable final
+disk digest, all four frozen source/media candidates and tool pins, no-process/
+handles/mounts/listeners and secret/resource guards passed. Final disk SHA-256:
+
+`37f9699db6045b38ef05e271d6a88ac2579a003ff5fcd7ba82a5e5c942bb1274`.
+
+**All required native checks, independent readback and exact guest cleanup passed.**
+The original host namespace and four source-only copies remain preserved. A
+read-only host audit bound all 713 owned entries, no symlink/special/hardlinked
+files, no handles/mounts, original disk/media/source hashes and 10,540,232,704 bytes
+of allocation, below 20 GiB. Sanitized results were saved separately before disposal.
+
+Automatic approval review rejected host-side deletion twice, including a narrower
+five-root request supported by the accepted plan's host-cleanup clause. It requires
+explicit trusted user approval of that exact host disposal. Both rejected commands
+were prevented before execution; no host disk, source, media, credential, capture
+or private helper was deleted. Preserve these fixtures, keep the consolidated PR
+**draft/unready**, and request only the blocked exact disposal after code/evidence/
+verification are reviewable. Do not bypass the rejection or claim target authority
+has ended. Shared tools, stock release inputs and Git/repository files stay outside
+any eventual fixture disposal.

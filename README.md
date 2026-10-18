@@ -121,11 +121,13 @@ help/version and refuse planning outside OpenBSD. See the
 [author guide](docs/configuration/author-guide.md) and
 [host evidence](docs/testing/project-plan-host.md). Exact native fixture approval was
 received; [stock installation and full-kernel prerequisites passed](docs/testing/project-plan-native-progress.md).
-After memory and CPU stops, a checked CPU-timer fix passed a fresh native build and
-all 5,832 serial and keyboard/VGA runtime checks with unchanged budgets. The first
-syscall trace exceeded the production file-size limit; the incomplete trace remains
-unqualified. A [trace evidence amendment](docs/testing/project-plan-trace-amendment.md)
-is proposed; full native qualification and exact fixture disposal remain pending.
+The CPU-timer correction and accepted test-only trace method now have **5,882
+required native checks**, complete serial/keyboard-VGA plans, independent retained
+readback and observed exact guest cleanup. Production resource limits are unchanged;
+traces use source-correlated companions under the [accepted evidence amendment](docs/testing/project-plan-trace-amendment.md).
+Automatic approval review blocks exact host fixture disposal pending explicit user
+approval, so final native delivery remains draft. Full results and earlier failures
+remain in the [native evidence](docs/testing/project-plan-native-progress.md).
 The [native run plan](docs/testing/project-plan-native-plan.md)
 and revised source/remaining-launch proposal stay on one continuation branch, linked from PR #74’s
 review; no intermediate phase PR is added.
