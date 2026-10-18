@@ -48,6 +48,14 @@ static struct stat canary_stat, outside_stat;
 static const char canary[] = "planner outside canary\n";
 static int console_saved;
 static struct winsize original_window;
+#ifdef BW_NATIVE_TRACE
+static int tracing;
+int bw_trace_prepare(const char *);
+int bw_trace_before(void);
+int bw_trace_after_fork(void);
+int bw_trace_after(void);
+int bw_trace_finish(void);
+#endif
 
 static void
 supervisor_deadline(int signal_number)
@@ -340,6 +348,10 @@ check(const char *binary, const struct native_case *fixture, enum mode mode,
         environment[3] = fault_environment;
     }
     started = now();
+#ifdef BW_NATIVE_TRACE
+    if (tracing && !bw_trace_before())
+        fail("trace enable/bounds");
+#endif
     active = fork();
     if (active < 0)
         fail("fork");
@@ -382,6 +394,10 @@ check(const char *binary, const struct native_case *fixture, enum mode mode,
         execve(executable, arguments, environment);
         _exit(125);
     }
+#ifdef BW_NATIVE_TRACE
+    if (tracing && !bw_trace_after_fork())
+        fail("trace supervisor clear");
+#endif
     if (mode != BROKEN_OUTPUT)
         nonblock(out[0]);
     if (mode != BROKEN_ERROR)
@@ -411,6 +427,10 @@ check(const char *binary, const struct native_case *fixture, enum mode mode,
     }
     result = active;
     active = 0;
+#ifdef BW_NATIVE_TRACE
+    if (tracing && !bw_trace_after())
+        fail("trace final case bounds");
+#endif
     elapsed = now() - started;
     if (!done)
         fail("completion");
@@ -522,7 +542,7 @@ check(const char *binary, const struct native_case *fixture, enum mode mode,
 int
 main(int argc, char **argv)
 {
-    static const char *const binaries[] = {"bootweave", "bootweave-static"};
+    const char *binaries[] = {"bootweave", "bootweave-static"};
     static const char *const io_faults[] = {"short", "changed", "read-error", "write-zero", "write-error",
         "timer-real", "timer-cpu", "sigprof"};
     static const char *const gates[] = {"data", "stack", "nofile", "core", "fsize", "cpu", "unveil", "lock", "pledge", "ugid"};
@@ -569,6 +589,18 @@ main(int argc, char **argv)
         fail("owned work prerequisite");
     inventory();
     suite_start = now();
+#ifdef BW_NATIVE_TRACE
+    if (!strcmp(argv[1], "--trace-positive") || !strcmp(argv[1], "--trace-edges")) {
+        int positive = !strcmp(argv[1], "--trace-positive");
+        tracing = 1;
+        printf("Trace supervisor pid=%ld\n", (long)getpid());
+        binaries[0] = "trace-bootweave";
+        binaries[1] = "trace-bootweave-static";
+        if (!bw_trace_prepare(positive ? "../positive-v2.trace" : "../rejection-v2.trace"))
+            fail("exclusive trace preparation");
+        argv[1] = positive ? "--tracecase" : "--edges";
+    }
+#endif
     if (!strcmp(argv[1], "--corpus") || !strcmp(argv[1], "--tracecase")) {
         for (binary = 0; binary < 2; binary++)
             for (i = 0; i < NATIVE_CASE_COUNT; i++) {
@@ -658,6 +690,10 @@ main(int argc, char **argv)
     } else {
         fail("unknown harness mode");
     }
+#ifdef BW_NATIVE_TRACE
+    if (tracing && !bw_trace_finish())
+        fail("trace completion bounds");
+#endif
     if (!strncmp(argv[1], "--console", 9))
         puts("Console check passed; TTY restored.");
     else
