@@ -1,11 +1,13 @@
 # Read-only planner native progress
 
-Status: **Stopped at launch 6's native CPU-accounting gate, 2026-10-18.** Stock
-filesystem recovery and a complete fresh native build passed under the capped-cache
-profile. Serial testing recorded **2,889 passing checks and one failed CPU probe**;
-later checks were not run. Source/artifact readback, native sync/poweroff and full
-host closure passed. Exact original fixtures are preserved. A CPU-timer fix and
-revised continuation are prepared below; no new native execution is authorized.
+Status: **5,832 revised serial/VGA runtime checks passed; trace gate incomplete,
+2026-10-18.** The checked CPU-timer correction passed with unchanged budgets.
+Launch 7's first traced invocation failed when kernel trace writes exceeded the
+production 8 KiB file limit; its partial trace is not accepted. Launch 8 completed
+all independent VGA runtime checks on the same binaries and powered off normally.
+Full stopped host closure passed; exact original fixtures remain preserved.
+The [trace evidence amendment](project-plan-trace-amendment.md) is a proposed major
+design decision. Routine bounded continuation follows Cam's standing instruction.
 Original scope and unchanged limits: [native run plan](project-plan-native-plan.md).
 The original exact target, media and private failure evidence are preserved.
 
@@ -26,7 +28,7 @@ qualification is ready.
 | PR #74 continuation review | 7 | Cam explicitly approved launches 4–7, the RAM manifest and bounded correction. Launch 4 completed stock installation, then stopped at process readback. |
 | PR #74 remaining-launch review | 7, unchanged | Cam accepted launches 5–7/full-kernel process readback on 2026-10-18. Launch 5 stopped at the host RSS ceiling during the native build. |
 | Accepted recovery, 2026-10-18 | 8 | Smaller explicit emulator cache; bounded recovery and partial-build replacement on the original disk, then complete launches 6–8. |
-| Current proposal | 9, unapproved | Preserve CPU limits, add a checked CPU timer, replace only the independently checked build tree from revised sealed source, and complete serial/VGA/readback in launches 7–9. |
+| Routine continuation, 2026-10-18 | 9 | Cam clarified that only major design decisions need approval; proceed with the concrete same-target CPU-timer correction and bounded launches 7–9, preserving all limits. |
 
 Separate exclusive private acceptance receipts bind each accepted run to the original
 host identity/digest, previous failure receipt and reviewed controller/input helper.
@@ -566,7 +568,8 @@ independently extracted/byte-compared: **675,289,088 bytes**, SHA-256:
 It is owned 0400 at `.tools/project-planner-native/cpu-candidate/data.iso`. All six
 selected release files and signed manifest are unchanged and explicitly verified.
 The original CD and source bundle are preserved. Preparation did not start a guest
-or change the stopped disk. Native attachment of this candidate is **not approved**.
+or change the stopped disk. Native attachment was initially pending. The later
+standing authorization below covers this concrete routine continuation.
 
 Request an **increase from eight to nine total launches**, counting all six consumed,
 only on the original disk bound to the stopped digest above. Keep the launch-6
@@ -589,3 +592,139 @@ receipt must bind closure 6, original target identity/digest, revised source/med
 reviewed controller/helpers and unchanged limits; previous receipts cannot start it.
 Any new compilation/oracle/resource/evidence failure stops dependent work. Keep the
 same branch and PR #74 continuation review; no intermediate phase PR.
+
+## Continuation authorization clarification, 2026-10-18
+
+After the concrete CPU-timer/source-CD and launches 7–9 request was presented, Cam
+instructed: “lets top asking for approval unless it is a major design decision”.
+This standing authorization supersedes repeated approval gates for routine fixes
+and bounded test continuation on the already confirmed disposable target. It is
+not recorded as a selection of the prior approval question. The CPU-timer fix keeps
+the accepted architecture, original resource/acceptance limits and exact disk, so
+the prepared continuation proceeds under that instruction. Major design decisions,
+materially expanded effects and new destructive targets remain review boundaries.
+
+Unexpected failures still stop dependent test work. Preserve evidence, diagnose and
+fix the cause, rebind changed source/helpers/media and revalidate the exact stopped
+target before a bounded continuation; do not count failures as passes, silently
+raise resource limits or bypass fixture guards. An exclusive private receipt binds
+this instruction, closure 6, original target identity/full digest, frozen CPU-timer
+source/CD and reviewed helper hashes. Prior receipts and performed-state records
+are preserved. Full source/media/pins/identity/no-handles/mount/endpoints/free-space
+checks passed before launch 7.
+
+## Launch 7: revised CPU timer passes; tracing interferes
+
+Under the standing continuation instruction above, launch 7 used the same original
+8 GiB target, unchanged 1 GiB/one-CPU guest and 2 GiB host RSS ceiling, capped
+128 MiB TCG cache, and exact revised source CD. Complete paused identity/device/
+process/media/digest checks passed. All three installed filesystems were clean.
+The retained fifty-entry tree and all previous source/artifact/input/canary hashes
+matched before its conditional exact replacement. No reinstall or reset occurred.
+
+The revised native build completed all fifteen guarded compiler invocations,
+sixteen executables and ten maps. Peak compiler RSS was 67,292 KiB; maximum CPU
+12.200 seconds and wall 12.398 seconds. Dynamic base-libc/loader and static PIE
+linkage checks passed. Source and artifact digests matched before and after tests.
+
+| Serial suite | Passed checks | Peak child RSS, KiB | Wall, ms |
+|---|---:|---:|---:|
+| Corpus | 2802 | 1024 | 57573 |
+| Edges | 46 | 1024 | 21115 |
+| IO/gate faults | 36 | 1020 | 739 |
+| Same-policy probes | 26 | 2880 | 4560 |
+| Pure API units | 2 | 840 | 44 |
+| Actual full-plan consoles | 4 | 1016 | 63 total |
+
+All **2,916 serial runtime checks passed**. Both real CPU probes exited 4, at
+2.000 and 2.010 measured CPU seconds, within the unchanged 2.1-second gate. Maximum
+child wall time was 5,019 ms and RSS 2,880 KiB. Each actual dynamic/static console
+at 80/40 TTY columns emitted the complete independent thirteen-line plan, with
+attributes and geometry restored. These are runtime results, not trace acceptance.
+
+The first positive tracing command then failed: the dynamic planner exited 5 and
+the harness exited 1 with zero trace cases completed. Its 37,208-byte trace ended
+at `setrlimit(RLIMIT_FSIZE, ...)`, without a return or subsequent input/confinement
+records. Native `/var/log/messages` reported `ktrace write failed, errno 27,
+tracing stopped`. This is observed tracing interference with the existing 8 KiB
+production file-size limit. The incomplete trace is **not accepted**. The rejection
+trace was not attempted; no trace retry or resource relaxation followed.
+
+Final source/artifact/input/canary readback passed. The failed trace and exact
+fifty-one-entry inventory were retained. Source CD unmount, native disk sync and
+normal poweroff passed. Full stopped target/media/source/tool hashes, original
+identity, no owned processes/handles/mounts/listeners and capture/secret guards
+passed. Elapsed launch time was 1,307.672 seconds; peak host RSS 1,242,048 KiB;
+capture 754,342 bytes; owned allocation 6,469,808,128 bytes. Stopped disk SHA-256:
+
+`0ecc0e28d66df242d67c5a25ddd76a5ea79dc49137f538c584e803843bf293b9`.
+
+Serial runtime is passed; overall qualification and tracing remain false. The
+independent VGA runtime stage may proceed on the same sealed binaries under the
+standing routine authorization, preserving the trace failure. A revised trace
+method that changes the evidence contract or a resource limit is a major design
+decision; final readback/disposal remains dependent on resolving that gate.
+
+## Launch 8: all keyboard/VGA runtime checks pass
+
+Launch 8 proceeded only with the independent VGA runtime stage after launch 7's
+serial runtime passed. A separate frozen controller required the actual failed
+trace status, preserved it as false, and could not launch final disposal. Complete
+paused original-target/media/device/process/handle checks passed. The stock boot
+reported all three filesystems clean. Actual keyboard login and `/dev/ttyC0`
+identity were observed; stock relinking finished before tests. Auxiliary serial
+was used for read-only integrity and receipt observations, not test execution.
+
+The exact launch-7 binaries and source manifest matched. No rebuild occurred.
+Actual keyboard/VGA invoked `native_run.sh` with an exclusive root-owned 0600
+receipt. Exit 0 was observed on VGA, and all 289,206 receipt bytes were independently
+read back over serial, bounded and hashed. All **2,912 suite checks** passed:
+
+| VGA suite | Passed checks | Peak child RSS, KiB | Wall, ms |
+|---|---:|---:|---:|
+| Corpus | 2802 | 940 | 56155 |
+| Edges | 46 | 920 | 21118 |
+| IO/gate faults | 36 | 920 | 732 |
+| Same-policy probes | 26 | 2872 | 4514 |
+| Pure API units | 2 | 824 | 41 |
+
+Maximum measured child CPU was 2.010 seconds, wall 5,019 ms and RSS 2,872 KiB,
+within the unchanged gates. Four further commands executed on the actual VGA
+keyboard, each with complete pending-command and result-frame observation:
+
+| Actual VGA plan | Wall, ms | CPU, microseconds | RSS, KiB |
+|---|---:|---:|---:|
+| 80x25 dynamic | 15 | 0 | 888 |
+| 80x25 static | 12 | 10000 | 232 |
+| 40x25 dynamic | 34 | 10000 | 916 |
+| 40x25 static | 22 | 0 | 228 |
+
+All four entire plans independently matched the Python oracle. For an additional
+exact byte check, a fixed native base-`jot` printable-ASCII reference supplied 95
+unique observed glyphs; those glyphs decoded the retained actual result frames.
+Every canonical plan line, including the complete digest, matched; all statuses
+were zero and attributes/geometry restored. Narrow plain-text viewports preserve
+the captured complete plans. The 40-column setting is TTY geometry, not physical
+40-column VGA hardware. Total VGA runtime **2,916 passed**; serial plus VGA
+**5,832 passed** on the revised candidate. None of the 48 trace cases is qualified.
+
+Post-test source/executable/map hashes, both canaries and the original failed
+trace matched. Exact retained inventory had 52 entries/50 regular files; only the
+expected input/timestamps, work-directory timestamps and new owned receipt changed.
+Allocation was 9,164 KiB. No compiler/test/relink worker remained and only the three
+installed filesystems were mounted; the source CD was not mounted in this launch.
+
+The actual VGA `sync && halt -p` command was observed before and after Return;
+the owned emulator powered off normally with exit 0, without host termination or
+QMP quit. **Disk-sync completion text was not captured before poweroff**, so an
+observed completion frame is not claimed. Elapsed launch time was 1,439.343 seconds,
+peak host RSS 1,230,208 KiB and capture 1,978,383 bytes. Full stopped target/media/
+source/tool hashes and original identity, no-process/handles/mounts/listeners,
+secret/capture/allocation guards passed. Owned allocation was 6,475,952,128 bytes.
+Stopped target SHA-256:
+
+`3036668ed2d0ee09bc9ca226c3bf8f3154569f81fc6ea64cf4aa3929a1e72b38`.
+
+All original fixtures, inputs/canaries, exact binaries and failure evidence remain
+preserved. Overall qualification and final disposal remain incomplete. The only
+current design boundary is the [proposed trace evidence amendment](project-plan-trace-amendment.md).

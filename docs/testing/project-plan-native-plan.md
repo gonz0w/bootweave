@@ -24,8 +24,13 @@ partial-build replacement on 2026-10-18. The original failed state is preserved 
 the accepted inventory and conditional cleanup. Launch 6 then completed that recovery
 and a fresh build, passed 2,889 serial checks, and stopped at the CPU-accounting gate.
 Clean native shutdown and host closure passed. The current
-[revised CPU-timer/source/media and launches 7–9 proposal](project-plan-native-progress.md#prepared-cpu-enforcement-fix-and-proposed-launches-79)
-requires review; no acceptance budget is relaxed. The original plan below is
+[revised CPU-timer/source/media continuation](project-plan-native-progress.md#prepared-cpu-enforcement-fix-and-proposed-launches-79)
+proceeded under Cam's standing instruction to continue routine bounded work without
+new approval. All 5,832 revised serial/VGA runtime checks passed in launches 7–8.
+The first positive trace failed at the production file-size limit; no partial
+trace is accepted. The [proposed trace evidence amendment](project-plan-trace-amendment.md)
+requires a major Test Design decision. No production acceptance budget is relaxed.
+The original plan below is
 historical for source candidate 375f6b6 and launches 1–6; its frozen argument preview
 is overridden only by the explicit accepted cache/profile amendments and any later
 accepted source-CD replacement, never by recreating its target.

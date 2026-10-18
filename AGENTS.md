@@ -33,3 +33,9 @@
     branch and draft PR. Continue requests and phase transitions are not new PR
     boundaries. Build accepted work and document as needed; bring larger decisions
     to review within the existing PR. Keep exact target authorization requirements.
+15. Continue routine implementation fixes and bounded native test recovery on an
+    already confirmed disposable target without requesting fresh approval. Stop
+    dependent work on a failure, preserve evidence, diagnose and fix it, then
+    continue within the accepted scope and resource limits. Ask for major design
+    decisions or materially expanded effects; retain exact confirmation for a new
+    destructive target. This clarification was authorized on 2026-10-18.

@@ -87,7 +87,10 @@ failures refuse with exit 4 and empty stdout. The same failure stimuli are inclu
 in the revised native test supervisor, adding twelve cases across both consoles.
 All existing cases remain. Runtime C/headers are now 14,337 bytes. Current sealed
 bindings reproduce the revised sixteen-file bundle; the original native bundle and
-media are preserved. No revised native build, pass or support claim is made.
+media are preserved. Later native continuation completed a revised build and all
+5,832 serial/VGA runtime checks; see [actual native results](project-plan-native-progress.md).
+The syscall-tracing gate and final disposal remain incomplete; no general support
+claim follows from these host checks or the bounded native runtime results.
 
 ## Limits and delivery gate
 

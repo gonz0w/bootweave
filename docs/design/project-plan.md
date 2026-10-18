@@ -168,8 +168,10 @@ do not reset on EINTR or partial progress. A hard timer must bound blocked I/O.
 The prepared CPU-enforcement fix arms checked one-shot ITIMER_PROF and ITIMER_REAL
 timers for those same budgets, restores/unblocks SIGPROF as well as the existing
 deadline signals, and retains RLIMIT_CPU=2. Timer/handler setup failures refuse.
-This fix has host evidence; its revised native source/media continuation requires
-review after [launch 6's CPU gate failure](../testing/project-plan-native-progress.md).
+This fix passed host tests and all revised serial/VGA runtime checks after
+[launch 6's CPU gate failure](../testing/project-plan-native-progress.md).
+The separate tracing gate remains incomplete; its proposed evidence amendment
+requires a major Test Design decision, without changing production limits.
 Measure actual native CPU/time/RSS/output. Limits changing or evidence unavailable
 stops qualification and needs review.
 
