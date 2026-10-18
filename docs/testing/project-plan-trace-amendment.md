@@ -143,3 +143,31 @@ Local `make verify` passed **121 groups** (39 tooling, 13 UI, 3 storage, 10 hand
 33 payload, 23 planner/preparation/trace), repository checks, shell lint and secret
 scan. This includes the unchanged portable native-supervisor rehearsal and five
 new trace-policy/evidence groups. Host-only results do not qualify native tracing.
+
+## Routine build-binding correction after launch 9
+
+Pre-execution review found that the retained compiler guard rejects cwd outside
+`/planner` and fixes TMPDIR there. Launch 9 ran no compiler or native case; original
+52-entry metadata/50-file hashes matched exactly and native disk sync/poweroff/full
+host closure passed. The corrected script calls the same pinned guard from its
+required cwd with fixed absolute `/planner-trace` input/output paths. It creates
+`/planner/compiler-tmp` exclusively as root-owned 0700, then removes it with `rmdir`
+after the seven successful guarded calls. No original file is modified. Only the
+original root directory's bookkeeping/timestamps may change from that transient
+child; retain exact identities/modes/owners/links and all regular-file metadata.
+Failure preserves the exact partial directory. Total guest allocation still counts
+both roots and temporary files, with the original 32 MiB ceiling.
+
+The new twelve-file source candidate is 2,037,561 bytes, manifest SHA-256
+`b39814630f4692f25589139bada8df32d0b020bdc6cfe3f60d24a2ced7095817`.
+Only the build script changed; all C sources and independent cases remain unchanged.
+Current [trace bindings](project-plan-trace-bindings.txt) describe this correction;
+the earlier sealed media/source are preserved. The bounded stages become launches
+10 (build/50 checks) and 11 (independent readback/teardown), counting all nine used.
+Host sealing/refusal tests and shell lint passed after the correction. Native
+execution is still required; no failed or unattempted case is counted as passed.
+
+Corrected nonbootable CD: 675,276,800 bytes, SHA-256
+`4987679ca56d91ee45bce3f559ad4b9194835e95db05bcb1f9b4a95dd8be809a`.
+Selected stock files/signatures and independent extraction/byte inventory passed;
+the stopped original disk and all older candidates were unchanged.

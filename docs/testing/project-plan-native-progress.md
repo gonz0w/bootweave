@@ -728,3 +728,42 @@ Stopped target SHA-256:
 All original fixtures, inputs/canaries, exact binaries and failure evidence remain
 preserved. Overall qualification and final disposal remain incomplete. The only
 current design boundary is the [proposed trace evidence amendment](project-plan-trace-amendment.md).
+
+## Launch 9: build binding corrected before execution
+
+The concrete test-only trace proposal was followed by Cam's direction to keep
+batching work until a PR is ready; the method proceeded under that direction and
+the standing same-target routine-continuation instruction. Signed source candidate
+`0996c28` added only qualification tooling and passed 121 local groups. Production
+runtime bytes and all completed launch-7/8 binaries remained unchanged.
+
+Complete paused host/target/media/device/process/handle checks passed. The native
+boot reported all three filesystems clean and reached serial login. Before any
+compiler, source copy or test execution, source review found that the retained
+compiler guard enforces cwd `/planner` and fixes TMPDIR to `/planner/compiler-tmp`;
+the prepared script invoked it from `/planner-trace`. Dependent work stopped.
+**No compilation, trace invocation or native case was attempted**, and the trace
+tree remained absent. This is a pre-execution build-binding stop, not a measured
+compiler or runtime failure.
+
+Independent native checks matched all 52 retained metadata entries and all 50
+file hashes exactly against launch 8. Only the three installed filesystems were
+mounted; no source CD mount or compiler/test/relink worker remained. Serial
+`sync && halt -p` printed actual disk-sync completion and the owned emulator
+powered off normally with exit 0. Elapsed 300.493 seconds; peak host RSS
+1,235,296 KiB; capture 60,268 bytes. Full stopped identity/digest, every earlier
+source/media/tool pin, no-process/handles/mounts/listeners and secret/resource
+checks passed. Exact fixtures and failure evidence remain preserved. Stopped hash:
+
+`a5a3f96527f736b9bf67cc22a67ecc1d0361843089c392bfe18063df2cdfa0ed`.
+
+The routine correction runs that same verified guard from its required cwd and
+passes only fixed absolute trace-source/output paths. It exclusively creates the
+guard's expected root-owned 0700 compiler temporary directory, and removes it only
+with `rmdir` after successful guarded builds. Original file bytes/metadata and
+binaries remain unchanged; the original root directory's bookkeeping/timestamps
+may reflect that explicitly owned transient child. Failure retains the observed
+partial state. Rebind the changed script/source/media and helpers, then continue
+in bounded launches 10 (build/traces) and 11 (independent readback/teardown), counting
+all nine consumed. No production limit, target, guest resource or deadline changes;
+no reinstall/reset or new approval question for this routine correction.
