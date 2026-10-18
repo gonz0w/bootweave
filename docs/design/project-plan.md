@@ -165,6 +165,11 @@ Accepted per-invocation ceilings: 16 KiB input, 2 KiB typed model, 4 KiB plan ou
 STACK, eight-descriptor limit, CORE=0 and FSIZE=8 KiB. CPU limit two seconds and
 whole wall-clock deadline five seconds from CLI work entry, including read/output;
 do not reset on EINTR or partial progress. A hard timer must bound blocked I/O.
+The prepared CPU-enforcement fix arms checked one-shot ITIMER_PROF and ITIMER_REAL
+timers for those same budgets, restores/unblocks SIGPROF as well as the existing
+deadline signals, and retains RLIMIT_CPU=2. Timer/handler setup failures refuse.
+This fix has host evidence; its revised native source/media continuation requires
+review after [launch 6's CPU gate failure](../testing/project-plan-native-progress.md).
 Measure actual native CPU/time/RSS/output. Limits changing or evidence unavailable
 stops qualification and needs review.
 

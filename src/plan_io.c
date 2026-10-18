@@ -31,6 +31,7 @@ bw_start(void)
     sigemptyset(&action.sa_mask);
     action.sa_handler = deadline;
     if (sigaction(SIGALRM, &action, NULL) == -1 ||
+        sigaction(SIGPROF, &action, NULL) == -1 ||
         sigaction(SIGXCPU, &action, NULL) == -1 ||
         sigaction(SIGXFSZ, &action, NULL) == -1)
         return 0;
@@ -39,6 +40,7 @@ bw_start(void)
         return 0;
     sigemptyset(&signals);
     sigaddset(&signals, SIGALRM);
+    sigaddset(&signals, SIGPROF);
     sigaddset(&signals, SIGXCPU);
     sigaddset(&signals, SIGXFSZ);
     sigaddset(&signals, SIGPIPE);
@@ -46,7 +48,11 @@ bw_start(void)
         return 0;
     memset(&timer, 0, sizeof(timer));
     timer.it_value.tv_sec = 5;
-    return setitimer(ITIMER_REAL, &timer, NULL) == 0;
+    if (setitimer(ITIMER_REAL, &timer, NULL) == -1)
+        return 0;
+    /* Keep CPU enforcement independent of the kernel's coarse rlimit checks. */
+    timer.it_value.tv_sec = 2;
+    return setitimer(ITIMER_PROF, &timer, NULL) == 0;
 }
 
 int

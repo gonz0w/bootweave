@@ -1,11 +1,11 @@
 # Read-only planner native progress
 
-Status: **Stopped during launch 5 native build, 2026-10-18.** Full installed-kernel
-prerequisites passed. Bootstrap and fourteen guarded compiler calls completed, then
-the emulator exceeded its fixed host RSS ceiling during the final harness build.
-No completed native build or planner check is claimed. All **5,868 required native
-checks remain unrun**. Native sync/halt was not observed; filesystem consistency is
-unverified after supervisor termination. Original partial state is preserved.
+Status: **Stopped at launch 6's native CPU-accounting gate, 2026-10-18.** Stock
+filesystem recovery and a complete fresh native build passed under the capped-cache
+profile. Serial testing recorded **2,889 passing checks and one failed CPU probe**;
+later checks were not run. Source/artifact readback, native sync/poweroff and full
+host closure passed. Exact original fixtures are preserved. A CPU-timer fix and
+revised continuation are prepared below; no new native execution is authorized.
 Original scope and unchanged limits: [native run plan](project-plan-native-plan.md).
 The original exact target, media and private failure evidence are preserved.
 
@@ -25,7 +25,8 @@ qualification is ready.
 | PR #74 | 6 | Launch 3 stopped on reduced-verifier usage. |
 | PR #74 continuation review | 7 | Cam explicitly approved launches 4–7, the RAM manifest and bounded correction. Launch 4 completed stock installation, then stopped at process readback. |
 | PR #74 remaining-launch review | 7, unchanged | Cam accepted launches 5–7/full-kernel process readback on 2026-10-18. Launch 5 stopped at the host RSS ceiling during the native build. |
-| Current proposal | 8, unapproved | Smaller explicit emulator cache; bounded recovery and partial-build replacement on the original disk, then complete launches 6–8. |
+| Accepted recovery, 2026-10-18 | 8 | Smaller explicit emulator cache; bounded recovery and partial-build replacement on the original disk, then complete launches 6–8. |
+| Current proposal | 9, unapproved | Preserve CPU limits, add a checked CPU timer, replace only the independently checked build tree from revised sealed source, and complete serial/VGA/readback in launches 7–9. |
 
 Separate exclusive private acceptance receipts bind each accepted run to the original
 host identity/digest, previous failure receipt and reviewed controller/input helper.
@@ -48,7 +49,7 @@ disk answer was sent in launches 1–3. Launch 4 used only that same target; its
 approved installation changed its content/allocation/timestamps. The stopped digest
 and independent postconditions are recorded below, separately from creation.
 
-Frozen native source/helper candidate is
+Original native source/helper candidate for launches 1–6 is
 `375f6b65ce7a8841a33c0bb2d0f4aaf94c1e6651`, tree
 `f10bfa143641f8516afc57f8e2d1f4c08a72cf19`. All sixteen source-bundle files
 (2,045,033 bytes) retain SHA256-listing digest
@@ -58,7 +59,8 @@ The independently extracted and byte-compared nonbootable source/release CD rema
 `b31e06d778c3bb43050dfcdfff66a40537799c0748c623c35de499f73dd5d1cd`.
 Its six selected stock files passed explicit-key host verification. All eight original
 tool/firmware/verifier/key/release pins matched before and after each launch.
-No native source/case/helper or media bytes changed.
+No native source/case/helper or media bytes changed during launches 1–6. A separate
+revised source/media candidate is prepared below; the original inputs remain intact.
 
 ## Actual native attempts
 
@@ -75,10 +77,11 @@ block graph edges and actual attachments were checked independently.
 | 3 | 1931.342 | 653376 | 1294473 | Observed CD unmount and clean halt, reaped, full zero readback. |
 | 4 | 2349.549 | 1580624 | 3000112 | Stock installation/relink completed; process readback failed; target unmount and clean halt observed, reaped, full stopped readback. |
 | 5 | 585.181 | 2122576 | 57846 | Process/source gates passed; native build stopped at the 2097152 KiB RSS ceiling. Reaped and full stopped hash; no native sync/halt. |
+| 6 | 1060.193 | 1250208 | 414907 | Stock preen and full fresh build passed; serial CPU gate failed. Source/artifact readback, native sync/poweroff, reap and full stopped hash passed. |
 
 Counts describe retained launch captures at closure; later diagnostic enlargements
 retain the original frames. These include prerequisite and partial-compiler
-observations, not successful native planner tests. Each closure independently found
+observations; launch 6 also contains the partial serial results below. Each closure independently found
 no owned guest/
 controller, fixture handles, mounts or IP listeners. Only checked stale owned Unix
 endpoints and redundant PPMs with retained lossless PNGs were removed. Failed disks,
@@ -373,14 +376,19 @@ credential, media and original evidence are preserved privately. No native unmou
 sync/halt or filesystem-consistency observation exists after the termination. QEMU
 return code 0 establishes process closure, not a clean guest filesystem or stage pass.
 
-## Proposed bounded recovery: launches 6–8, approval required
+## Accepted bounded recovery: launches 6–8
 
-Request an **eight-launch total ceiling**, counting all five consumed attempts, on
+Cam replied “approved” to this exact bounded recovery on 2026-10-18. A new exclusive
+private acceptance receipt binds the original stopped disk, failed closure and
+reviewed controller/auditor/input/watchdog hashes. Full identity/digest, source/media/
+tool pins, absent handles/mounts/endpoints and free-space checks passed before launch 6.
+
+The accepted **eight-launch total ceiling** counts all five consumed attempts, on
 only the original same-identity disk and stopped partial-state digest above. No
 reinstall, raw-target recreation/zeroing/clone/overlay, added disk, changed guest
 memory/CPU, source/media/dependency change or higher resource ceiling is proposed.
 The partial build fixture replacement and stock preen recovery below are new
-requested effects; previous approval does not authorize them.
+effects authorized by this explicit acceptance.
 
 Set the existing single-thread TCG accelerator explicitly to:
 
@@ -445,3 +453,139 @@ cannot run under earlier receipts; only its first recovery entry may accept the
 explicitly recorded unclean prior stop. Later phases require an actually passed stage
 and clean native halt. Keep this work on the same continuation branch and PR #74
 review, with one further consolidated PR when qualification and teardown are complete.
+
+## Launch 6: full native build and serial CPU-accounting stop
+
+Cam's acceptance above authorized this run on 2026-10-18. The exact stopped disk,
+all eight tool pins, unchanged source/CD and complete paused capped-cache profile
+passed independent checks. Stock boot preen corrected block counts, cleared
+unreferenced files and salvaged filesystem bookkeeping, then marked root, home and
+usr clean. No manual repair or reboot was requested. Native serial login was
+observed within 89 seconds and recorded at 96.645 seconds. The credential remained
+hidden. Installed platform/accounts/compiler/layout and absence of a physical NIC
+matched. Stock relinking was allowed to finish; a later native process inventory
+showed no relink/compiler/test workers before partial-tree inspection.
+
+Independent base-tool inspection recorded 50 partial-tree entries and all 47 regular
+file digests. All sixteen source files matched. The expected root/nobody ownership,
+modes, single regular-file links, exact namespace, absence of symlinks/special files/
+nested mounts and 5,984 KiB allocation passed the accepted conditional guards.
+Only this observed partial /planner tree was removed; its absence check returned 0.
+The existing owned empty CD mountpoint was checked and the unchanged CD mounted
+read-only. Exclusive fresh /planner creation, source copy, manifest pin, all fifteen
+checksums and sixteen root/wheel 0600 single-link file sizes passed.
+
+The unchanged fresh build completed with exit 0. Bootstrap used 4.62 seconds real,
+1.64 user, 0.90 system and 35,064 KiB RSS; the independent watchdog recorded
+guard-ready at 5.532 seconds. All fifteen guarded compiler calls returned wait 0.
+Maximum compiler measurements were 67,292 KiB RSS, 21.210 CPU seconds and 21.555
+wall seconds. Sixteen executable and ten map hashes, native size output, six
+base-libc/loader dynamic observations and six static-PIE readelf observations
+(no INTERP or NEEDED) were recorded. A stock linker advisory about the test
+supervisor's bounded strcpy was observed; compilation returned success.
+
+Serial results on the original frozen candidate:
+
+| Group | Actual result |
+|---|---|
+| Corpus | 2,802 passed; peak child RSS 972 KiB; 56.448 seconds. |
+| Descriptor/output/privilege edges | 46 passed; peak 968 KiB; 21.181 seconds. |
+| Injected IO/confinement failures | 30 passed; peak 948 KiB; 0.615 seconds. |
+| Same-policy probes | Eleven dynamic probes passed, including forbidden path/exec/fork/network/unveil, exact limits/descriptors/memory and stack termination. The next dynamic CPU probe failed the measured CPU ceiling. |
+| Remaining probes, API units, traces and actual consoles | Not run after the first failure; no VGA launch. |
+
+The harness reported `CPU ceiling; completed=11` and runner exit 1. Its failed
+comparison establishes user+system CPU above **2,100,000 microseconds** against the
+accepted two-second kernel limit plus 0.1-second observation allowance. It did not
+emit the failed child's exact usage, PID or status before exiting; those values
+are unavailable and must not be reconstructed as measurements. Earlier CPU-specific
+termination/output checks had passed, but that is not a resource pass. Across the
+successful receipts only, maximum child RSS was 2,940 KiB, CPU 0.020 seconds and
+wall 5.020 seconds. Overall: **2,889 passed, one failed, 2,890 attempted**, with no
+automatic retry or acceptance-limit change.
+
+Independent post-failure source and all sixteen artifact checksums passed. Fifty
+actual metadata entries (including device/inode, ownership/mode/link/size/allocation
+and recorded mtime/ctime) and the retained input/two canary hashes were preserved.
+The two canary digests matched their earlier values; guest allocation was 8,818 KiB.
+No compiler/test/relink worker remained. Owned CD unmount returned 0 and mount
+readback showed only installed filesystems. Native `sync && halt -p` produced
+`syncing disks... done`, followed by normal emulator poweroff/exit 0; no host
+termination or QMP quit was used. The stage remains failed despite clean shutdown.
+
+Independent stopped readback preserved original target/parent identity, owner/mode,
+single link and size, stable throughout its complete hash:
+
+`e804b4af91fc7bf63d51750f49a9628f60ddf91d289b8e7773dbd9a8757ba594`.
+
+All original media/source/tool pins matched. No owned processes, handles, mounts
+or listeners remained; only checked stale Unix endpoints were removed. Captures
+contained no credential. Owned allocation was 4,440,014,848 bytes. Original disk,
+completed binaries, retained inputs/canaries, source/media and failure receipts
+remain preserved; final disposal has not occurred.
+
+## Prepared CPU-enforcement fix and proposed launches 7–9
+
+The implementation keeps **RLIMIT_CPU=2**, the 2.1-second measured native gate and
+every existing resource/capture/deadline limit. It additionally arms a checked
+one-shot two-second ITIMER_PROF with the same refusal handler, restores/unblocks
+SIGPROF, and keeps the independent five-second ITIMER_REAL. No timer resets on
+progress. Handler/timer setup failure refuses before input. Production gains no
+test selector or dependency. The supervisor now emits numeric wait/time/CPU/RSS
+observations before a CPU-threshold failure; the missing launch-6 values remain
+unavailable.
+
+[OpenBSD's timer manual](https://man.openbsd.org/setitimer.2) defines ITIMER_PROF
+as charging user and system execution. Read-only upstream
+[kern_resource.c](https://github.com/openbsd/src/blob/master/sys/kern/kern_resource.c)
+revision 1.97 uses a 1,000 ms resource-check interval. This is a candidate explanation
+for relying on RLIMIT_CPU alone; it does not identify the exact failed guest usage
+or prove the cause on that kernel. No upstream code was copied. Native evidence
+for the added timer is still required.
+
+Host tests passed the busy-loop deadline with inherited blocked SIGPROF, plus
+injected REAL-timer, CPU-timer and SIGPROF-handler setup failures. The same three
+failure cases are added for each native binary on each console: **twelve additional
+checks**, retaining all prior 5,868. Revised total **5,880**: 2,916 per console plus
+48 serial trace cases. Fault cases become 36 per console; every other count and
+oracle is unchanged. Old partial passes do not qualify the changed candidate.
+
+Current [source bindings](project-plan-native-bindings.txt) describe the prepared
+sixteen-file bundle, 2,046,345 bytes, SHA256-listing digest:
+
+`704b9f5667ade98f5d82d9695e631ee615ad9caa5a08fd877409c64dd889cf7d`.
+
+Runtime C/headers total 14,337 bytes; four native helper C files total 35,653 bytes,
+within the original 24 KiB/48 KiB ceilings. The 1,401 independent definitions,
+case-manifest and generated-header bytes/digests are unchanged. The host-only CPU
+stimulus is not transported. A separate nonbootable CD candidate was prepared and
+independently extracted/byte-compared: **675,289,088 bytes**, SHA-256:
+
+`17847c522e1b02b4807d82785317e185313b0acce9e67b65ecdce6765d4e9835`.
+
+It is owned 0400 at `.tools/project-planner-native/cpu-candidate/data.iso`. All six
+selected release files and signed manifest are unchanged and explicitly verified.
+The original CD and source bundle are preserved. Preparation did not start a guest
+or change the stopped disk. Native attachment of this candidate is **not approved**.
+
+Request an **increase from eight to nine total launches**, counting all six consumed,
+only on the original disk bound to the stopped digest above. Keep the launch-6
+profile, including 128 MiB TCG cache and 2 GiB RSS, changing only the exact read-only
+data-CD path/bytes to this candidate. No reinstall, raw reset/recreation/clone,
+extra disk, guest RAM/CPU increase or relaxed acceptance limit.
+
+| Proposed launch | Bounded complete stage |
+|---|---|
+| 7 | Full paused identity/digest/device/process audit and clean full-kernel prerequisites. Independently recheck retained old source/artifact/input/canary hashes and fifty-entry metadata against launch 6. Conditionally dispose only that checked /planner tree, recreate it exclusively, copy/verify the exact revised sealed source, then one fresh complete native build and all serial suites, traces and four actual consoles. |
+| 8 | All revised keyboard/VGA suites and four actual console cases on the same completed binaries; no rebuild. |
+| 9 | Independent retained-fixture readback, exact native cleanup and clean halt, complete stopped hashes/host closure, then exact logical disposal of the original owned fixture and both source/media candidates/helpers. |
+
+The launch-7 conditional cleanup requires the same approved path/type/owner/mode/
+single-regular-link/no-symlink/no-special/no-nested-mount and 32 MiB allocation guards,
+now bound to the observed fifty-entry completed tree and retained hashes. Unknown
+inventory stops. Do not execute an old artifact as new qualification. Later launches
+require actual previous-stage success and clean halt. A new exclusive acceptance
+receipt must bind closure 6, original target identity/digest, revised source/media,
+reviewed controller/helpers and unchanged limits; previous receipts cannot start it.
+Any new compilation/oracle/resource/evidence failure stops dependent work. Keep the
+same branch and PR #74 continuation review; no intermediate phase PR.

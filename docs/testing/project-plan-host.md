@@ -63,10 +63,31 @@ recording the exact flag baseline; it masks no flags. A negative-control asserti
 was corrected to expect the actual content/identity diagnostic. These were host
 harness corrections before any native authority, not native successes or failures.
 
-The resource timer restores its required signal dispositions and unblocks those
-signals before arming a single nonrenewing timer. It does not change terminal
+The deadline setup restores its required signal dispositions and unblocks those
+signals before arming a single nonrenewing wall timer. It does not change terminal
 attributes or read environment variables. Only the private fault harness reads a
 test-selection environment value. Production output uses trusted format strings.
+
+## CPU-enforcement fix prepared after native launch 6
+
+The original native candidate passed its full build and 2,889 serial checks, then
+failed the measured CPU gate. Its actual stopped results remain separate in
+[native progress](project-plan-native-progress.md#launch-6-full-native-build-and-serial-cpu-accounting-stop).
+The revised runtime additionally arms checked one-shot ITIMER_PROF=2 seconds and
+unblocks/restores SIGPROF alongside the existing five-second wall timer. RLIMIT_CPU
+and the 2.1-second measured native threshold remain unchanged. A CPU-threshold
+failure now emits numeric child measurements before the fixed failure message.
+
+`make test-plan` passed eighteen groups: fifteen planner and three preparation
+groups. The new portable CPU stimulus exits 4 without stdout/stderr while inheriting
+blocked SIGPROF; measured host CPU stays between 1.5 and 2.5 seconds, with wall below
+five seconds. This host accounting range is a tooling test, not the stricter native
+acceptance threshold. Separately interposed REAL/CPU timer and SIGPROF-handler setup
+failures refuse with exit 4 and empty stdout. The same failure stimuli are included
+in the revised native test supervisor, adding twelve cases across both consoles.
+All existing cases remain. Runtime C/headers are now 14,337 bytes. Current sealed
+bindings reproduce the revised sixteen-file bundle; the original native bundle and
+media are preserved. No revised native build, pass or support claim is made.
 
 ## Limits and delivery gate
 

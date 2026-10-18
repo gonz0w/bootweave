@@ -18,9 +18,17 @@ not obtain process information under the installer kernel. Cam explicitly approv
 the existing remaining launches 5–7 and full installed-kernel process readback on
 2026-10-18 without a reinstall
 or extra launch. Launch 5 passed full-kernel prerequisites and began native compilation,
-then its supervisor stopped QEMU at the fixed host RSS ceiling. The current proposed
+then its supervisor stopped QEMU at the fixed host RSS ceiling. Cam explicitly approved
 launches 6–8 add an explicit smaller TCG cache, stock-preen recovery and conditional
-partial-build replacement. They require review; the original failed state is preserved.
+partial-build replacement on 2026-10-18. The original failed state is preserved pending
+the accepted inventory and conditional cleanup. Launch 6 then completed that recovery
+and a fresh build, passed 2,889 serial checks, and stopped at the CPU-accounting gate.
+Clean native shutdown and host closure passed. The current
+[revised CPU-timer/source/media and launches 7–9 proposal](project-plan-native-progress.md#prepared-cpu-enforcement-fix-and-proposed-launches-79)
+requires review; no acceptance budget is relaxed. The original plan below is
+historical for source candidate 375f6b6 and launches 1–6; its frozen argument preview
+is overridden only by the explicit accepted cache/profile amendments and any later
+accepted source-CD replacement, never by recreating its target.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
@@ -50,11 +58,13 @@ controls/Unicode and a fixed 256-case mutation corpus are included.
 | Case manifest | 413701 | 4bdfa1b1e132da11027749d078b0e424b630d6bd9cb3f1e46eec1ec0804721ae |
 | Source SHA256 listing | See linked listing | c58a21ff94aa3ead38d82da1691b5977fb87c23eb608c84209cd536a842e832b |
 
-The [complete source bindings](project-plan-native-bindings.txt) name all fifteen
+The [original complete source bindings](https://github.com/gonz0w/bootweave/blob/375f6b65ce7a8841a33c0bb2d0f4aaf94c1e6651/docs/testing/project-plan-native-bindings.txt) name all fifteen
 source/data files; the sealed source-only bundle has sixteen files including that
 listing, totaling 2,045,033 bytes. Its private owned 0700 staging directory and 0600
 files already exist. It contains no ISO, target, credential or native executable.
-Preparation tests reproduce the bundle and require exact equality to these bindings.
+Preparation tests reproduced the bundle and required exact equality to those bindings.
+The current binding file now describes the separately prepared CPU-timer candidate
+in the continuation proposal; it does not rewrite the transported launch-1–6 bytes.
 The PR supplies clean candidate/base/tree, signed/DCO verification and local results;
 documentation-only changes do not change these frozen transported bytes.
 

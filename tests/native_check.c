@@ -485,8 +485,13 @@ check(const char *binary, const struct native_case *fixture, enum mode mode,
     if (rss > peak_kib)
         peak_kib = rss;
     if ((long long)(usage.ru_utime.tv_sec + usage.ru_stime.tv_sec) * 1000000 +
-        usage.ru_utime.tv_usec + usage.ru_stime.tv_usec > 2100000)
+        usage.ru_utime.tv_usec + usage.ru_stime.tv_usec > 2100000) {
+        fprintf(stderr, "CPU ceiling observation: wait=%d wall_ms=%lld user_us=%lld system_us=%lld rss_kib=%ld\n",
+            status, elapsed,
+            (long long)usage.ru_utime.tv_sec * 1000000 + usage.ru_utime.tv_usec,
+            (long long)usage.ru_stime.tv_sec * 1000000 + usage.ru_stime.tv_usec, rss);
         fail("CPU ceiling");
+    }
     if (mode == ACTUAL_CONSOLE) {
         printf("console status=%d wall_ms=%lld\n", status, elapsed);
         printf("cpu_us=%lld rss_kib=%ld\n",
@@ -518,7 +523,8 @@ int
 main(int argc, char **argv)
 {
     static const char *const binaries[] = {"bootweave", "bootweave-static"};
-    static const char *const io_faults[] = {"short", "changed", "read-error", "write-zero", "write-error"};
+    static const char *const io_faults[] = {"short", "changed", "read-error", "write-zero", "write-error",
+        "timer-real", "timer-cpu", "sigprof"};
     static const char *const gates[] = {"data", "stack", "nofile", "core", "fsize", "cpu", "unveil", "lock", "pledge", "ugid"};
     static const char *const denied[] = {"open", "create", "exec", "fork", "inet4", "inet6", "unveil"};
     const struct native_case empty = {native_cases[0].data, 1, 3, "", 0};
@@ -603,7 +609,8 @@ main(int argc, char **argv)
             snprintf(name, sizeof(name), "io-fault-%zu", binary);
             for (i = 0; i < sizeof(io_faults) / sizeof(io_faults[0]); i++) {
                 snprintf(environment, sizeof(environment), "BW_TEST_FAULT=%s", io_faults[i]);
-                check(name, &native_cases[0], NORMAL, i == 0 ? 0 : i < 3 ? 3 : 5, "plan", environment);
+                check(name, &native_cases[0], NORMAL,
+                    i == 0 ? 0 : i < 3 ? 3 : i < 5 ? 5 : 4, "plan", environment);
             }
             snprintf(name, sizeof(name), "gate-fault-%zu", binary);
             for (i = 0; i < sizeof(gates) / sizeof(gates[0]); i++) {

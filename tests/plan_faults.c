@@ -4,8 +4,10 @@
 #define _DARWIN_C_SOURCE
 #endif
 #include <sys/stat.h>
+#include <sys/time.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <signal.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -16,6 +18,27 @@ mode(const char *name)
 {
     const char *value = getenv("BW_TEST_FAULT");
     return value != NULL && strcmp(value, name) == 0;
+}
+
+int
+bw_test_setitimer(int which, const struct itimerval *value, struct itimerval *previous)
+{
+    if ((which == ITIMER_REAL && mode("timer-real")) ||
+        (which == ITIMER_PROF && mode("timer-cpu"))) {
+        errno = EPERM;
+        return -1;
+    }
+    return setitimer(which, value, previous);
+}
+
+int
+bw_test_sigaction(int number, const struct sigaction *action, struct sigaction *previous)
+{
+    if (number == SIGPROF && mode("sigprof")) {
+        errno = EPERM;
+        return -1;
+    }
+    return sigaction(number, action, previous);
 }
 
 ssize_t
