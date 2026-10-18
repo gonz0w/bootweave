@@ -1,9 +1,11 @@
 # Read-only planner native progress
 
-Status: **Stopped after stock installation in launch 4, 2026-10-16.** Stock
-installation and kernel relinking completed, but the post-install process query
-failed under the installer kernel. No native planner compilation or check has run.
-All **5,868 required native checks remain unrun**.
+Status: **Stopped during launch 5 native build, 2026-10-18.** Full installed-kernel
+prerequisites passed. Bootstrap and fourteen guarded compiler calls completed, then
+the emulator exceeded its fixed host RSS ceiling during the final harness build.
+No completed native build or planner check is claimed. All **5,868 required native
+checks remain unrun**. Native sync/halt was not observed; filesystem consistency is
+unverified after supervisor termination. Original partial state is preserved.
 Original scope and unchanged limits: [native run plan](project-plan-native-plan.md).
 The original exact target, media and private failure evidence are preserved.
 
@@ -22,7 +24,8 @@ qualification is ready.
 | PR #73 | 5 | Launch 2 stopped; the keyboard diagnosis was corrected. |
 | PR #74 | 6 | Launch 3 stopped on reduced-verifier usage. |
 | PR #74 continuation review | 7 | Cam explicitly approved launches 4–7, the RAM manifest and bounded correction. Launch 4 completed stock installation, then stopped at process readback. |
-| Current proposal | 7, unchanged | Review the post-install failure before remaining launches 5–7; no extra launch or reinstall. |
+| PR #74 remaining-launch review | 7, unchanged | Cam accepted launches 5–7/full-kernel process readback on 2026-10-18. Launch 5 stopped at the host RSS ceiling during the native build. |
+| Current proposal | 8, unapproved | Smaller explicit emulator cache; bounded recovery and partial-build replacement on the original disk, then complete launches 6–8. |
 
 Separate exclusive private acceptance receipts bind each accepted run to the original
 host identity/digest, previous failure receipt and reviewed controller/input helper.
@@ -71,10 +74,12 @@ block graph edges and actual attachments were checked independently.
 | 2 | 634.331 | 659824 | 619312 | Observed clean native halt, reaped, full zero readback. |
 | 3 | 1931.342 | 653376 | 1294473 | Observed CD unmount and clean halt, reaped, full zero readback. |
 | 4 | 2349.549 | 1580624 | 3000112 | Stock installation/relink completed; process readback failed; target unmount and clean halt observed, reaped, full stopped readback. |
+| 5 | 585.181 | 2122576 | 57846 | Process/source gates passed; native build stopped at the 2097152 KiB RSS ceiling. Reaped and full stopped hash; no native sync/halt. |
 
 Counts describe retained launch captures at closure; later diagnostic enlargements
-retain the original frames. These are supervision/prerequisite observations, not
-successful native planner tests. Each closure independently found no owned guest/
+retain the original frames. These include prerequisite and partial-compiler
+observations, not successful native planner tests. Each closure independently found
+no owned guest/
 controller, fixture handles, mounts or IP listeners. Only checked stale owned Unix
 endpoints and redundant PPMs with retained lossless PNGs were removed. Failed disks,
 media, source staging, original frames and receipts remain preserved; final fixture
@@ -288,11 +293,11 @@ checked stale control socket was removed; other endpoints were already absent.
 Credential text was absent from launch captures. Original disk, media, source,
 credential and failure evidence remain private and preserved; no final disposal.
 
-## Proposed continuation: remaining launches 5–7, review required
+## Accepted continuation: remaining launches 5–7
 
 Keep the **existing seven-launch ceiling** and the same original installed target,
-bound to the full stopped digest above. Four launches have been consumed. Request
-review of the post-provisioning evidence failure, allowing launch 5 to start from
+bound to the full stopped digest above. At acceptance four launches had been
+consumed. Cam accepted the post-provisioning failure review, allowing launch 5 to start from
 this exact stopped state despite launch 4’s false stage flag. No reinstall, reset,
 replacement/clone, source/media change, extra launch or resource increase.
 
@@ -300,7 +305,7 @@ Use the normal base process query only after an observed boot into the **full
 installed OpenBSD kernel**, together with its native release/architecture, clean
 filesystem, account/compiler, layout and source/media prerequisites. Do not retry
 installed ps under the installer kernel or count the earlier failure as success.
-The prepared private controller requires a new explicit acceptance receipt bound to
+The private controller requires a new explicit acceptance receipt bound to
 the failed closure, original target/media and reviewed helper hashes; prior approval
 cannot start it. Later phases still require an actually passed previous stage.
 
@@ -312,3 +317,131 @@ fixtures. All 5,868 checks, deadlines, resource/capture limits, first-failure st
 and independent observations remain unchanged. The prerequisite-only usage exception
 cannot correct post-provisioning errors. Keep all remaining work on this branch and
 PR #74’s continuation review; no intermediate phase PR.
+
+## Launch 5: full-kernel prerequisites and native build memory stop
+
+Cam replied “approved, continue” to the exact remaining-launch question on
+2026-10-18. A separate exclusive acceptance receipt bound the original installed
+image, failed closure 4 and reviewed controller/input helpers. Complete source/media/
+tool pins, original identity/full stopped disk digest, free-space and no-handles
+checks passed. The complete paused profile matched the prior inventory minus only
+the approved omitted installer CD; raw graph edges, firmware, one CPU/1 GiB, exact
+process arguments/handles, no host IP listener and original full disk digest passed.
+
+The full OpenBSD 7.9 GENERIC amd64 kernel booted from that original installed image.
+Root/usr/home filesystems reported clean. Actual serial login arrived at 115.508
+seconds. Disposable credential input stayed hidden. Stock first-boot firmware/patch
+fetches failed without NIC/DNS; they are expected offline boot observations, not
+planner test results. Native uname/machine/root identity returned 0. Normal full-kernel
+ps returned 0 and showed no relinker, compiler or test workers. Installed clang 19.1.7,
+nobody UID/GID 32767, original disklabel/layout and no physical NIC matched. The CD
+mounted read-only as cd0; only loopback/enc/pflog interfaces were present.
+
+Exact absence guards preceded creation of root-owned 0700 /mnt/cd and /planner.
+The read-only CD source-manifest digest and copied manifest matched the frozen pin.
+All fifteen source checksums passed. Independent sixteen-file inventory confirmed
+root/wheel 0600, single links, expected byte sizes and no extra file. The unchanged
+accepted build script then started once. No new native source, media or dependency.
+
+Bootstrap base cc returned successfully: 5.06 seconds real, 1.79 user, 1.39 system,
+35120 KiB maximum RSS. Its independent host watchdog observed the guard-ready marker
+at 6.030 seconds, within 180. Fourteen subsequent native guarded compiler calls
+returned wait status 0. Maximum recorded compiler RSS was 37408 KiB, combined CPU
+5.450 seconds and wall 5.702 seconds, within the original 512 MiB/120 CPU/180 wall
+bounds. This includes normal dynamic/static engine and test objects; it is not a
+complete accepted build, artifact inventory or runtime qualification.
+
+The final static native-check harness compilation did not produce its completion
+record. The supervisor observed emulator RSS **2122576 KiB**, exceeding the fixed
+**2097152 KiB** ceiling, and terminated/reaped only its owned emulator. A subsequent
+pause request found the already closed controller; no guest pause or native shutdown
+is claimed. Overall launch elapsed was 585.181 seconds. There was no build-complete
+marker, final artifact/map/linkage readback, planner invocation or native suite.
+The native per-compiler measurements passed so far; the outer host resource gate
+failed and remains failed. No automatic retry, resource increase or new boot followed.
+
+Independent host closure confirmed absent owned processes, handles, mounts and
+listeners. Complete stopped readback preserved the original target/parent identity,
+owner/mode/single link/size and was stable while hashing. Its new partial-state digest:
+
+`b456d19e70d597f3532d1d6146d0da6ea727fe7ca98822a26f232ab9c02b9c91`.
+
+Media, all eight pins and the frozen source bundle matched. Credential text was absent
+from captures. Owned allocation was 4,402,786,304 bytes, below 20 GiB. Only checked
+stale Unix endpoints were removed. Raw disk, partial source/build/test fixtures,
+credential, media and original evidence are preserved privately. No native unmount,
+sync/halt or filesystem-consistency observation exists after the termination. QEMU
+return code 0 establishes process closure, not a clean guest filesystem or stage pass.
+
+## Proposed bounded recovery: launches 6–8, approval required
+
+Request an **eight-launch total ceiling**, counting all five consumed attempts, on
+only the original same-identity disk and stopped partial-state digest above. No
+reinstall, raw-target recreation/zeroing/clone/overlay, added disk, changed guest
+memory/CPU, source/media/dependency change or higher resource ceiling is proposed.
+The partial build fixture replacement and stock preen recovery below are new
+requested effects; previous approval does not authorize them.
+
+Set the existing single-thread TCG accelerator explicitly to:
+
+```text
+-accel tcg,thread=single,tb-size=128
+```
+
+Pinned local QEMU help lists tb-size; [QEMU's primary documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html)
+defines its translation cache size in MiB. This bounds the requested cache at 128 MiB
+while preserving the **2 GiB host RSS** and every native/host deadline, CPU, memory,
+file/capture and allocation ceiling. The cache is a candidate contributor, not a
+measured attribution of the failed RSS. Its effect and the changed profile require
+fresh native evidence; no successful memory bound is claimed in advance. All other
+attachments/firmware/arguments stay fixed. A normal host help query confirmed option
+syntax without booting a guest. An earlier accelerator-help form returned a property
+error before any VM/endpoint/CPU initialization; it is not a capability success or
+an additional native launch.
+
+Launch 6 may boot that exact preserved disk under the changed cache profile, with
+complete paused identity/full-digest/device/process audits first. Request only the
+unmodified stock boot filesystem **preen** path, including ordinary repairs it accepts
+after the unclean stop. Observe full filesystem results and native login before any
+build/test work. A manual-repair prompt, requested reboot, uncorrected error, missing
+observation or resource/identity failure stops the run. No manual fsck-y, alternate
+repair tool, reset or reinstall is included. Preen is recovery, not installation
+rollback or proof that partial files were durably written.
+
+After successful boot/prerequisites and no active compiler/relink/test workers,
+independently inventory and hash the retained partial /planner tree using base tools,
+preserving its actual metadata/content observations privately. Do not execute any
+partial binary or claim the earlier fourteen compiles as qualification. Request
+conditional disposal of **only that observed partial build tree**, after confirming
+its exact /planner root, expected source/build/temp/work namespace, approved root/
+nobody ownership, only single-link regular files and expected directories, no
+symlink/special file or nested mount, no unexpected/out-of-scope path, and at most
+the original 32 MiB
+guest allocation. Allowed root entries are the sixteen frozen source files; the
+sixteen executable names and ten map names listed by native_build.sh; fault-io.o,
+fault-native.o and ARTIFACTS.SHA256; compiler-tmp; work; and outside-canary. Work may
+contain only input and canary. Compiler-tmp may contain only bounded compiler-owned
+regular intermediates. Missing/partial outputs are diagnostic state, not accepted
+artifacts. Preserve each actual file digest before cleanup. Unknown inventory
+stops cleanup.
+No disposal of the original disk, media or unrelated guest paths is included here.
+
+Then exclusively recreate /planner on that same installation, copy the unchanged
+sealed source bundle, and independently reverify its manifest, every source checksum
+and expected ownership/modes before one complete fresh native build. This explicitly
+replaces the partial guest build/test fixtures; it does not reset the raw disk or
+alter the source. Retain new qualified input/canaries/artifacts through later readback.
+
+| Launch | Requested complete stage |
+|---|---|
+| 6 | Stock-preen recovery, full native prerequisites, independent partial-state readback/conditional exact build-tree disposal, unchanged source recopy, complete native serial build, suites, 48 trace cases and four actual serial consoles. |
+| 7 | All original keyboard/VGA suites and four actual console cases on the same completed native binaries. |
+| 8 | Independent retained-fixture readback, observed exact native cleanup/halt and exact owned host disposal. |
+
+All 5,868 native checks and first-failure stops remain required. A new exclusive
+acceptance receipt must bind this failed closure, original target/media, exact new
+accelerator argument and reviewed controller/helper hashes. The prepared controller
+cannot run under earlier receipts; only its first recovery entry may accept the
+explicitly recorded unclean prior stop. Later phases require an actually passed stage
+and clean native halt. Keep this work on the same continuation branch and PR #74
+review, with one further consolidated PR when qualification and teardown are complete.

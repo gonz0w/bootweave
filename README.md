@@ -120,8 +120,9 @@ for this bounded feature. Run `make build test-plan`; normal host builds provide
 help/version and refuse planning outside OpenBSD. See the
 [author guide](docs/configuration/author-guide.md) and
 [host evidence](docs/testing/project-plan-host.md). Exact native fixture approval was
-received; [launch 4 completed stock installation and relinking](docs/testing/project-plan-native-progress.md),
-then stopped on an unavailable process query under the installer kernel. Native
-qualification remains pending. The [frozen native run plan](docs/testing/project-plan-native-plan.md)
+received; [stock installation and full-kernel prerequisites passed](docs/testing/project-plan-native-progress.md).
+Native compilation began, then the emulator exceeded its host memory ceiling during
+the final harness build. Partial state is preserved; native qualification remains
+pending. The [frozen native run plan](docs/testing/project-plan-native-plan.md)
 and remaining-launch proposal stay on one continuation branch, linked from PR #74’s
 review; no intermediate phase PR is added.

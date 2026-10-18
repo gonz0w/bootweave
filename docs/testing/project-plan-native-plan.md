@@ -14,9 +14,13 @@ stopped because the reduced ramdisk verifier rejects checksum mode. The current
 verification followed by selected-file checksums; Cam explicitly approved its
 RAM-only manifest namespace and narrow prerequisite-correction exception. Launch 4
 completed first stock installation/relink, then stopped when full installed ps could
-not obtain process information under the installer kernel. The current proposal
-uses the existing remaining launches 5–7 and full installed-kernel process readback;
-it requires review of that failure without a reinstall or extra launch.
+not obtain process information under the installer kernel. Cam explicitly approved
+the existing remaining launches 5–7 and full installed-kernel process readback on
+2026-10-18 without a reinstall
+or extra launch. Launch 5 passed full-kernel prerequisites and began native compilation,
+then its supervisor stopped QEMU at the fixed host RSS ceiling. The current proposed
+launches 6–8 add an explicit smaller TCG cache, stock-preen recovery and conditional
+partial-build replacement. They require review; the original failed state is preserved.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
