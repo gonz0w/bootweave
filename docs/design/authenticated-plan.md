@@ -1,8 +1,8 @@
 # Authenticated read-only payload review: scoped product design
 
-Status: proposed for adoption with [the issue #5 decision](project-trust/ADOPTION.md),
-2026-10-19. No source implementation, native run or new target is authorized by
-this document alone. Engineering continuation is delegated; this is a concrete
+Status: adopted safety scope by independently reviewed [PR #76](https://github.com/gonz0w/bootweave/pull/76),
+2026-10-19. This permits the bounded pure-model continuation below, with native
+execution and authenticated CLI I/O remaining separate engineering gates. Engineering continuation is delegated; this is a concrete
 scope to review rather than a request for new product direction.
 
 ## Requirements
@@ -101,3 +101,26 @@ fixtures or a VM. Native evidence must distinguish legitimate verifier scratch
 writes from forbidden target/member effects. No native test or real key is
 requested now. Parent PT/PTT acceptance remains partial; no broad installer,
 extraction, privilege, secret or bootstrap claim follows from this design.
+
+## First pure structure component
+
+The initial source slice is `bw_payload_structure_review`, an internal pure C
+retained-buffer function in src/payload_review.c. It accepts a const byte span
+and disjoint typed count output; it opens nothing, allocates nothing and performs
+no system call. It returns only member/file/content counts after complete valid
+structure, never an authenticity/compatibility/authorization assertion. Failure
+zeros disjoint output; pointer alias/overflow or null output rejects without a
+write. The caller owns valid buffer lifetime and must separately authenticate the
+retained bytes before composing a trusted product review. There is no CLI, policy
+injection, verifier/scratch handoff, device or write backend in this slice.
+
+This ports only the bounded structural policy from the original researched
+inspector, with per-call state and depth16 enforcement: UID/GID numeric zero,
+0755 directories/0644 regular files, zero owner/group name and link fields,
+strict ustar checksum/numeric/trailer/padding and no special/extended types. A
+nonempty file inventory is required; zero-length regular files are supported.
+Unrelated application, DNS and firewall bytes follow identical rules. The new
+C/header ceiling is8KiB and workspace34KiB; the complete current src remains
+under the planner's existing24KiB source ceiling. No native memory claim follows.
+The test-only C byte driver and independently constructed corpus are never linked
+into bootweave. Native confinement and authenticated I/O are still unimplemented.
