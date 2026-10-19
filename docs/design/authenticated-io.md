@@ -164,3 +164,9 @@ Run complete `make verify` on the identified clean candidate, independent source
 and evidence review and signature/DCO checks. Host tests establish only this
 capture component. Verifier/scratch/confinement composition and native serial/plain
 evidence require their later implementation and fresh exact native authority.
+
+The next [portable verifier-material increment](verifier-material.md) refines the
+startup order: reserve only an exact empty scratch capability outside fd roles
+0..4 before locking confinement/capture, then populate it from retained bytes.
+It adds format validation and anonymous read-only handles without a verifier
+launch or CLI. The same native composition gates remain.
