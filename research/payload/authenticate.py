@@ -32,6 +32,7 @@ CATEGORIES = frozenset(('context', 'input', 'identity', 'signature', 'inspection
                         'tools', 'io', 'deadline', 'output', 'resource',
                         'interrupted', 'cleanup'))
 METRICS = {'child_peak_rss_bytes': 0, 'reaped_children': 0}
+_UNRESOLVED_CHILDREN = []
 
 
 class Failure(Exception):
@@ -70,6 +71,21 @@ class ChildResult:
     stdout: bytes
     stderr: bytes
     rss_bytes: int
+
+
+@dataclass
+class _WaitState:
+    consumed: bool = False
+    lost: bool = False
+    stop_attempted: bool = False
+    rss: object = None
+
+
+@dataclass(frozen=True)
+class _BornChild:
+    process: object
+    pid: int
+    wait: _WaitState
 
 
 def _check(deadline, cancelled):
@@ -163,34 +179,94 @@ def _limits():
     os.umask(0o077)
 
 
-def _reap(process, block=False):
-    while True:
-        try:
-            pid, status, usage = os.wait4(process.pid, 0 if block else os.WNOHANG)
-            break
-        except InterruptedError:
-            continue
+def _exited(owner):
+    """Observe our child without consuming the kernel-held leader reservation."""
+    if owner.wait.lost:
+        raise Failure('cleanup')
+    if owner.wait.consumed:
+        return True
+    try:
+        observed = os.waitid(os.P_PID, owner.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+    except InterruptedError:
+        return False
+    except BaseException:
+        owner.wait.lost = True
+        raise
+    if observed is None or observed.si_pid == 0:
+        return False
+    if observed.si_pid != owner.pid:
+        owner.wait.lost = True
+        raise Failure('cleanup')
+    return True
+
+
+def _stop_owned_group(owner):
+    # The strong born Popen binding has never been waited/polled. No sampled
+    # PID/argv observation can restore authority after wait consumption/loss.
+    if owner.wait.consumed or owner.wait.lost or owner.wait.stop_attempted:
+        return
+    owner.wait.stop_attempted = True
+    try:
+        os.killpg(owner.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+
+
+def _reap(owner):
+    if owner.wait.consumed:
+        return owner.wait.rss
+    if owner.wait.lost:
+        raise Failure('cleanup')
+    try:
+        pid, status, usage = os.wait4(owner.pid, os.WNOHANG)
+    except InterruptedError:
+        return None
+    except BaseException:
+        owner.wait.lost = True
+        raise
     if not pid:
         return None
-    process.returncode = os.waitstatus_to_exitcode(status)
-    rss = usage.ru_maxrss * (1 if sys.platform == 'darwin' else 1024)
-    METRICS['child_peak_rss_bytes'] = max(METRICS['child_peak_rss_bytes'], rss)
+    # Latch before status/RSS conversion or any refusal can raise.
+    owner.wait.consumed = True
     METRICS['reaped_children'] += 1
+    if pid != owner.pid:
+        owner.wait.lost = True
+        raise Failure('cleanup')
+    owner.process.returncode = os.waitstatus_to_exitcode(status)
+    rss = usage.ru_maxrss * (1 if sys.platform == 'darwin' else 1024)
+    owner.wait.rss = rss
+    METRICS['child_peak_rss_bytes'] = max(METRICS['child_peak_rss_bytes'], rss)
     return rss
+
+
+def _terminal_reap(owner, deadline):
+    while True:
+        measured = _reap(owner)
+        if owner.wait.consumed:
+            return measured
+        if time.monotonic() >= deadline:
+            raise Failure('cleanup')
+        time.sleep(min(.01, max(0, deadline - time.monotonic())))
 
 
 def _run(argv, data, directory, deadline, cancelled):
     """Trusted-only child supervision shared by the experiment and fixture tests."""
     _check(deadline, cancelled)
-    deadline = min(deadline, time.monotonic() + CHILD_SECONDS)
-    process = None
+    now = time.monotonic()
+    terminal_deadline = min(deadline, now + CHILD_SECONDS)
+    deadline = terminal_deadline - min(1, (terminal_deadline - now) / 4)
+    if (not hasattr(os, 'waitid') or not hasattr(os, 'WNOWAIT')
+            or signal.getsignal(signal.SIGCHLD) != signal.SIG_DFL):
+        raise Failure('tools')
+    process = owner = None
     selector = selectors.DefaultSelector()
     output, errors = bytearray(), bytearray()
-    sent, rss, finished = 0, None, False
+    sent, rss, exited = 0, None, False
     try:
         process = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, cwd=directory, env=ENVIRONMENT,
                                    close_fds=True, start_new_session=True, preexec_fn=_limits)
+        owner = _BornChild(process, process.pid, _WaitState())
         for stream in (process.stdin, process.stdout, process.stderr):
             os.set_blocking(stream.fileno(), False)
         if data:
@@ -199,7 +275,7 @@ def _run(argv, data, directory, deadline, cancelled):
             process.stdin.close()
         selector.register(process.stdout, selectors.EVENT_READ, 'output')
         selector.register(process.stderr, selectors.EVENT_READ, 'error')
-        while selector.get_map() or process.returncode is None:
+        while selector.get_map() or not exited:
             _check(deadline, cancelled)
             for key, _ in selector.select(min(.1, max(0, deadline - time.monotonic()))):
                 if key.data == 'input':
@@ -224,28 +300,38 @@ def _run(argv, data, directory, deadline, cancelled):
                         (output if key.data == 'output' else errors).extend(part)
                         if len(output) + len(errors) > OUTPUT_CAP:
                             raise Failure('output')
-            if process.returncode is None:
-                measured = _reap(process)
-                if measured is not None:
-                    rss = measured
+            if not exited:
+                exited = _exited(owner)
+        _stop_owned_group(owner)
+        rss = _terminal_reap(owner, terminal_deadline)
         if rss is None or rss > CHILD_RSS_CAP:
             raise Failure('resource')
         if sent != len(data):
             raise Failure('io')
-        finished = True
         return ChildResult(process.returncode, bytes(output), bytes(errors), rss)
     finally:
-        selector.close()
-        if process is not None:
-            if not finished:
-                try:
-                    os.killpg(process.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-            if process.returncode is None:
-                _reap(process, block=True)
-            for stream in (process.stdin, process.stdout, process.stderr):
-                stream.close()
+        primary = sys.exc_info()[1]
+        failures = []
+        actions = [('selector-close', selector.close)]
+        if owner is not None:
+            actions += [('stop-owned-group', lambda: _stop_owned_group(owner)),
+                        ('reap-owned-child', lambda: _terminal_reap(owner, terminal_deadline))]
+            actions += [(name + '-close', stream.close) for name, stream in (
+                ('stdin', process.stdin), ('stdout', process.stdout), ('stderr', process.stderr))]
+        for name, action in actions:
+            try:
+                action()
+            except BaseException as error:
+                failures.append(name + ':' + type(error).__name__)
+        if owner is not None and not owner.wait.consumed:
+            # Keep the born handle; never let an implicit destructor turn an
+            # uncertain terminal receipt into an unrecorded consuming poll.
+            _UNRESOLVED_CHILDREN.append(owner)
+        if failures:
+            if primary is not None:
+                primary.add_note('Authenticated cleanup stages failed: ' + ', '.join(failures))
+            else:
+                raise Failure('cleanup')
 
 
 def _write(directory, name, data):
