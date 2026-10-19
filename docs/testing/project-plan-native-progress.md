@@ -1,26 +1,29 @@
 # Read-only planner native progress
 
-Status: **5,882 required native checks, independent readback and exact guest
-cleanup passed, 2026-10-18. Host disposal is blocked pending explicit approval.**
+Status: **5,882 required native checks, independent readback, exact guest cleanup
+and final approved host disposal completed. Exact target authority ended.**
+See the [dated final disposal evidence](#final-approved-host-disposal-and-authority-ended);
+the native execution results below retain their original source bindings and dates.
 The checked CPU-timer correction passed with unchanged production budgets. The
 accepted trace method uses separately labelled source-correlated test companions;
 all 48 complete traces passed, including explicit loader accounting. Launch 11
 independently matched all 85 retained entries/81 file hashes, removed only the
 checked guest fixtures and powered off normally. Full stopped host closure passed.
-Automatic approval review requires explicit user approval before deleting the exact
-host fixture/source copies and private helpers. Those bytes remain preserved and
-the consolidated PR remains draft until disposal is complete.
+Automatic approval review previously blocked host deletion twice. Explicit approval
+and later independent absence are recorded separately below; neither rejection
+nor any original failed native attempt is rewritten as a pass.
 Original scope and unchanged limits: [native run plan](project-plan-native-plan.md).
-The original exact target, media and private failure evidence are preserved.
+The original target/media/private failure evidence was preserved through native
+readback and approval review, then logically disposed only within the final
+explicitly approved scope. Sanitized historical evidence remains retained.
 
 ## Authority and frozen fixtures
 
 Cam's explicit “continue” replies accepted the concrete target/run questions below.
 Each continuation counted prior attempts; none authorized a reset or replacement.
 The maintainer merged each draft before its execution. Remaining qualification and
-teardown accumulate on one continuation branch; PR #74's review notes link its current
-evidence and proposal. A further PR will cover that remaining work together when
-qualification is ready.
+teardown accumulated on one continuation branch, linked from PR #74's review.
+PR #75 carries that complete continuation and final evidence together.
 
 | Review | Accepted ceiling | Outcome |
 |---|---:|---|
@@ -876,6 +879,8 @@ read-only host audit bound all 713 owned entries, no symlink/special/hardlinked
 files, no handles/mounts, original disk/media/source hashes and 10,540,232,704 bytes
 of allocation, below 20 GiB. Sanitized results were saved separately before disposal.
 
+Historical blocked-disposal checkpoint, before the final October 19 disposition:
+
 Automatic approval review rejected host-side deletion twice, including a narrower
 five-root request supported by the accepted plan's host-cleanup clause. It requires
 explicit trusted user approval of that exact host disposal. Both rejected commands
@@ -885,3 +890,44 @@ or private helper was deleted. Preserve these fixtures, keep the consolidated PR
 verification are reviewable. Do not bypass the rejection or claim target authority
 has ended. Shared tools, stock release inputs and Git/repository files stay outside
 any eventual fixture disposal.
+
+
+## Final approved host disposal and authority ended
+
+On 2026-10-19, explicit trusted approval authorized only the exact 83-target host
+disposal: five roots and 78 separate files, bound by private manifest SHA-256
+`4f81ac60bdb2b03281dc4e8a8c16a8b8dc9a535c236116f3c773c93409d51097`. Fresh identity,
+inventory, type/link/ownership, file-hash, tool/release-pin and scoped quiescence checks
+passed. One deletion run removed 791 entries (751 regular files and 40 directories); its
+complete unique journal matches the checked preflight inventory. A separate independent
+post-effect observation confirmed all 83 targets absent and all 791 inventory paths
+absent, with 13 preserved exclusions, eight resolved tool/release pins and aliases, and
+two historical external audit copies unchanged. Scoped process/file-handle observations
+rely on trusted coordinator quiescence; this is not universal proof about hidden
+processes, unlinked handles or future recreation. Versioned source/Git, shared verified
+tools, stock inputs, sanitized evidence, and the explicitly excluded scope/review and
+preserved historical audit records remain outside disposal.
+
+The fresh manifest reports 16,708,757,372 regular logical bytes and 10,540,908,544
+allocated bytes before deletion. These are scoped inventory figures, not a claim of
+physical bytes reclaimed. Logical disposal is not secure erasure or installation
+rollback. The exact disposable planner target authority has ended; no new native run or
+broader effect is authorized.
+
+The original sanitized completion receipt (SHA-256
+`5484ad2af1c8b30603104d28857f21752590bdc50304358c3e7a61c9e25060b6`) remains historical,
+including its then-false host-disposal flags. The separate [sanitized final-disposal
+receipt](project-plan-host-disposal-2026-10-19.json) is SHA-256
+`7713833d8a50b84435524af3d0793f425b0e289c75ccc88a049bac5b335b1314`; independent absence
+evidence is SHA-256 `32ded6ac759e784b0d543ac8fd462a28f49df825c782de1d7ebcb2fdd294957c`.
+Earlier failed/stopped cases and both prevented approval-review requests above remain
+unchanged history.
+
+No planner/compiler/trace case was rerun for this disposal or documentation step. The
+5,882 native checks bind runtime source `fab0816bad2de10e7c45bff3e50f9deb3798eea1` and
+trace source `67c79762a7d8c0a5c849554c3f5def1bab35e81e`. Later host observer corrections
+retain the original native artifacts/oracles/traces and their stated limits; this final
+documentation does not claim a native rebuild of current HEAD. Production budgets,
+read-only planner scope and broader installer/profile gates remain unchanged. Final
+signed-candidate portable verification and review are recorded separately with their
+exact source/tree/base.

@@ -1,6 +1,7 @@
 # Read-only planner host evidence
 
-Status: Portable implementation checked, 2026-10-15. OpenBSD qualification pending.
+Status: historical portable implementation evidence from 2026-10-15. Subsequent
+bounded native qualification and [exact fixture teardown](project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) are recorded separately; these host checks are not native evidence.
 Scope: [accepted PRD/EDD/Test Design](../design/project-plan.md) and
 [ADR 0003](../adr/0003-read-only-project-planner.md). PR #70 was merged by the
 maintainer before implementation; its exact merged tree is the implementation base.
@@ -91,9 +92,9 @@ media are preserved. Later native continuation completed a revised build and all
 5,832 serial/VGA runtime checks; see [actual native results](project-plan-native-progress.md).
 The accepted source-correlated tracing method subsequently passed all 48 cases
 and two added native limit helpers, for 5,882 required native checks. Independent
-readback and exact guest cleanup passed. Automatic approval review blocks host
-disposal pending explicit approval; no general support claim follows from host
-checks or the bounded native results.
+readback and exact guest cleanup passed. Subsequent explicit approval, host disposal
+and independent absence are recorded in the final native evidence. No general
+support claim follows from host checks or the bounded native results.
 
 ## Limits and delivery gate
 
@@ -104,9 +105,10 @@ Read/stat faults are controlled interposition, not proof of an atomic file snaps
 Canary comparisons do not alone prove absence of attempted syscalls. These limits
 remain explicit requirements of PLAN-T04 through T08.
 
-The feature draft must remain open and unready until a concrete frozen native
-manifest/helpers/source and exact fresh fixture run plan receive approval, all
-required native cases pass, and independent readback/disposal completes. No native
+The native delivery gate required approved frozen manifests/helpers/source and an
+exact fixture plan, all required native cases, and independent readback/disposal.
+The final native evidence records completion of those bounded obligations; fresh
+clean-candidate verification and review remain required before delivery. No native
 fixture was provisioned or launched for these host checks. Previous research target
 authority has ended. This feature grants no installer/payload-write authority.
 

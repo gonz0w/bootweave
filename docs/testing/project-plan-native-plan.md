@@ -36,8 +36,9 @@ is overridden only by the explicit accepted cache/profile amendments and any lat
 accepted source-CD replacement, never by recreating its target.
 Current result: [all 5,882 required native checks, independent readback and exact
 guest cleanup passed](project-plan-native-progress.md#launch-11-independent-readback-and-exact-guest-cleanup).
-Automatic approval review requires explicit user approval for exact host disposal;
-the original host fixture/source/media/helpers remain intact and delivery is draft.
+After explicit approval, [final host disposal and independent absence](project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) completed;
+that exact target authority ended. Earlier blocked-disposal observations remain
+historical, and source-bound verification/review still govern delivery.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research

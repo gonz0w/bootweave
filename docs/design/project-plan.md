@@ -8,7 +8,8 @@ separate. Related runtime decision: [ADR 0003](../adr/0003-read-only-project-pla
 This is the next complete feature after the
 [installed-payload qualification](../research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15).
 It adopts the bounded metadata/runtime contract below for this planner only.
-Implementation and portable host checks are complete; native qualification is pending.
+Implementation, portable checks and bounded native planner qualification are complete;
+[exact fixture disposal](../testing/project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) ended that target authority. Broader installer/profile acceptance remains separate.
 
 ## PRD: outcome and accepted work
 
@@ -212,9 +213,9 @@ The host-tested slice and author guide are implemented. The
 [accepted native continuation](../testing/project-plan-native-plan.md) completed all
 5,882 required native checks, independent retained readback and exact guest cleanup.
 [Actual evidence](../testing/project-plan-native-progress.md) preserves earlier
-failures and the accepted source-correlated trace method. Automatic approval review
-blocks exact host fixture disposal pending explicit user approval; the draft stays
-unready and retained host bytes are not claimed disposed.
+failures and the accepted source-correlated trace method. After explicit approval,
+[final host disposal and independent absence](../testing/project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) completed. Earlier automatic rejections remain historical;
+source-bound review and clean-candidate verification still govern readiness.
 The bounded native plan must retain exact source/artifacts,
 release/backend/firmware, fresh target identity/allowed effects, case manifest,
 commands, resource/capture limits, stop/reap and independent disposal. Obtain exact

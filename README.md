@@ -5,8 +5,9 @@ BSD-3-Clause licensed; community contributions welcome. This project is independ
 of the OpenBSD project and does not imply upstream endorsement.
 
 **Status: first read-only planner implementation and bounded installer research.**
-The planner has an accepted metadata contract and portable tests; OpenBSD planner
-qualification is pending. A disposable research image boots the synthetic UI. No
+The planner has an accepted metadata contract, portable tests and completed bounded
+OpenBSD 7.9 amd64 BIOS/TCG planner qualification with exact fixture teardown.
+A disposable research image boots the synthetic UI. No
 production installer, runtime service, supported hardware profile or release exists yet.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
 The maintainer approved the name and public repository on 2026-10-11.
@@ -125,9 +126,8 @@ The CPU-timer correction and accepted test-only trace method now have **5,882
 required native checks**, complete serial/keyboard-VGA plans, independent retained
 readback and observed exact guest cleanup. Production resource limits are unchanged;
 traces use source-correlated companions under the [accepted evidence amendment](docs/testing/project-plan-trace-amendment.md).
-Automatic approval review blocks exact host fixture disposal pending explicit user
-approval, so final native delivery remains draft. Full results and earlier failures
-remain in the [native evidence](docs/testing/project-plan-native-progress.md).
-The [native run plan](docs/testing/project-plan-native-plan.md)
-and revised source/remaining-launch proposal stay on one continuation branch, linked from PR #74’s
-review; no intermediate phase PR is added.
+Following explicit approval, [exact host disposal and independent absence](docs/testing/project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended)
+completed and that target authority ended. Full results, original failures and
+prior approval rejections remain recorded. The [native run plan](docs/testing/project-plan-native-plan.md),
+implementation, corrections and final evidence remain together in PR #75. This
+bounded planner result does not qualify a production installer or broader profile.
