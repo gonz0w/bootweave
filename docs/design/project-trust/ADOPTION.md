@@ -1,9 +1,10 @@
 # Project trust contract: staged adoption for issue #5
 
-Status: proposed for adoption by the reviewed PR, 2026-10-19. The owner delegated
+Status: adopted by independently reviewed [PR #76](https://github.com/gonz0w/bootweave/pull/76),
+2026-10-19, canonical35642f92926be6c7c7df1ab57366a115a39370b5. The owner delegated
 contract preparation and routine engineering decisions in the continuation after
-PR #75. This document records that engineering recommendation; it does not claim
-that the owner accepted an unreviewed document or authorize native execution.
+PR #75. This document records the delegated engineering decision and its review; it
+does not authorize native execution.
 Related: [requirements](PRD.md), [engineering](EDD.md), [tests](TDD.md),
 [bounded next product slice](../authenticated-plan.md).
 
