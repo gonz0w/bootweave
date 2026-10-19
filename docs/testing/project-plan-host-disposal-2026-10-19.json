@@ -1,0 +1,77 @@
+{
+  "schema": "bootweave-planner-final-host-disposal/v1",
+  "status": "COMPLETED_BOUNDED_LOGICAL_DISPOSAL",
+  "disposal_observed_utc": "2026-10-19T02:54:33.609901+00:00",
+  "independent_absence_observed_utc": "2026-10-19T02:55:47.430062+00:00",
+  "approval": {
+    "source": "Explicit trusted maintainer approval for the exact 83 targets, supplied through the coordinating task",
+    "record_sha256": "3c778f4e7ccb20444e2c9c615ffaad546fd8e9d0516fe38ecf5e833b9176ab58",
+    "scope": "Five disposable planner roots and 78 separate owned files only; exclusions preserved"
+  },
+  "bindings": {
+    "scope_manifest_sha256": "4f81ac60bdb2b03281dc4e8a8c16a8b8dc9a535c236116f3c773c93409d51097",
+    "scope_record_sha256": "6ae50cd2b20aff7144adc266517c3f6646e959b5676d46d548a822bc5f64d8cf",
+    "historical_disposal_plan_sha256": "2ca3b312759f86f705d76ca0c2fb3726dfc7b034e2bad07a1f32ced024f54981",
+    "historical_pin_record_sha256": "89a378c9d2631c1755b898c0fa75f474ca6e8c9a5adacc3b06eff0ac2eb9dc88",
+    "fresh_preflight_sha256": "3cedd579a68179352b41f13031a128844c84dc2253f5a9ce579bfe7d52307f9f",
+    "deletion_receipt_sha256": "8202025d73b7630992fb7a029d1edb22ca789e244d205abddb91149d78aaf655",
+    "deletion_journal_sha256": "03eedd10886a1764421f977473d66331fedb7539b072c78e328d9bf53fc494d4",
+    "cleanup_helper_sha256": "fbf26645dac1c23d4fa996a20600dc068b7c1c34859cc6bb1274e9d1a4c1c735",
+    "independent_absence_report_sha256": "32ded6ac759e784b0d543ac8fd462a28f49df825c782de1d7ebcb2fdd294957c"
+  },
+  "observed_counts": {
+    "exact_targets": 83,
+    "absent_targets": 83,
+    "root_targets": 5,
+    "individual_file_targets": 78,
+    "journal_entries": 791,
+    "inventory_entries": 791,
+    "absent_inventory_paths": 791,
+    "regular_files": 751,
+    "directories": 40,
+    "preserved_exclusions": 13,
+    "resolved_pins": 8,
+    "historical_external_copies": 2,
+    "regular_logical_bytes_before_deletion": 16708757372,
+    "allocated_bytes_before_deletion": 10540908544
+  },
+  "byte_semantics": "16,708,757,372 regular logical bytes and 10,540,908,544 allocated bytes are fresh pre-deletion inventory totals; neither measures reclaimed space. Logical unlink/rmdir is not secure erasure or rollback.",
+  "independent_verification": [
+    "All 83 approved targets and 791 inventoried paths absent",
+    "Unique complete 791-entry deletion journal matches preflight metadata, hashes and actions",
+    "13 preserved exclusions and 8 resolved tool/release pins and aliases unchanged",
+    "Two exact historical audit copies retained outside deletion scope",
+    "Original sanitized completion receipt unchanged"
+  ],
+  "retained_exclusions": [
+    "Versioned source and Git state",
+    "Shared verified tools and stock release inputs",
+    "Sanitized evidence including the original completion receipt",
+    "Explicitly excluded scope/review records and preserved historical audit copies"
+  ],
+  "historical_evidence": {
+    "original_completion_receipt_sha256": "5484ad2af1c8b30603104d28857f21752590bdc50304358c3e7a61c9e25060b6",
+    "original_false_disposal_flags_rewritten": false,
+    "earlier_failures_and_two_prevented_deletion_requests": "Retained as historical evidence"
+  },
+  "native_lineage": {
+    "required_checks": 5882,
+    "runtime_source": "fab0816bad2de10e7c45bff3e50f9deb3798eea1",
+    "trace_source": "67c79762a7d8c0a5c849554c3f5def1bab35e81e",
+    "independent_guest_readback_entries": 85,
+    "independent_guest_readback_files": 81,
+    "later_observer_correction": "Host loader descriptor-zero accounting; native source, artifacts, oracles and traces unchanged",
+    "native_rerun_for_disposal": false
+  },
+  "authority": {
+    "exact_disposable_planner_target_ended": true,
+    "other_contexts_or_targets_affected": false,
+    "new_native_or_installer_authority": false
+  },
+  "limits": [
+    "Point-in-time absence; no guarantee against future recreation",
+    "Scoped PID/command-name/recorded-PID/file-handle observations rely on trusted coordinator quiescence; no universal proof about hidden processes or unlinked handles",
+    "No physical-erasure, reclaimed-block, production-installer, broader profile or release claim",
+    "Fresh clean-candidate portable verification, signatures, DCO and review remain separate delivery gates"
+  ]
+}

@@ -1,6 +1,7 @@
 # Read-only planner host evidence
 
-Status: Portable implementation checked, 2026-10-15. OpenBSD qualification pending.
+Status: historical portable implementation evidence from 2026-10-15. Subsequent
+bounded native qualification and [exact fixture teardown](project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) are recorded separately; these host checks are not native evidence.
 Scope: [accepted PRD/EDD/Test Design](../design/project-plan.md) and
 [ADR 0003](../adr/0003-read-only-project-planner.md). PR #70 was merged by the
 maintainer before implementation; its exact merged tree is the implementation base.
@@ -63,10 +64,37 @@ recording the exact flag baseline; it masks no flags. A negative-control asserti
 was corrected to expect the actual content/identity diagnostic. These were host
 harness corrections before any native authority, not native successes or failures.
 
-The resource timer restores its required signal dispositions and unblocks those
-signals before arming a single nonrenewing timer. It does not change terminal
+The deadline setup restores its required signal dispositions and unblocks those
+signals before arming a single nonrenewing wall timer. It does not change terminal
 attributes or read environment variables. Only the private fault harness reads a
 test-selection environment value. Production output uses trusted format strings.
+
+## CPU-enforcement fix prepared after native launch 6
+
+The original native candidate passed its full build and 2,889 serial checks, then
+failed the measured CPU gate. Its actual stopped results remain separate in
+[native progress](project-plan-native-progress.md#launch-6-full-native-build-and-serial-cpu-accounting-stop).
+The revised runtime additionally arms checked one-shot ITIMER_PROF=2 seconds and
+unblocks/restores SIGPROF alongside the existing five-second wall timer. RLIMIT_CPU
+and the 2.1-second measured native threshold remain unchanged. A CPU-threshold
+failure now emits numeric child measurements before the fixed failure message.
+
+`make test-plan` passed eighteen groups: fifteen planner and three preparation
+groups. The new portable CPU stimulus exits 4 without stdout/stderr while inheriting
+blocked SIGPROF; measured host CPU stays between 1.5 and 2.5 seconds, with wall below
+five seconds. This host accounting range is a tooling test, not the stricter native
+acceptance threshold. Separately interposed REAL/CPU timer and SIGPROF-handler setup
+failures refuse with exit 4 and empty stdout. The same failure stimuli are included
+in the revised native test supervisor, adding twelve cases across both consoles.
+All existing cases remain. Runtime C/headers are now 14,337 bytes. Current sealed
+bindings reproduce the revised sixteen-file bundle; the original native bundle and
+media are preserved. Later native continuation completed a revised build and all
+5,832 serial/VGA runtime checks; see [actual native results](project-plan-native-progress.md).
+The accepted source-correlated tracing method subsequently passed all 48 cases
+and two added native limit helpers, for 5,882 required native checks. Independent
+readback and exact guest cleanup passed. Subsequent explicit approval, host disposal
+and independent absence are recorded in the final native evidence. No general
+support claim follows from host checks or the bounded native results.
 
 ## Limits and delivery gate
 
@@ -77,9 +105,10 @@ Read/stat faults are controlled interposition, not proof of an atomic file snaps
 Canary comparisons do not alone prove absence of attempted syscalls. These limits
 remain explicit requirements of PLAN-T04 through T08.
 
-The feature draft must remain open and unready until a concrete frozen native
-manifest/helpers/source and exact fresh fixture run plan receive approval, all
-required native cases pass, and independent readback/disposal completes. No native
+The native delivery gate required approved frozen manifests/helpers/source and an
+exact fixture plan, all required native cases, and independent readback/disposal.
+The final native evidence records completion of those bounded obligations; fresh
+clean-candidate verification and review remain required before delivery. No native
 fixture was provisioned or launched for these host checks. Previous research target
 authority has ended. This feature grants no installer/payload-write authority.
 

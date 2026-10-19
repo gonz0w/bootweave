@@ -8,7 +8,8 @@ separate. Related runtime decision: [ADR 0003](../adr/0003-read-only-project-pla
 This is the next complete feature after the
 [installed-payload qualification](../research/installed-payload-native-progress.md#completed-independent-readback-and-exact-disposal-2026-10-15).
 It adopts the bounded metadata/runtime contract below for this planner only.
-Implementation and portable host checks are complete; native qualification is pending.
+Implementation, portable checks and bounded native planner qualification are complete;
+[exact fixture disposal](../testing/project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) ended that target authority. Broader installer/profile acceptance remains separate.
 
 ## PRD: outcome and accepted work
 
@@ -165,6 +166,15 @@ Accepted per-invocation ceilings: 16 KiB input, 2 KiB typed model, 4 KiB plan ou
 STACK, eight-descriptor limit, CORE=0 and FSIZE=8 KiB. CPU limit two seconds and
 whole wall-clock deadline five seconds from CLI work entry, including read/output;
 do not reset on EINTR or partial progress. A hard timer must bound blocked I/O.
+The prepared CPU-enforcement fix arms checked one-shot ITIMER_PROF and ITIMER_REAL
+timers for those same budgets, restores/unblocks SIGPROF as well as the existing
+deadline signals, and retains RLIMIT_CPU=2. Timer/handler setup failures refuse.
+This fix passed host tests and all revised serial/VGA runtime checks after
+[launch 6's CPU gate failure](../testing/project-plan-native-progress.md).
+The accepted separate trace-evidence method passed with source-correlated test
+companions, without changing production limits. Independent readback and exact
+guest cleanup passed; automatic approval review requires explicit approval for
+remaining host fixture disposal.
 Measure actual native CPU/time/RSS/output. Limits changing or evidence unavailable
 stops qualification and needs review.
 
@@ -199,11 +209,13 @@ independent assertions over rejection/no-effects, with host memory/UB diagnostic
 when available; freeze tool/options and report limitations. No unbounded fuzz job
 or dependency installation. The normal host executable must retain refusal.
 
-The complete host-tested slice and author guide are implemented. The
-[concrete native continuation](../testing/project-plan-native-plan.md) now binds
-source/cases/helpers and identifies the approved fresh exact target. Its first launch
-[stopped before installation](../testing/project-plan-native-progress.md); the
-proposed recovery requires review under the accepted first-failure rule.
+The host-tested slice and author guide are implemented. The
+[accepted native continuation](../testing/project-plan-native-plan.md) completed all
+5,882 required native checks, independent retained readback and exact guest cleanup.
+[Actual evidence](../testing/project-plan-native-progress.md) preserves earlier
+failures and the accepted source-correlated trace method. After explicit approval,
+[final host disposal and independent absence](../testing/project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) completed. Earlier automatic rejections remain historical;
+source-bound review and clean-candidate verification still govern readiness.
 The bounded native plan must retain exact source/artifacts,
 release/backend/firmware, fresh target identity/allowed effects, case manifest,
 commands, resource/capture limits, stop/reap and independent disposal. Obtain exact

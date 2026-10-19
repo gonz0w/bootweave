@@ -45,7 +45,7 @@ for variant in 0 1; do
     chmod 0755 "$name"
     chmod 4755 "bootweave-suid-$variant"
     chmod 2755 "bootweave-sgid-$variant"
-    ./native-compile -std=c99 -O2 -Wall -Wextra -Werror -pedantic -I. -Dread=bw_test_read -Dwrite=bw_test_write -Dfstat=bw_test_fstat -c plan_io.c -o fault-io.o
+    ./native-compile -std=c99 -O2 -Wall -Wextra -Werror -pedantic -I. -Dread=bw_test_read -Dwrite=bw_test_write -Dfstat=bw_test_fstat -Dsetitimer=bw_test_setitimer -Dsigaction=bw_test_sigaction -c plan_io.c -o fault-io.o
     ./native-compile -std=c99 -O2 -Wall -Wextra -Werror -pedantic "$@" -I. "-Wl,-Map=io-fault-$variant.map" main.c plan.c native.c fault-io.o plan_faults.c -o "io-fault-$variant"
     ./native-compile -std=c99 -O2 -Wall -Wextra -Werror -pedantic -I. -Dunveil=bw_test_unveil -Dpledge=bw_test_pledge -Dsetrlimit=bw_test_setrlimit -Dissetugid=bw_test_issetugid -c native.c -o fault-native.o
     ./native-compile -std=c99 -O2 -Wall -Wextra -Werror -pedantic "$@" -I. "-Wl,-Map=gate-fault-$variant.map" main.c plan.c plan_io.c fault-native.o native_faults.c -o "gate-fault-$variant"

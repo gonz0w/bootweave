@@ -8,7 +8,37 @@ the [failure evidence and accepted five-launch continuation](project-plan-native
 record Cam's subsequent explicit recovery approval. Launch 2 then stopped because
 `uname` is unavailable in the stock ramdisk; the earlier keyboard diagnosis was
 incorrect. The original four-launch plan below and five-launch recovery are historical;
-the proposed launches 3–6 in that continuation require review before another launch.
+Cam explicitly approved launches 3–6 after PR #74's recovery question. Launch 3 then
+stopped because the reduced ramdisk verifier rejects checksum mode. The current
+[accepted seven-launch continuation](project-plan-native-progress.md) uses native embedded-signature
+verification followed by selected-file checksums; Cam explicitly approved its
+RAM-only manifest namespace and narrow prerequisite-correction exception. Launch 4
+completed first stock installation/relink, then stopped when full installed ps could
+not obtain process information under the installer kernel. Cam explicitly approved
+the existing remaining launches 5–7 and full installed-kernel process readback on
+2026-10-18 without a reinstall
+or extra launch. Launch 5 passed full-kernel prerequisites and began native compilation,
+then its supervisor stopped QEMU at the fixed host RSS ceiling. Cam explicitly approved
+launches 6–8 add an explicit smaller TCG cache, stock-preen recovery and conditional
+partial-build replacement on 2026-10-18. The original failed state is preserved pending
+the accepted inventory and conditional cleanup. Launch 6 then completed that recovery
+and a fresh build, passed 2,889 serial checks, and stopped at the CPU-accounting gate.
+Clean native shutdown and host closure passed. The current
+[revised CPU-timer/source/media continuation](project-plan-native-progress.md#prepared-cpu-enforcement-fix-and-proposed-launches-79)
+proceeded under Cam's standing instruction to continue routine bounded work without
+new approval. All 5,832 revised serial/VGA runtime checks passed in launches 7–8.
+The first positive trace failed at the production file-size limit; no partial
+trace is accepted. The [proposed trace evidence amendment](project-plan-trace-amendment.md)
+requires a major Test Design decision. No production acceptance budget is relaxed.
+The original plan below is
+historical for source candidate 375f6b6 and launches 1–6; its frozen argument preview
+is overridden only by the explicit accepted cache/profile amendments and any later
+accepted source-CD replacement, never by recreating its target.
+Current result: [all 5,882 required native checks, independent readback and exact
+guest cleanup passed](project-plan-native-progress.md#launch-11-independent-readback-and-exact-guest-cleanup).
+After explicit approval, [final host disposal and independent absence](project-plan-native-progress.md#final-approved-host-disposal-and-authority-ended) completed;
+that exact target authority ended. Earlier blocked-disposal observations remain
+historical, and source-bound verification/review still govern delivery.
 Implements the native gates of the [accepted planner design](../design/project-plan.md).
 The maintainer merged implementation PR #71 before qualification; keep this entire
 continuation, fixes, observations and teardown in one draft. The explicit exact-target approval supplies this authority; earlier research
@@ -38,11 +68,13 @@ controls/Unicode and a fixed 256-case mutation corpus are included.
 | Case manifest | 413701 | 4bdfa1b1e132da11027749d078b0e424b630d6bd9cb3f1e46eec1ec0804721ae |
 | Source SHA256 listing | See linked listing | c58a21ff94aa3ead38d82da1691b5977fb87c23eb608c84209cd536a842e832b |
 
-The [complete source bindings](project-plan-native-bindings.txt) name all fifteen
+The [original complete source bindings](https://github.com/gonz0w/bootweave/blob/375f6b65ce7a8841a33c0bb2d0f4aaf94c1e6651/docs/testing/project-plan-native-bindings.txt) name all fifteen
 source/data files; the sealed source-only bundle has sixteen files including that
 listing, totaling 2,045,033 bytes. Its private owned 0700 staging directory and 0600
 files already exist. It contains no ISO, target, credential or native executable.
-Preparation tests reproduce the bundle and require exact equality to these bindings.
+Preparation tests reproduced the bundle and required exact equality to those bindings.
+The current binding file now describes the separately prepared CPU-timer candidate
+in the continuation proposal; it does not rewrite the transported launch-1–6 bytes.
 The PR supplies clean candidate/base/tree, signed/DCO verification and local results;
 documentation-only changes do not change these frozen transported bytes.
 
@@ -132,7 +164,9 @@ headless VGA with QMP keyboard/screendump. No NIC/IP listener, forwarding, shari
 passthrough, hotplug/reopen or additional disk. Empty machine controllers are not
 backed targets and must be identified as such in the full inventory.
 
-In the stock shell, independently verify the expected OpenBSD release/key and
+The stopped stock-shell `signify -C` method is not executable with the reduced
+ramdisk verifier. The corrected method above was explicitly accepted; the original
+method below is historical. Independently verify the expected OpenBSD release/key and
 all six selected files (`bsd`, `bsd.rd`, `base79.tgz`, `comp79.tgz`, `man79.tgz`,
 `INSTALL.amd64`) against the native explicit-key signed manifest on the read-only
 data CD. Unmount before the fixed manual installer. Confirm sole guest `sd0`,

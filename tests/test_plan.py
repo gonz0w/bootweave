@@ -9,6 +9,7 @@ from pathlib import Path
 import platform
 import pty
 import random
+import resource
 import signal
 import socket
 import subprocess
@@ -287,6 +288,25 @@ class PlannerTests(unittest.TestCase):
             mutation = raw[:at] + bytes([generator.choice([0, 1, 27, 127, 128, 255])]) + raw[at:]
             self.rejected(mutation)
 
+    def test_cpu_deadline_with_inherited_signal_mask(self):
+        stimulus = self.directory / "cpu-stimulus"
+        subprocess.run(self.flags + self.core + [str(ROOT / "tests/plan_cpu.c"),
+                                                "-o", str(stimulus)],
+                       check=True, capture_output=True)
+        before = resource.getrusage(resource.RUSAGE_CHILDREN)
+        started = time.monotonic()
+        result = subprocess.run(
+            [stimulus], capture_output=True, timeout=7,
+            preexec_fn=lambda: signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGPROF}))
+        elapsed = time.monotonic() - started
+        after = resource.getrusage(resource.RUSAGE_CHILDREN)
+        cpu = after.ru_utime + after.ru_stime - before.ru_utime - before.ru_stime
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (4, b"", b""))
+        # Host scheduling/accounting only; the stricter native 2.1 s gate is unchanged.
+        self.assertGreater(cpu, 1.5)
+        self.assertLess(cpu, 2.5)
+        self.assertLess(elapsed, 5)
+
     def test_model_api_and_production_cli(self):
         subprocess.run([self.unit], check=True, capture_output=True, timeout=2)
         for argument in ["--help", "--version"]:
@@ -309,7 +329,8 @@ class PlannerTests(unittest.TestCase):
         fault_object = self.directory / "fault-io.o"
         fault_driver = self.directory / "fault-driver"
         subprocess.run(self.flags + ["-Dread=bw_test_read", "-Dwrite=bw_test_write",
-                                    "-Dfstat=bw_test_fstat", "-c",
+                                    "-Dfstat=bw_test_fstat", "-Dsetitimer=bw_test_setitimer",
+                                    "-Dsigaction=bw_test_sigaction", "-c",
                                     str(ROOT / "src/plan_io.c"), "-o", str(fault_object)],
                        check=True, capture_output=True)
         subprocess.run(self.flags + [str(ROOT / "src/plan.c"), str(fault_object),
@@ -317,7 +338,8 @@ class PlannerTests(unittest.TestCase):
                                     str(ROOT / "tests/plan_faults.c"), "-o", str(fault_driver)],
                        check=True, capture_output=True)
         for mode, status in [("short", 0), ("changed", 3), ("read-error", 3),
-                             ("write-zero", 5), ("write-error", 5)]:
+                             ("write-zero", 5), ("write-error", 5),
+                             ("timer-real", 4), ("timer-cpu", 4), ("sigprof", 4)]:
             result = self.run_bytes(encode(BASE), fault_driver,
                                     env={**os.environ, "BW_TEST_FAULT": mode})
             self.assertEqual(result.returncode, status, mode)
