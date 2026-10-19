@@ -31,6 +31,7 @@ and extension interfaces remain separate designs.
 - [Product requirements](docs/product/PRD.md) and [architecture](docs/architecture/baseline.md)
 - [Installer author guide](docs/configuration/author-guide.md)
 - [First read-only project planner](docs/design/project-plan.md)
+- [Next trust-contract adoption](docs/design/project-trust/ADOPTION.md) (review proposal)
 - [Security boundaries](docs/security/threat-model.md) and [debugging](docs/debugging.md)
 - [Research and decisions](docs/research/openbsd-installers.md)
 - [First native profile design](docs/design/native-profile/PRD.md) (proposed)

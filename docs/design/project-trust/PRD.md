@@ -2,7 +2,8 @@
 
 Status: Proposed, 2026-10-11. Owner and acceptance authority: Cam.
 [Issue #5](https://github.com/gonz0w/bootweave/issues/5), [EDD](EDD.md),
-[Test Design](TDD.md). Acceptance date/source: pending explicit review.
+[Test Design](TDD.md). Acceptance date/source: pending explicit review. The [staged adoption decision](ADOPTION.md)
+recommends the mandatory safety contract and a bounded read-only continuation.
 This scope defines proposed boundaries, not configuration syntax or permission to
 implement or execute privileged operations.
 
