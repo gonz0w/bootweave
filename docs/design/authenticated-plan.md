@@ -52,6 +52,9 @@ These are engineering decisions under the above fixed authority limits. Do not
 weaken confinement, create an arbitrary pathname interface or publish an invented
 privilege/wire schema to work around them. Pure model/parser work can proceed
 once this scope is adopted; this remaining I/O design is a concrete review gate.
+The [bounded I/O contract](authenticated-io.md) now specifies that handoff and
+the separately reviewed portable input-capture increment. It does not qualify
+or implement the verifier, scratch writer or native entry.
 
 Every opened input must be a held, read-only regular file at initial offset zero;
 reject descriptor/output aliases and observed metadata changes. Caller-owned
