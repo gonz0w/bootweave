@@ -107,6 +107,9 @@ class AuthInputTests(unittest.TestCase):
             for fault, code in [("close-eintr"+suffix, 3), ("close-ebadf"+suffix, 2)]:
                 result = self.capture(fault=fault)
                 self.assertEqual((result.returncode, result.stdout, result.stderr), (code, b"", b""))
+        for fault, code in [("close-deadline", 2), ("close-clock-error", 2), ("close-eintr-deadline", 3)]:
+            result = self.capture(fault=fault)
+            self.assertEqual((result.returncode, result.stdout, result.stderr), (code, b"", b""))
 
     def test_component_budget_symbols_and_unchanged_cli_link(self):
         self.assertLessEqual(sum((ROOT / "src" / p).stat().st_size for p in ["auth_input.c", "auth_input.h"]), 6*1024)

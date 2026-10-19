@@ -120,6 +120,7 @@ cleanup:
             else if (result == BW_CAPTURED) result = BW_CAPTURE_REJECTED;
         }
     }
+    if (result == BW_CAPTURED && !live(&start)) result = BW_CAPTURE_REJECTED;
     if (snapshot && result != BW_CAPTURED) memset(snapshot, 0, sizeof(*snapshot));
     return result;
 }

@@ -25,6 +25,8 @@ bw_io_clock_gettime(clockid_t id, struct timespec *t)
 {
     int result = clock_gettime(id, t);
     ticks++;
+    if (closes[4] && mode("close-clock-error")) return -1;
+    if (closes[4] && (mode("close-deadline") || mode("close-eintr-deadline"))) t->tv_sec += 3;
     if (mode("clock-error")) return -1;
     if (mode("clock-invalid")) t->tv_nsec = 1000000000L;
     if (mode("clock-backwards")) t->tv_sec -= ticks;
@@ -95,7 +97,7 @@ bw_io_close(int fd)
 {
     int result = close(fd);
     if (fd >= 0 && fd <= 4) closes[fd]++;
-    if ((fd == 0 && mode("close-eintr")) || (fd == 3 && mode("close-eintr-3")) ||
+    if ((fd == 0 && (mode("close-eintr") || mode("close-eintr-deadline"))) || (fd == 3 && mode("close-eintr-3")) ||
         (fd == 4 && mode("close-eintr-4"))) { errno = EINTR; return -1; }
     if ((fd == 0 && mode("close-ebadf")) || (fd == 3 && mode("close-ebadf-3")) ||
         (fd == 4 && mode("close-ebadf-4"))) { errno = EBADF; return -1; }
