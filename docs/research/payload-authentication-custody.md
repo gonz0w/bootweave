@@ -34,6 +34,14 @@ up to one second (one quarter of a shorter allowance) for terminal collection.
 No callback is consulted to authorize a signal. Lost/unresolved ownership remains
 uncertainty, never cleanup success.
 
+The first corrected portable run exposed Darwin EPERM on a group containing
+only its exited, unreaped leader. That failed run remains retained. EPERM is not
+treated as a successful stop: while the born leader remains unreaped, a fixed
+read-only ps query must completely show no live member in the group. A live,
+malformed, failed, empty or timed-out observation preserves refusal. Its timeout
+is bounded by the remaining child allowance and 250 ms. This observation cannot
+restore consumed/lost wait custody. Two injected groups cover these outcomes.
+
 ## Behavioral test design
 
 | ID | Independent oracle |

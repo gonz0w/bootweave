@@ -2,6 +2,7 @@
 """Host-only authenticated inspection research; trusted test context, no CLI API."""
 import base64
 from dataclasses import dataclass
+import errno
 import fcntl
 import hashlib
 import os
@@ -79,6 +80,8 @@ class _WaitState:
     lost: bool = False
     stop_attempted: bool = False
     rss: object = None
+    quiescent_after_permission_error: bool = False
+    stop_errno: object = None
 
 
 @dataclass(frozen=True)
@@ -200,7 +203,7 @@ def _exited(owner):
     return True
 
 
-def _stop_owned_group(owner):
+def _stop_owned_group(owner, deadline=None):
     # The strong born Popen binding has never been waited/polled. No sampled
     # PID/argv observation can restore authority after wait consumption/loss.
     if owner.wait.consumed or owner.wait.lost or owner.wait.stop_attempted:
@@ -210,6 +213,37 @@ def _stop_owned_group(owner):
         os.killpg(owner.pid, signal.SIGKILL)
     except ProcessLookupError:
         pass
+    except PermissionError as error:
+        owner.wait.stop_errno = error.errno
+        # Darwin can report EPERM when only an exited leader remains. This is
+        # not a successful signal. While the unreaped born leader still reserves
+        # its identity, require a complete fresh observation with no live member.
+        # Unknown/live observations retain the original permission failure.
+        remaining = .25 if deadline is None else min(.25, deadline - time.monotonic())
+        if (sys.platform != 'darwin' or error.errno != errno.EPERM or remaining <= 0
+                or not _group_quiescent(owner.pid, remaining)):
+            raise
+        owner.wait.quiescent_after_permission_error = True
+
+
+def _group_quiescent(pgid, seconds):
+    try:
+        result = subprocess.run(['/bin/ps', '-axo', 'pid=,pgid=,stat='],
+                                env=ENVIRONMENT, close_fds=True, start_new_session=True,
+                                stdin=subprocess.DEVNULL, capture_output=True,
+                                timeout=seconds)
+        if result.returncode or result.stderr or not 0 < len(result.stdout) <= INPUT_CAP:
+            return False
+        rows = [line.split() for line in result.stdout.splitlines()]
+        if any(len(row) != 3 or not row[0].isdigit() or not row[1].isdigit()
+               or not row[2] for row in rows):
+            return False
+        leaders = [row for row in rows if int(row[0]) == pgid]
+        return (len(leaders) == 1 and int(leaders[0][1]) == pgid
+                and leaders[0][2].startswith(b'Z')
+                and all(row[2].startswith(b'Z') for row in rows if int(row[1]) == pgid))
+    except (OSError, subprocess.SubprocessError):
+        return False
 
 
 def _reap(owner):
@@ -302,7 +336,7 @@ def _run(argv, data, directory, deadline, cancelled):
                             raise Failure('output')
             if not exited:
                 exited = _exited(owner)
-        _stop_owned_group(owner)
+        _stop_owned_group(owner, terminal_deadline)
         rss = _terminal_reap(owner, terminal_deadline)
         if rss is None or rss > CHILD_RSS_CAP:
             raise Failure('resource')
@@ -314,7 +348,7 @@ def _run(argv, data, directory, deadline, cancelled):
         failures = []
         actions = [('selector-close', selector.close)]
         if owner is not None:
-            actions += [('stop-owned-group', lambda: _stop_owned_group(owner)),
+            actions += [('stop-owned-group', lambda: _stop_owned_group(owner, terminal_deadline)),
                         ('reap-owned-child', lambda: _terminal_reap(owner, terminal_deadline))]
             actions += [(name + '-close', stream.close) for name, stream in (
                 ('stdin', process.stdin), ('stdout', process.stdout), ('stderr', process.stderr))]

@@ -56,6 +56,36 @@ class Process:
 
 
 class AuthenticationLifecycleTests(unittest.TestCase):
+    def test_permission_refusal_requires_complete_quiescent_observation(self):
+        for output, code, error, accepted in (
+                (b'4242 4242 Z\n9 9 S\n', 0, b'', True),
+                (b'9 9 S\n', 0, b'', False),
+                (b'4242 4242 Z\n4243 4242 S\n', 0, b'', False),
+                (b'incomplete\n', 0, b'', False),
+                (b'', 1, b'', False),
+                (b'4242 4242 Z\n', 0, b'denied', False)):
+            with self.subTest(output=output, code=code, error=error):
+                owner = gate._BornChild(Process([]), 4242, gate._WaitState())
+                with patch.object(gate.os, 'killpg', side_effect=PermissionError(1, 'refused')), \
+                     patch.object(gate.sys, 'platform', 'darwin'), \
+                     patch.object(gate.subprocess, 'run', return_value=SimpleNamespace(
+                         stdout=output, stderr=error, returncode=code)), \
+                     patch.object(gate.os, 'wait4') as wait:
+                    if accepted:
+                        gate._stop_owned_group(owner)
+                        self.assertTrue(owner.wait.quiescent_after_permission_error)
+                    else:
+                        with self.assertRaises(PermissionError): gate._stop_owned_group(owner)
+                    wait.assert_not_called()
+                self.assertFalse(owner.wait.consumed)
+
+    def test_permission_observation_timeout_cannot_be_absence(self):
+        owner = gate._BornChild(Process([]), 4242, gate._WaitState())
+        with patch.object(gate.os, 'killpg', side_effect=PermissionError(1, 'refused')), \
+             patch.object(gate.sys, 'platform', 'darwin'), \
+             patch.object(gate.subprocess, 'run', side_effect=gate.subprocess.TimeoutExpired('ps', .1)):
+            with self.assertRaises(PermissionError): gate._stop_owned_group(owner)
+
     def run_injected(self, *, rss=1, selector_failure=False, conversion_failure=False,
                      lost_wait=False, interrupted=False, bad_stream=False):
         events = []
