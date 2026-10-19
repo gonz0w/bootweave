@@ -1,7 +1,8 @@
 # Generic project trust and privilege: engineering design
 
 Status: Proposed, 2026-10-11. Owner: Cam; acceptance pending.
-Related [PRD](PRD.md) and [Test Design](TDD.md).
+Related [PRD](PRD.md), [Test Design](TDD.md) and the
+[staged adoption decision](ADOPTION.md).
 
 ## Boundaries and authority
 
@@ -112,8 +113,9 @@ Each implementation slice needs accepted scoped PRD/EDD/Test Design or an explic
 bounded spike, exact allowed effects and a disposable fixture. Public contracts and
 migration rules require separate review before profile syntax is published.
 
-The [first read-only project planner](../project-plan.md) now scopes that initial
-loader/model/output implementation and proposes its exact metadata contract.
-[ADR 0003](../../adr/0003-read-only-project-planner.md) requests the associated
-runtime/format decision. Both remain proposed; the parent trust design and privileged
-interfaces are not adopted by preparing them.
+The [first read-only project planner](../project-plan.md) and
+[ADR 0003](../../adr/0003-read-only-project-planner.md) are accepted for that narrow
+metadata feature; PR #75 completed its bounded native qualification and teardown.
+They do not adopt parent privileged interfaces. The [staged adoption decision](ADOPTION.md)
+and [authenticated read-only continuation](../authenticated-plan.md) now identify
+the next contract for review without promoting a research writer.
