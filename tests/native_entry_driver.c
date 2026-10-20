@@ -142,17 +142,21 @@ int ne_write(int fd,const char *bytes,size_t length){unsigned char *out;size_t *
  if(fd==1){out=ne_out;used=&ne_out_n;}else if(fd==2){out=ne_err;used=&ne_err_n;}else exit(90);
  if(length>4096-*used)exit(90);memcpy(out+*used,bytes,length);*used+=length;return ne_write_ok;}
 int ne_confine(void){exit(97);}int ne_run(void){exit(97);}
-struct ne_fd {int fd,fd_flags,fd_errno,status_flags,status_errno,stat_ok,stat_errno;dev_t device;ino_t inode;mode_t mode;};
+struct ne_fd {int fd,fd_flags,fd_errno,status_flags,status_errno,stat_ok,stat_result,stat_errno;dev_t device;ino_t inode;mode_t mode;};
 static void ne_probe(int fd,struct ne_fd *out){struct stat s;int result;memset(out,0,sizeof(*out));out->fd=fd;
  out->fd_flags=fcntl(fd,F_GETFD);out->fd_errno=out->fd_flags<0?errno:0;
  out->status_flags=fcntl(fd,F_GETFL);out->status_errno=out->status_flags<0?errno:0;
- result=fstat(fd,&s);out->stat_errno=result<0?errno:0;out->stat_ok=result==0;
+ result=fstat(fd,&s);out->stat_errno=result<0?errno:0;out->stat_result=result;out->stat_ok=result==0;
  if(out->stat_ok){out->device=s.st_dev;out->inode=s.st_ino;out->mode=s.st_mode;}}
 static int ne_equal_fd(const struct ne_fd *a,const struct ne_fd *b){return a->fd_flags==b->fd_flags&&a->status_flags==b->status_flags&&a->stat_ok==b->stat_ok&&
  a->device==b->device&&a->inode==b->inode&&a->mode==b->mode;}
+static int ne_valid_probe(const struct ne_fd *p,int private_fd){
+ if(p->fd_flags>=0&&p->status_flags>=0&&p->stat_result==0&&p->stat_ok==1&&!p->fd_errno&&!p->status_errno&&!p->stat_errno)return 1;
+ return !private_fd&&p->fd_flags==-1&&p->status_flags==-1&&p->stat_result==-1&&p->stat_ok==0&&
+  p->fd_errno==EBADF&&p->status_errno==EBADF&&p->stat_errno==EBADF;}
 static void ne_print_probes(const struct ne_fd *probes){unsigned i;putchar('[');for(i=0;i<7;i++){const struct ne_fd *p=&probes[i];
- printf("%s{\"fd\":%d,\"fd_flags\":%d,\"fd_errno\":%d,\"status_flags\":%d,\"status_errno\":%d,\"stat_ok\":%d,\"stat_errno\":%d,\"device\":%llu,\"inode\":%llu,\"mode\":%llu}",
-  i?",":"",p->fd,p->fd_flags,p->fd_errno,p->status_flags,p->status_errno,p->stat_ok,p->stat_errno,
+ printf("%s{\"fd\":%d,\"fd_flags\":%d,\"fd_errno\":%d,\"status_flags\":%d,\"status_errno\":%d,\"stat_ok\":%d,\"stat_result\":%d,\"stat_errno\":%d,\"device\":%llu,\"inode\":%llu,\"mode\":%llu}",
+  i?",":"",p->fd,p->fd_flags,p->fd_errno,p->status_flags,p->status_errno,p->stat_ok,p->stat_result,p->stat_errno,
   (unsigned long long)p->device,(unsigned long long)p->inode,(unsigned long long)p->mode);}putchar(']');}
 static void ne_hex(const unsigned char *b,size_t n){size_t i;for(i=0;i<n;i++)printf("%02x",b[i]);}
 int main(int argc,char **argv){int result,unchanged=1,owner_unchanged=1,normal_unveil=-9,normal_pledge=-9,canaries=1;
@@ -189,6 +193,7 @@ int main(int argc,char **argv){int result,unchanged=1,owner_unchanged=1,normal_u
   for(i=0;i<2;i++)if(!ne_equal_fd(&before_fd[5+i],&ready_fd[5+i]))private_setup_mask|=1U<<i;
   ne_running_main=ne_is("main");result=ne_running_main?ne_actual_main(count,arguments):bw_entry_cli(count,arguments);
   for(i=0;i<7;i++)ne_probe(roles[i],&after_fd[i]);
+  for(i=0;i<7;i++)if(!ne_valid_probe(&before_fd[i],i>=5)||!ne_valid_probe(&ready_fd[i],i>=5)||!ne_valid_probe(&after_fd[i],i>=5))canaries=0;
   for(i=0;i<5;i++)if(!ne_equal_fd(&ready_fd[i],&after_fd[i]))call_mask|=1U<<i;
   for(i=0;i<2;i++)if(!ne_equal_fd(&ready_fd[5+i],&after_fd[5+i]))private_call_mask|=1U<<i;
   poller.fd=owned[0];poller.events=POLLIN;poller.revents=0;

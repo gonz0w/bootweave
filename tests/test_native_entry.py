@@ -6,6 +6,7 @@ launcher retains every actual PID, stream and consuming wait. Boundary storage,
 identity/stats/security and the private original-clock bridge are pure models.
 CLI uses only newly owned pipe canaries and read-only inherited-FD observations.
 """
+import errno
 import hashlib
 import json
 from pathlib import Path
@@ -25,7 +26,7 @@ CLI_FIELDS = {"family", "status", "legacy_calls", "start_calls", "entry_calls", 
               "private_call_mismatch_mask", "fd_before", "fd_ready", "fd_after", "canary_poll", "canary_read",
               "fixture_close_dispositions"}
 CLI_STRUCTURED_FIELDS = {"fd_before", "fd_ready", "fd_after", "canary_poll", "canary_read", "fixture_close_dispositions"}
-FD_FIELDS = {"fd", "fd_flags", "fd_errno", "status_flags", "status_errno", "stat_ok", "stat_errno", "device", "inode", "mode"}
+FD_FIELDS = {"fd", "fd_flags", "fd_errno", "status_flags", "status_errno", "stat_ok", "stat_result", "stat_errno", "device", "inode", "mode"}
 FD_COMPARE_FIELDS = ("fd_flags", "status_flags", "stat_ok", "device", "inode", "mode")
 
 
@@ -153,6 +154,11 @@ class NativeEntryTests(unittest.TestCase):
                 self.assertIn(probe["stat_ok"], (0, 1))
                 self.assertGreaterEqual(probe["stat_errno"], 0)
                 self.assertEqual(probe["stat_errno"] == 0, probe["stat_ok"] == 1)
+                valid = (probe["fd_flags"] >= 0 and probe["status_flags"] >= 0 and probe["stat_result"] == 0 and
+                         probe["stat_ok"] == 1 and (probe["fd_errno"], probe["status_errno"], probe["stat_errno"]) == (0, 0, 0))
+                absent = ((probe["fd_flags"], probe["status_flags"], probe["stat_result"], probe["stat_ok"]) == (-1, -1, -1, 0) and
+                          (probe["fd_errno"], probe["status_errno"], probe["stat_errno"]) == (errno.EBADF, errno.EBADF, errno.EBADF))
+                self.assertTrue(valid or (i < 5 and absent), (name, i, probe))
                 if not probe["stat_ok"]:
                     self.assertEqual((probe["device"], probe["inode"], probe["mode"]), (0, 0, 0))
         private_fds = [row["fd"] for row in actual["fd_ready"][5:]]
