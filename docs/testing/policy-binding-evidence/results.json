@@ -1,0 +1,118 @@
+{
+  "kind": "portable focused component evidence; no native/authenticated-product qualification",
+  "base": "56647ccacc63aa24a1b6346ce77c03df4133919c",
+  "source": [
+    {
+      "path": "src/policy_binding.c",
+      "sha256": "59282a92ccd3ec1c4f9532eeb5cad53c8bfd593e24e3894a361fdedc1aa00334"
+    },
+    {
+      "path": "src/policy_binding.h",
+      "sha256": "df9ebad119d6f63d4fa25aa5af35b40a441290d94f2915ff79b16fc72681ce6d"
+    },
+    {
+      "path": "src/policy_platform.c",
+      "sha256": "c2f38199e44313d9fdc78d3eac2b2387b26753285185d038ce27bcc2d166da02"
+    },
+    {
+      "path": "src/policy_data.c",
+      "sha256": "2d10ab4bf7af3be524b888675a056ee31ace384046e0f6d469b2e0841ef17f96"
+    },
+    {
+      "path": "src/auth_material.c",
+      "sha256": "88b2e5f54a42015d48389495530153dea7979698b49a642efcd6e9c9be1e222c"
+    },
+    {
+      "path": "src/auth_material.h",
+      "sha256": "68ca59088b5ffcf19e81c51d9460260da02421fe8830423ca9a7119c4e8398ce"
+    },
+    {
+      "path": "tests/policy_driver.c",
+      "sha256": "d70568f35cf55f5eff3662486b18d71e894d25029d4dd07b4fad1eb03e8d3668"
+    },
+    {
+      "path": "tests/test_policy.py",
+      "sha256": "30c655234e97664a75e238ebef40f8e7223612b7630e965c2b01efc5d71f49dd"
+    },
+    {
+      "path": "tests/fixtures/policy-definition.json",
+      "sha256": "028217bc0cc16683fb541ce2a568c82488404297a9df9ce20be581a62694fbb4"
+    },
+    {
+      "path": "tests/fixtures/policy-payload.txt",
+      "sha256": "a782010bfa54952b6d71cb6c241483f77cff1a671c5df044e163a0c4e05cf627"
+    },
+    {
+      "path": "docs/design/policy-binding.md",
+      "sha256": "e1dc456f3b27fc8623d64b3b16b295f8f2986f73369e5be6ab499ab57cbf420e"
+    }
+  ],
+  "new_source_bytes": 7843,
+  "whole_src_bytes": 65346,
+  "groups": 11,
+  "corrected_invocations": 171,
+  "compile_link_steps": 43,
+  "byte_driver_invocations": 121,
+  "object_inspections": 2,
+  "intentional_failure_controls": 5,
+  "all_direct_waits_consumed": true,
+  "lost_waits": 0,
+  "written_stream_files": 341,
+  "intentionally_unconfirmed_stdout_publications": 1,
+  "hard_isolation_claimed": false,
+  "native_run": false,
+  "deployment": false,
+  "runs": [
+    {
+      "run": "bootweave-policy-focused-check",
+      "exit_code": 1,
+      "elapsed_seconds": 13.74345774995163,
+      "started_utc": "2026-10-20T01:57:08.116472+00:00",
+      "receipt_sha256": "b0ba1c10d4d386dd4e3b1220ef51caceab331c29af2bacd1000a58331d18b96d",
+      "original_log_sha256": "1f2915631f425b099620a810e48d385d6806197349efcc1d83ba737429cef50e",
+      "sanitized_log": "focused-r1.log",
+      "sanitized_log_sha256": "bf8f4bb242645298e8cf310eadc3df557b6ba75d26c181924416da4066b0d8b9",
+      "source_unchanged": true,
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "cleanup_errors": []
+    },
+    {
+      "run": "bootweave-policy-focused-check-r2",
+      "exit_code": 0,
+      "elapsed_seconds": 14.68357341689989,
+      "started_utc": "2026-10-20T01:59:28.199016+00:00",
+      "receipt_sha256": "f9199d06ef78c812eeb23a8c4fd447fe784ccaf8e46eec47754ef28043bc1585",
+      "original_log_sha256": "ea22fa3e1bc5eba6050aab9cdffad3a957f977e20661897cafd98426b3f59b91",
+      "sanitized_log": "focused.log",
+      "sanitized_log_sha256": "ea22fa3e1bc5eba6050aab9cdffad3a957f977e20661897cafd98426b3f59b91",
+      "source_unchanged": true,
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "cleanup_errors": []
+    }
+  ],
+  "retained_recipes": [
+    {
+      "name": "verify_bootweave_policy_focused.py",
+      "sha256": "4d0c8117bce0a500676c41d677f0719a1ca0018c0d65e050586fc94861519fdd"
+    },
+    {
+      "name": "verify_bootweave_policy_focused_r2.py",
+      "sha256": "626315f957b29e36ef4eabc858f87f51560cc70c303daeb6ce5bc1615afdbb71"
+    },
+    {
+      "name": "verify_bootweave_policy_full.py",
+      "sha256": "0317f26d97bec815101a9684fd9ca3291804f9a868410bcf96d8c0f686669dde"
+    }
+  ],
+  "notes": [
+    "Original builds, inputs, outputs, ledgers and receipts retained locally; logs redact workspace prefix and strip trailing whitespace.",
+    "R1 has two unexpected fixture failures and five intentional failure controls; corrected R2 has only five intentional controls.",
+    "ASAN/UBSAN remain active; unsupported leak detection disabled explicitly.",
+    "Product C/header sources are unchanged between focused runs; the two documented test-fixture corrections changed only tests/test_policy.py.",
+    "No CLI or runtime authority; full clean-candidate checks and independent canonical delivery gate remain separate."
+  ]
+}

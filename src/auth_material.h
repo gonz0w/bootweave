@@ -32,6 +32,7 @@ struct bw_verifier_material {
     char path[256];
 };
 /* Format checks only; never cryptographic verification. */
+int bw_signify_public_key(const unsigned char *, size_t);
 int bw_signify_records(const unsigned char *, size_t, const unsigned char *, size_t);
 /* Reserve before confinement/capture; directory >=5 leaves fixed roles intact.
  * Original two-second cooperative deadline and cancellation span both calls.
