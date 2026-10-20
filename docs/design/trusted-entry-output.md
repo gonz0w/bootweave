@@ -42,8 +42,13 @@ must retain its original input/output alias and metadata checks and consume each
 owned input once. A descriptor is never reopened from a project filename.
 
 The entry must carry one private original clock through reserve/capture/prepare.
-Current capture starts a fresh two-second clock; the future entry must resolve
-that gap rather than extend the reservation's conservative two-second allowance.
+The closed reservation-bound capture sibling now retains material's original
+two-second clock and cancellation flag, including final close checks. Legacy
+capture retains its fresh-clock behavior. The new sibling's latch and failure
+poisoning prevent repeat input closure or preparation from failed capture; see
+the [capture contract](authenticated-io.md#reservation-bound-capture-continuity).
+This does not establish the full entry's earliest hard-timer origin or signal-flag
+lifetime and never extends the reservation's conservative allowance.
 The overall fifteen-second hard wall, four-second CPU, eleven-second dependent
 work stop and four-second cleanup reserve remain unchanged. The post-signature
 two-second hash/inspection/render/output phase is shared, never renewed at an API

@@ -298,6 +298,8 @@ bw_verifier_prepare(const struct bw_verifier_request *r, struct bw_verifier_mate
 {
     if (!m || m->state != BW_VM_RESERVED) return BW_MATERIAL_REJECTED;
     m->state = BW_VM_WORKING;
+    if (m->cause != BW_VM_NONE || m->uncertain || m->unknown_closes)
+        return finish(m, 0); /* Failed capture cannot prepare replacement bytes. */
     if (!r || !r->key || !r->signature || !r->definition || !r->definition_length ||
         r->definition_length > 16384 || !r->key_length || r->key_length > 1024 ||
         !r->signature_length || r->signature_length > 16384) fail(m, BW_VM_ARGUMENT);
