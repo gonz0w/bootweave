@@ -17,8 +17,9 @@ classes, partial refusal and five reuse cases. Fatal callbacks use an intercepte
 exit and nonlocal return; a callback that returns normally fails. These tests do
 not change host signal dispositions, limits or timers.
 
-A separately linked uninstrumented guard uses the normal unsupported Mac adapter.
-It refuses before process mutation; 30 actual read-only before/after queries verify
+A separately linked production guard without syscall substitution uses the normal
+unsupported Mac adapter. It refuses before process mutation; 30 actual read-only
+before/after queries verify
 unchanged limits, dispositions, masks and timers. The production guard object
 exports only `bw_process_guard`; symbol inspection rejects file, path, child,
 execution, output and confinement dependencies. The planner's four-source CLI
