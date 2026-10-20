@@ -26,6 +26,8 @@ struct bw_verifier_material {
     enum bw_material_cause cause;
     int directory, writer[3], fd[3];
     unsigned created, known, directory_known, directory_lost, uncertain, close_errors, unknown_closes;
+    /* Input roles 0/3/4 use separate observation bits 0/1/2; never retry. */
+    unsigned capture_taken, capture_close_errors, capture_unknown_closes;
     struct stat identity, file[3];
     struct timespec started;
     const volatile sig_atomic_t *cancelled;

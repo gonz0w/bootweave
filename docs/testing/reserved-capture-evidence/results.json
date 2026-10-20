@@ -1,0 +1,43 @@
+{
+  "scope": "Portable source-only reservation-bound capture; no authentication/operations/native authority",
+  "date": "2026-10-20",
+  "head": "c599e06e86603c1ffa6a69035694563d4fa3907a",
+  "base": "7550f2e93dfa05d4f35591323f19fb7daa37de26",
+  "tree": "128b35f371ee896a2ee83de70fbd273dafa83385",
+  "groups": 2,
+  "driver_cases": 116,
+  "launches": 122,
+  "stream_files": 244,
+  "exit_code": 0,
+  "skips": 0,
+  "elapsed_seconds": 10.501826083287597,
+  "source_files_before_after": 298,
+  "source_unchanged": true,
+  "outer_wait_consumed": true,
+  "outer_wait_lost": false,
+  "current_invocation_publication_complete": true,
+  "terminal_rows": [],
+  "cleanup_errors": [],
+  "receipt_sha256": "3bd6160165f68011d95d73c771475f058bc7db031b4aa4e24bcca39e1b5b438a",
+  "log_sha256": "cd472089711d85946e33617aca44fc632aba3292c1aa30ae917b8674406be7c1",
+  "budgets_bytes": {
+    "capture": [
+      8093,
+      8192
+    ],
+    "material": [
+      15466,
+      18432
+    ],
+    "whole": [
+      87218,
+      98304
+    ]
+  },
+  "limitations": [
+    "Synthetic portable clock/syscall faults; existing host launcher bounds, no hard isolation claim",
+    "No real publisher/signing key/verifier/native entry",
+    "Complete private hard-timer origin/cancellation-handler lifetime/native whitelist remain unimplemented or unqualified",
+    "Full clean-candidate and canonical acceptance recorded separately in PR"
+  ]
+}

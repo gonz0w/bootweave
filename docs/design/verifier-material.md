@@ -36,6 +36,14 @@ READY means only that three owned handles are available. A separate release
 function consumes them exactly once; a second release cannot close reused fd
 numbers. The caller must not concurrently close/rebind/advance those descriptors.
 
+The later [reservation-bound capture](authenticated-io.md#reservation-bound-capture-continuity)
+borrows the original clock/flag and latches its input attempt in material. Failed
+capture preserves first cause and separate input-close masks; unknown input
+closure latches uncertainty. Preparation consumes poisoned/uncertain RESERVED
+material before member creation, so replacement bytes cannot bypass capture
+failure. Scratch remains caller-owned for one release or genuine successful
+transfer; the latch is never reset. Legacy valid material preparation is unchanged.
+
 Reserve checks cancellation and non-elevated identity before namespace creation.
 Prepare validates nonnull inputs, lengths (definition 1..16384, signature 1..16384,
 trusted public key 1..1024) and the same cancellation flag before creating any member file. A malformed

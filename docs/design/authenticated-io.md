@@ -60,6 +60,88 @@ snapshot bytes/lengths; no downstream parse, hash or successful review is allowe
 Success occurs only after all closes. No helper diagnostic can mutate an alias.
 Process death may prevent return; the supervising entry reports incomplete state.
 
+## Reservation-bound capture continuity
+
+The source-only continuation after PR #87 adds the closed internal sibling
+`bw_auth_capture_reserved(material, snapshot)`. It remains unlinked from the CLI.
+Its trusted caller supplies genuine, exclusively owned RESERVED material, valid
+exclusive snapshot storage and the original live cancellation flag. No caller
+clock, deadline, callback, descriptor selector or accepted-capture credential is
+introduced. The legacy `bw_auth_capture(snapshot)` retains its existing fresh
+two-second clock, including taking/closing inputs on a null snapshot.
+
+Before reading material members, the new sibling rejects null/overflowing or
+overlapping material and snapshot spans. It then checks the original flag's
+nonempty numeric span against both objects before reading state or taking inputs.
+Numeric checks do not establish mapped-memory validity: valid typed storage is
+a trusted caller obligation. Malformed, poisoned or used reservation shape returns
+NOT_TAKEN with all objects/descriptors unchanged and no syscall. Required shape:
+RESERVED, no capture attempt or recorded failure, a known directory outside roles
+0..4, no members/writers/read handles, a nonempty reserved path, normalized
+nonnegative original time and recorded 0700 directory identity with positive links.
+Do not mutate live material to manufacture that shape. Correcting an argument
+after NOT_TAKEN is safe because ownership did not transfer.
+
+After preflight, `capture_taken` is permanently latched before snapshot clearing
+or any clock/descriptor observation. The call now owns all three fixed input
+closes on every return. It checks the retained directory descriptor's full
+identity/metadata against the unchanged empty reservation before input queries.
+This proves only the held descriptor observation; current pathname binding
+remains preparation's responsibility through its existing held/named checks.
+
+The common core keeps every existing input/output alias, access, offset, size, EOF
+and final metadata check. Reserved capture uses material's unchanged `started` and
+cancellation pointer at every live boundary, including after EINTR and otherwise
+successful closes. Reservation, capture and preparation share the same conservative
+original two-second window; neither capture nor preparation renews it. Existing
+cooperative/hard-timer limitations remain.
+
+Success leaves material RESERVED with the same origin/flag and exact snapshot.
+It grants no authentication or operation authority. Failure clears all snapshot
+bytes/lengths and poisons material's first cause: cancellation is CANCEL, invalid,
+backward, unavailable or expired clock is DEADLINE, held-reservation mismatch is
+OWNERSHIP and other input/alias/read/metadata refusal is IO. Close failure is CLOSE
+only if no earlier cause exists. Separate `capture_close_errors` and
+`capture_unknown_closes` use bits 0/1/2 for definition/payload/signature. EBADF
+invalidates success but is known absence; every other close error also latches
+material uncertainty. Never retry a close or reset the capture latch.
+
+Capture never releases scratch. The caller owns one later release or genuine
+successful transfer to the fused pipeline. Preparation consumes an already
+poisoned/uncertain RESERVED object before any member creation or write, even if a
+caller supplies replacement bytes or clears the external clock/flag fault. Its
+existing exact cleanup runs independently; input uncertainty cannot become clean
+success merely because scratch cleanup is known. Rebound input descriptors must
+survive every refused repeat and later material cleanup.
+
+The capture C/header and complete local fixed-object disjointness helper fit the
+approved 8 KiB cap. The helper handles exactly three nonempty object pairs; no
+implementation moves outside accounting. The generic private span header remains
+unchanged and fully charged to its other consumers. Both declarations share one
+concise reference to this normative contract. Other component/runtime ceilings
+remain unchanged.
+
+Measured continuation source is 8,093/8,192 capture bytes, 15,466/18,432 material
+bytes and 87,218/98,304 whole-runtime bytes. The complete local predicate is in
+capture C; public material interface declarations stay with their owning component,
+as in existing consumers. No implementation helper or runtime source is omitted.
+
+| Test | Independent expected behavior |
+| --- | --- |
+| RC-T01 | Real reservation, exact binary inputs, short reads/EINTR and spent original time preserve exact snapshot, original origin/flag and caller scratch ownership; preparation uses those same bytes and window. |
+| RC-T02 | Exact two-second boundary, cancellation and invalid/backward/failed clock at preflight/read/EINTR/final close refuse finitely, clear storage, poison first cause and attempt all input closes once. |
+| RC-T03 | Each role's EBADF versus unknown close preserves separate masks and uncertainty; an earlier input error remains primary. Scratch release cannot erase unknown input closure. |
+| RC-T04 | Input/output aliases, invalid access/offset/type/size, EOF/read/metadata failures retain old refusal semantics under the original reservation window. |
+| RC-T05 | Null/overflow/each pairwise overlap, invalid reservation shape and reuse are NOT_TAKEN with unchanged objects and zero effects. Rebound canary descriptors survive repeats. |
+| RC-T06 | Failed capture followed by valid direct preparation cannot create/write members; successful capture is not a substitute for signature/content review. Legacy capture, material, fused and CLI regressions remain. |
+
+Use synthetic portable fixtures with real owned reservation/input/prepare/release
+operations and separate syscall/clock models. No signer, native verifier, listener
+or host security mutation is introduced. Independent source/fixture/envelope review
+precedes execution, then focused/full clean-candidate checks, exact squash/DCO
+review and canonical verification. Earliest hard-timer origin, cancellation-handler
+lifetime and exact native confinement remain full-entry gates outside this slice.
+
 ## Verifier handoff and private scratch
 
 The future verifier is exactly OpenBSD base `/usr/bin/signify`, with reviewed
