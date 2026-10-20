@@ -35,7 +35,7 @@ class TrustedStartTests(unittest.TestCase):
                      "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-g", "-I", str(ROOT / "src")]
         paths = sorted([*ROOT.joinpath("src").glob("*.[ch]"),
             *(ROOT / "tests" / n for n in ("trusted_start_driver.c", "test_trusted_start.py",
-                                            "trusted_start_vectors.py", "test_policy.py"))])
+                                            "trusted_start_vectors.py", "test_policy.py", "entry_ownership_driver.c"))])
         manifest = {str(p.relative_to(ROOT)): {"bytes": p.stat().st_size,
                     "sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in paths}
         (cls.directory / "source-manifest.json").write_text(json.dumps(manifest, sort_keys=True) + "\n")
@@ -43,9 +43,19 @@ class TrustedStartTests(unittest.TestCase):
         for target, source, extra in ((cls.plain, "trusted_start.c", []),
                 (platform, "signature_platform.c", []), (material, "auth_material.c", [])):
             cls.execute(cls.flags + extra + ["-c", str(ROOT / "src" / source), "-o", str(target)], compile_job=True)
+        dependencies = []
+        for source in ("auth_input", "authenticated_review", "content_review", "policy_binding", "plan",
+                       "payload_review", "signature_verify", "entry_platform"):
+            target = cls.directory / (source + ".o")
+            cls.execute(cls.flags + ["-c", str(ROOT / "src" / (source + ".c")), "-o", str(target)], compile_job=True)
+            dependencies.append(target)
+        support = cls.directory / "unused-entry-policy.o"
+        cls.execute(cls.flags + ["-DEO_UNUSED_DEPENDENCIES", "-c", str(ROOT / "tests/entry_ownership_driver.c"),
+                                "-o", str(support)], compile_job=True)
+        dependencies += [support, platform]
         cls.modeled, cls.normal = cls.directory / "modeled", cls.directory / "normal-unsupported"
-        for target, objects, extra in ((cls.modeled, [material], []),
-                (cls.normal, [cls.plain, platform, material], ["-DTS_NORMAL"])):
+        for target, objects, extra in ((cls.modeled, [material, *dependencies], []),
+                (cls.normal, [cls.plain, material, *dependencies], ["-DTS_NORMAL"])):
             cls.execute(cls.flags + extra + list(map(str, objects)) +
                         [str(ROOT / "tests/trusted_start_driver.c"), "-o", str(target)], compile_job=True)
 
@@ -262,18 +272,20 @@ class TrustedStartTests(unittest.TestCase):
         names = {row.split()[-1] for row in undefined.splitlines()}
         self.assertLessEqual({n for n in names if "asan" not in n and "ubsan" not in n}, {
             "_bw_sv_supported", "_bw_material_reserve_started", "_clock_gettime", "_getuid", "_geteuid", "_getgid", "_getegid", "_getitimer", "_setitimer",
+            "_bw_entry_boundary", "_bw_auth_capture_reserved", "_bw_authenticated_output", "_bw_verifier_release",
+            "_bw_sv_closefrom", "_bw_sv_parent_boundary", "_fcntl", "_close", "___error",
             "_getrlimit", "_setrlimit", "_sigemptyset", "_sigaddset", "_sigaction", "_sigprocmask",
             "__exit", "_memset", "_bzero", "_memcpy", "___stack_chk_fail", "___stack_chk_guard"})
         exported = self.execute(["nm", "-gU", str(self.plain)]).decode()
         self.assertEqual({row.split()[-1] for row in exported.splitlines()
-                          if "asan" not in row and "ubsan" not in row}, {"_bw_process_guard", "_bw_start_reserve"})
+                          if "asan" not in row and "ubsan" not in row}, {"_bw_process_guard", "_bw_start_reserve", "_bw_entry_output", "_bw_entry_observe"})
         makefile = (ROOT / "Makefile").read_text()
         self.assertEqual(next(row for row in makefile.splitlines() if row.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*")
                                  if p.suffix in (".c", ".h")), 96 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
-            ("trusted_start.c", "trusted_start.h", "private_limits.h", "private_start_material.h")), 10 * 1024)
+            ("trusted_start.c", "trusted_start.h", "entry_platform.c", "private_limits.h", "private_start_material.h")), 10 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
             ("signature_verify.c", "signature_verify.h", "signature_platform.c", "private_limits.h")), 18 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
