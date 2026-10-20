@@ -1,0 +1,7 @@
+test_closed_production_symbols_cli_and_fully_charged_source (test_trusted_start.TrustedStartTests.test_closed_production_symbols_cli_and_fully_charged_source) ... ok
+test_independent_finite_guard_corpus (test_trusted_start.TrustedStartTests.test_independent_finite_guard_corpus) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 12.007s
+
+OK

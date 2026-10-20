@@ -304,7 +304,7 @@ class SignatureTests(unittest.TestCase):
         files = list((ROOT / "src").rglob("*.c")) + list((ROOT / "src").rglob("*.h"))
         self.assertLessEqual(sum(p.stat().st_size for p in files), 80 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / p).stat().st_size for p in
-                                 ["signature_verify.c", "signature_verify.h", "signature_platform.c"]), 18 * 1024)
+                                 ["signature_verify.c", "signature_verify.h", "signature_platform.c", "private_limits.h"]), 18 * 1024)
         makefile = (ROOT / "Makefile").read_text()
         self.assertIn("PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c\n", makefile)
         symbols = subprocess.run(["nm", "-u", str(self.directory / "normal.o")],
