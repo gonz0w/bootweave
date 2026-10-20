@@ -7,7 +7,7 @@
 #include <time.h>
 
 enum bw_material_state { BW_VM_EMPTY, BW_VM_RESERVED, BW_VM_WORKING, BW_VM_READY,
-    BW_VM_CLOSED, BW_VM_REJECTED, BW_VM_UNCERTAIN };
+    BW_VM_CLOSED, BW_VM_REJECTED, BW_VM_UNCERTAIN, BW_VM_VERIFYING };
 enum bw_material_cause { BW_VM_NONE, BW_VM_ARGUMENT, BW_VM_RECORD, BW_VM_CANCEL,
     BW_VM_DEADLINE, BW_VM_IO, BW_VM_OWNERSHIP, BW_VM_CLOSE };
 enum bw_material_result { BW_MATERIAL_UNCERTAIN = -1, BW_MATERIAL_REJECTED,
@@ -41,6 +41,8 @@ int bw_signify_records(const unsigned char *, size_t, const unsigned char *, siz
  */
 enum bw_material_result bw_verifier_reserve(const volatile sig_atomic_t *, struct bw_verifier_material *);
 enum bw_material_result bw_verifier_prepare(const struct bw_verifier_request *, struct bw_verifier_material *);
-/* Consume RESERVED or READY exactly once; unknown closure never authorizes retry. */
+/* Consume RESERVED/READY, or the sole verifier's VERIFYING cleanup, exactly once.
+ * Caller must never release another active verifier's exclusive material.
+ * Unknown closure never authorizes retry. */
 enum bw_material_result bw_verifier_release(struct bw_verifier_material *);
 #endif

@@ -1,0 +1,30 @@
+test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) ... ok
+test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) ... ok
+test_close_failures_consumed_once_and_never_accepted (test_signature.SignatureTests.test_close_failures_consumed_once_and_never_accepted) ... ok
+test_diagnostics_io_and_cancellation_fail_closed (test_signature.SignatureTests.test_diagnostics_io_and_cancellation_fail_closed) ...
+  test_diagnostics_io_and_cancellation_fail_closed (test_signature.SignatureTests.test_diagnostics_io_and_cancellation_fail_closed) (fault='overflow') ... FAIL
+
+======================================================================
+FAIL: test_diagnostics_io_and_cancellation_fail_closed (test_signature.SignatureTests.test_diagnostics_io_and_cancellation_fail_closed) (fault='overflow')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<workspace>/bootweave-signature-verifier/tests/test_signature.py", line 237, in test_diagnostics_io_and_cancellation_fail_closed
+    self.assertEqual((r["result"], r["cause"]), (0, cause))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (-1, 14) != (0, 14)
+
+First differing element 0:
+-1
+0
+
+- (-1, 14)
+?  ^^
+
++ (0, 14)
+?  ^
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.218s
+
+FAILED (failures=1)

@@ -1,0 +1,706 @@
+{
+  "scope": "inert portable stage only; no native or cryptographic verification",
+  "base": "2f32fb16fee2c6f3f3e29d6a57938f1784ee640f",
+  "logs": "Published logs redact the workspace prefix and strip trailing whitespace for repository checks. Original logs/receipts/case ledgers and every fixture directory remain retained locally. Original and sanitized hashes are distinct.",
+  "runs": [
+    {
+      "started_utc": "2026-10-20T00:49:46.005937+00:00",
+      "finished_utc": "2026-10-20T00:49:46.990805+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 0.9845703751780093,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 86372,
+      "pgid": 86372,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": false,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "9bb95c7fbbe6a345e458bc4c7bbe71d2d422971997636f028b5624b133c4c429",
+      "attempt": "focused-r1",
+      "driver_rows": 1,
+      "actual_births": 0,
+      "full_receipt_sha256": "ea076ff7be7516750b961679bb6c2cec8a6543f3d07c2dfdb388e8437ad14835",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "144c15c6f8cc5d0770975f26dff57763dcdc9c1ab8c412b1aa50f1956a53e171"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "c925eda1f6caa6e3d4667335d2e2ecc7d815e37a9bac33abcac659a2703162c3"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r1.log",
+      "sanitized_log_sha256": "c791bb2991e439aeb8a6bfeaf59c76e899691c3dee551e5461a2e6c46fc89a3f"
+    },
+    {
+      "started_utc": "2026-10-20T00:51:58.029381+00:00",
+      "finished_utc": "2026-10-20T00:51:59.003967+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 0.9742774162441492,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 87011,
+      "pgid": 87011,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": false,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "6e0558ac306514a61168f27ad66ad8bb74a49e7d77680a760836cbc0b8d31ed3",
+      "attempt": "focused-r2",
+      "driver_rows": 1,
+      "actual_births": 0,
+      "full_receipt_sha256": "7331fdae3ab39a8b638133ae58ff5ec6e4ed4203bdf9a3de80afc4c6c766b2da",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "4fab125512e465d11df91b8fb6f69d7db12db5225f976fae1ea86f994c8e3275"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "c75a1f40dad4ddf772dc424135771f4e21208c215041543aa91987385a6d2e10"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r2.log",
+      "sanitized_log_sha256": "5569e457a5db0f5f05168f83f47858d9a8ebb1b2fc45bd3adae7784e89a80394"
+    },
+    {
+      "started_utc": "2026-10-20T00:53:28.060371+00:00",
+      "finished_utc": "2026-10-20T00:53:29.027798+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 0.9670829591341317,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 87508,
+      "pgid": 87508,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": false,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "fa6f074f6d3e3baf5f2f0e8983fd4bf7f4e4bfbc1ba8174a80ad4964a7e13e25",
+      "attempt": "focused-r3",
+      "driver_rows": 12,
+      "actual_births": 1,
+      "full_receipt_sha256": "e99c37203857d7a4a862f9f7d4a0652818bcfd14c4c989aca93ce9415b1a327b",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "98aeb9cbec46b10cd1f55785a7ab932ecfc221829460ef307c6465c4859cae75"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "c75a1f40dad4ddf772dc424135771f4e21208c215041543aa91987385a6d2e10"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r3.log",
+      "sanitized_log_sha256": "5b173a6e276c251a90ae960bba5e381d6080b9960961096166f12312e66f1d28"
+    },
+    {
+      "started_utc": "2026-10-20T00:56:30.459176+00:00",
+      "finished_utc": "2026-10-20T00:56:31.929033+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.4695472088642418,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 88489,
+      "pgid": 88489,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": true,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "a7dcc9626e0252e6b1b48c5ce828717cb570eef02d2a2220255e4dc04cc70f8f",
+      "attempt": "focused-r4",
+      "driver_rows": 34,
+      "actual_births": 23,
+      "full_receipt_sha256": "d530af47963d3be888c3c925f3734f6c7a6eda7220da425b8e5c7d290221214c",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "c084ee087a270659952c18dac5685252940b4f7472dd70f2dbbf35e33b33b0e4"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "6bd79fc9275e7339c7e59b1780c045ded3350d49fd91459d3ec56ea2d5092746"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r4.log",
+      "sanitized_log_sha256": "9aea9f3deb736cb07209e311c43b3612f6a67ac6ea7b7ba6d22b37b0ebed432e"
+    },
+    {
+      "started_utc": "2026-10-20T00:57:59.862604+00:00",
+      "finished_utc": "2026-10-20T00:58:01.344178+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 1.481182875111699,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 89053,
+      "pgid": 89053,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": true,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "a7073dfc287841f9d179d9a993c7a63bba7d5c00e730975ff5f0cecf7e305ad4",
+      "attempt": "focused-r5",
+      "driver_rows": 37,
+      "actual_births": 26,
+      "full_receipt_sha256": "eadb2acf7e15d7f248e21c9827c88906aa84c62010536d8c5439d208b4e120ba",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "c084ee087a270659952c18dac5685252940b4f7472dd70f2dbbf35e33b33b0e4"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "9e683a35a58d961045053ef31c3cc94e45044940dbdb153e85613b92c27f3d1e"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r5.log",
+      "sanitized_log_sha256": "e990ce063d76b370f79cb87f9c7379faaf8f071c0c23f02e93bd9daa88b33a6e"
+    },
+    {
+      "started_utc": "2026-10-20T01:01:56.719718+00:00",
+      "finished_utc": "2026-10-20T01:01:58.742566+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 2.0224735839292407,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 92077,
+      "pgid": 92077,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": true,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "9f74313246aded58a0a284191821342a035af6ea8cc185ebe72718001503587d",
+      "attempt": "focused-r6",
+      "driver_rows": 58,
+      "actual_births": 43,
+      "full_receipt_sha256": "5af9000f172c4e1a1d3e4e4d0e68f3abd7bea34be9bbc40cb180f6998a9c08d8",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "13f7aeec0f22ce70cb465d934b887f9acf1b4aefaedc1c22a1175ed02bc6ee5b"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "2749188c313782603d7aeb6acd1d1ee12a610c26034b98b6ec97ea7e26dcc31b"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r6.log",
+      "sanitized_log_sha256": "4647d2c795dd655eea2267470524860bccff7acff8dd0e1ef9a8636d6c57550a"
+    },
+    {
+      "started_utc": "2026-10-20T01:05:13.919308+00:00",
+      "finished_utc": "2026-10-20T01:05:21.633332+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 7.713450416922569,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 96019,
+      "pgid": 96019,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": true,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "801ae728232f33c4049aec3cb4df4f845e33c15f46f1a101796494d94b2ae907",
+      "attempt": "focused-r7",
+      "driver_rows": 82,
+      "actual_births": 50,
+      "full_receipt_sha256": "6870d541486374bba688b23890595f3c26d7176a36a8d93f9c99cc473672325e",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "47034127558a062b603e2e83481eeade8dde2bf8ad657798b43c6ddba5d4351e"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "2749188c313782603d7aeb6acd1d1ee12a610c26034b98b6ec97ea7e26dcc31b"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "sanitized_log": "focused-r7.log",
+      "sanitized_log_sha256": "801ae728232f33c4049aec3cb4df4f845e33c15f46f1a101796494d94b2ae907"
+    },
+    {
+      "started_utc": "2026-10-20T01:10:21.212370+00:00",
+      "finished_utc": "2026-10-20T01:12:53.126298+00:00",
+      "exit_code": 2,
+      "elapsed_seconds": 151.91118800034747,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 97759,
+      "pgid": 97759,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": true,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "32dd126ea114bfa5bfb6f69d62844bddba1c07efd685f2ec1778e4440c510eb1",
+      "attempt": "full-r1",
+      "driver_rows": 82,
+      "actual_births": 50,
+      "full_receipt_sha256": "5fb2abb4ffc9c35583f950bace8c41938c743d443d3518ba5858e6b6e9e6000b",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "47034127558a062b603e2e83481eeade8dde2bf8ad657798b43c6ddba5d4351e"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "2749188c313782603d7aeb6acd1d1ee12a610c26034b98b6ec97ea7e26dcc31b"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "unittest_sections": [
+        39,
+        13,
+        3,
+        10,
+        36,
+        63
+      ],
+      "unittest_total": 164,
+      "skipped": 1,
+      "sanitized_log": "full-r1.log",
+      "sanitized_log_sha256": "c135afa17ccbef9f514cdde96d0512dc41163b10c6c7ce3240e51df57ccc1636"
+    },
+    {
+      "started_utc": "2026-10-20T01:18:13.666231+00:00",
+      "finished_utc": "2026-10-20T01:18:21.206147+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 7.53937349980697,
+      "native": false,
+      "work_seconds": 270,
+      "total_seconds": 300,
+      "network_requested": false,
+      "credentials_inherited": false,
+      "hard_isolation_claimed": false,
+      "events": [
+        "final-group-kill-before-wait",
+        "actual-consuming-wait"
+      ],
+      "pid": 9805,
+      "pgid": 9805,
+      "stop_errno": 1,
+      "stop_result": "signal refused; only zombies observed; wait pending",
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_observation_complete": true,
+      "inner_terminal_rows": [],
+      "source_unchanged": true,
+      "log_sha256": "f69adfd4812e2ecbef4620819c94aec52cf249c34c409b5cc2aff6e4950231c4",
+      "attempt": "focused-r8",
+      "driver_rows": 82,
+      "actual_births": 50,
+      "full_receipt_sha256": "18dd94dbd1133f596ab1258009ae82dc923e1bbf881ed9e6485bf4354f0bd502",
+      "source_sha256": [
+        {
+          "path": "tests/test_plan.py",
+          "sha256": "d601cbe002c0e9477323ced29a33d81def7b801c36e241d1d4611678a62994fb"
+        },
+        {
+          "path": "tests/signature_driver.c",
+          "sha256": "1d82ce3bad73c9de494308660e8c8ed0efab803b8960832b0cf89ad1e2211591"
+        },
+        {
+          "path": "tests/test_signature.py",
+          "sha256": "9bf9acda28f4060794cb2f6ff4be3b14bf7f1dfe0764d2ed440a82b4834f854f"
+        },
+        {
+          "path": "src/signature_verify.h",
+          "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+        },
+        {
+          "path": "src/signature_platform.c",
+          "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+        },
+        {
+          "path": "src/auth_material.h",
+          "sha256": "a8aed054c428c592fd7db1897009f30d00b2cebd60bea2c0457956cb93ada792"
+        },
+        {
+          "path": "src/auth_material.c",
+          "sha256": "5d3ba73a970fc5e542b8de4a47a440599377cdff19ee1284e306825ac5b708e3"
+        },
+        {
+          "path": "src/signature_verify.c",
+          "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+        },
+        {
+          "path": "src/auth_input.c",
+          "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+        },
+        {
+          "path": "docs/design/signature-verifier.md",
+          "sha256": "c4a29882bf8a982adf6de14f3c1fbcf421f0c88a958b5007d544e5056fa428ee"
+        }
+      ],
+      "input_canary_parity": true,
+      "unittest_sections": [
+        14
+      ],
+      "unittest_total": 14,
+      "skipped": 0,
+      "sanitized_log": "focused-r8.log",
+      "sanitized_log_sha256": "f69adfd4812e2ecbef4620819c94aec52cf249c34c409b5cc2aff6e4950231c4"
+    }
+  ]
+}

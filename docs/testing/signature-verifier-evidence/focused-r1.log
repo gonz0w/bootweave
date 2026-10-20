@@ -1,0 +1,18 @@
+test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) ...
+  test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) (fault='null-error') ... FAIL
+
+======================================================================
+FAIL: test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) (fault='null-error')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<workspace>/bootweave-signature-verifier/tests/test_signature.py", line 198, in test_channel_and_fork_failures_no_launch
+    r = self.fixture(fault)
+  File "<workspace>/bootweave-signature-verifier/tests/test_signature.py", line 148, in fixture
+    self.assertEqual(result.returncode, 0, (fault, result.stdout, result.stderr))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 94 != 0 : ('null-error', b'', b'')
+
+----------------------------------------------------------------------
+Ran 1 test in 0.655s
+
+FAILED (failures=1)

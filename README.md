@@ -32,6 +32,7 @@ and extension interfaces remain separate designs.
 - [Installer author guide](docs/configuration/author-guide.md)
 - [First read-only project planner](docs/design/project-plan.md)
 - [Next trust-contract adoption](docs/design/project-trust/ADOPTION.md) (review proposal)
+- [Internal fixed signature stage](docs/design/signature-verifier.md) and [portable evidence](docs/testing/signature-verifier-host.md) (no CLI or native qualification)
 - [Security boundaries](docs/security/threat-model.md) and [debugging](docs/debugging.md)
 - [Research and decisions](docs/research/openbsd-installers.md)
 - [First native profile design](docs/design/native-profile/PRD.md) (proposed)

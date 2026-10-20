@@ -1,0 +1,19 @@
+test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) ... ok
+test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) ... ok
+test_close_failures_consumed_once_and_never_accepted (test_signature.SignatureTests.test_close_failures_consumed_once_and_never_accepted) ... ok
+test_diagnostics_io_and_cancellation_fail_closed (test_signature.SignatureTests.test_diagnostics_io_and_cancellation_fail_closed) ... ok
+test_fixed_arguments_environment_exact_retained_bytes_and_private_output (test_signature.SignatureTests.test_fixed_arguments_environment_exact_retained_bytes_and_private_output) ... ok
+test_lost_wait_uses_only_nonspawning_syscall_models (test_signature.SignatureTests.test_lost_wait_uses_only_nonspawning_syscall_models) ... ok
+test_normal_host_unsupported_before_fork (test_signature.SignatureTests.test_normal_host_unsupported_before_fork) ... ok
+test_parent_group_boundary_and_dead_reader_no_launch (test_signature.SignatureTests.test_parent_group_boundary_and_dead_reader_no_launch) ... ok
+test_partial_output_preserves_independent_identity_witnesses (test_signature.SignatureTests.test_partial_output_preserves_independent_identity_witnesses) ... ok
+test_preflight_refusals_consume_material_without_child (test_signature.SignatureTests.test_preflight_refusals_consume_material_without_child) ... ok
+test_rejection_exception_is_only_recorded_host_stop_refusal (test_signature.SignatureTests.test_rejection_exception_is_only_recorded_host_stop_refusal) ... ok
+test_shared_cleanup_deadline_includes_close_wait_and_final_boundary (test_signature.SignatureTests.test_shared_cleanup_deadline_includes_close_wait_and_final_boundary) ... ok
+test_source_budget_and_production_link_boundary (test_signature.SignatureTests.test_source_budget_and_production_link_boundary) ... ok
+test_stop_uncertainty_and_child_hard_alarm (test_signature.SignatureTests.test_stop_uncertainty_and_child_hard_alarm) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 7.080s
+
+OK
