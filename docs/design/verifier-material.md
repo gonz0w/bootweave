@@ -143,6 +143,9 @@ New C/header source is capped at 18 KiB and whole src at 48 KiB; previous planne
 and capture 6 KiB ceilings stay separately enforced. Scratch content is at most
 33792 bytes across three files; private transient C workspace is at most 8 KiB.
 Runtime budgets in the parent I/O contract are unchanged. No RSS claim follows.
+These earlier whole/capture measurements are superseded by the owner-approved
+complete-entry package; current fully charged material/bridge and whole-source
+counts are in [startup accounting](trusted-entry-output.md#closed-startup-and-reservation-lifetime).
 
 | Test | Independent observation |
 | --- | --- |

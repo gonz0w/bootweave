@@ -126,6 +126,10 @@ the real native verifier accepted a cryptographic signature.
 ## Original deadlines, storage and source fit
 
 Use material.started as the original reserve/startup origin; never renew it.
+The closed [startup sibling](trusted-entry-output.md#closed-startup-and-reservation-lifetime)
+supplies its pre-first-REAL-arm origin and permanent private cancellation flag.
+Signature work/terminal checks now also enforce original11/15 alongside phase5/4;
+they cannot renew the lifetime after a clock jump between component boundaries.
 Reserve→capture→prepare retains the existing conservative 2-second material window.
 Require cancellation/valid nonbackward monotonic clock before/after dependent
 stages. Signature work 5s/cleanup 4s starts only inside that original 2s window.

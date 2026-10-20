@@ -87,6 +87,10 @@ checks both the phase5/4 cap and the original11/15 cap; it must be normalized an
 not precede either origin. A jump before signature's first local stamp cannot
 renew work. These conservative ceilings apply to all genuine material, including
 legacy reservation; no mode bit or new clock sample/allowance is introduced.
+The already sampled cleanup-start time must also satisfy work5/original11 before
+successful observation becomes cleanup. Exact work expiry at the final WNOWAIT
+completion refuses, preserving that sample as the cleanup origin and performing
+all remaining owned finalizers. No additional clock sample or renewed work phase.
 Cancellation remains the exact original material flag after startup returns.
 The parent's private flag is copied, not shared, across fork; child ALRM5 and
 parent custody remain unchanged. This is not a global all-syscall chronology claim.
@@ -132,6 +136,9 @@ Keep main/Makefile production linkage unchanged. New source/header/adapter ceili
 is 18KiB, whole src64KiB; retain planner24KiB, capture6KiB and material18KiB
 ceilings separately. Fixed transient workspace <=8KiB, three pipes and one child.
 The adopted native runtime limits above are unchanged and are not host claims.
+The owner-approved complete-entry package supersedes these earlier whole/capture
+source ceilings; current fully charged signature and whole-source counts are in
+[startup accounting](trusted-entry-output.md#closed-startup-and-reservation-lifetime).
 
 Tests link the real common orchestration and material code with a separate static
 native adapter and execve/syscall substitutions. Use inert format-valid records,

@@ -239,7 +239,7 @@ class MaterialTests(unittest.TestCase):
         self.fixture(fault="replace-directory", inspect=replaced)
 
     def test_source_budget_symbols_and_production_link_unchanged(self):
-        self.assertLessEqual(sum((ROOT / "src" / p).stat().st_size for p in ["auth_material.c", "auth_material.h"]), 18*1024)
+        self.assertLessEqual(sum((ROOT / "src" / p).stat().st_size for p in ["auth_material.c", "auth_material.h", "private_start_material.h"]), 18*1024)
         result = subprocess.run(["nm", "-u", self.normal], capture_output=True, check=True, timeout=3, env=self.env)
         for forbidden in [b"getenv", b"fork", b"exec", b"socket", b"system", b"bw_m_", b"malloc"]:
             self.assertNotIn(forbidden, result.stdout)

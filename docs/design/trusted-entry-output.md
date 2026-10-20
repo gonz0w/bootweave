@@ -166,6 +166,8 @@ signals. A pending cancellation delivered on unblocking refuses before sampling
 the origin or arming a timer. Check cancellation before each arm, after the origin
 sample and after the final readback. A cancellation can always arrive after a
 check; the same flag remains live in every later component.
+This lifetime begins with the installed private handlers. A signal already
+discarded by an inherited disposition before installation cannot be reconstructed.
 
 Sample one normalized CLOCK_MONOTONIC origin immediately before the first REAL15
 arm. Clock failure or invalid fields refuses before that arm. The original REAL15
@@ -193,6 +195,10 @@ sample against both relevant origins. It rejects invalid fields, samples before
 either origin and exact expired boundaries. These original11/15 ceilings apply
 consistently to all genuine material, including legacy reservation; a delayed or
 jumped signature start cannot renew dependent work. There is no entry-mode bit.
+Before successful work becomes cleanup, validate the existing cleanup-start
+sample against work5/original11 too. A final WNOWAIT observation cannot cross a
+work deadline and silently become a fresh cleanup phase. That check adds no
+clock sample and never skips cleanup; cancellation is checked before its bounds.
 Capture/material clocks remain origin-relative, fused review retains its existing
 last sample, and signature remains phase/original-relative. This does not claim
 a global nondecreasing chronology across every syscall. After fork the parent's
@@ -205,10 +211,10 @@ neither a successful reserve nor a known release proves complete entry execution
 confinement or native resource sufficiency. Failed close/identity observations
 must not be erased by a later known cleanup or converted into retry instructions.
 
-Before execution the complete source is90,851/98,304 bytes. Entry C/header plus
+Before execution the complete source is91,341/98,304 bytes. Entry C/header plus
 the entire private_limits.h and private_start_material.h is5,743/10,240; material
 plus the entire bridge header is16,712/18,432; signature plus its entire shared
-limit helper is16,672/18,432. Capture remains8,093/8,192 and authenticated
+limit helper is17,162/18,432. Capture remains8,093/8,192 and authenticated
 review/output12,782/16,384. Count the bridge once in whole source and fully in both
 consumers. All other runtime/component ceilings remain unchanged. A compile-time
 8KiB guard workspace bound and existing sequential application accounting cover
@@ -233,7 +239,7 @@ roles and refusal observations independently before candidate execution.
 | Either timer arm/readback failure; zero, invalid, over-cap or periodic readback | Refusal without retry, reset or claimed guard success |
 | Every fatal handler | Fixed exit classification, no diagnostic/cleanup action |
 | Reuse after a latched attempt | No further signal, resource or timer mutation; no deadline renewal |
-| Production symbols and full source accounting | Only closed guard exported; no fd/path/write/fork/exec/unveil dependency; shared source charged fully; planner/CLI and all old regressions preserved |
+| Production symbols and full source accounting | Guard and closed startup/reservation wrappers only; exact private material bridge dependency, no caller seed selector, shared source charged fully; planner/CLI and all old regressions preserved |
 
 For the newly integrated output sibling, independently freeze all 18 exact report
 lines and test short writes, EINTR, EAGAIN, zero/oversized/error returns, every
@@ -253,7 +259,7 @@ For startup lifetime, freeze new literal oracles before reading implementation:
 | SL-T02 | INT/TERM/HUP installed while blocked, exact handler masks/flags and nine-signal unblock; pending cancellation and each later phase use the same flag, which never resets on refusal/reuse |
 | SL-T03 | Every new signal-set/block/action/unblock and origin-clock failure retains only its attempted prefix; terminal guard failure leaves material/inputs untouched; normal unsupported adapter changes no host state |
 | SL-T04 | Exact original2 boundary before namespace, capture and prepare refuses; known finalizers still run, no input/scratch double close or erased uncertainty |
-| SL-T05 | Signature jump before its own phase start still refuses at original11; own5/original11 and cleanup4/original15 exact/near boundaries are independently distinguished |
+| SL-T05 | Signature jump before its own phase start and final observer completion still refuse at exact work boundaries; own5/original11 and cleanup4/original15 exact/just-below controls are independently distinguished |
 | SL-T06 | Cancellation and invalid/backward-to-origin clocks at work/cleanup boundaries retain first cause; unknown close/lostwait/failedstop remain uncertainty independently of lateness |
 | SL-T07 | Empty/nonempty/null/reused material and cross-wrapper reuse cannot clear flag, renew guard or close rebound descriptors; legacy149 guard event oracles remain unchanged |
 | SL-T08 | Public entry has no caller seed selector; private bridge fully charged to both consumers, normal symbols/link boundaries and unchanged planner/capture/fused regressions verified |

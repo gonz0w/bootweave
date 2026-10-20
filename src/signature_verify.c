@@ -34,20 +34,27 @@ static int stamp(struct timespec *t) {
         t->tv_nsec >= 0 && t->tv_nsec < 1000000000L;
 }
 
-static int within(struct operation *o, const struct timespec *start, int seconds, int total) {
-    struct timespec now;
+/* Both callers supply one already-normalized clock sample. */
+static int bounded(struct operation *o, const struct timespec *now,
+    const struct timespec *start, int seconds, int total) {
     const struct timespec *original = &o->material->started;
     time_t elapsed, overall;
-    if (!stamp(&now) || original->tv_sec < 0 || original->tv_nsec < 0 ||
-        original->tv_nsec >= 1000000000L || now.tv_sec < original->tv_sec ||
-        (now.tv_sec == original->tv_sec && now.tv_nsec < original->tv_nsec) ||
-        now.tv_sec < start->tv_sec || (now.tv_sec == start->tv_sec && now.tv_nsec < start->tv_nsec)) {
+    if (original->tv_sec < 0 || original->tv_nsec < 0 ||
+        original->tv_nsec >= 1000000000L || now->tv_sec < original->tv_sec ||
+        (now->tv_sec == original->tv_sec && now->tv_nsec < original->tv_nsec) ||
+        now->tv_sec < start->tv_sec || (now->tv_sec == start->tv_sec && now->tv_nsec < start->tv_nsec)) {
         fail(o, BW_SV_CLOCK); return 0;
     }
-    elapsed = now.tv_sec - start->tv_sec;
-    overall = now.tv_sec - original->tv_sec;
-    return (elapsed < seconds || (elapsed == seconds && now.tv_nsec < start->tv_nsec)) &&
-        (overall < total || (overall == total && now.tv_nsec < original->tv_nsec));
+    elapsed = now->tv_sec - start->tv_sec;
+    overall = now->tv_sec - original->tv_sec;
+    return (elapsed < seconds || (elapsed == seconds && now->tv_nsec < start->tv_nsec)) &&
+        (overall < total || (overall == total && now->tv_nsec < original->tv_nsec));
+}
+
+static int within(struct operation *o, const struct timespec *start, int seconds, int total) {
+    struct timespec now;
+    if (!stamp(&now)) { fail(o, BW_SV_CLOCK); return 0; }
+    return bounded(o, &now, start, seconds, total);
 }
 
 static int live(struct operation *o) {
@@ -276,6 +283,10 @@ bw_signature_verify(struct bw_verifier_material *m, struct bw_signature_observat
 finish:
     o.cleanup_clock = stamp(&o.cleanup_started);
     if (!o.cleanup_clock) fail(&o, BW_SV_CLOCK);
+    else if (r->cause == BW_SV_NONE) {
+        if (*m->cancelled) fail(&o, BW_SV_CANCEL);
+        else if (!bounded(&o, &o.cleanup_started, &o.started, 5, 11)) fail(&o, BW_SV_DEADLINE);
+    }
     consume(&o, GATE_W);
     (void)terminal_check(&o);
     if (r->pid > 0) {
