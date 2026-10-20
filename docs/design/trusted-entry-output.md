@@ -411,15 +411,17 @@ gates below still apply, and the original planner remains unchanged.
 
 ## Remaining integration and native gates
 
-The closed sibling establishes startup/reservation/capture origin and cancellation
-continuity only. It does not choose the smallest exact native
-loader whitelist or prove locked unveil removal, actual signify fd handoff,
-hard timers, resource sufficiency or serial/plain output. Those remain explicit
-engineering/native gates. Preserve all consumed fixture authority and research.
-No new guest, key, download, security-setting change or deployment is requested.
+The closed coordinator now composes startup, reservation, capture, preparation,
+signature, content review and output ownership with one original clock and
+cancellation lifetime. Portable models exercise COMPLETE and refusal/uncertainty
+paths. The normal entry boundary always refuses before capture, so that model
+success grants no production entry or CLI authority.
 
-Complete entry must adopt this closed lifetime and finish all pre-signature
-failure ownership:
-capture consumes inputs 0/3/4, preparation failure consumes material, and signature
-entry transfers sole material/process cleanup. No public deadline token, caller
-authentication flag or complete-entry success is implemented by these closed slices.
+Native activation still needs the exact executable/loader/library/devnull/fd/scratch
+whitelist, locked unveil removal and actual signify fd handoff. Hard timers,
+resource sufficiency and serial/plain output need fresh native qualification.
+CLI activation must adopt the coordinator, inherited writable nonblocking fd1 and
+exclusive fixed input roles under the reviewed media policy, preserving the
+qualified planner. No public deadline token or caller authentication flag is
+introduced. Preserve all consumed fixture authority and research. No new guest,
+key, download, security-setting change or deployment is requested.
