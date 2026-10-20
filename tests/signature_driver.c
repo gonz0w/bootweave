@@ -25,7 +25,7 @@ static volatile sig_atomic_t cancelled;
 static unsigned char inputs[3][17000];
 static size_t lengths[3];
 static int active, fake, channels, fds[7], material[3], stop_errno, modeled_stop;
-static int death_gate[2]={-1,-1};
+static int fixture_gate[2]={-1,-1};
 static unsigned calls, waits, signals_sent, lost_seen, reaped_seen, final_calls, bad_order, bad_close;
 static unsigned generations[128], consumed[128];
 static int jumped, final_seen, interrupted, poll_failed, witness_error;
@@ -34,9 +34,9 @@ static int is(const char *s) { return !strcmp(fault,s); }
 static int parent(void) { return getpid()==owner; }
 static int named(const char *prefix,int i) { char b[80];snprintf(b,sizeof(b),"%s-%d",prefix,i);return is(b); }
 static void track(int fd) { if(fd>=0 && fd<128) generations[fd]++; }
-static void death_consume(unsigned i) {
-    int fd=death_gate[i];
-    death_gate[i]=-1;
+static void fixture_consume(unsigned i) {
+    int fd=fixture_gate[i];
+    fixture_gate[i]=-1;
     if(fd>=0 && close(fd)) witness_error=1;
 }
 static void group_observation(pid_t pid) {
@@ -133,44 +133,61 @@ pid_t bw_v_fork(void) {
     calls++;
     if(is("fork-error")) {errno=EAGAIN;return -1;}
     if(fake) {born_child=12345;return born_child;}
-    if(is("gate-reader-death")) {
-        if(pipe(death_gate)) return -1;
-        if(fcntl(death_gate[0],F_SETFD,FD_CLOEXEC) || fcntl(death_gate[1],F_SETFD,FD_CLOEXEC)) {
-            death_consume(0);death_consume(1);return -1;
-        }
+    if(pipe(fixture_gate)) return -1;
+    if(fcntl(fixture_gate[0],F_SETFD,FD_CLOEXEC) || fcntl(fixture_gate[1],F_SETFD,FD_CLOEXEC)) {
+        fixture_consume(0);fixture_consume(1);return -1;
     }
     p=fork();
-    if(p<0) {death_consume(0);death_consume(1);}
+    if(p<0) {fixture_consume(0);fixture_consume(1);}
     if(p>0) {
         struct timespec born={0,0};
         pid_t observed_group;
         int group_errno;
         born_child=p;
-        death_consume(0);
+        fixture_consume(0);
         if(clock_gettime(CLOCK_MONOTONIC,&born)) witness_error=1;
         observed_group=getpgid(p);group_errno=observed_group<0?errno:0;
         printf("SV_BORN %ld %ld %lld %ld %d\n",(long)p,(long)observed_group,(long long)born.tv_sec,born.tv_nsec,group_errno);
         if(fflush(stdout)) witness_error=1;
     }
-    if(!p) death_consume(1);
+    if(!p) fixture_consume(1);
     return p;
 }
 int bw_v_setpgid(pid_t pid,pid_t group) {
-    int r;
+    int r,saved;
+    char grant;
     calls++;
-    if(parent() && is("group-error")) {errno=EPERM;return -1;}
+    if(!parent()) {
+        /* Common ALRM5 is already default/unblocked. Let the real parent group
+         * establishment finish first; this fixture does not qualify the
+         * native concurrent setpgid interleaving. */
+        if(read(fixture_gate[0],&grant,1)!=1 || grant!='G') {
+            fixture_consume(0);errno=EIO;return -1;
+        }
+        if(!is("gate-reader-death")) fixture_consume(0);
+    }
+    if(parent() && is("group-error")) {
+        printf("SV_SETGROUP_FAILED %ld %ld %d 1\n",(long)pid,(long)group,EPERM);
+        if(fflush(stdout)) witness_error=1;
+        fixture_consume(0);fixture_consume(1);errno=EPERM;return -1;
+    }
     r=fake ? 0 : setpgid(pid,group);
+    saved=r<0?errno:0;
     if(parent() && !fake && !r) {
         /* Acknowledged owned syscall, separate from a fallible later sample. */
         printf("SV_SETGROUP %ld %ld\n",(long)pid,(long)group);
         if(fflush(stdout)) witness_error=1;
         group_observation(pid);
-        if(is("gate-reader-death")) {
-            if(write(death_gate[1],"D",1)!=1) witness_error=1;
-            death_consume(1);
-        }
+        if(write(fixture_gate[1],"G",1)!=1) witness_error=1;
+        if(is("gate-reader-death") && write(fixture_gate[1],"D",1)!=1) witness_error=1;
+        fixture_consume(1);
     }
-    if(parent() && r<0) {death_consume(0);death_consume(1);}
+    if(parent() && r<0) {
+        printf("SV_SETGROUP_FAILED %ld %ld %d 0\n",(long)pid,(long)group,saved);
+        if(fflush(stdout)) witness_error=1;
+        fixture_consume(0);fixture_consume(1);
+    }
+    if(r<0) errno=saved;
     return r;
 }
 int bw_v_dup2(int old,int target) {
@@ -195,8 +212,8 @@ ssize_t bw_v_read(int fd,void *p,size_t n) {
     if(!parent() && is("gate-reader-death") && fd==fds[5]) {
         char grant;
         /* Common child() has already installed/unblocked its ALRM5 here. */
-        if(read(death_gate[0],&grant,1)!=1 || grant!='D') _exit(125);
-        death_consume(0);
+        if(read(fixture_gate[0],&grant,1)!=1 || grant!='D') _exit(125);
+        fixture_consume(0);
         _exit(125);
     }
     if(parent()) {
@@ -402,7 +419,7 @@ int main(int argc,char **argv) {
     active=1;
     result=bw_signature_verify(&m,&r);
     active=0;
-    death_consume(0);death_consume(1);
+    fixture_consume(0);fixture_consume(1);
     if(witness_error) return 98;
     if(bad_order || bad_close || r.state!=BW_SV_FINISHED || r.pid!=born_child) return 95;
     for(i=3;i<32;i++) if((int)i!=sentinel && fcntl((int)i,F_GETFD)!=-1) return 96;

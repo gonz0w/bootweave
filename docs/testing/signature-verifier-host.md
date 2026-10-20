@@ -11,12 +11,12 @@ and privilege authorization remain separate unqualified work.
 
 ## Observed focused result
 
-On 2026-10-20 the final focused run passed all 14 unittest groups, zero skips,
+On 2026-10-20 focused r8 passed all 14 unittest groups, zero skips,
 with 82 inert driver invocations: 50 actual fixed test children, 29 no-child cases
 and 3 nonspawning syscall models. The 14 groups include pure observer/assertion
-controls. It ran 01:05:13.919–01:05:21.633 UTC, 7.713 seconds total.
+controls. It ran 01:18:13.666–01:18:21.206 UTC, 7.539 seconds total.
 [Source-bound results](signature-verifier-evidence/results.json) and the
-[passing log](signature-verifier-evidence/focused-r7.log) retain the observations
+[passing log](signature-verifier-evidence/focused-r8.log) retain the observations
 and original/sanitized log hashes. Base:
 2f32fb16fee2c6f3f3e29d6a57938f1784ee640f.
 
@@ -35,6 +35,11 @@ once-only close ownership, unknown close quarantine, non-reaping observation
 before stop and actual consuming wait, and refusal after lost wait. Lost-wait
 faults are nonspawning models and dispatch no actual numeric signal/wait.
 Actual child alarm 5 fires independently while the modeled parent clock is frozen.
+The test-only two-fd rendezvous makes each real child wait after common alarm
+setup until the parent's actual setpgid succeeds. Successful and failed syscalls
+are separate records; actual versus injected failure and immediate errno remain
+explicit. Failed requested groups never become observation/signal authority.
+This controlled ordering does not qualify native concurrent group behavior.
 
 Native DATA/STACK, pledge and closefrom outcomes are explicitly modeled on this
 Mac. Host child CPU/fd/core/file/alarm controls and fork/pipe/wait behavior were
@@ -64,12 +69,13 @@ bound the outer run. Driver processes use CPU 2 / fd 32 / CORE 0 / 16 KiB file a
 timeouts; common child alarm 5 is independent. RSS is observed, not hard memory
 isolation. No sandbox, hostile-worker qualification or global cleanup proof is
 claimed. The [retained envelope source](signature-verifier-evidence/portable-envelope.py)
-is a source snapshot for review, not a relocation-safe launcher or permission to
+and the [corrected full-check envelope](signature-verifier-evidence/portable-envelope-r2.py)
+are source snapshots for review, not relocation-safe launchers or permission to
 reuse a completed job/approval. Full clean-candidate make verify and exact
 signature/DCO/canonical binding are recorded in delivery review, separately from
 this focused result.
 
-The six earlier attempts remain failures, with original case directories, caches,
+The six earlier focused attempts remain failures, with original case directories, caches,
 objects, logs, receipts and ledgers retained locally. Published logs redact the workspace prefix and strip trailing whitespace to meet
 repository checks; original and sanitized hashes are distinct in results.json.
 
@@ -83,6 +89,20 @@ repository checks; original and sanitized hashes are distinct in results.json.
 | r6 | First 57 controls passed; early-death child raced parent group establishment and correctly caused GROUP rejection. A bounded test-only rendezvous now establishes the group before child exit, proving actual EPIPE. |
 
 Production common source remained unchanged throughout these fixture corrections.
+The first [focused green r7](signature-verifier-evidence/focused-r7.log) remains
+preserved. Its subsequent [full check](signature-verifier-evidence/full-r1.log)
+failed one of 164 tests: the overflow fixture was refused at actual GROUP setup
+before launch. The group's syscall errno was not captured, so no exact OS
+root-cause is claimed. The test rendezvous now orders parent establishment first,
+with actual failure metadata retained rather than broadening expected causes.
+That full attempt also skipped the eight legacy authentication tests because
+this worktree lacked the existing pinned verifier-tool link; it stopped before
+the final secret scan. Its one failure and one skipped class remain recorded.
+The same existing tool's source/binary pins were checked and its owned link
+restored, with no acquisition or security-setting change. The new inert tests
+never use it. A corrected full check must execute 172 tests with zero skips,
+including the eight unchanged host authentication regressions, and reach secrets.
+
 No native run, live credential, installed target, service, deployment or renewed
 native authority was involved. Historical evidence and primary worktrees remain
 preserved. Issue #5 remains open for the remaining trust/extraction/privilege work.

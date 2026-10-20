@@ -22,19 +22,23 @@ FIELDS = ("result state cause pid group launch stop consumed lost bytes close_er
 
 def witnesses(stdout):
     """Recover valid identity rows even when another row/result is malformed."""
-    born, groups, setgroups, errors = [], [], [], []
+    born, groups, setgroups, failedgroups, errors = [], [], [], [], []
     for raw in stdout.splitlines():
         parts = raw.split()
-        if not parts or parts[0] not in (b"SV_BORN", b"SV_GROUP", b"SV_SETGROUP"):
+        if not parts or parts[0] not in (b"SV_BORN", b"SV_GROUP", b"SV_SETGROUP", b"SV_SETGROUP_FAILED"):
             continue
         try:
-            expected = {b"SV_BORN": 6, b"SV_GROUP": 4, b"SV_SETGROUP": 3}[parts[0]]
+            expected = {b"SV_BORN": 6, b"SV_GROUP": 4, b"SV_SETGROUP": 3, b"SV_SETGROUP_FAILED": 5}[parts[0]]
             if len(parts) != expected:
                 raise ValueError("truncated identity row")
             values = list(map(int, parts[1:]))
             if values[0] <= 0 or values[1] == 0 or values[1] < -1:
                 raise ValueError("invalid identity")
-            if parts[0] == b"SV_GROUP":
+            if parts[0] == b"SV_SETGROUP_FAILED":
+                if values[1] != values[0] or values[2] <= 0 or values[3] not in (0, 1):
+                    raise ValueError("invalid failed setpgid observation")
+                failedgroups.append(values)
+            elif parts[0] == b"SV_GROUP":
                 if (values[1] < 0 and values[2] <= 0) or (values[1] > 0 and values[2] != 0):
                     raise ValueError("invalid group observation")
                 groups.append(values)
@@ -50,14 +54,15 @@ def witnesses(stdout):
                 born.append(values)
         except (ValueError, OverflowError) as caught:
             errors.append(str(caught))
-    return born, groups, setgroups, errors
+    return born, groups, setgroups, failedgroups, errors
 
 
 def parse(stdout):
     result = None
     for row in stdout.decode("ascii").splitlines():
         parts = row.split()
-        if parts[0] in ("SV_BORN", "SV_GROUP", "SV_SETGROUP") and len(parts) == {"SV_BORN": 6, "SV_GROUP": 4, "SV_SETGROUP": 3}[parts[0]]:
+        sizes = {"SV_BORN": 6, "SV_GROUP": 4, "SV_SETGROUP": 3, "SV_SETGROUP_FAILED": 5}
+        if parts[0] in sizes and len(parts) == sizes[parts[0]]:
             list(map(int, parts[1:]))
         elif parts[0] == "SV_SETUP" and len(parts) == 6:
             list(map(int, parts[2:]))
@@ -116,7 +121,7 @@ class SignatureTests(unittest.TestCase):
 
         before = {p.name: identity(p) for p in paths}
         result = error = parsed = parse_error = inventory_error = None
-        born, groups, setgroups, witness_errors = [], [], [], []
+        born, groups, setgroups, failedgroups, witness_errors = [], [], [], [], []
         inventory = []
         try:
             result = subprocess.run([self.normal if normal else self.modeled, directory, *paths[:3], fault],
@@ -127,7 +132,7 @@ class SignatureTests(unittest.TestCase):
         finally:
             stdout = result.stdout if result is not None else getattr(error, "stdout", None) or b""
             stderr = result.stderr if result is not None else getattr(error, "stderr", None) or b""
-            born, groups, setgroups, witness_errors = witnesses(stdout)
+            born, groups, setgroups, failedgroups, witness_errors = witnesses(stdout)
             try:
                 parsed = parse(stdout)
             except BaseException as caught:
@@ -155,7 +160,8 @@ class SignatureTests(unittest.TestCase):
                     "stdout_bytes": len(stdout), "stderr_bytes": len(stderr),
                     "stdout_sha256": hashlib.sha256(stdout).hexdigest(),
                     "stderr_sha256": hashlib.sha256(stderr).hexdigest(),
-                    "born": born, "groups": groups, "setgroups": setgroups, "witness_errors": witness_errors,
+                    "born": born, "groups": groups, "setgroups": setgroups,
+                    "failedgroups": failedgroups, "witness_errors": witness_errors,
                     "result": parsed, "parse_error": parse_error,
                     "before": before, "inventory": inventory, "inventory_error": inventory_error},
                     sort_keys=True) + "\n")
@@ -307,17 +313,19 @@ class SignatureTests(unittest.TestCase):
             self.assertNotIn(name, symbols)
 
     def test_partial_output_preserves_independent_identity_witnesses(self):
-        output = b"SV_BORN 123 100 400 5 0\nSV_SETGROUP 123 123\nSV_GROUP 123 123 0\nSV_GROUP 123 -1 3\nSV_BORN 456 -1 401 6 3\nSV_RESULT malformed\nSV_BORN 789"
-        born, groups, setgroups, errors = witnesses(output)
+        output = b"SV_BORN 123 100 400 5 0\nSV_SETGROUP 123 123\nSV_GROUP 123 123 0\nSV_GROUP 123 -1 3\nSV_BORN 456 -1 401 6 3\nSV_SETGROUP_FAILED 456 456 1 0\nSV_SETGROUP_FAILED 789 789 1 1\nSV_RESULT malformed\nSV_BORN 789"
+        born, groups, setgroups, failedgroups, errors = witnesses(output)
         self.assertEqual(born, [[123, 100, 400, 5, 0], [456, -1, 401, 6, 3]])
         self.assertEqual(groups, [[123, 123, 0], [123, -1, 3]])
         self.assertEqual(setgroups, [[123, 123]])
+        self.assertEqual(failedgroups, [[456, 456, 1, 0], [789, 789, 1, 1]])
         self.assertTrue(errors)
         with self.assertRaises(AssertionError):
             parse(output)
         for malformed in [b"SV_BORN 456 -1 401 6 0\n", b"SV_GROUP 123 -1 0\n",
-                          b"SV_GROUP 123 -2 3\n", b"SV_SETGROUP 123 456\n"]:
-            self.assertTrue(witnesses(malformed)[3])
+                          b"SV_GROUP 123 -2 3\n", b"SV_SETGROUP 123 456\n",
+                          b"SV_SETGROUP_FAILED 123 123 0 0\n", b"SV_SETGROUP_FAILED 123 123 1 2\n"]:
+            self.assertTrue(witnesses(malformed)[4])
 
     def test_rejection_exception_is_only_recorded_host_stop_refusal(self):
         r = {"result": 0, "cause": 14, "stop_errno": 0, "modeled_stop": 0,
