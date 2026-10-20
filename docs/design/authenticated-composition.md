@@ -16,6 +16,13 @@ Independent exact source/fixture review and bounded checks precede adoption.
 Never shorten a report, remove a check, hide source or create a flag/token stub
 to meet a budget. Preserve the original failed-fit candidate and evidence.
 
+The later approved complete entry package supersedes those source-only ceilings:
+96 KiB whole and 16 KiB fully charged authenticated review/output, with 10 KiB trusted
+entry and 8 KiB capture. Earlier component and all runtime/workspace/I/O limits stay
+unchanged. The closed fixed-fd1 sibling is specified in
+[trusted entry/output](trusted-entry-output.md); the memory API below retains its
+original behavior. Historical 80/11 KiB candidate measurements remain evidence.
+
 ## Closed entry, input and output
 
 Propose one unlinked internal `bw_authenticated_review(material, snapshot, text,
@@ -139,8 +146,8 @@ No duplicate 1 MiB snapshot, allocator or new OS adapter. One key copy, private
 material 8 KiB/signature 8 KiB/content 4 KiB/policy 2 KiB/inspector 34 KiB allowances plus
 snapshot/output, retained planner 24 KiB and new locals within unchanged 2 MiB
 application storage. Bound new locals, nested preflight and scalar allowance at
-8 KiB; bound new C/header plus both private shared headers at 11 KiB independently
-of the approved 80 KiB whole-source ceiling. Parent and
+8 KiB; bound C/header plus both private shared headers at 16 KiB independently
+of the approved 96 KiB whole-source ceiling. Parent and
 child native limits remain unchanged and unqualified.
 
 Permitted fit investigation: extract unchanged numeric range/disjoint helpers

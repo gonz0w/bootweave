@@ -52,6 +52,13 @@ static unsigned ar_early_boundaries, ar_signature_boundaries, ar_clock_calls;
 static unsigned ar_after_final, ar_order_errors, ar_unlink_failures, ar_hash_fail;
 static int ar_in_call, ar_in_signature, ar_in_release, ar_in_early_boundary, ar_final;
 static int ar_prepare_identity = 1, ar_span_identity = 1, ar_setup_uncertain;
+static int ar_output, ar_output_protocol = 1, ar_write_order = 1, ar_write_identity = 1;
+static const char *ar_sink;
+static unsigned ar_sink_fcntl, ar_sink_fstat, ar_sink_isatty, ar_write_calls;
+static unsigned char ar_wire[2048];
+static const unsigned char *ar_wire_source;
+static size_t ar_wire_length;
+static struct { size_t offered, offset; ssize_t returned; int error; } ar_writes[4];
 
 enum bw_material_result bw_ar_real_release(struct bw_verifier_material *);
 
@@ -295,6 +302,73 @@ bw_ar_memcpy(void *destination, const void *source, size_t length)
     return result;
 }
 
+/* Only the authenticated translation unit uses these fixed-fd doubles.  The
+ * existing verifier/material adapters keep their real inert descriptor checks. */
+int bw_ar_output_fcntl(int fd, int command, ...)
+{
+    ar_process_call(); ar_sink_fcntl++;
+    if (!ar_output || fd != STDOUT_FILENO || command != F_GETFL || ar_prepare_calls) ar_output_protocol = 0;
+    if (!strcmp(ar_sink, "fcntl-error")) { errno = EIO; return -1; }
+    if (!strcmp(ar_sink, "blocking")) return O_WRONLY;
+    if (!strcmp(ar_sink, "readonly")) return O_RDONLY | O_NONBLOCK;
+    return (!strcmp(ar_sink, "rdwr") ? O_RDWR : O_WRONLY) | O_NONBLOCK;
+}
+
+int bw_ar_output_fstat(int fd, struct stat *sink)
+{
+    ar_process_call(); ar_sink_fstat++;
+    if (!ar_output || fd != STDOUT_FILENO || ar_prepare_calls) ar_output_protocol = 0;
+    if (!strcmp(ar_sink, "fstat-error")) { errno = EIO; return -1; }
+    memset(sink, 0, sizeof(*sink)); sink->st_dev = 11; sink->st_ino = 23; sink->st_nlink = 1;
+    sink->st_mode = S_IFREG | 0600;
+    if (!strcmp(ar_sink, "fifo")) sink->st_mode = S_IFIFO | 0600;
+    if (!strcmp(ar_sink, "tty") || !strcmp(ar_sink, "char") || !strcmp(ar_sink, "isatty-error")) sink->st_mode = S_IFCHR | 0600;
+    if (!strcmp(ar_sink, "socket")) sink->st_mode = S_IFSOCK | 0600;
+    if (!strcmp(ar_sink, "block")) sink->st_mode = S_IFBLK | 0600;
+    if (!strcmp(ar_sink, "directory")) sink->st_mode = S_IFDIR | 0700;
+    return 0;
+}
+
+int bw_ar_output_isatty(int fd)
+{
+    ar_process_call(); ar_sink_isatty++;
+    if (!ar_output || fd != STDOUT_FILENO || ar_prepare_calls) ar_output_protocol = 0;
+    if (!strcmp(ar_sink, "isatty-error")) { errno = EIO; return 0; }
+    return !strcmp(ar_sink, "tty");
+}
+
+ssize_t bw_ar_output_write(int fd, const void *bytes, size_t length)
+{
+    ssize_t n = (ssize_t)length;
+    unsigned index = ar_write_calls++;
+    if (index >= 4 || !length || length > sizeof(ar_wire) - ar_wire_length) exit(97);
+    if (!ar_output || fd != STDOUT_FILENO) ar_output_protocol = 0;
+    if (!ar_final || ar_material.state != BW_VM_CLOSED || ar_terminal_consumptions != 1 ||
+        ar_signature_releases != 1 || ar_observation.signature.cause != BW_SV_NONE ||
+        !ar_observation.signature.wait_consumed || !ar_observation.signature.launch_granted ||
+        ar_content_calls != 1 || ar_policy_calls != 1 || ar_hash_calls != 2 ||
+        ar_inspect_calls != 1 || ar_content_formats != 1 || ar_formats != 1) ar_write_order = 0;
+    if (!index) ar_wire_source = bytes;
+    if ((const unsigned char *)bytes != ar_wire_source + ar_wire_length) ar_write_identity = 0;
+    errno = 0;
+    if (ar_is("output-short") || ar_is("output-prefix-eagain")) {
+        if (!index && length > 17) n = 17;
+        else if (ar_is("output-prefix-eagain")) { errno = EAGAIN; n = -1; }
+    }
+    if (ar_is("output-eintr") && !index) { errno = EINTR; n = -1; }
+    if (ar_is("output-eagain")) { errno = EAGAIN; n = -1; }
+    if (ar_is("output-error")) { errno = EIO; n = -1; }
+    if (ar_is("output-zero")) n = 0;
+    if (ar_is("output-oversized")) n = (ssize_t)length + 1;
+    if (ar_at("between-writes") && !index && length > 17) n = 17;
+    if (ar_at("after-eintr") && !index) { errno = EINTR; n = -1; }
+    ar_writes[index].offered = length; ar_writes[index].offset = ar_wire_length;
+    ar_writes[index].returned = n; ar_writes[index].error = n < 0 ? errno : 0;
+    if (n > 0 && (size_t)n <= length) { memcpy(ar_wire + ar_wire_length, bytes, (size_t)n); ar_wire_length += (size_t)n; }
+    if (ar_is("cancel") && (ar_at("after-output") || ar_at("between-writes") || ar_at("after-eintr"))) cancelled = 1;
+    return n;
+}
+
 static unsigned
 ar_clock_target(void)
 {
@@ -303,7 +377,9 @@ ar_clock_target(void)
     if (ar_at("after-signature")) return 4;
     if (ar_at("after-content")) return 6;
     if (ar_at("after-format")) return 7;
-    if (ar_at("after-publication")) return 8;
+    if (ar_at("before-output")) return 8;
+    if (ar_at("after-output") || ar_at("between-writes") || ar_at("after-eintr")) return 9;
+    if (ar_at("after-publication")) return ar_output ? 9 : 8;
     return 0;
 }
 
@@ -320,6 +396,9 @@ bw_ar_clock_gettime(clockid_t id, struct timespec *out)
 {
     unsigned target = ar_clock_target();
     ar_clock_calls++;
+    /* Cancellation is installed before the NEXT live check, not after that
+     * check has already read its signal flag. */
+    if (ar_output && ar_is("cancel") && ar_at("before-output") && ar_clock_calls == 7) cancelled = 1;
     if (id != CLOCK_MONOTONIC) ar_order_errors++;
     *out = ar_started;
     /* The default observed time is one second after the ORIGINAL reserve.
@@ -389,6 +468,7 @@ static void
 ar_emit(int result, size_t capacity, int no_write, int immutable, int reuse_ok,
     int material_state, int outside)
 {
+    unsigned i;
     struct bw_content_observation *content = &ar_observation.content;
     struct bw_signature_observation *signature = &ar_observation.signature;
     unsigned boundaries = ar_early_boundaries + ar_signature_boundaries;
@@ -410,7 +490,7 @@ ar_emit(int result, size_t capacity, int no_write, int immutable, int reuse_ok,
         "\"descriptor_witness\":%d,\"cleared\":%d,\"output_zero\":%d,\"outside\":%d,"
         "\"no_write\":%d,\"immutable\":%d,\"reuse_ok\":%d,\"material_state\":%d,"
         "\"clock_calls\":%u,\"wait_consumed\":%u,\"wait_lost\":%u,\"fake\":%d,"
-        "\"members\":%zu,\"files\":%zu,\"content_bytes\":%zu}\n",
+        "\"members\":%zu,\"files\":%zu,\"content_bytes\":%zu",
         result, ar_observation.state, ar_observation.cause, ar_observation.material_cause,
         signature->cause, content->cause, content->policy_cause, content->length,
         ar_prepare_calls, ar_signature_calls, ar_content_calls, ar_policy_calls, ar_hash_calls,
@@ -422,11 +502,21 @@ ar_emit(int result, size_t capacity, int no_write, int immutable, int reuse_ok,
         !memcmp(ar_text, ar_text_before, sizeof(ar_text)), outside, no_write, immutable,
         reuse_ok, material_state, ar_clock_calls, signature->wait_consumed, signature->wait_lost, fake,
         content->summary.members, content->summary.files, content->summary.content_bytes);
+    printf(",\"output_attempted\":%u,\"output_bytes\":%zu,\"sink_fcntl\":%u,\"sink_fstat\":%u,"
+        "\"sink_isatty\":%u,\"write_calls\":%u,\"output_protocol\":%d,\"write_order\":%d,\"write_identity\":%d,\"wire_hex\":\"",
+        ar_observation.output_attempted, ar_observation.output_bytes, ar_sink_fcntl, ar_sink_fstat,
+        ar_sink_isatty, ar_write_calls, ar_output_protocol, ar_write_order, ar_write_identity);
+    for (i = 0; i < ar_wire_length; i++) printf("%02x", ar_wire[i]);
+    printf("\",\"write_trace\":[");
+    for (i = 0; i < ar_write_calls; i++) printf("%s[%zu,%lld,%d,%zu]", i ? "," : "", ar_writes[i].offered,
+        (long long)ar_writes[i].returned, ar_writes[i].error, ar_writes[i].offset);
+    printf("]}\n");
     if (result == BW_AUTH_COMPLETE) {
         printf("AR_MODEL "); ar_hex(content->plan.id); putchar(' '); ar_hex(content->plan.name); putchar(' ');
         ar_hex(content->plan.release); putchar(' '); ar_hex(content->plan.architecture); putchar(' ');
         ar_hex(content->plan.file); putchar(' '); ar_hex(content->plan.sha256); putchar('\n');
-        if (content->length >= capacity || fwrite(ar_text + 1, 1, content->length, stdout) != content->length)
+        if ((!ar_output && content->length >= capacity) ||
+            fwrite(ar_output ? ar_wire : ar_text + 1, 1, content->length, stdout) != content->length)
             exit(96);
     }
 }
@@ -441,12 +531,13 @@ main(int argc, char **argv)
     struct sigaction action;
     unsigned char sizes[16], snapshot_before[32], snapshot_after[32];
     unsigned frame_lengths[4], i;
-    unsigned prior_calls[8];
+    unsigned prior_calls[12];
     long long length_override;
     size_t capacity;
     char *text = (char *)ar_text + 1;
     int result, immutable, no_write = 0, reuse_ok = 1, sentinel, opened, material_state, outside = 1;
-    if (argc != 9) return 90;
+    if (argc != 9 && argc != 10) return 90;
+    ar_output = argc == 10; ar_sink = ar_output ? argv[9] : "none";
     root = argv[1]; ar_fault = argv[2]; ar_phase = argv[4]; ar_origin = argv[5]; owner = getpid();
     capacity = (size_t)strtoul(argv[3], NULL, 10);
     ar_offset = strtoll(argv[6], NULL, 10); ar_pure_offset = strtoll(argv[7], NULL, 10);
@@ -518,7 +609,8 @@ main(int argc, char **argv)
     memcpy(&before_observation, &ar_observation, sizeof(before_observation));
     if (CC_SHA256(&ar_snapshot, (CC_LONG)sizeof(ar_snapshot), snapshot_before) != snapshot_before) return 94;
     ar_in_call = 1;
-    result = bw_authenticated_review(m, snapshot, text, capacity, out);
+    result = ar_output ? bw_authenticated_output(m, snapshot, out) :
+        bw_authenticated_review(m, snapshot, text, capacity, out);
     ar_in_call = 0; active = 0;
     if (CC_SHA256(&ar_snapshot, (CC_LONG)sizeof(ar_snapshot), snapshot_after) != snapshot_after) return 94;
     immutable = !memcmp(snapshot_before, snapshot_after, 32);
@@ -532,24 +624,29 @@ main(int argc, char **argv)
         struct bw_verifier_material saved_material;
         struct bw_authenticated_observation saved_observation;
         unsigned char saved_text[32], repeated_text[32];
-        unsigned current_calls[8];
+        unsigned current_calls[12];
         memcpy(&saved_material, &ar_material, sizeof(saved_material));
         memcpy(&saved_observation, &ar_observation, sizeof(saved_observation));
         prior_calls[0] = ar_prepare_calls; prior_calls[1] = ar_signature_calls;
         prior_calls[2] = ar_content_calls; prior_calls[3] = ar_clock_calls;
         prior_calls[4] = ar_fused_releases; prior_calls[5] = ar_signature_releases;
         prior_calls[6] = ar_early_boundaries; prior_calls[7] = ar_signature_boundaries;
+        prior_calls[8] = ar_sink_fcntl; prior_calls[9] = ar_sink_fstat;
+        prior_calls[10] = ar_sink_isatty; prior_calls[11] = ar_write_calls;
         if (CC_SHA256(ar_text, (CC_LONG)sizeof(ar_text), saved_text) != saved_text) return 94;
         opened = open("/dev/null", O_RDONLY);
         if (opened < 0) return 94;
         ar_in_call = 1;
-        reuse_ok = bw_authenticated_review(&ar_material, &ar_snapshot, (char *)ar_text + 1,
-            capacity, &ar_observation) == BW_AUTH_NOT_TAKEN;
+        reuse_ok = (ar_output ? bw_authenticated_output(&ar_material, &ar_snapshot, &ar_observation) :
+            bw_authenticated_review(&ar_material, &ar_snapshot, (char *)ar_text + 1,
+            capacity, &ar_observation)) == BW_AUTH_NOT_TAKEN;
         ar_in_call = 0;
         current_calls[0] = ar_prepare_calls; current_calls[1] = ar_signature_calls;
         current_calls[2] = ar_content_calls; current_calls[3] = ar_clock_calls;
         current_calls[4] = ar_fused_releases; current_calls[5] = ar_signature_releases;
         current_calls[6] = ar_early_boundaries; current_calls[7] = ar_signature_boundaries;
+        current_calls[8] = ar_sink_fcntl; current_calls[9] = ar_sink_fstat;
+        current_calls[10] = ar_sink_isatty; current_calls[11] = ar_write_calls;
         if (CC_SHA256(ar_text, (CC_LONG)sizeof(ar_text), repeated_text) != repeated_text) return 94;
         reuse_ok = reuse_ok && !memcmp(&saved_material, &ar_material, sizeof(ar_material)) &&
             !memcmp(&saved_observation, &ar_observation, sizeof(ar_observation)) &&
@@ -560,7 +657,7 @@ main(int argc, char **argv)
     if (ar_text[0] != 0xa5) outside = 0;
     for (i = capacity && capacity <= BW_CONTENT_OUTPUT_MAX ? (unsigned)capacity + 1 : 1;
          i < sizeof(ar_text); i++) if (ar_text[i] != 0xa5) outside = 0;
-    if (result == BW_AUTH_COMPLETE && (ar_observation.content.length >= capacity ||
+    if (!ar_output && result == BW_AUTH_COMPLETE && (ar_observation.content.length >= capacity ||
         !ar_zero(ar_text + 1 + ar_observation.content.length,
             capacity - ar_observation.content.length))) outside = 0;
     /* Caller retains responsibility on NOT_TAKEN; these separately labeled

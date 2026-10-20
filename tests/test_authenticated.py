@@ -6,6 +6,7 @@ outer suite owns the final terminal process check; this ledger never discards
 birth witnesses because a result could not be decoded.  No native dispatch.
 """
 import hashlib
+import errno
 import json
 import os
 from pathlib import Path
@@ -21,7 +22,7 @@ import test_signature
 
 ROOT = Path(__file__).resolve().parents[1]
 CAUSES = {s: n for n, s in enumerate(("NONE", "ARGUMENT", "POLICY", "MATERIAL",
-    "SIGNATURE", "CONTENT", "FORMAT", "CANCEL", "CLOCK", "DEADLINE"))}
+    "SIGNATURE", "CONTENT", "FORMAT", "CANCEL", "CLOCK", "DEADLINE", "OUTPUT"))}
 MATERIAL_CAUSES = {s: n for n, s in enumerate(("NONE", "ARGUMENT", "RECORD", "CANCEL",
     "DEADLINE", "IO", "OWNERSHIP", "CLOSE"))}
 SIGNATURE_CAUSES = {s: n for n, s in enumerate(("NONE", "UNSUPPORTED", "IDENTITY", "SIGNALS",
@@ -36,7 +37,8 @@ RESULT_FIELDS = set(("return state cause material_cause signature_cause content_
     "final_boundary_failed signature_final_boundary_failed path_or_process_calls_after_final_boundary "
     "close_retries bad_order prepare_identity span_identity descriptor_witness cleared output_zero outside "
     "no_write immutable reuse_ok material_state clock_calls wait_consumed wait_lost fake members files "
-    "content_bytes").split())
+    "content_bytes output_attempted output_bytes sink_fcntl sink_fstat sink_isatty write_calls "
+    "output_protocol write_order write_identity wire_hex write_trace").split())
 WITNESS_PREFIXES = (b"SV_BORN ", b"SV_GROUP ", b"SV_SETGROUP ", b"SV_SETGROUP_FAILED ")
 
 
@@ -50,10 +52,14 @@ def parse(data):
         raise AssertionError("truncated composition result")
     result = json.loads(header.decode("ascii"))
     if set(result) != RESULT_FIELDS or any(type(v) is not int for k, v in result.items()
-                                         if k != "boundary_owner"):
+                                         if k not in ("boundary_owner", "wire_hex", "write_trace")):
         raise AssertionError("unexpected composition result schema")
     if result["boundary_owner"] not in ("caller", "none", "fused", "signature"):
         raise AssertionError("invalid boundary owner")
+    bytes.fromhex(result["wire_hex"])
+    if len(result["write_trace"]) > 4 or any(len(row) != 4 or any(type(n) is not int for n in row)
+                                            for row in result["write_trace"]):
+        raise AssertionError("invalid modeled write trace")
     model = None
     if result["return"] == vectors.RETURNS["COMPLETE"]:
         model_line, separator, remaining = remaining.partition(b"\n")
@@ -127,7 +133,9 @@ class AuthenticatedTests(unittest.TestCase):
             ("authenticated", "src/authenticated_review.c", ["-Dclock_gettime=bw_ar_clock_gettime",
                 "-Dbw_verifier_prepare=bw_ar_prepare", "-Dbw_signature_verify=bw_ar_signature",
                 "-Dbw_content_review=bw_ar_content", "-Dbw_sv_parent_boundary=bw_ar_early_boundary",
-                "-Dsnprintf=bw_ar_snprintf", "-Dmemcpy=bw_ar_memcpy"]),
+                "-Dsnprintf=bw_ar_snprintf", "-Dmemcpy=bw_ar_memcpy",
+                "-Dfcntl=bw_ar_output_fcntl", "-Dfstat=bw_ar_output_fstat",
+                "-Disatty=bw_ar_output_isatty", "-Dwrite=bw_ar_output_write"]),
         ]
         for name, source, defines in sources:
             target = cls.directory / (name + ".o")
@@ -175,6 +183,8 @@ class AuthenticatedTests(unittest.TestCase):
                    str(case.get("pure_origin_offset_nanoseconds") if
                        case.get("pure_origin_offset_nanoseconds") is not None else -1),
                    str(case.get("length", -1))]
+        if case.get("destination") == "stdout":
+            command.append(case["sink"])
         parts = [case[x] for x in ("key", "signature", "definition", "payload")]
         frame = struct.pack(">IIII", *(len(x) for x in parts)) + b"".join(parts)
         stdout = b""
@@ -233,6 +243,7 @@ class AuthenticatedTests(unittest.TestCase):
         expected = case["expected"]
         self.assertEqual(actual["return"], expected["return"], case["name"])
         self.assertEqual(report, expected["report"], case["name"])
+        self.check_fixed_output(case, actual)
         for name, count in expected["calls"].items():
             self.assertEqual(actual[name], count, (case["name"], name))
         for name in ("fused_release_calls", "signature_release_calls", "material_terminal_consumptions",
@@ -295,6 +306,41 @@ class AuthenticatedTests(unittest.TestCase):
         elif not expected["quarantine_required"]:
             self.assertFalse(row["inventory"], case["name"])
 
+    def check_fixed_output(self, case, actual):
+        expected = case["expected"]
+        for key in ("output_protocol", "write_order", "write_identity"):
+            self.assertEqual(actual[key], 1, (case["name"], key))
+        if case.get("destination") != "stdout":
+            for key in ("output_attempted", "output_bytes", "sink_fcntl", "sink_fstat", "sink_isatty", "write_calls"):
+                self.assertEqual(actual[key], 0, (case["name"], key))
+            self.assertEqual(actual["wire_hex"], "")
+            self.assertEqual(actual["write_trace"], [])
+            return
+        golden = case["expected"]["report"] if expected["return"] == 1 else vectors.valid_cases()[0]["expected"]["report"]
+        trace, offset = [], 0
+        for outcome in expected["write_outcomes"]:
+            offered = len(golden) - offset
+            error = 0
+            if outcome == "all":
+                returned = offered
+            elif outcome == "oversized":
+                returned = offered + 1
+            elif outcome in ("EINTR", "EAGAIN", "EIO"):
+                returned, error = -1, getattr(errno, outcome)
+            else:
+                returned = outcome
+            trace.append([offered, returned, error, offset])
+            if 0 < returned <= offered:
+                offset += returned
+        self.assertEqual(actual["write_trace"], trace, case["name"])
+        self.assertEqual(actual["write_calls"], len(trace), case["name"])
+        self.assertEqual(actual["output_attempted"], expected["output_attempted"], case["name"])
+        self.assertEqual(actual["output_bytes"], offset, case["name"])
+        self.assertEqual(bytes.fromhex(actual["wire_hex"]), golden[:offset], case["name"])
+        self.assertEqual(tuple(actual[k] for k in ("sink_fcntl", "sink_fstat", "sink_isatty")), expected["sink_queries"])
+        # The external sibling never touches the memory destination/canaries.
+        self.assertEqual(actual["output_zero"], 1, case["name"])
+
     def test_independent_complete_reports_and_models(self):
         for case in vectors.valid_cases():
             with self.subTest(case=case["name"]):
@@ -337,20 +383,27 @@ class AuthenticatedTests(unittest.TestCase):
                 self.check(case)
         self.check(dict(vectors.valid_cases()[0], name="maximum-output-span", capacity=65536))
 
+    def test_fixed_stdout_independent_publication_and_refusal_cases(self):
+        for case in vectors.output_cases():
+            with self.subTest(case=case["name"]):
+                self.check(case)
+
     def test_production_symbols_source_budgets_and_cli_separation(self):
         symbols = self.execute(["nm", "-u", str(self.plain)]).decode()
         names = {line.split()[-1] for line in symbols.splitlines()}
         self.assertLessEqual({n for n in names if "asan" not in n and "ubsan" not in n}, {
             "_bw_compiled_policy", "_bw_verifier_prepare", "_bw_verifier_release", "_bw_signature_verify",
             "_bw_content_review", "_bw_sv_parent_boundary", "_clock_gettime", "_snprintf", "_memcpy",
-            "_memset", "_bzero", "___stack_chk_fail", "___stack_chk_guard"})
+            "_memset", "_bzero", "_fcntl", "_fstat", "_isatty", "_write", "___error",
+            "___stack_chk_fail", "___stack_chk_guard"})
         exported = self.execute(["nm", "-gU", str(self.plain)]).decode()
         public = {row.split()[-1] for row in exported.splitlines()}
-        self.assertEqual({n for n in public if "asan" not in n and "ubsan" not in n}, {"_bw_authenticated_review"})
+        self.assertEqual({n for n in public if "asan" not in n and "ubsan" not in n},
+                         {"_bw_authenticated_review", "_bw_authenticated_output"})
         makefile = (ROOT / "Makefile").read_text()
         self.assertEqual(next(row for row in makefile.splitlines() if row.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
-            ("authenticated_review.c", "authenticated_review.h", "private_span.h", "private_content_format.h")), 11 * 1024)
+            ("authenticated_review.c", "authenticated_review.h", "private_span.h", "private_content_format.h")), 16 * 1024)
         self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*")
-                                 if p.suffix in (".c", ".h")), 80 * 1024)
+                                 if p.suffix in (".c", ".h")), 96 * 1024)

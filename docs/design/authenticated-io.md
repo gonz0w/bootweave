@@ -170,3 +170,7 @@ startup order: reserve only an exact empty scratch capability outside fd roles
 0..4 before locking confinement/capture, then populate it from retained bytes.
 It adds format validation and anonymous read-only handles without a verifier
 launch or CLI. The same native composition gates remain.
+
+The later owner-approved [complete entry source package](trusted-entry-output.md)
+supersedes the historical source-only limits above with 8 KiB capture and 96 KiB whole
+source. Capture's input, timing, ownership, cleanup and storage limits do not change.
