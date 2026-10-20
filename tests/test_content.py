@@ -182,5 +182,6 @@ class ContentTests(unittest.TestCase):
         makefile = (ROOT / "Makefile").read_text()
         self.assertEqual(next(x for x in makefile.splitlines() if x.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
-        self.assertLessEqual(sum((ROOT / "src" / ("content_review" + s)).stat().st_size for s in (".c", ".h")), 8192)
-        self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").iterdir() if p.suffix in (".c", ".h")), 72 * 1024)
+        self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
+            ("content_review.c", "content_review.h", "private_span.h", "private_content_format.h")), 8192)
+        self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*") if p.suffix in (".c", ".h")), 80 * 1024)

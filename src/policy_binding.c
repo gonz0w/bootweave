@@ -3,40 +3,25 @@
 #include "policy_binding.h"
 #include "auth_input.h"
 #include "auth_material.h"
-#include <stdint.h>
+#include "private_span.h"
 #include <string.h>
 
-struct span { uintptr_t start, end; };
 typedef char workspace_bound[(2 * sizeof(struct bw_plan) +
     sizeof(struct bw_policy_request) + 6 * sizeof(struct span) + 64 <= BW_POLICY_COMMON_WORKSPACE) ? 1 : -1];
-
-static int
-range(const void *p, size_t n, struct span *s)
-{
-    s->start = (uintptr_t)p;
-    if ((!p && n) || n > UINTPTR_MAX - s->start) return 0;
-    s->end = s->start + n;
-    return 1;
-}
 
 static int
 disjoint(const struct bw_policy_request *r, struct bw_policy_observation *out)
 {
     struct span spans[6];
-    size_t i, j;
     if (!r || !out || !range(r, sizeof(*r), &spans[0]) ||
         !range(out, sizeof(*out), &spans[1]) ||
         !range(&bw_compiled_policy, sizeof(bw_compiled_policy), &spans[2])) return 0;
     /* Establish request/output/policy disjointness before reading request fields. */
-    for (i = 0; i < 3; i++) for (j = 0; j < i; j++)
-        if (spans[i].start < spans[j].end && spans[j].start < spans[i].end) return 0;
+    if (!separate(spans, 3)) return 0;
     if (!range(r->key, r->key_length, &spans[3]) ||
         !range(r->definition, r->definition_length, &spans[4]) ||
         !range(r->payload, r->payload_length, &spans[5])) return 0;
-    for (i = 0; i < 6; i++) for (j = 0; j < i; j++)
-        if (spans[i].start != spans[i].end && spans[j].start != spans[j].end &&
-            spans[i].start < spans[j].end && spans[j].start < spans[i].end) return 0;
-    return 1;
+    return separate(spans, 6);
 }
 
 static int

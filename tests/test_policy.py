@@ -399,7 +399,8 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(next(line for line in makefile.splitlines() if line.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         sources = [ROOT / "src" / (x + suffix) for x, suffix in [("policy_binding", ".c"), ("policy_binding", ".h"),
-                                                               ("policy_data", ".c"), ("policy_platform", ".c")]]
+                                                               ("policy_data", ".c"), ("policy_platform", ".c"),
+                                                               ("private_span", ".h")]]
         self.assertLessEqual(sum(p.stat().st_size for p in sources), 8*1024)
 
     def test_fixture_live_output_and_timeout_retention_controls(self):

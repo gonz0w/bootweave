@@ -1,11 +1,12 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 #include "content_review.h"
 #include "auth_input.h"
-#include <stdint.h>
-#include <stdio.h>
+#include "private_span.h"
 #include <string.h>
+#define BW_REPORT_TITLE "UNAUTHENTICATED CONTENT REVIEW - NO OPERATIONS AUTHORIZED"
+#define BW_REPORT_SIGNATURE "Signature authentication: not established"
+#include "private_content_format.h"
 
-struct span { uintptr_t start, end; };
 struct workspace {
     struct bw_policy_observation policy;
     struct bw_payload_summary summary;
@@ -18,25 +19,6 @@ typedef char local_bound[(sizeof(struct workspace) + 7 * sizeof(struct span) +
 typedef char application_bound[(sizeof(struct bw_auth_snapshot) +
     BW_CONTENT_OUTPUT_MAX + sizeof(struct bw_content_observation) +
     4096 + 2048 + 34816 + 24576 <= 2 * 1024 * 1024) ? 1 : -1];
-
-static int
-range(const void *p, size_t n, struct span *s)
-{
-    s->start = (uintptr_t)p;
-    if ((!p && n) || n > UINTPTR_MAX - s->start) return 0;
-    s->end = s->start + n;
-    return 1;
-}
-
-static int
-separate(const struct span *s, size_t count)
-{
-    size_t i, j;
-    for (i = 0; i < count; i++) for (j = 0; j < i; j++)
-        if (s[i].start != s[i].end && s[j].start != s[j].end &&
-            s[i].start < s[j].end && s[j].start < s[i].end) return 0;
-    return 1;
-}
 
 static int
 disjoint(const struct bw_policy_request *r, char *text, size_t capacity,
@@ -75,28 +57,7 @@ bw_content_review(const struct bw_policy_request *r, char *text, size_t capacity
     out->cause = BW_CR_STRUCTURE;
     if (bw_payload_structure_review(r->payload, r->payload_length, &w.summary)) return 0;
     out->cause = BW_CR_FORMAT;
-    length = snprintf(w.text, sizeof(w.text),
-        "UNAUTHENTICATED CONTENT REVIEW - NO OPERATIONS AUTHORIZED\n"
-        "Compiled policy: matched\n"
-        "Definition SHA-256: matched compiled pin\n"
-        "Payload SHA-256: matched definition\n"
-        "Archive structure: complete restricted ustar\n"
-        "Signature authentication: not established\n"
-        "Project ID (policy-bound): %s\n"
-        "Project name (supplied): %s\n"
-        "Requested release (policy-bound): %s\n"
-        "Requested architecture (policy-bound): %s\n"
-        "Payload file (supplied label): %s\n"
-        "Archive members: %zu\n"
-        "Regular files: %zu\n"
-        "Content bytes: %zu\n"
-        "Target: unselected; no device identity collected\n"
-        "Operations authorized: none\n"
-        "Operations performed: none\n"
-        "Operations independently observed: none\n",
-        w.policy.plan.id, w.policy.plan.name, w.policy.plan.release,
-        w.policy.plan.architecture, w.policy.plan.file,
-        w.summary.members, w.summary.files, w.summary.content_bytes);
+    length = content_format(w.text, sizeof(w.text), &w.policy.plan, &w.summary);
     if (length < 0 || (size_t)length >= sizeof(w.text) ||
         (size_t)length >= capacity) return 0;
     memcpy(text, w.text, (size_t)length + 1);
