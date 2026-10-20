@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-20",
+  "scope": "Internal process-guard portable source checks on connected Mac ARM64; all supported signal/resource/timer effects modeled",
+  "command": ".tools/venv/bin/python3 -m unittest discover -s tests -p test_trusted_start.py -v",
+  "groups": 2,
+  "driver_cases": 149,
+  "stage_counts": {
+    "complete": 34,
+    "fatal-handler": 4,
+    "identity": 6,
+    "initial-timers": 23,
+    "limits": 39,
+    "signal-setup": 15,
+    "timer-arm": 3,
+    "timer-readback": 24,
+    "unblock": 1
+  },
+  "invocations": 155,
+  "compile_link_invocations": 4,
+  "symbol_invocations": 2,
+  "retained_streams": 310,
+  "unittest_seconds": 12.007,
+  "outer_seconds": 12.247537583112717,
+  "outcome": "PASS",
+  "source_unchanged": true,
+  "source_files_bound_before_after": 289,
+  "waits_consumed": 155,
+  "waits_lost": 0,
+  "stream_eof_and_closed": 310,
+  "stream_publication_hashes_and_lengths_verified": 310,
+  "terminal_rows": 0,
+  "remaining_outer_group_rows": 0,
+  "cleanup_errors": [],
+  "normal_mac_adapter_readonly_queries": 30,
+  "normal_mac_guard_state_unchanged": true,
+  "address_and_undefined_behavior_instrumentation": true,
+  "leak_detection": "Disabled on unsupported Mac runtime",
+  "tools": {
+    "python": "3.14.7",
+    "clang": "Apple clang 21.0.0 (clang-2100.3.20.102)"
+  },
+  "source_budgets": {
+    "whole_bytes": 81920,
+    "whole_ceiling": 81920,
+    "guard_own_C_header_and_shared_implementation": 3239,
+    "signature_with_entire_shared_helper": 16245,
+    "signature_ceiling": 18432,
+    "fused_unchanged": 10332,
+    "fused_ceiling": 11264
+  },
+  "source_files": {
+    "src/auth_input.c": {
+      "bytes": 4528,
+      "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+    },
+    "src/auth_input.h": {
+      "bytes": 1022,
+      "sha256": "ac9c0bd61388b5284437fd14a1ce609cad489175798883555e2c57e38e7fcb3f"
+    },
+    "src/auth_material.c": {
+      "bytes": 12606,
+      "sha256": "88b2e5f54a42015d48389495530153dea7979698b49a642efcd6e9c9be1e222c"
+    },
+    "src/auth_material.h": {
+      "bytes": 2555,
+      "sha256": "68ca59088b5ffcf19e81c51d9460260da02421fe8830423ca9a7119c4e8398ce"
+    },
+    "src/authenticated_review.c": {
+      "bytes": 6829,
+      "sha256": "ee44751836ba51b09a32e059a70a2d36b211669e4e714d90798a4f99370baa4b"
+    },
+    "src/authenticated_review.h": {
+      "bytes": 1471,
+      "sha256": "04b6f99519f4b0fbbd71b33459888a5f739713bd0d1d32e1da02119132994ba9"
+    },
+    "src/content_review.c": {
+      "bytes": 2848,
+      "sha256": "c6621d3508a06e96f30bf9ca3fcfb7e628199daff3162c2bebf30024b887f570"
+    },
+    "src/content_review.h": {
+      "bytes": 1324,
+      "sha256": "504ef87d6c8326228a6a610d0d9e85ba82da1b15bcc695fba125ae42bc0d4b3a"
+    },
+    "src/main.c": {
+      "bytes": 1008,
+      "sha256": "af7d3d5e79598377ece6e770e238462e191e5b5001e6d0944439ee3f264ac10d"
+    },
+    "src/native.c": {
+      "bytes": 1036,
+      "sha256": "beeb5d13061c597378ea274ff10360a3963f630b44ee3eb4bb561c822692c4c5"
+    },
+    "src/payload_review.c": {
+      "bytes": 5908,
+      "sha256": "a09e656550676c0e047d9851c2a36d868af42330f4e7250a39f2f9fd3b4fcbb5"
+    },
+    "src/payload_review.h": {
+      "bytes": 611,
+      "sha256": "761a114a1465aa0fe53640e3b7319bb8c85d32474318cb762e260c9722d86811"
+    },
+    "src/plan.c": {
+      "bytes": 6953,
+      "sha256": "d5f491eb85f82a3ad46f91adde5cff4005f2299ca8e9ae926a0d90b73188e035"
+    },
+    "src/plan.h": {
+      "bytes": 604,
+      "sha256": "fd61c40d9d07b02a9a2cf64fc43eb26608ba633e7499836b64abc3827c07ca86"
+    },
+    "src/plan_io.c": {
+      "bytes": 4736,
+      "sha256": "172ad2b514530f0d46e1742a4c0fe6a844e81aec441b5eca15d18c115d973f3b"
+    },
+    "src/policy_binding.c": {
+      "bytes": 3826,
+      "sha256": "d201e9762e70ac5bb74bf41c541c202ad3033f06f6be46b1484760dac2470385"
+    },
+    "src/policy_binding.h": {
+      "bytes": 1977,
+      "sha256": "df9ebad119d6f63d4fa25aa5af35b40a441290d94f2915ff79b16fc72681ce6d"
+    },
+    "src/policy_data.c": {
+      "bytes": 800,
+      "sha256": "2d10ab4bf7af3be524b888675a056ee31ace384046e0f6d469b2e0841ef17f96"
+    },
+    "src/policy_platform.c": {
+      "bytes": 698,
+      "sha256": "c2f38199e44313d9fdc78d3eac2b2387b26753285185d038ce27bcc2d166da02"
+    },
+    "src/private_content_format.h": {
+      "bytes": 1353,
+      "sha256": "a7af0ede035ddaaa6832d1523add7abb1b90ccdcdb5f5b757ca065bef92b73c6"
+    },
+    "src/private_limits.h": {
+      "bytes": 936,
+      "sha256": "4abcdcad65fd8f999fc93ccd72f4b0e71e3544c6628d832d51528d7d7fad9cf7"
+    },
+    "src/private_span.h": {
+      "bytes": 679,
+      "sha256": "e03aad9a9c2999f68704761faa3e26c0799a13c2adf3274a336edc894ae5f2e6"
+    },
+    "src/signature_platform.c": {
+      "bytes": 938,
+      "sha256": "40fa2741fcbddc2759ac00b5d76ba5d204f0058b3a469ac775a588fac4eeb06f"
+    },
+    "src/signature_verify.c": {
+      "bytes": 12432,
+      "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+    },
+    "src/signature_verify.h": {
+      "bytes": 1939,
+      "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+    },
+    "src/trusted_start.c": {
+      "bytes": 2085,
+      "sha256": "3e6e560c736abcb2fa903bb6d0bf3309432c26a73ee99657f18d521bb4f55938"
+    },
+    "src/trusted_start.h": {
+      "bytes": 218,
+      "sha256": "7dd5b4c12e50dcdc13ffd0b1ff6dbd550fb6c86784cddf16ffd69551b0e94f20"
+    }
+  },
+  "fixture_hashes": {
+    "tests/trusted_start_driver.c": "58768f68979380beead42be63104219ff0a4673d2f02ab7f1634090e49329fda",
+    "tests/test_trusted_start.py": "6d37ca99350ad7475acb7b4c3f917fabb626ed985846172ed4fe651ee2fc5aa3",
+    "tests/trusted_start_vectors.py": "734eed9ed100e7b78b1ed385c981d83a0caf73707dd9ad0415ccee902aa299b7",
+    "tests/test_policy.py": "a7ff1850ed2a708d3ab21c28dbcd925e4687903abf1e755c203d9aa319850d26",
+    "docs/design/trusted-entry-output.md": "5f87000be2fcf95a403c7a96b8370259c95ddc9c7e99a5acae6d70e052f9a8bc"
+  },
+  "focused_receipt_sha256": "cc93bdeac3ef80f823649fdd2c62176eb0ab8e82089f4a3c9ef53fc539730ba0",
+  "focused_log_sha256": "36ccf1b4dd5a621c5313ac28dcd8107b98dc07219fe5d6bb173621a75b16563a",
+  "earlier_attempt": {
+    "outcome": "FAILED",
+    "reason": "One reuse-case oracle lacked signal-index metadata; two explicit literal fields were added, with no source/runner/envelope change",
+    "receipt_sha256": "7c8559c721e3667c880038196818c1327b5fae0186e7ae61236569afca0a5bcc",
+    "raw_log_sha256": "932c2ba05dd635b6bdc164082695b1b2637d3963b51778c70647179b035bafbb",
+    "evidence_retained": true
+  },
+  "static_pre_dispatch_correction": "Darwin SDK signal-set macros explicitly undefined before function-like test substitutions around the exact real C source; old unexecuted bytes recovered and hash verified with that provenance",
+  "native_qualification": false,
+  "CLI_linkage": false,
+  "authentication_or_output_authority": false,
+  "deployment": false,
+  "base_commit": "674c401d760cf66beec451bf010b805d1e436ca5",
+  "outer_envelope_sha256": "c700b7d486e3d66ebb3295469c3760ec880919129a8a3fcda0af306a8393596e",
+  "independent_focused_acceptance_sha256": "cbb5fc842d4a7dffc1875fb29184171dcaecbd9edf143acf06fc107e3f7e81f0",
+  "independent_terminal_receipt_sha256": "31ac74a04161d21613bcbbbdc4c7fd5c5749eff7c18c2dfd6f75cdbc425f6f9b",
+  "independent_terminal_PID_candidates_absent": 156,
+  "independent_terminal_owned_groups_absent": 1
+}

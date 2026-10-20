@@ -5,6 +5,9 @@
 #define _POSIX_C_SOURCE 200809L
 #include "signature_verify.h"
 #include <unistd.h>
+#ifdef __OpenBSD__
+#include "private_limits.h"
+#endif
 
 int bw_sv_supported(void) {
 #ifdef __OpenBSD__
@@ -16,19 +19,8 @@ int bw_sv_supported(void) {
 
 int bw_sv_child_limits(void) {
 #ifdef __OpenBSD__
-    static const int kinds[] = {RLIMIT_CPU, RLIMIT_DATA, RLIMIT_STACK, RLIMIT_NOFILE, RLIMIT_CORE, RLIMIT_FSIZE};
     static const rlim_t caps[] = {2, 32*1024*1024, 2*1024*1024, 16, 0, 0};
-    struct rlimit limit, seen;
-    size_t i;
-    for (i = 0; i < sizeof(kinds)/sizeof(kinds[0]); i++) {
-        if (getrlimit(kinds[i], &limit) == -1) return -1;
-        if (limit.rlim_cur == RLIM_INFINITY || limit.rlim_cur > caps[i]) limit.rlim_cur = caps[i];
-        if (limit.rlim_max == RLIM_INFINITY || limit.rlim_max > caps[i]) limit.rlim_max = caps[i];
-        if ((i < 4 && !limit.rlim_cur) || setrlimit(kinds[i], &limit) == -1 ||
-            getrlimit(kinds[i], &seen) == -1 || seen.rlim_cur != limit.rlim_cur ||
-            seen.rlim_max != limit.rlim_max) return -1;
-    }
-    return 0;
+    return fixed_limits(caps);
 #else
     return -1;
 #endif
