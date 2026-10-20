@@ -1,0 +1,7 @@
+test_independent_finite_ownership_corpus (test_entry_ownership.EntryOwnershipTests.test_independent_finite_ownership_corpus) ... ok
+test_symbols_and_full_component_accounting (test_entry_ownership.EntryOwnershipTests.test_symbols_and_full_component_accounting) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 13.104s
+
+OK
