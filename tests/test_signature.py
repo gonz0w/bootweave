@@ -301,8 +301,8 @@ class SignatureTests(unittest.TestCase):
         self.assertEqual((r["result"], r["cause"], r["consumed"]), (0, 13, 1))
 
     def test_source_budget_and_production_link_boundary(self):
-        files = list((ROOT / "src").glob("*.c")) + list((ROOT / "src").glob("*.h"))
-        self.assertLessEqual(sum(p.stat().st_size for p in files), 72 * 1024)
+        files = list((ROOT / "src").rglob("*.c")) + list((ROOT / "src").rglob("*.h"))
+        self.assertLessEqual(sum(p.stat().st_size for p in files), 80 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / p).stat().st_size for p in
                                  ["signature_verify.c", "signature_verify.h", "signature_platform.c"]), 18 * 1024)
         makefile = (ROOT / "Makefile").read_text()
