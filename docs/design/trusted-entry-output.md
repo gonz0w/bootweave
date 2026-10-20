@@ -274,6 +274,141 @@ results, full clean-candidate `make verify`, trusted signatures/DCO, independent
 terminal/source/canonical binding and normal PR gates precede eligible merge.
 Reuse existing evidence custody; do not create a new validation framework.
 
+## Closed complete-entry ownership coordinator
+
+The next source-only continuation adopts, in the existing trusted-start module, a closed `bw_entry_output(void)` and a
+const private-observation accessor, `bw_entry_observe(void)`. No caller supplies
+storage, material, snapshot, clock, cancellation flag, descriptor, path, callback,
+prior report or authentication assertion. Private static snapshot/material storage
+keeps the existing application-storage ceiling; observations grant no operation,
+retry or cleanup authority. The coordinator reuses `bw_authenticated_result`: its
+existing NOT_TAKEN/UNCERTAIN/REJECTED/COMPLETE meanings cover this full fixed-output
+lifetime. Entry state/cause remain distinct; no duplicate result domain is added. A dedicated fresh single-threaded caller exclusively
+transfers its original fixed input roles0/3/4 on the first taken attempt; their
+open-file descriptions must not be concurrently rebound, advanced or modified.
+No output or ordinary diagnostic is written before alias/authentication checks.
+
+Before taking inputs or changing the observation, refuse NOT_TAKEN if this entry
+was already attempted or the shared private process guard was latched by another
+wrapper. This protects scratch/material owned by a prior guard/reserve caller.
+Otherwise latch the entry WORKING and its original input ownership before guard
+setup. Unsupported, identity, inherited-timer and partial-setup guard refusal is
+terminal after independently closing those original inputs once. It performs no
+later confinement/final-pledge transition. This entry consumes its process lifetime
+even when the unsupported/identity branch did not previously latch the guard.
+The legacy guard and startup/reservation interfaces retain their own behavior.
+
+After successful original-clock/private-flag guard setup, observe all five fixed
+roles0..4 with F_GETFD and require each present before any namespace allocation.
+Only0/3/4 transfer ownership; fd1/2 and their flags are preserved.
+Missing/unobservable roles refuse and all original input close attempts still run
+once; no replacement input is opened. Next call the fixed native closefrom adapter
+with lower bound5, preserving roles0..4 and closing unrelated inherited descriptors
+including numbers above the new NOFILE ceiling. This precedes reservation, avoiding
+any scratch-fd exclusion or closefrom hole. A failed closefrom observation stops
+before reservation and separately records uncertain unrelated closure. Individual
+native close guarantees remain a qualification gate, not a portable proof.
+
+Reserve with the exact private pre-first-REAL-arm origin and permanent flag, using
+the existing private implementation bridge. Fixed-role presence checks and unrelated closure
+consume the original two-second allowance; they cannot start another clock or
+renew either hard timer. Check the same private flag and normalized original2 clock
+before every F_GETFD, before and after closefrom, before the native boundary
+and before authenticated-output handoff. Cancellation, invalid/backward clocks
+and exact expiry refuse as separate entry causes before dependent work. Reserve failure has already consumed its own attempted
+material cleanup and must not be released again by the coordinator.
+
+The fixed private entry boundary adapter takes only the genuine reservation for a
+future native whitelist. In this slice its normal implementation always refuses,
+on every platform, and performs no security operation. Tests separately link an
+inert adapter. This intentional refusal prevents normal capture/signify/output
+before the exact locked whitelist is adopted and natively qualified. There is no
+fallback, caller bypass, production test switch or CLI wiring.
+
+After a test-modeled successful boundary, call real reservation-bound capture.
+NOT_TAKEN retains entry input ownership; every taken capture return transfers all
+three input closes permanently to capture, including rejected/uncertain returns.
+Never close the role numbers again, even if a later allocation/rebind reuses them.
+Capture does not own scratch: failure requires one independent RESERVED release.
+A successful snapshot then goes directly to the real closed authenticated-output
+sibling. Its NOT_TAKEN leaves material with the coordinator for one release; every
+ordinary taken return transfers all material and final-boundary responsibility.
+Preparation failure already consumed material; signature entry owns its sole
+process/material cleanup. The coordinator must never release or reduce again.
+
+On an earlier controlled failure, independently attempt every still-owned original
+input close, known RESERVED release and, only after successful guard and while
+still owned, final parent reduction once. EBADF is known absence but an invalid
+close observation; other close failures record unknown closure and UNCERTAIN.
+Latch each attempted role before closing; never retry a number. Preserve first
+entry cause, separate capture/material close masks, uncertainty and final-boundary
+failure. Entry input-close masks describe the sole closer: NOT_TAKEN
+(including capture not called) retains entry ownership; a taken capture result
+transfers it to capture. Copy capture's role0/1/2 masks after takeover. Material
+state/cause/close masks remain in the original private object, not duplicated in
+the entry view; test-only bridge witnesses observe that actual object. A later cleanup success cannot erase a prior unknown close, failed stop
+or lost wait. No path after final reduction performs an input, namespace, process
+or output operation; only bounded private observation/copy/clearing remains.
+
+COMPLETE requires this call's real fused-output COMPLETE, never an observed prior
+report. Preserve its same original11 work stop, shared post-signature two-second
+phase, cancellation and post-write uncertainty. No API return creates another
+allowance. The normal boundary currently makes COMPLETE unreachable. The snapshot
+is cleared on controlled return; no raw bytes or private scratch path are exposed
+by the const accessor. Refused repeats leave terminal observation, rebound input
+canaries and every boundary unchanged. Existing149 guard oracles and all legacy
+capture/material/fused/planner regressions remain mandatory.
+
+| ID | Independent required observation |
+| --- | --- |
+| EO-T01 | First taken call owns original0/3/4; guard precedes all five presence checks, closefrom5 precedes reserve, reserve precedes boundary/capture; original origin/flag and hard timers never renew. |
+| EO-T02 | Unsupported/identity/active-timer/partial-guard failures close original inputs once with no later boundary; prior latched legacy guard/start refuses entry with no takeover/effects. |
+| EO-T03 | Missing/query-failed fixed roles0..4 stop before closefrom/reserve; high unrelated descriptors use exact fixed closefrom5; refusal is uncertain and cannot reserve. No replacement role or caller-selected descriptor. |
+| EO-T04 | Every reserve failure/uncertain cleanup is consumed once; normal boundary always refuses before reads/verifier/output, then independent input/material cleanup and one eligible final reduction. |
+| EO-T05 | Capture NOT_TAKEN versus taken success/refusal/uncertainty transfers input closes correctly; rebound role canaries survive all subsequent material/signature cleanup and repeated entry. |
+| EO-T06 | Real capture/prepare/fused signature/content/output use exact retained inputs, compiled policy and same origin/flag. Preparation failure, signature rejection/stop/wait/close uncertainty, policy/content/output failures preserve sole cleanup ownership and no premature publication. |
+| EO-T07 | Entry/capture/material close EBADF versus unknown failure, earlier primary error, failed final reduction and combined failures preserve independent attempts, masks and uncertainty without retry. |
+| EO-T08 | Shared exact/just-below deadlines, cancellation before/after handoffs, original final completion checks, partial/zero/late output and reused observation cannot establish false COMPLETE or renew a phase. |
+| EO-T09 | Public symbols have no caller selector; normal boundary is an inert refusal; full helper/whole/component accounting stays within approved caps and production planner/CLI/native sources retain their qualified behavior. |
+
+Independent literal oracles are frozen before new coordinator implementation
+inspection. Reuse the existing finite owned portable launcher and evidence custody;
+new fixtures use inert records, modeled guard/security/process adapters and owned
+private files only. No actual new child verifier, signer, native activation or
+security mutation is authorized. Review source/fixtures/envelope before execution,
+then focused/full exact clean-source checks, independent terminal review, genuine
+source signatures/DCO, exact squash preflight and actual canonical verification.
+
+### Measured coordinator source fit
+
+The unexecuted current coordinator totals **95,788/98,304** runtime C/header
+bytes. Trusted entry is **10,190/10,240**, including trusted_start.c/.h,
+private_limits.h, the entire private_start_material.h and entry_platform.c.
+The entire bridge is also charged to material: **16,610/18,432**. Signature
+remains **17,162/18,432**, capture **8,093/8,192** and review/output
+**12,782/16,384**; all other runtime files and ceilings are unchanged.
+No implementation is excluded by directory, helper sharing or declaration naming.
+
+The initial unexecuted draft exceeded the entry cap and remains preserved outside
+the repository. The fitting source consolidates startup interfaces and the result
+domain, references the normative contract instead of duplicating its prose, and
+keeps material observations in their owning private object. No check, failure
+record, finalizer, legacy oracle or runtime ceiling is removed. Entry has only
+50 source bytes of headroom; further native-boundary implementation requires
+another measured fit review under the same approved limits, not an assumed
+increase. The exact native whitelist remains unadopted and unqualified.
+
+The compile-time application bound includes the private static snapshot,
+material and entry observation plus131,072 bytes for all remaining bounded
+component workspace. This conservatively covers the existing fused, material,
+signature, capture, guard, parser and inspector workspace bounds; it adds no
+runtime allowance and makes no RSS or hard syscall-latency claim.
+
+This source coordinator completes the ownership composition only. Activation
+must adopt it together with the exact native boundary and inherited fd1 contract.
+It does not require a second ownership implementation. The remaining native/CLI
+gates below still apply, and the original planner remains unchanged.
+
 ## Remaining integration and native gates
 
 The closed sibling establishes startup/reservation/capture origin and cancellation
