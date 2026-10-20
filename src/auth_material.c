@@ -49,10 +49,16 @@ record(const unsigned char *b, size_t n, size_t decoded, size_t cap)
 }
 
 int
+bw_signify_public_key(const unsigned char *key, size_t key_length)
+{
+    return key && key_length && key_length <= 1024 && record(key, key_length, 42, 1024);
+}
+
+int
 bw_signify_records(const unsigned char *key, size_t key_length,
     const unsigned char *signature, size_t signature_length)
 {
-    return record(key, key_length, 42, 1024) && record(signature, signature_length, 74, 16384);
+    return bw_signify_public_key(key, key_length) && record(signature, signature_length, 74, 16384);
 }
 
 static void

@@ -1,0 +1,44 @@
+test_all_aliases_invalid_ranges_and_no_write_canaries (test_policy.PolicyTests.test_all_aliases_invalid_ranges_and_no_write_canaries) ... FAIL
+test_exact_default_and_generic_use_are_identity_only (test_policy.PolicyTests.test_exact_default_and_generic_use_are_identity_only) ... ok
+test_exact_key_and_original_definition_bytes (test_policy.PolicyTests.test_exact_key_and_original_definition_bytes) ... ok
+test_fixture_live_output_and_timeout_retention_controls (test_policy.PolicyTests.test_fixture_live_output_and_timeout_retention_controls) ... ok
+test_hash_failure_repeatability_and_host_unavailability (test_policy.PolicyTests.test_hash_failure_repeatability_and_host_unavailability) ... ok
+test_independent_hash_vectors_and_padding_boundaries (test_policy.PolicyTests.test_independent_hash_vectors_and_padding_boundaries) ... ok
+test_invalid_linked_policy_refuses_before_hash (test_policy.PolicyTests.test_invalid_linked_policy_refuses_before_hash) ... FAIL
+test_objects_production_linkage_and_source_budgets (test_policy.PolicyTests.test_objects_production_linkage_and_source_budgets) ... ok
+test_payload_full_digest_and_boundary_bytes (test_policy.PolicyTests.test_payload_full_digest_and_boundary_bytes) ... ok
+test_preflight_empty_exact_and_over_caps (test_policy.PolicyTests.test_preflight_empty_exact_and_over_caps) ... ok
+test_strict_syntax_and_tuple_with_new_compiled_pins (test_policy.PolicyTests.test_strict_syntax_and_tuple_with_new_compiled_pins) ... ok
+
+======================================================================
+FAIL: test_all_aliases_invalid_ranges_and_no_write_canaries (test_policy.PolicyTests.test_all_aliases_invalid_ranges_and_no_write_canaries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/bootweave-policy-binding/tests/test_policy.py", line 370, in test_all_aliases_invalid_ranges_and_no_write_canaries
+    self.assertEqual(self.run_bytes(binary=binary, mode=mode), b"PB_NOWRITE 0 0 1 1\n", mode)
+                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/bootweave-policy-binding/tests/test_policy.py", line 288, in run_bytes
+    return self.execute([str(binary or self.default), mode], frame)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/bootweave-policy-binding/tests/test_policy.py", line 262, in execute
+    raise AssertionError(f"fixture {case.name}: status={record.get('returncode')}, errors={record['errors']!r}, stderr={bytes(buffers['stderr'][:1024])!r}")
+AssertionError: fixture case-035: status=-6, errors=[], stderr=b'==75841==AddressSanitizer: detect_leaks is not supported on this platform.\n'
+
+======================================================================
+FAIL: test_invalid_linked_policy_refuses_before_hash (test_policy.PolicyTests.test_invalid_linked_policy_refuses_before_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/bootweave-policy-binding/tests/test_policy.py", line 362, in test_invalid_linked_policy_refuses_before_hash
+    self.expect(2, 0, binary=self.linked(**variant))
+                             ~~~~~~~~~~~^^^^^^^^^^^
+  File "[workspace]/bootweave-policy-binding/tests/test_policy.py", line 282, in linked
+    cls.execute(cls.flags + cls.objects + [str(cls.driver), str(path), "-o", str(binary)], compile_job=True)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/bootweave-policy-binding/tests/test_policy.py", line 262, in execute
+    raise AssertionError(f"fixture {case.name}: status={record.get('returncode')}, errors={record['errors']!r}, stderr={bytes(buffers['stderr'][:1024])!r}")
+AssertionError: fixture case-090: status=1, errors=[], stderr=b'[workspace]/bootweave-policy-binding/.tools/policy-build-9pqtty2q/policy-12.c:7:1: error: use of an empty initializer is a C23 extension [-Werror,-Wc23-extensions]\n    7 | {},\n      | ^\n1 error generated.\n'
+
+----------------------------------------------------------------------
+Ran 11 tests in 13.218s
+
+FAILED (failures=2)
