@@ -1,0 +1,172 @@
+{
+  "kind": "portable internal authenticated-composition focused evidence",
+  "date": "2026-10-20",
+  "platform": "connected Mac ARM64",
+  "base": "72592b7f608100e1a4b60476d5d078cbbed504dc",
+  "tracked_source_head": "e1279be0b7cb65ae6f8b031b6760cdd5eddd8ba1",
+  "tracked_source_tree": "28892e90b885c4cbdd43069da2517002f9841f04",
+  "fixture_identity": "final reviewed untracked fixture files at dispatch; exact hashes below",
+  "result": {
+    "groups": 9,
+    "groups_seconds": 23.627,
+    "outer_seconds": 24.297700417228043,
+    "exit_code": 0,
+    "skips": 0,
+    "launches": 134,
+    "compile_link_launches": 25,
+    "driver_cases": 107,
+    "symbol_launches": 2,
+    "streams": 268,
+    "observed_verifier_children": 42,
+    "all_waits_consumed": true,
+    "any_wait_lost": false,
+    "all_streams_eof_closed": true,
+    "stream_hashes_lengths_rechecked": true,
+    "one_to_one_driver_ledger_complete": true,
+    "source_unchanged": true,
+    "outer_wait_consumed": true,
+    "outer_wait_lost": false,
+    "outer_terminal_group_empty": true,
+    "inner_terminal_rows_empty": true,
+    "cleanup_errors": [],
+    "outer_final_stop": "Darwin EPERM while only zombie leader observed; actual consuming wait then empty group; no post-wait signal"
+  },
+  "receipt_sha256": "b1906f9496fbe45e2b1a559a84af1e989fed71e5588f302945c93fb71a875ea2",
+  "log_sha256": "8fea057a7a68c12b9b08f2611e16bb2997eba925d685fecec804dda07b8ef5a3",
+  "launch_ledger_sha256": "92181b3a9e6744658895ba5737573138e5399e006f1f4a503158d21a532bb9ab",
+  "composition_ledger_sha256": "f0bb73fd57f78b47f63072d430be011743221cb74aa6de1222828df5e88b944d",
+  "preexecution_reviews": {
+    "product_source": "9f0d2f6df7d27b3ea89a4471b9860654b3f190b258d319abcdff01eaf194c22d",
+    "product_envelope": "d918e0225767dd0e4f0e933587b37bbff2f46bb9fe58618c910708292eace053",
+    "independent_oracles": "1d7dca5326e3dc36f8e853b794ccf39034fc5d8974a72099b30c4fe8195097dc",
+    "exact_fixture_dispatch": "b78d95d1dfb0b417235042aed5f326b51578443d506b96cd1a9393422f7d7532",
+    "frozen_package": "18a287b48acc4e93f24f9f59d0d9418d42701075d5a51ce7b4281f432e368636",
+    "outer_envelope": "77804b002a34c57c0303eb9df3f3aba35253de1b266a65446568d993e3525217"
+  },
+  "source_bytes": 79308,
+  "whole_source_ceiling": 81920,
+  "fully_charged_component_bytes": 10332,
+  "component_source_ceiling": 11264,
+  "sources": {
+    "src/auth_input.c": {
+      "bytes": 4528,
+      "sha256": "f27a8ef6ffeb97c2f3c5c6db89c8b0e9aff7c6c7c4b83935e4be94b9065dbca6"
+    },
+    "src/auth_input.h": {
+      "bytes": 1022,
+      "sha256": "ac9c0bd61388b5284437fd14a1ce609cad489175798883555e2c57e38e7fcb3f"
+    },
+    "src/auth_material.c": {
+      "bytes": 12606,
+      "sha256": "88b2e5f54a42015d48389495530153dea7979698b49a642efcd6e9c9be1e222c"
+    },
+    "src/auth_material.h": {
+      "bytes": 2555,
+      "sha256": "68ca59088b5ffcf19e81c51d9460260da02421fe8830423ca9a7119c4e8398ce"
+    },
+    "src/authenticated_review.c": {
+      "bytes": 6829,
+      "sha256": "ee44751836ba51b09a32e059a70a2d36b211669e4e714d90798a4f99370baa4b"
+    },
+    "src/authenticated_review.h": {
+      "bytes": 1471,
+      "sha256": "04b6f99519f4b0fbbd71b33459888a5f739713bd0d1d32e1da02119132994ba9"
+    },
+    "src/content_review.c": {
+      "bytes": 2848,
+      "sha256": "c6621d3508a06e96f30bf9ca3fcfb7e628199daff3162c2bebf30024b887f570"
+    },
+    "src/content_review.h": {
+      "bytes": 1324,
+      "sha256": "504ef87d6c8326228a6a610d0d9e85ba82da1b15bcc695fba125ae42bc0d4b3a"
+    },
+    "src/main.c": {
+      "bytes": 1008,
+      "sha256": "af7d3d5e79598377ece6e770e238462e191e5b5001e6d0944439ee3f264ac10d"
+    },
+    "src/native.c": {
+      "bytes": 1036,
+      "sha256": "beeb5d13061c597378ea274ff10360a3963f630b44ee3eb4bb561c822692c4c5"
+    },
+    "src/payload_review.c": {
+      "bytes": 5908,
+      "sha256": "a09e656550676c0e047d9851c2a36d868af42330f4e7250a39f2f9fd3b4fcbb5"
+    },
+    "src/payload_review.h": {
+      "bytes": 611,
+      "sha256": "761a114a1465aa0fe53640e3b7319bb8c85d32474318cb762e260c9722d86811"
+    },
+    "src/plan.c": {
+      "bytes": 6953,
+      "sha256": "d5f491eb85f82a3ad46f91adde5cff4005f2299ca8e9ae926a0d90b73188e035"
+    },
+    "src/plan.h": {
+      "bytes": 604,
+      "sha256": "fd61c40d9d07b02a9a2cf64fc43eb26608ba633e7499836b64abc3827c07ca86"
+    },
+    "src/plan_io.c": {
+      "bytes": 4736,
+      "sha256": "172ad2b514530f0d46e1742a4c0fe6a844e81aec441b5eca15d18c115d973f3b"
+    },
+    "src/policy_binding.c": {
+      "bytes": 3826,
+      "sha256": "d201e9762e70ac5bb74bf41c541c202ad3033f06f6be46b1484760dac2470385"
+    },
+    "src/policy_binding.h": {
+      "bytes": 1977,
+      "sha256": "df9ebad119d6f63d4fa25aa5af35b40a441290d94f2915ff79b16fc72681ce6d"
+    },
+    "src/policy_data.c": {
+      "bytes": 800,
+      "sha256": "2d10ab4bf7af3be524b888675a056ee31ace384046e0f6d469b2e0841ef17f96"
+    },
+    "src/policy_platform.c": {
+      "bytes": 698,
+      "sha256": "c2f38199e44313d9fdc78d3eac2b2387b26753285185d038ce27bcc2d166da02"
+    },
+    "src/private_content_format.h": {
+      "bytes": 1353,
+      "sha256": "a7af0ede035ddaaa6832d1523add7abb1b90ccdcdb5f5b757ca065bef92b73c6"
+    },
+    "src/private_span.h": {
+      "bytes": 679,
+      "sha256": "e03aad9a9c2999f68704761faa3e26c0799a13c2adf3274a336edc894ae5f2e6"
+    },
+    "src/signature_platform.c": {
+      "bytes": 1565,
+      "sha256": "ad9c68f482c8e98b34bc9bddaa4474e94c0e0fecaea16d49ec0f76cd156665ff"
+    },
+    "src/signature_verify.c": {
+      "bytes": 12432,
+      "sha256": "00fd6f91d02edd601961d2bb01802027a178383803c3b128c4e926677c861627"
+    },
+    "src/signature_verify.h": {
+      "bytes": 1939,
+      "sha256": "3dfebb3c9527ac73009592604eacd8ad33c59d1b4fa2aff5853c826868ef7079"
+    }
+  },
+  "fixtures": {
+    "tests/authenticated_driver.c": {
+      "bytes": 26326,
+      "sha256": "fc75d38a58ab98c13fc44adadf948523ed7f20608e0a0ccf7492c6753ea9c40b"
+    },
+    "tests/test_authenticated.py": {
+      "bytes": 21062,
+      "sha256": "04c2c3f591a3d46b02cad4ef775c8d6a44718724857c467c579f409a8e4621e2"
+    },
+    "tests/authenticated_vectors.py": {
+      "bytes": 18881,
+      "sha256": "0ca4d9159b18305f97ccb0d2a0f7cabe7f910bdfdf05c6568d893b11b7805302"
+    }
+  },
+  "full_verification": "Required on the clean signed candidate; canonical delivery evidence is recorded in the PR separately from this focused snapshot.",
+  "scope": {
+    "native": false,
+    "actual_signify_or_cryptographic_proof": false,
+    "cli_linked": false,
+    "operation_authority": false,
+    "new_signer_or_credentials": false,
+    "deployment": false
+  },
+  "evidence_retention": "Raw local receipts, process observations, all build/stream/material artifacts and earlier failed-fit assessment are preserved outside the repository; only sanitized summaries and this unittest log are included."
+}
