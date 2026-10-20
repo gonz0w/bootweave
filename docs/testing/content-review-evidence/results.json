@@ -95,5 +95,42 @@
   },
   "ledger_sha256": "f282af5e2d24583ccf38cd8589b4080e34c2dd8d1763f147702d8af006aa5785",
   "independent_design_receipt_sha256": "b7b7542f8cb9b80e07b4bdc6924a97a3d942467b8008fb70d8a01ac78dbb19bc",
-  "independent_dispatch_receipt_sha256": "c99fdf403151244b36be05d522aba4c9e667ba5d40831a4dd61c5519276a6e2b"
+  "independent_dispatch_receipt_sha256": "c99fdf403151244b36be05d522aba4c9e667ba5d40831a4dd61c5519276a6e2b",
+  "full_attempts": [
+    {
+      "candidate": "90343222c6146859675d41081106994d85786dc3",
+      "tree": "4df9931bb6faeacc9e68aa84ccf0b5bc4a20962f",
+      "groups": [
+        39,
+        13,
+        3,
+        10,
+        44,
+        82
+      ],
+      "tests": 191,
+      "failures": 1,
+      "skips": 0,
+      "exit_code": 2,
+      "elapsed_seconds": 200.54672933276743,
+      "receipt_sha256": "d6aaa5c8d671a7c1bee9dd818817b75812a33d257335bc869087b3b110d742d8",
+      "original_log_sha256": "9635688404ec0181e803212de4a68e642836b9be7b3ed86fabe9f8fc1b2648f1",
+      "sanitized_log": "full-r1.log",
+      "sanitized_log_sha256": "eed8ed427e6e203f632433411210bea44fd270f9bf79aa5775b7396a2b860fee",
+      "source_unchanged": true,
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_terminal_rows": [],
+      "cleanup_errors": [],
+      "final_secrets_reached": false
+    }
+  ],
+  "aggregate_budget_correction": {
+    "path": "tests/test_signature.py",
+    "before_sha256": "9bf9acda28f4060794cb2f6ff4be3b14bf7f1dfe0764d2ed440a82b4834f854f",
+    "after_sha256": "cee003069d817a21457e01795fe9a11a3a4bd2e46b603916f8bd9092f8f3768e",
+    "change": "whole-source64KiB to scoped72KiB; separate18KiB signature component and runtime caps unchanged",
+    "product_driver_vector_changes": false
+  }
 }

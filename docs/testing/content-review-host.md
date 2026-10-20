@@ -63,3 +63,15 @@ Full clean-candidate make verify, independent source/terminal review and normal
 signed/DCO PR/canonical checks are recorded separately at delivery. Complete
 authenticated composition, cancellation/hard timers, CLI integration, publisher
 policy and native qualification remain gated.
+
+The first full check reached191 tests with one failure: an inherited aggregate
+source-size assertion in test_signature.py still required64KiB after this scoped
+design raised the whole-source ceiling to72KiB. The planner guard had been updated;
+the signature test's duplicate aggregate guard was missed. Its separate18KiB
+signature-component guard and all runtime limits remain unchanged. No product,
+driver or independent vector change was needed. The failed
+[full log](content-review-evidence/full-r1.log), original receipt/log hashes and
+correction are retained in results.json. The full run consumed its actual wait,
+observed empty terminal groups and unchanged source; final make secrets was not
+reached. A fresh clean signed candidate must pass the complete full check before
+readiness or merge. Focused success alone is insufficient.
