@@ -36,6 +36,16 @@ READY means only that three owned handles are available. A separate release
 function consumes them exactly once; a second release cannot close reused fd
 numbers. The caller must not concurrently close/rebind/advance those descriptors.
 
+The closed [startup/reservation sibling](trusted-entry-output.md#closed-startup-and-reservation-lifetime)
+supplies its own pre-REAL-arm origin and permanent private cancellation flag to
+the same reserve core through a private implementation bridge. It accepts only
+EMPTY material, with no caller seed/flag/path selector. Guard failure is terminal
+and leaves material untouched; reservation failure owns its existing scratch
+cleanup. The core copies the exact normalized seed without a new origin stamp;
+guard/arm time therefore consumes the same original two-second allowance. Legacy
+reserve still stamps its own origin. Charge private_start_material.h fully to
+material and entry; it is absent from the public material API.
+
 The later [reservation-bound capture](authenticated-io.md#reservation-bound-capture-continuity)
 borrows the original clock/flag and latches its input attempt in material. Failed
 capture preserves first cause and separate input-close masks; unknown input
@@ -98,7 +108,8 @@ identity is quarantined; do not widen permissions or delete an unknown object.
 
 ## Cancellation, bounded failure and uncertainty
 
-Use one fixed two-second monotonic cooperative deadline beginning at reserve,
+Use one fixed two-second monotonic cooperative deadline beginning at legacy
+reserve, or at the closed startup sibling's original pre-REAL-arm seed,
 including the intervening capture/handoff; prepare cannot reset or extend it. This
 conservatively refuses earlier than separate maximum stage budgets and does not
 widen the adopted resource ceilings. Native qualification must establish useful
@@ -132,6 +143,9 @@ New C/header source is capped at 18 KiB and whole src at 48 KiB; previous planne
 and capture 6 KiB ceilings stay separately enforced. Scratch content is at most
 33792 bytes across three files; private transient C workspace is at most 8 KiB.
 Runtime budgets in the parent I/O contract are unchanged. No RSS claim follows.
+These earlier whole/capture measurements are superseded by the owner-approved
+complete-entry package; current fully charged material/bridge and whole-source
+counts are in [startup accounting](trusted-entry-output.md#closed-startup-and-reservation-lifetime).
 
 | Test | Independent observation |
 | --- | --- |

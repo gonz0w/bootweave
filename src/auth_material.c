@@ -7,6 +7,7 @@
 #define _DARWIN_C_SOURCE
 #endif
 #include "auth_material.h"
+#include "private_start_material.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -208,8 +209,9 @@ finish(struct bw_verifier_material *m, int ready)
     return BW_MATERIAL_OK;
 }
 
-enum bw_material_result
-bw_verifier_reserve(const volatile sig_atomic_t *cancelled, struct bw_verifier_material *m)
+static enum bw_material_result
+reserve(const volatile sig_atomic_t *cancelled, struct bw_verifier_material *m,
+    const struct timespec *started)
 {
     struct stat s;
     int original, moved;
@@ -224,7 +226,12 @@ bw_verifier_reserve(const volatile sig_atomic_t *cancelled, struct bw_verifier_m
 #if defined(__APPLE__) || defined(__OpenBSD__)
     if (issetugid()) { fail(m, BW_VM_ARGUMENT); return finish(m, 0); }
 #endif
-    if (!stamp(&m->started)) { fail(m, BW_VM_DEADLINE); return finish(m, 0); }
+    if (started) {
+        m->started = *started;
+        if (started->tv_sec < 0 || started->tv_nsec < 0 || started->tv_nsec >= 1000000000L) {
+            fail(m, BW_VM_DEADLINE); return finish(m, 0);
+        }
+    } else if (!stamp(&m->started)) { fail(m, BW_VM_DEADLINE); return finish(m, 0); }
     if (!live(m)) return finish(m, 0);
     memcpy(m->path, "/tmp/bootweave-verify.XXXXXXXXXX", sizeof("/tmp/bootweave-verify.XXXXXXXXXX"));
     if (!live(m)) { m->path[0] = 0; return finish(m, 0); }
@@ -243,6 +250,20 @@ bw_verifier_reserve(const volatile sig_atomic_t *cancelled, struct bw_verifier_m
     if (m->cause != BW_VM_NONE || !live(m)) return finish(m, 0);
     m->state = BW_VM_RESERVED;
     return BW_MATERIAL_OK;
+}
+
+enum bw_material_result
+bw_verifier_reserve(const volatile sig_atomic_t *cancelled, struct bw_verifier_material *m)
+{
+    return reserve(cancelled, m, NULL);
+}
+
+enum bw_material_result
+bw_material_reserve_started(const struct timespec *started,
+    const volatile sig_atomic_t *cancelled, struct bw_verifier_material *m)
+{
+    if (!started) return BW_MATERIAL_REJECTED;
+    return reserve(cancelled, m, started);
 }
 
 static int

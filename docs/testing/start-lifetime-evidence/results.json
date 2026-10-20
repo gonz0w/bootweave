@@ -1,0 +1,57 @@
+{
+  "scope": "Portable closed startup lifetime with real owned capture/material and synthetic verifier process observations; no native entry or authentication authority",
+  "date": "2026-10-20",
+  "head": "9c5c28671ebe5177a71d8c780fb3d121cdf2c12a",
+  "base": "1a8b5b25f4f95d86948f002286c926abc2ce017a",
+  "tree": "3031dbe7f350af2db0f0d01e17294648aba50a06",
+  "groups": 2,
+  "driver_cases": 80,
+  "launches": 91,
+  "stream_files": 182,
+  "exit_code": 0,
+  "skips": 0,
+  "elapsed_seconds": 8.802552666980773,
+  "source_files_before_after": 305,
+  "source_unchanged": true,
+  "outer_wait_consumed": true,
+  "outer_wait_lost": false,
+  "current_invocation_publication_complete": true,
+  "terminal_rows": [],
+  "cleanup_errors": [],
+  "receipt_sha256": "62a13281477ba0602a46cdec0344daf05e7cee9dc41e343f26e38049f3b99a5f",
+  "log_sha256": "77048b14c8c402fb74c4ca3e7cc236763bcacf779e6dacb2ddf0f332366a636a",
+  "budgets_bytes": {
+    "entry": [
+      5743,
+      10240
+    ],
+    "material": [
+      16712,
+      18432
+    ],
+    "signature": [
+      17162,
+      18432
+    ],
+    "capture": [
+      8093,
+      8192
+    ],
+    "review": [
+      12782,
+      16384
+    ],
+    "whole": [
+      91341,
+      98304
+    ]
+  },
+  "limitations": [
+    "Guard mutators and verifier process custody are modeled; syntheticPID12345 is never born or signaled and is not actual child-custody evidence.",
+    "Normal unsupported adapter uses36 read-only before/after host queries and refuses before settings changes.",
+    "Cancellation lifetime begins at installed handlers; inherited discarded signals cannot be reconstructed; parent flag is copied, not shared, across fork.",
+    "No global all-syscall nondecreasing chronology or hard isolation/native resource sufficiency claim.",
+    "Complete entry ownership, locked native whitelist and actual OpenBSD qualification remain separate.",
+    "Full clean-candidate and canonical bindings recorded separately in PR."
+  ]
+}

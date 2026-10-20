@@ -39,13 +39,13 @@ class TrustedStartTests(unittest.TestCase):
         manifest = {str(p.relative_to(ROOT)): {"bytes": p.stat().st_size,
                     "sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in paths}
         (cls.directory / "source-manifest.json").write_text(json.dumps(manifest, sort_keys=True) + "\n")
-        cls.plain, platform = (cls.directory / n for n in ("guard.o", "platform.o"))
+        cls.plain, platform, material = (cls.directory / n for n in ("guard.o", "platform.o", "material.o"))
         for target, source, extra in ((cls.plain, "trusted_start.c", []),
-                (platform, "signature_platform.c", [])):
+                (platform, "signature_platform.c", []), (material, "auth_material.c", [])):
             cls.execute(cls.flags + extra + ["-c", str(ROOT / "src" / source), "-o", str(target)], compile_job=True)
         cls.modeled, cls.normal = cls.directory / "modeled", cls.directory / "normal-unsupported"
-        for target, objects, extra in ((cls.modeled, [], []),
-                (cls.normal, [cls.plain, platform], ["-DTS_NORMAL"])):
+        for target, objects, extra in ((cls.modeled, [material], []),
+                (cls.normal, [cls.plain, platform, material], ["-DTS_NORMAL"])):
             cls.execute(cls.flags + extra + list(map(str, objects)) +
                         [str(ROOT / "tests/trusted_start_driver.c"), "-o", str(target)], compile_job=True)
 
@@ -261,19 +261,19 @@ class TrustedStartTests(unittest.TestCase):
         undefined = self.execute(["nm", "-u", str(self.plain)]).decode()
         names = {row.split()[-1] for row in undefined.splitlines()}
         self.assertLessEqual({n for n in names if "asan" not in n and "ubsan" not in n}, {
-            "_bw_sv_supported", "_getuid", "_geteuid", "_getgid", "_getegid", "_getitimer", "_setitimer",
+            "_bw_sv_supported", "_bw_material_reserve_started", "_clock_gettime", "_getuid", "_geteuid", "_getgid", "_getegid", "_getitimer", "_setitimer",
             "_getrlimit", "_setrlimit", "_sigemptyset", "_sigaddset", "_sigaction", "_sigprocmask",
             "__exit", "_memset", "_bzero", "_memcpy", "___stack_chk_fail", "___stack_chk_guard"})
         exported = self.execute(["nm", "-gU", str(self.plain)]).decode()
         self.assertEqual({row.split()[-1] for row in exported.splitlines()
-                          if "asan" not in row and "ubsan" not in row}, {"_bw_process_guard"})
+                          if "asan" not in row and "ubsan" not in row}, {"_bw_process_guard", "_bw_start_reserve"})
         makefile = (ROOT / "Makefile").read_text()
         self.assertEqual(next(row for row in makefile.splitlines() if row.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*")
                                  if p.suffix in (".c", ".h")), 96 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
-            ("trusted_start.c", "trusted_start.h", "private_limits.h")), 10 * 1024)
+            ("trusted_start.c", "trusted_start.h", "private_limits.h", "private_start_material.h")), 10 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
             ("signature_verify.c", "signature_verify.h", "signature_platform.c", "private_limits.h")), 18 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in

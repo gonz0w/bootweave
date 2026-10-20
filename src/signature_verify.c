@@ -34,26 +34,38 @@ static int stamp(struct timespec *t) {
         t->tv_nsec >= 0 && t->tv_nsec < 1000000000L;
 }
 
-static int within(struct operation *o, const struct timespec *start, int seconds) {
-    struct timespec now;
-    time_t elapsed;
-    if (!stamp(&now) || now.tv_sec < start->tv_sec ||
-        (now.tv_sec == start->tv_sec && now.tv_nsec < start->tv_nsec)) {
+/* Both callers supply one already-normalized clock sample. */
+static int bounded(struct operation *o, const struct timespec *now,
+    const struct timespec *start, int seconds, int total) {
+    const struct timespec *original = &o->material->started;
+    time_t elapsed, overall;
+    if (original->tv_sec < 0 || original->tv_nsec < 0 ||
+        original->tv_nsec >= 1000000000L || now->tv_sec < original->tv_sec ||
+        (now->tv_sec == original->tv_sec && now->tv_nsec < original->tv_nsec) ||
+        now->tv_sec < start->tv_sec || (now->tv_sec == start->tv_sec && now->tv_nsec < start->tv_nsec)) {
         fail(o, BW_SV_CLOCK); return 0;
     }
-    elapsed = now.tv_sec - start->tv_sec;
-    return elapsed < seconds || (elapsed == seconds && now.tv_nsec < start->tv_nsec);
+    elapsed = now->tv_sec - start->tv_sec;
+    overall = now->tv_sec - original->tv_sec;
+    return (elapsed < seconds || (elapsed == seconds && now->tv_nsec < start->tv_nsec)) &&
+        (overall < total || (overall == total && now->tv_nsec < original->tv_nsec));
+}
+
+static int within(struct operation *o, const struct timespec *start, int seconds, int total) {
+    struct timespec now;
+    if (!stamp(&now)) { fail(o, BW_SV_CLOCK); return 0; }
+    return bounded(o, &now, start, seconds, total);
 }
 
 static int live(struct operation *o) {
     if (*o->material->cancelled) { fail(o, BW_SV_CANCEL); return 0; }
-    if (!within(o, &o->started, 5)) { fail(o, BW_SV_DEADLINE); return 0; }
+    if (!within(o, &o->started, 5, 11)) { fail(o, BW_SV_DEADLINE); return 0; }
     return 1;
 }
 
 static int terminal_check(struct operation *o) {
     if (o->material->cancelled && *o->material->cancelled) fail(o, BW_SV_CANCEL);
-    if (!o->cleanup_clock || !within(o, &o->cleanup_started, 4)) {
+    if (!o->cleanup_clock || !within(o, &o->cleanup_started, 4, 15)) {
         o->result->cleanup_budget_failed = 1;
         fail(o, o->cleanup_clock ? BW_SV_DEADLINE : BW_SV_CLOCK);
         return 0;
@@ -271,6 +283,10 @@ bw_signature_verify(struct bw_verifier_material *m, struct bw_signature_observat
 finish:
     o.cleanup_clock = stamp(&o.cleanup_started);
     if (!o.cleanup_clock) fail(&o, BW_SV_CLOCK);
+    else if (r->cause == BW_SV_NONE) {
+        if (*m->cancelled) fail(&o, BW_SV_CANCEL);
+        else if (!bounded(&o, &o.cleanup_started, &o.started, 5, 11)) fail(&o, BW_SV_DEADLINE);
+    }
     consume(&o, GATE_W);
     (void)terminal_check(&o);
     if (r->pid > 0) {

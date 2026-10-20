@@ -121,10 +121,12 @@ unchanged and fully charged to its other consumers. Both declarations share one
 concise reference to this normative contract. Other component/runtime ceilings
 remain unchanged.
 
-Measured continuation source is 8,093/8,192 capture bytes, 15,466/18,432 material
+At capture adoption, measured source was 8,093/8,192 capture bytes, 15,466/18,432 material
 bytes and 87,218/98,304 whole-runtime bytes. The complete local predicate is in
 capture C; public material interface declarations stay with their owning component,
 as in existing consumers. No implementation helper or runtime source is omitted.
+Current startup/material accounting is recorded with the closed
+[startup lifetime](trusted-entry-output.md#closed-startup-and-reservation-lifetime).
 
 | Test | Independent expected behavior |
 | --- | --- |
@@ -139,8 +141,10 @@ Use synthetic portable fixtures with real owned reservation/input/prepare/releas
 operations and separate syscall/clock models. No signer, native verifier, listener
 or host security mutation is introduced. Independent source/fixture/envelope review
 precedes execution, then focused/full clean-candidate checks, exact squash/DCO
-review and canonical verification. Earliest hard-timer origin, cancellation-handler
-lifetime and exact native confinement remain full-entry gates outside this slice.
+review and canonical verification. The later closed startup sibling supplies the
+pre-first-arm origin and permanent private cancellation flag; calling legacy guard
+and reserve separately does not. Complete entry ownership and exact native
+confinement/qualification remain separate gates.
 
 ## Verifier handoff and private scratch
 
