@@ -117,8 +117,8 @@ static struct bw_verifier_material material;
 typedef char entry_storage[(sizeof(entry) + sizeof(snapshot) + sizeof(material) +
     131072 <= 2 * 1024 * 1024) ? 1 : -1];
 
-static int
-entry_live(void)
+int
+bw_entry_live(void)
 {
     struct timespec now;
     if (cancelled) entry.cause = BW_ENTRY_CANCEL;
@@ -154,26 +154,26 @@ bw_entry_output(void)
     boundary_owned = 1;
     entry.cause = BW_ENTRY_INPUT;
     for (i = 0; i < 5; i++)
-        if (!entry_live() || fcntl((int)i, F_GETFD) == -1) goto finish;
+        if (!bw_entry_live() || fcntl((int)i, F_GETFD) == -1) goto finish;
     entry.cause = BW_ENTRY_UNRELATED;
-    if (!entry_live()) goto finish;
+    if (!bw_entry_live()) goto finish;
     if (bw_sv_closefrom(5) == -1) {
         uncertain = 1; goto finish;
     }
-    if (!entry_live()) goto finish;
+    if (!bw_entry_live()) goto finish;
     entry.cause = BW_ENTRY_MATERIAL;
     if (bw_material_reserve_started(&started, &cancelled, &material) != BW_MATERIAL_OK)
         goto finish;
     material_owned = 1;
     entry.cause = BW_ENTRY_CONFINEMENT;
-    if (!entry_live() || bw_entry_boundary(&material) == -1) goto finish;
+    if (!bw_entry_live() || bw_entry_boundary(&material) == -1) goto finish;
     entry.cause = BW_ENTRY_CAPTURE;
     entry.capture = bw_auth_capture_reserved(&material, &snapshot);
     if (entry.capture != BW_CAPTURE_NOT_TAKEN) inputs_owned = 0;
     uncertain = entry.capture == BW_CAPTURE_UNCERTAIN;
     if (entry.capture != BW_CAPTURED) goto finish;
     entry.cause = BW_ENTRY_AUTHENTICATED;
-    if (!entry_live()) goto finish;
+    if (!bw_entry_live()) goto finish;
     result = bw_authenticated_output(&material, &snapshot, &entry.authenticated);
     if (result != BW_AUTH_NOT_TAKEN) material_owned = boundary_owned = 0;
     uncertain = result == BW_AUTH_UNCERTAIN;

@@ -260,3 +260,7 @@ launch or CLI. The same native composition gates remain.
 The later owner-approved [complete entry source package](trusted-entry-output.md)
 supersedes the historical source-only limits above with 8 KiB capture and 96 KiB whole
 source. Capture's input, timing, ownership, cleanup and storage limits do not change.
+
+The later owner-approved native-entry source package raises only whole source to
+100 KiB and fully charged entry to16 KiB. All other source and runtime limits stay
+unchanged; see [source-only integration](native-entry-source.md).

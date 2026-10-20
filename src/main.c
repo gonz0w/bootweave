@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
 #include "plan.h"
+#include "private_cli.h"
 
 #include <string.h>
 #include <unistd.h>
@@ -11,7 +12,7 @@ message(int fd, const char *text, int status)
 }
 
 int
-main(int argc, char **argv)
+bw_legacy_cli(int argc, char **argv)
 {
     if (!bw_start())
         return 4;
@@ -30,4 +31,10 @@ main(int argc, char **argv)
         return message(2, "bootweave: runtime refused\n", 4);
     return bw_run();
 #endif
+}
+
+int
+main(int argc, char **argv)
+{
+    return bw_legacy_cli(argc, argv);
 }

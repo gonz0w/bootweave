@@ -302,7 +302,7 @@ class SignatureTests(unittest.TestCase):
 
     def test_source_budget_and_production_link_boundary(self):
         files = list((ROOT / "src").rglob("*.c")) + list((ROOT / "src").rglob("*.h"))
-        self.assertLessEqual(sum(p.stat().st_size for p in files), 96 * 1024)
+        self.assertLessEqual(sum(p.stat().st_size for p in files), 100 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / p).stat().st_size for p in
                                  ["signature_verify.c", "signature_verify.h", "signature_platform.c", "private_limits.h"]), 18 * 1024)
         makefile = (ROOT / "Makefile").read_text()

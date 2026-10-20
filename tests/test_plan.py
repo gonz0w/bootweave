@@ -323,9 +323,9 @@ class PlannerTests(unittest.TestCase):
             self.assertEqual((result.returncode, result.stdout), (77, b""))
         source_bytes = sum(p.stat().st_size for p in (ROOT / "src").rglob("*")
                            if p.suffix in {".c", ".h"})
-        self.assertLessEqual(source_bytes, 96 * 1024)
+        self.assertLessEqual(source_bytes, 100 * 1024)
         planner_bytes = sum((ROOT / path).stat().st_size for path in
-                            ["src/main.c", "src/plan.c", "src/plan_io.c", "src/native.c", "src/plan.h"])
+                            ["src/main.c", "src/plan.c", "src/plan_io.c", "src/native.c", "src/plan.h", "src/private_cli.h"])
         self.assertLessEqual(planner_bytes, 24 * 1024)
 
     def test_io_faults_and_short_transfers(self):
