@@ -4,8 +4,18 @@ Status: source-only engineering continuation of issue #5 after PR #85,
 2026-10-20. This refines the adopted [read-only scope](authenticated-plan.md),
 [fixed I/O](authenticated-io.md), [material ownership](verifier-material.md) and
 [fused review](authenticated-composition.md). Independent design/source review
-precedes candidate execution. No new CLI, authentication/output capability,
-publisher policy, extraction, native campaign or deployment is adopted here.
+precedes candidate execution. No new CLI, publisher policy, extraction, native
+campaign, runtime/security activation or deployment is adopted here.
+
+The owner subsequently approved the complete source-budget package on 2026-10-20:
+96 KiB whole source, 16 KiB authenticated review/output, 10 KiB trusted entry and 8 KiB
+capture. All other component and runtime ceilings remain unchanged. These limits
+measure source text, not storage, resource sufficiency or native qualification.
+Count every runtime C/header regardless of directory, shared headers once in the
+whole tree and in full in every using component. No minification or hidden source.
+The first complete implementation under this package is the closed, unlinked
+fixed-fd1 output sibling below; private startup/capture continuity and native
+confinement remain explicit later obligations within the same bounded direction.
 
 ## Useful next result and fixed boundaries
 
@@ -65,12 +75,15 @@ delivery nor durability. COMPLETE requires all bytes accepted and the final live
 check; callers must also observe successful process completion. The report's
 eighteen lines and zero-operation statements remain unchanged.
 
-That complete candidate totals **81,747/81,920** whole-source bytes but
+Before this approval, the complete candidate totaled **81,747/81,920** whole-source bytes but
 **12,771/11,264** fully charged fused bytes, an excess of **1,507**. All shared
 headers are included; the other22 source files match PR #85. It is preserved
-uncompiled and unexecuted, with independent fit review. It is not integrated or
-adopted. No check/report is removed, no implementation moved out of accounting,
-and no budget increase is selected to make it fit.
+uncompiled and unexecuted in the historical fit snapshot, with independent fit
+review. That refusal remains preserved. The two-file output implementation is
+now integrated onto PR86's process-guard source under the explicitly approved
+96/16 KiB source limits. No check/report is removed or source hidden. The old
+memory entry retains its exact report and refusal behavior. Both public siblings
+select their destination by compiled wrapper constants; no caller flag is added.
 
 ## Complete bounded prerequisite: process guard
 
@@ -114,8 +127,9 @@ The complete guard candidate totals **81,920/81,920** whole-source bytes. Its C,
 header and fully charged shared helper total3,239 bytes; the signature component
 including that helper totals16,245/18,432. The fused component remains10,332/11,264
 and earlier limits remain unchanged. No new component budget is invented. There
-is no whole-source headroom for further implementation. Full output combined with
-this guard would exceed the whole ceiling by2,439 bytes as well as the fused cap.
+was no whole-source headroom under the previous 80 KiB ceiling. Full output combined
+with this guard exceeded that ceiling by2,439 bytes as well as the previous fused
+cap. Those historical measurements do not represent the newly approved limits.
 
 Guard locals and fixed tables are small and sequential with the later pipeline;
 they fit within the existing conservative8KiB local allowance and2MiB application
@@ -144,6 +158,16 @@ roles and refusal observations independently before candidate execution.
 | Reuse after a latched attempt | No further signal, resource or timer mutation; no deadline renewal |
 | Production symbols and full source accounting | Only closed guard exported; no fd/path/write/fork/exec/unveil dependency; shared source charged fully; planner/CLI and all old regressions preserved |
 
+For the newly integrated output sibling, independently freeze all 18 exact report
+lines and test short writes, EINTR, EAGAIN, zero/oversized/error returns, every
+original clock/cancellation boundary and final completion check. Literal tests
+must verify that no output can precede this call's own signature/content acceptance
+and that any refusal after a write attempt is UNCERTAIN. Sink preflight must refuse
+before preparation, preserve fd1 flags/ownership and accept only the specified
+regular/FIFO/terminal objects. Test the old memory API and all alias/reuse cases
+unchanged. Model writes and descriptor/syscall failures; no live listener, native
+verifier, real credential or host resource/security mutation is permitted.
+
 Independent source/fixture/envelope review precedes modeled execution. Focused
 results, full clean-candidate `make verify`, trusted signatures/DCO, independent
 terminal/source/canonical binding and normal PR gates precede eligible merge.
@@ -157,3 +181,13 @@ loader whitelist or prove locked unveil removal, actual signify fd handoff,
 hard timers, resource sufficiency or serial/plain output. Those remain explicit
 engineering/native gates. Preserve all consumed fixture authority and research.
 No new guest, key, download, security-setting change or deployment is requested.
+
+The full entry's private monotonic origin must be captured no later than the
+hard-wall timer's arming, before reservation or capture can consume time. Guard,
+reservation and capture must not establish later origins that extend dependent
+work beyond that original 11-second stop or shrink the four-second cleanup
+reserve before the original 15-second hard stop. Freeze fixed cancellation
+signals and private flag lifetime, then all pre-signature failure ownership:
+capture consumes inputs 0/3/4, preparation failure consumes material, and signature
+entry transfers sole material/process cleanup. No public deadline token, caller
+authentication flag or complete-entry success is implemented by this output slice.

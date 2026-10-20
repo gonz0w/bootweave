@@ -345,3 +345,97 @@ BYTE_IDENTITY_REQUIREMENTS = {
     "raw_diagnostics_publication": 0,
     "supplied_verdict_or_cached_result": 0,
 }
+
+
+# Fixed-fd output requirements are frozen from the adopted contract and existing
+# exact reports. Nothing below imports a candidate, driver or observed result.
+# Write outcomes are semantic syscall outcomes; "all" means the offered suffix.
+OUTPUT_SINK_REFUSALS = (
+    ("blocking", (1, 0, 0)), ("readonly", (1, 0, 0)),
+    ("fcntl-error", (1, 0, 0)), ("fstat-error", (1, 1, 0)),
+    ("socket", (1, 1, 0)), ("block", (1, 1, 0)),
+    ("directory", (1, 1, 0)), ("char", (1, 1, 1)),
+    ("isatty-error", (1, 1, 1)),
+)
+OUTPUT_WRITE_OUTCOMES = (
+    ("short", "output-short", (17, "all"), 1, "NONE"),
+    ("eintr", "output-eintr", ("EINTR", "all"), 1, "NONE"),
+    ("eagain", "output-eagain", ("EAGAIN",), -1, "OUTPUT"),
+    ("zero", "output-zero", (0,), -1, "OUTPUT"),
+    ("error", "output-error", ("EIO",), -1, "OUTPUT"),
+    ("oversized", "output-oversized", ("oversized",), -1, "OUTPUT"),
+    ("prefix-eagain", "output-prefix-eagain", (17, "EAGAIN"), -1, "OUTPUT"),
+)
+
+
+def output_cases():
+    """Independent fixed fd1 cases; external acceptance is never delivery proof.
+
+    The same original/pure phase clocks apply before each retry and after full
+    publication. A failed attempt (even zero bytes) is UNCERTAIN. Old memory
+    cases above and their exact report bytes are retained without modification.
+    """
+    viewer = valid_cases()[0]
+    full = _calls(1, 1, 1, 1, 2, 1, 1, 1)
+    cases = []
+
+    def add(case, expected, writes=(), queries=(1, 1, 0)):
+        item = copy.deepcopy(case)
+        item.update(destination="stdout", sink=item.get("sink", "reg"), capacity=0)
+        item["expected"] = copy.deepcopy(expected)
+        e = item["expected"]
+        # Only complete reports retain their model. Fixed causes/ownership still
+        # come from the independent ordinary/phase oracle supplied to this call.
+        e.update(write_outcomes=writes, sink_queries=queries,
+                 output_attempted=int(bool(writes)))
+        cases.append(item)
+
+    for base in valid_cases():
+        add(dict(base, name=base["name"] + "-stdout"), base["expected"], ("all",))
+    for sink, queries in (("rdwr", (1, 1, 0)), ("fifo", (1, 1, 0)), ("tty", (1, 1, 1))):
+        add({"name": "stdout-accept-" + sink, "sink": sink}, viewer["expected"], ("all",), queries)
+    for sink, queries in OUTPUT_SINK_REFUSALS:
+        add({"name": "stdout-refuse-" + sink, "sink": sink},
+            _failure("OUTPUT", fused_release=1, output="unchanged"), queries=queries)
+    for name, fault, writes, result, cause in OUTPUT_WRITE_OUTCOMES:
+        expected = viewer["expected"] if result == 1 else _failure(cause,
+            result="UNCERTAIN", calls=full, signature_release=1,
+            boundary_owner="signature", live_child=True, output="unchanged")
+        add({"name": "stdout-write-" + name, "fault": fault}, expected, writes)
+
+    for original in phase_cases():
+        case = copy.deepcopy(original)
+        case["name"] = "stdout-" + case["name"]
+        expected = case.pop("expected")
+        expected["output_disposition"] = "unchanged"
+        writes = ()
+        if case["phase"] == "after-publication":
+            case["phase"] = "after-output"
+            expected["return"] = -1
+            writes = ("all",)
+        queries = (0, 0, 0) if case["phase"] == "before-prepare" else (1, 1, 0)
+        add(case, expected, writes, queries)
+
+    for phase, writes in (("before-output", ()), ("between-writes", (17,)),
+                           ("after-eintr", ("EINTR",))):
+        for fault, cause in (("cancel", "CANCEL"), ("clock-error", "CLOCK"),
+                              ("clock-backward", "CLOCK")):
+            add({"name": "stdout-" + fault + "-" + phase, "fault": fault, "phase": phase},
+                _failure(cause, result="UNCERTAIN" if writes else "REJECTED", calls=full,
+                    signature_release=1, boundary_owner="signature", live_child=True, output="unchanged"), writes)
+        for origin, nanos in (("reservation", 11000000000), ("pure-phase", 2000000000)):
+            add({"name": "stdout-strict-" + origin + "-" + phase, "fault": "clock-at-offset",
+                 "phase": phase, "origin": origin, "offset_nanoseconds": nanos},
+                _failure("DEADLINE", result="UNCERTAIN" if writes else "REJECTED", calls=full,
+                    signature_release=1, boundary_owner="signature", live_child=True, output="unchanged"), writes)
+
+    for original in (ownership_cases()[0], ownership_cases()[5], content_cases()[0], formatting_cases()[2]):
+        case = copy.deepcopy(original)
+        case["name"] = "stdout-before-publication-" + case["name"]
+        expected = case.pop("expected")
+        expected["output_disposition"] = "unchanged"
+        add(case, expected)
+    for fault in ("null-material", "null-snapshot", "null-result", "material-result",
+                  "material-closed", "result-finished"):
+        add({"name": "stdout-no-write-" + fault, "fault": fault}, NO_WRITE_EXPECTATION, queries=(0, 0, 0))
+    return tuple(cases)

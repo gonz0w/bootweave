@@ -1,0 +1,15 @@
+test_all_15_aliases_invalid_ranges_and_states_never_write (test_authenticated.AuthenticatedTests.test_all_15_aliases_invalid_ranges_and_states_never_write) ... ok
+test_argument_and_compiled_policy_refusals_consume_once (test_authenticated.AuthenticatedTests.test_argument_and_compiled_policy_refusals_consume_once) ... ok
+test_capacity_formatting_and_maximum_publication_span (test_authenticated.AuthenticatedTests.test_capacity_formatting_and_maximum_publication_span) ... ok
+test_fixed_stdout_independent_publication_and_refusal_cases (test_authenticated.AuthenticatedTests.test_fixed_stdout_independent_publication_and_refusal_cases) ... ok
+test_independent_complete_reports_and_models (test_authenticated.AuthenticatedTests.test_independent_complete_reports_and_models) ... ok
+test_later_consumers_recompute_exact_original_spans (test_authenticated.AuthenticatedTests.test_later_consumers_recompute_exact_original_spans) ... ok
+test_phase_cancellation_clock_and_original_budgets (test_authenticated.AuthenticatedTests.test_phase_cancellation_clock_and_original_budgets) ... ok
+test_production_symbols_source_budgets_and_cli_separation (test_authenticated.AuthenticatedTests.test_production_symbols_source_budgets_and_cli_separation) ... ok
+test_signature_acceptance_cannot_bypass_real_content (test_authenticated.AuthenticatedTests.test_signature_acceptance_cannot_bypass_real_content) ... ok
+test_single_owner_refusal_uncertainty_and_boundary (test_authenticated.AuthenticatedTests.test_single_owner_refusal_uncertainty_and_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 26.511s
+
+OK

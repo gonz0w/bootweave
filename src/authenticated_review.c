@@ -3,6 +3,10 @@
 #include "authenticated_review.h"
 #include "private_span.h"
 #include <string.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
 #define BW_REPORT_TITLE "AUTHENTICATED CONTENT REVIEW - NO OPERATIONS AUTHORIZED"
 #define BW_REPORT_SIGNATURE "Signature authentication: accepted by fixed verifier"
 #include "private_content_format.h"
@@ -69,10 +73,21 @@ live(struct bw_verifier_material *m, struct workspace *w,
     return 1;
 }
 
-enum bw_authenticated_result
-bw_authenticated_review(struct bw_verifier_material *m,
+static int
+output_ready(void)
+{
+    struct stat sink;
+    int flags = fcntl(STDOUT_FILENO, F_GETFL);
+    return flags != -1 && (flags & O_NONBLOCK) &&
+        ((flags & O_ACCMODE) == O_WRONLY || (flags & O_ACCMODE) == O_RDWR) &&
+        fstat(STDOUT_FILENO, &sink) == 0 && (S_ISREG(sink.st_mode) ||
+        S_ISFIFO(sink.st_mode) || (S_ISCHR(sink.st_mode) && isatty(STDOUT_FILENO)));
+}
+
+static enum bw_authenticated_result
+review(struct bw_verifier_material *m,
     const struct bw_auth_snapshot *snapshot, char *text, size_t capacity,
-    struct bw_authenticated_observation *out)
+    struct bw_authenticated_observation *out, int to_stdout)
 {
     struct workspace w;
     enum bw_material_result material;
@@ -81,11 +96,12 @@ bw_authenticated_review(struct bw_verifier_material *m,
     enum bw_policy_cause policy_cause;
     int length, owned = 1, entered = 0, uncertain = 0, complete = 0;
     int valid_capacity = capacity && capacity <= BW_CONTENT_OUTPUT_MAX;
+    ssize_t n;
     if (!disjoint(m, snapshot, text, capacity, out)) return BW_AUTH_NOT_TAKEN;
     memset(out, 0, sizeof(*out)); out->state = BW_AR_WORKING;
     out->cause = BW_AR_ARGUMENT;
     if (valid_capacity) memset(text, 0, capacity);
-    if (!valid_capacity || !snapshot->definition_length ||
+    if ((!to_stdout && !valid_capacity) || !snapshot->definition_length ||
         snapshot->definition_length > BW_AUTH_DEFINITION_MAX ||
         !snapshot->signature_length || snapshot->signature_length > BW_AUTH_SIGNATURE_MAX ||
         !snapshot->payload_length || snapshot->payload_length > BW_AUTH_PAYLOAD_MAX) goto finish;
@@ -98,6 +114,7 @@ bw_authenticated_review(struct bw_verifier_material *m,
     w.verifier = (struct bw_verifier_request){w.key, snapshot->signature, snapshot->definition,
         bw_compiled_policy.key_length, snapshot->signature_length, snapshot->definition_length};
     if (!live(m, &w, &m->started, 2, out)) goto finish;
+    if (to_stdout && !output_ready()) { out->cause = BW_AR_OUTPUT; goto finish; }
     out->cause = BW_AR_MATERIAL;
     material = bw_verifier_prepare(&w.verifier, m);
     owned = material == BW_MATERIAL_OK; /* Failure has already consumed it. */
@@ -122,9 +139,20 @@ bw_authenticated_review(struct bw_verifier_material *m,
     if (!live(m, &w, &w.phase, 2, out)) goto finish;
     out->cause = BW_AR_FORMAT;
     length = content_format(w.text, sizeof(w.text), &w.content.plan, &w.content.summary);
-    if (length < 0 || (size_t)length >= sizeof(w.text) || (size_t)length >= capacity) goto finish;
+    if (length < 0 || (size_t)length >= sizeof(w.text) || (!to_stdout && (size_t)length >= capacity)) goto finish;
     if (!live(m, &w, &w.phase, 2, out)) goto finish;
-    memcpy(text, w.text, (size_t)length + 1);
+    if (to_stdout) {
+        out->cause = BW_AR_OUTPUT;
+        while (out->output_bytes < (size_t)length) {
+            if (!live(m, &w, &w.phase, 2, out)) goto finish;
+            out->output_attempted = 1;
+            n = write(STDOUT_FILENO, w.text + out->output_bytes,
+                (size_t)length - out->output_bytes);
+            if (n < 0 && errno == EINTR) continue;
+            if (n <= 0 || (size_t)n > (size_t)length - out->output_bytes) goto finish;
+            out->output_bytes += (size_t)n;
+        }
+    } else memcpy(text, w.text, (size_t)length + 1);
     out->content = w.content; out->content.length = (size_t)length;
     if (!live(m, &w, &w.phase, 2, out)) goto finish;
     out->cause = BW_AR_NONE; complete = 1;
@@ -140,5 +168,21 @@ finish:
         out->content.cause = content_cause; out->content.policy_cause = policy_cause;
     }
     out->state = BW_AR_FINISHED;
-    return uncertain ? BW_AUTH_UNCERTAIN : complete ? BW_AUTH_COMPLETE : BW_AUTH_REJECTED;
+    return uncertain || (!complete && out->output_attempted) ? BW_AUTH_UNCERTAIN :
+        complete ? BW_AUTH_COMPLETE : BW_AUTH_REJECTED;
+}
+
+enum bw_authenticated_result
+bw_authenticated_review(struct bw_verifier_material *m,
+    const struct bw_auth_snapshot *snapshot, char *text, size_t capacity,
+    struct bw_authenticated_observation *out)
+{
+    return review(m, snapshot, text, capacity, out, 0);
+}
+
+enum bw_authenticated_result
+bw_authenticated_output(struct bw_verifier_material *m,
+    const struct bw_auth_snapshot *snapshot, struct bw_authenticated_observation *out)
+{
+    return review(m, snapshot, NULL, 0, out, 1);
 }
