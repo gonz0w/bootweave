@@ -80,6 +80,21 @@ future entry's hard overall wall/CPU timers remain required. Check cancellation
 at every work boundary. Child alarm is established independently before gate wait,
 mapping, limits and exec. Kernel calls and host scheduling remain native concerns.
 
+The closed [startup lifetime](trusted-entry-output.md#closed-startup-and-reservation-lifetime)
+also binds signature work to material's immutable original11-second stop and
+terminal cleanup to original15. One sample at each existing private boundary
+checks both the phase5/4 cap and the original11/15 cap; it must be normalized and
+not precede either origin. A jump before signature's first local stamp cannot
+renew work. These conservative ceilings apply to all genuine material, including
+legacy reservation; no mode bit or new clock sample/allowance is introduced.
+Cancellation remains the exact original material flag after startup returns.
+The parent's private flag is copied, not shared, across fork; child ALRM5 and
+parent custody remain unchanged. This is not a global all-syscall chronology claim.
+Late known cleanup refuses and sets cleanup_budget_failed; an invalid clock keeps
+the first CLOCK cause. Cancellation/primary failures remain first, and actual
+unknown close/stop/wait outcomes independently preserve uncertainty. A failed live
+check cannot skip the other fixed owned finalizers or authorize a retry.
+
 Keep the immutable fork PID and known group unreaped through the final positive
 stop. Observe completion only with waitid WNOWAIT. Unsupported/failed/lost wait
 authority revokes all further positive signals; observation never renews it.

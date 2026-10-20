@@ -14,8 +14,9 @@ measure source text, not storage, resource sufficiency or native qualification.
 Count every runtime C/header regardless of directory, shared headers once in the
 whole tree and in full in every using component. No minification or hidden source.
 The first complete implementation under this package is the closed, unlinked
-fixed-fd1 output sibling below; private startup/capture continuity and native
-confinement remain explicit later obligations within the same bounded direction.
+fixed-fd1 output sibling below. Reservation-bound capture and the closed
+startup/reservation lifetime below continue that direction; complete input
+ownership and native confinement remain separate integration obligations.
 
 ## Useful next result and fixed boundaries
 
@@ -47,12 +48,14 @@ two-second clock and cancellation flag, including final close checks. Legacy
 capture retains its fresh-clock behavior. The new sibling's latch and failure
 poisoning prevent repeat input closure or preparation from failed capture; see
 the [capture contract](authenticated-io.md#reservation-bound-capture-continuity).
-This does not establish the full entry's earliest hard-timer origin or signal-flag
-lifetime and never extends the reservation's conservative allowance.
+The closed startup/reservation sibling now supplies that clock from immediately
+before the first hard-wall arm and owns its permanent signal flag. Calling legacy
+guard and reserve separately does not establish that relationship. Neither path
+extends the reservation's conservative allowance.
 The overall fifteen-second hard wall, four-second CPU, eleven-second dependent
 work stop and four-second cleanup reserve remain unchanged. The post-signature
 two-second hash/inspection/render/output phase is shared, never renewed at an API
-return. Exact clock/cancellation integration remains unimplemented.
+return. Complete entry ownership/confinement and native qualification remain gated.
 
 ## Closed output design and measured fit
 
@@ -90,7 +93,7 @@ now integrated onto PR86's process-guard source under the explicitly approved
 memory entry retains its exact report and refusal behavior. Both public siblings
 select their destination by compiled wrapper constants; no caller flag is added.
 
-## Complete bounded prerequisite: process guard
+## Legacy bounded prerequisite: process guard
 
 The fitting independent slice is internal `bw_process_guard(void)`, unlinked from
 the CLI. It establishes process ceilings and required signal/timer dispositions
@@ -142,6 +145,75 @@ accounting. No duplicate snapshot, allocator, worker, new external dependency or
 new runtime allowance is introduced. This is source accounting, not native RSS,
 hard-timer performance or confinement qualification.
 
+## Closed startup and reservation lifetime
+
+`bw_start_reserve(material)` accepts only a valid exclusive EMPTY material object.
+It accepts no clock, cancellation pointer, token, path, descriptor selector or
+callback. Invalid/null/nonempty storage refuses before the guard latch or effects.
+The same private once-only guard core serves this compiled wrapper and legacy
+`bw_process_guard`; calling either after a latched supported attempt cannot renew
+timers or start another reservation. The legacy wrapper's existing six-signal,
+resource and timer observations stay unchanged.
+
+After identity and inactive inherited-timer checks, the new path builds the fixed
+INT/TERM/HUP set and blocks it before installing handlers. Those three handlers
+have zero flags, block all three cancellation signals during the handler, and
+only assign one to a private static volatile sig_atomic_t. The flag is initially
+zero by static initialization and is never reset. Preserve the existing four
+fatal handlers, ignored PIPE and default CHLD with their empty handler masks.
+After the unchanged six resource clamps/readbacks, unblock exactly these nine
+signals. A pending cancellation delivered on unblocking refuses before sampling
+the origin or arming a timer. Check cancellation before each arm, after the origin
+sample and after the final readback. A cancellation can always arrive after a
+check; the same flag remains live in every later component.
+
+Sample one normalized CLOCK_MONOTONIC origin immediately before the first REAL15
+arm. Clock failure or invalid fields refuses before that arm. The original REAL15
+and PROF4 nonrepeating arms/readbacks remain unchanged and are never reset. The
+closed wrapper passes its exact private origin and permanent flag through a
+private material implementation bridge to the existing reserve core. That bridge
+is declared only in private_start_material.h, never the public material API, and
+accepts only trusted implementation-owned seed storage. It is not a caller
+deadline interface. The core copies the seed without a replacement origin stamp;
+its ordinary live observations charge all time since the pre-arm sample to the
+same conservative two-second reserve/capture/prepare window. Legacy
+`bw_verifier_reserve` still takes its own origin and caller flag.
+
+| Stage | Clock and cancellation lifetime | Ownership and failure |
+| --- | --- | --- |
+| Guard setup/arms | Private pre-REAL origin and permanent INT/TERM/HUP flag; original hard15/CPU4 limits | No descriptor or namespace takeover; any partial guard failure is terminal and leaves material untouched; do not restore/retry setup |
+| Reservation | Exact pre-arm origin, original2 window, same flag before namespace work | Only the exact private scratch directory; reservation failure performs its existing once-only cleanup and retains uncertainty; fixed inputs remain caller-owned |
+| Reserved capture and prepare | Same origin/flag and joint2 window, never renewed | Existing input latch, once-only0/3/4 consumption, poisoned preparation, first cause and unknown-close uncertainty remain unchanged |
+| Signature work | Its own5 phase cap AND original11; same parent flag | No channels/fork/grant after a failed live boundary; sole READY transfer/custody rules remain unchanged |
+| Signature cleanup | Its own4 cleanup cap AND original15; same parent flag | Preserve first cause and independent fixed finalizers; lost wait, failed stop and unknown closure remain uncertainty; known complete but late cleanup is refusal |
+| Content and publication | Original11 and the existing shared2 content/render/output phase; same flag | Late failure clears private publication; any external write attempt preserves UNCERTAIN; no new allowance on return |
+
+The signature helper samples once per existing clock boundary and compares that
+sample against both relevant origins. It rejects invalid fields, samples before
+either origin and exact expired boundaries. These original11/15 ceilings apply
+consistently to all genuine material, including legacy reservation; a delayed or
+jumped signature start cannot renew dependent work. There is no entry-mode bit.
+Capture/material clocks remain origin-relative, fused review retains its existing
+last sample, and signature remains phase/original-relative. This does not claim
+a global nondecreasing chronology across every syscall. After fork the parent's
+flag storage is copied, not shared; the child keeps its existing independent hard
+ALRM5 and the parent retains sole cancellation/custody responsibility.
+
+Release is a cleanup observation, not entry success or authorization. Fixed
+cleanup remains bounded by the known objects and the hard process lifetime;
+neither a successful reserve nor a known release proves complete entry execution,
+confinement or native resource sufficiency. Failed close/identity observations
+must not be erased by a later known cleanup or converted into retry instructions.
+
+Before execution the complete source is90,851/98,304 bytes. Entry C/header plus
+the entire private_limits.h and private_start_material.h is5,743/10,240; material
+plus the entire bridge header is16,712/18,432; signature plus its entire shared
+limit helper is16,672/18,432. Capture remains8,093/8,192 and authenticated
+review/output12,782/16,384. Count the bridge once in whole source and fully in both
+consumers. All other runtime/component ceilings remain unchanged. A compile-time
+8KiB guard workspace bound and existing sequential application accounting cover
+the small private origin/flag and local masks; this is not measured native RSS.
+
 ## Behavioral Test Design
 
 Use the existing finite owned launcher and replaced environment. Test-only static
@@ -173,6 +245,24 @@ regular/FIFO/terminal objects. Test the old memory API and all alias/reuse cases
 unchanged. Model writes and descriptor/syscall failures; no live listener, native
 verifier, real credential or host resource/security mutation is permitted.
 
+For startup lifetime, freeze new literal oracles before reading implementation:
+
+| ID | Required independent observation |
+| --- | --- |
+| SL-T01 | Exact private pre-REAL origin survives guard/reserve/capture/prepare; consumed guard time is charged; no replacement reserve origin, no timer renewal |
+| SL-T02 | INT/TERM/HUP installed while blocked, exact handler masks/flags and nine-signal unblock; pending cancellation and each later phase use the same flag, which never resets on refusal/reuse |
+| SL-T03 | Every new signal-set/block/action/unblock and origin-clock failure retains only its attempted prefix; terminal guard failure leaves material/inputs untouched; normal unsupported adapter changes no host state |
+| SL-T04 | Exact original2 boundary before namespace, capture and prepare refuses; known finalizers still run, no input/scratch double close or erased uncertainty |
+| SL-T05 | Signature jump before its own phase start still refuses at original11; own5/original11 and cleanup4/original15 exact/near boundaries are independently distinguished |
+| SL-T06 | Cancellation and invalid/backward-to-origin clocks at work/cleanup boundaries retain first cause; unknown close/lostwait/failedstop remain uncertainty independently of lateness |
+| SL-T07 | Empty/nonempty/null/reused material and cross-wrapper reuse cannot clear flag, renew guard or close rebound descriptors; legacy149 guard event oracles remain unchanged |
+| SL-T08 | Public entry has no caller seed selector; private bridge fully charged to both consumers, normal symbols/link boundaries and unchanged planner/capture/fused regressions verified |
+
+Use the unchanged owned finite launcher with modeled guard mutators and inert
+records. Real private inputs/material/pipes are permitted; any modeled verifier
+child must stay explicitly synthetic, with no actual fork/kill or fictional born
+PID claim. No signer, credential, native verifier or real host setting mutation.
+
 Independent source/fixture/envelope review precedes modeled execution. Focused
 results, full clean-candidate `make verify`, trusted signatures/DCO, independent
 terminal/source/canonical binding and normal PR gates precede eligible merge.
@@ -180,19 +270,15 @@ Reuse existing evidence custody; do not create a new validation framework.
 
 ## Remaining integration and native gates
 
-This guard does not establish one coherent private startup/reservation/capture
-origin or cancellation lifetime. It does not choose the smallest exact native
+The closed sibling establishes startup/reservation/capture origin and cancellation
+continuity only. It does not choose the smallest exact native
 loader whitelist or prove locked unveil removal, actual signify fd handoff,
 hard timers, resource sufficiency or serial/plain output. Those remain explicit
 engineering/native gates. Preserve all consumed fixture authority and research.
 No new guest, key, download, security-setting change or deployment is requested.
 
-The full entry's private monotonic origin must be captured no later than the
-hard-wall timer's arming, before reservation or capture can consume time. Guard,
-reservation and capture must not establish later origins that extend dependent
-work beyond that original 11-second stop or shrink the four-second cleanup
-reserve before the original 15-second hard stop. Freeze fixed cancellation
-signals and private flag lifetime, then all pre-signature failure ownership:
+Complete entry must adopt this closed lifetime and finish all pre-signature
+failure ownership:
 capture consumes inputs 0/3/4, preparation failure consumes material, and signature
 entry transfers sole material/process cleanup. No public deadline token, caller
-authentication flag or complete-entry success is implemented by this output slice.
+authentication flag or complete-entry success is implemented by these closed slices.
