@@ -62,7 +62,7 @@ class StartLifetimeTests(unittest.TestCase):
                      "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-g", "-I", str(ROOT / "src")]
         sources = sorted([*ROOT.joinpath("src").glob("*.[ch]"),
             *(ROOT / "tests" / n for n in ("start_lifetime_driver.c", "start_lifetime_vectors.py",
-                "test_start_lifetime.py", "signature_driver.c", "test_policy.py"))])
+                "test_start_lifetime.py", "signature_driver.c", "test_policy.py", "entry_ownership_driver.c"))])
         (cls.directory / "source-manifest.json").write_text(json.dumps({str(p.relative_to(ROOT)):
             {"bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
             for p in sources}, sort_keys=True) + "\n")
@@ -78,11 +78,20 @@ class StartLifetimeTests(unittest.TestCase):
             (platform, "signature_platform.c", []))
         for target, source, extra in jobs:
             cls.execute(cls.flags + extra + ["-c", str(ROOT / "src" / source), "-o", str(target)], compile_job=True)
+        dependencies = []
+        for source in ("authenticated_review", "content_review", "policy_binding", "plan", "payload_review", "entry_platform"):
+            target = cls.directory / (source + ".o")
+            cls.execute(cls.flags + ["-c", str(ROOT / "src" / (source + ".c")), "-o", str(target)], compile_job=True)
+            dependencies.append(target)
+        support = cls.directory / "unused-entry-policy.o"
+        cls.execute(cls.flags + ["-DEO_UNUSED_DEPENDENCIES", "-c", str(ROOT / "tests/entry_ownership_driver.c"),
+                                "-o", str(support)], compile_job=True)
+        dependencies.append(support)
         cls.material = material
         cls.modeled, cls.normal = cls.directory / "modeled-lifetime", cls.directory / "normal-unsupported"
         for target, objects, extra in ((cls.modeled, [guard, signature, material, capture], []),
                 (cls.normal, [cls.plain, platform, signature, material, capture], ["-DLS_NORMAL", "-DTEST_REAL_PLATFORM"])):
-            cls.execute(cls.flags + extra + list(map(str, objects)) + [driver, "-o", str(target)], compile_job=True)
+            cls.execute(cls.flags + extra + list(map(str, [*objects, *dependencies])) + [driver, "-o", str(target)], compile_job=True)
 
     def run_case(self, case):
         type(self).invocations += 1
@@ -308,11 +317,13 @@ class StartLifetimeTests(unittest.TestCase):
         undefined = {row.split()[-1] for row in self.execute(["nm", "-u", str(self.plain)]).decode().splitlines()}
         self.assertLessEqual({n for n in undefined if "asan" not in n and "ubsan" not in n}, {
             "_bw_sv_supported", "_bw_material_reserve_started", "_clock_gettime", "_getuid", "_geteuid", "_getgid", "_getegid",
+            "_bw_entry_boundary", "_bw_auth_capture_reserved", "_bw_authenticated_output", "_bw_verifier_release",
+            "_bw_sv_closefrom", "_bw_sv_parent_boundary", "_fcntl", "_close", "___error",
             "_getitimer", "_setitimer", "_getrlimit", "_setrlimit", "_sigemptyset", "_sigaddset", "_sigaction", "_sigprocmask",
             "__exit", "_memset", "_bzero", "_memcpy", "___stack_chk_fail", "___stack_chk_guard"})
         exports = lambda obj: {row.split()[-1] for row in self.execute(["nm", "-gU", str(obj)]).decode().splitlines()
                                if "asan" not in row and "ubsan" not in row}
-        self.assertEqual(exports(self.plain), {"_bw_process_guard", "_bw_start_reserve"})
+        self.assertEqual(exports(self.plain), {"_bw_process_guard", "_bw_start_reserve", "_bw_entry_output", "_bw_entry_observe"})
         self.assertEqual(exports(self.material), {"_bw_signify_public_key", "_bw_signify_records", "_bw_verifier_reserve",
             "_bw_material_reserve_started", "_bw_verifier_prepare", "_bw_verifier_release"})
         self.assertNotIn("bw_material_reserve_started", (ROOT / "src/auth_material.h").read_text())
@@ -320,7 +331,7 @@ class StartLifetimeTests(unittest.TestCase):
         self.assertEqual(next(row for row in (ROOT / "Makefile").read_text().splitlines() if row.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*") if p.suffix in (".c", ".h")), 96 * 1024)
-        budgets = ((10, ("trusted_start.c", "trusted_start.h", "private_limits.h", "private_start_material.h")),
+        budgets = ((10, ("trusted_start.c", "trusted_start.h", "entry_platform.c", "private_limits.h", "private_start_material.h")),
             (18, ("auth_material.c", "auth_material.h", "private_start_material.h")),
             (18, ("signature_verify.c", "signature_verify.h", "signature_platform.c", "private_limits.h")),
             (8, ("auth_input.c", "auth_input.h")),
