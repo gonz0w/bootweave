@@ -22,7 +22,7 @@ policies, strict syntax/system refusal, different project identity, payload
 suffixes/NULs/full-cap bytes and first/last digest changes have independent
 expected results. All fifteen request/input/output/compiled-policy alias pairs
 and invalid ranges are checked with no-write canaries, including separate address
-and undefined-behavior instrumentation. Actual hash failure and repeated
+and undefined-behavior instrumentation. Injected hash-adapter failure and repeated
 match/refusal/match expose no partial plan or cached success. A deliberately
 invalid archive can match: this stage grants no structure or signature verdict.
 
