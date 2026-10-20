@@ -1,4 +1,7 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
+#ifdef __OpenBSD__
+#define _BSD_SOURCE
+#endif
 #define _POSIX_C_SOURCE 200809L
 #ifdef __APPLE__
 #define _DARWIN_C_SOURCE
@@ -302,7 +305,8 @@ bw_verifier_prepare(const struct bw_verifier_request *r, struct bw_verifier_mate
 enum bw_material_result
 bw_verifier_release(struct bw_verifier_material *m)
 {
-    if (!m || (m->state != BW_VM_RESERVED && m->state != BW_VM_READY)) return BW_MATERIAL_REJECTED;
+    if (!m || (m->state != BW_VM_RESERVED && m->state != BW_VM_READY &&
+        m->state != BW_VM_VERIFYING)) return BW_MATERIAL_REJECTED;
     m->state = BW_VM_WORKING; /* Ownership consumed before any close/removal. */
     return finish(m, 0);
 }

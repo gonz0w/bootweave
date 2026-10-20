@@ -1,0 +1,18 @@
+test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) ... ok
+test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) ... ok
+test_close_failures_consumed_once_and_never_accepted (test_signature.SignatureTests.test_close_failures_consumed_once_and_never_accepted) ...
+  test_close_failures_consumed_once_and_never_accepted (test_signature.SignatureTests.test_close_failures_consumed_once_and_never_accepted) (material=0) ... FAIL
+
+======================================================================
+FAIL: test_close_failures_consumed_once_and_never_accepted (test_signature.SignatureTests.test_close_failures_consumed_once_and_never_accepted) (material=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<workspace>/bootweave-signature-verifier/tests/test_signature.py", line 263, in test_close_failures_consumed_once_and_never_accepted
+    self.assertTrue(r["material_unknown_closes"] & (1 << fd))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not true
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.232s
+
+FAILED (failures=1)

@@ -1,4 +1,7 @@
 /* SPDX-License-Identifier: BSD-3-Clause */
+#ifdef __OpenBSD__
+#define _BSD_SOURCE
+#endif
 #define _POSIX_C_SOURCE 200809L
 #ifdef __APPLE__
 #define _DARWIN_C_SOURCE

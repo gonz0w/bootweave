@@ -1,0 +1,26 @@
+test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) ... ok
+test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) ...
+  test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) (fault='child-dup') ... FAIL
+
+======================================================================
+FAIL: test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) (fault='child-dup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<workspace>/bootweave-signature-verifier/tests/test_signature.py", line 208, in test_child_setup_and_exit_rejections_are_reaped
+    r = self.fixture(fault)
+  File "<workspace>/bootweave-signature-verifier/tests/test_signature.py", line 153, in fixture
+    self.assertEqual(witness_errors, [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['invalid identity'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'invalid identity'
+
+- ['invalid identity']
++ []
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.707s
+
+FAILED (failures=1)
