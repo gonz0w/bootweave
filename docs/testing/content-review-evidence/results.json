@@ -1,0 +1,136 @@
+{
+  "kind": "portable focused component evidence; signature authentication unestablished",
+  "base": "bfea271efc3574e756852e598f75e0e3b7fa0bac",
+  "source": [
+    {
+      "path": "src/content_review.c",
+      "sha256": "726dec35527f81b3b61550df73c29c779df3d976932d7e59d51eaa37293f2532"
+    },
+    {
+      "path": "src/content_review.h",
+      "sha256": "504ef87d6c8326228a6a610d0d9e85ba82da1b15bcc695fba125ae42bc0d4b3a"
+    },
+    {
+      "path": "src/policy_binding.c",
+      "sha256": "59282a92ccd3ec1c4f9532eeb5cad53c8bfd593e24e3894a361fdedc1aa00334"
+    },
+    {
+      "path": "src/policy_binding.h",
+      "sha256": "df9ebad119d6f63d4fa25aa5af35b40a441290d94f2915ff79b16fc72681ce6d"
+    },
+    {
+      "path": "src/payload_review.c",
+      "sha256": "a09e656550676c0e047d9851c2a36d868af42330f4e7250a39f2f9fd3b4fcbb5"
+    },
+    {
+      "path": "src/payload_review.h",
+      "sha256": "761a114a1465aa0fe53640e3b7319bb8c85d32474318cb762e260c9722d86811"
+    },
+    {
+      "path": "src/plan.c",
+      "sha256": "d5f491eb85f82a3ad46f91adde5cff4005f2299ca8e9ae926a0d90b73188e035"
+    },
+    {
+      "path": "src/plan.h",
+      "sha256": "fd61c40d9d07b02a9a2cf64fc43eb26608ba633e7499836b64abc3827c07ca86"
+    },
+    {
+      "path": "src/auth_material.c",
+      "sha256": "88b2e5f54a42015d48389495530153dea7979698b49a642efcd6e9c9be1e222c"
+    },
+    {
+      "path": "src/auth_material.h",
+      "sha256": "68ca59088b5ffcf19e81c51d9460260da02421fe8830423ca9a7119c4e8398ce"
+    },
+    {
+      "path": "tests/content_driver.c",
+      "sha256": "7dfd14cfe5ad0b479d40c26d3398027c683eca2b80bd2447414853a8de190de0"
+    },
+    {
+      "path": "tests/content_vectors.py",
+      "sha256": "7cda2afabd389f9b3a9e37e10678ef80521b8d098183c773fed0c13f5adfef6e"
+    },
+    {
+      "path": "tests/test_content.py",
+      "sha256": "b9bd49d1295c114866a5b7c6cdce871de3327501d8c9e27b76bdabc4731bb061"
+    },
+    {
+      "path": "tests/test_policy.py",
+      "sha256": "30c655234e97664a75e238ebef40f8e7223612b7630e965c2b01efc5d71f49dd"
+    },
+    {
+      "path": "tests/test_plan.py",
+      "sha256": "2be9a5828ef8282eac9436194e11c44855a33f963c25904f5d88823b38bc5f49"
+    },
+    {
+      "path": "docs/design/content-review.md",
+      "sha256": "571cda39cdce1e42d0106f9c27ef00a0955a4e0c11cb863268f5ffd7c914d1f4"
+    }
+  ],
+  "new_source_bytes": 5504,
+  "whole_src_bytes": 70850,
+  "groups": 8,
+  "invocations": 186,
+  "compile_link_steps": 68,
+  "byte_driver_invocations": 117,
+  "object_inspections": 1,
+  "all_direct_waits_consumed": true,
+  "lost_waits": 0,
+  "written_stream_files": 372,
+  "all_stream_hashes_match": true,
+  "native_run": false,
+  "deployment": false,
+  "hard_isolation_claimed": false,
+  "run": {
+    "exit_code": 0,
+    "elapsed_seconds": 20.99366591591388,
+    "started_utc": "2026-10-20T03:01:40.378468+00:00",
+    "receipt_sha256": "6f3bfc799c1dc60d8010a35c6e4c9e3e5aecffc4f5ee68032d4c8aa96f2a5e03",
+    "log_sha256": "acb99c5707d9babf9f63efa619e55ff7c641e2ed4cdaef846cc5718708bfc4c8",
+    "source_unchanged": true,
+    "wait_consumed": true,
+    "wait_lost": false,
+    "remaining_group": [],
+    "cleanup_errors": []
+  },
+  "ledger_sha256": "f282af5e2d24583ccf38cd8589b4080e34c2dd8d1763f147702d8af006aa5785",
+  "independent_design_receipt_sha256": "b7b7542f8cb9b80e07b4bdc6924a97a3d942467b8008fb70d8a01ac78dbb19bc",
+  "independent_dispatch_receipt_sha256": "c99fdf403151244b36be05d522aba4c9e667ba5d40831a4dd61c5519276a6e2b",
+  "full_attempts": [
+    {
+      "candidate": "90343222c6146859675d41081106994d85786dc3",
+      "tree": "4df9931bb6faeacc9e68aa84ccf0b5bc4a20962f",
+      "groups": [
+        39,
+        13,
+        3,
+        10,
+        44,
+        82
+      ],
+      "tests": 191,
+      "failures": 1,
+      "skips": 0,
+      "exit_code": 2,
+      "elapsed_seconds": 200.54672933276743,
+      "receipt_sha256": "d6aaa5c8d671a7c1bee9dd818817b75812a33d257335bc869087b3b110d742d8",
+      "original_log_sha256": "9635688404ec0181e803212de4a68e642836b9be7b3ed86fabe9f8fc1b2648f1",
+      "sanitized_log": "full-r1.log",
+      "sanitized_log_sha256": "eed8ed427e6e203f632433411210bea44fd270f9bf79aa5775b7396a2b860fee",
+      "source_unchanged": true,
+      "wait_consumed": true,
+      "wait_lost": false,
+      "remaining_group": [],
+      "inner_terminal_rows": [],
+      "cleanup_errors": [],
+      "final_secrets_reached": false
+    }
+  ],
+  "aggregate_budget_correction": {
+    "path": "tests/test_signature.py",
+    "before_sha256": "9bf9acda28f4060794cb2f6ff4be3b14bf7f1dfe0764d2ed440a82b4834f854f",
+    "after_sha256": "cee003069d817a21457e01795fe9a11a3a4bd2e46b603916f8bd9092f8f3768e",
+    "change": "whole-source64KiB to scoped72KiB; separate18KiB signature component and runtime caps unchanged",
+    "product_driver_vector_changes": false
+  }
+}

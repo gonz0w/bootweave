@@ -1,0 +1,246 @@
+sh tools/check-repo.sh
+Repository content, configuration, required license, links, and local-only policy passed
+.tools/bin/shellcheck tools/check-repo.sh .githooks/pre-commit .githooks/commit-msg research/ui/native-smoke.sh research/ramdisk/build.sh research/ramdisk/profile research/ramdisk/smoke.sh research/storage/build.sh research/storage/profile research/handoff/build.sh research/handoff/profile research/payload/native_build.sh research/payload/native_run.sh research/payload/auth_native_build.sh research/payload/auth_native_run.sh research/payload/auth_native_cleanup.sh research/payload/placement_build.sh research/payload/placement_run.sh research/payload/review_build.sh research/payload/review_run.sh research/installed/build.sh tests/native_build.sh tests/native_run.sh tests/native_trace_build.sh
+.tools/venv/bin/python3 -m unittest discover -s tools/tests -v
+test_commit_hook_rejects_missing_or_wrong_signoff (test_foundation.FoundationTests.test_commit_hook_rejects_missing_or_wrong_signoff) ... ok
+test_commits_do_not_launch_background_maintenance (test_foundation.FoundationTests.test_commits_do_not_launch_background_maintenance) ... ok
+test_committed_whitespace_is_rejected_without_staged_changes (test_foundation.FoundationTests.test_committed_whitespace_is_rejected_without_staged_changes) ... ok
+test_dco_requires_author_trailer_on_every_commit (test_foundation.FoundationTests.test_dco_requires_author_trailer_on_every_commit) ... ok
+test_duplicate_yaml_security_keys_are_rejected (test_foundation.FoundationTests.test_duplicate_yaml_security_keys_are_rejected) ... ok
+test_even_pinned_github_actions_workflow_is_rejected (test_foundation.FoundationTests.test_even_pinned_github_actions_workflow_is_rejected) ... ok
+test_github_actions_workflow_is_rejected (test_foundation.FoundationTests.test_github_actions_workflow_is_rejected) ... ok
+test_go_source_is_text_and_not_yaml (test_foundation.FoundationTests.test_go_source_is_text_and_not_yaml) ... ok
+test_license_is_required (test_foundation.FoundationTests.test_license_is_required) ... ok
+test_markdown_hard_breaks_are_allowed (test_foundation.FoundationTests.test_markdown_hard_breaks_are_allowed) ... ok
+test_missing_local_link_is_rejected (test_foundation.FoundationTests.test_missing_local_link_is_rejected) ... ok
+test_missing_stability_gate_is_rejected (test_foundation.FoundationTests.test_missing_stability_gate_is_rejected) ... ok
+test_secret_filename_with_spaces_is_rejected (test_foundation.FoundationTests.test_secret_filename_with_spaces_is_rejected) ... ok
+test_symlinked_source_is_rejected (test_foundation.FoundationTests.test_symlinked_source_is_rejected) ... ok
+test_ambiguous_malformed_and_nonstandard_JSON (test_native_blocks.NativeBlockTests.test_ambiguous_malformed_and_nonstandard_JSON) ... ok
+test_exact_input_size_boundary (test_native_blocks.NativeBlockTests.test_exact_input_size_boundary) ... ok
+test_expected_inventory_requires_explicit_unique_paths_and_modes (test_native_blocks.NativeBlockTests.test_expected_inventory_requires_explicit_unique_paths_and_modes) ... ok
+test_inconsistent_image_and_backing_metadata (test_native_blocks.NativeBlockTests.test_inconsistent_image_and_backing_metadata) ... ok
+test_missing_extra_duplicate_and_uninserted_devices (test_native_blocks.NativeBlockTests.test_missing_extra_duplicate_and_uninserted_devices) ... ok
+test_no_private_or_control_text_in_diagnostics_and_no_path_execution (test_native_blocks.NativeBlockTests.test_no_private_or_control_text_in_diagnostics_and_no_path_execution) ... ok
+test_reviewed_raw_attachments_and_order (test_native_blocks.NativeBlockTests.test_reviewed_raw_attachments_and_order) ... ok
+test_target_path_access_format_and_backing_substitution (test_native_blocks.NativeBlockTests.test_target_path_access_format_and_backing_substitution) ... ok
+test_actual_scrolled_case_announcement_precedes_current_review (test_native_prompt.NativePromptTests.test_actual_scrolled_case_announcement_precedes_current_review) ... ok
+test_current_cleanup_binds_each_known_artifact_or_observed_absence (test_native_prompt.NativePromptTests.test_current_cleanup_binds_each_known_artifact_or_observed_absence) ... ok
+test_current_cleanup_refuses_changed_identity_fields_or_unknown_paths (test_native_prompt.NativePromptTests.test_current_cleanup_refuses_changed_identity_fields_or_unknown_paths) ... ok
+test_current_cleanup_requires_complete_baseline_and_typed_rows (test_native_prompt.NativePromptTests.test_current_cleanup_requires_complete_baseline_and_typed_rows) ... ok
+test_current_prompt_and_refusal_boundaries (test_native_prompt.NativePromptTests.test_current_prompt_and_refusal_boundaries) ... ok
+test_full_native_review_exceeds_current_VGA_page (test_native_prompt.NativePromptTests.test_full_native_review_exceeds_current_VGA_page) ... ok
+test_installed_VGA_login_requires_banner_and_fresh_prompt (test_native_prompt.NativePromptTests.test_installed_VGA_login_requires_banner_and_fresh_prompt) ... ok
+test_preboot_observation_never_authorizes_input (test_native_prompt.NativePromptTests.test_preboot_observation_never_authorizes_input) ... ok
+test_review_refuses_changed_identity_effects_and_digest_rows (test_native_prompt.NativePromptTests.test_review_refuses_changed_identity_effects_and_digest_rows) ... ok
+test_review_requires_observed_overlap_and_exact_restoration (test_native_prompt.NativePromptTests.test_review_requires_observed_overlap_and_exact_restoration) ... ok
+test_review_uses_the_frozen_inspector_for_each_variant (test_native_prompt.NativePromptTests.test_review_uses_the_frozen_inspector_for_each_variant) ... ok
+test_scrollback_probe_needs_both_observed_pages_and_return (test_native_prompt.NativePromptTests.test_scrollback_probe_needs_both_observed_pages_and_return) ... ok
+test_scrollback_rejects_malformed_pages_and_hash_inputs (test_native_prompt.NativePromptTests.test_scrollback_rejects_malformed_pages_and_hash_inputs) ... ok
+test_scrolled_case_rejects_malformed_page_or_counter (test_native_prompt.NativePromptTests.test_scrolled_case_rejects_malformed_page_or_counter) ... ok
+test_stopped_fixture_matches_exact_observed_metadata (test_native_prompt.NativePromptTests.test_stopped_fixture_matches_exact_observed_metadata) ... ok
+test_stopped_fixture_rejects_untyped_or_unbounded_fields (test_native_prompt.NativePromptTests.test_stopped_fixture_rejects_untyped_or_unbounded_fields) ... ok
+test_stopped_fixture_rejects_wrong_baseline_and_extra_paths (test_native_prompt.NativePromptTests.test_stopped_fixture_rejects_wrong_baseline_and_extra_paths) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 6.618s
+
+OK
+.tools/venv/bin/python3 -m unittest discover -s research/ui -v
+test_back_preserves_validated_values (test_plain_ui.PlainUITests.test_back_preserves_validated_values) ... ok
+test_blocked_output_deadline (test_plain_ui.PlainUITests.test_blocked_output_deadline) ... ok
+test_broken_output_and_output_budget (test_plain_ui.PlainUITests.test_broken_output_and_output_budget) ... ok
+test_control_and_overflow_lines_rejected_whole (test_plain_ui.PlainUITests.test_control_and_overflow_lines_rejected_whole) ... ok
+test_eof_cancel_and_no_enter_default (test_plain_ui.PlainUITests.test_eof_cancel_and_no_enter_default) ... ok
+test_idle_timeout (test_plain_ui.PlainUITests.test_idle_timeout) ... ok
+test_lost_owned_console (test_plain_ui.PlainUITests.test_lost_owned_console) ... ok
+test_signals_resize_and_forced_cleanup (test_plain_ui.PlainUITests.test_signals_resize_and_forced_cleanup) ... ok
+test_source_and_resource_ceiling (test_plain_ui.PlainUITests.test_source_and_resource_ceiling) ... ok
+test_tty_control_echo_and_timeout_restoration (test_plain_ui.PlainUITests.test_tty_control_echo_and_timeout_restoration) ... ok
+test_tty_sizes_and_normal_restoration (test_plain_ui.PlainUITests.test_tty_sizes_and_normal_restoration) ... ok
+test_valid_help_back_and_delimiters (test_plain_ui.PlainUITests.test_valid_help_back_and_delimiters) ... ok
+test_validation_and_label_boundaries (test_plain_ui.PlainUITests.test_validation_and_label_boundaries) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 25.612s
+
+OK
+Measured simulation peak RSS bytes: 1900544
+.tools/venv/bin/python3 -m unittest discover -s research/storage -v
+test_arguments_do_not_select_devices (test_storage.StorageTests.test_arguments_do_not_select_devices) ... ok
+test_host_is_not_native_evidence (test_storage.StorageTests.test_host_is_not_native_evidence) ... ok
+test_validation_boundaries (test_storage.StorageTests.test_validation_boundaries) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.317s
+
+OK
+.tools/venv/bin/python3 -m unittest discover -s research/handoff -v
+test_blocked_output_deadline_restores_input_terminal (test_handoff.HandoffTests.test_blocked_output_deadline_restores_input_terminal) ... ok
+test_changed_observation (test_handoff.HandoffTests.test_changed_observation) ... ok
+test_fresh_confirmation_sizes_and_delimiters (test_handoff.HandoffTests.test_fresh_confirmation_sizes_and_delimiters) ... ok
+test_help_back_do_not_authorize (test_handoff.HandoffTests.test_help_back_do_not_authorize) ... ok
+test_host_production_stub (test_handoff.HandoffTests.test_host_production_stub) ... ok
+test_input_arriving_during_reobservation_rejects (test_handoff.HandoffTests.test_input_arriving_during_reobservation_rejects) ... ok
+test_invalid_controls_overflow_queue_and_cancel (test_handoff.HandoffTests.test_invalid_controls_overflow_queue_and_cancel) ... ok
+test_lost_owned_console (test_handoff.HandoffTests.test_lost_owned_console) ... ok
+test_model_and_argument_boundary (test_handoff.HandoffTests.test_model_and_argument_boundary) ... ok
+test_signals_resize_and_timeout (test_handoff.HandoffTests.test_signals_resize_and_timeout) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 22.104s
+
+OK
+.tools/venv/bin/python3 -m unittest discover -s research/payload -v
+test_PAV01_real_signature_then_inspection (test_authenticate.AuthenticationTests.test_PAV01_real_signature_then_inspection) ... ok
+test_PAV02_tampering_identity_and_wrong_signer (test_authenticate.AuthenticationTests.test_PAV02_tampering_identity_and_wrong_signer) ... ok
+test_PAV03_comments_cannot_select_key_or_emit_controls (test_authenticate.AuthenticationTests.test_PAV03_comments_cannot_select_key_or_emit_controls) ... ok
+test_PAV04_signed_malformed_archive_is_not_completion (test_authenticate.AuthenticationTests.test_PAV04_signed_malformed_archive_is_not_completion) ... ok
+test_PAV05_original_source_changed_after_capture (test_authenticate.AuthenticationTests.test_PAV05_original_source_changed_after_capture) ... ok
+test_PAV06_bounds_and_injected_environment_or_arguments (test_authenticate.AuthenticationTests.test_PAV06_bounds_and_injected_environment_or_arguments) ... ok
+test_PAV07_child_failures_and_bounded_supervision (test_authenticate.AuthenticationTests.test_PAV07_child_failures_and_bounded_supervision) ... ok
+test_PAV08_permissions_inventory_signals_and_cleanup (test_authenticate.AuthenticationTests.test_PAV08_permissions_inventory_signals_and_cleanup) ... ok
+test_PAV_LC01_post_reap_resource_refusal_has_no_later_signal (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC01_post_reap_resource_refusal_has_no_later_signal) ... ok
+test_PAV_LC02_conversion_failure_keeps_consumed_wait (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC02_conversion_failure_keeps_consumed_wait) ... ok
+test_PAV_LC03_selector_close_cannot_skip_terminal_stages (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC03_selector_close_cannot_skip_terminal_stages) ... ok
+test_PAV_LC03_success_is_withheld_on_selector_failure (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC03_success_is_withheld_on_selector_failure) ... ok
+test_PAV_LC04_lost_wait_never_renews_group_authority (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC04_lost_wait_never_renews_group_authority) ... ok
+test_PAV_LC05_multiple_cleanup_failures_preserve_primary (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC05_multiple_cleanup_failures_preserve_primary) ... ok
+test_PAV_LC06_born_pid_is_immutable_and_consumed_wait_is_not_repeated (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC06_born_pid_is_immutable_and_consumed_wait_is_not_repeated) ... ok
+test_PAV_LC06_normal_completion_has_one_terminal_wait (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_PAV_LC06_normal_completion_has_one_terminal_wait) ... ok
+test_nondefault_SIGCHLD_refuses_before_spawn (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_nondefault_SIGCHLD_refuses_before_spawn) ... ok
+test_permission_observation_timeout_cannot_be_absence (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_permission_observation_timeout_cannot_be_absence) ... ok
+test_permission_refusal_requires_complete_quiescent_observation (test_authenticate_lifecycle.AuthenticationLifecycleTests.test_permission_refusal_requires_complete_quiescent_observation) ... ok
+test_IPFH01_each_authority_field_and_unsafe_root (test_installed.InstalledTooling.test_IPFH01_each_authority_field_and_unsafe_root) ... ok
+test_IPFH02_host_refuses_and_original_source_budgets (test_installed.InstalledTooling.test_IPFH02_host_refuses_and_original_source_budgets) ... ok
+test_IPFH03_public_records_become_only_numeric_data (test_installed.InstalledTooling.test_IPFH03_public_records_become_only_numeric_data) ... ok
+test_PAY01_viewer_counts_order_and_directories (test_payload.PayloadTests.test_PAY01_viewer_counts_order_and_directories) ... ok
+test_PAY02_header_numeric_and_truncation (test_payload.PayloadTests.test_PAY02_header_numeric_and_truncation) ... ok
+test_PAY03_path_rejection_and_private_output (test_payload.PayloadTests.test_PAY03_path_rejection_and_private_output) ... ok
+test_PAY04_duplicates_aliases_and_ancestor_conflicts (test_payload.PayloadTests.test_PAY04_duplicates_aliases_and_ancestor_conflicts) ... ok
+test_PAY05_excluded_types_ownership_mode_and_metadata (test_payload.PayloadTests.test_PAY05_excluded_types_ownership_mode_and_metadata) ... ok
+test_PAY06_limits_and_extremes (test_payload.PayloadTests.test_PAY06_limits_and_extremes) ... ok
+test_PAY07_trailer_padding_and_concatenation (test_payload.PayloadTests.test_PAY07_trailer_padding_and_concatenation) ... ok
+test_PAY08_deadlines_signals_partial_writes_and_output_failure (test_payload.PayloadTests.test_PAY08_deadlines_signals_partial_writes_and_output_failure) ... ok
+test_PAY09_independent_header_no_effects_and_argument_boundary (test_payload.PayloadTests.test_PAY09_independent_header_no_effects_and_argument_boundary) ... ok
+test_PAY10_native_tools_refuse_host_effects (test_payload.PayloadTests.test_PAY10_native_tools_refuse_host_effects) ... ok
+test_PAY11_native_fixture_recipe_matches_observed_bytes (test_payload.PayloadTests.test_PAY11_native_fixture_recipe_matches_observed_bytes) ... ok
+test_PAY12_distinct_wire_directory_aliases (test_payload.PayloadTests.test_PAY12_distinct_wire_directory_aliases) ... ok
+test_PPLH01_frozen_structural_and_alias_rejections (test_placement.PlacementTooling.test_PPLH01_frozen_structural_and_alias_rejections) ... ok
+test_PPLH02_realized_objects_depth_and_independent_content (test_placement.PlacementTooling.test_PPLH02_realized_objects_depth_and_independent_content) ... ok
+test_PPLH03_native_entry_refusals_and_source_budgets (test_placement.PlacementTooling.test_PPLH03_native_entry_refusals_and_source_budgets) ... ok
+test_PAFH01_bindings_reject_each_changed_authority_field (test_review.ReviewTooling.test_PAFH01_bindings_reject_each_changed_authority_field) ... ok
+test_PAFH02_exact_fresh_confirmation_and_full_review (test_review.ReviewTooling.test_PAFH02_exact_fresh_confirmation_and_full_review) ... ok
+test_PAFH03_help_back_invalidate_and_stale_phrase_rejects (test_review.ReviewTooling.test_PAFH03_help_back_invalidate_and_stale_phrase_rejects) ... ok
+test_PAFH04_controls_overflow_defaults_and_queued_input (test_review.ReviewTooling.test_PAFH04_controls_overflow_defaults_and_queued_input) ... ok
+test_PAFH05_dimensions_and_resize (test_review.ReviewTooling.test_PAFH05_dimensions_and_resize) ... ok
+test_PAFH06_signals_timeout_death_and_lost_console (test_review.ReviewTooling.test_PAFH06_signals_timeout_death_and_lost_console) ... ok
+test_PAFH07_no_context_argument_backend_and_source_caps (test_review.ReviewTooling.test_PAFH07_no_context_argument_backend_and_source_caps) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 46.266s
+
+OK
+Authentication host test-process lifetime peak RSS: 39272448 bytes
+Authentication child-lifetime peak RSS: 18006016 bytes
+Authentication sampled owned allocation: 73728 bytes
+Payload host admission-case peak RSS: 1949696 bytes
+Payload host sampled fixture allocation: 1110016 bytes
+.tools/venv/bin/python3 -m unittest discover -s tests -v
+test_binary_exact_caps_short_reads_and_repeatability (test_auth_input.AuthInputTests.test_binary_exact_caps_short_reads_and_repeatability) ... ok
+test_clock_failures_and_deadlines_close_every_input (test_auth_input.AuthInputTests.test_clock_failures_and_deadlines_close_every_input) ... ok
+test_close_uncertainty_and_unexpected_absence_never_succeed (test_auth_input.AuthInputTests.test_close_uncertainty_and_unexpected_absence_never_succeed) ... ok
+test_component_budget_symbols_and_unchanged_cli_link (test_auth_input.AuthInputTests.test_component_budget_symbols_and_unchanged_cli_link) ... ok
+test_descriptor_roles_access_offset_and_missing (test_auth_input.AuthInputTests.test_descriptor_roles_access_offset_and_missing) ... ok
+test_empty_and_one_over_each_cap_reject_before_reads (test_auth_input.AuthInputTests.test_empty_and_one_over_each_cap_reject_before_reads) ... ok
+test_errors_growth_shrink_and_metadata_changes_clear_snapshots (test_auth_input.AuthInputTests.test_errors_growth_shrink_and_metadata_changes_clear_snapshots) ... ok
+test_input_and_output_aliases_preserve_bytes (test_auth_input.AuthInputTests.test_input_and_output_aliases_preserve_bytes) ... ok
+test_nonregular_inputs_reject_before_reads (test_auth_input.AuthInputTests.test_nonregular_inputs_reject_before_reads) ... ok
+test_all_21_aliases_and_invalid_numeric_ranges_never_write (test_content.ContentTests.test_all_21_aliases_and_invalid_numeric_ranges_never_write) ... ok
+test_capacity_and_format_failures_clear_complete_model (test_content.ContentTests.test_capacity_and_format_failures_clear_complete_model) ... ok
+test_exact_pinned_structure_failures_publish_nothing (test_content.ContentTests.test_exact_pinned_structure_failures_publish_nothing) ... ok
+test_independent_complete_reports_and_models (test_content.ContentTests.test_independent_complete_reports_and_models) ... ok
+test_policy_and_preflight_failures_never_inspect (test_content.ContentTests.test_policy_and_preflight_failures_never_inspect) ... ok
+test_production_linkage_symbols_and_scoped_storage_budgets (test_content.ContentTests.test_production_linkage_symbols_and_scoped_storage_budgets) ... ok
+test_repeat_success_failure_success_and_late_format_failure (test_content.ContentTests.test_repeat_success_failure_success_and_late_format_failure) ... ok
+test_uninstrumented_composition_and_unavailable_native_adapter (test_content.ContentTests.test_uninstrumented_composition_and_unavailable_native_adapter) ... ok
+test_bad_requests_never_open_or_write_members (test_material.MaterialTests.test_bad_requests_never_open_or_write_members) ... ok
+test_cancel_and_expiry_during_directory_observation_prevent_member_effects (test_material.MaterialTests.test_cancel_and_expiry_during_directory_observation_prevent_member_effects) ... ok
+test_cancellation_every_lifecycle_phase_and_first_cause (test_material.MaterialTests.test_cancellation_every_lifecycle_phase_and_first_cause) ... ok
+test_creation_privilege_clock_and_shared_deadline_refusals (test_material.MaterialTests.test_creation_privilege_clock_and_shared_deadline_refusals) ... ok
+test_each_close_role_uncertainty_and_no_success_after_final_deadline (test_material.MaterialTests.test_each_close_role_uncertainty_and_no_success_after_final_deadline) ... ok
+test_exact_caps_binary_readback_short_transfers_and_once_only_ownership (test_material.MaterialTests.test_exact_caps_binary_readback_short_transfers_and_once_only_ownership) ... ok
+test_failed_cleanup_and_unknown_names_are_quarantined (test_material.MaterialTests.test_failed_cleanup_and_unknown_names_are_quarantined) ... ok
+test_io_changes_bounds_and_finite_interruption_failures (test_material.MaterialTests.test_io_changes_bounds_and_finite_interruption_failures) ... ok
+test_record_lines_comments_marker_base64_and_padding_are_pure (test_material.MaterialTests.test_record_lines_comments_marker_base64_and_padding_are_pure) ... ok
+test_reservation_preserves_every_missing_fixed_role_and_capture_rejection (test_material.MaterialTests.test_reservation_preserves_every_missing_fixed_role_and_capture_rejection) ... ok
+test_source_budget_symbols_and_production_link_unchanged (test_material.MaterialTests.test_source_budget_symbols_and_production_link_unchanged) ... ok
+test_argument_preview_cannot_change_inventory (test_native_preparation.NativePreparationTests.test_argument_preview_cannot_change_inventory) ... ok
+test_frozen_cases_and_portable_supervisor (test_native_preparation.NativePreparationTests.test_frozen_cases_and_portable_supervisor) ... ok
+test_sealed_source_preparation (test_native_preparation.NativePreparationTests.test_sealed_source_preparation) ... ok
+test_count_content_and_input_bounds (test_payload_review.PayloadReviewTests.test_count_content_and_input_bounds) ... ok
+test_exact_depth_path_content_and_input_ceiling (test_payload_review.PayloadReviewTests.test_exact_depth_path_content_and_input_ceiling) ... ok
+test_null_alias_failure_reset_and_repeatability (test_payload_review.PayloadReviewTests.test_null_alias_failure_reset_and_repeatability) ... ok
+test_ownership_modes_checksum_padding_and_trailer (test_payload_review.PayloadReviewTests.test_ownership_modes_checksum_padding_and_trailer) ... ok
+test_paths_types_aliases_and_conflicts (test_payload_review.PayloadReviewTests.test_paths_types_aliases_and_conflicts) ... ok
+test_valid_contents_and_exact_summary (test_payload_review.PayloadReviewTests.test_valid_contents_and_exact_summary) ... ok
+test_all_orders_and_generic_projects (test_plan.PlannerTests.test_all_orders_and_generic_projects) ... ok
+test_blocked_output_deadline_with_inherited_signal_mask (test_plan.PlannerTests.test_blocked_output_deadline_with_inherited_signal_mask) ... ok
+test_broken_output_and_stderr_failure (test_plan.PlannerTests.test_broken_output_and_stderr_failure) ... ok
+test_control_unicode_and_json_rejections (test_plan.PlannerTests.test_control_unicode_and_json_rejections) ... ok
+test_cpu_deadline_with_inherited_signal_mask (test_plan.PlannerTests.test_cpu_deadline_with_inherited_signal_mask) ... ok
+test_descriptor_refusals (test_plan.PlannerTests.test_descriptor_refusals) ... ok
+test_deterministic_mutations (test_plan.PlannerTests.test_deterministic_mutations) ... ok
+test_each_field_boundary (test_plan.PlannerTests.test_each_field_boundary) ... ok
+test_input_byte_ceiling (test_plan.PlannerTests.test_input_byte_ceiling) ... ok
+test_io_faults_and_short_transfers (test_plan.PlannerTests.test_io_faults_and_short_transfers) ... ok
+test_model_api_and_production_cli (test_plan.PlannerTests.test_model_api_and_production_cli) ... ok
+test_output_alias_and_canary_invariants (test_plan.PlannerTests.test_output_alias_and_canary_invariants) ... ok
+test_required_unknown_duplicate_and_wrong_types (test_plan.PlannerTests.test_required_unknown_duplicate_and_wrong_types) ... ok
+test_sanitized_bounded_corpus (test_plan.PlannerTests.test_sanitized_bounded_corpus) ... ok
+test_whitespace_escapes_and_literal_metacharacters (test_plan.PlannerTests.test_whitespace_escapes_and_literal_metacharacters) ... ok
+test_all_aliases_invalid_ranges_and_no_write_canaries (test_policy.PolicyTests.test_all_aliases_invalid_ranges_and_no_write_canaries) ... ok
+test_exact_default_and_generic_use_are_identity_only (test_policy.PolicyTests.test_exact_default_and_generic_use_are_identity_only) ... ok
+test_exact_key_and_original_definition_bytes (test_policy.PolicyTests.test_exact_key_and_original_definition_bytes) ... ok
+test_fixture_live_output_and_timeout_retention_controls (test_policy.PolicyTests.test_fixture_live_output_and_timeout_retention_controls) ... ok
+test_hash_failure_repeatability_and_host_unavailability (test_policy.PolicyTests.test_hash_failure_repeatability_and_host_unavailability) ... ok
+test_independent_hash_vectors_and_padding_boundaries (test_policy.PolicyTests.test_independent_hash_vectors_and_padding_boundaries) ... ok
+test_invalid_linked_policy_refuses_before_hash (test_policy.PolicyTests.test_invalid_linked_policy_refuses_before_hash) ... ok
+test_objects_production_linkage_and_source_budgets (test_policy.PolicyTests.test_objects_production_linkage_and_source_budgets) ... ok
+test_payload_full_digest_and_boundary_bytes (test_policy.PolicyTests.test_payload_full_digest_and_boundary_bytes) ... ok
+test_preflight_empty_exact_and_over_caps (test_policy.PolicyTests.test_preflight_empty_exact_and_over_caps) ... ok
+test_strict_syntax_and_tuple_with_new_compiled_pins (test_policy.PolicyTests.test_strict_syntax_and_tuple_with_new_compiled_pins) ... ok
+test_channel_and_fork_failures_no_launch (test_signature.SignatureTests.test_channel_and_fork_failures_no_launch) ... ok
+test_child_setup_and_exit_rejections_are_reaped (test_signature.SignatureTests.test_child_setup_and_exit_rejections_are_reaped) ... ok
+test_close_failures_consumed_once_and_never_accepted (test_signature.SignatureTests.test_close_failures_consumed_once_and_never_accepted) ... ok
+test_diagnostics_io_and_cancellation_fail_closed (test_signature.SignatureTests.test_diagnostics_io_and_cancellation_fail_closed) ... ok
+test_fixed_arguments_environment_exact_retained_bytes_and_private_output (test_signature.SignatureTests.test_fixed_arguments_environment_exact_retained_bytes_and_private_output) ... ok
+test_lost_wait_uses_only_nonspawning_syscall_models (test_signature.SignatureTests.test_lost_wait_uses_only_nonspawning_syscall_models) ... ok
+test_normal_host_unsupported_before_fork (test_signature.SignatureTests.test_normal_host_unsupported_before_fork) ... ok
+test_parent_group_boundary_and_dead_reader_no_launch (test_signature.SignatureTests.test_parent_group_boundary_and_dead_reader_no_launch) ... ok
+test_partial_output_preserves_independent_identity_witnesses (test_signature.SignatureTests.test_partial_output_preserves_independent_identity_witnesses) ... ok
+test_preflight_refusals_consume_material_without_child (test_signature.SignatureTests.test_preflight_refusals_consume_material_without_child) ... ok
+test_rejection_exception_is_only_recorded_host_stop_refusal (test_signature.SignatureTests.test_rejection_exception_is_only_recorded_host_stop_refusal) ... ok
+test_shared_cleanup_deadline_includes_close_wait_and_final_boundary (test_signature.SignatureTests.test_shared_cleanup_deadline_includes_close_wait_and_final_boundary) ... ok
+test_source_budget_and_production_link_boundary (test_signature.SignatureTests.test_source_budget_and_production_link_boundary) ... FAIL
+test_stop_uncertainty_and_child_hard_alarm (test_signature.SignatureTests.test_stop_uncertainty_and_child_hard_alarm) ... ok
+test_all_edge_pids_and_disallowed_input_failure (test_trace_evidence.TraceEvidenceTests.test_all_edge_pids_and_disallowed_input_failure) ... ok
+test_complete_sequences_and_injected_missing_evidence (test_trace_evidence.TraceEvidenceTests.test_complete_sequences_and_injected_missing_evidence) ... ok
+test_disallowed_input_and_pid_correlation (test_trace_evidence.TraceEvidenceTests.test_disallowed_input_and_pid_correlation) ... ok
+test_real_limits_and_rejected_substitutions (test_trace_preparation.TracePreparationTests.test_real_limits_and_rejected_substitutions) ... ok
+test_sealed_trace_sources_keep_production_unchanged (test_trace_preparation.TracePreparationTests.test_sealed_trace_sources_keep_production_unchanged) ... ok
+
+======================================================================
+FAIL: test_source_budget_and_production_link_boundary (test_signature.SignatureTests.test_source_budget_and_production_link_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<portable-source>/tests/test_signature.py", line 305, in test_source_budget_and_production_link_boundary
+    self.assertLessEqual(sum(p.stat().st_size for p in files), 64 * 1024)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 70850 not less than or equal to 65536
+
+----------------------------------------------------------------------
+Ran 82 tests in 98.443s
+
+FAILED (failures=1)
+make: *** [test-plan] Error 1

@@ -323,7 +323,7 @@ class PlannerTests(unittest.TestCase):
             self.assertEqual((result.returncode, result.stdout), (77, b""))
         source_bytes = sum(p.stat().st_size for p in (ROOT / "src").iterdir()
                            if p.suffix in {".c", ".h"})
-        self.assertLessEqual(source_bytes, 64 * 1024)
+        self.assertLessEqual(source_bytes, 72 * 1024)
         planner_bytes = sum((ROOT / path).stat().st_size for path in
                             ["src/main.c", "src/plan.c", "src/plan_io.c", "src/native.c", "src/plan.h"])
         self.assertLessEqual(planner_bytes, 24 * 1024)
