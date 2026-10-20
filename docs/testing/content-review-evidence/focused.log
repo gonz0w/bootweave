@@ -1,0 +1,13 @@
+test_all_21_aliases_and_invalid_numeric_ranges_never_write (test_content.ContentTests.test_all_21_aliases_and_invalid_numeric_ranges_never_write) ... ok
+test_capacity_and_format_failures_clear_complete_model (test_content.ContentTests.test_capacity_and_format_failures_clear_complete_model) ... ok
+test_exact_pinned_structure_failures_publish_nothing (test_content.ContentTests.test_exact_pinned_structure_failures_publish_nothing) ... ok
+test_independent_complete_reports_and_models (test_content.ContentTests.test_independent_complete_reports_and_models) ... ok
+test_policy_and_preflight_failures_never_inspect (test_content.ContentTests.test_policy_and_preflight_failures_never_inspect) ... ok
+test_production_linkage_symbols_and_scoped_storage_budgets (test_content.ContentTests.test_production_linkage_symbols_and_scoped_storage_budgets) ... ok
+test_repeat_success_failure_success_and_late_format_failure (test_content.ContentTests.test_repeat_success_failure_success_and_late_format_failure) ... ok
+test_uninstrumented_composition_and_unavailable_native_adapter (test_content.ContentTests.test_uninstrumented_composition_and_unavailable_native_adapter) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 20.714s
+
+OK
