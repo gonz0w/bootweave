@@ -20,7 +20,13 @@ ROOT = Path(__file__).resolve().parents[1]
 BOUNDARY_FIELDS = {"family", "return", "material_unchanged", "owner_unchanged", "normal_unveil", "normal_pledge",
                    "lives", "work", "security", "trace", "outcomes"}
 CLI_FIELDS = {"family", "status", "legacy_calls", "start_calls", "entry_calls", "availability_calls", "argv_identity",
-              "canaries_unchanged", "writes", "stdout_hex", "stderr_hex", "fixture_pipe_bytes", "fixture_private_fds"}
+              "canaries_unchanged", "writes", "stdout_hex", "stderr_hex", "fixture_pipe_bytes", "fixture_private_fds",
+              "inherited_setup_mismatch_mask", "inherited_call_mismatch_mask", "private_setup_mismatch_mask",
+              "private_call_mismatch_mask", "fd_before", "fd_ready", "fd_after", "canary_poll", "canary_read",
+              "fixture_close_dispositions"}
+CLI_STRUCTURED_FIELDS = {"fd_before", "fd_ready", "fd_after", "canary_poll", "canary_read", "fixture_close_dispositions"}
+FD_FIELDS = {"fd", "fd_flags", "fd_errno", "status_flags", "status_errno", "stat_ok", "stat_errno", "device", "inode", "mode"}
+FD_COMPARE_FIELDS = ("fd_flags", "status_flags", "stat_ok", "device", "inode", "mode")
 
 
 def clean_symbols(data):
@@ -89,7 +95,7 @@ class NativeEntryTests(unittest.TestCase):
         self.assertEqual(actual["family"], family)
         self.assertEqual(set(actual), BOUNDARY_FIELDS if family == "boundary" else CLI_FIELDS)
         self.assertTrue(all(type(v) is int for n, v in actual.items() if n not in
-            ("family", "trace", "outcomes", "stdout_hex", "stderr_hex")))
+            {"family", "trace", "outcomes", "stdout_hex", "stderr_hex"} | CLI_STRUCTURED_FIELDS))
         self.assertEqual(sorted(p.name for p in directory.iterdir()), ["case.json", "result.json"])
         return actual
 
@@ -131,12 +137,70 @@ class NativeEntryTests(unittest.TestCase):
         self.assertTrue(all(expected[n] for n in ("material_unchanged", "no_close", "no_write", "no_child", "no_output")))
         self.assertEqual(expected["origin_refreshes"], 0)
 
+    def check_cli_fd_witnesses(self, actual):
+        for name in ("fd_before", "fd_ready", "fd_after"):
+            probes = actual[name]
+            self.assertIs(type(probes), list)
+            self.assertEqual(len(probes), 7)
+            for i, probe in enumerate(probes):
+                self.assertEqual(set(probe), FD_FIELDS)
+                self.assertTrue(all(type(value) is int for value in probe.values()))
+                self.assertEqual(probe["fd"], i if i < 5 else actual["fd_ready"][i]["fd"])
+                for result, error in (("fd_flags", "fd_errno"), ("status_flags", "status_errno")):
+                    self.assertGreaterEqual(probe[result], -1)
+                    self.assertGreaterEqual(probe[error], 0)
+                    self.assertEqual(probe[error] == 0, probe[result] >= 0)
+                self.assertIn(probe["stat_ok"], (0, 1))
+                self.assertGreaterEqual(probe["stat_errno"], 0)
+                self.assertEqual(probe["stat_errno"] == 0, probe["stat_ok"] == 1)
+                if not probe["stat_ok"]:
+                    self.assertEqual((probe["device"], probe["inode"], probe["mode"]), (0, 0, 0))
+        private_fds = [row["fd"] for row in actual["fd_ready"][5:]]
+        self.assertTrue(all(fd >= 5 for fd in private_fds))
+        self.assertEqual(len(set(private_fds)), 2)
+        for phase in ("fd_before", "fd_ready", "fd_after"):
+            for probe in actual[phase][5:]:
+                self.assertEqual(probe["stat_ok"], 1)
+                self.assertGreaterEqual(probe["fd_flags"], 0)
+                self.assertGreaterEqual(probe["status_flags"], 0)
+        for name, before, after, first, count in (
+            ("inherited_setup_mismatch_mask", "fd_before", "fd_ready", 0, 5),
+            ("inherited_call_mismatch_mask", "fd_ready", "fd_after", 0, 5),
+            ("private_setup_mismatch_mask", "fd_before", "fd_ready", 5, 2),
+            ("private_call_mismatch_mask", "fd_ready", "fd_after", 5, 2)):
+            observed = sum(1 << i for i in range(count) if any(
+                actual[before][first + i][field] != actual[after][first + i][field] for field in FD_COMPARE_FIELDS))
+            self.assertEqual(actual[name], observed, name)
+            # Private before->ready includes our own promotions and first write.
+            # All inherited setup and all dispatch preservation remain mandatory.
+            if name != "private_setup_mismatch_mask":
+                self.assertEqual(actual[name], 0, name)
+        poll = actual["canary_poll"]
+        self.assertEqual(set(poll), {"calls", "result", "errno", "requested", "revents"})
+        self.assertTrue(all(type(value) is int for value in poll.values()))
+        self.assertEqual((poll["calls"], poll["result"], poll["errno"]), (1, 1, 0))
+        self.assertGreater(poll["requested"], 0)
+        self.assertTrue(poll["revents"] & poll["requested"])
+        read = actual["canary_read"]
+        self.assertEqual(set(read), {"calls", "result", "errno", "hex", "exact_bytes"})
+        self.assertTrue(all(type(value) is int for name, value in read.items() if name != "hex"))
+        self.assertEqual((read["calls"], read["result"], read["errno"], read["exact_bytes"]), (1, 7, 0, 1))
+        self.assertEqual(read["hex"], "63616e6172790a")
+        closes = actual["fixture_close_dispositions"]
+        self.assertIs(type(closes), list)
+        self.assertEqual(len(closes), 2)
+        for fd, close in zip(private_fds, closes):
+            self.assertEqual(set(close), {"fd", "calls", "result", "errno"})
+            self.assertTrue(all(type(value) is int for value in close.values()))
+            self.assertEqual((close["fd"], close["calls"], close["result"], close["errno"]), (fd, 1, 0, 0))
+
     def check_cli(self, case):
         actual, expected = self.run_case("cli", case), case["expected"]
         for name in ("status", "legacy_calls", "start_calls", "entry_calls", "availability_calls"):
             self.assertEqual(actual[name], expected[name], (case["name"], name))
         self.assertEqual(actual["argv_identity"], 1)
         self.assertEqual(actual["canaries_unchanged"], 1)
+        self.check_cli_fd_witnesses(actual)
         self.assertEqual(bytes.fromhex(actual["stdout_hex"]), expected["stdout"].encode("ascii"))
         self.assertEqual(bytes.fromhex(actual["stderr_hex"]), expected["stderr"].encode("ascii"))
         self.assertEqual(actual["writes"], int(bool(expected["stdout"] or expected["stderr"])))

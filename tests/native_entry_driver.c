@@ -142,11 +142,18 @@ int ne_write(int fd,const char *bytes,size_t length){unsigned char *out;size_t *
  if(fd==1){out=ne_out;used=&ne_out_n;}else if(fd==2){out=ne_err;used=&ne_err_n;}else exit(90);
  if(length>4096-*used)exit(90);memcpy(out+*used,bytes,length);*used+=length;return ne_write_ok;}
 int ne_confine(void){exit(97);}int ne_run(void){exit(97);}
-struct ne_fd {int fd_flags,status_flags,stat_ok;dev_t device;ino_t inode;mode_t mode;};
-static void ne_probe(int fd,struct ne_fd *out){struct stat s;memset(out,0,sizeof(*out));out->fd_flags=fcntl(fd,F_GETFD);out->status_flags=fcntl(fd,F_GETFL);
- out->stat_ok=fstat(fd,&s)==0;if(out->stat_ok){out->device=s.st_dev;out->inode=s.st_ino;out->mode=s.st_mode;}}
+struct ne_fd {int fd,fd_flags,fd_errno,status_flags,status_errno,stat_ok,stat_errno;dev_t device;ino_t inode;mode_t mode;};
+static void ne_probe(int fd,struct ne_fd *out){struct stat s;int result;memset(out,0,sizeof(*out));out->fd=fd;
+ out->fd_flags=fcntl(fd,F_GETFD);out->fd_errno=out->fd_flags<0?errno:0;
+ out->status_flags=fcntl(fd,F_GETFL);out->status_errno=out->status_flags<0?errno:0;
+ result=fstat(fd,&s);out->stat_errno=result<0?errno:0;out->stat_ok=result==0;
+ if(out->stat_ok){out->device=s.st_dev;out->inode=s.st_ino;out->mode=s.st_mode;}}
 static int ne_equal_fd(const struct ne_fd *a,const struct ne_fd *b){return a->fd_flags==b->fd_flags&&a->status_flags==b->status_flags&&a->stat_ok==b->stat_ok&&
  a->device==b->device&&a->inode==b->inode&&a->mode==b->mode;}
+static void ne_print_probes(const struct ne_fd *probes){unsigned i;putchar('[');for(i=0;i<7;i++){const struct ne_fd *p=&probes[i];
+ printf("%s{\"fd\":%d,\"fd_flags\":%d,\"fd_errno\":%d,\"status_flags\":%d,\"status_errno\":%d,\"stat_ok\":%d,\"stat_errno\":%d,\"device\":%llu,\"inode\":%llu,\"mode\":%llu}",
+  i?",":"",p->fd,p->fd_flags,p->fd_errno,p->status_flags,p->status_errno,p->stat_ok,p->stat_errno,
+  (unsigned long long)p->device,(unsigned long long)p->inode,(unsigned long long)p->mode);}putchar(']');}
 static void ne_hex(const unsigned char *b,size_t n){size_t i;for(i=0;i<n;i++)printf("%02x",b[i]);}
 int main(int argc,char **argv){int result,unchanged=1,owner_unchanged=1,normal_unveil=-9,normal_pledge=-9,canaries=1;
  struct bw_verifier_material before;unsigned i;
@@ -167,22 +174,37 @@ int main(int argc,char **argv){int result,unchanged=1,owner_unchanged=1,normal_u
   printf("NE_RESULT {\"family\":\"boundary\",\"return\":%d,\"material_unchanged\":%d,\"owner_unchanged\":%d,\"normal_unveil\":%d,\"normal_pledge\":%d,\"lives\":%u,\"work\":%u,\"security\":%u,\"trace\":",
    result,unchanged,owner_unchanged,normal_unveil,normal_pledge,ne_lives,ne_work,ne_security);ne_print_events();printf(",\"outcomes\":[");
   for(i=0;i<ne_event_count;i++)printf("%s%d",i?",":"",ne_events[i].result);printf("]}\n");
- }else if(!strcmp(argv[2],"cli")){struct ne_fd original[5],after,pipe_before[2];int pair[2],owned[2];char bytes[8];struct pollfd poller;
-  char *arguments[8];int count;
+ }else if(!strcmp(argv[2],"cli")){struct ne_fd before_fd[7],ready_fd[7],after_fd[7];int pair[2],owned[2],roles[7]={0,1,2,3,4,-1,-1};
+  unsigned setup_mask=0,call_mask=0,private_setup_mask=0,private_call_mask=0,close_calls[2]={0,0};
+  int close_result[2],close_error[2],poll_result,poll_error,read_calls=0,read_error=0,data_ok;ssize_t read_result=-2;
+  unsigned char bytes[7]={0};struct pollfd poller;char *arguments[8];int count;
   if(argc<9||argc>16)return 90;ne_mode=argv[3];ne_available_value=atoi(argv[4]);ne_entry_value=atoi(argv[5]);ne_start_ok=atoi(argv[6]);ne_write_ok=atoi(argv[7]);
   count=argc-8;if(count>7)return 90;for(i=0;i<(unsigned)count;i++){arguments[i]=argv[8+i];ne_original_pointers[i]=arguments[i];ne_copy(ne_original_bytes[i],sizeof(ne_original_bytes[i]),arguments[i]);}arguments[count]=NULL;ne_argc=count;ne_argv=arguments;
-  for(i=0;i<5;i++)ne_probe((int)i,&original[i]);
-  if(pipe(pair))return 91;for(i=0;i<2;i++){owned[i]=fcntl(pair[i],F_DUPFD_CLOEXEC,5);if(owned[i]<5||close(pair[i]))return 91;ne_probe(owned[i],&pipe_before[i]);}
+  for(i=0;i<5;i++)ne_probe((int)i,&before_fd[i]);
+  if(pipe(pair))return 91;for(i=0;i<2;i++){owned[i]=fcntl(pair[i],F_DUPFD_CLOEXEC,5);if(owned[i]<5||close(pair[i]))return 91;roles[5+i]=owned[i];ne_probe(owned[i],&before_fd[5+i]);}
   if(write(owned[1],"canary\n",7)!=7)return 91;
+  /* Setup is complete before the preservation interval around the dispatcher. */
+  for(i=0;i<7;i++)ne_probe(roles[i],&ready_fd[i]);
+  for(i=0;i<5;i++)if(!ne_equal_fd(&before_fd[i],&ready_fd[i]))setup_mask|=1U<<i;
+  for(i=0;i<2;i++)if(!ne_equal_fd(&before_fd[5+i],&ready_fd[5+i]))private_setup_mask|=1U<<i;
   ne_running_main=ne_is("main");result=ne_running_main?ne_actual_main(count,arguments):bw_entry_cli(count,arguments);
-  for(i=0;i<5;i++){ne_probe((int)i,&after);if(!ne_equal_fd(&original[i],&after))canaries=0;}
-  for(i=0;i<2;i++){ne_probe(owned[i],&after);if(!ne_equal_fd(&pipe_before[i],&after))canaries=0;}
+  for(i=0;i<7;i++)ne_probe(roles[i],&after_fd[i]);
+  for(i=0;i<5;i++)if(!ne_equal_fd(&ready_fd[i],&after_fd[i]))call_mask|=1U<<i;
+  for(i=0;i<2;i++)if(!ne_equal_fd(&ready_fd[5+i],&after_fd[5+i]))private_call_mask|=1U<<i;
   poller.fd=owned[0];poller.events=POLLIN;poller.revents=0;
-  if(poll(&poller,1,0)!=1||!(poller.revents&POLLIN)||read(owned[0],bytes,7)!=7||memcmp(bytes,"canary\n",7))canaries=0;
+  poll_result=poll(&poller,1,0);poll_error=poll_result<0?errno:0;
+  if(poll_result==1&&(poller.revents&POLLIN)){read_calls++;read_result=read(owned[0],bytes,7);read_error=read_result<0?errno:0;}
+  data_ok=poll_result==1&&(poller.revents&POLLIN)&&read_calls==1&&read_result==7&&!memcmp(bytes,"canary\n",7);
+  if(setup_mask||call_mask||private_call_mask||!data_ok)canaries=0;
   for(i=0;i<(unsigned)count;i++)if(arguments[i]!=ne_original_pointers[i]||strcmp(ne_original_bytes[i],arguments[i]))ne_arg_identity=0;
-  if(close(owned[0])||close(owned[1]))return 91;
+  for(i=0;i<2;i++){close_calls[i]++;close_result[i]=close(owned[i]);close_error[i]=close_result[i]<0?errno:0;if(close_result[i])canaries=0;}
   printf("NE_RESULT {\"family\":\"cli\",\"status\":%d,\"legacy_calls\":%u,\"start_calls\":%u,\"entry_calls\":%u,\"availability_calls\":%u,\"argv_identity\":%u,\"canaries_unchanged\":%d,\"writes\":%u,\"stdout_hex\":\"",
-   result,ne_legacy_calls,ne_start_calls,ne_entry_calls,ne_availability_calls,ne_arg_identity,canaries,ne_writes);ne_hex(ne_out,ne_out_n);printf("\",\"stderr_hex\":\"");ne_hex(ne_err,ne_err_n);printf("\",\"fixture_pipe_bytes\":7,\"fixture_private_fds\":2}\n");
+   result,ne_legacy_calls,ne_start_calls,ne_entry_calls,ne_availability_calls,ne_arg_identity,canaries,ne_writes);ne_hex(ne_out,ne_out_n);printf("\",\"stderr_hex\":\"");ne_hex(ne_err,ne_err_n);
+  printf("\",\"fixture_pipe_bytes\":7,\"fixture_private_fds\":2,\"inherited_setup_mismatch_mask\":%u,\"inherited_call_mismatch_mask\":%u,\"private_setup_mismatch_mask\":%u,\"private_call_mismatch_mask\":%u,\"fd_before\":",setup_mask,call_mask,private_setup_mask,private_call_mask);
+  ne_print_probes(before_fd);printf(",\"fd_ready\":");ne_print_probes(ready_fd);printf(",\"fd_after\":");ne_print_probes(after_fd);
+  printf(",\"canary_poll\":{\"calls\":1,\"result\":%d,\"errno\":%d,\"requested\":%d,\"revents\":%d},\"canary_read\":{\"calls\":%d,\"result\":%ld,\"errno\":%d,\"hex\":\"",poll_result,poll_error,(int)poller.events,(int)poller.revents,read_calls,(long)read_result,read_error);
+  if(read_result>0)ne_hex(bytes,(size_t)read_result);printf("\",\"exact_bytes\":%d},\"fixture_close_dispositions\":[",data_ok);
+  for(i=0;i<2;i++)printf("%s{\"fd\":%d,\"calls\":%u,\"result\":%d,\"errno\":%d}",i?",":"",owned[i],close_calls[i],close_result[i],close_error[i]);printf("]}\n");
  }else return 90;
  return 0;
 }
