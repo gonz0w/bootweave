@@ -88,3 +88,29 @@ Only a later reviewed source change after qualification may connect native entry
 and CLI readiness. No native guest, security-setting change, live credential,
 deployment, retained-image action or consumed native approval occurred.
 Historical failed sequential-run custody gaps remain preserved and unrepaired.
+
+## Current planner preparation lineage
+
+The first full portable attempt failed two sealed-source assertions because the
+new main wrapper has a different source hash from the historically qualified
+planner. Full receipt `132d7c3942f828a74991a18ae6c7c1b1b2762123512e37a6f5ad7bbd710bd42e`
+remains retained; it is not a passing full result. The two historical binding
+files are preserved byte-identically: native SHA256
+`4eabc5e50a4a8bcbc966b40cf2b7241be4cc2de2d130ef630718ec63d7372c0f` and trace
+`b39814630f4692f25589139bada8df32d0b020bdc6cfe3f60d24a2ced7095817`.
+
+Distinct current [planner source bindings](native-entry-evidence/planner-source-bindings.txt)
+(SHA256 `7243b896f56d4b4f1d83694d7a4b49fb4efb36566a18b2968df5c006d66c171c`) and
+[trace source bindings](native-entry-evidence/planner-trace-source-bindings.txt)
+(SHA256 `26b75b3f9a9543c4ec58bd3f8b19f70495e09729fe6daf12166fa7d65e0d45c1`) bind the current main
+and its newly required complete private_cli.h. Both preparation paths stage that
+header; all other sealed bytes and generated corpus hashes remain unchanged.
+Host tests compare these current-source records, exact staged source bytes,
+permissions and closure while also pinning historical record hashes. Existing
+OpenBSD build/run scripts and their guards are unchanged.
+
+These are unqualified source-preparation records. They grant no authority to
+acquire media, provision, build or run an OpenBSD fixture, apply credentials or
+set-ID bits, or reuse old native/trace results or consumed approvals. The original
+legacy body remains byte-identical, but the new wrapper/header source itself
+needs fresh exact-source native acceptance before qualification is claimed.

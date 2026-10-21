@@ -9,6 +9,8 @@ The planner has an accepted metadata contract, portable tests and completed boun
 OpenBSD 7.9 amd64 BIOS/TCG planner qualification with exact fixture teardown.
 A disposable research image boots the synthetic UI. No
 production installer, runtime service, supported hardware profile or release exists yet.
+Historical planner evidence binds its recorded source; the current legacy-wrapper/header
+preparation is source-only and does not inherit native acceptance.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
 The maintainer approved the name and public repository on 2026-10-11.
 

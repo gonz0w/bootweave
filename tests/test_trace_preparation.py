@@ -27,13 +27,16 @@ class TracePreparationTests(unittest.TestCase):
             self.assertEqual(result.stdout,
                              b"Trace-only limits checked; production FSIZE remains separate.\n")
 
-    def test_sealed_trace_sources_keep_production_unchanged(self):
+    def test_sealed_trace_sources_match_current_planner(self):
         directory = native_trace_prepare.prepare()
         try:
-            self.assertEqual(len(list(directory.iterdir())), 12)
+            self.assertEqual(len(list(directory.iterdir())), 13)
+            # Historical qualification binds its original inputs, not this new source.
+            self.assertEqual(hashlib.sha256((ROOT / "docs/testing/project-plan-trace-bindings.txt").read_bytes()).hexdigest(),
+                             "b39814630f4692f25589139bada8df32d0b020bdc6cfe3f60d24a2ced7095817")
             self.assertEqual((directory / "SHA256").read_bytes(),
-                             (ROOT / "docs/testing/project-plan-trace-bindings.txt").read_bytes())
-            for source in ["main.c", "plan.c", "plan.h", "plan_io.c", "native.c"]:
+                             (ROOT / "docs/testing/native-entry-evidence/planner-trace-source-bindings.txt").read_bytes())
+            for source in ["main.c", "private_cli.h", "plan.c", "plan.h", "plan_io.c", "native.c"]:
                 self.assertEqual((directory / source).read_bytes(), (ROOT / "src" / source).read_bytes())
             for entry in (directory / "SHA256").read_text().splitlines():
                 name, digest = entry.removeprefix("SHA256 (").split(") = ")

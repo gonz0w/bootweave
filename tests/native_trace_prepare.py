@@ -12,7 +12,7 @@ from native_cases import ROOT, artifacts
 
 def prepare():
     files = artifacts()
-    for name in ["src/main.c", "src/plan.c", "src/plan.h", "src/plan_io.c", "src/native.c",
+    for name in ["src/main.c", "src/private_cli.h", "src/plan.c", "src/plan.h", "src/plan_io.c", "src/native.c",
                  "tests/native_check.c", "tests/native_trace.c", "tests/trace_limits.c",
                  "tests/native_trace_build.sh"]:
         files[Path(name).name] = (ROOT / name).read_bytes()
