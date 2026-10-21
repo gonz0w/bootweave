@@ -8,6 +8,7 @@ paused guest, and own all manual console/transport/closure proof. It must enforc
 blocking-system-call and whole-campaign limits independently. See MISSING below.
 """
 import hashlib
+import errno
 import json
 import math
 import os
@@ -15,11 +16,15 @@ from pathlib import Path
 import re
 import selectors
 import signal
+import socket
 import stat
 import subprocess
 import sys
 import threading
 import time
+from qualification.coordinator import Coordinator
+from qualification.transport import Transport, CHANNELS, RAW_CAP, Refusal as TransportRefusal
+from qualification.accounting import Accounting, RESERVATIONS
 
 STATUS = "SOURCE_ONLY_NOT_EXECUTION_READY_OR_AUTHORIZED"
 CANONICAL = "92166f07fd79c9d356ef3e1ed704eaeeed8653e4"
@@ -34,7 +39,7 @@ PINS = {
 }
 MISSING = (
     "Fresh exact target/effects authority and independently sealed execution closure",
-    "Coordinator source enforcing pre-target original10800s and phase scheduling",
+    "External supervisor bounding blocked coordinator operations before/after child birth",
     "Independent paused device/block/PCI/handle/listener/process inventory before cont",
     "Manual install, credential/private-input custody and later installed-state seals",
     "Reviewed QMP/serial transport recording EVERY byte through the shared raw budget",
@@ -181,7 +186,7 @@ def _directory(row):
         raise Refusal("Directory is not owned")
 
 
-def _verify(row, deadline):
+def _verify(row, deadline, lifetime):
     path = _path(row["path"])
     for parent in path.parents:
         if not stat.S_ISDIR(parent.lstat().st_mode):
@@ -197,8 +202,8 @@ def _verify(row, deadline):
             raise Refusal("File identity differs from seal")
         digest, count = hashlib.sha256(), 0
         while True:
-            if _now() >= deadline:
-                raise Refusal("Binding read exceeded original time")
+            if lifetime.cancelled or lifetime.now() >= deadline:
+                raise Refusal("Binding read exceeded shared lifetime")
             block = os.read(fd, min(4 * 1024 * 1024, row["bytes"] - count + 1))
             if not block:
                 break
@@ -216,28 +221,79 @@ class _Raw:
     def __init__(self, phase):
         self.phase = phase
         self.used, self.errors, self.fds = 0, [], {}
-        self.failed, self.closed = False, False
+        self.failed, self.closed, self._write_sealed = False, False, False
         self.digests, self.lengths = {}, {}
         self.lock = threading.Lock()
+        self.ledger = Transport(phase)
+        self.allocation = {}
+        self.identities = {}
+        self.accounting = Accounting()
+        self.allocation_role = "host." + phase + "-raw"
+        self.ceiling = next(row.ceiling for row in RESERVATIONS if row.name == self.allocation_role)
+        if self.ceiling != RAW_CAP:
+            raise Refusal("Capture/allocation reservation mismatch")
 
     def open(self, directory):
         for name in ("stdout", "stderr", "qmp", "serial", "rss"):
             self.fds[name] = os.open(directory / (name + ".raw"), os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC, 0o600)
             self.digests[name], self.lengths[name] = hashlib.sha256(), 0
+            self.allocation[name] = 0
+            seen = os.fstat(self.fds[name])
+            if not stat.S_ISREG(seen.st_mode) or seen.st_size != 0 or seen.st_nlink != 1 or stat.S_IMODE(seen.st_mode) != 0o600 or seen.st_uid != os.getuid():
+                self.failed = True
+                raise Refusal("New exclusive capture identity refused")
+            self.identities[name] = (seen.st_dev, seen.st_ino, seen.st_uid, seen.st_gid)
 
     def record(self, channel, data):
-        """Future reviewed transport must route every QMP/serial raw byte here."""
+        """One raw-byte charge and one owned write; never retry a partial write.
+
+        Enforces logical capture bytes. Actual allocation samples can stop future
+        writes but cannot prove temporary peaks, filesystem metadata or global
+        quotas. That distinct native allocation gate stays closed.
+        """
         with self.lock:
-            if self.failed or self.closed or channel not in self.fds or type(data) is not bytes or self.used + len(data) > CAPTURE:
+            if self._write_sealed or self.closed or channel not in self.fds or type(data) is not bytes:
                 self.failed = True
                 raise Refusal("Raw capture incomplete or quota exhausted")
-            self.used += len(data)
             try:
-                written = os.write(self.fds[channel], data)
+                ticket = self.ledger.raw_read(channel, self.lengths[channel], data)
+                self.used = self.ledger.used
+                try:
+                    written = os.write(self.fds[channel], data)
+                except OSError as error:
+                    self.ledger.publish_result(ticket, -1, error.errno or 0)
+                    raise
+                if type(written) is not int or not 0 <= written <= len(data):
+                    self.ledger.publish_result(ticket, -1, 0)
+                    raise Refusal("Impossible write result")
                 self.digests[channel].update(data[:written])
                 self.lengths[channel] += written
-                if written != len(data):
-                    raise Refusal("Partial raw capture; no retry")
+                frames = self.ledger.publish_result(ticket, written, 0)
+                seen = os.fstat(self.fds[channel])
+                if not stat.S_ISREG(seen.st_mode) or seen.st_size != self.lengths[channel] or seen.st_nlink != 1 or stat.S_IMODE(seen.st_mode) != 0o600 or (seen.st_dev, seen.st_ino, seen.st_uid, seen.st_gid) != self.identities[channel]:
+                    raise Refusal("Capture identity/length changed")
+                self.allocation[channel] = max(self.allocation[channel], seen.st_size, seen.st_blocks * 512)
+                if sum(self.allocation.values()) > self.ceiling:
+                    raise Refusal("Observed capture allocation exceeds reservation; retain")
+                return frames
+            except TransportRefusal as error:
+                self.used = self.ledger.used
+                self.failed = True
+                self._write_sealed |= str(error) != "JSON_FRAMING"
+                raise
+            except BaseException:
+                self.used = self.ledger.used
+                self.failed = self._write_sealed = True
+                raise
+
+    @property
+    def readable(self):
+        return not self.closed and not self._write_sealed
+
+    def eof(self, channel):
+        with self.lock:
+            try:
+                self.ledger.eof(channel, self.lengths[channel])
             except BaseException:
                 self.failed = True
                 raise
@@ -245,22 +301,50 @@ class _Raw:
     def close(self):
         with self.lock:
             self.closed = True
+            if self.fds:
+                try:
+                    for name, fd in self.fds.items():
+                        seen = os.fstat(fd)
+                        if not stat.S_ISREG(seen.st_mode) or seen.st_nlink != 1 or seen.st_size != self.lengths[name] or stat.S_IMODE(seen.st_mode) != 0o600 or (seen.st_dev, seen.st_ino, seen.st_uid, seen.st_gid) != self.identities[name]:
+                            raise Refusal("Capture final identity/allocation uncertain")
+                        self.allocation[name] = max(self.allocation[name], seen.st_size, seen.st_blocks * 512)
+                    manifest = json.dumps({name: {"identity": self.identities[name],
+                        "bytes": self.lengths[name], "sha256": self.digests[name].hexdigest(),
+                        "allocated_charge": self.allocation[name]} for name in self.fds}, sort_keys=True).encode()
+                    self.accounting.observe(self.allocation_role, sum(self.lengths.values()),
+                        sum(self.allocation.values()), hashlib.sha256(manifest).hexdigest())
+                except BaseException as error:
+                    self.failed = True
+                    self.errors.append(("final-allocation", str(error)))
             for name, fd in list(self.fds.items()):
                 self.fds.pop(name)
                 try:
                     os.close(fd)
+                    self.ledger.close_result(name, 0, 0)
+                except OSError as error:
+                    try:
+                        self.ledger.close_result(name, -1, error.errno or 0)
+                    except BaseException as reported:
+                        self.errors.append((name, str(reported)))
+                    self.errors.append((name, str(error)))
                 except BaseException as error:
                     self.errors.append((name, str(error)))
 
 
 class _Held:
-    def __init__(self):
+    def __init__(self, lifetime=None):
         self.proc, self.pid, self.consumed, self.lost = None, None, False, False
         self.sealed, self.finishing, self.exited = False, False, False
         self.errors, self.stops, self.data = [], [], {"stdout": bytearray(), "stderr": bytearray()}
         self.selector, self.streams = None, {}
         self.eof = {"stdout": False, "stderr": False}
         self.wait_pid, self.wait_status, self.wait_rusage = None, None, None
+        self.lifetime = lifetime
+        self._custody_lock = threading.RLock()
+        self._stop_attempted = False
+
+    def now(self):
+        return _now() if self.lifetime is None else self.lifetime.now()
 
     def start(self, argv, env, cwd, deadline):
         if signal.getsignal(signal.SIGCHLD) != signal.SIG_DFL or not hasattr(os, "WNOWAIT") or not hasattr(os, "waitid"):
@@ -269,8 +353,8 @@ class _Held:
         # cannot exclude a native SA_NOCLDWAIT flag. Main coordinator thread and
         # no competing signal/child-reaper changes are mandatory preconditions.
         signal.signal(signal.SIGCHLD, signal.SIG_DFL)
-        if _now() >= deadline:
-            raise Refusal("No child birth after its original admission deadline")
+        if self.now() >= deadline or self.lifetime is not None and self.lifetime.cancelled:
+            raise Refusal("No child birth after shared admission closes")
         self.proc = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL,
                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                      close_fds=True, start_new_session=True)
@@ -285,6 +369,10 @@ class _Held:
             self.selector.register(stream, selectors.EVENT_READ, name)
 
     def observe(self):
+        with self._custody_lock:
+            return self._observe()
+
+    def _observe(self):
         if self.pid is None or self.consumed or self.lost or self.sealed:
             return self.exited
         try:
@@ -300,7 +388,24 @@ class _Held:
             self.errors.append(("observe-lost", str(error)))
         return self.exited
 
-    def pump(self, sink):
+    def stop(self):
+        """Sole original direct-PID stop; no renewal after error or lost wait.
+
+        The independent child watchdog and finalizer serialize this with the
+        consuming wait. No sampled PID, process-group or descendant authority.
+        """
+        with self._custody_lock:
+            if self.pid is None or self.sealed or self.consumed or self.lost or self._stop_attempted:
+                return False
+            self._stop_attempted = True
+            try:
+                os.kill(self.pid, signal.SIGKILL)
+                self.stops.append("KILL")
+            except BaseException as error:
+                self.errors.append(("last-stop", str(error), self.exited))
+            return True
+
+    def pump(self, sink, eof=None):
         if self.selector is None:
             return
         for key, _ in self.selector.select(0):
@@ -311,6 +416,8 @@ class _Held:
             if not data:
                 self.eof[key.data] = True
                 self.selector.unregister(key.fileobj)
+                if eof is not None:
+                    eof(key.data)
             else:
                 sink(key.data, data)
 
@@ -342,28 +449,26 @@ class _Held:
             return  # Pipe handles still close; no PID signal authority invented.
         self.observe()
         try:
-            live_time = _now() < deadline
+            live_time = self.now() < deadline
         except BaseException as error:
             self.errors.append(("final-clock", str(error)))
             live_time = False
         if not live_time:
             self.errors.append(("no-time-for-stop",))
         if live_time and not self.lost and not self.consumed:
-            try:
-                os.kill(self.pid, signal.SIGKILL)  # Last ORIGINAL direct-PID stop.
-                self.stops.append("KILL")
-            except BaseException as error:
-                self.errors.append(("last-stop", str(error), self.exited))
-        self.sealed = True  # Irrevocable, BEFORE the first consuming-wait attempt.
+            self.stop()
+        with self._custody_lock:
+            self.sealed = True  # Irrevocable BEFORE consuming-wait attempt.
         while not self.lost and not self.consumed:
             try:
-                if _now() >= deadline:
+                if self.now() >= deadline:
                     break
             except BaseException as error:
                 self.errors.append(("wait-clock", str(error)))
                 break
             try:
-                pid, status, usage = os.wait4(self.pid, os.WNOHANG)
+                with self._custody_lock:
+                    pid, status, usage = os.wait4(self.pid, os.WNOHANG)
                 if pid:
                     self.consumed = True  # Latch BEFORE identity/status validation.
                     self.wait_pid, self.wait_status, self.wait_rusage = pid, status, usage
@@ -393,7 +498,7 @@ class _Held:
                 break
         while self.selector is not None and self.selector.get_map():
             try:
-                if _now() >= deadline:
+                if self.now() >= deadline:
                     self.errors.append(("no-time-for-stream-finalization",))
                     break
                 self.pump(sink)
@@ -403,9 +508,212 @@ class _Held:
                 break
 
 
-def _rss(pid, raw, deadline, env, cwd, observations):
-    query = _Held()
-    origin = _now()
+class _ChildWatchdog:
+    """Independent thread stops ONLY the original held child at work closure.
+
+    This still cannot bound a blocked coordinator filesystem call, thread start,
+    or pre-PID Popen. It grants no native execution/descendant signal authority.
+    """
+    def __init__(self, child, lifetime, window):
+        self.child, self.lifetime, self.window = child, lifetime, window
+        self.done = threading.Event()
+        self.thread, self.errors = None, []
+
+    def start(self):
+        if self.thread is not None or self.done.is_set():
+            raise Refusal("Watchdog is once-only")
+        self.thread = threading.Thread(target=self._run, name="qualification-child-stop", daemon=True)
+        self.thread.start()
+
+    def _run(self):
+        try:
+            while not self.done.is_set():
+                now = self.lifetime.now()
+                if self.lifetime.cancelled or now >= self.window.work_end:
+                    self.child.stop()
+                    return
+                self.done.wait(min(0.05, self.window.work_end - now))
+        except BaseException as error:
+            self.errors.append(("watchdog-unknown", str(error)))
+            self.lifetime.cancel()
+            self.child.stop()
+
+    def close(self):
+        self.done.set()
+        if self.thread is not None:
+            try:
+                self.thread.join(max(0, min(1, self.window.end - self.lifetime.now())))
+                if self.thread.is_alive():
+                    raise Refusal("Watchdog did not join")
+            except BaseException as error:
+                self.errors.append(("watchdog-join-unknown", str(error)))
+                self.lifetime.cancel()
+
+
+_SOCKET_TYPE = socket.socket
+
+
+def _socket_close(stream):
+    stream.close()  # One library close, never retry the numeric descriptor.
+
+
+def _close_sockets(sockets):
+    closes, errors = {}, []
+    for name, stream in list(sockets.items()):
+        sockets.pop(name)  # Consume ownership before any close attempt.
+        closes[name] = "unknown"
+        if type(stream) is not _SOCKET_TYPE:
+            errors.append(("not-owned-socket", name))
+            continue  # Never invoke an arbitrary object's close callback.
+        try:
+            _socket_close(stream)
+            closes[name] = "closed"
+        except BaseException as error:
+            errors.append(("socket-close", name, str(error)))
+    return closes, errors
+
+
+class _ReadChannels:
+    """Own two nonblocking Unix streams; raw publication precedes framing use.
+
+    Invalid shape/types/aliases refuse BEFORE transfer: caller retains ownership.
+    Once validated, constructor failure attempts both closes, including selector
+    allocation failure. Read-only: no sender, inventory verdict or resume method.
+    Socket closes are distinct from capture-file closes and never imply EOF.
+    """
+    def __init__(self, sockets, raw):
+        if type(sockets) is not dict or set(sockets) != {"qmp", "serial"}:
+            raise Refusal("Exact two owned read channels required")
+        if any(type(stream) is not _SOCKET_TYPE or stream.family != socket.AF_UNIX or
+               stream.type != socket.SOCK_STREAM or stream.fileno() < 0
+               for stream in sockets.values()) or len({s.fileno() for s in sockets.values()}) != 2:
+            raise Refusal("Distinct ordinary owned Unix stream sockets required; no transfer")
+        self.sockets = dict(sockets)
+        self.raw, self.selector = raw, None
+        self.eof, self.closes, self.errors = set(), {}, []
+        try:
+            self.selector = selectors.DefaultSelector()
+            for name, stream in self.sockets.items():
+                stream.setblocking(False)
+                self.selector.register(stream, selectors.EVENT_READ, name)
+        except BaseException as error:
+            self.close()
+            refused = Refusal("Channel construction failed: " + str(error))
+            refused.socket_closes, refused.close_errors = dict(self.closes), tuple(self.errors)
+            raise refused from error
+
+    @classmethod
+    def connect(cls, plan, raw, lifetime, window):
+        """Dormant exact-endpoint connection; no QEMU executed by this module."""
+        sockets = {}
+        try:
+            for name, path in zip(("qmp", "serial"), endpoints(plan)):
+                lifetime.require_work(window)
+                before = path.lstat()
+                if not stat.S_ISSOCK(before.st_mode) or before.st_uid != os.getuid():
+                    raise Refusal("Owned fixed socket endpoint missing")
+                lifetime.require_work(window)  # lstat may consume/cancel work.
+                stream = sockets[name] = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                stream.setblocking(False)
+                lifetime.require_work(window)  # No connect after delayed birth.
+                result = stream.connect_ex(str(path))
+                if result not in (0, errno.EINPROGRESS, errno.EWOULDBLOCK, errno.EALREADY):
+                    raise Refusal("Fixed endpoint connection failed")
+                with selectors.DefaultSelector() as pending:
+                    pending.register(stream, selectors.EVENT_WRITE)
+                    while not pending.select(0):
+                        lifetime.require_work(window)
+                        time.sleep(0.01)
+                lifetime.require_work(window)
+                if stream.getsockopt(socket.SOL_SOCKET, socket.SO_ERROR) or _identity(path.lstat()) != _identity(before):
+                    raise Refusal("Socket identity/connect result uncertain")
+                lifetime.require_work(window)
+            owned, sockets = sockets, {}
+            return cls(owned, raw)
+        except BaseException as error:
+            closes, errors = _close_sockets(sockets)
+            if hasattr(error, "socket_closes"):
+                closes.update(error.socket_closes)
+                errors.extend(error.close_errors)
+            refused = Refusal("Socket connection refused: " + str(error))
+            refused.socket_closes, refused.close_errors = closes, tuple(errors)
+            raise refused from error
+
+    def pump(self):
+        if self.selector is None:
+            raise Refusal("Read channels already closed")
+        frames = []
+        for key, _ in self.selector.select(0):
+            if not self.raw.readable:
+                self.errors.append(("capture-sealed-before-read", key.data))
+                self.selector.unregister(key.fileobj)
+                continue
+            try:
+                data = key.fileobj.recv(65536)
+            except (BlockingIOError, InterruptedError):
+                continue
+            except BaseException as error:
+                self.errors.append(("socket-read-unknown", key.data, str(error)))
+                self.selector.unregister(key.fileobj)
+                continue
+            try:
+                if data:
+                    frames.extend(self.raw.record(key.data, data))
+                else:
+                    self.eof.add(key.data)
+                    self.selector.unregister(key.fileobj)
+                    self.raw.eof(key.data)
+            except BaseException as error:
+                self.errors.append(("channel-capture", key.data, str(error)))
+                # Framing failure is sticky but permits bounded forensic tails.
+                # Publication/quota failure seals reads without inventing EOF.
+        return tuple(frames)
+
+    def drain(self, lifetime, window):
+        """Bound both channels by original end and finite polls, reserving close.
+
+        Failure of one channel does not skip the other. This cannot interrupt a
+        blocking clock/selector/read syscall; the external watchdog gate remains.
+        """
+        for _ in range(4096):
+            try:
+                if self.selector is None or not self.selector.get_map():
+                    break
+                now = lifetime.now()
+                if now >= window.end - 1:
+                    self.errors.append(("socket-drain-deadline",))
+                    break
+                self.pump()
+                if self.selector.get_map():
+                    time.sleep(min(0.01, window.end - 1 - now))
+            except BaseException as error:
+                self.errors.append(("socket-drain-unknown", str(error)))
+                break
+        else:
+            self.errors.append(("socket-drain-poll-bound",))
+        if self.eof != {"qmp", "serial"}:
+            self.errors.append(("socket-eof-incomplete", tuple(sorted(self.eof))))
+
+    def require_healthy(self):
+        """Negative-only work stop gate; never native admission."""
+        if self.raw.failed or self.errors:
+            raise Refusal("Transport capture/read failed")
+
+    def close(self):
+        closes, errors = _close_sockets(self.sockets)
+        self.closes.update(closes)
+        self.errors.extend(errors)
+        if self.selector is not None:
+            owned, self.selector = self.selector, None
+            try:
+                owned.close()
+            except BaseException as error:
+                self.errors.append(("socket-selector-close", str(error)))
+
+
+def _rss(pid, raw, deadline, env, cwd, observations, lifetime):
+    query = _Held(lifetime)
+    origin = lifetime.now()
     end = min(deadline, origin + 2)
     def retain(name, data):
         if len(query.data[name]) + len(data) > 4096:
@@ -414,13 +722,13 @@ def _rss(pid, raw, deadline, env, cwd, observations):
         query.data[name].extend(data)
     try:
         query.start(["/bin/ps", "-p", str(pid), "-o", "rss="], env, cwd, end)
-        while _now() < end - 0.5 and not query.observe() and not query.lost:
+        while lifetime.now() < end - 0.5 and not lifetime.cancelled and not query.observe() and not query.lost:
             query.pump(retain)
             time.sleep(0.01)
     finally:
         query.finish(end, retain)
         try:
-            if _now() >= end:
+            if lifetime.now() >= end:
                 query.errors.append(("query-deadline",))
         except BaseException as error:
             query.errors.append(("query-final-clock", str(error)))
@@ -441,15 +749,22 @@ def _rss(pid, raw, deadline, env, cwd, observations):
 
 
 class Campaign:
-    """Create once BEFORE any external target/media effect. No caller clock/reset."""
-    def __init__(self):
+    """Borrow the once-only Coordinator lifetime; never capture another origin."""
+    def __init__(self, coordinator):
         global _campaign_created
         if _campaign_created:
             raise Refusal("Campaign origin is once-only in this coordinator process")
         _campaign_created = True
-        self.origin, self.attempts, self.previous = _now(), [], None
+        if type(coordinator) is not Coordinator:
+            raise Refusal("Exact shared Coordinator required")
+        coordinator.lifetime.claim_host()
+        self.coordinator, self.lifetime = coordinator, coordinator.lifetime
+        self.origin, self.attempts, self.previous = self.lifetime.origin, [], None
         self.raw = None
         self.anchor = None
+
+    def cancel(self):
+        self.coordinator.cancel()
 
     def record_transport(self, phase, channel, data):
         raw = self.raw
@@ -463,14 +778,18 @@ class Campaign:
         Does not grant execution admission. No QMP cont/quit or serial bytes sent.
         A returned receipt is partial custody evidence, never campaign acceptance.
         """
+        if not self.coordinator.admission("launch").native_admitted:
+            raise Refusal("Native admission remains unsupported")
         if sys.platform != "darwin":
             raise Refusal("Connected Mac only")
         host = os.uname()
         if (host.sysname, host.release, host.machine) != ("Darwin", "27.0.0", "arm64") or os.getuid() == 0 or os.getuid() != os.geteuid() or os.getgid() != os.getegid():
             raise Refusal("Reviewed unprivileged Mac identity required")
-        origin = _now()
         plan = validate_plan(sealed_plan, expected_sha256)
         phase = plan["phase"]
+        window = self.lifetime.window(phase)
+        self.lifetime.require_work(window)
+        origin = window.origin
         if self.attempts != ([] if phase == "install" else ["install"]):
             raise Refusal("No repeat, reordered or third launch")
         if phase == "installed" and (self.previous is None or self.previous["errors"] or not self.previous["consumed"] or self.previous["returncode"] != 0):
@@ -483,9 +802,10 @@ class Campaign:
             raise Refusal("No replacement target, tools or media between phases")
         self.anchor = anchor
         self.attempts.append(phase)  # Failed preparations consume the phase.
-        end = min(origin + 3600, self.origin + 10800)
-        work = min(origin + 2700, end - 900)
-        child, errors, peaks, queries, work_closed = _Held(), [], [], [], False
+        end, work = window.end, window.work_end
+        child, errors, peaks, queries, work_closed = _Held(self.lifetime), [], [], [], False
+        watchdog = _ChildWatchdog(child, self.lifetime, window)
+        channels = None
         root = Path(plan["fixture"]["path"])
         env = {"LC_ALL": "C", "LANG": "C", "TZ": "UTC", "PATH": "",
                "HOME": str(root / "home"), "TMPDIR": str(root / "tmp")}
@@ -499,7 +819,7 @@ class Campaign:
                 if not stat.S_ISDIR(seen.st_mode) or seen.st_uid != os.getuid() or stat.S_IMODE(seen.st_mode) != 0o700:
                     raise Refusal("Wrong private environment directory")
             for row in plan["files"].values():
-                _verify(row, work)
+                _verify(row, work, self.lifetime)
             for endpoint in endpoints(plan):
                 if os.path.lexists(endpoint):
                     raise Refusal("Fresh endpoint already exists; never unlink")
@@ -507,22 +827,26 @@ class Campaign:
             os.mkdir(directory, 0o700)  # Exclusive phase/capture latch, never reused.
             self.raw = _Raw(phase)
             self.raw.open(directory)
-            if _now() >= work:
+            if self.lifetime.now() >= work:
                 raise Refusal("No launch after work admission closes")
             child.start(arguments(plan), env, root, work)
-            next_rss = _now()
-            while _now() < end - 5 and not child.observe() and not child.lost:
-                child.pump(self.raw.record)
-                if self.raw.failed:
-                    raise Refusal("Independent transport capture failed")
-                now = _now()
+            watchdog.start()
+            channels = _ReadChannels.connect(plan, self.raw, self.lifetime, window)
+            next_rss = self.lifetime.now()
+            while self.lifetime.now() < end - 5 and not child.observe() and not child.lost:
+                child.pump(self.raw.record, self.raw.eof)
+                channels.pump()
+                channels.require_healthy()
+                now = self.lifetime.now()
                 if now < origin:
                     raise Refusal("Original launch clock moved backward")
-                work_closed |= now >= work
+                work_closed |= now >= work or self.lifetime.cancelled
+                if work_closed:
+                    raise Refusal("Shared work lifetime closed")
                 if now >= next_rss:
                     if len(queries) >= 3600:
                         raise Refusal("Finite RSS query count exhausted")
-                    sampled = _rss(child.pid, self.raw, end - 5, env, root, queries)
+                    sampled = _rss(child.pid, self.raw, end - 5, env, root, queries, self.lifetime)
                     peaks.append(sampled)
                     if sampled > RSS:
                         raise Refusal("Sampled emulator RSS ceiling exceeded")
@@ -536,7 +860,27 @@ class Campaign:
             except BaseException as error:
                 errors.append("finalization uncertain: " + str(error))
             finally:
+                watchdog.close()
+                errors.extend(watchdog.errors)
                 if self.raw is not None:
+                    if channels is not None:
+                        try:
+                            channels.drain(self.lifetime, window)
+                        except BaseException as error:
+                            errors.append("last channel read uncertain: " + str(error))
+                        channels.close()
+                        errors.extend(channels.errors)
+                    for name in ("stdout", "stderr"):
+                        state = json.loads(self.raw.ledger.snapshot())["channels"][name]
+                        if child.eof[name] and not state["eof"]:
+                            try:
+                                self.raw.eof(name)
+                            except BaseException as error:
+                                errors.append("stream EOF uncertain: " + str(error))
+                    try:
+                        self.raw.eof("rss")  # No later RSS reader can be born.
+                    except BaseException as error:
+                        errors.append("RSS EOF uncertain: " + str(error))
                     try:
                         self.raw.close()
                     except BaseException as error:
@@ -545,7 +889,7 @@ class Campaign:
                     if self.raw.failed:
                         errors.append("raw capture failed; retained prefix is incomplete")
         try:
-            finished = _now()
+            finished = self.lifetime.now()
             if finished < origin or finished >= end:
                 errors.append("original total deadline/clock failed during finalization")
         except BaseException as error:
@@ -563,6 +907,11 @@ class Campaign:
                   "sampled_peak_rss": max(peaks, default=None),
                   "rss_queries": queries,
                   "raw_quota_charged": 0 if self.raw is None else self.raw.used,
+                  "transport_receipt": None if self.raw is None else json.loads(self.raw.ledger.snapshot()),
+                  "socket_eof": [] if channels is None else sorted(channels.eof),
+                  "socket_closes": {} if channels is None else dict(channels.closes),
+                  "observed_capture_allocations": {} if self.raw is None else dict(self.raw.allocation),
+                  "capture_accounting": None if self.raw is None else self.raw.accounting.report(),
                   "raw_known_writes": {} if self.raw is None else {
                       name: {"bytes": self.raw.lengths[name], "sha256": digest.hexdigest()}
                       for name, digest in self.raw.digests.items()},

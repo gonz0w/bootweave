@@ -74,14 +74,26 @@ for native execution authority:
    immutable execution packet review. A missing later-stage hash is an explicit
    blocking staged seal, never a guessed value or automatic permission to continue.
 
-Pure coordinator state/watchdog decisions and raw-observation/framing models are
-now prepared. They remain separate from actual host effects: the host guard does
-not yet share the model's original clock/cancellation lifetime, no independent
-watchdog bounds blocking operations, and no actual QMP/serial transport is
-supplied. Exact installed QMP schemas/whitelist facts are unavailable in the
+The coordinator and dormant host guard now share one actual lifetime/cancellation
+object, including original phase windows. The public launch entry refuses before
+plan/file/process effects because native admission remains unavailable. Actual
+retained capture writes feed Transport once-only tickets and Accounting; separate
+nonblocking Unix readers retain inbound QMP/serial bytes without sending commands.
+A separate child-stop thread serializes its sole original direct-PID stop with
+the owner's wait. This does not bound blocked coordinator filesystem calls,
+pre-PID process birth or thread creation; an independent external watchdog remains
+unfinished. There is no query/serial sender or protocol/inventory/resume admission.
+Exact installed QMP schemas/whitelist facts are unavailable in the
 reviewed local documentation, so inventory and resume stay unsupported. A digest
 or correctly shaped caller record never converts that missing proof into native
 admission. No source-only module grants native authority.
+
+The controlled capture writer enforces its logical shared raw cap before any
+write, compares exact held descriptor identities, retains partial bytes without
+retry, and stops on observed allocation excess. Maximum allocated samples never
+shrink. These are useful controlled-writer checks, not whole-host/guest allocation
+or compiler scratch peak enforcement. The unchanged 20 GiB/27 MiB aggregate gates
+remain unresolved; no quota/security setting is adopted or applied.
 
 Fresh exact authority must cover new-file allocation, stock installation and
 same-target writes, one isolated guest root credential, existing stock nobody

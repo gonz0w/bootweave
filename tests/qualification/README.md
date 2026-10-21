@@ -43,15 +43,34 @@ refuses, readiness remains zero and no review CLI is activated.
   exits, limit/timer records, file-size bytes or entry records. Collection success
   supplies raw observations, never independent native oracle acceptance.
 - `host_guard.py` is dormant host source with pure closed-schema role/argv
-  validators. Its two ordered paused launch slots share one campaign origin;
+  validators. Its public launch entry refuses before plan reads or effects because
+  native admission is unavailable. Its two proposed paused launch slots borrow
+  the coordinator's exact lifetime object; there is no second campaign origin.
   every original child remains owned through its last direct-PID stop and sole
   consuming wait. The five capture channels share10 MiB per launch,20 MiB across
-  two launches. It supplies no QMP/serial sender, resume/inventory admission,
+  two launches. One exclusive capture writer consumes Transport publication
+  tickets, keeps exact descriptor identities, preserves partial writes and unknown
+  closes without retry, and reports observed physical allocation to Accounting.
+  Two owned nonblocking Unix readers retain QMP/serial bytes before generic
+  framing. Constructor failure independently closes both validated transferred
+  sockets; invalid objects/aliases never transfer ownership. Shared checks after
+  metadata and socket creation prevent starting a connection after work closes.
+  Terminal draining is bounded by the original end and 4,096 polls, with one
+  second reserved for closes. Framing failure stays fatal to work while bounded
+  forensic tail capture continues; publication/quota failure seals further reads.
+  Close does not invent EOF. These readers send nothing and provide no
+  protocol/inventory/resume admission.
+  A separate child-stop thread observes shared cancellation/work closure; its
+  once-only direct-PID stop serializes with the owner's consuming wait. It cannot
+  interrupt a blocked coordinator filesystem call or bound pre-PID Popen/thread
+  creation. An external watchdog still blocks native readiness. There is no
   provisioning coordinator, target creator or execution-ready campaign.
 - `coordinator.py` prepares a separate pure state/lifetime model: exact reported
   binding-set comparisons, once-only phase/stage order, sticky cancellation and
-  custody uncertainty, and data-only deadline/stop decisions. It issues no native
-  authority and implements no independent watchdog or host-clock integration.
+  custody uncertainty, and data-only deadline/stop decisions. `lifetime.py` owns
+  the original clock and sticky cancellation shared with the host guard; phase
+  windows have no origin seed, reset or failed-slot renewal. These sources issue
+  no native authority or independent external watchdog.
 - `transport.py` accounts reported raw prefixes across five channels with one
   10 MiB per-launch budget, once-only publication/close outcomes and bounded
   generic JSON-object framing. It supplies no socket/channel transport, QMP
@@ -61,7 +80,11 @@ refuses, readiness remains zero and no review CLI is activated.
 - `accounting.py` reserves 10 GiB plus 22 MiB on the host and 23 MiB in the guest,
   within unchanged 20 GiB/27 MiB ceilings. Its bounded sampled ledger preserves
   oversize reports, maxima and decreases without releasing reservations. It
-  supplies no allocator/quota API, complete inventory or high-water proof.
+  supplies no allocator/quota API, complete inventory or high-water proof. The
+  real host capture writer now enforces its logical raw ceiling before writing
+  and retains maximum observed allocated bytes without reclaim. Unexpected
+  filesystem allocation stops subsequent writes; sampling supplies no preventive
+  physical-quota or compiler temporary high-water proof.
 - `trace_limits.c/.h` implement the approved companion-only paired FSIZE
   substitution. Only `trusted_start.c` and `signature_platform.c` are renamed in
   separate objects; the wrapper object calls the real OS functions. One parent
@@ -126,6 +149,13 @@ current holds it must not be dispatched again without a current exact exception
 or independently reviewed equivalent complete coverage that avoids those effects.
 The historical 220-test pass is evidence for its original head only, not a fresh
 full gate for this continuation. No partial run is renamed `make verify`.
+
+The added host-integration fixtures exercise real retained capture files and
+anonymous Unix socket pairs, exact EOF/close records, shared cancellation, and
+synthetic partial-write/unknown-close failures. Signal calls are doubled; no
+emulator or native body is launched. A real read path in those portable fixtures
+does not establish QMP schema semantics, paused host inventory, resume or native
+confinement. Closing owned descriptors leaves all fixture files retained.
 
 A complete retained-coverage revision cannot currently replace that gate. The
 reviewed public corpus lacks two signer public records and four genuine

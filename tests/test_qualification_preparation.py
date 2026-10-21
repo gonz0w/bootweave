@@ -3,10 +3,14 @@
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
+import socket
 import stat
 import sys
 import tempfile
+import threading
+import time
 import unittest
 from unittest import mock
 
@@ -509,7 +513,7 @@ class QualificationPreparationTests(unittest.TestCase):
 
     def test_coordinator_single_lifetime_cancellation_and_unknown_custody(self):
         support = self.support_module("coordinator")
-        with mock.patch.object(support.time, "monotonic", return_value=100):
+        with mock.patch("qualification.lifetime.time.monotonic", return_value=100):
             coordinator = support.Coordinator()
             with self.assertRaises(support.Refusal):
                 support.Coordinator()
@@ -523,13 +527,13 @@ class QualificationPreparationTests(unittest.TestCase):
             with self.assertRaises(support.Refusal):
                 coordinator.begin_phase("install")
         other = self.support_module("coordinator")
-        with mock.patch.object(other.time, "monotonic", return_value=100):
+        with mock.patch("qualification.lifetime.time.monotonic", return_value=100):
             coordinator = other.Coordinator()
             with self.assertRaises(other.Refusal):
                 coordinator.report_custody("install", "a" * 64, consumed=True, lost=False, close_unknown=False)
             self.assertTrue(coordinator.watchdog().uncertain)
         other = self.support_module("coordinator")
-        with mock.patch.object(other.time, "monotonic", return_value=100):
+        with mock.patch("qualification.lifetime.time.monotonic", return_value=100):
             coordinator = other.Coordinator()
             bindings = self.coordinator_bindings(other)
             coordinator.record(bindings, other.Evidence("campaign", "preflight", "a" * 64, bindings, 100))
@@ -537,7 +541,7 @@ class QualificationPreparationTests(unittest.TestCase):
                 coordinator.record(bindings, other.Evidence("campaign", "prepared", "a" * 64, bindings, 100))
         for consumed, lost, stop in ((True, False, False), (False, True, False), (False, False, True)):
             other = self.support_module("coordinator")
-            with mock.patch.object(other.time, "monotonic", return_value=100):
+            with mock.patch("qualification.lifetime.time.monotonic", return_value=100):
                 coordinator = other.Coordinator()
                 bindings = self.coordinator_bindings(other)
                 for stage, digest in zip(other.STAGES["campaign"], ("a" * 64, "b" * 64)):
@@ -553,7 +557,7 @@ class QualificationPreparationTests(unittest.TestCase):
     def test_coordinator_unsupported_inventory_and_original_deadline_never_resume(self):
         support = self.support_module("coordinator")
         clock = [100.0]
-        with mock.patch.object(support.time, "monotonic", side_effect=lambda: clock[0]):
+        with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
             coordinator = support.Coordinator()
             bindings = self.coordinator_bindings(support)
             for stage, digest in zip(support.STAGES["campaign"], ("d" * 64, "f" * 64)):
@@ -569,7 +573,7 @@ class QualificationPreparationTests(unittest.TestCase):
         # the exact work/total deadline comparisons under test.
         fresh = self.support_module("coordinator")
         clock[0] = 100
-        with mock.patch.object(fresh.time, "monotonic", side_effect=lambda: clock[0]):
+        with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
             coordinator = fresh.Coordinator()
             bound = tuple(fresh.Binding(row.kind, row.name, row.size, row.sha256) for row in bindings)
             for stage, digest in zip(fresh.STAGES["campaign"], ("a" * 64, "b" * 64)):
@@ -589,9 +593,465 @@ class QualificationPreparationTests(unittest.TestCase):
             self.assertEqual(coordinator.watchdog().first_failure, "TOTAL_DEADLINE")
         fresh = self.support_module("coordinator")
         clock[0] = 100
-        with mock.patch.object(fresh.time, "monotonic", side_effect=lambda: clock[0]):
+        with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
             coordinator = fresh.Coordinator()
             clock[0] = 10899.999
             self.assertFalse(coordinator.watchdog().work_closed)
             clock[0] = 10900
             self.assertTrue(coordinator.watchdog().work_closed)
+
+    def test_shared_host_clock_cancellation_and_closed_native_admission(self):
+        guard = self.support_module("host_guard")
+        with mock.patch("qualification.lifetime.time.monotonic", return_value=100):
+            coordinator = guard.Coordinator()
+            with mock.patch.object(guard, "_now", side_effect=AssertionError("second origin")):
+                campaign = guard.Campaign(coordinator)
+            self.assertIs(campaign.lifetime, coordinator.lifetime)
+            self.assertEqual(campaign.origin, coordinator.origin)
+            campaign.cancel()
+            self.assertTrue(coordinator.watchdog().cancelled)
+            with mock.patch.object(guard, "validate_plan") as validator, \
+                    mock.patch.object(guard.subprocess, "Popen") as birth, \
+                    self.assertRaisesRegex(guard.Refusal, "admission remains unsupported"):
+                campaign.launch(b"not a plan", "a" * 64)
+            validator.assert_not_called()
+            birth.assert_not_called()
+            with self.assertRaises(guard.Refusal):
+                guard.Campaign(coordinator)
+
+    def test_shared_lifetime_exact_deadlines_and_failed_slots_cannot_renew(self):
+        from qualification.lifetime import Lifetime, Refusal
+        clock = [100.0]
+        with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
+            lifetime = Lifetime()
+            window = lifetime.begin("install")
+            self.assertEqual((window.origin, window.work_end, window.end), (100, 2800, 3700))
+            clock[0] = 2799.99
+            lifetime.require_work(window)
+            clock[0] = 2800
+            with self.assertRaises(Refusal):
+                lifetime.require_work(window)
+            lifetime.cancel()
+            clock[0] = 3700
+            with self.assertRaises(Refusal):
+                lifetime.begin("installed")
+            with self.assertRaises(Refusal):
+                lifetime.begin("installed")
+            self.assertEqual(lifetime.origin, 100)
+            self.assertEqual(lifetime.end, 10900)
+        clock[0] = 100
+        with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
+            lifetime = Lifetime()
+            clock[0] = 99
+            with self.assertRaises(Refusal):
+                lifetime.now()
+            clock[0] = 101
+            with self.assertRaises(Refusal):
+                lifetime.now()
+            self.assertTrue(lifetime.cancelled)
+
+    def test_child_stop_watchdog_and_finalizer_share_once_only_original_rights(self):
+        guard = self.support_module("host_guard")
+        held = guard._Held()
+        held.pid = 42424242  # Synthetic only; all kill calls below are doubled.
+        with mock.patch.object(guard.os, "kill") as stop:
+            workers = [threading.Thread(target=held.stop) for _ in range(4)]
+            for worker in workers:
+                worker.start()
+            for worker in workers:
+                worker.join(1)
+                self.assertFalse(worker.is_alive())
+            stop.assert_called_once_with(42424242, guard.signal.SIGKILL)
+            self.assertFalse(held.stop())
+            for field in ("consumed", "lost", "sealed"):
+                other = guard._Held()
+                other.pid = 42424243
+                setattr(other, field, True)
+                self.assertFalse(other.stop())
+            self.assertEqual(stop.call_count, 1)
+        unknown = guard._Held()
+        unknown.pid = 42424244
+        with mock.patch.object(guard.os, "kill", side_effect=InterruptedError("synthetic")) as stop:
+            self.assertTrue(unknown.stop())
+            self.assertFalse(unknown.stop())
+            self.assertEqual(stop.call_count, 1)
+            self.assertTrue(unknown.errors)
+
+    def test_child_watchdog_runs_independently_and_uses_shared_cancellation(self):
+        from qualification.lifetime import Lifetime
+        guard = self.support_module("host_guard")
+        lifetime = Lifetime()
+        window = lifetime.begin("install")
+        stopped = threading.Event()
+        child = mock.Mock()
+        child.stop.side_effect = stopped.set  # No actual process or signal.
+        watchdog = guard._ChildWatchdog(child, lifetime, window)
+        try:
+            watchdog.start()
+            lifetime.cancel()
+            self.assertTrue(stopped.wait(1))
+        finally:
+            watchdog.close()
+        self.assertFalse(watchdog.thread.is_alive())
+        self.assertEqual(watchdog.errors, [])
+        child.stop.assert_called_once_with()
+        with self.assertRaises(guard.Refusal):
+            watchdog.start()
+
+    def raw_fixture(self, label):
+        guard = self.support_module("host_guard")
+        directory = Path(tempfile.mkdtemp(prefix=label + "-", dir=self.directory))
+        raw = guard._Raw("install")
+        raw.open(directory)
+        return guard, raw, directory
+
+    def retain_io(self, directory, raw, extra=None):
+        files = {p.name: {"bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+                 for p in directory.glob("*.raw")}
+        (directory / "portable-io-receipt.json").write_text(json.dumps({
+            "portable_synthetic_only": True, "native_cases": 0,
+            "transport": json.loads(raw.ledger.snapshot()), "allocation": raw.accounting.report(),
+            "close_errors": raw.errors, "files": files, "extra": extra}, sort_keys=True) + "\n")
+
+    def test_actual_anonymous_read_channels_retain_raw_bytes_eof_and_close(self):
+        guard, raw, directory = self.raw_fixture("anonymous-read")
+        peers, transferred, channels = {}, {}, None
+        wire = {"qmp": b'{"reported":"synthetic"}\n', "serial": b"\x00\xffinert-console\x1b"}
+        try:
+            for name in ("qmp", "serial"):
+                transferred[name], peers[name] = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+                self.assertEqual(peers[name].send(wire[name]), len(wire[name]))
+                peers[name].shutdown(socket.SHUT_WR)
+            owned, transferred = transferred, {}
+            channels = guard._ReadChannels(owned, raw)
+            frames = []
+            for _ in range(100):
+                frames.extend(channels.pump())
+                if channels.eof == {"qmp", "serial"}:
+                    break
+                time.sleep(0.001)
+            self.assertEqual(channels.eof, {"qmp", "serial"})
+            self.assertEqual([frame.raw for frame in frames], [wire["qmp"]])
+            for name in ("stdout", "stderr", "rss"):
+                raw.eof(name)
+        finally:
+            if channels is not None:
+                channels.close()
+            for stream in [*peers.values(), *transferred.values()]:
+                stream.close()
+            raw.close()
+        for name, data in wire.items():
+            self.assertEqual((directory / (name + ".raw")).read_bytes(), data)
+        self.assertEqual(channels.closes, {"qmp": "closed", "serial": "closed"})
+        self.assertEqual(channels.errors, [])
+        report = json.loads(raw.ledger.snapshot())
+        self.assertTrue(report["reported_capture_complete"])
+        self.assertEqual(report["charged"], sum(map(len, wire.values())))
+        self.assertFalse(raw.ledger.inventory_report().resume_eligible)
+        self.retain_io(directory, raw, {"socket_closes": channels.closes, "socket_eof": sorted(channels.eof)})
+
+    def test_actual_capture_partial_write_is_retained_without_retry(self):
+        guard, raw, directory = self.raw_fixture("partial-write")
+        original = guard.os.write
+        try:
+            with mock.patch.object(guard.os, "write", side_effect=lambda fd, data: original(fd, data[:2])) as writer:
+                with self.assertRaisesRegex(RuntimeError, "PUBLICATION_PARTIAL_OR_ERROR"):
+                    raw.record("stdout", b"observed")
+                self.assertEqual(writer.call_count, 1)
+            with mock.patch.object(guard.os, "write") as writer, self.assertRaises(guard.Refusal):
+                raw.record("stdout", b"retry")
+            writer.assert_not_called()
+        finally:
+            raw.close()
+        self.assertEqual((directory / "stdout.raw").read_bytes(), b"ob")
+        report = json.loads(raw.ledger.snapshot())
+        self.assertEqual((report["channels"]["stdout"]["observed"], report["channels"]["stdout"]["published"]), (8, 2))
+        self.assertTrue(report["uncertain"])
+        self.retain_io(directory, raw)
+
+    def test_actual_capture_close_uncertainty_consumes_descriptor_once(self):
+        guard, raw, directory = self.raw_fixture("unknown-close")
+        for name in guard.CHANNELS:
+            raw.eof(name)
+        target = raw.fds["stdout"]
+        original, calls = guard.os.close, []
+        def interrupted(fd):
+            calls.append(fd)
+            original(fd)
+            if fd == target:
+                raise InterruptedError(4, "synthetic unknown close after actual close")
+        with mock.patch.object(guard.os, "close", side_effect=interrupted):
+            raw.close()
+            raw.close()
+        self.assertEqual(calls.count(target), 1)
+        self.assertEqual(raw.fds, {})
+        self.assertTrue(raw.errors)
+        self.assertEqual(json.loads(raw.ledger.snapshot())["channels"]["stdout"]["close"], "unknown")
+        self.retain_io(directory, raw, {"target_close_attempts": calls.count(target)})
+
+    def test_actual_capture_overquota_stops_but_framing_failure_retains_tails(self):
+        guard, raw, directory = self.raw_fixture("malformed-wire")
+        try:
+            with self.assertRaisesRegex(RuntimeError, "JSON_FRAMING"):
+                raw.record("qmp", b'{"same":1,"same":2}\n')
+            raw.record("serial", b"forensic tail")
+        finally:
+            raw.close()
+        self.assertEqual((directory / "qmp.raw").read_bytes(), b'{"same":1,"same":2}\n')
+        self.assertEqual((directory / "serial.raw").read_bytes(), b"forensic tail")
+        self.assertTrue(raw.failed)
+        self.assertTrue(json.loads(raw.ledger.snapshot())["framing_failed"])
+        self.assertFalse(raw.ledger.inventory_report().resume_eligible)
+        self.retain_io(directory, raw)
+        guard, raw, directory = self.raw_fixture("oversize-before-write")
+        try:
+            with mock.patch.object(guard.os, "write") as writer, self.assertRaisesRegex(RuntimeError, "RAW_CAP"):
+                raw.record("stdout", b"x" * 65537)
+            writer.assert_not_called()
+        finally:
+            raw.close()
+        self.assertEqual((directory / "stdout.raw").stat().st_size, 0)
+        self.assertEqual(json.loads(raw.ledger.snapshot())["charged"], 65537)
+        self.retain_io(directory, raw)
+
+    def test_read_channel_constructor_failure_closes_only_transferred_sockets(self):
+        guard, raw, directory = self.raw_fixture("constructor-close")
+        unknown = mock.Mock()
+        with self.assertRaises(guard.Refusal):
+            guard._ReadChannels({"qmp": unknown, "serial": unknown}, raw)
+        unknown.close.assert_not_called()
+        left, right = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+        try:
+            with self.assertRaises(guard.Refusal):
+                guard._ReadChannels({"qmp": left, "serial": left}, raw)
+            self.assertGreaterEqual(left.fileno(), 0)  # Invalid aliases never transfer.
+        finally:
+            left.close()
+            right.close()
+        streams, peers = {}, {}
+        for name in ("qmp", "serial"):
+            streams[name], peers[name] = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+        calls = []
+        def close(stream):
+            calls.append(stream)
+            stream.close()
+            if stream is streams["qmp"]:
+                raise InterruptedError(4, "synthetic unknown close")
+        receipt = None
+        try:
+            with mock.patch.object(guard.selectors, "DefaultSelector", side_effect=OSError("synthetic selector birth")), \
+                    mock.patch.object(guard, "_socket_close", side_effect=close), \
+                    self.assertRaises(guard.Refusal) as failure:
+                guard._ReadChannels(streams, raw)
+            receipt = failure.exception
+            self.assertEqual(receipt.socket_closes, {"qmp": "unknown", "serial": "closed"})
+            self.assertEqual(calls, [streams["qmp"], streams["serial"]])
+            self.assertTrue(receipt.close_errors)
+            self.assertEqual([s.fileno() for s in streams.values()], [-1, -1])
+        finally:
+            for peer in peers.values():
+                peer.close()
+            raw.close()
+        self.retain_io(directory, raw, {"constructor_closes": receipt.socket_closes,
+                                       "constructor_errors": receipt.close_errors})
+
+    def test_read_channel_metadata_and_socket_birth_cannot_renew_work_window(self):
+        from qualification.lifetime import Lifetime
+        from types import SimpleNamespace
+        guard = self.support_module("host_guard")
+        for failure_mode in ("deadline", "cancel"):
+            clock = [100.0]
+            with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
+                lifetime = Lifetime()
+                window = lifetime.begin("install")
+                def delayed_metadata():
+                    if failure_mode == "deadline":
+                        clock[0] = window.work_end
+                    else:
+                        lifetime.cancel()
+                    return SimpleNamespace(st_mode=stat.S_IFSOCK | 0o600, st_uid=os.getuid())
+                endpoint = mock.Mock()
+                endpoint.lstat.side_effect = delayed_metadata
+                with mock.patch.object(guard, "endpoints", return_value=(endpoint, endpoint)), \
+                        mock.patch.object(guard.socket, "socket") as factory, \
+                        self.assertRaisesRegex(guard.Refusal, "WORK_CLOSED"):
+                    guard._ReadChannels.connect({}, mock.Mock(), lifetime, window)
+                factory.assert_not_called()
+        clock = [100.0]
+        stream = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        with mock.patch("qualification.lifetime.time.monotonic", side_effect=lambda: clock[0]):
+            lifetime = Lifetime()
+            window = lifetime.begin("install")
+            endpoint = mock.Mock()
+            endpoint.lstat.return_value = SimpleNamespace(st_mode=stat.S_IFSOCK | 0o600, st_uid=os.getuid())
+            def delayed_socket(*_):
+                clock[0] = window.work_end
+                return stream
+            with mock.patch.object(guard, "endpoints", return_value=(endpoint, endpoint)), \
+                    mock.patch.object(guard.socket, "socket", side_effect=delayed_socket), \
+                    self.assertRaisesRegex(guard.Refusal, "WORK_CLOSED") as failure:
+                guard._ReadChannels.connect({}, mock.Mock(), lifetime, window)
+            self.assertEqual(failure.exception.socket_closes, {"qmp": "closed"})
+        self.assertEqual(stream.fileno(), -1)
+        lifetime = Lifetime()
+        window = lifetime.begin("install")
+        endpoint = mock.Mock()
+        endpoint.lstat.return_value = SimpleNamespace(st_mode=stat.S_IFSOCK | 0o600, st_uid=os.getuid())
+        pending = mock.MagicMock()
+        pending.__enter__.return_value = pending
+        pending.select.return_value = [(None, 2)]
+        closed = []
+        def uncertain_close(stream):
+            closed.append(stream)
+            stream.close()
+            if len(closed) == 1:
+                raise InterruptedError(4, "synthetic first close unknown")
+        with mock.patch.object(guard, "endpoints", return_value=(endpoint, endpoint)), \
+                mock.patch.object(guard, "_identity", return_value={"synthetic": True}), \
+                mock.patch.object(socket.socket, "connect_ex", side_effect=(0, OSError("synthetic second connect"))), \
+                mock.patch.object(socket.socket, "getsockopt", return_value=0), \
+                mock.patch.object(guard.selectors, "DefaultSelector", return_value=pending), \
+                mock.patch.object(guard, "_socket_close", side_effect=uncertain_close), \
+                self.assertRaises(guard.Refusal) as failure:
+            guard._ReadChannels.connect({}, mock.Mock(), lifetime, window)
+        self.assertEqual(failure.exception.socket_closes, {"qmp": "unknown", "serial": "closed"})
+        self.assertEqual(len(closed), 2)
+        self.assertEqual([stream.fileno() for stream in closed], [-1, -1])
+
+    def test_terminal_read_channels_drain_large_tails_through_real_eof(self):
+        from qualification.lifetime import Lifetime
+        guard, raw, directory = self.raw_fixture("terminal-tail")
+        wire = {"qmp": (b'{"n":"' + b"x" * 1000 + b'"}\n') * 130,
+                "serial": b"z" * 131072}
+        streams, peers, workers, failures = {}, {}, [], []
+        for name in ("qmp", "serial"):
+            streams[name], peers[name] = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+            peers[name].settimeout(1)
+        channels = guard._ReadChannels(streams, raw)
+        def send(name):
+            try:
+                peers[name].sendall(wire[name])
+            except BaseException as error:
+                failures.append(str(error))
+            finally:
+                peers[name].close()
+        lifetime = Lifetime()
+        window = lifetime.begin("install")
+        try:
+            for name in ("qmp", "serial"):
+                worker = threading.Thread(target=send, args=(name,))
+                worker.start()
+                workers.append(worker)
+            channels.drain(lifetime, window)
+            self.assertEqual(channels.eof, {"qmp", "serial"})
+            self.assertEqual(channels.errors, [])
+            for name in ("stdout", "stderr", "rss"):
+                raw.eof(name)
+        finally:
+            channels.close()
+            for worker in workers:
+                worker.join(2)
+                self.assertFalse(worker.is_alive())
+            raw.close()
+        self.assertEqual(failures, [])
+        for name, data in wire.items():
+            self.assertGreater(len(data), 65536)
+            self.assertEqual((directory / (name + ".raw")).read_bytes(), data)
+        self.assertTrue(json.loads(raw.ledger.snapshot())["reported_capture_complete"])
+        self.retain_io(directory, raw, {"socket_closes": channels.closes, "socket_eof": sorted(channels.eof)})
+
+    def test_terminal_read_clock_failure_preserves_missing_eof_and_both_closes(self):
+        from qualification.lifetime import Lifetime, Refusal
+        guard, raw, directory = self.raw_fixture("terminal-clock")
+        streams, peers = {}, {}
+        for name in ("qmp", "serial"):
+            streams[name], peers[name] = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+        channels = guard._ReadChannels(streams, raw)
+        lifetime = Lifetime()
+        window = lifetime.begin("install")
+        try:
+            with mock.patch.object(lifetime, "now", side_effect=Refusal("synthetic clock failure")):
+                channels.drain(lifetime, window)
+        finally:
+            channels.close()
+            for peer in peers.values():
+                peer.close()
+            raw.close()
+        self.assertEqual(channels.eof, set())
+        self.assertEqual(channels.closes, {"qmp": "closed", "serial": "closed"})
+        self.assertTrue(channels.errors)
+        self.assertFalse(json.loads(raw.ledger.snapshot())["reported_capture_complete"])
+        self.retain_io(directory, raw, {"socket_closes": channels.closes, "socket_eof": [],
+                                       "drain_errors": channels.errors})
+
+    def test_terminal_recv_error_stops_work_and_other_channel_still_drains(self):
+        from qualification.lifetime import Lifetime
+        guard, raw, directory = self.raw_fixture("one-channel-read-error")
+        streams, peers = {}, {}
+        wire = {"qmp": b'{"unobserved":"read fails"}\n', "serial": b"retained independent tail"}
+        for name in ("qmp", "serial"):
+            streams[name], peers[name] = socket.socketpair(socket.AF_UNIX, socket.SOCK_STREAM)
+            self.assertEqual(peers[name].send(wire[name]), len(wire[name]))
+            peers[name].shutdown(socket.SHUT_WR)
+        channels = guard._ReadChannels(streams, raw)
+        lifetime = Lifetime()
+        window = lifetime.begin("install")
+        original_recv = socket.socket.recv
+        def read(stream, size):
+            if stream is streams["qmp"]:
+                raise OSError(5, "synthetic recv failure")
+            return original_recv(stream, size)
+        try:
+            with mock.patch.object(socket.socket, "recv", new=read):
+                channels.drain(lifetime, window)
+            self.assertEqual(channels.eof, {"serial"})
+            self.assertFalse(raw.failed)  # Gate must inspect channel errors too.
+            with self.assertRaisesRegex(guard.Refusal, "Transport capture/read failed"):
+                channels.require_healthy()
+        finally:
+            channels.close()
+            for peer in peers.values():
+                peer.close()
+            raw.close()
+        self.assertEqual((directory / "qmp.raw").read_bytes(), b"")
+        self.assertEqual((directory / "serial.raw").read_bytes(), wire["serial"])
+        self.assertEqual(channels.closes, {"qmp": "closed", "serial": "closed"})
+        self.assertFalse(json.loads(raw.ledger.snapshot())["reported_capture_complete"])
+        self.retain_io(directory, raw, {"socket_closes": channels.closes, "socket_eof": sorted(channels.eof),
+                                       "drain_errors": channels.errors})
+
+    def test_original_stop_serializes_with_consuming_wait_and_cannot_return(self):
+        from types import SimpleNamespace
+        guard = self.support_module("host_guard")
+        held = guard._Held()
+        held.pid, held.proc = 42424245, SimpleNamespace(returncode=None)
+        entered, release, late_stop = threading.Event(), threading.Event(), []
+        def wait(*_):
+            entered.set()
+            if not release.wait(1):
+                raise RuntimeError("synthetic wait release missing")
+            return held.pid, 0, None
+        with mock.patch.object(guard, "_now", return_value=100), \
+                mock.patch.object(guard.os, "waitid", return_value=None), \
+                mock.patch.object(guard.os, "wait4", side_effect=wait) as waited, \
+                mock.patch.object(guard.os, "kill") as killed:
+            owner = threading.Thread(target=held.finish, args=(200, lambda *_: None))
+            owner.start()
+            contender = None
+            try:
+                self.assertTrue(entered.wait(1))
+                contender = threading.Thread(target=lambda: late_stop.append(held.stop()))
+                contender.start()
+            finally:
+                release.set()
+                owner.join(2)
+                if contender is not None:
+                    contender.join(2)
+            self.assertFalse(owner.is_alive())
+            self.assertFalse(contender.is_alive())
+            self.assertTrue(held.consumed and held.sealed)
+            self.assertFalse(held.lost)
+            self.assertEqual(late_stop, [False])
+            self.assertEqual(held.errors, [])
+            waited.assert_called_once_with(42424245, guard.os.WNOHANG)
+            killed.assert_called_once_with(42424245, guard.signal.SIGKILL)

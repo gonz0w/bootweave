@@ -6,25 +6,21 @@ External records are reported evidence, not authenticated native facts. There is
 no authority issuer here, and every Admission.native_admitted remains False.
 Positive pure-model decisions neither authorize effects nor validate inventory.
 
-A separately reviewed integration must bind host_guard's lifetime to this exact
-origin and independently bound blocking calls. Calling watchdog is not itself an
-independent watchdog. No proof of fresh authority, native observation, aggregate
+The dormant host guard now borrows this exact lifetime, including cancellation;
+blocking owner operations still need an external watchdog. Calling watchdog is
+not itself an independent watchdog. No proof of fresh authority, native observation, aggregate
 allocation, transport completeness or terminal closure is invented here.
 """
 from dataclasses import dataclass, field, replace
 import math
 import re
-import time
 from types import MappingProxyType
+from qualification.lifetime import Lifetime
 
 STATUS = "SOURCE_ONLY_NOT_EXECUTION_READY_OR_AUTHORIZED"
 CANONICAL = "92166f07fd79c9d356ef3e1ed704eaeeed8653e4"
 RUNTIME_TREE = "79060329e9d06283a95c247c9245bbdd60ac9081"
 RUNTIME_BINDING_SHA256 = "6d537a176ef58cac2ea0ad4b91822dea32bf51928220c265cfb7bcc995bad797"
-CAMPAIGN_SECONDS = 10800
-LAUNCH_SECONDS = 3600
-WORK_SECONDS = 2700
-CLOSURE_SECONDS = 900
 MAX_BINDINGS = 512
 MAX_RECORDS = 32
 MAX_POLLS = 131072
@@ -45,7 +41,8 @@ REQUIRED_SOURCE = frozenset((
     "src/private_span.h", "src/private_start_material.h", "src/signature_platform.c",
     "src/signature_verify.c", "src/signature_verify.h", "src/trusted_start.c", "src/trusted_start.h",
     "tests/qualification/coordinator.py", "tests/qualification/transport.py",
-    "tests/qualification/accounting.py",
+    "tests/qualification/accounting.py", "tests/qualification/lifetime.py",
+    "tests/qualification/__init__.py",
     "tests/qualification/host_guard.py", "tests/qualification/prepare.py",
     "tests/qualification/compiler_guard.c", "tests/qualification/native_supervisor.c",
     "tests/qualification/entry_probe.c", "tests/qualification/limit_probe.c",
@@ -56,8 +53,7 @@ REQUIRED_SOURCE = frozenset((
 ))
 MISSING = (
     "Fresh exact native execution authority and independently reviewed issuer",
-    "Exact shared original-clock/private cancellation integration with host_guard",
-    "Independent watchdog bounding blocking operations and effect quiescence",
+    "External watchdog bounding blocked coordinator operations and effect quiescence",
     "Supported exact QMP inventory/resume semantics and independent paused inventory",
     "Authentication and independent interpretation of actual external stage seals",
     "Canonical34-source actual before/after byte proof against the frozen runtime binding",
@@ -75,13 +71,6 @@ class NativeAuthority:
     """Deliberately unissuable here. Plan/source approval is not this authority."""
     def __new__(cls, *args, **kwargs):
         raise Refusal("Fresh native authority integration is not implemented")
-
-
-def _stamp():
-    value = time.monotonic()
-    if not math.isfinite(value) or value < 0:
-        raise Refusal("CLOCK")
-    return value
 
 
 def _digest(value):
@@ -189,8 +178,9 @@ class Coordinator:
         if _created:
             raise Refusal("ONCE")
         _created = True  # Even clock failure cannot renew this process lifetime.
-        self._origin = self._last = _stamp()
-        self._end = self._origin + CAMPAIGN_SECONDS
+        self._lifetime = Lifetime()
+        self._origin = self._lifetime.origin
+        self._end = self._lifetime.end
         self._cancelled, self._failure, self._uncertain = False, "", False
         self._phase, self._phase_origin, self._work_end, self._phase_end = "campaign", None, None, None
         self._attempts, self._accepted, self._tried, self._records = (), (), (), ()
@@ -205,6 +195,11 @@ class Coordinator:
         """Read-only clock witness; never accepted as an origin selector."""
         return self._origin
 
+    @property
+    def lifetime(self):
+        """Same object borrowed by the host guard, never a copied clock seed."""
+        return self._lifetime
+
     def _fail(self, reason, uncertain=False):
         if not self._failure:
             self._failure = reason
@@ -212,10 +207,7 @@ class Coordinator:
 
     def _now(self):
         try:
-            now = _stamp()
-            if now < self._last:
-                raise Refusal("CLOCK")
-            self._last = now
+            now = self._lifetime.now()
             if now >= self._end:
                 self._fail("CAMPAIGN_DEADLINE")
             return now
@@ -224,6 +216,7 @@ class Coordinator:
             raise
 
     def cancel(self):
+        self._lifetime.cancel()
         self._cancelled = True  # No clear/reset method, including between phases.
         self._fail("CANCELLED")
 
@@ -304,9 +297,9 @@ class Coordinator:
                     self._accepted != STAGES[self._phase]:
                 raise Refusal("PHASE_ORDER")
             self._attempts += (phase,)  # No repeat or renewal after preparation failure.
-            self._phase, self._phase_origin = phase, now
-            self._phase_end = min(now + LAUNCH_SECONDS, self._end)
-            self._work_end = min(now + WORK_SECONDS, self._phase_end - CLOSURE_SECONDS)
+            window = self._lifetime.begin(phase)
+            self._phase, self._phase_origin = phase, window.origin
+            self._phase_end, self._work_end = window.end, window.work_end
             self._accepted, self._custody = (), None
             if now >= self._work_end:
                 raise Refusal("NO_WORK_WINDOW")
@@ -350,6 +343,8 @@ class Coordinator:
     def watchdog(self):
         """Data only. An independent external watchdog must enforce these stops."""
         self._polls += 1
+        if self._lifetime.cancelled:
+            self.cancel()
         if self._polls > MAX_POLLS:
             self._fail("POLL_BOUND", True)
         try:
