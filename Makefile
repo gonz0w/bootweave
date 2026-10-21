@@ -6,7 +6,7 @@ PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c
 
 build: bin/bootweave
 
-bin/bootweave: $(PLAN_SOURCES) src/plan.h
+bin/bootweave: $(PLAN_SOURCES) src/plan.h src/private_cli.h
 	mkdir -p bin
 	$(CC) $(CFLAGS) -Isrc $(PLAN_SOURCES) -o $@
 

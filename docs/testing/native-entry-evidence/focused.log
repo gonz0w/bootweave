@@ -1,0 +1,8 @@
+test_boundary_literal_corpus (test_native_entry.NativeEntryTests.test_boundary_literal_corpus) ... ok
+test_cli_literal_corpus (test_native_entry.NativeEntryTests.test_cli_literal_corpus) ... ok
+test_source_closed_symbols_and_accounting (test_native_entry.NativeEntryTests.test_source_closed_symbols_and_accounting) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 14.621s
+
+OK

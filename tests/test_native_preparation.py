@@ -138,9 +138,16 @@ class NativePreparationTests(unittest.TestCase):
         directory = native_cases.prepare()
         try:
             self.assertEqual(directory.stat().st_mode & 0o777, 0o700)
+            # Historical qualification binds its original inputs, not this new source.
+            self.assertEqual(hashlib.sha256((ROOT / "docs/testing/project-plan-native-bindings.txt").read_bytes()).hexdigest(),
+                             "4eabc5e50a4a8bcbc966b40cf2b7241be4cc2de2d130ef630718ec63d7372c0f")
             self.assertEqual((directory / "SHA256").read_bytes(),
-                             (ROOT / "docs/testing/project-plan-native-bindings.txt").read_bytes())
+                             (ROOT / "docs/testing/native-entry-evidence/planner-source-bindings.txt").read_bytes())
             entries = (directory / "SHA256").read_text().splitlines()
+            self.assertEqual({p.name for p in directory.iterdir()},
+                             {"SHA256", *(line.removeprefix("SHA256 (").split(") = ")[0] for line in entries)})
+            for source in ("main.c", "private_cli.h", "plan.c", "plan.h", "plan_io.c", "native.c"):
+                self.assertEqual((directory / source).read_bytes(), (ROOT / "src" / source).read_bytes())
             for entry in entries:
                 name, digest = entry.removeprefix("SHA256 (").split(") = ")
                 self.assertEqual(hashlib.sha256((directory / name).read_bytes()).hexdigest(), digest)

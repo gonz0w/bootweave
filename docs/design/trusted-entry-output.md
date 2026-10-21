@@ -9,7 +9,9 @@ campaign, runtime/security activation or deployment is adopted here.
 
 The owner subsequently approved the complete source-budget package on 2026-10-20:
 96 KiB whole source, 16 KiB authenticated review/output, 10 KiB trusted entry and 8 KiB
-capture. All other component and runtime ceilings remain unchanged. These limits
+capture. After the complete native/CLI fit assessment, the owner approved
+100 KiB whole and16 KiB entry; all other component and runtime ceilings remain
+unchanged. Historical measurements below retain their earlier caps. These limits
 measure source text, not storage, resource sufficiency or native qualification.
 Count every runtime C/header regardless of directory, shared headers once in the
 whole tree and in full in every using component. No minification or hidden source.

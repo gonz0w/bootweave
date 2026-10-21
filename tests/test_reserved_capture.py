@@ -185,4 +185,4 @@ class ReservedCaptureTests(unittest.TestCase):
         self.assertLessEqual(sum((ROOT / "src" / name).stat().st_size for name in
             ("auth_input.c", "auth_input.h")), 8 * 1024)
         self.assertLessEqual(sum(path.stat().st_size for path in (ROOT / "src").rglob("*")
-                                 if path.suffix in (".c", ".h")), 96 * 1024)
+                                 if path.suffix in (".c", ".h")), 100 * 1024)

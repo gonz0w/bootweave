@@ -9,6 +9,8 @@ The planner has an accepted metadata contract, portable tests and completed boun
 OpenBSD 7.9 amd64 BIOS/TCG planner qualification with exact fixture teardown.
 A disposable research image boots the synthetic UI. No
 production installer, runtime service, supported hardware profile or release exists yet.
+Historical planner evidence binds its recorded source; the current legacy-wrapper/header
+preparation is source-only and does not inherit native acceptance.
 Project: [gonz0w/bootweave](https://github.com/gonz0w/bootweave).
 The maintainer approved the name and public repository on 2026-10-11.
 
@@ -37,6 +39,7 @@ and extension interfaces remain separate designs.
 - [Internal content-review model and plain-text renderer](docs/design/content-review.md) and [portable evidence](docs/testing/content-review-host.md) (signature authentication unestablished; no CLI or operation authority)
 - [Internal fused authenticated-review contract](docs/design/authenticated-composition.md) and [portable evidence](docs/testing/authenticated-composition-host.md) (real internal pipeline with inert verifier double; no CLI, native qualification or operation authority)
 - [Trusted entry/output design and internal process guard](docs/design/trusted-entry-output.md), [guard evidence](docs/testing/trusted-start-host.md) and [closed fixed-output evidence](docs/testing/authenticated-output-host.md); [reservation-bound capture](docs/testing/reserved-capture-host.md) and [closed startup lifetime](docs/testing/start-lifetime-host.md) preserve one pre-timer origin, permanent cancellation flag and failure uncertainty. [Closed entry ownership](docs/testing/entry-ownership-host.md) composes sole input/material/final-boundary responsibility (unlinked; the normal entry boundary refuses, and CLI/confinement/native qualification remain gated).
+- [Source-only native boundary and review dispatcher](docs/design/native-entry-source.md) and [portable evidence](docs/testing/native-entry-host.md); production retains its legacy planner and unconditional entry refusal. Locked native handoff and CLI activation remain qualification gates.
 - [Security boundaries](docs/security/threat-model.md) and [debugging](docs/debugging.md)
 - [Research and decisions](docs/research/openbsd-installers.md)
 - [First native profile design](docs/design/native-profile/PRD.md) (proposed)

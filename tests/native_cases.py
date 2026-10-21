@@ -148,7 +148,7 @@ def artifacts():
 def prepare():
     (ROOT / ".tools").mkdir(exist_ok=True)
     files = artifacts()
-    names = ["src/main.c", "src/plan.c", "src/plan.h", "src/plan_io.c", "src/native.c",
+    names = ["src/main.c", "src/private_cli.h", "src/plan.c", "src/plan.h", "src/plan_io.c", "src/native.c",
              "tests/native_check.c", "tests/native_probe.c", "tests/native_faults.c", "tests/native_compile.c",
              "tests/plan_faults.c", "tests/plan_unit.c", "tests/native_build.sh",
              "tests/native_run.sh"]
