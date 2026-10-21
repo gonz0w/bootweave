@@ -22,7 +22,8 @@ HELPERS = tuple("tests/qualification/" + name for name in (
     "entry_probe.c", "limit_probe.c", "forwarder.c", "oracles.json",
     "oracle_notes.md", "README.md", "runtime-bindings.json", "prepare.py",
     "compiler_guard.c", "native_supervisor.c", "trace_limits.c", "trace_limits.h",
-    "trace_model.c", "trace_oracles.json", "host_guard.py", "next-step.md"))
+    "trace_model.c", "trace_oracles.json", "host_guard.py", "next-step.md", "accounting.py",
+    "coordinator.py", "transport.py"))
 FIXTURES = ("tests/fixtures/policy-definition.json", "tests/fixtures/policy-payload.txt")
 
 

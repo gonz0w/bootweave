@@ -316,3 +316,282 @@ class QualificationPreparationTests(unittest.TestCase):
                     self.assertLessEqual(previous[column], value)
                     self.assertLessEqual(value, 256)
                 previous = counts
+
+    def support_module(self, name):
+        spec = importlib.util.spec_from_file_location("nq_support_" + name,
+            ROOT / "tests/qualification" / (name + ".py"))
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        return module
+
+    def coordinator_bindings(self, support):
+        # Synthetic reported records exercise comparisons, never native facts.
+        return tuple(support.Binding("source", name, len(data), hashlib.sha256(data).hexdigest())
+                     for name, data in sorted(self.source_files.items())) + (
+            support.Binding("tool", "model-tool", 1, "a" * 64),
+            support.Binding("input", "model-input", 1, "b" * 64),
+            support.Binding("recipe", "model-recipe", 1, "c" * 64))
+
+    def test_allocation_fixed_reservations_and_build_count(self):
+        support = self.support_module("accounting")
+        data = support.plan()
+        self.assertEqual(data["caps"], {"host": 20 * 1024**3, "guest": 27 * 1024**2})
+        self.assertEqual(data["reserved"]["guest"], 23 * 1024**2)
+        self.assertLess(data["reserved"]["host"], data["caps"]["host"])
+        self.assertEqual(data["compiler_calls"], 24)
+        self.assertEqual(data["compiler_jobs"], ["bootstrap", *self.preview["first_stage_jobs"]])
+        self.assertFalse(data["execution_ready"])
+
+    def test_allocation_samples_never_release_reservations_or_prove_peaks(self):
+        support = self.support_module("accounting")
+        ledger = support.Accounting()
+        ledger.observe("guest.compiler-tmp", 100, 4096, "a" * 64)
+        before = ledger.report()
+        ledger.observe("guest.compiler-tmp", 0, 0, "b" * 64)
+        after = ledger.report()
+        self.assertEqual(after["latest_charged_bytes"]["guest.compiler-tmp"], 0)
+        self.assertEqual(after["maximum_observed_bytes"]["guest.compiler-tmp"], 4096)
+        self.assertEqual(after["sample_decreases"], ["guest.compiler-tmp"])
+        self.assertEqual(before["reservations_held"], after["reservations_held"])
+        self.assertFalse(after["logical_or_sampled_fit_proves_high_water"])
+        self.assertFalse(after["execution_ready"])
+        after["observations"][0]["logical_bytes"] = 999
+        self.assertEqual(ledger.report()["observations"][0]["logical_bytes"], 100)
+
+    def test_allocation_failures_are_sticky_and_oversize_is_retained(self):
+        support = self.support_module("accounting")
+        ledger = support.Accounting()
+        with self.assertRaises(support.Refusal):
+            ledger.observe("guest.cases", 1024**2 + 1, 0, "a" * 64)
+        report = ledger.report()
+        self.assertEqual(report["observations"][0]["charged_bytes"], 1024**2 + 1)
+        self.assertTrue(report["failed"])
+        with self.assertRaises(support.Refusal):
+            ledger.observe("guest.cases", 0, 0, "b" * 64)
+        self.assertEqual(len(ledger.report()["observations"]), 1)
+        for role, logical, physical, digest in (("missing", 0, 0, "a" * 64),
+                ("host.metadata", True, 0, "a" * 64), ("host.metadata", 0, -1, "a" * 64),
+                ("host.metadata", 0, 0, "not-a-seal")):
+            with self.subTest(role=role, logical=logical, physical=physical):
+                rejected = support.Accounting()
+                with self.assertRaises(support.Refusal):
+                    rejected.observe(role, logical, physical, digest)
+                self.assertTrue(rejected.report()["failed"])
+
+    def test_allocation_unknowns_and_finite_record_count_do_not_recover(self):
+        support = self.support_module("accounting")
+        for role in ("guest.compiler-tmp", [], "unknown"):
+            ledger = support.Accounting()
+            with self.assertRaises(support.Refusal):
+                ledger.unknown(role)
+            self.assertTrue(ledger.report()["failed"])
+            self.assertFalse(ledger.report()["execution_ready"])
+        ledger = support.Accounting()
+        for _ in range(256):
+            ledger.observe("host.metadata", 0, 0, "a" * 64)
+        with self.assertRaises(support.Refusal):
+            ledger.observe("host.metadata", 0, 0, "a" * 64)
+        self.assertEqual(len(ledger.report()["observations"]), 256)
+
+    def test_transport_retains_exact_raw_prefixes_without_inventory_authority(self):
+        support = self.support_module("transport")
+        ledger = support.Transport("install")
+        first, second = b'{"reported":', b'1}\n'
+        ticket = ledger.raw_read("qmp", 0, first)
+        self.assertEqual(ledger.publish_result(ticket, len(first), 0), ())
+        ticket = ledger.raw_read("qmp", len(first), second)
+        frames = ledger.publish_result(ticket, len(second), 0)
+        self.assertEqual(len(frames), 1)
+        self.assertEqual(frames[0].raw, first + second)
+        self.assertEqual(frames[0].sha256, hashlib.sha256(first + second).hexdigest())
+        opaque = b'\x00\xffprivate-console-control\x1b'
+        ticket = ledger.raw_read("serial", 0, opaque)
+        self.assertEqual(ledger.publish_result(ticket, len(opaque), 0), ())
+        for channel in support.CHANNELS:
+            offset = len(first + second) if channel == "qmp" else len(opaque) if channel == "serial" else 0
+            ledger.eof(channel, offset)
+            ledger.close_result(channel, 0, 0)
+        record = json.loads(ledger.snapshot())
+        self.assertTrue(record["reported_capture_complete"])
+        self.assertFalse(record["actual_channel_transport_supplied"])
+        self.assertEqual(record["charged"], len(first + second + opaque))
+        self.assertFalse(record["qmp_semantics_supported"])
+        report = ledger.inventory_report()
+        self.assertFalse(report.supported or report.valid or report.resume_eligible or report.native_authority)
+
+    def test_transport_partial_publication_and_close_never_restore_rights(self):
+        support = self.support_module("transport")
+        ledger = support.Transport("installed")
+        ticket = ledger.raw_read("stdout", 0, b"observed")
+        with self.assertRaises(support.Refusal):
+            ledger.publish_result(ticket, 3, 0)
+        record = json.loads(ledger.snapshot())
+        self.assertEqual(record["channels"]["stdout"]["observed"], 8)
+        self.assertEqual(record["channels"]["stdout"]["published"], 3)
+        self.assertTrue(record["uncertain"])
+        with self.assertRaises(support.Refusal):
+            ledger.publish_result(ticket, 8, 0)
+        with self.assertRaises(support.Refusal):
+            ledger.raw_read("stderr", 0, b"later")
+        ledger.eof("stdout", 8)
+        with self.assertRaises(support.Refusal):
+            ledger.close_result("stdout", -1, 4)
+        with self.assertRaises(support.Refusal):
+            ledger.close_result("stdout", 0, 0)
+        self.assertEqual(json.loads(ledger.snapshot())["channels"]["stdout"]["close"], "unknown")
+        invalid = support.Transport("install")
+        ticket = invalid.raw_read("stdout", 0, b"x")
+        with self.assertRaises(support.Refusal):
+            invalid.publish_result(ticket, -1, 2**31)
+        self.assertTrue(json.loads(invalid.snapshot())["uncertain"])
+        invalid = support.Transport("install")
+        invalid.eof("stdout", 0)
+        with self.assertRaises(support.Refusal):
+            invalid.close_result("stdout", -1, 2**31)
+        record = json.loads(invalid.snapshot())
+        self.assertEqual(record["channels"]["stdout"]["close"], "unknown")
+        self.assertEqual(record["channels"]["stdout"]["close_errno"], 0)
+
+    def test_transport_generic_json_errors_are_sticky_without_semantic_shortcuts(self):
+        support = self.support_module("transport")
+        for wire in (b'{"same":1,"same":2}\n', b'{"n":NaN}\n', b'[]\n', b'{"n":9223372036854775808}\n',
+                     b'{"a":' + b'[' * 33 + b'0' + b']' * 33 + b'}\n', b'{"x":"\xff"}\n'):
+            ledger = support.Transport("install")
+            ticket = ledger.raw_read("qmp", 0, wire)
+            with self.assertRaises(support.Refusal):
+                ledger.publish_result(ticket, len(wire), 0)
+            self.assertTrue(json.loads(ledger.snapshot())["framing_failed"])
+            self.assertFalse(ledger.inventory_report().resume_eligible)
+        ledger = support.Transport("install")
+        ticket = ledger.raw_read("qmp", 0, b'{"cut":')
+        ledger.publish_result(ticket, 7, 0)
+        with self.assertRaises(support.Refusal):
+            ledger.eof("qmp", 7)
+        self.assertTrue(json.loads(ledger.snapshot())["failed"])
+
+    def test_transport_caps_are_shared_across_channels_and_offsets_are_exact(self):
+        support = self.support_module("transport")
+        ledger = support.Transport("installed")
+        chunk = b"x" * 65536
+        offsets = {name: 0 for name in ("stdout", "serial")}
+        for index in range(160):
+            channel = "stdout" if index % 2 else "serial"
+            ticket = ledger.raw_read(channel, offsets[channel], chunk)
+            ledger.publish_result(ticket, len(chunk), 0)
+            offsets[channel] += len(chunk)
+        self.assertEqual(json.loads(ledger.snapshot())["charged"], 10 * 1024**2)
+        with self.assertRaises(support.Refusal):
+            ledger.raw_read("stdout", offsets["stdout"], b"x")
+        self.assertEqual(json.loads(ledger.snapshot())["charged"], 10 * 1024**2 + 1)
+        with self.assertRaises(support.Refusal):
+            support.Transport("installed").raw_read("serial", True, b"x")
+
+    def test_coordinator_exact_bindings_and_order_are_structural_only(self):
+        support = self.support_module("coordinator")
+        binding = support.Binding("source", "fixed.c", 1, "a" * 64)
+        support.compare_bindings((binding,), (binding,))
+        with self.assertRaises(support.Refusal):
+            support.compare_bindings((binding,), (support.Binding("source", "fixed.c", 1, "b" * 64),))
+        with self.assertRaises(support.Refusal):
+            support.binding_set((binding, binding))
+        accepted = ()
+        for stage in support.STAGES["installed"]:
+            accepted = support.model_order("installed", accepted, stage)
+        with self.assertRaises(support.Refusal):
+            support.model_order("installed", (), "closed")
+        evidence = support.Evidence("campaign", "preflight", "c" * 64, (binding,), 10)
+        self.assertTrue(support.model_evidence("campaign", "preflight", (binding,), evidence, 9, 11))
+        with self.assertRaises(support.Refusal):
+            support.model_evidence("campaign", "preflight", (binding,), evidence, 11, 12)
+        with self.assertRaises(support.Refusal):
+            support.NativeAuthority()
+
+    def test_coordinator_single_lifetime_cancellation_and_unknown_custody(self):
+        support = self.support_module("coordinator")
+        with mock.patch.object(support.time, "monotonic", return_value=100):
+            coordinator = support.Coordinator()
+            with self.assertRaises(support.Refusal):
+                support.Coordinator()
+            self.assertFalse(coordinator.admission("prepare", {"approved": True}).native_admitted)
+            coordinator.cancel()
+            decision = coordinator.watchdog()
+            self.assertTrue(decision.cancelled and decision.work_closed)
+            self.assertFalse(decision.native_admitted)
+            with self.assertRaises(TypeError):
+                bool(decision)
+            with self.assertRaises(support.Refusal):
+                coordinator.begin_phase("install")
+        other = self.support_module("coordinator")
+        with mock.patch.object(other.time, "monotonic", return_value=100):
+            coordinator = other.Coordinator()
+            with self.assertRaises(other.Refusal):
+                coordinator.report_custody("install", "a" * 64, consumed=True, lost=False, close_unknown=False)
+            self.assertTrue(coordinator.watchdog().uncertain)
+        other = self.support_module("coordinator")
+        with mock.patch.object(other.time, "monotonic", return_value=100):
+            coordinator = other.Coordinator()
+            bindings = self.coordinator_bindings(other)
+            coordinator.record(bindings, other.Evidence("campaign", "preflight", "a" * 64, bindings, 100))
+            with self.assertRaisesRegex(other.Refusal, "RECEIPT_REUSE"):
+                coordinator.record(bindings, other.Evidence("campaign", "prepared", "a" * 64, bindings, 100))
+        for consumed, lost, stop in ((True, False, False), (False, True, False), (False, False, True)):
+            other = self.support_module("coordinator")
+            with mock.patch.object(other.time, "monotonic", return_value=100):
+                coordinator = other.Coordinator()
+                bindings = self.coordinator_bindings(other)
+                for stage, digest in zip(other.STAGES["campaign"], ("a" * 64, "b" * 64)):
+                    coordinator.record(bindings, other.Evidence("campaign", stage, digest, bindings, 100))
+                coordinator.begin_phase("install")
+                coordinator.report_custody("install", "c" * 64,
+                    consumed=consumed, lost=lost, close_unknown=True)
+                decision = coordinator.watchdog()
+                self.assertTrue(decision.uncertain)
+                self.assertEqual(decision.stop_required, stop)
+                self.assertFalse(decision.native_admitted)
+
+    def test_coordinator_unsupported_inventory_and_original_deadline_never_resume(self):
+        support = self.support_module("coordinator")
+        clock = [100.0]
+        with mock.patch.object(support.time, "monotonic", side_effect=lambda: clock[0]):
+            coordinator = support.Coordinator()
+            bindings = self.coordinator_bindings(support)
+            for stage, digest in zip(support.STAGES["campaign"], ("d" * 64, "f" * 64)):
+                evidence = support.Evidence("campaign", stage, digest, bindings, clock[0])
+                self.assertFalse(coordinator.record(bindings, evidence).native_admitted)
+            coordinator.begin_phase("install")
+            clock[0] += 1
+            with self.assertRaisesRegex(support.Refusal, "INVENTORY_UNSUPPORTED"):
+                coordinator.record(bindings, support.Evidence("install", "paused-inventory", "e" * 64, bindings, clock[0]))
+            self.assertFalse(coordinator.admission("resume").native_admitted)
+            self.assertEqual(coordinator.origin, 100)
+        # Independent unpoisoned controls: unsupported inventory must not mask
+        # the exact work/total deadline comparisons under test.
+        fresh = self.support_module("coordinator")
+        clock[0] = 100
+        with mock.patch.object(fresh.time, "monotonic", side_effect=lambda: clock[0]):
+            coordinator = fresh.Coordinator()
+            bound = tuple(fresh.Binding(row.kind, row.name, row.size, row.sha256) for row in bindings)
+            for stage, digest in zip(fresh.STAGES["campaign"], ("a" * 64, "b" * 64)):
+                coordinator.record(bound, fresh.Evidence("campaign", stage, digest, bound, clock[0]))
+            coordinator.begin_phase("install")
+            clock[0] = 2799.999
+            before = coordinator.watchdog()
+            self.assertFalse(before.work_closed or before.stop_required)
+            self.assertTrue(before.model_eligible)
+            clock[0] = 2800
+            exact = coordinator.watchdog()
+            self.assertTrue(exact.work_closed and exact.stop_required)
+            self.assertEqual(exact.first_failure, "")
+            clock[0] = 3699.999
+            self.assertEqual(coordinator.watchdog().first_failure, "")
+            clock[0] = 3700
+            self.assertEqual(coordinator.watchdog().first_failure, "TOTAL_DEADLINE")
+        fresh = self.support_module("coordinator")
+        clock[0] = 100
+        with mock.patch.object(fresh.time, "monotonic", side_effect=lambda: clock[0]):
+            coordinator = fresh.Coordinator()
+            clock[0] = 10899.999
+            self.assertFalse(coordinator.watchdog().work_closed)
+            clock[0] = 10900
+            self.assertTrue(coordinator.watchdog().work_closed)

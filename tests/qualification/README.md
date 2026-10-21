@@ -48,6 +48,20 @@ refuses, readiness remains zero and no review CLI is activated.
   consuming wait. The five capture channels share10 MiB per launch,20 MiB across
   two launches. It supplies no QMP/serial sender, resume/inventory admission,
   provisioning coordinator, target creator or execution-ready campaign.
+- `coordinator.py` prepares a separate pure state/lifetime model: exact reported
+  binding-set comparisons, once-only phase/stage order, sticky cancellation and
+  custody uncertainty, and data-only deadline/stop decisions. It issues no native
+  authority and implements no independent watchdog or host-clock integration.
+- `transport.py` accounts reported raw prefixes across five channels with one
+  10 MiB per-launch budget, once-only publication/close outcomes and bounded
+  generic JSON-object framing. It supplies no socket/channel transport, QMP
+  command/reply/event validation, inventory whitelist or resume authority. The
+  installed QEMU README supplies no exact QMP schema; unsupported inventory is
+  always invalid and ineligible for resume, even after complete reported capture.
+- `accounting.py` reserves 10 GiB plus 22 MiB on the host and 23 MiB in the guest,
+  within unchanged 20 GiB/27 MiB ceilings. Its bounded sampled ledger preserves
+  oversize reports, maxima and decreases without releasing reservations. It
+  supplies no allocator/quota API, complete inventory or high-water proof.
 - `trace_limits.c/.h` implement the approved companion-only paired FSIZE
   substitution. Only `trusted_start.c` and `signature_platform.c` are renamed in
   separate objects; the wrapper object calls the real OS functions. One parent
@@ -112,6 +126,15 @@ current holds it must not be dispatched again without a current exact exception
 or independently reviewed equivalent complete coverage that avoids those effects.
 The historical 220-test pass is evidence for its original head only, not a fresh
 full gate for this continuation. No partial run is renamed `make verify`.
+
+A complete retained-coverage revision cannot currently replace that gate. The
+reviewed public corpus lacks two signer public records and four genuine
+signatures over three required archive messages: accepted 2,048-byte ustar,
+authenticated traversal 1,536-byte ustar and exact 1 MiB accepted input. Release
+signatures and format-only records do not establish those crypto positives.
+The test/controller temporary-directory lifetime and private-key diagnostic
+fixture also need reviewed retained/non-secret equivalents. No crypto positive
+is mocked, skipped or declared covered; no new key/signature is generated here.
 
 All runtime limits, failed evidence, primary worktrees and Vectivium holds remain
 unchanged. A passing portable preparation check is not native approval, native

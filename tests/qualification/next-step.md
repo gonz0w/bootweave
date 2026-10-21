@@ -42,6 +42,9 @@ Per-file compiler ceilings and sampled observations alone do not prove the guest
 aggregate or compiler temporary high-water bound. The final coordinator/allocation
 ledger must enforce that bound before this proposal can become execution-ready;
 the stated 27 MiB is a ceiling, not a demonstrated fit or a silent allowance.
+The new source-only accounting model assigns 23 MiB of guest reservations and
+10 GiB plus 22 MiB of host reservations. Unreserved space grants no additional
+allocation permission, and sample decreases never release existing reservations.
 
 `compiler_guard.c` holds its original unreaped compiler/group until the last
 authorized stop before one consuming wait. `native_supervisor.c` holds each
@@ -71,6 +74,15 @@ for native execution authority:
    immutable execution packet review. A missing later-stage hash is an explicit
    blocking staged seal, never a guessed value or automatic permission to continue.
 
+Pure coordinator state/watchdog decisions and raw-observation/framing models are
+now prepared. They remain separate from actual host effects: the host guard does
+not yet share the model's original clock/cancellation lifetime, no independent
+watchdog bounds blocking operations, and no actual QMP/serial transport is
+supplied. Exact installed QMP schemas/whitelist facts are unavailable in the
+reviewed local documentation, so inventory and resume stay unsupported. A digest
+or correctly shaped caller record never converts that missing proof into native
+admission. No source-only module grants native authority.
+
 Fresh exact authority must cover new-file allocation, stock installation and
 same-target writes, one isolated guest root credential, existing stock nobody
 child-only privilege drop, actual per-process resource/timer/signal calls and
@@ -89,3 +101,10 @@ revision. The focused preparation selector is useful partial evidence and cannot
 replace that gate. PR #92 stays draft while applicable checks or native gates remain
 unsatisfied. There is no remaining trace-method decision; exact native execution
 approval comes only after these concrete bindings are complete.
+
+The reviewed retained-coverage feasibility assessment found the genuine public
+crypto fixtures missing: four signatures across two signers for three messages
+(2,048-byte accepted ustar, 1,536-byte traversal ustar and exact 1 MiB accepted
+archive). A replacement must also preserve lifetime, failure, permissions,
+descriptor and private-diagnostic coverage without private keys or fixture
+disposal. No complete equivalent is implemented or claimed at this head.
