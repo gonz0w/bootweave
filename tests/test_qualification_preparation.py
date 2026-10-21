@@ -14,6 +14,8 @@ import test_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 ORACLES_SHA256 = "610a161c0c0d64bbebdd35d1584a0ec5234186bec3b2c453f50ffbbf40381f73"
+TRACE_ORACLES_SHA256 = "7684d2ddca3369af32ffecba33e3de53369dc9856a2a301433e6c38f8cf08b47"
+ORACLE_GATES_SHA256 = "089022ea7d7ca37a903fcb7c0ef84e18c35762bb9eb6cb48813a2ecfdb140131"
 
 
 class QualificationPreparationTests(unittest.TestCase):
@@ -75,8 +77,11 @@ class QualificationPreparationTests(unittest.TestCase):
             bundle = self.preparation.prepare()
         manifest = json.loads((bundle / "SOURCE-MANIFEST.json").read_text())
         self.assertTrue(manifest["source_only"])
-        expected = set(self.source_files) | {"BUILD-PREVIEW.json"}
+        expected = set(self.source_files) | {"BUILD-PREVIEW.json", "BUILD-JOBS.h", "ORACLE-GATES.h",
+                                           "inputs/definition.bin", "inputs/signature.bin", "inputs/payload.bin"}
         self.assertEqual(set(manifest["files"]), expected)
+        self.assertEqual(hashlib.sha256((bundle / "ORACLE-GATES.h").read_bytes()).hexdigest(),
+                         ORACLE_GATES_SHA256)
         self.assertEqual({str(p.relative_to(bundle)) for p in bundle.rglob("*") if p.is_file()},
                          expected | {"SOURCE-MANIFEST.json"})
         for name, row in manifest["files"].items():
@@ -96,8 +101,24 @@ class QualificationPreparationTests(unittest.TestCase):
             self.assertFalse(any(arg.startswith("-D") for arg in job["argv"]))
             self.assertNotIn("src/main.c", job["argv"])
             self.assertNotIn("src/entry_cli.c", job["argv"])
-            self.assertEqual("src/entry_platform.c" in job["argv"], not job["name"].startswith("forwarded"))
+            if job["name"] not in ("closed-dynamic", "limits-dynamic"):
+                self.assertEqual("src/entry_platform.c" in job["argv"], not job["name"].startswith("forwarded"))
             self.assertEqual("tests/qualification/forwarder.c" in job["argv"], job["name"].startswith("forwarded"))
+        self.assertEqual(len(build["first_stage_jobs"]), 23)
+        self.assertEqual(build["first_stage_jobs"][-3:], ["supervisor", "closed-dynamic", "limits-dynamic"])
+        self.assertEqual(len(build["auxiliary_jobs"]), 21)
+        by_name = {job["name"]: job for job in build["jobs"] + build["auxiliary_jobs"]}
+        self.assertEqual(sum(by_name[name]["slot_seconds"] for name in build["first_stage_jobs"]), 950)
+        self.assertEqual(build["first_stage_build_batch"]["file_ceiling_bytes"], 262144)
+        self.assertEqual(120 + 950 + 130, build["first_stage_build_batch"]["wall_seconds"])
+        self.assertEqual(len(build["trace_jobs"]), 5)
+        for job in build["jobs"] + build["auxiliary_jobs"]:
+            self.assertFalse(any(arg.startswith("-D") for arg in job["argv"]))
+        renamed = [job for job in build["trace_jobs"] if "-Dgetrlimit=bw_nq_trace_getrlimit" in job["argv"]]
+        self.assertEqual([job["name"] for job in renamed], ["trace-start", "trace-child"])
+        wrapper = next(job for job in build["trace_jobs"] if job["name"] == "trace-limits")
+        self.assertFalse(any(arg.startswith("-D") for arg in wrapper["argv"]))
+        self.assertEqual((bundle / "inputs/signature.bin").read_bytes(), b"unsigned closed-entry fixture\n")
 
     def test_changed_runtime_refuses_before_output_namespace(self):
         root = self.source_root()
@@ -145,9 +166,9 @@ class QualificationPreparationTests(unittest.TestCase):
             self.preparation.prepare()
         bundles = list((root / ".tools").iterdir())
         self.assertEqual(len(bundles), 1)
-        self.assertEqual([p.name for p in bundles[0].iterdir()], ["BUILD-PREVIEW.json"])
-        self.assertEqual((bundles[0] / "BUILD-PREVIEW.json").read_bytes(),
-                         (json.dumps(self.preview, sort_keys=True, indent=2) + "\n").encode())
+        self.assertEqual([p.name for p in bundles[0].iterdir()], ["BUILD-JOBS.h"])
+        self.assertEqual((bundles[0] / "BUILD-JOBS.h").read_bytes(),
+                         self.preparation.jobs_header(self.preview))
 
     def test_native_body_syntax_and_unsupported_main_functions(self):
         objects = []
@@ -180,3 +201,118 @@ class QualificationPreparationTests(unittest.TestCase):
         binary = self.directory / "forwarder"
         self.execute(self.flags + [str(check), str(forward), "-o", str(binary)], compile_job=True)
         self.assertEqual(self.execute([str(binary)]), b"NQ_FORWARD_REFUSAL 0 -1\n")
+
+    def test_prepared_native_witnesses_refuse_on_host(self):
+        (self.directory / "BUILD-JOBS.h").write_bytes(self.preparation.jobs_header(self.preview))
+        header = self.preparation.oracle_header(self.source_files["tests/qualification/oracles.json"])
+        self.assertEqual(hashlib.sha256(header).hexdigest(), ORACLE_GATES_SHA256)
+        (self.directory / "ORACLE-GATES.h").write_bytes(header)
+        flags = self.flags + ["-I", str(self.directory)]
+        wrapper = self.directory / "guard-refusal-wrapper.c"
+        wrapper.write_text('#include <stdio.h>\nint nq_probe_main(int,char **);\n'
+                           'int main(int argc,char **argv) { int result=nq_probe_main(argc,argv);\n'
+                           'printf("NQ_HOST_STATUS %d\\n",result); return result==77?0:1; }\n')
+        for label, name in (("compiler", "compiler_guard.c"), ("supervisor", "native_supervisor.c")):
+            source = ROOT / "tests/qualification" / name
+            self.execute(flags + ["-DBW_NQ_SOURCE_CHECK", "-fsyntax-only", str(source)], compile_job=True)
+            obj, binary = self.directory / (label + ".o"), self.directory / label
+            self.execute(flags + ["-Dmain=nq_probe_main", "-c", str(source), "-o", str(obj)], compile_job=True)
+            names = {row.split()[-1] for row in self.execute(["nm", "-u", str(obj)]).decode().splitlines()}
+            self.assertLessEqual(names, {"___stack_chk_fail", "___stack_chk_guard"})
+            self.execute(flags + [str(obj), str(wrapper), "-o", str(binary)], compile_job=True)
+            self.assertEqual(self.execute([str(binary)]), b"NQ_HOST_STATUS 77\n")
+
+    def test_dormant_host_role_plan_has_closed_selectors(self):
+        # Pure data only: never construct Campaign, inspect target files or launch.
+        spec = importlib.util.spec_from_file_location("nq_host_source", ROOT / "tests/qualification/host_guard.py")
+        guard = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(guard)
+        self.assertFalse(guard._campaign_created)
+        directory = {"path": "/q", "device": 1, "inode": 2, "uid": 501, "gid": 20, "mode": 0o700}
+        fixture = dict(directory, path="/q/" + guard.FIXTURE, inode=3)
+        def file_row(path, size=1, digest="0" * 64):
+            return {"path": path, "bytes": size, "sha256": digest, "device": 1, "inode": 4,
+                    "uid": 501, "gid": 20, "mode": 0o600, "nlink": 1, "mtime_ns": 1, "ctime_ns": 1}
+        files = {name: file_row("/tools/" + name, size, digest)
+                 for name, (size, digest) in guard.PINS.items()}
+        files.update(disk=file_row(fixture["path"] + "/build.raw", 8589934592,
+            "ebfb4ef19ae410f190327b5ebd312711263bc7579970e87d9c1e2d84e06b3c25"),
+            data=file_row(fixture["path"] + "/data.iso"), ps=file_row("/bin/ps"))
+        plan = {"schema": "bootweave-host-role-plan-v1", "canonical": self.preparation.CANONICAL,
+                "phase": "install", "workspace": directory, "fixture": fixture, "files": files}
+        def validated(value):
+            raw = json.dumps(value).encode()
+            return guard.validate_plan(raw, hashlib.sha256(raw).hexdigest())
+        checked = validated(plan)
+        argv = guard.arguments(checked)
+        for flag in ("-S", "-no-user-config", "-nodefaults", "-no-reboot"):
+            self.assertIn(flag, argv)
+        for flag, value in (("-machine", "pc-i440fx-11.1"), ("-cpu", "qemu64-v1"),
+                            ("-smp", "1"), ("-m", "1024"), ("-nic", "none"), ("-net", "none")):
+            self.assertEqual(argv[argv.index(flag) + 1], value)
+        first = guard.endpoints(checked)
+        self.assertEqual([p.name for p in first], ["qmp1.sock", "ser1.sock"])
+        installed = validated(dict(plan, phase="installed"))
+        self.assertEqual([p.name for p in guard.endpoints(installed)], ["qmp2.sock", "ser2.sock"])
+        self.assertFalse(any("id=installer" in arg for arg in guard.arguments(installed)))
+        for field, value in (("argv", ["/bin/sh"]), ("env", {"PATH": "/bin"}), ("phase", "third")):
+            with self.assertRaises(guard.Refusal):
+                validated(dict(plan, **{field: value}))
+        for key, value in (("bytes", True), ("nlink", 2), ("mode", 0o666), ("sha256", "f" * 64)):
+            broken = {**files, "qemu": dict(files["qemu"], **{key: value})}
+            with self.assertRaises(guard.Refusal):
+                validated(dict(plan, files=broken))
+        raw = json.dumps(plan).encode()
+        with self.assertRaises(guard.Refusal):
+            guard.validate_plan(raw, "0" * 64)
+        duplicate = b'{"schema":0,"schema":1}'
+        with self.assertRaises(guard.Refusal):
+            guard.validate_plan(duplicate, hashlib.sha256(duplicate).hexdigest())
+        self.assertFalse(guard._campaign_created)
+        self.assertEqual(guard._retained, [])
+
+    def test_trace_pair_against_independent_literal_model(self):
+        raw = self.source_files["tests/qualification/trace_oracles.json"]
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), TRACE_ORACLES_SHA256)
+        oracle = json.loads(raw)
+        self.assertEqual(oracle["schema"], "bootweave-qualification-trace-model-oracles-v1")
+        self.assertEqual(oracle["case_count"], 64)
+        self.assertEqual(oracle["driver_invocations"], 64)
+        self.assertEqual(len(oracle["cases"]), 64)
+        obj, binary = self.directory / "trace-pair.o", self.directory / "trace-model"
+        renames = ["-Dgetrlimit=nq_model_getrlimit", "-Dsetrlimit=nq_model_setrlimit",
+                   "-Dgetpid=nq_model_getpid", "-Dgetppid=nq_model_getppid"]
+        self.execute(self.flags + renames + ["-c", str(ROOT / "tests/qualification/trace_limits.c"),
+                     "-o", str(obj)], compile_job=True)
+        names = {row.split()[-1] for row in self.execute(["nm", "-u", str(obj)]).decode().splitlines()}
+        self.assertLessEqual(names, {"___error", "___stack_chk_fail", "___stack_chk_guard",
+                                    "_nq_model_getrlimit", "_nq_model_setrlimit",
+                                    "_nq_model_getpid", "_nq_model_getppid"})
+        self.execute(self.flags + [str(ROOT / "tests/qualification/trace_model.c"), str(obj),
+                     "-o", str(binary)], compile_job=True)
+        linked = {row.split()[-1].lstrip("_").split("$", 1)[0] for row in
+                  self.execute(["nm", "-u", str(binary)]).decode().splitlines()}
+        self.assertFalse(linked & {"getrlimit", "setrlimit", "getpid", "getppid"})
+        for index, case in enumerate(oracle["cases"]):
+            self.assertEqual(case["index"], index)
+            self.assertEqual(case["argv"], [str(index)])
+            output = self.execute([str(binary), *case["argv"]])
+            lines = output.splitlines(keepends=True)
+            self.assertEqual(len(lines), 2)
+            self.assertEqual(lines[0], case["expected_stdout"].encode())
+            self.assertTrue(lines[1].startswith(b"NQ_TRACE_PID "))
+            self.assertTrue(lines[1].endswith(b"\n"))
+            pid = json.loads(lines[1][len(b"NQ_TRACE_PID "):])
+            self.assertEqual(set(pid), {"case_index", "counts"})
+            self.assertIs(type(pid["case_index"]), int)
+            self.assertEqual(pid["case_index"], index)
+            self.assertEqual(len(pid["counts"]), case["expected_pid_record_rows"])
+            previous = [0, 0]
+            for counts in pid["counts"]:
+                self.assertIsInstance(counts, list)
+                self.assertEqual(len(counts), 2)
+                for column, value in enumerate(counts):
+                    self.assertIs(type(value), int)
+                    self.assertLessEqual(previous[column], value)
+                    self.assertLessEqual(value, 256)
+                previous = counts

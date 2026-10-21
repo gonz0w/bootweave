@@ -1,4 +1,4 @@
-# Nontrace native qualification source preparation
+# Native qualification source preparation
 
 This is preparation for canonical `92166f07fd79c9d356ef3e1ed704eaeeed8653e4`,
 tree `79060329e9d06283a95c247c9245bbdd60ac9081`. It authorizes no native work.
@@ -27,7 +27,34 @@ refuses, readiness remains zero and no review CLI is activated.
   product link. The build preview may prepare it with the inert compiled policy;
   no native execution case or cryptographic positive is supplied for it here.
 - `oracles.json` is an independently authored nine-case requirement catalogue,
-  not observed native results. The note records its independent provenance.
+  not observed native results. Its original authority/status fields remain
+  byte-frozen historical catalogue context; the later trace-method adoption is
+  recorded separately and grants none of these cases trace/native authority.
+  The note records its independent provenance.
+- `compiler_guard.c` accepts only generated fixed job names. It records an
+  exclusive started marker, validates private separate log descriptors, uses
+  a preexec process-group gate and holds the original unreaped compiler through
+  the last stop before its consuming wait. Each fixed slot is at most180 seconds
+  and includes a final five-second stop/wait reserve. First-stage object/link
+  slots are25/150 seconds; its file ceiling is256 KiB. It supplies no bootstrap
+  or host controller.
+- `native_supervisor.c` collects the fixed nine dynamic cases in one fresh suite.
+  Necessary gates from `ORACLE-GATES.h` stop before the next case on unexpected
+  exits, limit/timer records, file-size bytes or entry records. Collection success
+  supplies raw observations, never independent native oracle acceptance.
+- `host_guard.py` is dormant host source with pure closed-schema role/argv
+  validators. Its two ordered paused launch slots share one campaign origin;
+  every original child remains owned through its last direct-PID stop and sole
+  consuming wait. The five capture channels share10 MiB per launch,20 MiB across
+  two launches. It supplies no QMP/serial sender, resume/inventory admission,
+  provisioning coordinator, target creator or execution-ready campaign.
+- `trace_limits.c/.h` implement the approved companion-only paired FSIZE
+  substitution. Only `trusted_start.c` and `signature_platform.c` are renamed in
+  separate objects; the wrapper object calls the real OS functions. One parent
+  get/set/get and its direct fork-copy child get/set/get are admitted; all extra
+  FSIZE calls or failures poison that state. Actual limits remain 4 MiB, while
+  successful virtual readbacks report 65,536 and zero. The finite host model uses
+  complete syscall/PID doubles; it supplies zero native evidence.
 
 Both probe mains return quiet 77 on non-OpenBSD, even when `BW_NQ_SOURCE_CHECK`
 exposes otherwise inactive bodies for host syntax checking. That macro cannot
@@ -39,7 +66,9 @@ signing, target, media, mount, credential or cleanup API, and creates only a new
 owned source directory under `.tools/entry-qualification-source-*`. It checks
 the exact canonical runtime closure, rejects changed, oversized, unstable or
 symlink source inputs, and writes private source copies, a complete manifest and
-typed build-preview arrays. Any partially written namespace remains retained.
+typed build-preview arrays, a fixed `BUILD-JOBS.h` argv table and necessary local
+`ORACLE-GATES.h` stop gates derived from the unchanged independent catalogue. Any partially
+written namespace remains retained.
 Its stable-file checks assume trusted coordinator quiescence; they do not claim
 hostile-filesystem confinement. No executable recipe is generated.
 
@@ -54,21 +83,40 @@ length/bytes/hash and termination. A numeric exit5 alone proves no signal cause.
 Do not recover authority from sampled PIDs, signal after wait consumption/loss,
 retry numeric closes, or remove uncertain state.
 
-`BUILD-PREVIEW.json` is data only. No native compiler/custody executor is supplied
-or authorized. In particular, no historical helper hash or old `/planner` cwd is
-silently treated as a new build guard. Before use, bind the complete new executor,
+`BUILD-PREVIEW.json` and `BUILD-JOBS.h` are data/source only. The new compiler and
+collector sources are unqualified and unexecuted. No native executor is authorized.
+In particular, no historical helper hash or old `/planner` cwd is silently treated
+as a new build guard. Before use, bind the complete new executor,
 compiler/source/build flags, output/maps, exact oracle/count/slot/byte/transport
 ledger, public signed fixture and private key custody, and independent seals.
 Native output hashes are observed only after approved installation/build and
 before dependent tests. No private key or guest credential belongs in media.
 
-The held trace choice remains separate. No setrlimit/getrlimit renaming,
-virtualization or trace companion occurs in these sources or build previews.
+The [trace method](../../docs/testing/entry-trace-decision.md) is adopted, while
+native use remains held. `jobs` retain the six original unmodified/inert previews;
+`auxiliary_jobs` holds20 retained single-unit objects and the collector link;
+`trace_jobs` separately lists three disclosed companion objects and two links.
+The proposed first native stage uses23 guarded calls:20object jobs and three
+links for the collector and two unmodified dynamic binaries. With one120-second
+externally guarded bootstrap and130seconds for setup/audit, immutable slots total
+the original1200-second build batch. No trace, static,
+forwarder, positive crypto, planner, VGA or complete-entry claim follows from it.
 Unmodified readbacks/file-size enforcement can establish those measured caps and
 outcomes; they cannot establish syscall absence/order, a complete exact-binary
 trace, the actual locked loader/signify/FD handoff, cryptographic acceptance,
 whole-session confinement or a future production entry/CLI qualification.
 
+New focused portable fixtures remain retained. The baseline `make verify` still
+includes host key generation and automatic temporary-fixture disposal. Under the
+current holds it must not be dispatched again without a current exact exception
+or independently reviewed equivalent complete coverage that avoids those effects.
+The historical 220-test pass is evidence for its original head only, not a fresh
+full gate for this continuation. No partial run is renamed `make verify`.
+
 All runtime limits, failed evidence, primary worktrees and Vectivium holds remain
 unchanged. A passing portable preparation check is not native approval, native
 teardown or disposal authority.
+
+The [next-step proposal](next-step.md) states the finite first stage, effects,
+custody and unfinished execution bindings. No incomplete packet is native-run
+admission.
