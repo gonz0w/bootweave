@@ -39,3 +39,9 @@
     continue within the accepted scope and resource limits. Ask for major design
     decisions or materially expanded effects; retain exact confirmation for a new
     destructive target. This clarification was authorized on 2026-10-18.
+
+## Task context
+
+Use the [local task context](docs/engineering/agent-tasks.md) for the compact shared
+packet and repository command/path index. Existing instructions, required reviews
+and source/native execution and acceptance gates remain authoritative.
