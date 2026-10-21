@@ -131,7 +131,10 @@ def prepare():
     try:
         for name, data in sorted(files.items()):
             path = directory / name
-            path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            parent = directory
+            for part in Path(name).parts[:-1]:
+                parent = parent / part
+                parent.mkdir(mode=0o700, exist_ok=True)
             fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
             with os.fdopen(fd, "wb") as stream:
                 stream.write(data)

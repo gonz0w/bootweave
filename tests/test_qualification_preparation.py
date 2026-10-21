@@ -174,7 +174,7 @@ class QualificationPreparationTests(unittest.TestCase):
             names = {row.split()[-1] for row in self.execute(["nm", "-u", str(obj)]).decode().splitlines()}
             self.assertLessEqual(names, {"___stack_chk_fail", "___stack_chk_guard"})
         check = self.directory / "host-forwarder.c"
-        check.write_text('#include "private_entry.h"\n#include <stdio.h>\n'
+        check.write_text('#include "private_entry.h"\n#include "private_start_material.h"\n#include <stdio.h>\n'
                          'int main(void) { int ready=bw_entry_available(); int result=bw_entry_boundary(0);\n'
                          'printf("NQ_FORWARD_REFUSAL %d %d\\n",ready,result); return ready==0&&result==-1?0:1; }\n')
         binary = self.directory / "forwarder"
