@@ -173,3 +173,7 @@ teardown or disposal authority.
 The [next-step proposal](next-step.md) states the finite first stage, effects,
 custody and unfinished execution bindings. No incomplete packet is native-run
 admission.
+
+## Approved isolated test-key direction, 2026-10-22
+
+The owner adopted the [isolated fixture policy](../../docs/testing/isolated-auth-fixtures.md). Two test pairs/four signatures are proposed in [the effects packet](auth-fixture-effects.json), not generated or approved to run. This supersedes the earlier unresolved public-corpus direction, while exact effects approval, retained full-coverage integration, containment, observer and native gates remain held.

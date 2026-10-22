@@ -120,3 +120,7 @@ crypto fixtures missing: four signatures across two signers for three messages
 archive). A replacement must also preserve lifetime, failure, permissions,
 descriptor and private-diagnostic coverage without private keys or fixture
 disposal. No complete equivalent is implemented or claimed at this head.
+
+## Approved isolated test-key direction, 2026-10-22
+
+The owner adopted the [isolated fixture policy](../../docs/testing/isolated-auth-fixtures.md). Two test pairs/four signatures are proposed in [the effects packet](auth-fixture-effects.json), not generated or approved to run. This supersedes the earlier unresolved public-corpus direction, while exact effects approval, retained full-coverage integration, containment, observer and native gates remain held.
