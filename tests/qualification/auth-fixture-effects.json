@@ -1,0 +1,341 @@
+{
+  "schema": "bootweave-isolated-auth-fixture-effects-v1",
+  "status": "DIRECTION_ADOPTED_EFFECTS_PROPOSED_NOT_APPROVED_NOT_EXECUTION_READY",
+  "owning_pr": 92,
+  "source_base": {
+    "commit": "4e7087ec14552ef0b602bf0405c2bbb7df2b93dd",
+    "tree": "384a168398e277dfd447ca15591110bd653dd8f5",
+    "runtime_commit": "92166f07fd79c9d356ef3e1ed704eaeeed8653e4",
+    "runtime_tree": "79060329e9d06283a95c247c9245bbdd60ac9081",
+    "new_context_commit": "04fa08df064e3f26d5e5b72b4db2f89ea34065ba"
+  },
+  "namespace": {
+    "basename": "bootweave-auth-fixture-a1",
+    "parent": "current task workspace; exact absolute binding in local companion packet",
+    "directories": [
+      "private",
+      "public",
+      "evidence",
+      "public/selected-small",
+      "public/other-small",
+      "public/selected-traversal",
+      "public/selected-boundary"
+    ],
+    "creation": "fresh root exclusive mkdir; no symlink components; refuse any existing root; directories0700/files0600/umask077",
+    "custodian": "Cam; local private retention, no external export",
+    "retention": "all bytes indefinitely until separate explicit disposal authority; partial failures retained; no unlink/rmdir/replace/overwrite",
+    "private_reads": "four exact signer children only; no coordinator diagnostic/content/hash read; owner/mode/identity metadata only",
+    "exclusivity_limitation": "signify -S uses O_TRUNC, not O_EXCL; fresh per-signature directories plus trusted same-user quiescence are required"
+  },
+  "tool": {
+    "token": "TOOL_EXACT_LOCAL_SIGNIFY",
+    "repository_relative_path": ".tools/signify-review/signify-osx-1.4/signify",
+    "binary_sha256": "4b9b2069c5e5acda9d35ca898ecd5afc050094170cf3c73fa7cf9eb615530946",
+    "bytes": 226600,
+    "source_commit": "9a654d698f5dc957ac407a3156a638bb3b77add2",
+    "source_archive_sha256": "5aa954fe6c54f2fc939771779e5bb64298e46d0a4ae3d08637df44c7ed8d2897",
+    "signify_c_sha256": "96006fa573cf1cdeae4b96682ced2ade7750830984346d009bd88e07e942d264",
+    "provenance": "docs/adr/0002-host-artifact-verifier.md; local-use port, no native confinement claim",
+    "dependency_seal": "BLOCKED: current complete executable/loader/dependency stable readback required before dispatch; no acquisition/build allowed"
+  },
+  "public_messages": [
+    {
+      "path": "public/small.tar",
+      "bytes": 2048,
+      "sha256": "9936b0aa079dcb7c3901473819eb8163550bb5d5f0a8dd27515ebf0d0d4d6832",
+      "recipe": "USTAR regular header mode0644 uid/gid0 mtime0, viewer/readme.txt size5 with hello; data padded to512; two zero records",
+      "coverage": "PAV01/PAV03/PAV05/PAV07/PAV08"
+    },
+    {
+      "path": "public/traversal.tar",
+      "bytes": 1536,
+      "sha256": "9f2a069901ebc6f50fe2b2cc39965291f24014d4eb241f322d35866488bf3c7c",
+      "recipe": "USTAR regular header mode0644 uid/gid0 mtime0, ../escape size0; two zero records",
+      "coverage": "PAV04: verified true, inspection refusal"
+    },
+    {
+      "path": "public/boundary.tar",
+      "bytes": 1048576,
+      "sha256": "d958e46eabb17fb1e545a828b73cda71617dfdbfbed266d80a5d67e7868e4608",
+      "recipe": "USTAR regular header mode0644 uid/gid0 mtime0, viewer/readme.txt size5 with hello; data padded to512; two zero records; then zero extension to1048576",
+      "coverage": "PAV06: exact input ceiling positive"
+    }
+  ],
+  "recipe_source": {
+    "research/payload/test_payload.py": "dc6151a99a6c70863b51dbd11357bdff3a9cf9a4e487893166c4a9dd079dbb7a",
+    "research/payload/test_authenticate.py": "26119c7a5b36d7813c44160e3a69905b822da4d82541e4979af42e661a4e41d5",
+    "planning": "stdlib tarfile data-only computation; candidate modules not imported; key/public/signature outputs not generated"
+  },
+  "operations": [
+    {
+      "id": "generate-selected",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-G",
+        "-n",
+        "-c",
+        "bootweave isolated fixture a1",
+        "-p",
+        "public/selected.pub",
+        "-s",
+        "private/selected.sec"
+      ],
+      "stdin": "empty",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "generate-other",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-G",
+        "-n",
+        "-c",
+        "bootweave isolated fixture a1",
+        "-p",
+        "public/other.pub",
+        "-s",
+        "private/other.sec"
+      ],
+      "stdin": "empty",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "sign-selected-small",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-S",
+        "-s",
+        "private/selected.sec",
+        "-m",
+        "-",
+        "-x",
+        "public/selected-small/data.sig"
+      ],
+      "stdin_public_message": "public/small.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "sign-other-small",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-S",
+        "-s",
+        "private/other.sec",
+        "-m",
+        "-",
+        "-x",
+        "public/other-small/data.sig"
+      ],
+      "stdin_public_message": "public/small.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "sign-selected-traversal",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-S",
+        "-s",
+        "private/selected.sec",
+        "-m",
+        "-",
+        "-x",
+        "public/selected-traversal/data.sig"
+      ],
+      "stdin_public_message": "public/traversal.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "sign-selected-boundary",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-S",
+        "-s",
+        "private/selected.sec",
+        "-m",
+        "-",
+        "-x",
+        "public/selected-boundary/data.sig"
+      ],
+      "stdin_public_message": "public/boundary.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "verify-selected-small",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-V",
+        "-q",
+        "-p",
+        "public/selected.pub",
+        "-x",
+        "public/selected-small/data.sig",
+        "-m",
+        "-"
+      ],
+      "stdin_public_message": "public/small.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "verify-other-small",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-V",
+        "-q",
+        "-p",
+        "public/other.pub",
+        "-x",
+        "public/other-small/data.sig",
+        "-m",
+        "-"
+      ],
+      "stdin_public_message": "public/small.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "verify-selected-traversal",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-V",
+        "-q",
+        "-p",
+        "public/selected.pub",
+        "-x",
+        "public/selected-traversal/data.sig",
+        "-m",
+        "-"
+      ],
+      "stdin_public_message": "public/traversal.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "verify-selected-boundary",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-V",
+        "-q",
+        "-p",
+        "public/selected.pub",
+        "-x",
+        "public/selected-boundary/data.sig",
+        "-m",
+        "-"
+      ],
+      "stdin_public_message": "public/boundary.tar",
+      "expected_exit": 0,
+      "expected_stdout": "empty",
+      "expected_stderr": "empty"
+    },
+    {
+      "id": "reject-appended-byte",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-V",
+        "-q",
+        "-p",
+        "public/selected.pub",
+        "-x",
+        "public/selected-small/data.sig",
+        "-m",
+        "-"
+      ],
+      "stdin_recipe": "small.tar plus literal byte x; not persisted",
+      "expected_exit": 1,
+      "expected_stdout": "empty",
+      "expected_stderr": "signify: signature verification failed\n",
+      "wait_requirement": "normal exited status1, not signaled; exact diagnostic required; IO/resource/custody/stream failures never count as rejection"
+    },
+    {
+      "id": "reject-other-key",
+      "argv": [
+        "TOOL_EXACT_LOCAL_SIGNIFY",
+        "-V",
+        "-q",
+        "-p",
+        "public/selected.pub",
+        "-x",
+        "public/other-small/data.sig",
+        "-m",
+        "-"
+      ],
+      "stdin_public_message": "public/small.tar",
+      "expected_exit": 1,
+      "expected_stdout": "empty",
+      "expected_stderr": "signify: verification failed: checked against wrong key\n",
+      "wait_requirement": "normal exited status1, not signaled; exact diagnostic required; IO/resource/custody/stream failures never count as rejection"
+    }
+  ],
+  "effects": {
+    "generation_calls": 2,
+    "signing_calls": 4,
+    "verification_calls": 6,
+    "keypairs": 2,
+    "detached_signatures": 4,
+    "secrets_unencrypted_test_only": true,
+    "network": "none",
+    "native": "none",
+    "security_settings": "unchanged",
+    "existing_credential_access": "none",
+    "cleanup_or_deletion": "none",
+    "cwd": "the new root only",
+    "environment": {
+      "LC_ALL": "C",
+      "LANG": "C",
+      "PATH": ""
+    },
+    "fds": "only0/1/2 inherited at exec; child may open its disclosed key/public/signature paths afterward; stdin exact public bytes; separate bounded retained stdout/stderr; no agent/home/credential FD inheritance"
+  },
+  "proposed_limits": {
+    "original_wall_seconds": 300,
+    "work_seconds": 240,
+    "finalization_reserved_seconds": 60,
+    "max_children": 12,
+    "per_child_wall_seconds": 15,
+    "per_child_cpu_seconds": 15,
+    "per_child_rss_bytes": 33554432,
+    "controller_rss_bytes": 67108864,
+    "child_nofile": 32,
+    "child_core_bytes": 0,
+    "child_fsize_bytes": 4096,
+    "stream_bytes_each": 4096,
+    "public_record_bytes_each": 2048,
+    "max_files": 64,
+    "logical_namespace_bytes": 4194304,
+    "allocated_namespace_bytes": 16777216,
+    "resource_evidence": "controlled fixed write count/length plus actual stable allocation samples and wait4 RSS; sampled compliance is not a physical quota; missing high-water proof blocks claimed resource acceptance",
+    "per_child_wall_scope": "15seconds total including final direct-PID stop/stream EOF+close/sole consuming wait; finalization reserve must fit inside both child and original campaign deadlines, never extend either"
+  },
+  "custody": "one child at a time, original born handle retained through last direct-PID stop and sole consuming wait; status/EOF/close facts/uncertainty retained; no sampled PID/group grants rights",
+  "completion": "all four own-key positives plus tamper/wrong-key negatives; complete private metadata and public byte seals; independent review; no success if missing custody/resource evidence",
+  "execution_blockers": [
+    "No exact key-generation/signing approval yet.",
+    "Retained finite coordinator/executable/dependency/source seals and independent final packet review unfinished.",
+    "Shared-host four lost-identity Aervium groups: no clean containment proof; no observer retry authorized.",
+    "Complete retained make verify coverage adapters remain unfinished; corpus creation alone is not full coverage."
+  ],
+  "performed": {
+    "key_generation": false,
+    "signing": false,
+    "verifier_execution": false,
+    "native_execution": false,
+    "cleanup": false,
+    "public_message_recipe_hashed_in_memory_only": true
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "schema": "bootweave-native-qualification-expectations-v1",
+  "status": "independent literal source-preparation catalogue; no native result",
+  "baseline": "92166f07fd79c9d356ef3e1ed704eaeeed8653e4",
+  "case_count": 9,
+  "authority": {
+    "current": "isolated harness/oracle source preparation and independent review only",
+    "future_native_execution": "requires a separately approved exact source/tool/profile/fixture/supervisor binding",
+    "production_cli_readiness": 0,
+    "positive_authentication_cases": 0,
+    "verifier_child_cases": 0,
+    "trace_interposer": false,
+    "credentials_or_keys": false,
+    "held_trace_method_adopted": false
+  },
+  "resource_order": ["CPU", "DATA", "STACK", "NOFILE", "CORE", "FSIZE"],
+  "common_native_preconditions": {
+    "fresh_dedicated_single_threaded_process": true,
+    "existing_children": 0,
+    "concurrent_signal_or_timer_owner": false,
+    "inherited_REAL_value_microseconds": 0,
+    "inherited_REAL_interval_microseconds": 0,
+    "inherited_PROF_value_microseconds": 0,
+    "inherited_PROF_interval_microseconds": 0,
+    "inherited_soft_and_hard_limits_at_least": [4, 67108864, 2097152, 32, 0, 65536],
+    "no_limit_raise_restore_or_retry": true,
+    "no_timer_rearm_after_guard": true,
+    "no_descriptor_rebinding_during_entry": true
+  },
+  "ordinary_identity": {
+    "supported_native_adapter": true,
+    "issetugid": 0,
+    "uid_nonzero": true,
+    "uid_equals_euid": true,
+    "gid_equals_egid": true
+  },
+  "readback_record": {
+    "stream": "stdout",
+    "prefix": "NQ_LIMITS",
+    "profile_tokens": ["parent", "child"],
+    "limit_pair_encoding": "six decimal soft:hard pairs in resource_order",
+    "timer_encoding": "REAL sec usec interval_sec interval_usec PROF sec usec interval_sec interval_usec",
+    "record_terminator": "LF",
+    "records": 1,
+    "extra_stdout_bytes": 0,
+    "stderr_bytes": 0,
+    "timer_observations_are_raw": true,
+    "timer_rules": {
+      "seconds_minimum": 0,
+      "microseconds_minimum": 0,
+      "microseconds_maximum": 999999,
+      "REAL_remaining_microseconds_exclusive_minimum": 0,
+      "REAL_remaining_microseconds_inclusive_maximum": 15000000,
+      "PROF_remaining_microseconds_exclusive_minimum": 0,
+      "PROF_remaining_microseconds_inclusive_maximum": 4000000,
+      "REAL_interval_seconds": 0,
+      "REAL_interval_microseconds": 0,
+      "PROF_interval_seconds": 0,
+      "PROF_interval_microseconds": 0,
+      "exact_remaining_value_expected": false,
+      "zero_expired_readback_accepted": false
+    },
+    "required_output_role": "caller-owned FIFO with writable O_NONBLOCK fd1 and an independently held ready reader",
+    "regular_file_stdout_accepted_for_child_profile": false
+  },
+  "entry_record": {
+    "stream": "stderr",
+    "prefix": "NQ_ENTRY",
+    "record_terminator": "LF",
+    "records": 1,
+    "bounded_numeric_fields": [
+      "result", "state", "cause", "capture", "input_close_errors", "input_unknown_closes", "final_boundary_failed",
+      "auth_state", "auth_cause", "auth_material_cause", "auth_final_boundary_failed", "output_attempted", "output_bytes",
+      "signature_state", "signature_cause", "signature_pid", "signature_group_owned", "signature_launch_granted",
+      "signature_stop_attempted", "signature_wait_consumed", "signature_wait_lost", "signature_diagnostic_bytes",
+      "signature_close_errors", "signature_unknown_closes", "signature_final_boundary_failed",
+      "signature_material_close_errors", "signature_material_unknown_closes", "signature_cleanup_budget_failed", "signature_wait_status"
+    ],
+    "source_of_values": "const observation accessor after one actual closed bw_entry_output call",
+    "raw_struct_bytes_or_padding_are_not_an_oracle": true,
+    "rusage_outside_this_record_projection": true,
+    "driver_record_grants_no_product_output_or_retry_authority": true
+  },
+  "required_witness_roles": {
+    "source_binding": [
+      "exact clean candidate/base/tree and complete unmodified production source linkage",
+      "exact driver source/build flags and native tool/profile bindings",
+      "no syscall interposer, readiness override, mocked native success or live credentials",
+      "driver failure paths cannot synthesize guard success or successful file-size termination"
+    ],
+    "native_driver": [
+      "record all six actual getrlimit soft/hard pairs, not aggregate validity flags",
+      "record raw REAL/PROF value and interval sec/usec observations",
+      "read actual closed-entry semantic fields without modifying observation storage"
+    ],
+    "independent_supervisor": [
+      "retain exact actual PID identity, streams, EOF, consuming wait and terminal disposition",
+      "require WIFEXITED and exact exit status; timeout, WIFSIGNALED, missing wait or truncated stream fails",
+      "independently verify file-size probe fd3 object identity, type, initial emptiness, final size and complete bytes/hash",
+      "retain stdout/stderr separately from the owned fd3 file and reject extra bytes or success markers",
+      "observe terminal absence using the separately reviewed ownership/custody envelope before forgetting process identity"
+    ],
+    "proof_limits": [
+      "same-process child-limit readback is not a real verifier-child, launch, timer or custody qualification",
+      "fixed write-call schedule is a source-bound expectation; file length/hash and termination need independent actual observations",
+      "exit5 alone does not establish SIGXFSZ causality without the exact unmodified guard and driver control-flow binding",
+      "host syntax/model/refusal evidence cannot satisfy any native case",
+      "no native pass, locked whitelist, publication, cryptographic acceptance or production readiness follows from this catalogue"
+    ]
+  },
+  "portable_evidence_scope": {
+    "may_establish": ["JSON/schema validity", "source/build closure", "literal case completeness", "actual unsupported-host refusal when separately reviewed"],
+    "normal_unsupported_guard_result": 0,
+    "normal_unsupported_host_mutation_allowed": false,
+    "may_establish_native_limits_timers_or_SIGXFSZ": false,
+    "native_cases_satisfied_by_portable_checks": 0,
+    "native_case_skip_counts_as_pass": false
+  },
+  "cases": [
+    {
+      "id": "NQ-LIMITS-PARENT",
+      "mode": "parent-readback",
+      "identity": "ordinary_identity",
+      "expected": {
+        "exit_status": 0,
+        "guard_result": 1,
+        "guard_calls": 1,
+        "child_limit_adapter_calls": 0,
+        "profile_token": "parent",
+        "actual_soft_hard_pairs": [[4, 4], [67108864, 67108864], [2097152, 2097152], [32, 32], [0, 0], [65536, 65536]],
+        "raw_timer_rules": "readback_record.timer_rules",
+        "timer_owner": "original parent process guard"
+      }
+    },
+    {
+      "id": "NQ-LIMITS-CHILD",
+      "mode": "child-readback",
+      "identity": "ordinary_identity",
+      "expected": {
+        "exit_status": 0,
+        "guard_result": 1,
+        "guard_calls": 1,
+        "child_limit_adapter_result": 0,
+        "child_limit_adapter_calls": 1,
+        "profile_token": "child",
+        "actual_soft_hard_pairs": [[2, 2], [33554432, 33554432], [2097152, 2097152], [16, 16], [0, 0], [0, 0]],
+        "raw_timer_rules": "readback_record.timer_rules",
+        "timer_owner": "original parent process guard, unchanged by same-process child-limit-only call",
+        "actual_verifier_children": 0,
+        "child_timer_setup_calls": 0
+      }
+    },
+    {
+      "id": "NQ-FSIZE-PARENT",
+      "mode": "parent-file-size",
+      "identity": "ordinary_identity",
+      "fd3_precondition": {"caller_owned": true, "type": "regular", "writable": true, "initial_size": 0, "initial_offset": 0},
+      "expected": {
+        "guard_calls": 1,
+        "guard_result": 1,
+        "child_limit_adapter_calls": 0,
+        "file_size_soft": 65536,
+        "file_size_hard": 65536,
+        "scheduled_successful_write_calls": 16,
+        "scheduled_successful_write_bytes_each": 4096,
+        "scheduled_triggering_write_call": 17,
+        "scheduled_triggering_write_bytes": 1,
+        "triggering_write_returns": false,
+        "writes_after_trigger": 0,
+        "write_byte": 88,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "final_fd3_size": 65536,
+        "final_fd3_sha256": "d2d5af5c0316f5c2b119635386239edc87abce035f851c3f6ee127e6c3cbf435",
+        "WIFEXITED": true,
+        "exit_status": 5,
+        "WIFSIGNALED": false,
+        "timer_or_supervisor_timeout_accepted": false,
+        "guard_SIGXFSZ_handler": "fixed exit5, no cleanup or output"
+      }
+    },
+    {
+      "id": "NQ-FSIZE-CHILD",
+      "mode": "child-file-size",
+      "identity": "ordinary_identity",
+      "fd3_precondition": {"caller_owned": true, "type": "regular", "writable": true, "initial_size": 0, "initial_offset": 0},
+      "expected": {
+        "guard_calls": 1,
+        "guard_result": 1,
+        "child_limit_adapter_calls": 1,
+        "child_limit_adapter_result": 0,
+        "file_size_soft": 0,
+        "file_size_hard": 0,
+        "scheduled_successful_write_calls": 0,
+        "scheduled_triggering_write_call": 1,
+        "scheduled_triggering_write_bytes": 1,
+        "triggering_write_returns": false,
+        "writes_after_trigger": 0,
+        "write_byte": 88,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "final_fd3_size": 0,
+        "final_fd3_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "WIFEXITED": true,
+        "exit_status": 5,
+        "WIFSIGNALED": false,
+        "timer_or_supervisor_timeout_accepted": false,
+        "guard_SIGXFSZ_handler": "fixed exit5, no cleanup or output",
+        "actual_verifier_children": 0
+      }
+    },
+    {
+      "id": "NQ-ENTRY-NORMAL-REFUSAL",
+      "mode": "entry-normal-refusal",
+      "identity": "ordinary_identity",
+      "fixed_roles_present": [0, 1, 2, 3, 4],
+      "expected": {
+        "exit_status": 3,
+        "stdout_bytes": 0,
+        "normal_boundary": "actual unconditional refusal, no forwarding or readiness override",
+        "capture_calls": 0,
+        "authenticated_output_calls": 0,
+        "record": {
+          "result": 0, "state": 2, "cause": 5, "capture": -2,
+          "input_close_errors": 0, "input_unknown_closes": 0, "final_boundary_failed": 0,
+          "auth_state": 0, "auth_cause": 0, "auth_material_cause": 0, "auth_final_boundary_failed": 0,
+          "output_attempted": 0, "output_bytes": 0,
+          "signature_state": 0, "signature_cause": 0, "signature_pid": 0, "signature_group_owned": 0,
+          "signature_launch_granted": 0, "signature_stop_attempted": 0, "signature_wait_consumed": 0,
+          "signature_wait_lost": 0, "signature_diagnostic_bytes": 0, "signature_close_errors": 0,
+          "signature_unknown_closes": 0, "signature_final_boundary_failed": 0,
+          "signature_material_close_errors": 0, "signature_material_unknown_closes": 0,
+          "signature_cleanup_budget_failed": 0, "signature_wait_status": 0
+        }
+      }
+    },
+    {
+      "id": "NQ-ENTRY-ROOT-REFUSAL",
+      "mode": "entry-root-refusal",
+      "identity": {"uid": 0, "euid": 0, "fixed_roles_all_present": true},
+      "fixed_roles_present": [0, 1, 2, 3, 4],
+      "expected": {
+        "exit_status": 3,
+        "stdout_bytes": 0,
+        "guard_result": 0,
+        "namespace_allocations": 0,
+        "native_boundary_calls": 0,
+        "final_parent_reduction_calls": 0,
+        "capture_calls": 0,
+        "authenticated_output_calls": 0,
+        "record": {
+          "result": 0, "state": 2, "cause": 1, "capture": -2,
+          "input_close_errors": 0, "input_unknown_closes": 0, "final_boundary_failed": 0,
+          "auth_state": 0, "auth_cause": 0, "auth_material_cause": 0, "auth_final_boundary_failed": 0,
+          "output_attempted": 0, "output_bytes": 0,
+          "signature_state": 0, "signature_cause": 0, "signature_pid": 0, "signature_group_owned": 0,
+          "signature_launch_granted": 0, "signature_stop_attempted": 0, "signature_wait_consumed": 0,
+          "signature_wait_lost": 0, "signature_diagnostic_bytes": 0, "signature_close_errors": 0,
+          "signature_unknown_closes": 0, "signature_final_boundary_failed": 0,
+          "signature_material_close_errors": 0, "signature_material_unknown_closes": 0,
+          "signature_cleanup_budget_failed": 0, "signature_wait_status": 0
+        }
+      }
+    },
+    {
+      "id": "NQ-ENTRY-MISSING-0",
+      "mode": "entry-missing-0",
+      "identity": "ordinary_identity",
+      "fixed_roles_present": [1, 2, 3, 4],
+      "fixed_role_consistently_absent_EBADF": 0,
+      "expected": {
+        "exit_status": 3, "stdout_bytes": 0, "guard_result": 1,
+        "namespace_allocations": 0, "native_boundary_calls": 0, "capture_calls": 0, "authenticated_output_calls": 0,
+        "all_original_input_close_attempts": [0, 3, 4], "input_close_retries": 0,
+        "record": {
+          "result": 0, "state": 2, "cause": 2, "capture": -2,
+          "input_close_errors": 1, "input_unknown_closes": 0, "final_boundary_failed": 0,
+          "auth_state": 0, "auth_cause": 0, "auth_material_cause": 0, "auth_final_boundary_failed": 0,
+          "output_attempted": 0, "output_bytes": 0,
+          "signature_state": 0, "signature_cause": 0, "signature_pid": 0, "signature_group_owned": 0,
+          "signature_launch_granted": 0, "signature_stop_attempted": 0, "signature_wait_consumed": 0,
+          "signature_wait_lost": 0, "signature_diagnostic_bytes": 0, "signature_close_errors": 0,
+          "signature_unknown_closes": 0, "signature_final_boundary_failed": 0,
+          "signature_material_close_errors": 0, "signature_material_unknown_closes": 0,
+          "signature_cleanup_budget_failed": 0, "signature_wait_status": 0
+        }
+      }
+    },
+    {
+      "id": "NQ-ENTRY-MISSING-3",
+      "mode": "entry-missing-3",
+      "identity": "ordinary_identity",
+      "fixed_roles_present": [0, 1, 2, 4],
+      "fixed_role_consistently_absent_EBADF": 3,
+      "expected": {
+        "exit_status": 3, "stdout_bytes": 0, "guard_result": 1,
+        "namespace_allocations": 0, "native_boundary_calls": 0, "capture_calls": 0, "authenticated_output_calls": 0,
+        "all_original_input_close_attempts": [0, 3, 4], "input_close_retries": 0,
+        "record": {
+          "result": 0, "state": 2, "cause": 2, "capture": -2,
+          "input_close_errors": 2, "input_unknown_closes": 0, "final_boundary_failed": 0,
+          "auth_state": 0, "auth_cause": 0, "auth_material_cause": 0, "auth_final_boundary_failed": 0,
+          "output_attempted": 0, "output_bytes": 0,
+          "signature_state": 0, "signature_cause": 0, "signature_pid": 0, "signature_group_owned": 0,
+          "signature_launch_granted": 0, "signature_stop_attempted": 0, "signature_wait_consumed": 0,
+          "signature_wait_lost": 0, "signature_diagnostic_bytes": 0, "signature_close_errors": 0,
+          "signature_unknown_closes": 0, "signature_final_boundary_failed": 0,
+          "signature_material_close_errors": 0, "signature_material_unknown_closes": 0,
+          "signature_cleanup_budget_failed": 0, "signature_wait_status": 0
+        }
+      }
+    },
+    {
+      "id": "NQ-ENTRY-MISSING-4",
+      "mode": "entry-missing-4",
+      "identity": "ordinary_identity",
+      "fixed_roles_present": [0, 1, 2, 3],
+      "fixed_role_consistently_absent_EBADF": 4,
+      "expected": {
+        "exit_status": 3, "stdout_bytes": 0, "guard_result": 1,
+        "namespace_allocations": 0, "native_boundary_calls": 0, "capture_calls": 0, "authenticated_output_calls": 0,
+        "all_original_input_close_attempts": [0, 3, 4], "input_close_retries": 0,
+        "record": {
+          "result": 0, "state": 2, "cause": 2, "capture": -2,
+          "input_close_errors": 4, "input_unknown_closes": 0, "final_boundary_failed": 0,
+          "auth_state": 0, "auth_cause": 0, "auth_material_cause": 0, "auth_final_boundary_failed": 0,
+          "output_attempted": 0, "output_bytes": 0,
+          "signature_state": 0, "signature_cause": 0, "signature_pid": 0, "signature_group_owned": 0,
+          "signature_launch_granted": 0, "signature_stop_attempted": 0, "signature_wait_consumed": 0,
+          "signature_wait_lost": 0, "signature_diagnostic_bytes": 0, "signature_close_errors": 0,
+          "signature_unknown_closes": 0, "signature_final_boundary_failed": 0,
+          "signature_material_close_errors": 0, "signature_material_unknown_closes": 0,
+          "signature_cleanup_budget_failed": 0, "signature_wait_status": 0
+        }
+      }
+    }
+  ]
+}
