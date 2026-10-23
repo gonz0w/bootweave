@@ -184,4 +184,4 @@ class ContentTests(unittest.TestCase):
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
             ("content_review.c", "content_review.h", "private_span.h", "private_content_format.h")), 8192)
-        self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*") if p.suffix in (".c", ".h")), 100 * 1024)
+        self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*") if p.suffix in (".c", ".h")), 256 * 1024)

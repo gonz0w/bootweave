@@ -45,3 +45,10 @@
 Use the [local task context](docs/engineering/agent-tasks.md) for the compact shared
 packet and repository command/path index. Existing instructions, required reviews
 and source/native execution and acceptance gates remain authoritative.
+
+## Product-independence standard
+
+Follow [Suite-Standards5b5a36e](https://github.com/gonz0w/suite-standards/blob/5b5a36ea63989357c62eba132bec6f59c9e4f1e3/docs/standards.md#product-independence-and-bootweave-boundary).
+Bootweave supplies generic contracts; each consumer owns its profiles/setup and
+usage documentation. Existing local security, authorization and qualification
+gates remain effective. This pointer grants no execution or new trust authority.

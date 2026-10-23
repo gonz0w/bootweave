@@ -1,0 +1,55 @@
+#!/bin/sh
+# SPDX-License-Identifier: BSD-3-Clause
+# Reviewed stock installer bootstrap, executed inside the installed root.
+# Rendered package names are exact local filenames, never commands or URLs.
+# The functions deliberately remain dormant until native qualification.
+# shellcheck disable=SC2329
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+unset ENV BASH_ENV CDPATH TRUSTED_PKG_PATH PKG_CACHE DEBUG_PKG_CACHE
+umask 077
+
+bw_log() { /usr/bin/env -i PATH=/bin:/sbin:/usr/bin:/usr/sbin LC_ALL=C /usr/bin/logger -t bootweave "bootstrap:$1:$2"; }
+bw_prepare() {
+    [ "$(/usr/bin/uname -s)" = OpenBSD ] &&
+        [ "$(/usr/bin/uname -r)" = 8.0 ] &&
+        [ "$(/usr/bin/id -u)" = 0 ] &&
+        [ -d /var/db/bootweave/packages ] &&
+        [ ! -L /var/db/bootweave/packages ] &&
+        /bin/mkdir /var/db/bootweave/bootstrap-attempt
+}
+bw_packages() {
+    # A local-only dependency path and normal signature verification. Never
+    # TRUSTED_PKG_PATH, -Dunsigned, a moving mirror, a shell hook or an upgrade.
+    /usr/bin/env -i PATH=/bin:/sbin:/usr/bin:/usr/sbin \
+        PKG_PATH=/var/db/bootweave/packages LANG=C LC_ALL=C \
+        /usr/sbin/pkg_add -I @PACKAGES@ >/dev/null 2>&1
+}
+bw_setup() {
+    # Optional reviewed package-entry-v1, never an environment-selected hook.
+    # Admission of the installed target, parents and all executable dependencies
+    # remains mandatory; a path/digest is not that ownership or trust authority.
+    setup_path=@SETUP_PATH@
+    setup_sha256=@SETUP_SHA256@
+    [ -n "$setup_path" ] || return 0 # Package-only installation.
+    [ -f "$setup_path" ] && [ ! -L "$setup_path" ] || return 1
+    case "$(/usr/bin/stat -f '%u:%g:%Lp:%l' "$setup_path")" in
+    0:0:500:1|0:0:555:1) ;;
+    *) return 1 ;;
+    esac
+    [ "$(/bin/sha256 -q "$setup_path")" = "$setup_sha256" ] || return 1
+    /usr/bin/env -i PATH=/bin:/sbin:/usr/bin:/usr/sbin LANG=C LC_ALL=C TZ=UTC \
+        "$setup_path" @SETUP_ARGUMENTS@ >/dev/null 2>&1
+}
+bw_bootstrap() {
+    bw_prepare || { bw_log prepare failed; return 1; }
+    bw_log packages started || return 1
+    bw_packages || { bw_log packages failed; return 1; }
+    bw_log setup started || return 1
+    bw_setup || { bw_log setup failed; return 1; }
+    bw_log setup completed
+}
+
+# Native media authentication, exact target/site inputs and first-boot/product
+# acceptance are unqualified. No environment switch opens this installed entry.
+exit 77

@@ -29,10 +29,12 @@ and extension interfaces remain separate designs.
 
 ## Start here
 
+- [Adopted stock installer/package/bootstrap source path](docs/design/stock-installer-source.md): deterministic offline site-set assembly and a fixed, unqualified bootstrap; older bespoke executor work remains historical evidence.
+
 - [Accepted scope](docs/adr/0001-generic-public-foundation.md)
 - [Product requirements](docs/product/PRD.md) and [architecture](docs/architecture/baseline.md)
 - [Approved fresh-appliance direction, typed operation boundary and complete source fit](docs/design/production-appliance.md), with [prospective8.0 metadata](docs/design/openbsd80-baseline.md). Installer source-budget adoption and native authority remain separate gates.
-- [Four product profiles and concrete consumer handoff](docs/configuration/appliance-product-requirements.md): Aegvium, Nomvium, Arxwall and Vectivium; shared generic installer, independent product runtimes.
+- [Consumer-owned appliance configuration](docs/configuration/appliance-product-requirements.md): reusable package/setup interface, with profiles and commissioning kept in each independent consumer repository.
 - [Installer author guide](docs/configuration/author-guide.md)
 - [First read-only project planner](docs/design/project-plan.md)
 - [Next trust-contract adoption](docs/design/project-trust/ADOPTION.md) (review proposal)

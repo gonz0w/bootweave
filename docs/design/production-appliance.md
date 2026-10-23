@@ -1,5 +1,15 @@
 # Fresh appliance installation: production direction and complete fit assessment
 
+Historical design: suite-specific mappings below are superseded by the2026-10-23
+product-independence correction; they are preserved design history, not active
+Bootweave dispatch, role or commissioning contracts. Consumers own their setup.
+
+Production-path update2026-10-23: [stock installer/bootstrap source](stock-installer-source.md)
+replaces the bespoke per-effect executor below. Preserve this prior approved
+design, source accounting and ownership research as historical evidence; no old
+native result qualifies the new path. Independent products, confirmation,
+authenticity and truthful failure requirements remain effective.
+
 Source/design direction approved2026-10-23. This defines the first complete
 workflow and target-operation interface; it does not activate a writer, alter
 existing planner/profile syntax, expand budgets or authorize native effects.
