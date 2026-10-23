@@ -142,3 +142,9 @@ completed and that target authority ended. Full results, original failures and
 prior approval rejections remain recorded. The [native run plan](docs/testing/project-plan-native-plan.md),
 implementation, corrections and final evidence remain together in PR #75. This
 bounded planner result does not qualify a production installer or broader profile.
+
+The approved production-installer source continuation now has a separate strict
+[profile/effect-plan and coordinator](docs/design/installer-source.md). Its256KiB
+whole/24KiB entry source envelope changes no runtime limit. Native admission and
+all production writes remain unavailable; consumer requirement data is not an
+executable installer or authority token.

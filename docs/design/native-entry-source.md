@@ -1,5 +1,11 @@
 # Native boundary and CLI: source-only integration
 
+Current source-development amendment2026-10-23: total256KiB/entry24KiB approved
+for the production installer; existing read-only leaf/runtime limits unchanged.
+The historical100/16 measurements and exact native evidence below are preserved.
+New complete accounting includes installer entry/platform and full private/profile
+headers; see [installer source](installer-source.md). No runtime activation.
+
 Status: finite engineering continuation after PR90, 2026-10-20. The owner approved
 100 KiB whole runtime source and16 KiB fully charged entry; all other source and
 all runtime/resource/timer limits remain unchanged. This approves source and

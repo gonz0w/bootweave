@@ -123,7 +123,7 @@ One original operation cancellation/deadline and actual descriptor owner survive
 all phases. New privileged executor limits require a complete independent native
 resource design; existing read-only leaf limits remain unchanged.
 
-## Whole-feature source fit: decision required before runtime implementation
+## Whole-feature source fit and approved development envelope
 
 At base `04fa08df064e3f26d5e5b72b4db2f89ea34065ba`, the runtime closure is
 100932/102400 bytes and fully charged authenticated entry16342/16384. Margins are
@@ -142,9 +142,9 @@ the measured research scale gives no credible basis to start that full runtime
 implementation under the current cap. Moving code cannot remove its accounting.
 Code golfing is inappropriate.
 
-Recommend **one production planning package: total256KiB and full entry24KiB**,
+The owner approved **one production planning package: total256KiB and full entry24KiB**,
 all other existing leaf component caps and runtime limits unchanged. Keep the
-current100/16KiB caps enforced until that decision. New source allocation:
+256/24KiB guards enforced for this continuation. New source allocation:
 
 These count **source-text bytes of Bootweave-owned runtime C/header code**,
 including comments/whitespace, dormant native code and full shared helpers. They
@@ -195,12 +195,13 @@ read-only timers/resource limits stay enforced; the new installation actor needs
 its own finite qualified envelope before execution and cannot borrow those limits
 as sufficiency evidence.
 
-Decision: adopt256/24 as a **maximum source-development planning envelope**, with
-the listed component guards and measurements required before code, or retain
-100/16 and continue design/fit work while the full writer remains blocked. The
-evidence supports leaving the old envelope; it does not prove256/24 is minimal
-or sufficient. No extra ISO capacity, credentials, privileged/native attempt,
-security setting, deployment or acceptance waiver follows from either choice.
+Decision recorded2026-10-23: the owner approved256/24 as the **maximum
+source-development planning envelope**. Total/entry source guards are updated;
+existing leaf and all runtime ceilings stay unchanged. New component guards and
+measurements precede code. This is not a proved capacity, native execution grant,
+credential/security/deployment authority or acceptance waiver. The historical
+100/16 measurements above retain their original meaning. The first cohesive
+production source slice is specified in [installer source](installer-source.md).
 
 ## Behavioral Test Design and remaining gates
 

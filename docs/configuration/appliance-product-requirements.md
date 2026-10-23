@@ -30,7 +30,7 @@ release/architecture/board/firmware/media and publisher policy before privileged
 use. This file format is not accepted by the existing16KiB planner-v1 parser and
 must never be fed to the root executor as a prevalidated request. The real
 installer parsing, complete effect plan, capability transport and writer remain
-blocked on the unchanged source budget and later exact qualification. No helper
+subject to the approved256/24KiB development envelope and later exact qualification. No helper
 or callback may interpret these fields into arbitrary root actions.
 
 Product owners can complete their own role/input/audit/health source now. Bind
