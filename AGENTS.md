@@ -1,5 +1,11 @@
 # Agent instructions
 
+Delivery authority: [Suite-Standards backlog delivery](https://github.com/gonz0w/suite-standards/blob/4aeb70ae4d7423c4ae7d52c025f94af4fb53ff22/docs/backlog-delivery.md)
+and [rollout](https://github.com/gonz0w/suite-standards/blob/4aeb70ae4d7423c4ae7d52c025f94af4fb53ff22/docs/backlog-delivery-rollout.md),
+prospectively adopted at that immutable revision. Use the [local issue/command/WIP
+index](docs/engineering/backlog.md), owned by [#95](https://github.com/gonz0w/bootweave/issues/95),
+before selecting a batch. This pointer preserves all stronger constraints below.
+
 1. Read README, CONTRIBUTING and relevant scope/design documents before editing.
 2. OpenBSD is the runtime and media-build target. Host checks and cross-builds
    establish tooling only; native tests use disposable OpenBSD guests/networks.
