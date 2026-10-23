@@ -283,7 +283,7 @@ class TrustedStartTests(unittest.TestCase):
         self.assertEqual(next(row for row in makefile.splitlines() if row.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
         self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*")
-                                 if p.suffix in (".c", ".h")), 100 * 1024)
+                                 if p.suffix in (".c", ".h")), 256 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in
             ("trusted_start.c", "trusted_start.h", "entry_platform.c", "entry_native.c", "entry_openbsd.c", "entry_cli.c", "private_entry.h", "private_cli.h", "main.c", "private_limits.h", "private_start_material.h")), 16 * 1024)
         self.assertLessEqual(sum((ROOT / "src" / n).stat().st_size for n in

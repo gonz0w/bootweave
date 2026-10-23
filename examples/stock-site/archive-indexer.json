@@ -1,0 +1,12 @@
+{
+  "architecture": "amd64",
+  "root_package": "archive-indexer-1.0.tgz",
+  "setup": {
+    "package": "archive-indexer-1.0.tgz",
+    "path": "/usr/local/libexec/archive-indexer/setup",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "arguments": [
+      "initialize"
+    ]
+  }
+}

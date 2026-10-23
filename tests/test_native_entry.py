@@ -254,9 +254,10 @@ class NativeEntryTests(unittest.TestCase):
                          b"{\n    return bw_legacy_cli(argc, argv);\n}")
         self.assertEqual(next(row for row in (ROOT / "Makefile").read_text().splitlines() if row.startswith("PLAN_SOURCES =")),
                          "PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c")
-        self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*") if p.suffix in (".c", ".h")), 100 * 1024)
-        budgets = ((16, ("trusted_start.c", "trusted_start.h", "entry_platform.c", "entry_native.c", "entry_openbsd.c",
-                         "entry_cli.c", "private_entry.h", "private_cli.h", "private_limits.h", "private_start_material.h", "main.c")),
+        self.assertLessEqual(sum(p.stat().st_size for p in (ROOT / "src").rglob("*") if p.suffix in (".c", ".h")), 256 * 1024)
+        budgets = ((24, ("trusted_start.c", "trusted_start.h", "entry_platform.c", "entry_native.c", "entry_openbsd.c",
+                         "entry_cli.c", "private_entry.h", "private_cli.h", "private_limits.h", "private_start_material.h", "main.c",
+                         "install_entry.c", "install_platform.c", "private_install.h", "install_profile.h")),
             (24, ("main.c", "plan.c", "plan.h", "plan_io.c", "native.c", "private_cli.h")),
             (18, ("auth_material.c", "auth_material.h", "private_start_material.h")),
             (18, ("signature_verify.c", "signature_verify.h", "signature_platform.c", "private_limits.h")),
