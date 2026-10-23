@@ -31,6 +31,7 @@ and extension interfaces remain separate designs.
 
 - [Accepted scope](docs/adr/0001-generic-public-foundation.md)
 - [Product requirements](docs/product/PRD.md) and [architecture](docs/architecture/baseline.md)
+- [Approved fresh-appliance direction, typed operation boundary and complete source fit](docs/design/production-appliance.md), with [prospective8.0 metadata](docs/design/openbsd80-baseline.md). Installer source-budget adoption and native authority remain separate gates.
 - [Installer author guide](docs/configuration/author-guide.md)
 - [First read-only project planner](docs/design/project-plan.md)
 - [Next trust-contract adoption](docs/design/project-trust/ADOPTION.md) (review proposal)
