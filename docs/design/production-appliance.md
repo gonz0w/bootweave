@@ -15,9 +15,12 @@ with no Bootweave runtime dependency and no other mandatory suite product.
 First-boot product function, healthy degraded states and recovery instructions
 are acceptance, not inferred from installer exit or a service PID.
 
-The first implementation is a fresh offline OpenBSD8.0/amd64 single-disk install,
-with explicit BIOS/UEFI selection and separately qualified console/hardware
-profiles. No upgrade, disk reuse, general rollback, on-target compiler, public
+The first implementation/qualification candidate is a fresh offline OpenBSD8.0
+amd64 single-disk install with explicit BIOS/UEFI selection. This is an initial
+profile, **not an amd64-only product scope**. Supported VM/bare-metal and arm64
+device-specific paths need concrete firmware/media/board/console profiles and
+separate qualification; see [device evidence](openbsd80-baseline.md).
+No upgrade, disk reuse, general rollback, on-target compiler, public
 download fallback, arbitrary root hook or generic fleet service is included.
 Paired never-started images require the extra continuous-custody contract below;
 one installed disk never qualifies that handoff.
@@ -28,10 +31,21 @@ The parent supplied reviewed product requirements at Aegvium revision
 [Aegvium profile needs](https://github.com/gonz0w/aegvium/blob/2d52769a0fb4a44456aa1698f07c9a8beac7f257/docs/milestones/M2/BOOTWEAVE-APPLIANCE-PROFILE.md),
 [Nomvium profile needs](https://github.com/gonz0w/nomvium/blob/9d8c25fe412c2952804b378b6dd5bea552752a11/docs/milestones/M2/bootweave-appliance-requirements.md).
 These are consumer requirements, not authority issuers or parallel installers.
-Vectivium has a separate standalone service profile in progress. Existing context
-does **not establish the exact three intended ISO products**; do not label any
-three as selected or silently exclude another. Naming the third does not block
-the generic interface. Arxwall enrollment/PF authority is not settled by this design.
+The owner subsequently confirmed Aegvium, Nomvium and Arxwall, then adopted
+Vectivium as a fourth appliance alongside its independent package. One generic
+installer and each product's existing codebase serve these four profiles; there
+is no Vectivium fork or mandatory Aegvium dependency. Arxwall enrollment/PF
+authority remains unresolved and is not settled by this product clarification.
+
+Acceptance is product function, not publisher mechanics or configuration files:
+Aegvium protects as a standalone WAF on supported VMs/bare metal with no required
+Vectivium frontend; Nomvium provides actual ad/bad-traffic filtering, local
+authoritative DNS/cache and useful DNS features on qualified VM/device profiles;
+Arxwall provides a complete usable firewall with understandable modern management;
+Vectivium provides routing/load-balancing/TLS as a package or appliance. Each
+requires hardened defaults, minimal site-specific setup, real protection, useful
+logs/health and update/recovery acceptance. This promises no absolute security,
+unsupported hardware, new Nom filtering contract or unresolved Arx authority.
 
 ## Constrained profile and executor interface
 
@@ -132,6 +146,22 @@ Recommend **one production planning package: total256KiB and full entry24KiB**,
 all other existing leaf component caps and runtime limits unchanged. Keep the
 current100/16KiB caps enforced until that decision. New source allocation:
 
+These count **source-text bytes of Bootweave-owned runtime C/header code**,
+including comments/whitespace, dormant native code and full shared helpers. They
+are not an ISO/archive/payload format, binary-size, disk, RAM, CPU, timer or file
+descriptor limit. Product binaries and stock OpenBSD are separately authenticated
+dependency closures; moving Bootweave runtime code into a payload, generator or
+another directory cannot evade its accounting. Four declarative profiles share
+one engine envelope, not four copies of the allowance.
+
+The100/16 constraints came from the owner's approved authenticated read-only
+entry/native/CLI source package, recorded in
+[the trusted-entry design](trusted-entry-output.md) and
+[native accounting](native-entry-source.md). `tests/test_plan.py` enforces the
+whole cap; `tests/test_native_entry.py` and `tests/test_entry_ownership.py` enforce
+full entry/leaf charges. These are review-scope limits for that feature, not
+measured hardware capacity or an OpenBSD security threshold. No guard changes.
+
 | Complete new responsibility | Planning allowance |
 | --- | ---: |
 | Strict installer profile, compatibility and complete effect plan | 16KiB |
@@ -153,6 +183,24 @@ the final bound. Review actual measured source before each implementation slice.
 If even this package cannot fit without architectural sprawl, stop at the complete
 fit rather than requesting repeated tiny increases. Alternative: keep100/16KiB
 and the read-only product; that does not deliver the approved fresh installer.
+
+Increasing a text allowance alone adds no root operation, permission or runtime
+resource. Implementing the approved installer **does materially increase trusted
+code and attack surface**: a disk/extraction/account/service executor and private
+input lifecycle replace a solely read-only outcome. Source/component review,
+closed operations, independent failure tests and exact native privilege/resource
+qualification must address that expansion; a byte cap is not proof of security.
+Compiled size/allocations may grow and must be measured separately. Existing
+read-only timers/resource limits stay enforced; the new installation actor needs
+its own finite qualified envelope before execution and cannot borrow those limits
+as sufficiency evidence.
+
+Decision: adopt256/24 as a **maximum source-development planning envelope**, with
+the listed component guards and measurements required before code, or retain
+100/16 and continue design/fit work while the full writer remains blocked. The
+evidence supports leaving the old envelope; it does not prove256/24 is minimal
+or sufficient. No extra ISO capacity, credentials, privileged/native attempt,
+security setting, deployment or acceptance waiver follows from either choice.
 
 ## Behavioral Test Design and remaining gates
 

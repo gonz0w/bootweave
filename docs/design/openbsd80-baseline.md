@@ -34,3 +34,23 @@ signature material cannot silently authorize an unverified-set fallback.
 Exact8.0 firmware/storage/install answers, userland confinement/descriptor/Wait
 semantics, service lifecycle and actual product functions still need current
 source-bound native qualification. No native hold or consumed grant changes.
+
+## arm64/device scope
+
+The [current arm64 port page](https://www.openbsd.org/arm64.html) identifies8.0
+as its supported release and lists Raspberry Pi3/4/5 families. The
+[release-specific INSTALL.arm64](https://ftp.openbsd.org/pub/OpenBSD/8.0/arm64/INSTALL.arm64)
+provides actual8.0 board/media instructions: suitable standard-miniroot U-Boot
+for Pi3/4 and separate Pi5 installation guidance, with different serial-console
+connectors and storage guidance.
+Board/device-tree/UEFI firmware and a suitable storage/media path are required.
+Pi400 can need a different UEFI path; not every Pi-like device is equivalent.
+ISO is not a universal device install path: release media also provides
+miniroot/install images. No board firmware/image was acquired or written here.
+
+These establish upstream support candidates, **not Bootweave/Nomvium device
+qualification**. The first amd64 VM profile is an implementation starting point,
+not a product restriction. Before device support is claimed, bind exact board,
+revision, architecture, firmware/DTB, authenticated media/package closure, console,
+NIC/storage drivers and product memory/thermal/power/resource acceptance. A named
+qualified board profile is required; no blanket Raspberry Pi compatibility claim.
