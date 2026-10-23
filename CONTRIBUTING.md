@@ -1,5 +1,9 @@
 # Contributing
 
+Select a ready owning issue under the [central delivery agreement and local
+queue](docs/engineering/backlog.md). Related stories may share one coherent PR;
+map acceptance to evidence and keep unmet native/product criteria open.
+
 Read [agent instructions](AGENTS.md), [scope](docs/product/PRD.md) and the design for
 our active work. The framework is open to any OpenBSD project; use a generic
 synthetic fixture when a change does not depend on a real product.
