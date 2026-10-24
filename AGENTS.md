@@ -1,47 +1,73 @@
-# Agent instructions
+# Bootweave agent instructions
 
-1. Read README, CONTRIBUTING and relevant scope/design documents before editing.
-2. OpenBSD is the runtime and media-build target. Host checks and cross-builds
-   establish tooling only; native tests use disposable OpenBSD guests/networks.
-3. Repository setup, documentation and local foundation tooling were authorized
-   on 2026-10-11. Installer implementation needs approved scoped PRD/EDD/Test
-   Design or an explicitly authorized bounded research spike.
-4. This is a public, generic installer framework. Keep product-specific runtime
-   policy in its owning project. Do not constrain the engine to DNS or firewalls.
-5. Prefer OpenBSD base tools. Runtime language, parser and UI choices need native
-   evidence; significant dependencies require review, license/provenance and ADR.
-6. Project definitions, payloads, operator input and terminal output are untrusted.
-   Never interpolate them into shell commands. Privilege uses typed operations,
-   validated arguments and explicit authorization. Debug mode cannot bypass safety.
-7. Disk writes need explicit reviewed target confirmation. Separate planned,
-   performed and observed state; validate postconditions and report uncertainty.
-   Do not claim destructive installation has general rollback.
-8. Secrets and private network details never enter Git, default logs or PR evidence.
-   Treat build hooks as reviewed executable code, not harmless configuration.
-9. Require keyboard, serial, low-color and plain-text flows. Decorative ANSI output
-   must not obscure prompts or permit control-sequence injection.
-10. Run make verify locally. GitHub Actions, runners and hosted status publishers
-    are prohibited. Update compatibility/evidence for behavior changes.
-11. Use codex/ branches, signed Conventional Commits and author DCO sign-offs.
-    Leave PRs open. Do not merge, release, install services or modify a live network
-    without authorization. Public repository creation and the name Bootweave were approved 2026-10-11.
-12. Research is evidence until adopted. Do not invent future wire schemas,
-    configuration syntax or service names before their scoped design.
-13. Do not spawn agents unless the user explicitly requests parallel agent work.
-14. Use one PR per complete feature or closely related issue slice. Keep its scope,
-    implementation, fixes, tests, native qualification and evidence on the same
-    branch and draft PR. Continue requests and phase transitions are not new PR
-    boundaries. Build accepted work and document as needed; bring larger decisions
-    to review within the existing PR. Keep exact target authorization requirements.
-15. Continue routine implementation fixes and bounded native test recovery on an
-    already confirmed disposable target without requesting fresh approval. Stop
-    dependent work on a failure, preserve evidence, diagnose and fix it, then
-    continue within the accepted scope and resource limits. Ask for major design
-    decisions or materially expanded effects; retain exact confirmation for a new
-    destructive target. This clarification was authorized on 2026-10-18.
+Read [PROJECT](PROJECT.md), the pinned [Agent Temper core](.agent-temper/METHOD.md),
+[README](README.md), [CONTRIBUTING](CONTRIBUTING.md), and the selected issue and its
+comments before work. Agent Temper is platform/tool independent; PROJECT records
+Bootweave's lasting local choices. Compatible stronger local contracts remain. Missing or conflicting required policy stops dependent work for
+owner Q&A. Recorded answers persist; routine choices within accepted scope do not
+need repeated approval.
 
-## Task context
+## Work and review
 
-Use the [local task context](docs/engineering/agent-tasks.md) for the compact shared
-packet and repository command/path index. Existing instructions, required reviews
-and source/native execution and acceptance gates remain authoritative.
+GitHub Issues alone own live scope, priority, status, dependencies, approach and
+handoff. Use the [delivery index](docs/engineering/backlog.md) and advisory
+[task context](docs/engineering/agent-tasks.md). Select a finite ready outcome;
+keep related design, implementation, fixes, checks, native qualification and
+teardown in one branch and draft PR. A phase transition is not a new PR boundary.
+Respect the recorded WIP limits and exceptions; do not take over another owner's
+work or discard dirty files or evidence. Map acceptance to actual results and keep
+unmet operational outcomes open. Do not create parallel work plans or status ledgers;
+keep live approach/continuation in the issue. Retain linked Test Design and scoped
+native run procedures as technical contracts.
+
+Use `codex/` branches, signed Conventional Commits, genuine author DCO and existing
+hooks. Separate agents may perform bounded read-only reviews of accepted work,
+authorized by the owner on 2026-10-24 in #102. This does not authorize delegated
+implementation, native execution or merging. Leave PRs open for deliberate
+maintainer approval; no automatic merge, release, service or live-network action.
+
+## Product and safety
+
+Bootweave is a public generic OpenBSD installer, independent of every consumer.
+Keep product policy, service setup and runtime in the owning project. The selected
+stock OpenBSD installer/packages plus small generic bootstrap direction in #5/#96
+is not completed installer acceptance. Research is evidence until explicitly
+adopted; implementation needs accepted scoped requirements/design/Test Design or
+an authorized bounded research spike. Do not invent future schemas or services.
+
+Preserve existing C99/POSIX contracts and prefer OpenBSD base tools. Runtime
+language, parser and UI choices need native evidence; significant dependencies
+need review, license/provenance and an ADR. Use the simplest suitable solution.
+Project definitions, payloads, operator input and terminal output are untrusted.
+Never interpolate them into shell commands. Privilege requires typed operations,
+validated arguments and explicit authority. Debug mode cannot bypass safety.
+
+Disk writes require explicit reviewed target confirmation. Distinguish planned,
+performed and observed state; validate postconditions and report uncertainty.
+Do not promise general destructive-install rollback. Preserve keyboard, serial,
+low-color and plain-text flows; decoration cannot obscure prompts or inject
+terminal controls. Keep secrets/private network details out of Git, default logs
+and public evidence. Build hooks are reviewed code, not harmless configuration.
+
+## Execution and evidence
+
+Installer execution, builds, behavior tests and cross-build validation require
+OpenBSD. For the owner-approved #95/#102 documentation adoption, use existing
+supported-host content/lint/secrets, bundle/link, hook/signature/DCO checks and
+separate review; no runtime suite is needed for unchanged executable source.
+[PROJECT](PROJECT.md) records that scoped decision. Other changes retain their
+OpenBSD/full `make verify` gates; follow [development](docs/engineering/development.md)
+for tools and target authority. No GitHub Actions, runners or hosted success publishers.
+
+For behavior, define meaningful acceptance/failure checks first and prefer
+red/green/refactor; reproduce bugs or record unavailable reproduction and alternate
+evidence. Documentation uses source/link/policy/reader checks. A Test Design
+Document is not proof of a red run. Preserve exact measured bytes and original
+failures; update compatibility/evidence for changed behavior and never relabel
+historical observations as fresh tests or native acceptance.
+
+Continue routine fixes and bounded recovery on an already confirmed disposable
+target within its accepted scope/resource limits. Stop dependent work on failure,
+preserve evidence, diagnose and repair. Ask for major design decisions or expanded
+effects; a new destructive target requires exact confirmation. No new fixture,
+credential, disposal or native authority follows from adopting the method.

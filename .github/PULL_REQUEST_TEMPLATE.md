@@ -4,10 +4,14 @@ Describe the operator problem and resulting behavior. Link the scoped design.
 
 ## Validation
 
-Record candidate source/tree, commands and actual results. Distinguish portable
-checks, native evidence, skipped capabilities and remaining gates.
+Link the owning issues and map each acceptance ID to evidence. Record candidate
+source/tree, check-environment/tool identities, commands and actual results. Distinguish
+source checks, native evidence, unavailable/skipped capabilities and remaining gates.
 Include the resolved base, actual PR title, signature/DCO verification and clean
-candidate `make verify` result. Actions are disabled; Cam reviews local evidence.
+candidate result for the required change-specific gate (see PROJECT/development).
+For #95/#102, report full `make verify` as not run/not applicable to the documentation
+batch; behavior/tooling changes still require it. Actions are disabled; Cam reviews
+local evidence.
 
 ## Security and recovery
 

@@ -27,8 +27,16 @@ same reviewed extension contract. Product policy and runtime state stay with eac
 product. A small metadata definition is adopted for the read-only planner. Installer flow
 and extension interfaces remain separate designs.
 
+The selected production direction is stock OpenBSD 8.0 installer/packages with a
+small generic bootstrap. See [#5](https://github.com/gonz0w/bootweave/issues/5) and
+[#96](https://github.com/gonz0w/bootweave/issues/96) for accepted scope and live work.
+That direction does not turn the historical research below into production
+acceptance. Consumer configuration and runtime remain in each consumer's repo.
+
 ## Start here
 
+- [Engineering policy and setup decisions](PROJECT.md), [Agent Temper method](.agent-temper/METHOD.md) and [source revision](.agent-temper/SOURCE.md)
+- [Work selection](docs/engineering/backlog.md) and [documentation guide](docs/process/document-lifecycle.md)
 - [Accepted scope](docs/adr/0001-generic-public-foundation.md)
 - [Product requirements](docs/product/PRD.md) and [architecture](docs/architecture/baseline.md)
 - [Installer author guide](docs/configuration/author-guide.md)
@@ -48,17 +56,35 @@ and extension interfaces remain separate designs.
 
 ## Develop locally
 
-Use the interpreter pinned in `.python-version`. Python and the downloaded tools
-are development-only; no Python dependency is selected for the installed system.
+Agent Temper defines the general development method. The OpenBSD target and
+check-environment rules below are Bootweave's own choices, not framework defaults.
 
-```sh
-make tools hooks
-make verify
-```
+Read [development prerequisites](docs/engineering/development.md) before running
+commands. Installer execution, builds, behavior tests and cross-build checks
+require an authorized OpenBSD environment. Source inspection and editing can use
+other hosts. For the documentation-only method adoption, PROJECT records the
+owner-approved supported-host content/lint/secrets, provenance/link, hook and
+signature/DCO checks. Older host-test evidence remains historical.
+
+The published tool bootstrap still describes Mac/Linux artifacts; it is not a
+supported OpenBSD setup recipe. The OpenBSD adaptation and authentication inputs
+are separately held work. Do not run the old bootstrap or replace missing tools
+with arbitrary downloads. For behavior/tooling work, once prerequisites are
+admitted the required final command is `make verify` from the repository root.
+Missing prerequisites mean verification is unavailable, not passed. The scoped
+documentation-adoption checks do not qualify installer or tooling behavior.
 
 Checks run locally in the foreground. GitHub Actions and hosted/self-hosted runners
-are not used. Signed Conventional Commits, DCO sign-offs and reviewed PRs are required.
-See [development](docs/engineering/development.md) for tool pins and limitations.
+are not used. Signed Conventional Commits, author DCO and reviewed PRs are required.
+Python and check tools are development-only; no Python installed-system dependency
+is selected. See [PROJECT](PROJECT.md) for persistent local decisions and
+[review](docs/engineering/review.md) for integration gates.
+
+## Historical research and qualification
+
+The results below apply only to their recorded source, environment and authority.
+Commands in historical documents do not authorize a new run or restore Mac/Linux
+behavior validation. New executions follow the current development prerequisites.
 
 The [plain-text research simulation](research/ui/README.md) has host and
 [OpenBSD 7.9 native evidence](docs/research/plain-ui-native-evidence.md). It remains
@@ -126,8 +152,9 @@ separate decisions.
 The [first project planner](docs/design/project-plan.md) implements a read-only
 `bootweave plan` entry point in original base C with strict version-1 JSON metadata.
 Its [runtime/contract decision](docs/adr/0003-read-only-project-planner.md) is accepted
-for this bounded feature. Run `make build test-plan`; normal host builds provide
-help/version and refuse planning outside OpenBSD. See the
+for this bounded feature. The focused command is `make build test-plan` on an
+authorized OpenBSD check host. Historical host builds provided help/version and
+refused planning outside OpenBSD. See the
 [author guide](docs/configuration/author-guide.md) and
 [host evidence](docs/testing/project-plan-host.md). Exact native fixture approval was
 received; [stock installation and full-kernel prerequisites passed](docs/testing/project-plan-native-progress.md).
