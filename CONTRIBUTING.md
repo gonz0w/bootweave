@@ -58,6 +58,8 @@ removal paths. Do not introduce unbounded arbitrary-shell project configuration.
 Use synthetic data and disposable disks/networks. Do not commit keys, credentials,
 operator inventories or raw installation transcripts. Leave PRs open for maintainer
 review; agent merging, releases and live installations need explicit authority.
-Bounded read-only agent reviews of accepted work are allowed; this does not grant
-delegated implementation or execution authority. Respect the
+Bounded read-only agent reviews of accepted work are allowed. The later Codex
+selection in [PROJECT](PROJECT.md) also permits bounded implementation within
+accepted scope and explicit file ownership. Execution and merge gates remain
+separate; this role selection grants no native or operational authority. Respect the
 [code of conduct](CODE_OF_CONDUCT.md) and [security reporting policy](SECURITY.md).

@@ -22,8 +22,9 @@ native run procedures as technical contracts.
 
 Use `codex/` branches, signed Conventional Commits, genuine author DCO and existing
 hooks. Separate agents may perform bounded read-only reviews of accepted work,
-authorized by the owner on 2026-10-24 in #102. This does not authorize delegated
-implementation, native execution or merging. Leave PRs open for deliberate
+authorized by the owner on 2026-10-24 in #102. The subsequent routing selection
+in PROJECT additionally permits bounded implementation delegation within accepted
+scope and explicit ownership; native execution and merging retain existing gates. Leave PRs open for deliberate
 maintainer approval; no automatic merge, release, service or live-network action.
 
 ## Product and safety
@@ -71,3 +72,10 @@ target within its accepted scope/resource limits. Stop dependent work on failure
 preserve evidence, diagnose and repair. Ask for major design decisions or expanded
 effects; a new destructive target requires exact confirmation. No new fixture,
 credential, disposal or native authority follows from adopting the method.
+
+Apply the Codex routing profile selected in local project policy. When useful,
+delegate bounded inspection to `temper_workflow`, accepted implementation to
+`temper_implementer`, difficult analysis to `temper_analyst`, and separate final
+review to `temper_reviewer`. Supply the work item/comments, policy, relevant
+files, acceptance, checks and edit boundaries. Follow local escalation, fallback,
+resource and execution limits; the lead owns integration and verifies evidence.

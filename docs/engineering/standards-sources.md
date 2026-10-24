@@ -2,7 +2,8 @@
 
 [PROJECT](../../PROJECT.md) composes Agent Temper with local contracts. The exact
 Agent Temper core is retained publicly under [.agent-temper](../../.agent-temper/SOURCE.md)
-with its BSD-3-Clause license and complete manifest. No optional profile is active.
+with its BSD-3-Clause license and complete manifest. Only the Codex profile is
+active under [PROJECT](../../PROJECT.md).
 
 The following existing Suite pointers keep their original immutable identities.
 Their bodies remain in the authorized private Suite source history/cache; do not
