@@ -16,11 +16,11 @@ A product's installation/runtime target and its development/check environments
 are separate local decisions. One does not determine the other automatically.
 
 Apply the [Agent Temper core](.agent-temper/METHOD.md) at revision
-`588698ff019fbde5bfc01f426c02af66c4987b6d`, with its
+`c07af93dc99e770bf4f3ec6f30a0536cb2ae14c5`, with its
 [source](.agent-temper/SOURCE.md), [checksums](.agent-temper/SHA256SUMS) and
-[license](.agent-temper/LICENSE). No optional profile is selected. Copied GitHub
-and strict-test-first profiles are inactive; existing issue fields and coherent
-PR batches remain the local mapping.
+[license](.agent-temper/LICENSE). Only the [Codex profile](.agent-temper/profiles/codex.md)
+is selected. Copied GitHub and strict-test-first profiles remain inactive;
+existing issue fields and coherent PR batches remain the local mapping.
 
 | Local contract | Purpose and applicability |
 | --- | --- |
@@ -156,8 +156,9 @@ Cam deliberately reviews and authorizes merging. General agent merge authority
 has not been granted for Bootweave. Leave a PR open until that authority and its
 actual gates are satisfied. The owner authorized bounded read-only agent reviews
 of accepted work on 2026-10-24 in #102, replacing the blanket no-spawn restriction
-for that scope. Delegated implementation, native execution and merging are not
-included. An implementer's second pass is not independent review, and peer review
+for that scope. The October 24 routing decision below additionally permits
+bounded implementation delegation; native execution and merging retain their
+existing authority gates. An implementer's second pass is not independent review, and peer review
 cannot replace a required specialist or native witness.
 
 Review current head/base/tree, acceptance, effects, source, evidence and exact
@@ -187,3 +188,101 @@ applicable check environment, compatibility and separate review. Walk a represen
 completion. Classify findings under the [extension rules](.agent-temper/docs/reference/extensions.md);
 use sanitized examples for public upstream proposals. No automatic pin upgrades,
 new policy engine or source cleanup follows merely from adopting this method.
+
+### Codex routing selection and policy change — 2026-10-24
+
+The owner explicitly selected model-routed subagent implementation and directed
+all existing Temper adopters to be ready for it in
+[issue #103](https://github.com/gonz0w/bootweave/issues/103). This replaces the
+previous read-only-review-only delegation allowance with bounded implementation
+delegation within already owner-accepted task scope. The lead must supply explicit
+file ownership, acceptance, policy, evidence, stop conditions and resource limits.
+The reason is that owner-selected workflow; separate review and existing native,
+operational and per-PR maintainer merge approval remain binding. This does not
+select a new product/platform/toolchain or expand other-resource authority.
+
+| Role | Assignment | Model | Effort |
+| --- | --- | --- | --- |
+| `temper_workflow` | Bounded read-only inspection and evidence summaries | `gpt-6-luna` | `medium` |
+| `temper_implementer` | Accepted implementation, tests and ordinary debugging | `gpt-6.1-sol` | `high` |
+| `temper_analyst` | Difficult analysis or separate complex review | `gpt-6-astra` | `high` |
+| `temper_reviewer` | Separate final review of work it did not author | `gpt-6.1-sol` | `high` |
+
+The lead owns tracker writes, integration and returned-evidence verification.
+Use at most three concurrent delegated agents, excluding the lead, within existing
+resource and WIP limits. No nested helpers without an explicit lead assignment.
+Keep tiny or tightly coupled work with the lead when appropriate. No role changes
+permissions or authorizes native/operational execution by itself.
+
+If a role or model is unavailable, report it. The lead may do the bounded work
+with its current model only when adequate and permitted under existing policy
+and limits; otherwise resolve the missing choice with the owner. Never silently
+substitute a model or claim that requested settings actually ran. The owner
+approves model/effort/role/limit changes; routine routing within this table is
+delegated to the lead. Preserve independent final review.
+
+Local `.codex/agents/` files are adapted project configuration outside the pinned
+bundle. No global/default model, permission or primary-chat setting changes.
+Where native role discovery is unavailable but explicit spawn settings are
+supported, use this same table with a complete fresh-context brief and record
+observed settings, or follow the fallback. Existing chats do not switch models
+when files change. Record client/version and observed role/model/effort metadata
+in the owning issue; parsing proves syntax only. Native discovery/routing remain
+unverified until actually observed in a fresh supporting session. Earlier active
+work retains accepted scope and evidence; future delegation follows this policy.
+
+For this one owner-selected adoption item, Cam authorizes one temporary extra
+WIP lane alongside the two existing held product batches on 2026-10-24. The
+reason is fleet routing readiness; the exception ends at this item's merge or
+abandonment. It does not relabel, stop or enlarge other work. The old #95/#102
+supported-host documentation exception does not cover this configuration change:
+required OpenBSD/full `make verify` checks remain outstanding before acceptance.
+The owner subsequently authorized bounded validation for this exact routing
+candidate in an isolated disposable OpenBSD guest, with existing resource,
+isolation and teardown limits. Coordinate the shared executor before startup.
+This permits the required checks/hooks, not production, new credentials,
+permission/protection changes or unrelated effects. The owner also authorized
+this issue's gated integration after checks and separate review. This finite
+approval does not grant general future merge or native-operation authority.
+
+### Finite verification decision for routing adoption #103
+
+On 2026-10-24 the owner explicitly approved scoped Bootweave verification for
+[#103](https://github.com/gonz0w/bootweave/issues/103). This replaces the
+OpenBSD/full-suite acceptance requirement only for the thirteen-file adoption
+based on `2142175dc0ff86f09593fbbcb8296053e3aa0fe3`, tree
+`acfec5d0a49da7c9ed2eab81cdbaed27ea514711`, with sorted path+NUL+bytes+NUL
+fingerprint `438e57075da16c370beeb8487701fc1d50d80f0c00320660028e2a500fef18ea`,
+plus only this separately approved PROJECT/owning-issue decision delta. Any other
+source change requires fresh applicability, checks and review.
+
+For this exact adoption, unchanged pre-commit/commit-message hooks and
+`make check lint secrets` must pass in the admitted isolated OpenBSD guest.
+Exact upstream bundle/license/inventory/hashes, affected links, TOML/role mapping,
+signed actual-author-DCO source and separate exact-candidate review must also pass.
+Verify the public signed commit again on BSD and the canonical source after
+integration. A failure of check, lint, secrets, either hook, provenance, signature,
+DCO or required review remains blocking.
+
+Only for this exact adoption, the unchanged `test`, `test-ui`, `test-storage`,
+`test-handoff`, `test-payload` and `test-plan` targets are not applicable to
+adoption acceptance. This is an explicit six-target applicability decision for
+unchanged product/test/hook/tool/dependency sources, not a blanket exemption
+inferred from one Darwin-only guard. Retain the unchanged full `make verify`
+attempt, actual exit, every failure and existing skip. A failed aggregate stays
+FAILED and is never relabeled as passing. Until execution occurs, the predicted
+Darwin-only-harness failure is a source observation, not execution history. Its
+unresolved full-suite/native/authentication acceptance stays open under its
+original ownership.
+
+This finite replacement changes only #103's source/configuration verification
+applicability. It does not qualify product behavior, native authentication,
+runtime project-role discovery or measured model benefit. Actual role/model
+metadata remain unverified until observed. All behavior, build, tool, hook, test,
+dependency and broader policy changes retain their existing OpenBSD/full-suite gates.
+
+Preserve held work, resource/isolation/teardown, credential/access, signing and
+publication boundaries. Gated merge permission applies only after all required
+scoped gates above and separate review; no general future merge or operational
+authority follows. The exact owner-approved proposal is retained in #103; this
+decision delta requires separate review before final payload or signing.
