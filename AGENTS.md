@@ -1,5 +1,8 @@
 # Bootweave agent instructions
 
+Read root [policy.toml](policy.toml), every selected module and its prerequisites
+before work. PROJECT remains the policy entry point; selection grants no authority.
+
 Read [PROJECT](PROJECT.md), the pinned [Agent Temper core](.agent-temper/METHOD.md),
 [README](README.md), [CONTRIBUTING](CONTRIBUTING.md), and the selected issue and its
 comments before work. Agent Temper is platform/tool independent; PROJECT records
