@@ -16,7 +16,7 @@ A product's installation/runtime target and its development/check environments
 are separate local decisions. One does not determine the other automatically.
 
 Apply the [Agent Temper core](.agent-temper/METHOD.md) at revision
-`fcfb819f62d1a1091010db1df8fc5b7560cd1b8a`, with its
+`4e6804a2c10be6e9ffc9fd057a7d109dcc167504`, with its
 [source](.agent-temper/SOURCE.md), [checksums](.agent-temper/SHA256SUMS) and
 [license](.agent-temper/LICENSE). Only the [Codex profile](.agent-temper/profiles/codex.md)
 is selected. Copied GitHub and strict-test-first profiles remain inactive;
@@ -335,3 +335,18 @@ future bypass or runtime-routing claim.
 No VM, runner, publisher, tool installation, extra retry or infrastructure startup
 is included. Existing failed evidence remains failed; earlier exceptions stay
 expired outside this exact Terra patch and policy recording.
+
+## One-time Temper guidance integration — 2026-10-27
+
+On 2026-10-27 the owner approved a one-time integration decision for this owning
+Temper guidance-refresh issue. For this exact reviewed pin/provenance patch only,
+the upstream read-only auditor and trusted passive source/inventory/hash/link/
+role-preservation checks may run on inert coordinator copies. Separate source
+review and those checks replace unavailable required BSD gates and commit hooks,
+which are waived/not run, never passed. Existing SSH signatures, actual-author
+DCO, PRs, separate review and canonical verification remain. No consumer check,
+module, hook or product/native workload may execute on that host. The decision
+ends at this PR's merge or abandonment and grants no future bypass, CI workflow/
+infrastructure change, executor startup, model change, release or deployment.
+
+Owning work: [issue #107](https://github.com/gonz0w/bootweave/issues/107).
