@@ -35,7 +35,8 @@ of copyright. Contributions remain under BSD-3-Clause; retain upstream notices.
 Use the change-appropriate checks and environment in
 [development](docs/engineering/development.md). The owner-approved #95/#102
 adoption uses existing supported-host documentation/lint/secrets, provenance/link,
-hook/signature/DCO checks and separate review. Behavior/tooling changes retain
+hook/signature/DCO checks and separate review. Classified portable checks now follow the
+[portable-check and target policy](docs/policy/verification.md#portable-checks-and-target-verification). Behavior/tooling changes retain
 OpenBSD and full `make verify` gates; the old bootstrap is not an OpenBSD setup
 recipe. Missing prerequisites never authorize a hook bypass or a claimed pass.
 

@@ -16,7 +16,7 @@ A product's installation/runtime target and its development/check environments
 are separate local decisions. One does not determine the other automatically.
 
 Apply the [Agent Temper core](.agent-temper/METHOD.md) at revision
-`781a4b9f71d002b93bc4ad26669d01a3b37c482e`, with its
+`cf928f4120b687f34f1b1f974603a4979b5b874c`, with its
 [source](.agent-temper/SOURCE.md), [checksums](.agent-temper/SHA256SUMS) and
 [license](.agent-temper/LICENSE). Only the [Codex profile](.agent-temper/profiles/codex.md)
 is selected. Copied GitHub and strict-test-first profiles remain inactive;
