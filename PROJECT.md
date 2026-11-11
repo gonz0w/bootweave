@@ -16,7 +16,7 @@ A product's installation/runtime target and its development/check environments
 are separate local decisions. One does not determine the other automatically.
 
 Apply the [Agent Temper core](.agent-temper/METHOD.md) at revision
-`5222ac45c9edaa23c188816c7727fc70780a95a8`, with its
+`bc4ae7f68ee346b9970f07c7c4bff020120f0278`, with its
 [source](.agent-temper/SOURCE.md), [checksums](.agent-temper/SHA256SUMS) and
 [license](.agent-temper/LICENSE). Only the [Codex profile](.agent-temper/profiles/codex.md)
 is selected. Copied GitHub and strict-test-first profiles remain inactive;
@@ -122,3 +122,9 @@ The decision ends at that same event; retain it as expired history thereafter. I
 policy, and grants no future bypass, other WIP, retries, guest/runner startup,
 tool installation, CI workflow/infrastructure change, model change, release,
 deployment, key/trust change or control of unrelated work.
+
+## Artifact retention
+
+Follow the adopted [artifact lifecycle](.agent-temper/docs/reference/artifact-lifecycle.md) and the project's
+existing output, evidence, recovery and approval rules. Record a bounded
+retention decision in the owning issue before substantial generated output.
