@@ -167,3 +167,6 @@ completed and that target authority ended. Full results, original failures and
 prior approval rejections remain recorded. The [native run plan](docs/testing/project-plan-native-plan.md),
 implementation, corrections and final evidence remain together in PR #75. This
 bounded planner result does not qualify a production installer or broader profile.
+
+Developer output follows the [bounded storage policy](docs/engineering/storage-retention.md).
+Preserve source and useful evidence; budget external outputs before creating them.
