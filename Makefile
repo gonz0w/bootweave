@@ -4,16 +4,16 @@ CC = cc
 CFLAGS = -O2 -std=c99 -Wall -Wextra -Werror -pedantic
 PLAN_SOURCES = src/main.c src/plan.c src/plan_io.c src/native.c
 
-build: bin/bootweave
+build: storage-preflight bin/bootweave
 
-bin/bootweave: $(PLAN_SOURCES) src/plan.h src/private_cli.h
+bin/bootweave: $(PLAN_SOURCES) src/plan.h src/private_cli.h | storage-preflight
 	mkdir -p bin
 	$(CC) $(CFLAGS) -Isrc $(PLAN_SOURCES) -o $@
 
-test-plan:
+test-plan: storage-preflight
 	.tools/venv/bin/python3 -m unittest discover -s tests -v
 
-tools:
+tools: storage-preflight
 	python3 tools/bootstrap-tools.py
 
 hooks:
@@ -28,19 +28,24 @@ lint:
 test:
 	.tools/venv/bin/python3 -m unittest discover -s tools/tests -v
 
-test-ui:
+test-ui: storage-preflight
 	.tools/venv/bin/python3 -m unittest discover -s research/ui -v
 
-test-storage:
+test-storage: storage-preflight
 	.tools/venv/bin/python3 -m unittest discover -s research/storage -v
 
-test-handoff:
+test-handoff: storage-preflight
 	.tools/venv/bin/python3 -m unittest discover -s research/handoff -v
 
-test-payload:
+test-payload: storage-preflight
 	.tools/venv/bin/python3 -m unittest discover -s research/payload -v
 
 secrets:
 	.tools/bin/gitleaks dir --redact --no-banner --config .gitleaks.toml .
 
 verify: check lint test test-ui test-storage test-handoff test-payload test-plan secrets
+
+.PHONY: storage-preflight
+
+storage-preflight:
+	python3 tools/storage-preflight.py
